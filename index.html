@@ -1,0 +1,2648 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Power Platform Mastery</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #080c14;
+            --surface: #0f1520;
+            --surface2: #161f30;
+            --surface3: #1c2840;
+            --border: #1e2d45;
+            --border2: #243450;
+            --accent: #00e5ff;
+            --accent-dim: rgba(0, 229, 255, 0.12);
+            --accent2: #ff6b35;
+            --accent3: #7fff6b;
+            --warn: #ffd166;
+            --text: #dce8f8;
+            --muted: #5a7090;
+            --muted2: #8aa0bc;
+            --correct: #7fff6b;
+            --wrong: #ff4d6d;
+            --correct-dim: rgba(127, 255, 107, 0.1);
+            --wrong-dim: rgba(255, 77, 109, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Mono", monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 40% at 15% 5%,
+                    rgba(0, 229, 255, 0.055) 0%,
+                    transparent 60%),
+                radial-gradient(ellipse 50% 35% at 85% 95%,
+                    rgba(255, 107, 53, 0.04) 0%,
+                    transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 229, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── LAYOUT ── */
+        .app {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+            padding: 32px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeUp 0.35s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── NAV ── */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .nav-logo {
+            font-family: "Syne", sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .nav-logo span {
+            color: var(--muted2);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            font-family: "DM Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            background: transparent;
+            color: var(--muted2);
+            border: 1px solid var(--border2);
+            padding: 7px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            color: var(--text);
+            border-color: var(--muted2);
+        }
+
+        .nav-btn.active-nav {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ── HOME ── */
+        .home-hero {
+            margin-bottom: 48px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .hero-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(1.5);
+            }
+        }
+
+        .hero-title {
+            font-family: "Syne", sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            color: var(--muted2);
+            font-size: 12px;
+            line-height: 1.8;
+            max-width: 520px;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            display: flex;
+            gap: 1px;
+            margin-bottom: 48px;
+            background: var(--border);
+        }
+
+        .stat-cell {
+            flex: 1;
+            background: var(--surface);
+            padding: 20px 24px;
+            text-align: center;
+        }
+
+        .stat-n {
+            font-family: "Syne", sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-l {
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        /* ── TOPIC CARDS ── */
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .topic-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-dim), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 229, 255, 0.1);
+        }
+
+        .topic-card:hover::before {
+            opacity: 1;
+        }
+
+        .topic-card.locked {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .topic-card.locked:hover {
+            transform: none;
+            border-color: var(--border);
+            box-shadow: none;
+        }
+
+        .topic-card.locked::before {
+            display: none;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            font-size: 22px;
+        }
+
+        .card-status {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border: 1px solid;
+        }
+
+        .status-ready {
+            color: var(--accent3);
+            border-color: var(--accent3);
+        }
+
+        .status-locked {
+            color: var(--muted);
+            border-color: var(--border2);
+        }
+
+        .status-new {
+            color: var(--warn);
+            border-color: var(--warn);
+        }
+
+        .card-title {
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: var(--muted2);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 10px;
+            color: var(--muted);
+            flex-wrap: wrap;
+        }
+
+        .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-progress {
+            margin-top: 14px;
+            height: 2px;
+            background: var(--border);
+            position: relative;
+        }
+
+        .card-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent3));
+            transition: width 0.5s;
+        }
+
+        .mastery-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            padding: 3px 8px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+        }
+
+        .mb-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        /* ── QUIZ SCREEN ── */
+        .quiz-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .quiz-breadcrumb {
+            font-size: 11px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .quiz-breadcrumb:hover {
+            color: var(--accent);
+        }
+
+        .quiz-live-score {
+            font-family: "Syne", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent3);
+        }
+
+        .quiz-progress-wrap {
+            margin-bottom: 32px;
+        }
+
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .progress-track {
+            height: 4px;
+            background: var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 30px;
+            height: 100%;
+            background: white;
+            opacity: 0.5;
+            filter: blur(5px);
+        }
+
+        .q-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .cat-tag {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border: 1px solid;
+        }
+
+        .cat-delegable {
+            color: var(--accent3);
+            border-color: var(--accent3);
+        }
+
+        .cat-nondelegable {
+            color: var(--wrong);
+            border-color: var(--wrong);
+        }
+
+        .cat-partial {
+            color: var(--warn);
+            border-color: var(--warn);
+        }
+
+        .cat-general {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .q-tag {
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            background: var(--surface2);
+            padding: 3px 8px;
+            border: 1px solid var(--border);
+        }
+
+        .question-text {
+            font-family: "Syne", sans-serif;
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            font-weight: 700;
+            line-height: 1.55;
+            margin-bottom: 28px;
+            min-height: 72px;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .opt-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 15px 18px;
+            text-align: left;
+            cursor: pointer;
+            font-family: "DM Mono", monospace;
+            font-size: 12px;
+            line-height: 1.55;
+            transition: all 0.15s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--surface2);
+            transform: translateX(5px);
+        }
+
+        .opt-btn:disabled {
+            cursor: default;
+        }
+
+        .opt-letter {
+            font-family: "Syne", sans-serif;
+            font-weight: 800;
+            font-size: 10px;
+            color: var(--muted);
+            min-width: 18px;
+            padding-top: 2px;
+            letter-spacing: 1px;
+        }
+
+        .opt-btn.correct {
+            border-color: var(--correct);
+            background: var(--correct-dim);
+            color: var(--correct);
+        }
+
+        .opt-btn.correct .opt-letter {
+            color: var(--correct);
+        }
+
+        .opt-btn.wrong {
+            border-color: var(--wrong);
+            background: var(--wrong-dim);
+            color: var(--wrong);
+        }
+
+        .opt-btn.wrong .opt-letter {
+            color: var(--wrong);
+        }
+
+        .feedback-panel {
+            border-left: 3px solid;
+            padding: 16px 20px;
+            background: var(--surface);
+            margin-bottom: 20px;
+            display: none;
+            animation: fadeUp 0.25s ease;
+        }
+
+        .feedback-panel.show {
+            display: block;
+        }
+
+        .feedback-panel.fp-correct {
+            border-color: var(--correct);
+        }
+
+        .feedback-panel.fp-wrong {
+            border-color: var(--wrong);
+        }
+
+        .fb-label {
+            font-family: "Syne", sans-serif;
+            font-weight: 800;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .fb-label.c {
+            color: var(--correct);
+        }
+
+        .fb-label.w {
+            color: var(--wrong);
+        }
+
+        .fb-body {
+            font-size: 11px;
+            color: var(--muted2);
+            line-height: 1.75;
+        }
+
+        .fb-body strong {
+            color: var(--text);
+        }
+
+        .fb-readup {
+            margin-top: 10px;
+            font-size: 10px;
+            color: var(--warn);
+            letter-spacing: 0.5px;
+        }
+
+        .fb-readup span {
+            color: var(--muted2);
+        }
+
+        .btn-next {
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 12px 28px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+        }
+
+        .btn-next.show {
+            display: inline-block;
+        }
+
+        .btn-next:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        /* ── RESULTS SCREEN ── */
+        .results-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+        }
+
+        .results-topic-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .score-hero {
+            display: flex;
+            align-items: flex-end;
+            gap: 24px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .score-giant {
+            font-family: "Syne", sans-serif;
+            font-size: clamp(4rem, 12vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .score-denom {
+            font-family: "Syne", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .grade-chip {
+            font-family: "Syne", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border: 2px solid;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .grade-message {
+            font-size: 12px;
+            color: var(--muted2);
+            line-height: 1.6;
+            max-width: 400px;
+        }
+
+        /* CI Card */
+        .ci-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .ci-title {
+            font-family: "Syne", sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ci-title::after {
+            content: "95% confidence interval";
+            font-size: 9px;
+            color: var(--muted);
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-left: 4px;
+            opacity: 0.7;
+        }
+
+        .ci-bar-wrap {
+            position: relative;
+            height: 36px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        .ci-bar-range {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            background: rgba(0, 229, 255, 0.15);
+            border-left: 2px solid var(--accent);
+            border-right: 2px solid var(--accent);
+        }
+
+        .ci-bar-point {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .ci-bar-point::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .ci-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .ci-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .ci-stat {
+            text-align: center;
+            background: var(--surface2);
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .ci-stat-n {
+            font-family: "Syne", sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .ci-stat-l {
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Performance Summary */
+        .perf-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .perf-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 18px 20px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .perf-icon {
+            font-size: 18px;
+            min-width: 24px;
+        }
+
+        .perf-body {}
+
+        .perf-area {
+            font-family: "Syne", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .perf-why {
+            font-size: 11px;
+            color: var(--muted2);
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .perf-action {
+            font-size: 10px;
+            color: var(--warn);
+            letter-spacing: 0.5px;
+        }
+
+        /* Review */
+        .review-toggle {
+            font-size: 11px;
+            color: var(--accent);
+            cursor: pointer;
+            letter-spacing: 1px;
+            border: none;
+            background: none;
+            font-family: "DM Mono", monospace;
+            margin-bottom: 16px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .review-toggle:hover {
+            opacity: 0.7;
+        }
+
+        .review-list {
+            display: none;
+        }
+
+        .review-list.open {
+            display: block;
+        }
+
+        .review-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 11px;
+            line-height: 1.65;
+        }
+
+        .ri-icon {
+            font-size: 13px;
+            min-width: 20px;
+        }
+
+        .ri-q {
+            color: var(--muted2);
+        }
+
+        .ri-q strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 3px;
+            font-size: 11px;
+        }
+
+        .ri-ans {
+            font-size: 10px;
+            color: var(--correct);
+            margin-top: 2px;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .btn-primary {
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 14px 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+        }
+
+        .btn-ghost {
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: transparent;
+            color: var(--muted2);
+            border: 1px solid var(--border2);
+            padding: 14px 28px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            border-color: var(--muted2);
+        }
+
+        /* ── HISTORY SCREEN ── */
+        .history-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .history-empty span {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .session-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .session-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 18px 20px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .sc-topic {
+            font-family: "Syne", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sc-meta {
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        .sc-score-wrap {
+            text-align: right;
+        }
+
+        .sc-score {
+            font-family: "Syne", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .sc-pct {
+            font-size: 10px;
+            color: var(--muted);
+            display: block;
+        }
+
+        /* ── TOPIC DETAIL / ANALYTICS ── */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 600px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .analytic-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
+
+        .ac-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .ac-value {
+            font-family: "Syne", sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .tag-breakdown {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .tag-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tag-row:last-child {
+            border-bottom: none;
+        }
+
+        .tag-name {
+            font-size: 11px;
+            min-width: 180px;
+            color: var(--muted2);
+        }
+
+        .tag-bar-wrap {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            position: relative;
+        }
+
+        .tag-bar-fill {
+            height: 100%;
+            transition: width 0.6s ease;
+        }
+
+        .tag-pct {
+            font-size: 10px;
+            min-width: 36px;
+            text-align: right;
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 580px) {
+            .screen {
+                padding: 20px 16px;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ci-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- ══════════════════════════════════
+     HOME SCREEN
+══════════════════════════════════ -->
+        <div class="screen active" id="homeScreen">
+            <nav class="top-nav">
+                <div class="nav-logo">PP<span>·</span>Mastery</div>
+                <div class="nav-actions">
+                    <button class="nav-btn" onclick="showHistory()">History</button>
+                </div>
+            </nav>
+
+            <div class="home-hero">
+                <div class="hero-eyebrow">
+                    <div class="hero-dot"></div>
+                    Power Platform Learning System
+                </div>
+                <h1 class="hero-title">
+                    Build your<br /><em>certification</em> edge.
+                </h1>
+                <p class="hero-sub">
+                    Deep Q&A sessions with confidence tracking, weak-area analysis, and
+                    study recommendations. Pick a topic and start.
+                </p>
+            </div>
+
+            <div class="stats-bar" id="globalStatsBar">
+                <div class="stat-cell">
+                    <span class="stat-n" id="gs-sessions">0</span>
+                    <div class="stat-l">Sessions</div>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-n" id="gs-questions">0</span>
+                    <div class="stat-l">Questions Answered</div>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-n" id="gs-accuracy">—</span>
+                    <div class="stat-l">Overall Accuracy</div>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-n" id="gs-streak">0</span>
+                    <div class="stat-l">Best Score</div>
+                </div>
+            </div>
+
+            <div class="section-label">Available Topics</div>
+            <div class="topics-grid" id="topicsGrid"></div>
+        </div>
+
+        <!-- ══════════════════════════════════
+     QUIZ SCREEN
+══════════════════════════════════ -->
+        <div class="screen" id="quizScreen">
+            <div class="quiz-topbar">
+                <div class="quiz-breadcrumb" onclick="confirmExit()">
+                    ← Back to Topics
+                </div>
+                <div class="quiz-live-score" id="qliveScore">0 / 0</div>
+            </div>
+            <div class="quiz-progress-wrap">
+                <div class="progress-meta">
+                    <span id="qProgressLabel">Question 1 of 20</span>
+                    <span id="qTopicLabel"></span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="q-meta" id="qMeta"></div>
+            <div class="question-text" id="questionText"></div>
+            <div class="options-grid" id="optionsGrid"></div>
+            <div class="feedback-panel" id="feedbackPanel">
+                <div class="fb-label" id="fbLabel"></div>
+                <div class="fb-body" id="fbBody"></div>
+                <div class="fb-readup" id="fbReadup"></div>
+            </div>
+            <button class="btn-next" id="btnNext" onclick="nextQuestion()">
+                Next →
+            </button>
+        </div>
+
+        <!-- ══════════════════════════════════
+     RESULTS SCREEN
+══════════════════════════════════ -->
+        <div class="screen" id="resultsScreen">
+            <div class="results-topbar">
+                <div class="results-topic-label" id="resTopic"></div>
+                <button class="nav-btn" onclick="showHome()">Home</button>
+            </div>
+
+            <div class="score-hero">
+                <div>
+                    <div style="display: flex; align-items: flex-end; gap: 6px">
+                        <div class="score-giant" id="resScore">0</div>
+                        <div class="score-denom" id="resDenom">/20</div>
+                    </div>
+                    <div class="grade-chip" id="resGrade"></div>
+                    <div class="grade-message" id="resMessage"></div>
+                </div>
+            </div>
+
+            <!-- CI Card -->
+            <div class="ci-card">
+                <div class="ci-title">Mastery Confidence</div>
+                <div class="ci-bar-wrap" id="ciBarWrap">
+                    <div class="ci-bar-range" id="ciRange"></div>
+                    <div class="ci-bar-point" id="ciPoint"></div>
+                </div>
+                <div class="ci-labels">
+                    <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+                </div>
+                <div class="ci-stats">
+                    <div class="ci-stat">
+                        <span class="ci-stat-n" id="ciLow" style="color: var(--wrong)">-</span>
+                        <div class="ci-stat-l">Lower Bound</div>
+                    </div>
+                    <div class="ci-stat">
+                        <span class="ci-stat-n" id="ciMid" style="color: var(--accent)">-</span>
+                        <div class="ci-stat-l">Point Estimate</div>
+                    </div>
+                    <div class="ci-stat">
+                        <span class="ci-stat-n" id="ciHigh" style="color: var(--correct)">-</span>
+                        <div class="ci-stat-l">Upper Bound</div>
+                    </div>
+                </div>
+                <div style="
+              margin-top: 12px;
+              font-size: 10px;
+              color: var(--muted);
+              line-height: 1.7;
+            " id="ciInterpret"></div>
+            </div>
+
+            <!-- Performance Summary -->
+            <div class="section-label" style="margin-bottom: 16px">
+                Performance Summary
+            </div>
+            <div class="perf-grid" id="perfGrid"></div>
+
+            <!-- Review -->
+            <button class="review-toggle" onclick="toggleReview(this)">
+                ▶ Show Question Review
+            </button>
+            <div class="review-list" id="reviewList"></div>
+
+            <div class="results-actions">
+                <button class="btn-primary" id="btnPlayAgain" onclick="playAgain()">
+                    Play Again →
+                </button>
+                <button class="btn-ghost" onclick="showHome()">← All Topics</button>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════
+     HISTORY SCREEN
+══════════════════════════════════ -->
+        <div class="screen" id="historyScreen">
+            <nav class="top-nav">
+                <div class="nav-logo">PP<span>·</span>Mastery</div>
+                <div class="nav-actions">
+                    <button class="nav-btn active-nav" onclick="showHistory()">
+                        History
+                    </button>
+                    <button class="nav-btn" onclick="showHome()">Topics</button>
+                </div>
+            </nav>
+            <div class="section-label" style="margin-bottom: 20px">
+                Session History
+            </div>
+            <div id="historyContent"></div>
+        </div>
+    </div>
+    <!-- /app -->
+
+    <script>
+        /* ═══════════════════════════════════════════════════════
+     QUESTION BANK
+     Structure per question:
+     { q, options[], answer(0-based), category, tags[], explanation, readup }
+     tags: used for weak-area analysis
+     readup: what to study if wrong
+  ═══════════════════════════════════════════════════════ */
+        const QUESTION_BANK = {
+            delegation: {
+                id: "delegation",
+                title: "Delegation in Power Apps",
+                icon: "⚡",
+                desc: "Delegable vs non-delegable functions, data source behaviour, and performance implications.",
+                color: "var(--accent)",
+                questions: [
+                    // ── DELEGABLE ──
+                    {
+                        q: "Which function is generally delegable across most major data sources in Power Apps?",
+                        options: ["Search", "Filter", "CountIf", "GroupBy"],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["delegable-functions", "Filter"],
+                        explanation:
+                            "<strong>Filter</strong> is delegable across Dataverse, SharePoint, and SQL Server — it pushes the predicate to the server.",
+                        readup:
+                            "Review: Power Apps delegation overview — Filter function",
+                    },
+                    {
+                        q: "You need to retrieve a single matching record from a large Dataverse table. Which function should you use?",
+                        options: ["First", "Search", "LookUp", "Last"],
+                        answer: 2,
+                        category: "delegable",
+                        tags: ["delegable-functions", "LookUp"],
+                        explanation:
+                            "<strong>LookUp</strong> is delegable for retrieving a single record. First and Last are non-delegable.",
+                        readup: "Review: LookUp vs First — delegation differences",
+                    },
+                    {
+                        q: "Which text function is commonly recommended as a delegable replacement for Search()?",
+                        options: [
+                            "StartsWith inside Filter",
+                            "Len inside Filter",
+                            "Mid",
+                            "Trim",
+                        ],
+                        answer: 0,
+                        category: "delegable",
+                        tags: ["delegable-functions", "StartsWith", "text-search"],
+                        explanation:
+                            "<strong>StartsWith inside Filter</strong> delegates to the server. Search() often cannot.",
+                        readup: "Review: StartsWith as a delegation-safe search pattern",
+                    },
+                    {
+                        q: "Which logical operators are delegable in Power Apps?",
+                        options: [
+                            "Not (!)",
+                            "And (&&) and Or (||)",
+                            "All logical operators",
+                            "None are delegable",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["delegable-functions", "logical-operators"],
+                        explanation:
+                            "<strong>And (&&) and Or (||)</strong> are delegable. Not (!) has limitations especially on SharePoint.",
+                        readup: "Review: Logical operator delegation by data source",
+                    },
+                    {
+                        q: "Sum, Avg, Min, Max are only delegable when using which data source?",
+                        options: ["SharePoint", "Dataverse", "SQL Server", "Salesforce"],
+                        answer: 2,
+                        category: "delegable",
+                        tags: ["aggregation", "SQL-Server", "delegable-functions"],
+                        explanation:
+                            "<strong>SQL Server</strong> is the only data source where Sum, Avg, Min, Max are delegable aggregation functions.",
+                        readup:
+                            "Review: Aggregation delegation — SQL Server vs other sources",
+                    },
+                    {
+                        q: "SortByColumns is used to perform what kind of operation?",
+                        options: [
+                            "Client-side pagination",
+                            "Server-side sorting",
+                            "Local grouping",
+                            "Column filtering",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["Sort", "delegable-functions"],
+                        explanation:
+                            "<strong>SortByColumns</strong> is a delegable sort that executes on the server, handling large datasets efficiently.",
+                        readup: "Review: SortByColumns delegation behaviour",
+                    },
+                    {
+                        q: "The 'in' operator is supported for delegation on which data sources?",
+                        options: [
+                            "SharePoint and Dataverse",
+                            "SQL Server and Salesforce",
+                            "Only Dataverse",
+                            "All data sources",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["in-operator", "SQL-Server", "Salesforce"],
+                        explanation:
+                            "The <strong>in</strong> operator delegates on <strong>SQL Server and Salesforce</strong> but is NOT supported on SharePoint.",
+                        readup: "Review: 'in' operator delegation support by source",
+                    },
+                    {
+                        q: "Which comparison operators are generally delegable in Power Apps?",
+                        options: [
+                            "Only = and <>",
+                            "=, <>, >=, <=, >, <",
+                            "Only = and >=",
+                            "None are delegable",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["comparison-operators", "delegable-functions"],
+                        explanation:
+                            "<strong>=, <>, >=, <=, >, <</strong> are all generally delegable, though support varies by data source.",
+                        readup: "Review: Comparison operator delegation matrix",
+                    },
+                    {
+                        q: "When using Filter with StartsWith on Dataverse, where does the filtering happen?",
+                        options: [
+                            "In the browser memory",
+                            "On the Dataverse server",
+                            "In Power Apps Studio",
+                            "In a local collection",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["delegable-functions", "Dataverse", "StartsWith"],
+                        explanation:
+                            "With delegation, the <strong>Dataverse server</strong> processes the filter — only matching records are returned to the client.",
+                        readup: "Review: How delegation reduces data transferred",
+                    },
+                    {
+                        q: "Sort() and SortByColumns() — what do they have in common regarding delegation?",
+                        options: [
+                            "Neither is delegable",
+                            "Both are used for server-side sorting",
+                            "Only Sort is delegable",
+                            "SortByColumns is not delegable",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["Sort", "delegable-functions"],
+                        explanation:
+                            "<strong>Both Sort and SortByColumns</strong> are used for server-side sorting, making them delegable options.",
+                        readup: "Review: Sort vs SortByColumns delegation",
+                    },
+                    // ── NON-DELEGABLE ──
+                    {
+                        q: "Which of the following is a NON-delegable function?",
+                        options: ["Filter", "LookUp", "CountIf", "SortByColumns"],
+                        answer: 2,
+                        category: "nondelegable",
+                        tags: ["non-delegable", "CountIf"],
+                        explanation:
+                            "<strong>CountIf</strong> is non-delegable — it operates only on the locally-fetched record set (max 2000).",
+                        readup: "Review: Non-delegable functions — CountIf alternatives",
+                    },
+                    {
+                        q: "What is the default record limit when a non-delegable operation runs in Power Apps?",
+                        options: ["100", "500", "1000", "5000"],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["record-limit", "non-delegable"],
+                        explanation:
+                            "The default limit is <strong>500 records</strong>. This is configurable up to 2000 in Settings → Data row limit.",
+                        readup: "Review: Configuring data row limit in app settings",
+                    },
+                    {
+                        q: "What is the MAXIMUM record limit you can set for non-delegable queries?",
+                        options: ["500", "1000", "2000", "10000"],
+                        answer: 2,
+                        category: "nondelegable",
+                        tags: ["record-limit", "non-delegable"],
+                        explanation:
+                            "The maximum configurable limit is <strong>2000 records</strong>. Beyond this, delegation is essential.",
+                        readup: "Review: Data row limit — Power Apps settings",
+                    },
+                    {
+                        q: "Collect() and ClearCollect() are non-delegable. What is unusual about their delegation behaviour?",
+                        options: [
+                            "They show double warnings",
+                            "They do not return any delegation warning",
+                            "They auto-delegate when possible",
+                            "They only work on Dataverse",
+                        ],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["Collect", "ClearCollect", "non-delegable"],
+                        explanation:
+                            "<strong>Collect and ClearCollect</strong> don't surface delegation warnings — a silent gotcha that can cause incomplete data in collections.",
+                        readup: "Review: Collect/ClearCollect delegation pitfalls",
+                    },
+                    {
+                        q: "Which function for combining text from multiple records is non-delegable?",
+                        options: ["StartsWith", "Concat", "LookUp", "Filter"],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["Concat", "non-delegable", "text-functions"],
+                        explanation:
+                            "<strong>Concat</strong> is non-delegable — it runs client-side on the locally-fetched record set.",
+                        readup: "Review: Concat limitations with large datasets",
+                    },
+                    {
+                        q: "Which functions are used to retrieve subsets of records but are non-delegable?",
+                        options: [
+                            "Filter and LookUp",
+                            "First, FirstN, Last, LastN",
+                            "Sort and SortByColumns",
+                            "GroupBy and Ungroup",
+                        ],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["First", "Last", "FirstN", "LastN", "non-delegable"],
+                        explanation:
+                            "<strong>First, FirstN, Last, LastN</strong> are all non-delegable — they operate on the client-side fetched dataset.",
+                        readup: "Review: First/Last non-delegation — use LookUp instead",
+                    },
+                    {
+                        q: "Search() on SharePoint — what is its delegation status?",
+                        options: [
+                            "Fully delegable",
+                            "Non-delegable — limited to fetched records",
+                            "Partially delegable",
+                            "Delegable only with indexed columns",
+                        ],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["Search", "SharePoint", "non-delegable"],
+                        explanation:
+                            "<strong>Search on SharePoint is non-delegable</strong>. Use Filter with StartsWith as a replacement.",
+                        readup:
+                            "Review: Replacing Search() with Filter+StartsWith on SharePoint",
+                    },
+                    {
+                        q: "Which batch operations are non-delegable?",
+                        options: [
+                            "Filter and LookUp",
+                            "RemoveIf and UpdateIf",
+                            "Sort and SortByColumns",
+                            "StartsWith and EndsWith",
+                        ],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["RemoveIf", "UpdateIf", "non-delegable"],
+                        explanation:
+                            "<strong>RemoveIf and UpdateIf</strong> are non-delegable — they only operate on the locally-fetched record set.",
+                        readup:
+                            "Review: RemoveIf/UpdateIf limitations — consider Power Automate for large sets",
+                    },
+                    {
+                        q: "GroupBy and Ungroup are classified as:",
+                        options: [
+                            "Delegable data functions",
+                            "Non-delegable data-shaping functions",
+                            "Partially delegable",
+                            "Delegable only on SQL Server",
+                        ],
+                        answer: 1,
+                        category: "nondelegable",
+                        tags: ["GroupBy", "Ungroup", "non-delegable"],
+                        explanation:
+                            "<strong>GroupBy and Ungroup</strong> are non-delegable data-shaping functions — they work on locally-held data.",
+                        readup: "Review: GroupBy alternatives for server-side grouping",
+                    },
+                    {
+                        q: "Choices() function — what is its delegation status?",
+                        options: [
+                            "Fully delegable",
+                            "Partially delegable",
+                            "Non-delegable",
+                            "Delegable on Dataverse only",
+                        ],
+                        answer: 2,
+                        category: "nondelegable",
+                        tags: ["Choices", "non-delegable", "lookup-columns"],
+                        explanation:
+                            "<strong>Choices()</strong> is non-delegable — it retrieves possible values for a lookup column client-side.",
+                        readup: "Review: Choices() function and its dataset limits",
+                    },
+                    {
+                        q: "EndsWith() — what is its delegation status compared to StartsWith()?",
+                        options: [
+                            "Both are delegable",
+                            "EndsWith is delegable, StartsWith is not",
+                            "EndsWith is non-delegable unlike StartsWith",
+                            "Both are non-delegable",
+                        ],
+                        answer: 2,
+                        category: "nondelegable",
+                        tags: ["EndsWith", "StartsWith", "non-delegable", "text-search"],
+                        explanation:
+                            "<strong>EndsWith is non-delegable</strong> while StartsWith is delegable — a critical distinction for text filtering.",
+                        readup: "Review: StartsWith vs EndsWith — delegation differences",
+                    },
+                    // ── PARTIALLY DELEGABLE ──
+                    {
+                        q: "AddColumns, DropColumns, ShowColumns, and RenameColumns are classified as:",
+                        options: [
+                            "Fully delegable",
+                            "Fully non-delegable",
+                            "Partially delegable",
+                            "Only delegable in Dataverse",
+                        ],
+                        answer: 2,
+                        category: "partial",
+                        tags: ["AddColumns", "table-shaping", "partially-delegable"],
+                        explanation:
+                            "These are <strong>partially delegable</strong> — inner formulas can delegate but the function output is subject to the record limit.",
+                        readup:
+                            "Review: Table-shaping functions — partial delegation behaviour",
+                    },
+                    {
+                        q: "You use AddColumns with a LookUp to join tables. What limits the result?",
+                        options: [
+                            "LookUp is not delegable",
+                            "LookUp delegates but AddColumns caps the overall result at the data row limit",
+                            "Both delegate fully",
+                            "Neither delegates",
+                        ],
+                        answer: 1,
+                        category: "partial",
+                        tags: ["AddColumns", "LookUp", "partially-delegable"],
+                        explanation:
+                            "The <strong>LookUp inside AddColumns delegates</strong>, but AddColumns caps the output at the data row limit — a common join pitfall.",
+                        readup:
+                            "Review: AddColumns+LookUp join pattern — understanding the row limit",
+                    },
+                    {
+                        q: "The formula inside AddColumns can delegate, but the output is limited to:",
+                        options: [
+                            "500 records always",
+                            "The configured data row limit (500–2000)",
+                            "Unlimited records",
+                            "10,000 records",
+                        ],
+                        answer: 1,
+                        category: "partial",
+                        tags: ["AddColumns", "record-limit", "partially-delegable"],
+                        explanation:
+                            "The output of AddColumns is limited to the <strong>configured data row limit (default 500, max 2000)</strong>.",
+                        readup:
+                            "Review: Partial delegation record limits — table-shaping functions",
+                    },
+                    {
+                        q: "Which scenario correctly describes partial delegation?",
+                        options: [
+                            "Filter returns all matching records regardless of size",
+                            "AddColumns with LookUp: LookUp delegates but result is capped",
+                            "Collect fully delegates to Dataverse",
+                            "CountIf works on all records when used inside Filter",
+                        ],
+                        answer: 1,
+                        category: "partial",
+                        tags: ["partially-delegable", "AddColumns"],
+                        explanation:
+                            "<strong>AddColumns with LookUp</strong> is the canonical partial delegation scenario — the inner formula delegates, but output is capped.",
+                        readup: "Review: Partial delegation scenarios and workarounds",
+                    },
+                    // ── SHAREPOINT SPECIFIC ──
+                    {
+                        q: "On SharePoint, which logical operator has known delegation limitations?",
+                        options: ["And (&&)", "Or (||)", "Not (!)", "All work fully"],
+                        answer: 2,
+                        category: "delegable",
+                        tags: ["SharePoint", "Not", "logical-operators"],
+                        explanation:
+                            "<strong>Not (!)</strong> has delegation limitations specifically on SharePoint, unlike And and Or.",
+                        readup:
+                            "Review: SharePoint delegation limitations — logical operators",
+                    },
+                    {
+                        q: "On SharePoint, the <> (not equal) comparison operator:",
+                        options: [
+                            "Is fully delegable",
+                            "Has delegation limitations",
+                            "Is not supported at all",
+                            "Delegates only for text columns",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["SharePoint", "comparison-operators"],
+                        explanation:
+                            "SharePoint has <strong>limitations with <> and some other operators</strong> — test thoroughly when filtering on SharePoint.",
+                        readup: "Review: SharePoint operator delegation caveats",
+                    },
+                    {
+                        q: "Which text search approach is delegation-safe for SharePoint?",
+                        options: [
+                            "Search(DataSource, term, col)",
+                            "Filter(DataSource, col = term)",
+                            "Filter(DataSource, StartsWith(col, term))",
+                            "First(Filter(DataSource, col = term))",
+                        ],
+                        answer: 2,
+                        category: "delegable",
+                        tags: [
+                            "SharePoint",
+                            "StartsWith",
+                            "text-search",
+                            "delegable-functions",
+                        ],
+                        explanation:
+                            "<strong>Filter + StartsWith</strong> is the delegation-safe pattern on SharePoint. Search() and EndsWith are not.",
+                        readup:
+                            "Review: SharePoint text search delegation best practices",
+                    },
+                    // ── DATAVERSE SPECIFIC ──
+                    {
+                        q: "Which data source generally offers the broadest and most reliable delegation support?",
+                        options: [
+                            "SharePoint",
+                            "Excel (OneDrive)",
+                            "Dataverse",
+                            "Local collections",
+                        ],
+                        answer: 2,
+                        category: "general",
+                        tags: ["Dataverse", "delegation-support"],
+                        explanation:
+                            "<strong>Dataverse</strong> provides the most comprehensive and reliable delegation support in Power Apps.",
+                        readup: "Review: Choosing data sources — delegation comparison",
+                    },
+                    {
+                        q: "When using Filter with AND conditions on Dataverse, the operation:",
+                        options: [
+                            "Is non-delegable — AND is not supported",
+                            "Delegates fully — Dataverse supports compound filters",
+                            "Partially delegates — only the first condition",
+                            "Depends on the column types",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["Dataverse", "Filter", "logical-operators"],
+                        explanation:
+                            "<strong>Dataverse supports compound filter delegation</strong> with AND conditions, pushing the full predicate to the server.",
+                        readup: "Review: Compound filter delegation on Dataverse",
+                    },
+                    // ── PERFORMANCE & PATTERNS ──
+                    {
+                        q: "What is the main performance risk of using non-delegable functions with large datasets?",
+                        options: [
+                            "The app will crash",
+                            "Results may be incomplete — only the first 500–2000 records are processed",
+                            "The app becomes read-only",
+                            "Power Apps charges extra API calls",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["performance", "record-limit", "non-delegable"],
+                        explanation:
+                            "With large datasets, non-delegable functions produce <strong>incomplete results</strong> — only the fetched record subset is processed.",
+                        readup:
+                            "Review: Delegation warnings — why they matter in production",
+                    },
+                    {
+                        q: "Which approach can help work around delegation limits for large datasets?",
+                        options: [
+                            "Use Collect() to cache all data",
+                            "Use Power Automate to pre-aggregate data server-side",
+                            "Increase max tokens in settings",
+                            "Disable delegation warnings",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["performance", "Power-Automate", "workarounds"],
+                        explanation:
+                            "Using <strong>Power Automate to pre-aggregate or filter server-side</strong> is a production-grade workaround for delegation limits.",
+                        readup:
+                            "Review: Delegation workarounds — Power Automate integration patterns",
+                    },
+                    {
+                        q: "A delegation warning (blue underline) in Power Apps Studio means:",
+                        options: [
+                            "The formula has a syntax error",
+                            "Part of the formula may not work correctly with large datasets",
+                            "The data source is offline",
+                            "A premium connector is required",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["delegation-warnings", "performance"],
+                        explanation:
+                            "A <strong>blue delegation warning</strong> means the marked function cannot be pushed to the data source — large datasets may produce incomplete results.",
+                        readup: "Review: Understanding and resolving delegation warnings",
+                    },
+                    {
+                        q: "Which function is a delegable alternative to using Search() for partial text matching?",
+                        options: [
+                            "Len() inside Filter",
+                            "Filter with StartsWith()",
+                            "Concat with Filter",
+                            "GroupBy with Search",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["StartsWith", "text-search", "delegable-functions"],
+                        explanation:
+                            "<strong>Filter + StartsWith</strong> is the recommended delegable replacement for Search().",
+                        readup: "Review: Delegable text search patterns in Power Apps",
+                    },
+                    // ── COLLECTIONS ──
+                    {
+                        q: "A collection created with ClearCollect() — can it be used with non-delegable functions?",
+                        options: [
+                            "No — collections also have delegation limits",
+                            "Yes — collections are in-memory so all records are available, delegation does not apply",
+                            "Only if the collection has fewer than 500 records",
+                            "Only when connected to Dataverse",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["Collect", "ClearCollect", "collections"],
+                        explanation:
+                            "<strong>Collections are in-memory</strong> — since all records exist locally, delegation limits don't apply. Non-delegable functions work on full collection data.",
+                        readup:
+                            "Review: Collections vs data sources — delegation behaviour",
+                    },
+                    {
+                        q: "What is the main downside of using ClearCollect() to bypass delegation?",
+                        options: [
+                            "It crashes the app",
+                            "Loading all records into memory can be slow and hit data row limits during the load",
+                            "Collections cannot be filtered",
+                            "ClearCollect is not supported on mobile",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: [
+                            "ClearCollect",
+                            "collections",
+                            "performance",
+                            "record-limit",
+                        ],
+                        explanation:
+                            "ClearCollect itself is non-delegable — it can only fetch up to the <strong>data row limit (default 500, max 2000) during the load</strong>, so the collection may be incomplete for large sources.",
+                        readup:
+                            "Review: ClearCollect delegation pitfall — partial collection loading",
+                    },
+                    // ── ADVANCED ──
+                    {
+                        q: "Which scenario correctly uses delegation to efficiently search a 100,000-row Dataverse table?",
+                        options: [
+                            "ClearCollect(col, Table); Search(col, term, 'col')",
+                            "Filter(Table, StartsWith(Name, searchInput.Text))",
+                            "CountIf(Table, Status = 'Active')",
+                            "Last(Sort(Table, CreatedDate))",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: [
+                            "Dataverse",
+                            "Filter",
+                            "StartsWith",
+                            "delegable-functions",
+                        ],
+                        explanation:
+                            "<strong>Filter + StartsWith on Dataverse</strong> fully delegates — the server returns only matching rows, handling 100k+ records efficiently.",
+                        readup:
+                            "Review: Building scalable search in Power Apps — delegation best practices",
+                    },
+                    {
+                        q: "You want to count active records in a 50,000-row SharePoint list. What is the correct approach?",
+                        options: [
+                            "CountIf(SPList, Status='Active')",
+                            "Create a separate summary list updated via Power Automate",
+                            "First(Sort(SPList, Status))",
+                            "Use a label with CountIf directly in the gallery",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["SharePoint", "CountIf", "workarounds", "Power-Automate"],
+                        explanation:
+                            "<strong>Power Automate</strong> should be used to maintain a pre-computed count — CountIf on SharePoint is non-delegable and would only count fetched records.",
+                        readup:
+                            "Review: Aggregation workarounds on SharePoint — Power Automate patterns",
+                    },
+                    {
+                        q: "Filter(Products, Price >= 100 && Price <= 500) on Dataverse — this is:",
+                        options: [
+                            "Non-delegable because it uses &&",
+                            "Fully delegable — both comparison operators and && delegate on Dataverse",
+                            "Partially delegable — only one condition delegates",
+                            "Non-delegable because of the range check",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: ["Dataverse", "comparison-operators", "logical-operators"],
+                        explanation:
+                            "On Dataverse, <strong>range filters using && and comparison operators are fully delegable</strong>.",
+                        readup:
+                            "Review: Compound delegation on Dataverse — filter patterns",
+                    },
+                    {
+                        q: "RenameColumns is used inside a delegable Filter expression. The filter itself:",
+                        options: [
+                            "Cannot delegate because RenameColumns wraps it",
+                            "Can still delegate — inner formulas of table-shaping functions can delegate",
+                            "Does not execute at all",
+                            "Only works if renamed columns are indexed",
+                        ],
+                        answer: 1,
+                        category: "partial",
+                        tags: ["RenameColumns", "partially-delegable", "table-shaping"],
+                        explanation:
+                            "<strong>Inner formulas of table-shaping functions can delegate</strong> — it's the function's output that is subject to the record limit.",
+                        readup:
+                            "Review: Partial delegation — inner formula vs output distinction",
+                    },
+                    {
+                        q: "In a canvas app connected to SQL Server, which of the following is delegable?",
+                        options: [
+                            "GroupBy(Orders, 'Region', 'Sales', Sales)",
+                            "Sum(Filter(Orders, Year=2024), Amount)",
+                            "Last(Sort(Orders, Date))",
+                            "ClearCollect(col, Orders)",
+                        ],
+                        answer: 1,
+                        category: "delegable",
+                        tags: [
+                            "SQL-Server",
+                            "aggregation",
+                            "Filter",
+                            "delegable-functions",
+                        ],
+                        explanation:
+                            "On SQL Server, <strong>Sum inside Filter is delegable</strong> — aggregation functions delegate only on SQL Server.",
+                        readup: "Review: SQL Server delegation — aggregation functions",
+                    },
+                    {
+                        q: "Why is First(Sort(Table, Column, Descending)) considered problematic with large datasets?",
+                        options: [
+                            "Sort is not supported on all data sources",
+                            "Both First and Sort are non-delegable on most sources",
+                            "Sort delegates but First does not — only the first 500–2000 sorted records are fetched then First picks from those",
+                            "It has a syntax error",
+                        ],
+                        answer: 2,
+                        category: "nondelegable",
+                        tags: ["First", "Sort", "non-delegable", "performance"],
+                        explanation:
+                            "<strong>Sort delegates but First does not</strong> — Power Apps fetches the sorted first page then picks from that local set, potentially missing the true first record.",
+                        readup:
+                            "Review: First+Sort anti-pattern — use LookUp with delegation instead",
+                    },
+                    {
+                        q: "What does it mean for a data source to 'support' a delegable function?",
+                        options: [
+                            "The function can run locally on any data source",
+                            "The data source can process the formula's logic on the server side without sending all records to the app",
+                            "The function will auto-optimize for the data source",
+                            "The data source stores the formula for reuse",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["delegation-concept", "performance"],
+                        explanation:
+                            "A supported delegable function means the <strong>data source processes the logic server-side</strong>, returning only the relevant records to Power Apps.",
+                        readup:
+                            "Review: Core delegation concept — server-side vs client-side processing",
+                    },
+                    {
+                        q: "A Power Apps developer adds a delegation warning suppression comment. What does this mean?",
+                        options: [
+                            "The delegation issue is resolved",
+                            "The developer has acknowledged the warning but the risk of incomplete data remains",
+                            "The function now delegates",
+                            "Power Apps will automatically paginate",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: ["delegation-warnings", "performance"],
+                        explanation:
+                            "Suppressing a delegation warning only <strong>hides the indicator</strong> — the non-delegation risk and potential for incomplete data still exists.",
+                        readup:
+                            "Review: Delegation warning suppression — risks and best practices",
+                    },
+                    {
+                        q: "For an app targeting 10,000+ records on SharePoint, which architecture is most appropriate?",
+                        options: [
+                            "Increase data row limit to 2000 and use ClearCollect",
+                            "Use Filter+StartsWith for queries and Power Automate for aggregations",
+                            "Use Search() throughout as it handles large sets",
+                            "Use CountIf for analytics — it's delegable on SharePoint",
+                        ],
+                        answer: 1,
+                        category: "general",
+                        tags: [
+                            "SharePoint",
+                            "architecture",
+                            "performance",
+                            "workarounds",
+                        ],
+                        explanation:
+                            "The correct architecture combines <strong>Filter+StartsWith for delegable queries</strong> and <strong>Power Automate for server-side aggregations</strong>.",
+                        readup:
+                            "Review: Production Power Apps architecture for large SharePoint lists",
+                    },
+                    {
+                        q: "DropColumns is applied around a delegable Filter. The delegation behaviour is:",
+                        options: [
+                            "DropColumns fully delegates the inner filter and returns unlimited records",
+                            "Inner Filter can delegate, but DropColumns limits the output to the data row limit",
+                            "DropColumns prevents any delegation",
+                            "DropColumns turns Filter into a non-delegable function",
+                        ],
+                        answer: 1,
+                        category: "partial",
+                        tags: ["DropColumns", "partially-delegable", "table-shaping"],
+                        explanation:
+                            "<strong>DropColumns is partially delegable</strong> — the inner Filter delegates, but the output is bounded by the data row limit.",
+                        readup:
+                            "Review: DropColumns partial delegation — table-shaping function behaviour",
+                    },
+                    {
+                        q: "Which data source has the most delegation limitations for comparison operators?",
+                        options: ["Dataverse", "SQL Server", "SharePoint", "Salesforce"],
+                        answer: 2,
+                        category: "general",
+                        tags: [
+                            "SharePoint",
+                            "comparison-operators",
+                            "delegation-support",
+                        ],
+                        explanation:
+                            "<strong>SharePoint</strong> has the most operator limitations — certain operators like <> and Not are not fully supported for delegation.",
+                        readup:
+                            "Review: SharePoint delegation limitations — operator support matrix",
+                    },
+                ],
+            },
+            // ── ADD NEW TOPICS HERE ──
+            // Copy this block and fill in the questions array:
+            // "topicId": {
+            //   id: "topicId",
+            //   title: "Topic Name",
+            //   icon: "🔷",
+            //   desc: "Short description.",
+            //   color: "var(--accent2)",
+            //   questions: [ ...50 question objects... ]
+            // }
+        };
+
+    /* ═══════════════════════════════════════════════════════
+    STORAGE HELPERS
+    ═══════════════════════════════════════════════════════ */
+        const LS_KEY = "pp_mastery_v2";
+
+        function loadData() {
+            try {
+                return (
+                    JSON.parse(localStorage.getItem(LS_KEY)) || {
+                        sessions: [],
+                        tagStats: {},
+                    }
+                );
+            } catch (e) {
+                return { sessions: [], tagStats: {} };
+            }
+        }
+        function saveData(d) {
+            localStorage.setItem(LS_KEY, JSON.stringify(d));
+        }
+
+    /* ═══════════════════════════════════════════════════════
+    WILSON SCORE CONFIDENCE INTERVAL
+    ═══════════════════════════════════════════════════════ */
+        function wilsonCI(correct, total, z = 1.96) {
+            if (total === 0) return { low: 0, mid: 0, high: 0 };
+            const p = correct / total;
+            const denom = 1 + (z * z) / total;
+            const centre = p + (z * z) / (2 * total);
+            const spread =
+                z * Math.sqrt((p * (1 - p)) / total + (z * z) / (4 * total * total));
+            return {
+                low: Math.max(0, (centre - spread) / denom),
+                mid: p,
+                high: Math.min(1, (centre + spread) / denom),
+            };
+        }
+
+        function pct(v) {
+            return Math.round(v * 100) + "%";
+        }
+
+    /* ═══════════════════════════════════════════════════════
+    SCREEN MANAGEMENT
+    ═══════════════════════════════════════════════════════ */
+        function showScreen(id) {
+            document
+                .querySelectorAll(".screen")
+                .forEach((s) => s.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+            window.scrollTo(0, 0);
+        }
+        function showHome() {
+            renderHome();
+            showScreen("homeScreen");
+        }
+        function showHistory() {
+            renderHistory();
+            showScreen("historyScreen");
+        }
+
+    /* ═══════════════════════════════════════════════════════
+    HOME
+    ═══════════════════════════════════════════════════════ */
+        function renderHome() {
+            const data = loadData();
+
+            // Global stats
+            const totalSessions = data.sessions.length;
+            const totalQ = data.sessions.reduce((a, s) => a + s.total, 0);
+            const totalCorrect = data.sessions.reduce((a, s) => a + s.correct, 0);
+            const bestScore = data.sessions.reduce(
+                (a, s) => Math.max(a, Math.round((100 * s.correct) / s.total)),
+                0,
+            );
+            document.getElementById("gs-sessions").textContent = totalSessions;
+            document.getElementById("gs-questions").textContent = totalQ;
+            document.getElementById("gs-accuracy").textContent =
+                totalQ > 0 ? pct(totalCorrect / totalQ) : "—";
+            document.getElementById("gs-streak").textContent =
+                totalSessions > 0 ? bestScore + "%" : "—";
+
+            // Topic cards
+            const grid = document.getElementById("topicsGrid");
+            const topicIds = Object.keys(QUESTION_BANK);
+            const placeholders = [
+                {
+                    title: "Power Fx Formulas",
+                    icon: "🔷",
+                    desc: "Functions, expressions, and formula patterns.",
+                },
+                {
+                    title: "Canvas App UI",
+                    icon: "🎨",
+                    desc: "Galleries, forms, controls and UX patterns.",
+                },
+                {
+                    title: "Power Automate",
+                    icon: "🔄",
+                    desc: "Flow types, triggers, actions, and error handling.",
+                },
+                {
+                    title: "Dataverse",
+                    icon: "🗄️",
+                    desc: "Tables, relationships, security, and metadata.",
+                },
+            ];
+
+            let html = "";
+            topicIds.forEach((id) => {
+                const t = QUESTION_BANK[id];
+                const topicSessions = data.sessions.filter((s) => s.topicId === id);
+                const tTotal = topicSessions.reduce((a, s) => a + s.total, 0);
+                const tCorrect = topicSessions.reduce((a, s) => a + s.correct, 0);
+                const mastery = tTotal > 0 ? tCorrect / tTotal : null;
+                const ci = tTotal > 0 ? wilsonCI(tCorrect, tTotal) : null;
+                const lastSession = topicSessions[topicSessions.length - 1];
+                const progressPct = mastery !== null ? Math.round(mastery * 100) : 0;
+
+                let masteryColor = "var(--muted)";
+                let masteryLabel = "Not started";
+                if (mastery !== null) {
+                    if (mastery >= 0.85) {
+                        masteryColor = "var(--correct)";
+                        masteryLabel = "Expert";
+                    } else if (mastery >= 0.65) {
+                        masteryColor = "var(--accent)";
+                        masteryLabel = "Proficient";
+                    } else if (mastery >= 0.45) {
+                        masteryColor = "var(--warn)";
+                        masteryLabel = "Learning";
+                    } else {
+                        masteryColor = "var(--wrong)";
+                        masteryLabel = "Needs Work";
+                    }
+                }
+
+                html += `<div class="topic-card" onclick="selectTopic('${id}')">
+        <div class="card-header">
+        <div class="card-icon">${t.icon}</div>
+        <div class="card-status status-ready">Ready</div>
+        </div>
+        <div class="card-title">${t.title}</div>
+        <div class="card-desc">${t.desc}</div>
+        <div class="card-meta">
+        <span>📋 ${t.questions.length} questions</span>
+        ${topicSessions.length > 0 ? `<span>🎯 ${topicSessions.length} sessions</span>` : ""}
+        ${lastSession ? `<span>Last: ${Math.round((100 * lastSession.correct) / lastSession.total)}%</span>` : ""}
+        </div>
+        ${mastery !== null
+                        ? `
+        <div class="card-progress"><div class="card-progress-fill" style="width:${progressPct}%"></div></div>
+        <div class="mastery-badge"><div class="mb-dot" style="background:${masteryColor}"></div><span style="color:${masteryColor}">${masteryLabel}</span>${ci ? ` <span style="color:var(--muted)">CI: ${pct(ci.low)}–${pct(ci.high)}</span>` : ""}</div>`
+                        : ""
+                    }
+    </div>`;
+            });
+
+            // Locked placeholders
+            placeholders.forEach((p) => {
+                html += `<div class="topic-card locked">
+        <div class="card-header">
+        <div class="card-icon">${p.icon}</div>
+        <div class="card-status status-locked">Coming Soon</div>
+        </div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-desc">${p.desc}</div>
+      <div class="card-meta"><span>📋 — questions</span></div>
+    </div>`;
+            });
+
+            grid.innerHTML = html;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+     QUIZ STATE
+  ═══════════════════════════════════════════════════════ */
+        let QState = {};
+
+        function selectTopic(topicId) {
+            const topic = QUESTION_BANK[topicId];
+            if (!topic) return;
+            const pool = shuffle([...topic.questions]);
+            const selected = pool.slice(0, Math.min(20, pool.length));
+            QState = {
+                topicId,
+                topicTitle: topic.title,
+                questions: selected,
+                current: 0,
+                score: 0,
+                answered: [],
+            };
+            showScreen("quizScreen");
+            renderQuestion();
+        }
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function renderQuestion() {
+            const { questions, current, score } = QState;
+            const total = questions.length;
+            const q = questions[current];
+
+            document.getElementById("qliveScore").textContent =
+                `${score} / ${current}`;
+            document.getElementById("qProgressLabel").textContent =
+                `Question ${current + 1} of ${total}`;
+            document.getElementById("qTopicLabel").textContent = QState.topicTitle;
+            document.getElementById("progressFill").style.width =
+                `${(current / total) * 100}%`;
+
+            // Category + tags
+            const catMap = {
+                delegable: ["cat-delegable", "✅ Delegable"],
+                nondelegable: ["cat-nondelegable", "❌ Non-Delegable"],
+                partial: ["cat-partial", "⚠️ Partial"],
+                general: ["cat-general", "📋 General"],
+            };
+            const [catCls, catLabel] = catMap[q.category] || [
+                "cat-general",
+                "General",
+            ];
+            const tagHtml = (q.tags || [])
+                .slice(0, 2)
+                .map((t) => `<div class="q-tag">${t}</div>`)
+                .join("");
+            document.getElementById("qMeta").innerHTML =
+                `<div class="cat-tag ${catCls}">${catLabel}</div>${tagHtml}`;
+            document.getElementById("questionText").textContent = q.q;
+
+            const letters = ["A", "B", "C", "D"];
+            const grid = document.getElementById("optionsGrid");
+            grid.innerHTML = q.options
+                .map(
+                    (opt, i) =>
+                        `<button class="opt-btn" onclick="selectAnswer(${i},this)">
+      <span class="opt-letter">${letters[i]}</span><span>${opt}</span>
+    </button>`,
+                )
+                .join("");
+
+            document.getElementById("feedbackPanel").className = "feedback-panel";
+            document.getElementById("btnNext").className = "btn-next";
+        }
+
+        function selectAnswer(idx, btn) {
+            const q = QState.questions[QState.current];
+            document
+                .querySelectorAll(".opt-btn")
+                .forEach((b) => (b.disabled = true));
+
+            const isCorrect = idx === q.answer;
+            if (isCorrect) QState.score++;
+
+            document.querySelectorAll(".opt-btn").forEach((b, i) => {
+                if (i === q.answer) b.classList.add("correct");
+                else if (i === idx && !isCorrect) b.classList.add("wrong");
+            });
+
+            QState.answered.push({
+                q: q.q,
+                isCorrect,
+                correctAnswer: q.options[q.answer],
+                selectedAnswer: q.options[idx],
+                tags: q.tags || [],
+                category: q.category,
+            });
+
+            const panel = document.getElementById("feedbackPanel");
+            panel.className = `feedback-panel show ${isCorrect ? "fp-correct" : "fp-wrong"}`;
+            const lbl = document.getElementById("fbLabel");
+            lbl.className = `fb-label ${isCorrect ? "c" : "w"}`;
+            lbl.textContent = isCorrect ? "✓ Correct" : "✗ Incorrect";
+            document.getElementById("fbBody").innerHTML = q.explanation;
+            document.getElementById("fbReadup").innerHTML = q.readup
+                ? `<span>📖 Study tip:</span> ${q.readup}`
+                : "";
+
+            document.getElementById("btnNext").className = "btn-next show";
+        }
+
+        function nextQuestion() {
+            QState.current++;
+            if (QState.current >= QState.questions.length) {
+                finishQuiz();
+            } else {
+                renderQuestion();
+            }
+        }
+
+        function confirmExit() {
+            if (confirm("Exit this session? Progress will be lost.")) showHome();
+        }
+
+        function playAgain() {
+            selectTopic(QState.topicId);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+     FINISH & RESULTS
+  ═══════════════════════════════════════════════════════ */
+        function finishQuiz() {
+            const { topicId, topicTitle, questions, score, answered } = QState;
+            const total = questions.length;
+
+            // Save session
+            const data = loadData();
+            const sessionRecord = {
+                id: Date.now(),
+                topicId,
+                topicTitle,
+                correct: score,
+                total,
+                date: new Date().toISOString(),
+                answers: answered,
+            };
+            data.sessions.push(sessionRecord);
+
+            // Update tag stats
+            answered.forEach((a) => {
+                (a.tags || []).forEach((tag) => {
+                    if (!data.tagStats[topicId]) data.tagStats[topicId] = {};
+                    if (!data.tagStats[topicId][tag])
+                        data.tagStats[topicId][tag] = { correct: 0, total: 0 };
+                    data.tagStats[topicId][tag].total++;
+                    if (a.isCorrect) data.tagStats[topicId][tag].correct++;
+                });
+            });
+            saveData(data);
+
+            renderResults(sessionRecord, data);
+            showScreen("resultsScreen");
+        }
+
+        function renderResults(session, data) {
+            const { topicId, topicTitle, correct, total, answered } = session;
+
+            document.getElementById("resTopic").textContent = topicTitle;
+            document.getElementById("resScore").textContent = correct;
+            document.getElementById("resDenom").textContent = "/" + total;
+            document.getElementById("btnPlayAgain").textContent = "Play Again →";
+
+            const pctScore = correct / total;
+
+            // Grade
+            let grade, gColor, message;
+            if (pctScore >= 0.9) {
+                grade = "Expert";
+                gColor = "var(--correct)";
+                message = "Outstanding mastery. You understand delegation deeply.";
+            } else if (pctScore >= 0.75) {
+                grade = "Proficient";
+                gColor = "var(--accent)";
+                message = "Strong performance. A few areas to tighten up.";
+            } else if (pctScore >= 0.55) {
+                grade = "Learning";
+                gColor = "var(--warn)";
+                message = "Halfway there. Review the weak areas below and try again.";
+            } else {
+                grade = "Needs Work";
+                gColor = "var(--wrong)";
+                message =
+                    "Keep going — delegation takes time to master. Use the study tips.";
+            }
+
+            const gc = document.getElementById("resGrade");
+            gc.textContent = grade;
+            gc.style.color = gColor;
+            gc.style.borderColor = gColor;
+            document.getElementById("resMessage").textContent = message;
+
+            // CI
+            // Cumulative CI across all sessions for this topic
+            const topicSessions = data.sessions.filter(
+                (s) => s.topicId === topicId,
+            );
+            const cumTotal = topicSessions.reduce((a, s) => a + s.total, 0);
+            const cumCorrect = topicSessions.reduce((a, s) => a + s.correct, 0);
+            const ci = wilsonCI(cumCorrect, cumTotal);
+
+            document.getElementById("ciLow").textContent = pct(ci.low);
+            document.getElementById("ciMid").textContent = pct(ci.mid);
+            document.getElementById("ciHigh").textContent = pct(ci.high);
+
+            // CI bar
+            const barWrap = document.getElementById("ciBarWrap");
+            const barW = barWrap.offsetWidth || 600;
+            document.getElementById("ciRange").style.left = pct(ci.low);
+            document.getElementById("ciRange").style.width = pct(ci.high - ci.low);
+            document.getElementById("ciPoint").style.left = pct(ci.mid);
+
+            const sessions = topicSessions.length;
+            const ciWidth = Math.round((ci.high - ci.low) * 100);
+            document.getElementById("ciInterpret").innerHTML =
+                `Based on <strong style="color:var(--text)">${cumTotal} questions answered</strong> across <strong style="color:var(--text)">${sessions} session${sessions > 1 ? "s" : ""}</strong>, we are 95% confident your true mastery of this topic lies between <strong style="color:var(--wrong)">${pct(ci.low)}</strong> and <strong style="color:var(--correct)">${pct(ci.high)}</strong>. ${ciWidth > 30 ? "The interval is wide — play more sessions to get a precise estimate." : ciWidth > 15 ? "The interval is narrowing — keep playing to sharpen your estimate." : "Good precision — your mastery estimate is becoming reliable."}`;
+
+            // Performance Summary
+            const tagData = data.tagStats[topicId] || {};
+            const weakTags = Object.entries(tagData)
+                .filter(([t, v]) => v.total >= 2 && v.correct / v.total < 0.65)
+                .sort((a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total)
+                .slice(0, 4);
+
+            const strengthTags = Object.entries(tagData)
+                .filter(([t, v]) => v.total >= 2 && v.correct / v.total >= 0.8)
+                .sort((a, b) => b[1].correct / b[1].total - a[1].correct / a[1].total)
+                .slice(0, 2);
+
+            const tagReadup = {
+                "delegable-functions":
+                    "Read: Power Apps delegation overview — docs.microsoft.com/power-apps/maker/canvas-apps/delegation-overview",
+                "non-delegable":
+                    "Read: Understanding non-delegable functions and the data row limit",
+                "record-limit":
+                    "Read: Configure data row limit in app settings — max 2000",
+                SharePoint:
+                    "Read: SharePoint delegation caveats — comparison and logical operator support",
+                Dataverse:
+                    "Read: Dataverse delegation capabilities — broadest support",
+                "SQL-Server":
+                    "Read: SQL Server delegation — aggregation functions (Sum, Avg, Min, Max)",
+                StartsWith: "Read: Using StartsWith as a delegable search pattern",
+                Filter: "Read: Filter function delegation — foundational pattern",
+                AddColumns:
+                    "Read: Table-shaping functions — partial delegation behaviour",
+                "partially-delegable":
+                    "Read: AddColumns, DropColumns, RenameColumns — partial delegation",
+                ClearCollect:
+                    "Read: ClearCollect pitfall — partial collection loading from large sources",
+                collections:
+                    "Read: Collections are in-memory — delegation does not apply after loading",
+                performance:
+                    "Read: Delegation best practices for production Power Apps",
+                "Power-Automate":
+                    "Read: Using Power Automate to handle non-delegable operations at scale",
+                "text-search":
+                    "Read: Text search patterns — StartsWith vs Search delegation",
+                aggregation:
+                    "Read: Aggregation delegation — only Sum/Avg/Min/Max on SQL Server",
+                "comparison-operators":
+                    "Read: Comparison operator support matrix by data source",
+                "logical-operators":
+                    "Read: And/Or/Not delegation — SharePoint Not limitation",
+            };
+
+            let perfHtml = "";
+
+            if (weakTags.length > 0) {
+                perfHtml += `<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--wrong);margin-bottom:10px">⚠ Areas Needing Improvement</div>`;
+                weakTags.forEach(([tag, v]) => {
+                    const accuracy = Math.round((100 * v.correct) / v.total);
+                    const readup = tagReadup[tag] || `Study this area: ${tag}`;
+                    perfHtml += `<div class="perf-item">
+        <div class="perf-icon">📌</div>
+        <div class="perf-body">
+          <div class="perf-area">${tag.replace(/-/g, " ")}</div>
+          <div class="perf-why">You answered ${accuracy}% of questions on this tag correctly (${v.correct}/${v.total}). ${accuracy < 40 ? "This is a significant gap — prioritise this topic." : "You understand the basics but need to reinforce edge cases."}</div>
+          <div class="perf-action">📖 ${readup}</div>
+        </div>
+      </div>`;
+                });
+            }
+
+            if (strengthTags.length > 0) {
+                perfHtml += `<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--correct);margin:16px 0 10px">✓ Strengths</div>`;
+                strengthTags.forEach(([tag, v]) => {
+                    const accuracy = Math.round((100 * v.correct) / v.total);
+                    perfHtml += `<div class="perf-item" style="border-color:rgba(127,255,107,0.2)">
+        <div class="perf-icon">⭐</div>
+        <div class="perf-body">
+          <div class="perf-area" style="color:var(--correct)">${tag.replace(/-/g, " ")}</div>
+          <div class="perf-why">${accuracy}% accuracy on this area (${v.correct}/${v.total}). Solid understanding — maintain it.</div>
+        </div>
+      </div>`;
+                });
+            }
+
+            if (perfHtml === "") {
+                perfHtml = `<div class="perf-item"><div class="perf-icon">📊</div><div class="perf-body"><div class="perf-area">Building your profile</div><div class="perf-why">Play more sessions to generate your personalised weak-area analysis. Each session sharpens the picture.</div></div></div>`;
+            }
+
+            document.getElementById("perfGrid").innerHTML = perfHtml;
+
+            // Review
+            const reviewHtml = answered
+                .map(
+                    (a) =>
+                        `<div class="review-item">
+      <div class="ri-icon">${a.isCorrect ? "✅" : "❌"}</div>
+      <div class="ri-q">
+        <strong>${a.q}</strong>
+        ${!a.isCorrect ? `<span style="color:var(--muted)">You answered: <span style="color:var(--wrong)">${a.selectedAnswer}</span></span><br>` : ""}
+        ${!a.isCorrect ? `<div class="ri-ans">✓ ${a.correctAnswer}</div>` : ""}
+      </div>
+    </div>`,
+                )
+                .join("");
+            document.getElementById("reviewList").innerHTML = reviewHtml;
+        }
+
+        function toggleReview(btn) {
+            const list = document.getElementById("reviewList");
+            const open = list.classList.toggle("open");
+            btn.textContent = (open ? "▼ Hide" : "▶ Show") + " Question Review";
+        }
+
+        /* ═══════════════════════════════════════════════════════
+     HISTORY
+  ═══════════════════════════════════════════════════════ */
+        function renderHistory() {
+            const data = loadData();
+            const content = document.getElementById("historyContent");
+
+            if (data.sessions.length === 0) {
+                content.innerHTML = `<div class="history-empty"><span>📋</span>No sessions yet. Pick a topic and start your first session.</div>`;
+                return;
+            }
+
+            const sessions = [...data.sessions].reverse();
+            const html =
+                `<div class="session-list">` +
+                sessions
+                    .map((s) => {
+                        const scorePct = Math.round((100 * s.correct) / s.total);
+                        const color =
+                            scorePct >= 80
+                                ? "var(--correct)"
+                                : scorePct >= 60
+                                    ? "var(--accent)"
+                                    : scorePct >= 40
+                                        ? "var(--warn)"
+                                        : "var(--wrong)";
+                        const date = new Date(s.date).toLocaleDateString("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        });
+                        return `<div class="session-card">
+      <div>
+        <div class="sc-topic">${s.topicTitle}</div>
+        <div class="sc-meta">${date} · ${s.total} questions</div>
+      </div>
+      <div class="sc-score-wrap">
+        <div class="sc-score" style="color:${color}">${s.correct}/${s.total}</div>
+        <span class="sc-pct" style="color:${color}">${scorePct}%</span>
+      </div>
+    </div>`;
+                    })
+                    .join("") +
+                `</div>
+  <div style="margin-top:20px">
+    <button class="btn-ghost" onclick="if(confirm('Clear all history?')){localStorage.removeItem('${LS_KEY}');renderHistory();renderHome()}" style="font-size:10px;padding:10px 20px;color:var(--wrong);border-color:var(--wrong)">Clear All History</button>
+  </div>`;
+            content.innerHTML = html;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+     INIT
+  ═══════════════════════════════════════════════════════ */
+        renderHome();
+    </script>
+</body>
+
+</html>
