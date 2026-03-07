@@ -3,17 +3,28 @@
     "topic": "Delegation in Power Apps",
     "version": "1.0",
     "schema": "pp-mastery-v1",
-    "counts": { "mcq": 60, "dragdrop": 20, "casestudy": 10 },
+    "counts": {
+      "mcq": 60,
+      "dragdrop": 20,
+      "casestudy": 10
+    },
     "notes": "Add more questions to each array. MCQ target: 800+. Session draws 40 MCQ + 12 DD + 8 CS sub-questions per run."
   },
-
   "mcq": [
     {
       "q": "Which function is generally delegable across most major data sources in Power Apps?",
-      "options": ["Search", "Filter", "CountIf", "GroupBy"],
+      "options": [
+        "Search",
+        "Filter",
+        "CountIf",
+        "GroupBy"
+      ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["Filter", "delegable-functions"],
+      "tags": [
+        "Filter",
+        "delegable-functions"
+      ],
       "explanation": "<strong>Filter</strong> pushes its predicate to the server on Dataverse, SharePoint, and SQL Server. Only matching records are returned to the client.",
       "wrongExplanations": [
         "Search() is non-delegable on most sources including SharePoint — it retrieves a limited record set locally before searching.",
@@ -21,14 +32,25 @@
         "CountIf is non-delegable — it counts only within the locally-fetched record set (max 500–2000).",
         "GroupBy is a non-delegable data-shaping function that operates entirely client-side."
       ],
-      "msRef": { "label": "Understand delegation in Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+      "msRef": {
+        "label": "Understand delegation in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      }
     },
     {
       "q": "You need to retrieve a single matching record from a large Dataverse table efficiently. Which function should you use?",
-      "options": ["First", "Search", "LookUp", "Last"],
+      "options": [
+        "First",
+        "Search",
+        "LookUp",
+        "Last"
+      ],
       "answer": 2,
       "category": "delegable",
-      "tags": ["LookUp", "delegable-functions"],
+      "tags": [
+        "LookUp",
+        "delegable-functions"
+      ],
       "explanation": "<strong>LookUp</strong> is delegable for single-record retrieval — Dataverse processes the condition server-side and returns just the one matching record.",
       "wrongExplanations": [
         "First() is non-delegable. It fetches the first page of records locally and picks from those — may not return the true first record in a large dataset.",
@@ -36,14 +58,26 @@
         null,
         "Last() is non-delegable and has the same limitation as First() — it operates on the local record page, not the full dataset."
       ],
-      "msRef": { "label": "LookUp function in Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+      "msRef": {
+        "label": "LookUp function in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+      }
     },
     {
       "q": "Which text function is the recommended delegable replacement for Search()?",
-      "options": ["EndsWith inside Filter", "StartsWith inside Filter", "Len inside Filter", "Mid inside Filter"],
+      "options": [
+        "EndsWith inside Filter",
+        "StartsWith inside Filter",
+        "Len inside Filter",
+        "Mid inside Filter"
+      ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["StartsWith", "text-search", "delegable-functions"],
+      "tags": [
+        "StartsWith",
+        "text-search",
+        "delegable-functions"
+      ],
       "explanation": "<strong>StartsWith inside Filter</strong> delegates the text-prefix check to the server and is the standard delegable pattern for search bars.",
       "wrongExplanations": [
         "EndsWith is non-delegable — unlike StartsWith, suffix matching cannot be efficiently pushed to most data sources.",
@@ -51,14 +85,25 @@
         "Len() is non-delegable and does not perform text searching — it returns string length and runs client-side.",
         "Mid() is non-delegable. Substring extraction from an arbitrary position cannot be delegated."
       ],
-      "msRef": { "label": "StartsWith and EndsWith functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith" }
+      "msRef": {
+        "label": "StartsWith and EndsWith functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith"
+      }
     },
     {
       "q": "Which logical operators are delegable in Power Apps?",
-      "options": ["Not (!)", "And (&&) and Or (||)", "All logical operators are delegable", "No logical operators are delegable"],
+      "options": [
+        "Not (!)",
+        "And (&&) and Or (||)",
+        "All logical operators are delegable",
+        "No logical operators are delegable"
+      ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["logical-operators", "delegable-functions"],
+      "tags": [
+        "logical-operators",
+        "delegable-functions"
+      ],
       "explanation": "<strong>And (&&) and Or (||)</strong> are delegable across most major data sources, allowing compound filter conditions to be pushed to the server.",
       "wrongExplanations": [
         "Not (!) has delegation limitations, particularly on SharePoint — it cannot be pushed to the SharePoint server.",
@@ -66,14 +111,25 @@
         "Not (!) is a notable exception — it is not fully delegable on all sources.",
         "And and Or are fully delegable. Only Not has limitations."
       ],
-      "msRef": { "label": "Operators and Identifiers in Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/operators" }
+      "msRef": {
+        "label": "Operators and Identifiers in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/operators"
+      }
     },
     {
       "q": "Sum, Avg, Min, and Max are only delegable when using which data source?",
-      "options": ["SharePoint", "Dataverse", "SQL Server", "Salesforce"],
+      "options": [
+        "SharePoint",
+        "Dataverse",
+        "SQL Server",
+        "Salesforce"
+      ],
       "answer": 2,
       "category": "delegable",
-      "tags": ["aggregation", "SQL-Server"],
+      "tags": [
+        "aggregation",
+        "SQL-Server"
+      ],
       "explanation": "<strong>SQL Server</strong> is the only connector that supports server-side delegation of Sum, Avg, Min, and Max in Power Apps canvas apps.",
       "wrongExplanations": [
         "SharePoint does not delegate aggregation functions — Sum, Avg, Min, Max all run client-side against the fetched record page.",
@@ -81,14 +137,25 @@
         null,
         "Salesforce does not delegate Sum, Avg, Min, or Max in Power Apps canvas apps."
       ],
-      "msRef": { "label": "Delegation for SQL Server in Power Apps", "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation" }
+      "msRef": {
+        "label": "Delegation for SQL Server in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation"
+      }
     },
     {
       "q": "What is the default data row limit for non-delegable queries in Power Apps?",
-      "options": ["100", "500", "1000", "2000"],
+      "options": [
+        "100",
+        "500",
+        "1000",
+        "2000"
+      ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["record-limit", "non-delegable"],
+      "tags": [
+        "record-limit",
+        "non-delegable"
+      ],
       "explanation": "The default data row limit is <strong>500 records</strong>. Non-delegable operations only process this fetched set, potentially missing thousands of records.",
       "wrongExplanations": [
         "100 is not a valid limit. The default is 500.",
@@ -96,14 +163,25 @@
         "1000 is a configurable value between 500 and 2000, but not the default.",
         "2000 is the maximum configurable limit, not the default."
       ],
-      "msRef": { "label": "Change the limit for non-delegable queries", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit" }
+      "msRef": {
+        "label": "Change the limit for non-delegable queries",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit"
+      }
     },
     {
       "q": "What is the MAXIMUM data row limit you can configure for non-delegable queries?",
-      "options": ["500", "1000", "2000", "10000"],
+      "options": [
+        "500",
+        "1000",
+        "2000",
+        "10000"
+      ],
       "answer": 2,
       "category": "nondelegable",
-      "tags": ["record-limit", "non-delegable"],
+      "tags": [
+        "record-limit",
+        "non-delegable"
+      ],
       "explanation": "The maximum configurable data row limit is <strong>2000 records</strong>. Beyond this, proper delegation is required.",
       "wrongExplanations": [
         "500 is only the default — it can be raised. Not the maximum.",
@@ -111,14 +189,26 @@
         null,
         "10000 is not a supported limit. The platform caps the configurable limit at 2000."
       ],
-      "msRef": { "label": "Change the limit for non-delegable queries", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit" }
+      "msRef": {
+        "label": "Change the limit for non-delegable queries",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit"
+      }
     },
     {
       "q": "Collect() and ClearCollect() are non-delegable. What is unusual about their behaviour in Power Apps Studio?",
-      "options": ["They auto-paginate to get all records", "They do not show a delegation warning despite being non-delegable", "They only work with Dataverse", "They raise two delegation warnings"],
+      "options": [
+        "They auto-paginate to get all records",
+        "They do not show a delegation warning despite being non-delegable",
+        "They only work with Dataverse",
+        "They raise two delegation warnings"
+      ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["Collect", "ClearCollect", "non-delegable"],
+      "tags": [
+        "Collect",
+        "ClearCollect",
+        "non-delegable"
+      ],
       "explanation": "<strong>Collect and ClearCollect</strong> are non-delegable but silently so — Power Apps Studio does not underline them with a delegation warning, making the data limit easy to miss.",
       "wrongExplanations": [
         "Collect and ClearCollect do not auto-paginate. They load up to the row limit and stop — records beyond are silently excluded.",
@@ -126,14 +216,25 @@
         "They work with any tabular data source, not just Dataverse.",
         "They show no delegation warning at all — the absence of a warning is exactly the gotcha."
       ],
-      "msRef": { "label": "Collect and ClearCollect functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-clear-collect-clearcollect" }
+      "msRef": {
+        "label": "Collect and ClearCollect functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-clear-collect-clearcollect"
+      }
     },
     {
       "q": "Which of the following is classified as NON-delegable?",
-      "options": ["Filter", "LookUp", "SortByColumns", "CountIf"],
+      "options": [
+        "Filter",
+        "LookUp",
+        "SortByColumns",
+        "CountIf"
+      ],
       "answer": 3,
       "category": "nondelegable",
-      "tags": ["CountIf", "non-delegable"],
+      "tags": [
+        "CountIf",
+        "non-delegable"
+      ],
       "explanation": "<strong>CountIf</strong> is non-delegable — it only counts records within the locally-fetched page (default 500, max 2000).",
       "wrongExplanations": [
         "Filter is one of the most reliably delegable functions in Power Apps.",
@@ -141,7 +242,10 @@
         "SortByColumns is a delegable sort function that pushes ordering to the data source server.",
         null
       ],
-      "msRef": { "label": "Non-delegable functions and limits", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#non-delegable-functions" }
+      "msRef": {
+        "label": "Non-delegable functions and limits",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#non-delegable-functions"
+      }
     },
     {
       "q": "First, FirstN, Last, LastN are non-delegable because:",
@@ -153,7 +257,13 @@
       ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["First", "Last", "FirstN", "LastN", "non-delegable"],
+      "tags": [
+        "First",
+        "Last",
+        "FirstN",
+        "LastN",
+        "non-delegable"
+      ],
       "explanation": "<strong>First, FirstN, Last, LastN</strong> operate on the client-side fetched dataset. There is no way to instruct the data source to return just one positional record, so delegation is impossible.",
       "wrongExplanations": [
         "Support on SharePoint is not the reason — these functions are non-delegable on all data sources.",
@@ -161,7 +271,10 @@
         "There is no conflict with SortByColumns. The issue is purely that positional retrieval cannot be pushed to the server.",
         "Primary key availability does not affect the delegation status of these functions."
       ],
-      "msRef": { "label": "First, FirstN, Last, LastN functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-first-last" }
+      "msRef": {
+        "label": "First, FirstN, Last, LastN functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-first-last"
+      }
     },
     {
       "q": "Search() on SharePoint is non-delegable. What should you use instead?",
@@ -173,7 +286,12 @@
       ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["Search", "SharePoint", "non-delegable", "text-search"],
+      "tags": [
+        "Search",
+        "SharePoint",
+        "non-delegable",
+        "text-search"
+      ],
       "explanation": "<strong>Filter with StartsWith</strong> is the delegation-safe replacement for Search() on SharePoint. It pushes the prefix filter to the server.",
       "wrongExplanations": [
         "EndsWith is non-delegable — suffix matching cannot be delegated on SharePoint or most other sources.",
@@ -181,14 +299,26 @@
         "LookUp is delegable for single-record retrieval but is not a replacement for search-bar text filtering.",
         "Sorting before filtering does not fix the delegation issue — Search() remains non-delegable regardless."
       ],
-      "msRef": { "label": "Search function in Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+      "msRef": {
+        "label": "Search function in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+      }
     },
     {
       "q": "AddColumns, DropColumns, ShowColumns, and RenameColumns are classified as:",
-      "options": ["Fully delegable", "Fully non-delegable", "Partially delegable", "Only delegable in Dataverse"],
+      "options": [
+        "Fully delegable",
+        "Fully non-delegable",
+        "Partially delegable",
+        "Only delegable in Dataverse"
+      ],
       "answer": 2,
       "category": "partial",
-      "tags": ["AddColumns", "table-shaping", "partially-delegable"],
+      "tags": [
+        "AddColumns",
+        "table-shaping",
+        "partially-delegable"
+      ],
       "explanation": "These are <strong>partially delegable</strong>. Inner formulas (like Filter or LookUp) can delegate, but the function's output row count is bounded by the data row limit.",
       "wrongExplanations": [
         "These functions are not fully delegable — their output is capped at the row limit even if inner formulas delegate.",
@@ -196,7 +326,10 @@
         null,
         "The data source does not make these functions fully delegable. The output cap applies regardless."
       ],
-      "msRef": { "label": "AddColumns, DropColumns, RenameColumns, ShowColumns", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-table-shaping" }
+      "msRef": {
+        "label": "AddColumns, DropColumns, RenameColumns, ShowColumns",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-table-shaping"
+      }
     },
     {
       "q": "You use AddColumns with LookUp to join two tables. What is the key limitation?",
@@ -208,7 +341,11 @@
       ],
       "answer": 1,
       "category": "partial",
-      "tags": ["AddColumns", "LookUp", "partially-delegable"],
+      "tags": [
+        "AddColumns",
+        "LookUp",
+        "partially-delegable"
+      ],
       "explanation": "The <strong>LookUp inside AddColumns delegates</strong>, but AddColumns itself bounds the output rows to the configured data row limit.",
       "wrongExplanations": [
         "LookUp is delegable and works inside AddColumns. The row cap is on AddColumns output, not on LookUp.",
@@ -216,14 +353,26 @@
         "AddColumns does not delegate fully — its output is limited to the data row limit (500–2000).",
         "There is no 100-record cap. The limit is the configured data row limit."
       ],
-      "msRef": { "label": "AddColumns and table-shaping delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-table-shaping" }
+      "msRef": {
+        "label": "AddColumns and table-shaping delegation",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-table-shaping"
+      }
     },
     {
       "q": "On SharePoint, which logical operator has known delegation limitations?",
-      "options": ["And (&&)", "Or (||)", "Not (!)", "All operators work equally on SharePoint"],
+      "options": [
+        "And (&&)",
+        "Or (||)",
+        "Not (!)",
+        "All operators work equally on SharePoint"
+      ],
       "answer": 2,
       "category": "delegable",
-      "tags": ["SharePoint", "Not", "logical-operators"],
+      "tags": [
+        "SharePoint",
+        "Not",
+        "logical-operators"
+      ],
       "explanation": "<strong>Not (!) has delegation limitations on SharePoint</strong>. The SharePoint connector does not support server-side negation.",
       "wrongExplanations": [
         "And (&&) is fully delegable on SharePoint — compound filter conditions work server-side.",
@@ -231,14 +380,25 @@
         null,
         "SharePoint has a known limitation with Not (!). The operators are not all equally supported."
       ],
-      "msRef": { "label": "Delegation for SharePoint", "url": "https://learn.microsoft.com/en-us/connectors/sharepointonline/#power-apps-delegation" }
+      "msRef": {
+        "label": "Delegation for SharePoint",
+        "url": "https://learn.microsoft.com/en-us/connectors/sharepointonline/#power-apps-delegation"
+      }
     },
     {
       "q": "Which data source provides the most comprehensive delegation support in Power Apps?",
-      "options": ["SharePoint", "Excel (OneDrive)", "Dataverse", "SQL Server"],
+      "options": [
+        "SharePoint",
+        "Excel (OneDrive)",
+        "Dataverse",
+        "SQL Server"
+      ],
       "answer": 2,
       "category": "general",
-      "tags": ["Dataverse", "delegation-support"],
+      "tags": [
+        "Dataverse",
+        "delegation-support"
+      ],
       "explanation": "<strong>Dataverse</strong> offers the broadest delegation support — Filter, LookUp, Sort, comparisons, and logical operators all work reliably.",
       "wrongExplanations": [
         "SharePoint has several delegation gaps — Not (!), the 'in' operator, and certain comparison operators.",
@@ -246,7 +406,10 @@
         null,
         "SQL Server has strong delegation including aggregations, but Dataverse's native Power Platform integration makes it the most comprehensive overall."
       ],
-      "msRef": { "label": "Delegation overview — data sources", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+      "msRef": {
+        "label": "Delegation overview — data sources",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      }
     },
     {
       "q": "What does a blue wavy underline on a formula in Power Apps Studio indicate?",
@@ -258,7 +421,10 @@
       ],
       "answer": 1,
       "category": "general",
-      "tags": ["delegation-warnings", "performance"],
+      "tags": [
+        "delegation-warnings",
+        "performance"
+      ],
       "explanation": "A <strong>blue delegation warning underline</strong> means Power Apps cannot push that formula part to the data source — with large datasets results will be based only on the fetched page.",
       "wrongExplanations": [
         "Syntax errors produce red underlines, not blue. Blue specifically signals a delegation limitation.",
@@ -266,7 +432,10 @@
         "Premium connector requirements appear separately in settings, not as blue formula underlines.",
         "Offline issues produce connection errors, not delegation warnings."
       ],
-      "msRef": { "label": "Delegation warnings", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#delegation-warnings" }
+      "msRef": {
+        "label": "Delegation warnings",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#delegation-warnings"
+      }
     },
     {
       "q": "Collections created with ClearCollect() — do delegation limits apply when filtering them afterwards?",
@@ -278,7 +447,10 @@
       ],
       "answer": 2,
       "category": "general",
-      "tags": ["ClearCollect", "collections"],
+      "tags": [
+        "ClearCollect",
+        "collections"
+      ],
       "explanation": "<strong>Collections are in-memory</strong>. Once loaded, all records exist locally, so non-delegable functions operate on the full collection without a row-limit constraint.",
       "wrongExplanations": [
         "The row limit applies during the ClearCollect load from the source, not to subsequent operations on the collection.",
@@ -286,14 +458,26 @@
         null,
         "There is no 2000-item threshold for collection operations. Any collection can be fully operated on once loaded."
       ],
-      "msRef": { "label": "Collect, Clear, and ClearCollect functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-clear-collect-clearcollect" }
+      "msRef": {
+        "label": "Collect, Clear, and ClearCollect functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-clear-collect-clearcollect"
+      }
     },
     {
       "q": "The 'in' operator for delegation is supported on which data sources?",
-      "options": ["SharePoint and Dataverse", "SQL Server and Salesforce", "Only Dataverse", "All major data sources"],
+      "options": [
+        "SharePoint and Dataverse",
+        "SQL Server and Salesforce",
+        "Only Dataverse",
+        "All major data sources"
+      ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["in-operator", "SQL-Server", "Salesforce"],
+      "tags": [
+        "in-operator",
+        "SQL-Server",
+        "Salesforce"
+      ],
       "explanation": "The <strong>in</strong> operator is delegable on <strong>SQL Server and Salesforce</strong>. SharePoint and Dataverse do not support it for delegation.",
       "wrongExplanations": [
         "SharePoint does not support delegation of the 'in' operator. Dataverse also lacks this support.",
@@ -301,7 +485,10 @@
         "Dataverse does not support delegation of the 'in' operator in canvas apps.",
         "SharePoint and Dataverse do not delegate 'in' — it is not universally supported."
       ],
-      "msRef": { "label": "Delegation by data source", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-list" }
+      "msRef": {
+        "label": "Delegation by data source",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-list"
+      }
     },
     {
       "q": "RemoveIf and UpdateIf are non-delegable. What is the risk with large datasets?",
@@ -313,7 +500,11 @@
       ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["RemoveIf", "UpdateIf", "non-delegable"],
+      "tags": [
+        "RemoveIf",
+        "UpdateIf",
+        "non-delegable"
+      ],
       "explanation": "<strong>RemoveIf and UpdateIf</strong> only operate on the fetched record set (default 500, max 2000). Records beyond the limit are silently unaffected.",
       "wrongExplanations": [
         "The app does not crash — it silently processes only the fetched page.",
@@ -321,7 +512,10 @@
         "No runtime delegation error is thrown — the silent incompleteness is precisely the danger.",
         "They do not run slowly on the full dataset — they simply never process records beyond the row limit."
       ],
-      "msRef": { "label": "Remove and RemoveIf functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-remove-removeif" }
+      "msRef": {
+        "label": "Remove and RemoveIf functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-remove-removeif"
+      }
     },
     {
       "q": "Why is First(Sort(Table, Column, Descending)) considered problematic with large datasets?",
@@ -333,7 +527,12 @@
       ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["First", "Sort", "non-delegable", "performance"],
+      "tags": [
+        "First",
+        "Sort",
+        "non-delegable",
+        "performance"
+      ],
       "explanation": "<strong>Sort delegates</strong> but <strong>First is non-delegable</strong> — Power Apps fetches the first sorted page and picks from that local set, potentially missing the true top record.",
       "wrongExplanations": [
         "Sort and SortByColumns are both delegable on major sources. Sort is not the problem.",
@@ -341,27 +540,38 @@
         "Sort does delegate — the issue is specifically First() being non-delegable.",
         "There is no infinite loop. The formula silently returns a potentially incorrect result."
       ],
-      "msRef": { "label": "First and Last functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-first-last" }
+      "msRef": {
+        "label": "First and Last functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-first-last"
+      }
     },
     {
-      "q": "EndsWith() — how does its delegation status compare to StartsWith()?",
+      "q": "EndsWith() — how does its delegation status compare to StartsWith() when used inside Filter?",
       "options": [
-        "Both are delegable",
-        "EndsWith is delegable; StartsWith is not",
-        "EndsWith is non-delegable; StartsWith is delegable",
+        "Both are delegable inside Filter",
+        "EndsWith is delegable; StartsWith inside Filter is not",
+        "EndsWith is non-delegable; StartsWith inside Filter is delegable",
         "Both are non-delegable"
       ],
       "answer": 2,
       "category": "nondelegable",
-      "tags": ["EndsWith", "StartsWith", "text-search", "non-delegable"],
-      "explanation": "<strong>StartsWith is delegable</strong> (servers can use prefix indexes) while <strong>EndsWith is non-delegable</strong> — suffix matching cannot be efficiently pushed to most data source servers.",
-      "wrongExplanations": [
-        "Only StartsWith is delegable. EndsWith cannot be pushed because suffix-based indexes are not standard.",
-        "This is reversed. StartsWith is delegable; EndsWith is the non-delegable one.",
-        null,
-        "StartsWith is delegable — it is specifically recommended as a server-side text search pattern."
+      "tags": [
+        "EndsWith",
+        "StartsWith",
+        "text-search",
+        "non-delegable"
       ],
-      "msRef": { "label": "StartsWith and EndsWith functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith" }
+      "explanation": "<strong>Filter(List, StartsWith(Col, text)) is delegable</strong> on SharePoint and Dataverse. <strong>EndsWith is non-delegable</strong> even inside Filter — suffix matching cannot be pushed to most data source servers. Note: bare StartsWith() outside of Filter is also non-delegable.",
+      "wrongExplanations": [
+        "EndsWith is not delegable — it is the non-delegable one regardless of context.",
+        "This is reversed. StartsWith inside Filter is delegable; EndsWith is the non-delegable one.",
+        null,
+        "Filter+StartsWith is specifically the recommended delegable text search pattern — it is not non-delegable."
+      ],
+      "msRef": {
+        "label": "StartsWith and EndsWith functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith"
+      }
     },
     {
       "q": "GroupBy and Ungroup are non-delegable data-shaping functions. Which statement best explains why?",
@@ -373,7 +583,11 @@
       ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["GroupBy", "Ungroup", "non-delegable"],
+      "tags": [
+        "GroupBy",
+        "Ungroup",
+        "non-delegable"
+      ],
       "explanation": "<strong>GroupBy and Ungroup</strong> restructure data that is already in the app's local memory. There is no equivalent server-side grouping operation that can be delegated.",
       "wrongExplanations": [
         "The data source is not the reason — these functions are non-delegable on all sources including SQL Server and Dataverse.",
@@ -381,7 +595,10 @@
         "No premium connector is required. The limitation is architectural, not licensing.",
         "GroupBy and Ungroup are not deprecated — they are current functions, just non-delegable."
       ],
-      "msRef": { "label": "GroupBy and Ungroup functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-groupby" }
+      "msRef": {
+        "label": "GroupBy and Ungroup functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-groupby"
+      }
     },
     {
       "q": "Filter(Products, Price >= 100 && Price <= 500) on Dataverse — what is the delegation status?",
@@ -393,7 +610,11 @@
       ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["Dataverse", "comparison-operators", "logical-operators"],
+      "tags": [
+        "Dataverse",
+        "comparison-operators",
+        "logical-operators"
+      ],
       "explanation": "On Dataverse, <strong>both comparison operators and && are delegable</strong>. This compound range filter is fully pushed to the server.",
       "wrongExplanations": [
         "&& (And) is fully delegable on Dataverse. Compound conditions are well supported.",
@@ -401,7 +622,10 @@
         "Both conditions delegate together as a single compound predicate on Dataverse.",
         "Range comparisons using >=, <= are among the most reliably delegable operations on Dataverse."
       ],
-      "msRef": { "label": "Filter function and delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+      "msRef": {
+        "label": "Filter function and delegation",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+      }
     },
     {
       "q": "Suppressing a delegation warning in Power Apps Studio means:",
@@ -413,7 +637,10 @@
       ],
       "answer": 1,
       "category": "general",
-      "tags": ["delegation-warnings", "performance"],
+      "tags": [
+        "delegation-warnings",
+        "performance"
+      ],
       "explanation": "Suppressing only <strong>hides the visual indicator</strong>. The formula still does not delegate — the risk of incomplete results with large datasets is completely unchanged.",
       "wrongExplanations": [
         "Suppression is cosmetic only. The non-delegation behaviour is completely unchanged.",
@@ -421,7 +648,10 @@
         "Hiding the warning has no effect on how the formula executes.",
         "Power Apps does not auto-paginate when warnings are suppressed."
       ],
-      "msRef": { "label": "Delegation warnings — suppressing", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#delegation-warnings" }
+      "msRef": {
+        "label": "Delegation warnings — suppressing",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#delegation-warnings"
+      }
     },
     {
       "q": "Using Power Automate for aggregations on large datasets is recommended because:",
@@ -433,7 +663,11 @@
       ],
       "answer": 1,
       "category": "general",
-      "tags": ["Power-Automate", "workarounds", "performance"],
+      "tags": [
+        "Power-Automate",
+        "workarounds",
+        "performance"
+      ],
       "explanation": "<strong>Power Automate executes on Microsoft's servers</strong>, not in the browser. It can access the full dataset directly with no row-limit constraint.",
       "wrongExplanations": [
         "Speed depends on the operation and latency. The benefit is full-dataset access, not guaranteed speed.",
@@ -441,7 +675,10 @@
         "Power Automate does not automatically cache. Caching must be explicitly designed.",
         "Power Automate uses action-based logic, not Power Apps formula functions."
       ],
-      "msRef": { "label": "Using Power Automate with Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/using-logic-flows" }
+      "msRef": {
+        "label": "Using Power Automate with Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/using-logic-flows"
+      }
     },
     {
       "q": "Filter(Orders, CustomerID = Gallery1.Selected.CustomerID) on Dataverse — does the control reference prevent delegation?",
@@ -453,7 +690,11 @@
       ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["Filter", "delegable-functions", "Dataverse"],
+      "tags": [
+        "Filter",
+        "delegable-functions",
+        "Dataverse"
+      ],
       "explanation": "<strong>Control references do not prevent delegation.</strong> Power Apps resolves the control value locally, then passes it as a literal parameter in the delegated server query.",
       "wrongExplanations": [
         "Control references do not prevent delegation. The resolved value is embedded in the server query.",
@@ -461,7 +702,10 @@
         "Column type affects which operations can delegate, not whether a control reference can be used.",
         "There is no partial delegation here — Filter with a resolved value either fully delegates or not."
       ],
-      "msRef": { "label": "Filter function in Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+      "msRef": {
+        "label": "Filter function in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+      }
     },
     {
       "q": "An app uses Filter(Inventory, Quantity < 10 || IsDiscontinued = true) on Dataverse. This is:",
@@ -473,7 +717,11 @@
       ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["Dataverse", "logical-operators", "comparison-operators"],
+      "tags": [
+        "Dataverse",
+        "logical-operators",
+        "comparison-operators"
+      ],
       "explanation": "<strong>Or (||), < and = all delegate on Dataverse</strong>. This compound condition is fully pushed to the server.",
       "wrongExplanations": [
         "Or (||) is delegable on Dataverse. Only Not (!) has limitations on some sources.",
@@ -481,7 +729,10 @@
         "Both conditions delegate together as a single server-side predicate.",
         "Mixing numeric and boolean conditions in Or is valid and does not affect delegation."
       ],
-      "msRef": { "label": "Operators — delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/operators" }
+      "msRef": {
+        "label": "Operators — delegation",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/operators"
+      }
     },
     {
       "q": "What is the primary risk when using non-delegable functions against a 50,000-row SharePoint list?",
@@ -493,7 +744,11 @@
       ],
       "answer": 1,
       "category": "general",
-      "tags": ["performance", "record-limit", "SharePoint"],
+      "tags": [
+        "performance",
+        "record-limit",
+        "SharePoint"
+      ],
       "explanation": "Non-delegable functions produce <strong>silently incomplete results</strong> — the app shows no error while potentially missing 48,000+ records.",
       "wrongExplanations": [
         "The app does not crash. The silent incompleteness is arguably worse — incorrect results with no error.",
@@ -501,7 +756,10 @@
         "SharePoint does not return a rate-limit error. It returns up to the row limit silently.",
         "Power Apps does not charge extra for non-delegable operations."
       ],
-      "msRef": { "label": "Delegation warnings in Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#delegation-warnings" }
+      "msRef": {
+        "label": "Delegation warnings in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#delegation-warnings"
+      }
     },
     {
       "q": "ClearCollect() is used to load a 10,000-row Dataverse table. What actually happens?",
@@ -513,7 +771,11 @@
       ],
       "answer": 1,
       "category": "nondelegable",
-      "tags": ["ClearCollect", "record-limit", "collections"],
+      "tags": [
+        "ClearCollect",
+        "record-limit",
+        "collections"
+      ],
       "explanation": "ClearCollect is non-delegable — it loads only up to the <strong>configured row limit (default 500, max 2000)</strong> and stops silently.",
       "wrongExplanations": [
         "ClearCollect does not retrieve all records from a large table. It is bounded by the data row limit.",
@@ -521,7 +783,10 @@
         "No error is shown — the silent incompleteness makes this dangerous.",
         "ClearCollect does not auto-paginate. Use Power Automate to retrieve all records if needed."
       ],
-      "msRef": { "label": "Collect and ClearCollect limitations", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-clear-collect-clearcollect" }
+      "msRef": {
+        "label": "Collect and ClearCollect limitations",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-clear-collect-clearcollect"
+      }
     },
     {
       "q": "On SQL Server, which of these formulas is delegable?",
@@ -533,7 +798,11 @@
       ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["SQL-Server", "aggregation", "Filter"],
+      "tags": [
+        "SQL-Server",
+        "aggregation",
+        "Filter"
+      ],
       "explanation": "On SQL Server, <strong>Sum inside Filter is fully delegable</strong> — SQL Server supports both the Filter predicate and Sum aggregation server-side.",
       "wrongExplanations": [
         "GroupBy is non-delegable on all data sources including SQL Server.",
@@ -541,7 +810,10 @@
         "Last() is non-delegable — even though Sort delegates, Last picks from the local sorted page.",
         "ClearCollect is non-delegable and loads only up to the row limit from SQL Server."
       ],
-      "msRef": { "label": "Delegation for SQL Server", "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation" }
+      "msRef": {
+        "label": "Delegation for SQL Server",
+        "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation"
+      }
     },
     {
       "q": "Which statement is TRUE about delegation in Power Apps?",
@@ -553,7 +825,10 @@
       ],
       "answer": 1,
       "category": "general",
-      "tags": ["delegation-concept", "delegation-support"],
+      "tags": [
+        "delegation-concept",
+        "delegation-support"
+      ],
       "explanation": "<strong>Delegation support is a matrix of function × data source</strong>. What delegates on SQL Server may not on SharePoint. Always consult the Microsoft delegation list.",
       "wrongExplanations": [
         "Delegation is not universal. Each function-source combination has its own status.",
@@ -561,7 +836,10 @@
         "Even a few thousand records can cause incorrect results with non-delegable functions if they exceed the row limit.",
         "Delegation behaviour is determined at runtime by the formula and connector — not locked at publish."
       ],
-      "msRef": { "label": "Delegation list by data source", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-list" }
+      "msRef": {
+        "label": "Delegation list by data source",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-list"
+      }
     },
     {
       "q": "LookUp(Customers, Email = User().Email) on Dataverse — will this delegate?",
@@ -573,7 +851,11 @@
       ],
       "answer": 1,
       "category": "delegable",
-      "tags": ["LookUp", "Dataverse", "delegable-functions"],
+      "tags": [
+        "LookUp",
+        "Dataverse",
+        "delegable-functions"
+      ],
       "explanation": "<strong>Yes, this delegates.</strong> User().Email is evaluated locally to a string value, which is then passed as a literal in the delegated server query.",
       "wrongExplanations": [
         "User() is evaluated locally and its string result is passed to the server — it does not block delegation.",
@@ -581,7 +863,10 @@
         "Column indexing affects performance but not delegation eligibility on Dataverse.",
         "There is no split delegation — the whole LookUp with the resolved email is a single delegable operation."
       ],
-      "msRef": { "label": "LookUp function delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+      "msRef": {
+        "label": "LookUp function delegation",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+      }
     },
     {
       "q": "Which architecture is most appropriate for a canvas app targeting 50,000+ records on SharePoint?",
@@ -593,7 +878,12 @@
       ],
       "answer": 1,
       "category": "general",
-      "tags": ["SharePoint", "architecture", "performance", "workarounds"],
+      "tags": [
+        "SharePoint",
+        "architecture",
+        "performance",
+        "workarounds"
+      ],
       "explanation": "The correct pattern combines <strong>Filter+StartsWith for delegable queries</strong> and <strong>Power Automate for server-side aggregations</strong>.",
       "wrongExplanations": [
         "Raising the row limit to 2000 still leaves 48,000+ records unprocessed — not a solution.",
@@ -601,15 +891,28 @@
         "Search() is non-delegable on SharePoint — larger lists make it worse, not better.",
         "CountIf is non-delegable on SharePoint — it only counts the fetched page."
       ],
-      "msRef": { "label": "Delegation overview and best practices", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+      "msRef": {
+        "label": "Delegation overview and best practices",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      }
     }
   ],
-
   "dragdrop": [
     {
       "instruction": "Classify each Power Apps function by its delegation status. Drag each item into the correct zone.",
-      "items": ["Filter", "CountIf", "AddColumns", "Search", "LookUp", "GroupBy"],
-      "zones": ["Delegable", "Non-Delegable", "Partially Delegable"],
+      "items": [
+        "Filter",
+        "CountIf",
+        "AddColumns",
+        "Search",
+        "LookUp",
+        "GroupBy"
+      ],
+      "zones": [
+        "Delegable",
+        "Non-Delegable",
+        "Partially Delegable"
+      ],
       "correctMapping": {
         "Filter": "Delegable",
         "LookUp": "Delegable",
@@ -618,143 +921,292 @@
         "GroupBy": "Non-Delegable",
         "AddColumns": "Partially Delegable"
       },
-      "tags": ["delegable-functions", "non-delegable", "partially-delegable"],
+      "tags": [
+        "delegable-functions",
+        "non-delegable",
+        "partially-delegable"
+      ],
       "explanation": "Filter and LookUp are delegable. CountIf, Search, and GroupBy are non-delegable. AddColumns is partially delegable — inner formulas can delegate but output is row-limited.",
-      "msRef": { "label": "Delegation overview — function list", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+      "msRef": {
+        "label": "Delegation overview — function list",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      }
     },
     {
       "instruction": "Match each text function to whether it is delegable or non-delegable for text searching on SharePoint.",
-      "items": ["StartsWith", "EndsWith", "Search", "Filter+StartsWith"],
-      "zones": ["Delegable on SharePoint", "Non-Delegable on SharePoint"],
+      "items": [
+        "Filter+StartsWith",
+        "EndsWith",
+        "Search",
+        "StartsWith (standalone)"
+      ],
+      "zones": [
+        "Delegable on SharePoint",
+        "Non-Delegable on SharePoint"
+      ],
       "correctMapping": {
-        "StartsWith": "Delegable on SharePoint",
         "Filter+StartsWith": "Delegable on SharePoint",
         "EndsWith": "Non-Delegable on SharePoint",
-        "Search": "Non-Delegable on SharePoint"
+        "Search": "Non-Delegable on SharePoint",
+        "StartsWith (standalone)": "Non-Delegable on SharePoint"
       },
-      "tags": ["SharePoint", "text-search", "StartsWith", "non-delegable"],
-      "explanation": "StartsWith and Filter+StartsWith are delegable on SharePoint. EndsWith and Search() are non-delegable.",
-      "msRef": { "label": "StartsWith function", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith" }
+      "tags": [
+        "SharePoint",
+        "text-search",
+        "StartsWith",
+        "non-delegable"
+      ],
+      "explanation": "Only <strong>Filter(List, StartsWith(Col, text))</strong> is delegable on SharePoint. Bare <strong>StartsWith() on its own</strong> is non-delegable — it must be nested inside Filter to delegate. EndsWith and Search() are also non-delegable.",
+      "msRef": {
+        "label": "StartsWith function",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith"
+      }
     },
     {
       "instruction": "Classify each data source by its aggregation delegation support (Sum, Avg, Min, Max).",
-      "items": ["SQL Server", "SharePoint", "Dataverse", "Salesforce"],
-      "zones": ["Aggregation Delegable", "Aggregation NOT Delegable"],
+      "items": [
+        "SQL Server",
+        "SharePoint",
+        "Dataverse",
+        "Salesforce"
+      ],
+      "zones": [
+        "Aggregation Delegable",
+        "Aggregation NOT Delegable"
+      ],
       "correctMapping": {
         "SQL Server": "Aggregation Delegable",
         "SharePoint": "Aggregation NOT Delegable",
         "Dataverse": "Aggregation NOT Delegable",
         "Salesforce": "Aggregation NOT Delegable"
       },
-      "tags": ["aggregation", "SQL-Server", "delegation-support"],
+      "tags": [
+        "aggregation",
+        "SQL-Server",
+        "delegation-support"
+      ],
       "explanation": "Only SQL Server supports delegation of Sum, Avg, Min, and Max. All other sources require client-side aggregation or Power Automate.",
-      "msRef": { "label": "Delegation for SQL Server", "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation" }
+      "msRef": {
+        "label": "Delegation for SQL Server",
+        "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation"
+      }
     },
     {
       "instruction": "Classify each logical operator by whether it is delegable or has limitations on SharePoint.",
-      "items": ["And (&&)", "Or (||)", "Not (!)"],
-      "zones": ["Fully Delegable on SharePoint", "Has SharePoint Limitations"],
+      "items": [
+        "And (&&)",
+        "Or (||)",
+        "Not (!)"
+      ],
+      "zones": [
+        "Fully Delegable on SharePoint",
+        "Has SharePoint Limitations"
+      ],
       "correctMapping": {
         "And (&&)": "Fully Delegable on SharePoint",
         "Or (||)": "Fully Delegable on SharePoint",
         "Not (!)": "Has SharePoint Limitations"
       },
-      "tags": ["SharePoint", "logical-operators"],
+      "tags": [
+        "SharePoint",
+        "logical-operators"
+      ],
       "explanation": "And (&&) and Or (||) are fully delegable on SharePoint. Not (!) has known limitations and falls back to client-side evaluation.",
-      "msRef": { "label": "Delegation for SharePoint", "url": "https://learn.microsoft.com/en-us/connectors/sharepointonline/#power-apps-delegation" }
+      "msRef": {
+        "label": "Delegation for SharePoint",
+        "url": "https://learn.microsoft.com/en-us/connectors/sharepointonline/#power-apps-delegation"
+      }
     },
     {
       "instruction": "Sort the following scenarios by where the data processing happens — on the server or in the browser.",
-      "items": ["Filter(Table, Status='Active') on Dataverse", "CountIf(Table, Status='Active')", "ClearCollect(col, Table)", "LookUp(Table, ID=1)"],
-      "zones": ["Processed on the Server (Delegated)", "Processed in the Browser (Not Delegated)"],
+      "items": [
+        "Filter(Table, Status='Active') on Dataverse",
+        "CountIf(Table, Status='Active')",
+        "ClearCollect(col, Table)",
+        "LookUp(Table, ID=1)"
+      ],
+      "zones": [
+        "Processed on the Server (Delegated)",
+        "Processed in the Browser (Not Delegated)"
+      ],
       "correctMapping": {
         "Filter(Table, Status='Active') on Dataverse": "Processed on the Server (Delegated)",
         "LookUp(Table, ID=1)": "Processed on the Server (Delegated)",
         "CountIf(Table, Status='Active')": "Processed in the Browser (Not Delegated)",
         "ClearCollect(col, Table)": "Processed in the Browser (Not Delegated)"
       },
-      "tags": ["delegation-concept", "delegable-functions", "non-delegable"],
+      "tags": [
+        "delegation-concept",
+        "delegable-functions",
+        "non-delegable"
+      ],
       "explanation": "Filter and LookUp delegate to the server. CountIf and ClearCollect run client-side on the locally-fetched record set.",
-      "msRef": { "label": "Understand delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+      "msRef": {
+        "label": "Understand delegation",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      }
     },
     {
       "instruction": "Classify each scenario as producing COMPLETE results or potentially INCOMPLETE results on a 100,000-row dataset.",
-      "items": ["Filter+StartsWith on Dataverse", "Search() on SharePoint", "SortByColumns on SQL Server", "CountIf on SharePoint list"],
-      "zones": ["Complete Results (Delegation Safe)", "Potentially Incomplete Results"],
+      "items": [
+        "Filter+StartsWith on Dataverse",
+        "Search() on SharePoint",
+        "SortByColumns on SQL Server",
+        "CountIf on SharePoint list"
+      ],
+      "zones": [
+        "Complete Results (Delegation Safe)",
+        "Potentially Incomplete Results"
+      ],
       "correctMapping": {
         "Filter+StartsWith on Dataverse": "Complete Results (Delegation Safe)",
         "SortByColumns on SQL Server": "Complete Results (Delegation Safe)",
         "Search() on SharePoint": "Potentially Incomplete Results",
         "CountIf on SharePoint list": "Potentially Incomplete Results"
       },
-      "tags": ["performance", "record-limit", "delegation-support"],
+      "tags": [
+        "performance",
+        "record-limit",
+        "delegation-support"
+      ],
       "explanation": "Filter+StartsWith and SortByColumns are delegable and return complete results. Search() on SharePoint and CountIf on any source are non-delegable and return only the fetched page.",
-      "msRef": { "label": "Delegation overview", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+      "msRef": {
+        "label": "Delegation overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      }
     },
     {
       "instruction": "Match each function to its correct record limit behaviour.",
-      "items": ["Filter on Dataverse", "ClearCollect from a 10k table", "GroupBy on a collection", "Sum on SQL Server"],
-      "zones": ["No row limit — server processes all records", "Limited to configured row limit (500–2000)"],
+      "items": [
+        "Filter on Dataverse",
+        "ClearCollect from a 10k table",
+        "GroupBy on a collection",
+        "Sum on SQL Server"
+      ],
+      "zones": [
+        "No row limit — server processes all records",
+        "Limited to configured row limit (500–2000)"
+      ],
       "correctMapping": {
         "Filter on Dataverse": "No row limit — server processes all records",
         "Sum on SQL Server": "No row limit — server processes all records",
         "ClearCollect from a 10k table": "Limited to configured row limit (500–2000)",
         "GroupBy on a collection": "Limited to configured row limit (500–2000)"
       },
-      "tags": ["record-limit", "delegable-functions", "non-delegable"],
+      "tags": [
+        "record-limit",
+        "delegable-functions",
+        "non-delegable"
+      ],
       "explanation": "Delegable operations (Filter on Dataverse, Sum on SQL Server) are not row-limited. ClearCollect loads only up to the row limit; GroupBy runs on whatever is in the collection.",
-      "msRef": { "label": "Data row limit and delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit" }
+      "msRef": {
+        "label": "Data row limit and delegation",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit"
+      }
     },
     {
       "instruction": "Classify each approach as the CORRECT or INCORRECT workaround for counting active records in a 50,000-row SharePoint list.",
-      "items": ["Power Automate flow that maintains a count", "CountIf(SPList, Status='Active')", "Filter+CountRows as a gallery label", "ClearCollect then CountIf on collection"],
-      "zones": ["Correct Production Approach", "Problematic — Incomplete Results"],
+      "items": [
+        "Power Automate flow that maintains a count",
+        "CountIf(SPList, Status='Active')",
+        "Filter+CountRows as a gallery label",
+        "ClearCollect then CountIf on collection"
+      ],
+      "zones": [
+        "Correct Production Approach",
+        "Problematic — Incomplete Results"
+      ],
       "correctMapping": {
         "Power Automate flow that maintains a count": "Correct Production Approach",
         "CountIf(SPList, Status='Active')": "Problematic — Incomplete Results",
         "Filter+CountRows as a gallery label": "Problematic — Incomplete Results",
         "ClearCollect then CountIf on collection": "Problematic — Incomplete Results"
       },
-      "tags": ["SharePoint", "CountIf", "Power-Automate", "workarounds"],
+      "tags": [
+        "SharePoint",
+        "CountIf",
+        "Power-Automate",
+        "workarounds"
+      ],
       "explanation": "Only Power Automate can reliably count all records in a large SharePoint list. All Power Apps client-side approaches are limited to the fetched row set.",
-      "msRef": { "label": "Using Power Automate with Power Apps", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/using-logic-flows" }
+      "msRef": {
+        "label": "Using Power Automate with Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/using-logic-flows"
+      }
     },
     {
       "instruction": "Classify each function as delegable or non-delegable for removing/updating records in Power Apps.",
-      "items": ["RemoveIf", "UpdateIf", "Remove (single record by ID)", "Patch (single record)"],
-      "zones": ["Delegable / Safe for Large Datasets", "Non-Delegable / Unsafe for Large Datasets"],
+      "items": [
+        "RemoveIf",
+        "UpdateIf",
+        "Remove (single record by ID)",
+        "Patch (single record)"
+      ],
+      "zones": [
+        "Delegable / Safe for Large Datasets",
+        "Non-Delegable / Unsafe for Large Datasets"
+      ],
       "correctMapping": {
         "Remove (single record by ID)": "Delegable / Safe for Large Datasets",
         "Patch (single record)": "Delegable / Safe for Large Datasets",
         "RemoveIf": "Non-Delegable / Unsafe for Large Datasets",
         "UpdateIf": "Non-Delegable / Unsafe for Large Datasets"
       },
-      "tags": ["RemoveIf", "UpdateIf", "non-delegable"],
+      "tags": [
+        "RemoveIf",
+        "UpdateIf",
+        "non-delegable"
+      ],
       "explanation": "Remove and Patch operating on a single known record are safe. RemoveIf and UpdateIf are non-delegable — they only affect records within the fetched page.",
-      "msRef": { "label": "Remove and RemoveIf functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-remove-removeif" }
+      "msRef": {
+        "label": "Remove and RemoveIf functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-remove-removeif"
+      }
     },
     {
       "instruction": "Match each table-shaping function to the correct partial delegation description.",
-      "items": ["AddColumns", "DropColumns", "ShowColumns", "RenameColumns"],
-      "zones": ["Partially Delegable — inner formulas delegate, output is row-limited", "Fully Delegable — no row limit"],
+      "items": [
+        "AddColumns",
+        "DropColumns",
+        "ShowColumns",
+        "RenameColumns"
+      ],
+      "zones": [
+        "Partially Delegable — inner formulas delegate, output is row-limited",
+        "Fully Delegable — no row limit"
+      ],
       "correctMapping": {
         "AddColumns": "Partially Delegable — inner formulas delegate, output is row-limited",
         "DropColumns": "Partially Delegable — inner formulas delegate, output is row-limited",
         "ShowColumns": "Partially Delegable — inner formulas delegate, output is row-limited",
         "RenameColumns": "Partially Delegable — inner formulas delegate, output is row-limited"
       },
-      "tags": ["AddColumns", "table-shaping", "partially-delegable"],
+      "tags": [
+        "AddColumns",
+        "table-shaping",
+        "partially-delegable"
+      ],
       "explanation": "All four table-shaping functions share the same partial delegation behaviour — inner formulas can delegate but output rows are bounded by the data row limit.",
-      "msRef": { "label": "Table-shaping functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-table-shaping" }
+      "msRef": {
+        "label": "Table-shaping functions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-table-shaping"
+      }
     }
   ],
-
   "casestudy": [
     {
       "title": "The SharePoint List App",
       "scenario": "A developer at a logistics company is building a canvas app for warehouse managers. The data source is a SharePoint list with <strong>75,000 inventory records</strong>. The app needs to:\n\n1. Let users search items by name using a text input\n2. Display a count of 'Out of Stock' items in a summary label\n3. Show the 10 most recently updated items in a gallery\n4. Allow managers to mark items as 'Discontinued' in bulk\n\nThe developer has set the data row limit to 2000 in app settings. They have implemented the following:\n\n• <code>Search(Inventory, SearchInput.Text, 'ItemName')</code> for the search gallery\n• <code>CountIf(Inventory, Status='Out of Stock')</code> for the summary label\n• <code>FirstN(Sort(Inventory, Modified, Descending), 10)</code> for the recent items gallery\n• <code>UpdateIf(Inventory, Selected=true, {Status: 'Discontinued'})</code> for bulk updates",
-      "tags": ["SharePoint", "non-delegable", "performance", "workarounds"],
-      "msRef": { "label": "SharePoint delegation caveats", "url": "https://learn.microsoft.com/en-us/connectors/sharepointonline/#power-apps-delegation" },
+      "tags": [
+        "SharePoint",
+        "non-delegable",
+        "performance",
+        "workarounds"
+      ],
+      "msRef": {
+        "label": "SharePoint delegation caveats",
+        "url": "https://learn.microsoft.com/en-us/connectors/sharepointonline/#power-apps-delegation"
+      },
       "questions": [
         {
           "q": "The search gallery using Search(Inventory, SearchInput.Text, 'ItemName') will produce which result for a user searching for 'Bolt'?",
@@ -772,7 +1224,10 @@
             "Search() does not throw an error on SharePoint — it silently returns incomplete results.",
             "Search() and Filter+StartsWith behave very differently on SharePoint. Filter+StartsWith is delegable; Search() is not."
           ],
-          "msRef": { "label": "Search function — delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+          "msRef": {
+            "label": "Search function — delegation",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+          }
         },
         {
           "q": "What is the correct replacement for Search(Inventory, SearchInput.Text, 'ItemName') that is delegation-safe on SharePoint?",
@@ -790,7 +1245,10 @@
             "LookUp returns a single record, not a table — not suitable for a gallery displaying multiple search results.",
             "EndsWith is non-delegable on SharePoint — this has the same delegation problem as Search()."
           ],
-          "msRef": { "label": "StartsWith as a delegable search pattern", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith" }
+          "msRef": {
+            "label": "StartsWith as a delegable search pattern",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-startswith"
+          }
         },
         {
           "q": "The CountIf label shows 47 'Out of Stock' items. A manager knows there are over 3,000. What is the most likely cause?",
@@ -808,7 +1266,10 @@
             "Column indexing affects query performance, not the delegation row limit for CountIf.",
             "Republishing does not change delegation behaviour. The formula itself must be fixed."
           ],
-          "msRef": { "label": "Non-delegable functions — CountIf", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#non-delegable-functions" }
+          "msRef": {
+            "label": "Non-delegable functions — CountIf",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview#non-delegable-functions"
+          }
         },
         {
           "q": "The manager uses UpdateIf(Inventory, Selected=true, {Status: 'Discontinued'}) to mark 500 selected items as Discontinued, but only some are updated. Why?",
@@ -826,15 +1287,26 @@
             "Selected=true is valid syntax in UpdateIf — the issue is non-delegation, not syntax.",
             "If Status were read-only, UpdateIf would error on all records, not partially succeed."
           ],
-          "msRef": { "label": "Remove and RemoveIf — non-delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-remove-removeif" }
+          "msRef": {
+            "label": "Remove and RemoveIf — non-delegation",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-remove-removeif"
+          }
         }
       ]
     },
     {
       "title": "The Dataverse Production App",
       "scenario": "A Power Platform developer is building a customer service canvas app connected to <strong>Dataverse</strong> with a Contacts table containing <strong>500,000 records</strong>. The app requirements are:\n\n1. Search contacts by last name prefix\n2. Show contacts assigned to the currently logged-in agent\n3. Display total open cases per region (aggregated view)\n4. The app must perform correctly at full dataset scale\n\nThe developer proposes the following formulas:\n\n• Contact search: <code>Filter(Contacts, StartsWith(LastName, SearchBox.Text))</code>\n• Agent's contacts: <code>Filter(Contacts, AssignedTo = User().Email)</code>\n• Open cases by region: <code>GroupBy(Filter(Cases, Status='Open'), 'Region', 'RegionCases')</code>",
-      "tags": ["Dataverse", "delegable-functions", "aggregation", "performance"],
-      "msRef": { "label": "Dataverse delegation capabilities", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" },
+      "tags": [
+        "Dataverse",
+        "delegable-functions",
+        "aggregation",
+        "performance"
+      ],
+      "msRef": {
+        "label": "Dataverse delegation capabilities",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+      },
       "questions": [
         {
           "q": "The contact search formula Filter(Contacts, StartsWith(LastName, SearchBox.Text)) on Dataverse — how does this perform at 500,000 records?",
@@ -852,7 +1324,10 @@
             "Filter+StartsWith on Dataverse does not produce a delegation warning — it is a fully supported delegable pattern.",
             "Column indexing affects query performance on the Dataverse server but is not required for delegation to work."
           ],
-          "msRef": { "label": "Filter + StartsWith delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup" }
+          "msRef": {
+            "label": "Filter + StartsWith delegation",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-filter-lookup"
+          }
         },
         {
           "q": "Filter(Contacts, AssignedTo = User().Email) on Dataverse — does the User() reference prevent delegation?",
@@ -870,7 +1345,10 @@
             "There is no 2000-record cap on delegated Filter results — the server returns all matching records.",
             "Column type (lookup vs text) affects the filter syntax but does not change whether User().Email can be used in a delegated query."
           ],
-          "msRef": { "label": "Delegation and control references", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+          "msRef": {
+            "label": "Delegation and control references",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+          }
         },
         {
           "q": "The open cases by region uses GroupBy(Filter(Cases, Status='Open'), 'Region', 'RegionCases'). What is the issue?",
@@ -888,15 +1366,26 @@
             "Status='Open' is a valid equality comparison that delegates on Dataverse.",
             "GroupBy and Filter can be combined — the issue is GroupBy's non-delegable nature, not the combination."
           ],
-          "msRef": { "label": "GroupBy function — non-delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-groupby" }
+          "msRef": {
+            "label": "GroupBy function — non-delegation",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-groupby"
+          }
         }
       ]
     },
     {
       "title": "The Exam Architecture Review",
       "scenario": "A senior developer is reviewing a Power Apps solution built for a financial services firm. The app uses <strong>SQL Server</strong> as its data source with a Transactions table containing <strong>2 million records</strong>. The review identifies the following formulas in the app:\n\n• Dashboard total: <code>Sum(Transactions, Amount)</code>\n• Monthly filter: <code>Filter(Transactions, Month(TransactionDate) = 3)</code>\n• Recent high-value: <code>FirstN(Sort(Filter(Transactions, Amount > 10000), TransactionDate, Descending), 5)</code>\n• Customer lookup: <code>LookUp(Transactions, CustomerID = SelectedCustomer.CustomerID)</code>\n\nThe developer must identify which formulas are safe at 2 million records and which will produce incorrect results.",
-      "tags": ["SQL-Server", "aggregation", "non-delegable", "performance"],
-      "msRef": { "label": "SQL Server delegation in Power Apps", "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation" },
+      "tags": [
+        "SQL-Server",
+        "aggregation",
+        "non-delegable",
+        "performance"
+      ],
+      "msRef": {
+        "label": "SQL Server delegation in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation"
+      },
       "questions": [
         {
           "q": "Sum(Transactions, Amount) against SQL Server with 2 million records — what result does this produce?",
@@ -914,7 +1403,10 @@
             "Sum is specifically supported for delegation on SQL Server — it is one of its delegation advantages.",
             "With delegation, records are never downloaded to the browser. SQL Server computes and returns the sum directly."
           ],
-          "msRef": { "label": "SQL Server aggregation delegation", "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation" }
+          "msRef": {
+            "label": "SQL Server aggregation delegation",
+            "url": "https://learn.microsoft.com/en-us/connectors/sql/#power-apps-delegation"
+          }
         },
         {
           "q": "Filter(Transactions, Month(TransactionDate) = 3) on SQL Server — is this safe?",
@@ -932,7 +1424,10 @@
             "SQL Server supports many delegation scenarios but not every Power Apps formula function.",
             "Filter is delegable but Month() inside the Filter makes the whole condition non-delegable."
           ],
-          "msRef": { "label": "Delegation — date functions", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview" }
+          "msRef": {
+            "label": "Delegation — date functions",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/delegation-overview"
+          }
         },
         {
           "q": "FirstN(Sort(Filter(Transactions, Amount > 10000), TransactionDate, Descending), 5) — which part prevents safe operation at 2 million records?",
@@ -950,7 +1445,10 @@
             "Sort/SortByColumns are delegable on SQL Server — server-side sorting is well-supported.",
             "Power Apps supports deeply nested functions. The issue is specifically FirstN's non-delegable nature."
           ],
-          "msRef": { "label": "FirstN — non-delegation", "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-first-last" }
+          "msRef": {
+            "label": "FirstN — non-delegation",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/functions/function-first-last"
+          }
         }
       ]
     }
