@@ -221,6 +221,31 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 .flag-btn{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:none;border:1px solid var(--border2);padding:11px 14px;cursor:pointer;transition:all .2s}
 .flag-btn:hover{color:var(--warn);border-color:var(--warn)}
 .flag-btn.flagged{color:var(--warn);border-color:var(--warn);background:rgba(255,209,102,0.08)}
+.report-btn{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:none;border:1px solid var(--border2);padding:11px 14px;cursor:pointer;transition:all .2s}
+.report-btn:hover{color:var(--wrong);border-color:var(--wrong)}
+.report-btn.reported{color:var(--wrong);border-color:var(--wrong);background:rgba(255,77,109,0.08)}
+
+/* ── REPORT MODAL ── */
+.rpt-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .2s ease}
+.rpt-modal{background:var(--surface);border:1px solid var(--border2);max-width:460px;width:100%;padding:32px;position:relative}
+.rpt-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;line-height:1;padding:4px 8px}
+.rpt-close:hover{color:var(--text)}
+.rpt-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--wrong);margin-bottom:10px}
+.rpt-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:6px}
+.rpt-subtitle{font-size:11px;color:var(--muted2);line-height:1.6;margin-bottom:24px}
+.rpt-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+.rpt-select{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:11px 14px;margin-bottom:18px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a7090' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.rpt-select:focus{outline:none;border-color:var(--accent)}
+.rpt-textarea{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:11px 14px;resize:none;height:90px;line-height:1.6;margin-bottom:6px}
+.rpt-textarea:focus{outline:none;border-color:var(--accent)}
+.rpt-charcount{font-size:10px;color:var(--muted);text-align:right;margin-bottom:18px;display:block}
+.rpt-charcount.rpt-warn{color:var(--wrong)}
+.rpt-submit{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:var(--wrong);color:#fff;border:none;padding:12px 28px;cursor:pointer;width:100%;transition:all .2s}
+.rpt-submit:hover:not(:disabled){background:#e03055}
+.rpt-submit:disabled{opacity:.45;cursor:not-allowed}
+.rpt-status{font-size:11px;text-align:center;margin-top:14px;min-height:18px}
+.rpt-status.ok{color:var(--correct)}
+.rpt-status.err{color:var(--wrong)}
 
 /* ── RESULTS ── */
 .results-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:32px;flex-wrap:wrap}
@@ -498,6 +523,7 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
         <button class="btn-next" id="btnNext" onclick="nextQuestion()">Next →</button>
         <button class="btn-skip" id="btnSkip" onclick="skipQuestion()">Skip</button>
         <button class="flag-btn" id="flagBtn" onclick="toggleFlag()" title="Flag for review">⚑</button>
+        <button class="report-btn" id="reportBtn" onclick="openReportModal()" title="Report an issue with this question">⚐ Report</button>
       </div>
     </div>
 
@@ -578,6 +604,35 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
   </div>
 </div>
 
+<!-- ══════ REPORT MODAL ══════ -->
+<div class="rpt-modal-bg" id="reportModal" style="display:none" onclick="handleReportBgClick(event)">
+  <div class="rpt-modal">
+    <button class="rpt-close" onclick="closeReportModal()">✕</button>
+    <div class="rpt-eyebrow">⚐ Question Feedback</div>
+    <div class="rpt-title">Report an Issue</div>
+    <div class="rpt-subtitle">Help improve the question bank. All reports are reviewed by the admin before any changes are made.</div>
+
+    <label class="rpt-label">Nature of issue <span style="color:var(--wrong)">*</span></label>
+    <select class="rpt-select" id="rptType" onchange="validateReport()">
+      <option value="">— Select issue type —</option>
+      <option value="wrong-answer">Wrong answer — correct answer is marked incorrectly</option>
+      <option value="outdated-info">Outdated information — platform has changed</option>
+      <option value="misleading-question">Misleading question — ambiguous or poorly worded</option>
+      <option value="wrong-explanation">Wrong explanation — explanation is inaccurate</option>
+      <option value="broken-formatting">Broken formatting — display or layout issue</option>
+      <option value="remove-question">Remove question — out of scope or duplicate</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label class="rpt-label">Details <span style="color:var(--wrong)">*</span></label>
+    <textarea class="rpt-textarea" id="rptComment" maxlength="200" placeholder="Describe the issue clearly (max 200 characters)..." oninput="updateCharCount()"></textarea>
+    <span class="rpt-charcount" id="rptCharCount">0 / 200</span>
+
+    <button class="rpt-submit" id="rptSubmit" onclick="submitReport()" disabled>Submit Report →</button>
+    <div class="rpt-status" id="rptStatus"></div>
+  </div>
+</div>
+
 </div><!-- /app -->
 
 <script>
@@ -596,12 +651,23 @@ const CONFIG = {
   TOPICS: [
     { id:'delegation',      title:'Delegation in Power Apps',          icon:'⚡', desc:'Delegable vs non-delegable functions, data source behaviour, performance implications.',                          file:'Questions/delegation.json' },
     { id:'bpf',             title:'Business Process Flows',            icon:'🔀', desc:'Stages, branches, merge logic, workflows, action steps, entity limits, and BPF automation patterns.',          file:'Questions/bpf.json' },
+    { id:'mdaconfig',       title:'Configure Data Model & UI',         icon:'🧩', desc:'Tables, columns, forms, views, site map, app components, Dataverse search, notifications, and email templates.',  file:'Questions/mdaconfig.json',        locked:true },
     { id:'customerservice', title:'Customer Service Functional',       icon:'🎧', desc:'Cases, SLAs, entitlements, record creation rules, security roles, and timeline configuration.',              file:'Questions/customerservice.json' },
     { id:'powerfx',         title:'Power Fx Formulas',                 icon:'🔷', desc:'Functions, expressions, and formula patterns in canvas apps.',                                                 file:'Questions/powerfx.json',          locked:true },
     { id:'canvasui',        title:'Canvas App UI',                     icon:'🎨', desc:'Galleries, forms, controls and layout patterns.',                                                              file:'Questions/canvasui.json',         locked:true },
     { id:'automate',        title:'Power Automate',                    icon:'🔄', desc:'Flow types, triggers, actions, and error handling.',                                                           file:'Questions/automate.json',         locked:true },
     { id:'dataverse',       title:'Dataverse',                         icon:'🗄️', desc:'Tables, relationships, security roles, and metadata.',                                                         file:'Questions/dataverse.json',        locked:true },
   ]
+};
+
+/* ═══════════════════════════════════════
+   REPORT CONFIG  ← replace token before deploy
+═══════════════════════════════════════ */
+const REPORT_CFG = {
+  owner: 'ondiek-source',
+  repo:  'D365QnA',
+  // Fine-grained PAT: Issues → Read & Write only. Replace before committing.
+  token: 'REPLACE_WITH_GITHUB_PAT'
 };
 
 /* ═══════════════════════════════════════
@@ -853,6 +919,26 @@ function buildSession(bank){
                mcqCount:mcq.length, ddCount:dd.length, csCount:csFlat.length };
 
   const queue=nonCS.map((q,i)=>({...q,qIdx:i}));
+
+  // ── Shuffle MCQ answer options (done once per session so re-visiting keeps same order) ──
+  queue.forEach(q=>{
+    if(q.type==='mcq' && Array.isArray(q.options)){
+      const origAnswer=q.answer;
+      const indices=[...q.options.keys()]; // [0,1,2,3]
+      // Fisher-Yates shuffle on indices
+      for(let i=indices.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [indices[i],indices[j]]=[indices[j],indices[i]];
+      }
+      q.shuffledOptions=indices.map(i=>q.options[i]);
+      q.shuffledAnswer=indices.indexOf(origAnswer);
+      // Reorder wrongExplanations to match new order
+      if(q.wrongExplanations){
+        q.shuffledWrongExplanations=indices.map(i=>q.wrongExplanations[i]);
+      }
+    }
+  });
+
   queue._meta=meta; // non-enumerable-friendly attachment
   return queue;
 }
@@ -986,6 +1072,8 @@ function renderQuestion(){
   // Flag button
   const fb=document.getElementById('flagBtn');
   fb.className='flag-btn'+(QS.flags.has(QS.current)?' flagged':'');
+  // Reset report button
+  document.getElementById('reportBtn').className='report-btn';
 
   // Clear feedback
   document.getElementById('feedbackPanel').className='feedback-panel';
@@ -1042,6 +1130,7 @@ function renderMCQ(q){
   const [cc,cl]=catMap[q.category]||['cat-general','General'];
   const tags=(q.tags||[]).slice(0,2).map(t=>`<div class="q-tag-chip">${t}</div>`).join('');
   const letters=['A','B','C','D','E'];
+  const opts=q.shuffledOptions||q.options; // use shuffled if available
   document.getElementById('questionBlock').innerHTML=`
     <div class="q-block">
       <div class="q-meta-row">
@@ -1050,7 +1139,7 @@ function renderMCQ(q){
       </div>
       <div class="question-text">${q.q}</div>
       <div class="options-grid">
-        ${q.options.map((opt,i)=>`
+        ${opts.map((opt,i)=>`
           <button class="opt-btn" id="opt_${i}" onclick="selectMCQ(${i})">
             <div style="display:flex;flex-direction:column;width:100%">
               <div style="display:flex;align-items:flex-start;gap:12px">
@@ -1068,20 +1157,22 @@ function selectMCQ(idx){
   const q=QS.questions[QS.current];
   if(QS.answers[QS.current]&&!QS.answers[QS.current].skipped) return; // already answered
   document.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
-  const correct=idx===q.answer;
+  const correctIdx = q.shuffledAnswer !== undefined ? q.shuffledAnswer : q.answer;
+  const correct=idx===correctIdx;
   const pts=correct?q.pts:0;
   QS.answers[QS.current]={type:'mcq',selected:idx,correct,pts,fullCredit:correct,partialCredit:false};
   if(correct) QS.totalScore+=pts;
   QS.scoreBreakdown.mcq+=pts;
+  const wrongExp = q.shuffledWrongExplanations || q.wrongExplanations;
   // Highlight
   document.querySelectorAll('.opt-btn').forEach((b,i)=>{
-    if(i===q.answer) b.classList.add('correct');
+    if(i===correctIdx) b.classList.add('correct');
     else if(i===idx&&!correct) b.classList.add('wrong');
     else {
       b.classList.add('incorrect-reveal');
-      if(q.wrongExplanations&&q.wrongExplanations[i]){
+      if(wrongExp&&wrongExp[i]){
         const wn=document.getElementById(`wn_${i}`);
-        if(wn) wn.textContent=q.wrongExplanations[i];
+        if(wn) wn.textContent=wrongExp[i];
       }
     }
   });
@@ -1094,9 +1185,10 @@ function selectMCQ(idx){
 
 function showAnsweredState(q,ans){
   if(q.type==='mcq'&&ans.selected!==undefined){
+    const correctIdx = q.shuffledAnswer !== undefined ? q.shuffledAnswer : q.answer;
     document.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
     document.querySelectorAll('.opt-btn').forEach((b,i)=>{
-      if(i===q.answer) b.classList.add('correct');
+      if(i===correctIdx) b.classList.add('correct');
       else if(i===ans.selected&&!ans.correct) b.classList.add('wrong');
     });
     showFeedback(ans.correct?'correct':'wrong',q.explanation,ans.pts,q.pts,q.msRef);
@@ -1229,6 +1321,7 @@ function checkDragDrop(){
 ═══════════════════════════════════════ */
 function renderCaseStudy(q){
   const letters=['A','B','C','D','E'];
+  const opts=q.shuffledOptions||q.options;
   document.getElementById('questionBlock').innerHTML=`
     <div class="q-block">
       <div class="cs-sub-header">
@@ -1241,7 +1334,7 @@ function renderCaseStudy(q){
       </div>
       <div class="question-text">${q.q}</div>
       <div class="options-grid">
-        ${q.options.map((opt,i)=>`
+        ${opts.map((opt,i)=>`
           <button class="opt-btn" id="opt_${i}" onclick="selectCaseStudy(${i})">
             <div style="display:flex;align-items:flex-start;gap:12px">
               <span class="opt-letter">${letters[i]}</span>
@@ -1256,13 +1349,14 @@ function selectCaseStudy(idx){
   const q=QS.questions[QS.current];
   if(QS.answers[QS.current]&&!QS.answers[QS.current].skipped) return;
   document.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
-  const correct=idx===q.answer;
+  const correctIdx = q.shuffledAnswer !== undefined ? q.shuffledAnswer : q.answer;
+  const correct=idx===correctIdx;
   const pts=correct?q.pts:0;
   QS.answers[QS.current]={type:'casestudy',selected:idx,correct,pts,fullCredit:correct,partialCredit:false};
   if(correct) QS.totalScore+=pts;
   QS.scoreBreakdown.casestudy+=pts;
   document.querySelectorAll('.opt-btn').forEach((b,i)=>{
-    if(i===q.answer) b.classList.add('correct');
+    if(i===correctIdx) b.classList.add('correct');
     else if(i===idx&&!correct) b.classList.add('wrong');
   });
   showFeedback(correct?'correct':'wrong',q.explanation,pts,q.pts,q.msRef);
@@ -1337,6 +1431,115 @@ function toggleFlag(){
 }
 
 /* ═══════════════════════════════════════
+   REPORT MODAL
+═══════════════════════════════════════ */
+function openReportModal(){
+  document.getElementById('rptType').value='';
+  document.getElementById('rptComment').value='';
+  document.getElementById('rptCharCount').textContent='0 / 200';
+  document.getElementById('rptCharCount').className='rpt-charcount';
+  document.getElementById('rptStatus').textContent='';
+  document.getElementById('rptStatus').className='rpt-status';
+  document.getElementById('rptSubmit').disabled=true;
+  document.getElementById('reportModal').style.display='flex';
+}
+
+function closeReportModal(){
+  document.getElementById('reportModal').style.display='none';
+}
+
+function handleReportBgClick(e){
+  if(e.target===document.getElementById('reportModal')) closeReportModal();
+}
+
+function updateCharCount(){
+  const ta=document.getElementById('rptComment');
+  const n=ta.value.length;
+  const cc=document.getElementById('rptCharCount');
+  cc.textContent=`${n} / 200`;
+  cc.className='rpt-charcount'+(n>180?' rpt-warn':'');
+  validateReport();
+}
+
+function validateReport(){
+  const type=document.getElementById('rptType').value;
+  const comment=document.getElementById('rptComment').value.trim();
+  document.getElementById('rptSubmit').disabled=!(type && comment.length>=10);
+}
+
+async function submitReport(){
+  const type=document.getElementById('rptType').value;
+  const comment=document.getElementById('rptComment').value.trim();
+  if(!type||!comment) return;
+
+  const btn=document.getElementById('rptSubmit');
+  const status=document.getElementById('rptStatus');
+  btn.disabled=true;
+  btn.textContent='Submitting…';
+  status.textContent='';
+  status.className='rpt-status';
+
+  // Build question context for the issue body
+  const q=QS.session[QS.current];
+  const topicTitle=CONFIG.TOPICS.find(t=>t.id===QS.topicId)?.title||QS.topicId;
+  const qText=q?.q||'Unknown question';
+  const qType=q?.type||'mcq';
+  const qIdx=QS.current;
+
+  const typeLabels={
+    'wrong-answer':'Wrong answer',
+    'outdated-info':'Outdated information',
+    'misleading-question':'Misleading / ambiguous question',
+    'wrong-explanation':'Wrong explanation',
+    'broken-formatting':'Broken formatting',
+    'remove-question':'Remove question',
+    'other':'Other'
+  };
+
+  const issueTitle=`[Report] ${typeLabels[type]||type} — ${topicTitle} Q${qIdx+1}`;
+  const issueBody=`## Question Report\n\n**Topic:** ${topicTitle}\n**Question #:** ${qIdx+1} (session index)\n**Type:** ${qType.toUpperCase()}\n**Issue category:** ${typeLabels[type]||type}\n\n### Question text\n> ${qText.replace(/<[^>]*>/g,'')}\n\n### Reporter's comment\n${comment}\n\n---\n*Submitted ${new Date().toISOString()} via PP Mastery Quiz app*`;
+
+  try {
+    const res=await fetch(`https://api.github.com/repos/${REPORT_CFG.owner}/${REPORT_CFG.repo}/issues`,{
+      method:'POST',
+      headers:{
+        'Authorization':`Bearer ${REPORT_CFG.token}`,
+        'Content-Type':'application/json',
+        'Accept':'application/vnd.github+json',
+        'X-GitHub-Api-Version':'2022-11-28'
+      },
+      body:JSON.stringify({
+        title: issueTitle,
+        body:  issueBody,
+        labels:['question-report', type]
+      })
+    });
+
+    if(res.ok){
+      const data=await res.json();
+      status.textContent=`✓ Submitted — Issue #${data.number} logged. Thank you!`;
+      status.className='rpt-status ok';
+      // Mark button as reported
+      document.getElementById('reportBtn').classList.add('reported');
+      btn.textContent='Submitted ✓';
+      setTimeout(()=>closeReportModal(), 2200);
+    } else {
+      const err=await res.json();
+      status.textContent=`Error: ${err.message||'Could not submit. Try again.'}`;
+      status.className='rpt-status err';
+      btn.disabled=false;
+      btn.textContent='Submit Report →';
+    }
+  } catch(e){
+    status.textContent='Network error — please check your connection.';
+    status.className='rpt-status err';
+    btn.disabled=false;
+    btn.textContent='Submit Report →';
+  }
+}
+
+
+/* ═══════════════════════════════════════
    FINISH
 ═══════════════════════════════════════ */
 async function finishQuiz(timedOut){
@@ -1368,11 +1571,11 @@ async function finishQuiz(timedOut){
         q: q.q||q.instruction||'',
         type: q.type,
         tags: q.tags||[],
-        options: q.options||[],
-        answer: q.answer,
+        options: q.shuffledOptions||q.options||[],
+        answer: q.shuffledAnswer!==undefined?q.shuffledAnswer:q.answer,
         explanation: q.explanation||'',
         msRef: q.msRef||null,
-        correctAnswer: q.type!=='dragdrop'?(q.options?.[q.answer]||''):'See mapping',
+        correctAnswer: q.type!=='dragdrop'?((q.shuffledOptions||q.options)?.[(q.shuffledAnswer!==undefined?q.shuffledAnswer:q.answer)]||''):'See mapping',
         // Drag-drop specific
         correctMapping: q.correctMapping||null,
         zones: q.zones||null,

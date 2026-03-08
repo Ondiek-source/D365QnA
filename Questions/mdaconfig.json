@@ -1,0 +1,1879 @@
+{
+  "mcq": [
+    {
+      "q": "A company wants to separate admin navigation items from user navigation items in a model-driven app so users can switch between the two sets. What should be created?",
+      "options": [
+        "Group",
+        "Subarea",
+        "Area",
+        "Table"
+      ],
+      "answer": 2,
+      "category": "mda-components",
+      "tags": [
+        "site-map",
+        "area",
+        "navigation"
+      ],
+      "explanation": "<strong>Areas</strong> are the top-level navigation sections in a model-driven app site map. Creating separate areas for admin and user items allows users with appropriate access to switch between them using the area switcher at the bottom of the navigation pane.",
+      "wrongExplanations": [
+        "Groups organise subareas within an area — they cannot be switched between at the top level.",
+        "Subareas are individual pages or tables within a group — not top-level navigation separators.",
+        null,
+        "Tables are data containers — not navigation components."
+      ],
+      "msRef": {
+        "label": "Site map areas",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/app-navigation"
+      }
+    },
+    {
+      "q": "What is the correct hierarchy of the model-driven app site map from top to bottom?",
+      "options": [
+        "Group → Area → Subarea",
+        "Area → Group → Subarea",
+        "Subarea → Group → Area",
+        "Area → Subarea → Group"
+      ],
+      "answer": 1,
+      "category": "mda-components",
+      "tags": [
+        "site-map",
+        "hierarchy",
+        "navigation"
+      ],
+      "explanation": "The site map hierarchy is <strong>Area → Group → Subarea</strong>. Areas are top-level sections, Groups organise content within an area, and Subareas are individual items (tables, dashboards, URLs) within a group.",
+      "wrongExplanations": [
+        "Group is not the top level — Area is.",
+        null,
+        "Subareas are the lowest level, not the top.",
+        "Subarea cannot contain Group — it is the other way around."
+      ],
+      "msRef": {
+        "label": "Site map hierarchy",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/app-navigation"
+      }
+    },
+    {
+      "q": "What types of content can be added as a Subarea in a model-driven app site map?",
+      "options": [
+        "Tables only",
+        "Tables, Dashboards, and external URLs",
+        "Dashboards and charts only",
+        "Tables, Dashboards, URLs, and custom web resources"
+      ],
+      "answer": 3,
+      "category": "mda-components",
+      "tags": [
+        "site-map",
+        "subarea",
+        "content-types"
+      ],
+      "explanation": "Subareas support <strong>Tables, Dashboards, URLs, and Web Resources</strong> as content types. This allows a site map to include Dataverse table views, analytical dashboards, external web pages, and custom HTML/JS web resources all within the same navigation structure.",
+      "wrongExplanations": [
+        "Tables only is too restrictive — multiple content types are supported.",
+        "Web resources are also supported — not just tables, dashboards, and URLs.",
+        "Charts alone cannot be subareas — dashboards (which contain charts) can.",
+        null
+      ],
+      "msRef": {
+        "label": "Subarea content types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/app-navigation"
+      }
+    },
+    {
+      "q": "Which component in the model-driven App Designer controls which tables, forms, views, and dashboards are included in the app?",
+      "options": [
+        "Site Map Editor",
+        "App Designer",
+        "Solution Explorer",
+        "Power Apps Studio"
+      ],
+      "answer": 1,
+      "category": "mda-components",
+      "tags": [
+        "app-designer",
+        "mda-components"
+      ],
+      "explanation": "The <strong>App Designer</strong> is used to define which components (tables, forms, views, dashboards, business process flows, and charts) are included in the model-driven app. It controls the app's component inventory independently of the site map.",
+      "wrongExplanations": [
+        "The Site Map Editor controls navigation structure — not which components are included.",
+        null,
+        "Solution Explorer manages solution components broadly — the App Designer specifically configures the app's included components.",
+        "Power Apps Studio is for canvas apps — model-driven apps use the App Designer."
+      ],
+      "msRef": {
+        "label": "Model-driven App Designer",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/design-custom-business-apps-using-app-designer"
+      }
+    },
+    {
+      "q": "A model-driven app includes the Account table but agents report they cannot see a specific Account form. What is the most likely cause?",
+      "options": [
+        "The form is not published",
+        "The form has not been added to the app in the App Designer",
+        "The form is on the wrong table",
+        "The user does not have a security role"
+      ],
+      "answer": 1,
+      "category": "mda-components",
+      "tags": [
+        "app-designer",
+        "forms",
+        "troubleshooting"
+      ],
+      "explanation": "In the App Designer, each table has its own set of included forms and views. If a form is not explicitly <strong>added to the app</strong> for that table, it will not appear even if the table itself is included and the form exists and is published.",
+      "wrongExplanations": [
+        "An unpublished form would not be available in any app — but the question states agents can see the table, suggesting other forms work.",
+        null,
+        "The form is on Account — the correct table is in the app.",
+        "Security roles affect record access — not which forms appear for a table."
+      ],
+      "msRef": {
+        "label": "Add forms to an app",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/design-custom-business-apps-using-app-designer"
+      }
+    },
+    {
+      "q": "What is a Dashboard in a model-driven app and where can it be displayed?",
+      "options": [
+        "A reporting page showing charts and lists — it can only be shown on the home page",
+        "A reporting page containing charts, lists, and iFrames — it can be added as a subarea in the site map or set as the app's default home page",
+        "A read-only view of a single table's records",
+        "A Power BI report embedded in the app"
+      ],
+      "answer": 1,
+      "category": "mda-components",
+      "tags": [
+        "dashboard",
+        "mda-components"
+      ],
+      "explanation": "<strong>Dashboards</strong> combine charts, lists (views), iFrames, and web resources into a single page. They can be added as a <strong>subarea in the site map</strong> for direct navigation, or configured as the <strong>default home page</strong> of the app.",
+      "wrongExplanations": [
+        "Dashboards can appear as subareas anywhere in the navigation — not just the home page.",
+        null,
+        "Dashboards span multiple components — not a single table view.",
+        "Dashboards are native to Dataverse — Power BI reports are a separate embedded component."
+      ],
+      "msRef": {
+        "label": "Dashboards in model-driven apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/add-edit-dashboards"
+      }
+    },
+    {
+      "q": "What are the three table ownership types available when creating a new Dataverse table?",
+      "options": [
+        "User, Team, Organisation",
+        "User or Team, Organisation, None (virtual)",
+        "Public, Private, Shared",
+        "Standard, Activity, Virtual"
+      ],
+      "answer": 1,
+      "category": "tables",
+      "tags": [
+        "table-ownership",
+        "create-table"
+      ],
+      "explanation": "Dataverse tables have three ownership types: <strong>User or Team</strong> (records are owned by a specific user or team — security roles apply at user/BU/org level), <strong>Organisation</strong> (records are owned by the organisation — no user-level ownership), and <strong>None (virtual tables)</strong> which have no ownership concept.",
+      "wrongExplanations": [
+        "User, Team, Organisation misrepresents the types — User and Team are combined into one ownership type.",
+        null,
+        "Public, Private, Shared are not Dataverse table ownership types.",
+        "Standard, Activity, Virtual are table categories, not ownership types."
+      ],
+      "msRef": {
+        "label": "Table ownership types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+      }
+    },
+    {
+      "q": "What is an Activity table in Dataverse and how does it differ from a standard table?",
+      "options": [
+        "Activity tables store files and attachments; standard tables store structured data",
+        "Activity tables are a special category of tables (Email, Phone Call, Task etc.) that inherit from the ActivityPointer base table and support scheduling, tracking, and timeline integration",
+        "Activity tables are read-only; standard tables support full CRUD",
+        "Activity tables can only be created by Microsoft; standard tables can be created by makers"
+      ],
+      "answer": 1,
+      "category": "tables",
+      "tags": [
+        "activity-table",
+        "table-types"
+      ],
+      "explanation": "<strong>Activity tables</strong> (Email, Phone Call, Task, Appointment etc.) inherit from the <strong>ActivityPointer</strong> base table. They share common fields (subject, regarding, scheduled dates) and automatically appear in the Timeline control. Custom activity tables can also be created.",
+      "wrongExplanations": [
+        "Activity tables store interaction records — not files. File storage uses file/image columns.",
+        null,
+        "Activity tables support full CRUD — they are not read-only.",
+        "Custom activity tables can be created by makers — not only Microsoft."
+      ],
+      "msRef": {
+        "label": "Activity tables in Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+      }
+    },
+    {
+      "q": "What is a Virtual Table in Dataverse?",
+      "options": [
+        "A table with no columns — used as a placeholder",
+        "A table that maps to external data source records without storing data in Dataverse — data is retrieved in real time via a virtual table provider",
+        "A read-only copy of another table for reporting purposes",
+        "A table visible only in the App Designer but not queryable via API"
+      ],
+      "answer": 1,
+      "category": "tables",
+      "tags": [
+        "virtual-table",
+        "table-types",
+        "external-data"
+      ],
+      "explanation": "<strong>Virtual Tables</strong> present external data (from SQL Server, SharePoint, REST APIs etc.) as if it were native Dataverse data — without physically storing it in Dataverse. Data is retrieved in real time via a <strong>virtual table provider (connector)</strong>. They appear and behave like standard tables in apps and queries.",
+      "wrongExplanations": [
+        "Virtual tables have columns — they mirror the external data structure.",
+        null,
+        "Virtual tables are not copies — they are live views of external data.",
+        "Virtual tables are fully queryable via API — that is part of their value."
+      ],
+      "msRef": {
+        "label": "Virtual tables",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-virtual-entities"
+      }
+    },
+    {
+      "q": "When creating a new custom table in Dataverse, which properties can be configured at creation time?",
+      "options": [
+        "Display name, plural name, primary column name, table type, ownership, and whether to enable attachments and activities",
+        "Display name only — all other properties are set after creation",
+        "Display name, ownership, and primary key only",
+        "Table name and description only"
+      ],
+      "answer": 0,
+      "category": "tables",
+      "tags": [
+        "create-table",
+        "table-properties"
+      ],
+      "explanation": "When creating a table, makers can configure: <strong>display name, plural name, primary column name</strong> (the main identifier field), <strong>table type</strong> (standard, activity, virtual), <strong>ownership</strong>, and optional capabilities like <strong>attachments, activities, and audit</strong>.",
+      "wrongExplanations": [
+        null,
+        "Many properties are available at creation — not just display name.",
+        "Primary key is auto-generated — primary column name (the display field) is configurable.",
+        "Description is just one field — the full property set is available at creation."
+      ],
+      "msRef": {
+        "label": "Create a table in Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+      }
+    },
+    {
+      "q": "Which property on a Dataverse table, when enabled, automatically adds the table's records to the Timeline control on related records?",
+      "options": [
+        "Enable Attachments",
+        "Enable Activities",
+        "Enable Auditing",
+        "Enable Change Tracking"
+      ],
+      "answer": 1,
+      "category": "tables",
+      "tags": [
+        "table-properties",
+        "activities",
+        "timeline"
+      ],
+      "explanation": "Enabling <strong>Activities</strong> on a table allows activities (emails, calls, tasks) to be related to records of that table and appear in the Timeline control. This is required for the Timeline to show interaction history on the table's records.",
+      "wrongExplanations": [
+        "Enable Attachments allows files/notes to be attached — not timeline activities.",
+        null,
+        "Enable Auditing tracks field changes — not timeline activity display.",
+        "Change Tracking enables delta sync for integrations — not timeline integration."
+      ],
+      "msRef": {
+        "label": "Table activity and timeline settings",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+      }
+    },
+    {
+      "q": "Which Dataverse column type should be used to store a single selection from a predefined list of options?",
+      "options": [
+        "Text",
+        "Whole Number",
+        "Choice (Option Set)",
+        "Lookup"
+      ],
+      "answer": 2,
+      "category": "columns",
+      "tags": [
+        "column-types",
+        "choice",
+        "option-set"
+      ],
+      "explanation": "The <strong>Choice</strong> column type (also called Option Set) stores a single selection from a predefined list of labelled integer values. Each option has a label (displayed to users) and an integer value (stored in the database).",
+      "wrongExplanations": [
+        "Text stores free-form strings — not constrained option lists.",
+        "Whole Number stores numeric values — not labelled option lists.",
+        null,
+        "Lookup stores a reference to another record — not a predefined option list."
+      ],
+      "msRef": {
+        "label": "Choice column type",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "What is the difference between a local Choice column and a global Choice column in Dataverse?",
+      "options": [
+        "Local choices are only visible in the current environment; global choices can be shared across environments",
+        "Local choices are defined on a specific table and used only there; global choices are defined independently and can be reused across multiple tables and columns",
+        "There is no difference — local and global are just display terms",
+        "Global choices support more than 500 options; local choices are limited to 500"
+      ],
+      "answer": 1,
+      "category": "columns",
+      "tags": [
+        "choice",
+        "global-choice",
+        "local-choice"
+      ],
+      "explanation": "<strong>Local choices</strong> are defined within a specific column on a specific table — they cannot be reused elsewhere. <strong>Global choices</strong> (also called global option sets) are defined independently and can be <strong>reused across multiple columns and tables</strong>, ensuring consistent option lists across the solution.",
+      "wrongExplanations": [
+        "Both types exist in the same environment — the distinction is reusability, not environment scope.",
+        null,
+        "The distinction is reusability — not a technical naming convention.",
+        "Option count limits are not different between local and global choices."
+      ],
+      "msRef": {
+        "label": "Local vs global choices",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-global-option-sets-solution-explorer"
+      }
+    },
+    {
+      "q": "A column needs to store multiple selections from a predefined list simultaneously (e.g. a record can have both 'Email' and 'Phone' selected). Which column type is correct?",
+      "options": [
+        "Choice (single select)",
+        "Choices (multi-select option set)",
+        "Text (comma-separated values)",
+        "Two lookup columns — one per selection"
+      ],
+      "answer": 1,
+      "category": "columns",
+      "tags": [
+        "column-types",
+        "choices",
+        "multi-select"
+      ],
+      "explanation": "The <strong>Choices</strong> column type (multi-select option set) allows <strong>multiple options to be selected simultaneously</strong> on a single column. Each selected value is stored as part of a delimited set on the record.",
+      "wrongExplanations": [
+        "Choice (single select) stores only one option at a time.",
+        null,
+        "Text with comma-separated values is an anti-pattern — it cannot be filtered or queried reliably.",
+        "Multiple lookup columns would reference other records — not predefined option values."
+      ],
+      "msRef": {
+        "label": "Choices multi-select column",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "What is a Calculated column in Dataverse?",
+      "options": [
+        "A column whose value is set by a Power Automate flow on record creation",
+        "A column whose value is automatically computed from an expression using other fields on the same record or related records — updated on read",
+        "A column that aggregates child record values like SUM or COUNT",
+        "A column that runs a plugin to compute its value"
+      ],
+      "answer": 1,
+      "category": "columns",
+      "tags": [
+        "calculated-column",
+        "column-types"
+      ],
+      "explanation": "<strong>Calculated columns</strong> use a defined expression combining fields from the same record or related records. The value is <strong>computed on read</strong> (when the record is retrieved) rather than stored. They support conditions and functions like CONCAT, DATEDIFF, and IF.",
+      "wrongExplanations": [
+        "Power Automate flows can set column values but that is not the definition of a Calculated column.",
+        null,
+        "Aggregating child records (SUM, COUNT) is the purpose of Rollup columns — not Calculated columns.",
+        "Plugin-computed values are custom code — not the built-in Calculated column feature."
+      ],
+      "msRef": {
+        "label": "Calculated columns",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-calculated-fields"
+      }
+    },
+    {
+      "q": "What is a Rollup column in Dataverse and how does it differ from a Calculated column?",
+      "options": [
+        "Rollup columns compute values from the current record's fields; Calculated columns aggregate child records",
+        "Rollup columns aggregate values from related child records (e.g. SUM, COUNT, MAX on child records); Calculated columns compute values from fields on the same or parent records",
+        "They are the same — rollup and calculated are interchangeable terms",
+        "Rollup columns are real-time; Calculated columns update on a schedule"
+      ],
+      "answer": 1,
+      "category": "columns",
+      "tags": [
+        "rollup-column",
+        "calculated-column",
+        "column-types"
+      ],
+      "explanation": "<strong>Rollup columns</strong> aggregate values from <strong>related child records</strong> (e.g. total value of all Opportunity line items, count of open Cases on an Account). <strong>Calculated columns</strong> compute values from fields on the <strong>same record or parent records</strong>. Rollup columns are recalculated on a scheduled basis (every hour by default).",
+      "wrongExplanations": [
+        "It is the opposite — Rollup aggregates child records; Calculated uses current/parent record fields.",
+        null,
+        "They are distinct column types with different purposes.",
+        "Calculated columns update on read (real-time); Rollup columns update on a schedule (default hourly)."
+      ],
+      "msRef": {
+        "label": "Rollup columns",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-rollup-fields"
+      }
+    },
+    {
+      "q": "Which column type in Dataverse stores a reference to a record in another table?",
+      "options": [
+        "Text",
+        "Whole Number",
+        "Choice",
+        "Lookup"
+      ],
+      "answer": 3,
+      "category": "columns",
+      "tags": [
+        "lookup-column",
+        "column-types",
+        "relationships"
+      ],
+      "explanation": "A <strong>Lookup</strong> column stores a reference (entity type + GUID) to a record in another table, creating a many-to-one relationship between the current table and the target table. It is the primary mechanism for relating records across tables.",
+      "wrongExplanations": [
+        "Text stores free-form strings — not record references.",
+        "Whole Number stores numeric values — not record references.",
+        "Choice stores a selection from a predefined list — not a record reference.",
+        null
+      ],
+      "msRef": {
+        "label": "Lookup columns",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "What is the maximum character length for a single-line Text column in Dataverse?",
+      "options": [
+        "255 characters",
+        "2,000 characters",
+        "4,000 characters",
+        "100,000 characters"
+      ],
+      "answer": 2,
+      "category": "columns",
+      "tags": [
+        "text-column",
+        "column-limits"
+      ],
+      "explanation": "Single-line Text columns in Dataverse support a maximum of <strong>4,000 characters</strong>. For longer text content, the <strong>Multiline Text</strong> column type supports up to 1,048,576 characters.",
+      "wrongExplanations": [
+        "255 is a common limit in other systems — Dataverse text columns support up to 4,000.",
+        "2,000 is not the maximum — 4,000 characters is supported.",
+        null,
+        "100,000 characters applies to Multiline Text in some configurations — single-line text is 4,000."
+      ],
+      "msRef": {
+        "label": "Text column limits",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "What happens when a column is marked as 'Required' at the table level in Dataverse (as opposed to required only on a form)?",
+      "options": [
+        "The column is required only on the default form",
+        "The column must have a value whenever a record is saved regardless of which form, API, or flow creates or updates it",
+        "The column is required only when created via the UI — API calls can bypass it",
+        "Required at table level only applies to the primary column"
+      ],
+      "answer": 1,
+      "category": "columns",
+      "tags": [
+        "required-column",
+        "data-validation"
+      ],
+      "explanation": "Setting a column as <strong>Required at the table (data) level</strong> enforces the requirement across <strong>all creation and update paths</strong> — forms, Power Automate flows, plugins, and direct API calls. This is a data-level constraint, not a UI-only rule.",
+      "wrongExplanations": [
+        "Table-level required applies everywhere — not just the default form.",
+        null,
+        "API calls cannot bypass table-level required constraints — the platform enforces them.",
+        "Required can be set on any column — not just the primary column."
+      ],
+      "msRef": {
+        "label": "Column required property",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "True or False: Once a column is created in Dataverse, its data type cannot be changed.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "category": "columns",
+      "tags": [
+        "column-types",
+        "data-type-change"
+      ],
+      "explanation": "<strong>True.</strong> Once a column's data type is set and saved in Dataverse, it <strong>cannot be changed</strong>. For example, you cannot convert a Text column to a Whole Number column. To change the data type, a new column must be created and data migrated.",
+      "wrongExplanations": [
+        null,
+        "Data type changes are not supported after column creation — a new column is required."
+      ],
+      "msRef": {
+        "label": "Column data type immutability",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "What is the purpose of the 'Schema Name' (logical name) of a column in Dataverse?",
+      "options": [
+        "It is the label shown to users on forms and views",
+        "It is the unique technical identifier used in code, formulas, and API queries — it cannot be changed after the column is created",
+        "It is the column header shown in exported Excel files",
+        "It is the column's internal database index name"
+      ],
+      "answer": 1,
+      "category": "columns",
+      "tags": [
+        "schema-name",
+        "logical-name",
+        "column-properties"
+      ],
+      "explanation": "The <strong>Schema Name (logical name)</strong> is the unique technical identifier for the column used in Power Fx formulas, Power Automate flows, plugins, and Web API queries. It is prefixed with the solution publisher prefix (e.g. <code>cr123_columnname</code>) and <strong>cannot be changed after creation</strong>.",
+      "wrongExplanations": [
+        "The display name is shown to users — the schema name is for technical use.",
+        null,
+        "Excel export uses display names — not schema names.",
+        "Schema name is the Dataverse identifier — not a database index name specifically."
+      ],
+      "msRef": {
+        "label": "Column schema name",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "q": "What are the four types of forms available for a table in Dataverse model-driven apps?",
+      "options": [
+        "Main, Quick Create, Quick View, Card",
+        "Main, Sub-Grid, Lookup, Card",
+        "Main, Quick Create, Timeline, Header",
+        "Main, Detail, Summary, Mobile"
+      ],
+      "answer": 0,
+      "category": "forms",
+      "tags": [
+        "form-types",
+        "main-form",
+        "quick-create",
+        "quick-view",
+        "card-form"
+      ],
+      "explanation": "The four form types are: <strong>Main</strong> (full record editing form), <strong>Quick Create</strong> (streamlined form for fast record creation), <strong>Quick View</strong> (read-only form showing related record fields inline), and <strong>Card</strong> (compact form used in views and the Timeline).",
+      "wrongExplanations": [
+        null,
+        "Sub-Grid and Lookup are form components — not form types.",
+        "Timeline is a form component — not a form type.",
+        "Detail, Summary, and Mobile are not standard Dataverse form type names."
+      ],
+      "msRef": {
+        "label": "Form types in Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/types-forms"
+      }
+    },
+    {
+      "q": "What is a Quick Create form and when is it used?",
+      "options": [
+        "A form that auto-populates fields from a template",
+        "A streamlined form with a limited set of fields shown in a side panel — used when creating a record without navigating away from the current page",
+        "A form that creates multiple records simultaneously",
+        "A read-only form shown when hovering over a lookup field"
+      ],
+      "answer": 1,
+      "category": "forms",
+      "tags": [
+        "quick-create-form",
+        "form-types"
+      ],
+      "explanation": "A <strong>Quick Create</strong> form appears as a <strong>side panel flyout</strong> when a user creates a new record from the global create button or a lookup field — without navigating away from the current page. It shows only the most essential fields to minimise friction.",
+      "wrongExplanations": [
+        "Quick Create does not auto-populate from templates — that is a different feature.",
+        null,
+        "Quick Create creates one record at a time — not multiple.",
+        "Hovering over a lookup shows a Quick View form (read-only) — not Quick Create."
+      ],
+      "msRef": {
+        "label": "Quick Create forms",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-quick-create-forms"
+      }
+    },
+    {
+      "q": "What is a Quick View form used for in a model-driven app?",
+      "options": [
+        "A compact form for fast record creation",
+        "A read-only form embedded inside another form that shows fields from a related record via a lookup column",
+        "A mobile-optimised version of the main form",
+        "A form shown in the Timeline control for activity records"
+      ],
+      "answer": 1,
+      "category": "forms",
+      "tags": [
+        "quick-view-form",
+        "form-types"
+      ],
+      "explanation": "A <strong>Quick View</strong> form is a <strong>read-only form embedded within a main form</strong> that displays fields from a related record. For example, an Account quick view form on a Contact main form can show the account's phone number and address without navigating away.",
+      "wrongExplanations": [
+        "Quick Create is for fast record creation — Quick View is read-only and shows related data.",
+        null,
+        "Mobile optimisation uses responsive layout — not a Quick View form type.",
+        "The Timeline uses Card forms for activity previews — not Quick View forms."
+      ],
+      "msRef": {
+        "label": "Quick View forms",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-quick-view-forms"
+      }
+    },
+    {
+      "q": "What is the purpose of form tabs and sections in a model-driven app main form?",
+      "options": [
+        "Tabs control which users can see the form; sections control field-level security",
+        "Tabs organise the form into horizontal pages; sections subdivide each tab into labelled column-based layouts that contain the actual fields",
+        "Tabs are for desktop; sections are for mobile layout",
+        "Tabs group related tables; sections group related columns"
+      ],
+      "answer": 1,
+      "category": "forms",
+      "tags": [
+        "form-layout",
+        "tabs",
+        "sections"
+      ],
+      "explanation": "<strong>Tabs</strong> divide a form into horizontal pages (e.g. General, Details, Timeline). Each tab contains one or more <strong>Sections</strong>, which define the column layout (1, 2, or 3 columns) and contain the individual fields. This hierarchy organises complex forms into manageable, logical groupings.",
+      "wrongExplanations": [
+        "Tabs and sections are layout components — not security mechanisms.",
+        null,
+        "Both tabs and sections render on desktop and mobile — they are not platform-specific.",
+        "Tabs and sections are layout containers for fields — not for grouping tables or columns at the data level."
+      ],
+      "msRef": {
+        "label": "Form tabs and sections",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-and-edit-forms"
+      }
+    },
+    {
+      "q": "When multiple Main forms exist for a table, how does the system determine which form a user sees?",
+      "options": [
+        "The most recently created form is always shown",
+        "Forms have a defined order and security role assignments — users see the highest-ordered form they have access to based on their security role",
+        "Users are prompted to choose a form each time they open a record",
+        "The form with the most fields is always preferred"
+      ],
+      "answer": 1,
+      "category": "forms",
+      "tags": [
+        "form-selection",
+        "form-order",
+        "security-role"
+      ],
+      "explanation": "When multiple Main forms exist, they have a <strong>defined order</strong> and can be <strong>assigned to specific security roles</strong>. The system shows the highest-ordered form the user has access to. If no role-based assignment is set, the form order determines which is shown by default.",
+      "wrongExplanations": [
+        "Creation order does not determine which form is shown — explicit form order does.",
+        null,
+        "Users are not prompted — the system selects automatically based on order and role.",
+        "The number of fields has no bearing on form selection."
+      ],
+      "msRef": {
+        "label": "Form order and role assignment",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/assign-form-order"
+      }
+    },
+    {
+      "q": "What are the main types of views available for a Dataverse table?",
+      "options": [
+        "Public, Private, System",
+        "Public Views, Personal Views, System Views (Quick Find, Lookup, Associated)",
+        "Main View, Sub-View, Dashboard View",
+        "Grid View, Kanban View, Calendar View"
+      ],
+      "answer": 1,
+      "category": "views",
+      "tags": [
+        "view-types",
+        "public-views",
+        "system-views"
+      ],
+      "explanation": "Views are categorised as: <strong>Public Views</strong> (created by makers, available to all users), <strong>Personal Views</strong> (created by individual users for their own use), and <strong>System Views</strong> (built-in views like Quick Find View, Default Lookup View, and Associated View that serve specific system functions).",
+      "wrongExplanations": [
+        "Public/Private/System partially overlaps but omits key system view subtypes.",
+        null,
+        "Main/Sub/Dashboard are not view type names.",
+        "Grid/Kanban/Calendar are display formats — not view type categories."
+      ],
+      "msRef": {
+        "label": "View types in Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+      }
+    },
+    {
+      "q": "What is the Quick Find View used for in Dataverse?",
+      "options": [
+        "The default view shown when a table is opened in the app",
+        "The view that defines which columns are searched when a user types in the search box on a table's list page",
+        "The view used when a lookup column shows search results",
+        "A view that only shows records created in the last 24 hours"
+      ],
+      "answer": 1,
+      "category": "views",
+      "tags": [
+        "quick-find-view",
+        "system-views",
+        "search"
+      ],
+      "explanation": "The <strong>Quick Find View</strong> defines which columns are included in the search when a user types in the search bar on a table's list view. The columns in this view's <strong>Find Columns</strong> are the fields that Dataverse searches against.",
+      "wrongExplanations": [
+        "The default list view is the Public View set as default — not the Quick Find View.",
+        null,
+        "Lookup search results are controlled by the Default Lookup View — not Quick Find View.",
+        "Quick Find View is not time-filtered — it defines search scope."
+      ],
+      "msRef": {
+        "label": "Quick Find View",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+      }
+    },
+    {
+      "q": "What is the Associated View used for in a Dataverse table?",
+      "options": [
+        "The view shown when navigating to a table from the site map",
+        "The view shown in a sub-grid on a related record's form — displaying related records of this table",
+        "The view used in lookup column search dialogs",
+        "The view applied when exporting records to Excel"
+      ],
+      "answer": 1,
+      "category": "views",
+      "tags": [
+        "associated-view",
+        "system-views",
+        "sub-grid"
+      ],
+      "explanation": "The <strong>Associated View</strong> is the default view shown in <strong>sub-grids on related records</strong>. For example, when viewing an Account record, the Cases sub-grid uses the Case table's Associated View to display related cases.",
+      "wrongExplanations": [
+        "The site map navigation view is a Public View set as the app's default.",
+        null,
+        "Lookup dialogs use the Default Lookup View — not the Associated View.",
+        "Excel exports use the currently active view — not specifically the Associated View."
+      ],
+      "msRef": {
+        "label": "Associated View",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+      }
+    },
+    {
+      "q": "Which elements can be configured when creating or editing a view in the Power Apps view designer?",
+      "options": [
+        "Columns, sort order, and filter conditions only",
+        "Columns, sort order, filter conditions, column width, and whether the view is the default",
+        "Columns and filter conditions only — sort order is set by the user at runtime",
+        "Columns, sort order, filters, charts, and sub-grids"
+      ],
+      "answer": 1,
+      "category": "views",
+      "tags": [
+        "view-designer",
+        "view-configuration"
+      ],
+      "explanation": "The view designer allows configuration of: <strong>columns</strong> (which fields appear and their order), <strong>sort order</strong> (primary and secondary sort), <strong>filter conditions</strong> (which records appear), <strong>column width</strong>, and whether the view is set as the <strong>default view</strong> for the table.",
+      "wrongExplanations": [
+        "Column width is also configurable — not just columns, sort, and filters.",
+        null,
+        "Sort order can be defined at design time — users can also change it at runtime.",
+        "Charts are separate components — not configured within the view designer itself."
+      ],
+      "msRef": {
+        "label": "View designer configuration",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+      }
+    },
+    {
+      "q": "True or False: Personal views created by a user can be shared with other users or teams.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "category": "views",
+      "tags": [
+        "personal-views",
+        "sharing"
+      ],
+      "explanation": "<strong>True.</strong> Personal views can be <strong>shared</strong> with specific users or teams directly from the view. However, they remain personal views — to make them available to everyone in the app they should be promoted to a Public View by an administrator.",
+      "wrongExplanations": [
+        null,
+        "Personal views can be shared — they are not strictly private to the creator."
+      ],
+      "msRef": {
+        "label": "Sharing personal views",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+      }
+    },
+    {
+      "q": "What are the three types of table relationships available in Dataverse?",
+      "options": [
+        "Primary, Secondary, Tertiary",
+        "One-to-Many (1:N), Many-to-One (N:1), Many-to-Many (N:N)",
+        "Parent, Child, Sibling",
+        "Lookup, Reference, Association"
+      ],
+      "answer": 1,
+      "category": "relationships",
+      "tags": [
+        "relationship-types",
+        "1N",
+        "NN"
+      ],
+      "explanation": "Dataverse supports <strong>One-to-Many (1:N)</strong> — one record relates to many (e.g. one Account to many Contacts), <strong>Many-to-One (N:1)</strong> — the inverse of 1:N viewed from the child side, and <strong>Many-to-Many (N:N)</strong> — records on both sides relate to multiple records on the other (implemented via an intersect table).",
+      "wrongExplanations": [
+        "Primary/Secondary/Tertiary are not relationship type names.",
+        null,
+        "Parent/Child/Sibling are not the formal Dataverse relationship type names.",
+        "Lookup/Reference/Association are not the formal relationship type names in Dataverse."
+      ],
+      "msRef": {
+        "label": "Dataverse relationship types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entity-relationships"
+      }
+    },
+    {
+      "q": "What is created in the database when a Many-to-Many (N:N) relationship is configured between two tables in Dataverse?",
+      "options": [
+        "A lookup column on both tables pointing to each other",
+        "An intersect (junction) table that stores pairs of related record IDs from both tables",
+        "A calculated column on each table tracking the related records",
+        "A shared primary key between the two tables"
+      ],
+      "answer": 1,
+      "category": "relationships",
+      "tags": [
+        "many-to-many",
+        "intersect-table",
+        "relationship-types"
+      ],
+      "explanation": "N:N relationships are implemented via an <strong>intersect (junction) table</strong> automatically created by Dataverse. This table stores pairs of record IDs — one from each related table — representing each relationship instance. It is transparent to users but queryable via the API.",
+      "wrongExplanations": [
+        "Lookup columns implement 1:N relationships — not N:N.",
+        null,
+        "Calculated columns do not implement relationships.",
+        "Shared primary keys would break relational integrity — junction tables are the standard approach."
+      ],
+      "msRef": {
+        "label": "Many-to-Many relationships",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-nn-relationships-portal"
+      }
+    },
+    {
+      "q": "What is the difference between a native N:N relationship and a manual (custom) intersect table approach in Dataverse?",
+      "options": [
+        "There is no difference — both produce identical results",
+        "Native N:N creates a hidden intersect table with no custom columns; a manual intersect table is a standard custom table that can have additional columns to store relationship metadata",
+        "Native N:N supports up to 1 million records; manual intersect tables have no limit",
+        "Manual intersect tables support cascade delete; native N:N does not"
+      ],
+      "answer": 1,
+      "category": "relationships",
+      "tags": [
+        "many-to-many",
+        "intersect-table",
+        "relationship-design"
+      ],
+      "explanation": "A <strong>native N:N</strong> relationship creates a hidden intersect table with only the two foreign key columns — no extra data can be stored on the relationship. A <strong>manual intersect table</strong> is a custom standard table with lookup columns to both sides, allowing <strong>additional columns</strong> (e.g. relationship start date, role, notes) to be added to the relationship itself.",
+      "wrongExplanations": [
+        "They are functionally different — manual intersect tables support relationship metadata.",
+        null,
+        "Record count limits are not the distinguishing factor.",
+        "Cascade behaviour applies to 1:N relationships — not specifically a distinguishing feature of N:N approaches."
+      ],
+      "msRef": {
+        "label": "Native vs manual N:N relationships",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-nn-relationships-portal"
+      }
+    },
+    {
+      "q": "What is Dataverse Search (formerly Relevance Search) and how does it differ from Quick Find?",
+      "options": [
+        "Dataverse Search and Quick Find are the same feature with different names",
+        "Dataverse Search is a full-text, cross-table search powered by Azure Cognitive Search that returns results ranked by relevance; Quick Find searches one table at a time using exact/starts-with matching",
+        "Dataverse Search searches attachments and files; Quick Find searches record fields only",
+        "Quick Find is faster; Dataverse Search is more accurate but slower"
+      ],
+      "answer": 1,
+      "category": "dataverse-search",
+      "tags": [
+        "dataverse-search",
+        "relevance-search",
+        "quick-find"
+      ],
+      "explanation": "<strong>Dataverse Search</strong> uses <strong>Azure Cognitive Search</strong> to provide full-text, cross-table search with relevance ranking. It can search across multiple tables simultaneously and handle partial word matching. <strong>Quick Find</strong> searches within a single table using starts-with or exact matching on configured columns.",
+      "wrongExplanations": [
+        "They are distinct features with different capabilities and underlying technology.",
+        null,
+        "Both can search field content — Dataverse Search also supports richer content matching.",
+        "Speed differences exist but are not the primary distinguishing factor — search scope and matching algorithm are."
+      ],
+      "msRef": {
+        "label": "Dataverse Search overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/relevance-search-benefits"
+      }
+    },
+    {
+      "q": "How is Dataverse Search enabled for a specific table?",
+      "options": [
+        "It is enabled automatically for all tables when the feature is turned on",
+        "The table must have 'Can enable sync to external search index' enabled in the table properties, and the table must be added to the Dataverse Search configuration",
+        "Dataverse Search is enabled per column — each searchable column must be individually enabled",
+        "The System Administrator must raise a support request with Microsoft to index specific tables"
+      ],
+      "answer": 1,
+      "category": "dataverse-search",
+      "tags": [
+        "dataverse-search",
+        "search-index",
+        "configuration"
+      ],
+      "explanation": "For a table to be searchable via Dataverse Search, two things are needed: the table must have <strong>'Can enable sync to external search index'</strong> set to true, and the table must be <strong>added to the Dataverse Search configuration</strong> (Settings → Dataverse Search). The columns to index are also configurable per table.",
+      "wrongExplanations": [
+        "Not all tables are automatically indexed — they must be explicitly added.",
+        null,
+        "Individual column enablement is part of search configuration but the table must first be added overall.",
+        "Table indexing is self-service for administrators — no Microsoft support ticket is needed."
+      ],
+      "msRef": {
+        "label": "Configure Dataverse Search",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/configure-relevance-search-organization"
+      }
+    },
+    {
+      "q": "Which columns are used by Dataverse Search when returning results for a table?",
+      "options": [
+        "All columns on the table are searched automatically",
+        "Only columns explicitly added to the table's search index configuration in the Dataverse Search settings",
+        "Only the primary column (name field) is searched",
+        "Only columns included in the table's Quick Find View"
+      ],
+      "answer": 1,
+      "category": "dataverse-search",
+      "tags": [
+        "dataverse-search",
+        "search-columns",
+        "index-configuration"
+      ],
+      "explanation": "Dataverse Search only indexes and searches columns that are <strong>explicitly added to the table's search index configuration</strong>. Administrators select which columns to include — adding irrelevant columns increases index size and may reduce result quality.",
+      "wrongExplanations": [
+        "Not all columns are automatically indexed — selective configuration is required.",
+        null,
+        "The primary column is included by default but additional columns must be configured.",
+        "Quick Find View columns are used by Quick Find — Dataverse Search uses its own index configuration."
+      ],
+      "msRef": {
+        "label": "Dataverse Search column configuration",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/configure-relevance-search-organization"
+      }
+    },
+    {
+      "q": "What is the purpose of the In-App Notification feature in model-driven apps?",
+      "options": [
+        "To send push notifications to mobile devices",
+        "To display real-time notification banners and a notification bell to users within the model-driven app without leaving the app",
+        "To send emails triggered by record changes",
+        "To show system maintenance alerts from Microsoft"
+      ],
+      "answer": 1,
+      "category": "notifications",
+      "tags": [
+        "in-app-notifications",
+        "notifications"
+      ],
+      "explanation": "<strong>In-App Notifications</strong> display <strong>notification banners and a bell icon</strong> in the model-driven app UI. They allow processes (Power Automate flows, plugins) to surface contextual alerts directly to specific users within the app — without email or external messaging.",
+      "wrongExplanations": [
+        "Mobile push notifications are a separate capability — in-app notifications are browser/app-based.",
+        null,
+        "Email notifications are a separate feature — in-app notifications stay within the app.",
+        "System maintenance alerts are Microsoft-managed — in-app notifications are for custom app alerts."
+      ],
+      "msRef": {
+        "label": "In-app notifications",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+      }
+    },
+    {
+      "q": "How are In-App Notifications sent to a specific user in a model-driven app?",
+      "options": [
+        "By publishing a notification from the App Designer",
+        "By creating a record in the appnotification table (using Power Automate, a plugin, or the Web API) specifying the target user and notification content",
+        "By configuring a notification rule in the model-driven app settings",
+        "By sending an email to the user's Dynamics 365 email address"
+      ],
+      "answer": 1,
+      "category": "notifications",
+      "tags": [
+        "in-app-notifications",
+        "appnotification-table"
+      ],
+      "explanation": "In-App Notifications are sent by <strong>creating a record in the <code>appnotification</code> Dataverse table</strong>. The record specifies the target user, title, body, and optional action (a link to a record or URL). This can be done via <strong>Power Automate, a plugin, or the Web API</strong>.",
+      "wrongExplanations": [
+        "The App Designer does not send notifications — it configures app structure.",
+        null,
+        "There is no notification rule configuration in app settings — notifications are created as Dataverse records.",
+        "In-app notifications are Dataverse records — not emails."
+      ],
+      "msRef": {
+        "label": "Send in-app notifications",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+      }
+    },
+    {
+      "q": "What notification types are available for In-App Notifications in model-driven apps?",
+      "options": [
+        "Error, Warning, Info only",
+        "Toast (banner) notifications and notifications in the notification bell/panel",
+        "Email digest and push notification only",
+        "Pop-up dialog and status bar notification"
+      ],
+      "answer": 1,
+      "category": "notifications",
+      "tags": [
+        "in-app-notifications",
+        "notification-types"
+      ],
+      "explanation": "In-App Notifications appear as <strong>toast banners</strong> (temporary pop-up in the corner of the screen) and in the <strong>notification bell/panel</strong> (persistent list of notifications the user can review). Both can be configured per notification record.",
+      "wrongExplanations": [
+        "Error/Warning/Info describes severity levels — not notification delivery types.",
+        null,
+        "Email digest and push are separate channels — in-app notifications are in-browser.",
+        "Pop-up dialogs are a different UI pattern — in-app notifications use banners and the bell panel."
+      ],
+      "msRef": {
+        "label": "In-app notification types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+      }
+    },
+    {
+      "q": "What is an Email Template in Dynamics 365 / model-driven apps used for?",
+      "options": [
+        "Defining the layout of the email form in the model-driven app",
+        "A pre-formatted reusable email with dynamic field values that agents or automated processes can use to send consistent communications",
+        "Setting up email routing rules for inbound emails",
+        "Configuring the default email signature for all users"
+      ],
+      "answer": 1,
+      "category": "email-templates",
+      "tags": [
+        "email-templates",
+        "communication"
+      ],
+      "explanation": "<strong>Email Templates</strong> are pre-written email bodies with <strong>dynamic field values</strong> (using data slugs that pull from Dataverse records). Agents can insert a template when composing an email activity, and Power Automate flows can use templates in Send Email actions — ensuring consistent, personalised communications.",
+      "wrongExplanations": [
+        "Email form layout is controlled by form customisation — not email templates.",
+        null,
+        "Email routing rules are configured via Record Creation and Update Rules — not templates.",
+        "Email signatures are configured in personal or organisation settings — not email templates."
+      ],
+      "msRef": {
+        "label": "Email templates",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/email-template-create"
+      }
+    },
+    {
+      "q": "Email Templates in Dataverse can be scoped at which levels?",
+      "options": [
+        "User level only",
+        "Organisation level only",
+        "User level and Organisation (global) level",
+        "Business Unit level only"
+      ],
+      "answer": 2,
+      "category": "email-templates",
+      "tags": [
+        "email-templates",
+        "template-scope"
+      ],
+      "explanation": "Email Templates can be created at <strong>User level</strong> (personal templates visible only to the creator) or <strong>Organisation level</strong> (global templates available to all users). Administrators promote user templates to organisation level to share them broadly.",
+      "wrongExplanations": [
+        "Both user and organisation levels are supported.",
+        "User-level templates also exist.",
+        null,
+        "Business Unit level is not a supported scope for email templates."
+      ],
+      "msRef": {
+        "label": "Email template scope",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/email-template-create"
+      }
+    },
+    {
+      "q": "How are dynamic field values inserted into an Email Template in Dataverse?",
+      "options": [
+        "By writing Power Fx expressions in the template body",
+        "Using data field slugs (dynamic values) that reference fields from the template's associated record type — rendered at send time",
+        "By embedding JavaScript in the template HTML",
+        "Dynamic values are not supported — templates are static text only"
+      ],
+      "answer": 1,
+      "category": "email-templates",
+      "tags": [
+        "email-templates",
+        "dynamic-values",
+        "data-slugs"
+      ],
+      "explanation": "Email Templates support <strong>data field slugs</strong> — placeholders that reference fields from the associated record type (e.g. the contact's first name, the case number). When the email is sent, Dataverse replaces the slugs with actual field values from the record.",
+      "wrongExplanations": [
+        "Power Fx is used in canvas apps and formulas — not in email template bodies.",
+        null,
+        "JavaScript in templates is not supported and would be a security risk.",
+        "Dynamic values are a core feature of email templates — static-only templates would be very limited."
+      ],
+      "msRef": {
+        "label": "Email template dynamic values",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/email-template-create"
+      }
+    },
+    {
+      "q": "True or False: An Email Template must be associated with a specific Dataverse table (entity) to use dynamic field values from that table.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "category": "email-templates",
+      "tags": [
+        "email-templates",
+        "table-association"
+      ],
+      "explanation": "<strong>True.</strong> Email Templates are associated with a specific table (e.g. Case, Contact, Lead). This association defines which record's fields are available as dynamic values. A template associated with Case can include case number, case title, and customer name — but not fields from unrelated tables.",
+      "wrongExplanations": [
+        null,
+        "Table association is required for dynamic values — a global template with no table association can only use static text."
+      ],
+      "msRef": {
+        "label": "Email template table association",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/email-template-create"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Match each site map component to its correct role in model-driven app navigation.",
+      "items": [
+        "Area",
+        "Group",
+        "Subarea",
+        "Site Map",
+        "App Designer"
+      ],
+      "zones": [
+        "Top-level navigation section — users can switch between areas",
+        "Organises subareas within an area under a labelled heading",
+        "Individual navigation item pointing to a table, dashboard, URL, or web resource",
+        "The overall navigation structure definition for the app",
+        "Controls which tables, forms, views, and dashboards are included in the app"
+      ],
+      "correctMapping": {
+        "Area": "Top-level navigation section — users can switch between areas",
+        "Group": "Organises subareas within an area under a labelled heading",
+        "Subarea": "Individual navigation item pointing to a table, dashboard, URL, or web resource",
+        "Site Map": "The overall navigation structure definition for the app",
+        "App Designer": "Controls which tables, forms, views, and dashboards are included in the app"
+      },
+      "tags": [
+        "site-map",
+        "app-designer",
+        "navigation",
+        "mda-components"
+      ],
+      "explanation": "Area → Group → Subarea is the navigation hierarchy. The Site Map defines the structure. The App Designer controls what components (tables, forms, views) are included in the app separately from the navigation.",
+      "msRef": {
+        "label": "Site map and App Designer",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/app-navigation"
+      }
+    },
+    {
+      "instruction": "Classify each Dataverse column type by the kind of data it stores.",
+      "items": [
+        "Text",
+        "Whole Number",
+        "Choice",
+        "Choices",
+        "Lookup",
+        "Calculated",
+        "Rollup",
+        "DateTime"
+      ],
+      "zones": [
+        "Stores free-form character string values",
+        "Stores a numeric integer value",
+        "Stores a single selection from a predefined list",
+        "Stores multiple selections from a predefined list",
+        "Stores a reference to a record in another table",
+        "Stores a value computed from fields on the same or parent record — updated on read",
+        "Stores a value aggregated from related child records — updated on schedule",
+        "Stores a date and optional time value"
+      ],
+      "correctMapping": {
+        "Text": "Stores free-form character string values",
+        "Whole Number": "Stores a numeric integer value",
+        "Choice": "Stores a single selection from a predefined list",
+        "Choices": "Stores multiple selections from a predefined list",
+        "Lookup": "Stores a reference to a record in another table",
+        "Calculated": "Stores a value computed from fields on the same or parent record — updated on read",
+        "Rollup": "Stores a value aggregated from related child records — updated on schedule",
+        "DateTime": "Stores a date and optional time value"
+      },
+      "tags": [
+        "column-types",
+        "data-types"
+      ],
+      "explanation": "Each column type maps to a specific data category. Calculated vs Rollup is a common confusion — Calculated uses current/parent fields (on read), Rollup aggregates child records (on schedule).",
+      "msRef": {
+        "label": "Dataverse column types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    },
+    {
+      "instruction": "Match each Dataverse form type to its primary use case.",
+      "items": [
+        "Main Form",
+        "Quick Create Form",
+        "Quick View Form",
+        "Card Form"
+      ],
+      "zones": [
+        "Full record editing — the primary form agents use to view and update a record",
+        "Streamlined side-panel form for fast record creation without navigating away",
+        "Read-only embedded form showing fields from a related record via a lookup",
+        "Compact form used in views and the Timeline control for activity previews"
+      ],
+      "correctMapping": {
+        "Main Form": "Full record editing — the primary form agents use to view and update a record",
+        "Quick Create Form": "Streamlined side-panel form for fast record creation without navigating away",
+        "Quick View Form": "Read-only embedded form showing fields from a related record via a lookup",
+        "Card Form": "Compact form used in views and the Timeline control for activity previews"
+      },
+      "tags": [
+        "form-types",
+        "forms"
+      ],
+      "explanation": "Main = full edit. Quick Create = fast side-panel creation. Quick View = read-only related record preview embedded in another form. Card = compact preview in Timeline and views.",
+      "msRef": {
+        "label": "Form types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/types-forms"
+      }
+    },
+    {
+      "instruction": "Classify each Dataverse view type by its purpose.",
+      "items": [
+        "Public View",
+        "Personal View",
+        "Quick Find View",
+        "Default Lookup View",
+        "Associated View"
+      ],
+      "zones": [
+        "Maker-created view available to all users of the app",
+        "User-created view for personal use — can be shared with others",
+        "Defines which columns are searched when a user types in the table search bar",
+        "Defines the columns and results shown in lookup field search dialogs",
+        "Default view shown in sub-grids on related record forms"
+      ],
+      "correctMapping": {
+        "Public View": "Maker-created view available to all users of the app",
+        "Personal View": "User-created view for personal use — can be shared with others",
+        "Quick Find View": "Defines which columns are searched when a user types in the table search bar",
+        "Default Lookup View": "Defines the columns and results shown in lookup field search dialogs",
+        "Associated View": "Default view shown in sub-grids on related record forms"
+      },
+      "tags": [
+        "view-types",
+        "system-views"
+      ],
+      "explanation": "Public and Personal views are user-facing list views. Quick Find, Default Lookup, and Associated are system views serving specific platform functions — search, lookup dialogs, and sub-grid display respectively.",
+      "msRef": {
+        "label": "View types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+      }
+    },
+    {
+      "instruction": "Arrange the correct sequence of steps to create and publish a new custom table in Dataverse with a form and view, and add it to a model-driven app.",
+      "items": [
+        "Create the table — set display name, plural name, ownership, and primary column",
+        "Add required columns to the table",
+        "Customise the Main form — add columns, arrange tabs and sections",
+        "Create or customise the Public View — add columns and set filters",
+        "Open the App Designer and add the table, selecting the form and view to include",
+        "Save and publish the app"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5",
+        "Step 6"
+      ],
+      "correctMapping": {
+        "Create the table — set display name, plural name, ownership, and primary column": "Step 1",
+        "Add required columns to the table": "Step 2",
+        "Customise the Main form — add columns, arrange tabs and sections": "Step 3",
+        "Create or customise the Public View — add columns and set filters": "Step 4",
+        "Open the App Designer and add the table, selecting the form and view to include": "Step 5",
+        "Save and publish the app": "Step 6"
+      },
+      "tags": [
+        "create-table",
+        "forms",
+        "views",
+        "app-designer",
+        "sequence"
+      ],
+      "explanation": "Build the data model first (table → columns), then the UI layer (form → view), then wire it into the app (App Designer), then publish. Publishing is always the final step before changes are visible to users.",
+      "msRef": {
+        "label": "Create and deploy a table",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+      }
+    },
+    {
+      "instruction": "Arrange the correct sequence of steps to enable Dataverse Search for a new custom table.",
+      "items": [
+        "Verify the table property 'Can enable sync to external search index' is set to true",
+        "Navigate to Settings and open the Dataverse Search configuration",
+        "Add the table to the Dataverse Search index",
+        "Select the columns to include in the search index for that table",
+        "Save the configuration — the table begins syncing to the search index"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5"
+      ],
+      "correctMapping": {
+        "Verify the table property 'Can enable sync to external search index' is set to true": "Step 1",
+        "Navigate to Settings and open the Dataverse Search configuration": "Step 2",
+        "Add the table to the Dataverse Search index": "Step 3",
+        "Select the columns to include in the search index for that table": "Step 4",
+        "Save the configuration — the table begins syncing to the search index": "Step 5"
+      },
+      "tags": [
+        "dataverse-search",
+        "configuration",
+        "sequence"
+      ],
+      "explanation": "Enable the table property first, then add the table to the search configuration, select indexed columns, and save. The sync begins after saving — there may be a delay before new records appear in search results.",
+      "msRef": {
+        "label": "Configure Dataverse Search",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/configure-relevance-search-organization"
+      }
+    },
+    {
+      "instruction": "Match each table ownership type to its behaviour and typical use case.",
+      "items": [
+        "User or Team ownership",
+        "Organisation ownership",
+        "No ownership (Virtual table)"
+      ],
+      "zones": [
+        "Records are owned by a specific user or team — security roles apply at user, BU, and org level — used for most operational data like Cases and Contacts",
+        "Records belong to the entire organisation — no user-level ownership — used for reference/configuration data like product catalogues or status codes",
+        "No ownership concept — records come from an external data source in real time via a provider connector"
+      ],
+      "correctMapping": {
+        "User or Team ownership": "Records are owned by a specific user or team — security roles apply at user, BU, and org level — used for most operational data like Cases and Contacts",
+        "Organisation ownership": "Records belong to the entire organisation — no user-level ownership — used for reference/configuration data like product catalogues or status codes",
+        "No ownership (Virtual table)": "No ownership concept — records come from an external data source in real time via a provider connector"
+      },
+      "tags": [
+        "table-ownership",
+        "table-types"
+      ],
+      "explanation": "User/Team ownership enables granular security. Organisation ownership is for shared reference data where everyone has equal access. Virtual tables have no ownership because data lives externally.",
+      "msRef": {
+        "label": "Table ownership types",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+      }
+    },
+    {
+      "instruction": "Classify each statement about Dataverse Search vs Quick Find as applying to one or both.",
+      "items": [
+        "Searches across multiple tables simultaneously",
+        "Searches within a single table at a time",
+        "Uses Azure Cognitive Search for relevance ranking",
+        "Uses starts-with matching on configured Quick Find columns",
+        "Requires tables to be explicitly added to an index configuration",
+        "Results are controlled by the Quick Find View column configuration"
+      ],
+      "zones": [
+        "Dataverse Search only",
+        "Quick Find only",
+        "Both"
+      ],
+      "correctMapping": {
+        "Searches across multiple tables simultaneously": "Dataverse Search only",
+        "Uses Azure Cognitive Search for relevance ranking": "Dataverse Search only",
+        "Requires tables to be explicitly added to an index configuration": "Dataverse Search only",
+        "Searches within a single table at a time": "Quick Find only",
+        "Uses starts-with matching on configured Quick Find columns": "Quick Find only",
+        "Results are controlled by the Quick Find View column configuration": "Quick Find only"
+      },
+      "tags": [
+        "dataverse-search",
+        "quick-find",
+        "search-comparison"
+      ],
+      "explanation": "Dataverse Search = cross-table, relevance-ranked, Azure Cognitive Search, requires index configuration. Quick Find = single-table, starts-with matching, controlled by Quick Find View columns. Neither characteristic is shared in this set.",
+      "msRef": {
+        "label": "Search comparison",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/relevance-search-benefits"
+      }
+    },
+    {
+      "instruction": "Match each in-app notification property to what it configures.",
+      "items": [
+        "title",
+        "body",
+        "ownerid",
+        "expiry",
+        "toasttype",
+        "actions"
+      ],
+      "zones": [
+        "The headline text shown in the notification banner and bell panel",
+        "The detailed message content of the notification",
+        "The specific user who receives the notification",
+        "When the notification automatically disappears from the bell panel",
+        "Whether the notification appears as a banner, in the bell only, or is hidden",
+        "Optional buttons in the notification linking to a record or URL"
+      ],
+      "correctMapping": {
+        "title": "The headline text shown in the notification banner and bell panel",
+        "body": "The detailed message content of the notification",
+        "ownerid": "The specific user who receives the notification",
+        "expiry": "When the notification automatically disappears from the bell panel",
+        "toasttype": "Whether the notification appears as a banner, in the bell only, or is hidden",
+        "actions": "Optional buttons in the notification linking to a record or URL"
+      },
+      "tags": [
+        "in-app-notifications",
+        "appnotification-table",
+        "properties"
+      ],
+      "explanation": "The appnotification record properties control every aspect of the notification: who sees it (ownerid), what it says (title/body), how it appears (toasttype), when it expires, and what actions the user can take.",
+      "msRef": {
+        "label": "In-app notification properties",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+      }
+    },
+    {
+      "instruction": "Classify each item as a property that can be changed after a Dataverse column is created, or one that cannot be changed.",
+      "items": [
+        "Display name",
+        "Data type",
+        "Schema name (logical name)",
+        "Required level (optional to required)",
+        "Maximum length of a text column",
+        "Description",
+        "Whether field security is enabled"
+      ],
+      "zones": [
+        "Can be changed after creation",
+        "Cannot be changed after creation"
+      ],
+      "correctMapping": {
+        "Display name": "Can be changed after creation",
+        "Required level (optional to required)": "Can be changed after creation",
+        "Maximum length of a text column": "Can be changed after creation",
+        "Description": "Can be changed after creation",
+        "Data type": "Cannot be changed after creation",
+        "Schema name (logical name)": "Cannot be changed after creation",
+        "Whether field security is enabled": "Cannot be changed after creation"
+      },
+      "tags": [
+        "column-properties",
+        "immutable-properties"
+      ],
+      "explanation": "Data type, schema name, and field security enablement are fixed at creation. Display name, required level, max length, and description can all be changed post-creation. Note: once field security is enabled on a column it cannot be disabled.",
+      "msRef": {
+        "label": "Column property mutability",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "Contoso Services — Building a Custom App from Scratch",
+      "scenario": "Contoso Services is building a new model-driven app to manage <strong>Service Requests</strong>. The requirements are:\n\n1. A new custom table called <strong>Service Request</strong> must be created — agents own records, and the table must support activities and attachments\n2. The table needs a <strong>Priority</strong> column (single choice: Low, Medium, High, Critical) reusable across other tables in future, and a <strong>Resolution Notes</strong> column for long-form text\n3. The app must have two navigation areas: <strong>Agent Workspace</strong> (for agents) and <strong>Admin Settings</strong> (for admins)\n4. Agents should see a <strong>My Open Requests</strong> view as the default when opening the Service Request table\n5. When an agent opens a Service Request record, they should be able to see the related <strong>Account's phone number and address</strong> inline without navigating away\n6. Agents must receive an <strong>in-app notification</strong> when a high-priority request is assigned to them",
+      "tags": [
+        "create-table",
+        "columns",
+        "site-map",
+        "views",
+        "forms",
+        "in-app-notifications"
+      ],
+      "msRef": {
+        "label": "Build a model-driven app",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/build-first-model-driven-app"
+      },
+      "questions": [
+        {
+          "q": "For requirement 1 — creating the Service Request table — which ownership type and which table properties must be enabled?",
+          "options": [
+            "Organisation ownership — enable Activities and Attachments",
+            "User or Team ownership — enable Activities and Attachments",
+            "User or Team ownership — Activities and Attachments are enabled by default on all tables",
+            "Virtual table type — enable Activities and Attachments"
+          ],
+          "answer": 1,
+          "explanation": "<strong>User or Team ownership</strong> is required so individual agents own records and security roles apply at user/BU level. <strong>Activities</strong> must be enabled for the Timeline to show interaction history, and <strong>Attachments</strong> for file uploads — neither is on by default for custom tables.",
+          "wrongExplanations": [
+            "Organisation ownership means no user-level record ownership — agents could not own their service requests.",
+            null,
+            "Activities and Attachments are not enabled by default on custom tables — they must be explicitly checked at creation time.",
+            "Virtual tables source data externally — Service Request records need to be stored in Dataverse."
+          ],
+          "msRef": {
+            "label": "Table ownership and properties",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-entities-portal"
+          }
+        },
+        {
+          "q": "For requirement 2 — the Priority column reusable across other tables — which column configuration should be used?",
+          "options": [
+            "Create a local Choice column on Service Request and copy it to other tables when needed",
+            "Create a Global Choice (global option set) with the Low, Medium, High, Critical options, then use it as the column type when adding Priority to each table",
+            "Create a separate Priority lookup table and use a Lookup column",
+            "Create a Text column and use a Business Rule to restrict values"
+          ],
+          "answer": 1,
+          "explanation": "A <strong>Global Choice</strong> (global option set) is defined once and reused across multiple tables and columns. Any future table can reference the same global choice, ensuring consistent option values and labels without duplication.",
+          "wrongExplanations": [
+            "A local choice is table-specific — it cannot be reused on other tables.",
+            null,
+            "A lookup table works but is overkill for a fixed small list — Global Choice is the purpose-built solution.",
+            "A Text column with Business Rule validation is fragile and not queryable as a typed choice."
+          ],
+          "msRef": {
+            "label": "Global Choice columns",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-global-option-sets-solution-explorer"
+          }
+        },
+        {
+          "q": "For requirement 3 — two navigation areas for agents and admins — what must be created in the site map?",
+          "options": [
+            "Two Groups within a single Area",
+            "Two separate Areas — Agent Workspace and Admin Settings — each containing their own Groups and Subareas",
+            "Two separate Apps — one for agents and one for admins",
+            "Two Subareas at the top level of the site map"
+          ],
+          "answer": 1,
+          "explanation": "<strong>Areas</strong> are the top-level sections of a site map and are switchable by users. Creating two Areas — Agent Workspace and Admin Settings — allows users to switch between the two navigation contexts within the same app.",
+          "wrongExplanations": [
+            "Two Groups within one Area would not allow top-level switching — Groups organise content within an Area.",
+            null,
+            "Two separate apps would work but the requirement asks for switching within one app — Areas achieve this.",
+            "Subareas are individual page items — they cannot be top-level switchable sections."
+          ],
+          "msRef": {
+            "label": "Site map areas",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/app-navigation"
+          }
+        },
+        {
+          "q": "For requirement 4 — My Open Requests as the default view for agents — how is this configured?",
+          "options": [
+            "Set the view as default in the App Designer for the Service Request table",
+            "Create a Public View with filters for records owned by the current user and status = Open, then set it as the default view for the table in the app",
+            "Create a Personal View for each agent individually",
+            "Use a Dashboard as the default landing page showing open requests"
+          ],
+          "answer": 1,
+          "explanation": "Create a <strong>Public View</strong> with filter conditions: Owner = Current User AND Status = Open. Set this as the <strong>default view</strong> for the Service Request table in the App Designer. All agents see this as their default list when navigating to Service Requests.",
+          "wrongExplanations": [
+            "The App Designer is where you set it as default — but first the view must be created with the correct filters.",
+            null,
+            "Personal views per agent are unscalable — a Public View set as default applies to all agents automatically.",
+            "A Dashboard is a separate component — the default table view is configured in the App Designer."
+          ],
+          "msRef": {
+            "label": "Create and set default views",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+          }
+        },
+        {
+          "q": "For requirement 5 — showing the related Account's phone and address inline on the Service Request form — which form type achieves this?",
+          "options": [
+            "Add the Account fields directly to the Service Request Main form",
+            "Create a Quick View form on the Account table showing phone and address, then embed it on the Service Request Main form via the Account lookup column",
+            "Create a sub-grid showing all Account records on the Service Request form",
+            "Use a Dashboard component embedded in the Service Request form"
+          ],
+          "answer": 1,
+          "explanation": "A <strong>Quick View form</strong> on the Account table displays selected Account fields read-only. When embedded on the Service Request Main form (via the Account lookup column), it shows the related Account's phone and address inline — without the agent needing to navigate to the Account record.",
+          "wrongExplanations": [
+            "Account fields cannot be directly added to the Service Request form — they belong to the Account table.",
+            null,
+            "A sub-grid shows a list of related records — not a compact inline view of a single related record's fields.",
+            "Dashboards are separate pages — they cannot be embedded inline on a form."
+          ],
+          "msRef": {
+            "label": "Quick View forms",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-quick-view-forms"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Fabrikam Finance — Data Model Review and Search Configuration",
+      "scenario": "Fabrikam Finance is auditing their Dataverse environment. The following issues have been identified:\n\n1. The <strong>Loan Application</strong> table has a <strong>Credit Score</strong> column currently defined as Text — advisors need to sort and do range queries on it (e.g. score > 700)\n2. A column called <strong>Total Approved Amount</strong> must always show the <strong>sum of all related Loan Line Items</strong> for a Loan Application — currently calculated manually by agents\n3. The <strong>Dataverse Search</strong> is returning irrelevant results for Loan Application searches — too many columns are indexed\n4. Agents searching for loans in the lookup field on a related record are seeing the wrong columns in the search results dialog\n5. The <strong>Loan Application</strong> table does not appear in Dataverse Search results at all despite being configured",
+      "tags": [
+        "columns",
+        "rollup-column",
+        "dataverse-search",
+        "views",
+        "troubleshooting"
+      ],
+      "msRef": {
+        "label": "Dataverse data model and search",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform"
+      },
+      "questions": [
+        {
+          "q": "For issue 1 — Credit Score is currently Text but needs numeric sorting and range queries — what is the correct resolution?",
+          "options": [
+            "Change the Credit Score column data type from Text to Whole Number",
+            "Create a new Whole Number column for Credit Score and migrate existing data — the existing Text column's data type cannot be changed",
+            "Add a Business Rule that validates the text value is numeric",
+            "Create a Calculated column that converts the Text value to a number"
+          ],
+          "answer": 1,
+          "explanation": "Dataverse column data types <strong>cannot be changed after creation</strong>. The correct approach is to <strong>create a new Whole Number column</strong>, migrate the existing text data to it, update any forms, views, and flows referencing the old column, then deprecate the Text column.",
+          "wrongExplanations": [
+            "Data type changes are not supported in Dataverse — a new column must be created.",
+            null,
+            "A Business Rule validates input but does not change how the data is stored or enable numeric sorting.",
+            "A Calculated column can display a converted value but the source column remains Text — sorting on the calculated result still has limitations."
+          ],
+          "msRef": {
+            "label": "Column data type immutability",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-field-portal"
+          }
+        },
+        {
+          "q": "For issue 2 — Total Approved Amount must always show the sum of related Loan Line Items — which column type is correct?",
+          "options": [
+            "Calculated column using a SUM expression",
+            "Rollup column configured to SUM the Amount field on related Loan Line Item records",
+            "A Power Automate flow that updates the field when line items change",
+            "A plugin that recalculates the total on every save"
+          ],
+          "answer": 1,
+          "explanation": "A <strong>Rollup column</strong> is specifically designed to <strong>aggregate values from related child records</strong> — in this case, summing the Amount field across all related Loan Line Items. It updates on a schedule (default hourly) and can also be manually triggered.",
+          "wrongExplanations": [
+            "Calculated columns compute from the current or parent record's fields — they cannot aggregate child records.",
+            null,
+            "A Power Automate flow works but introduces timing dependencies and requires maintenance — Rollup columns are the purpose-built no-code solution.",
+            "A plugin is a code-based approach — Rollup columns achieve this without custom code."
+          ],
+          "msRef": {
+            "label": "Rollup columns",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-rollup-fields"
+          }
+        },
+        {
+          "q": "For issue 3 — too many irrelevant columns are indexed in Dataverse Search — how is this resolved?",
+          "options": [
+            "Disable Dataverse Search entirely and use Quick Find instead",
+            "Open the Dataverse Search configuration, select the Loan Application table, and remove irrelevant columns from the index — keeping only the most relevant fields",
+            "Delete and recreate the Loan Application table with fewer columns",
+            "Add a search filter in the App Designer to restrict results"
+          ],
+          "answer": 1,
+          "explanation": "The Dataverse Search configuration allows administrators to <strong>select exactly which columns are indexed per table</strong>. Removing irrelevant columns from the index reduces noise in search results — only fields that users would meaningfully search on should be included.",
+          "wrongExplanations": [
+            "Disabling Dataverse Search removes cross-table relevance search capability — reducing indexed columns is the targeted fix.",
+            null,
+            "Recreating the table is destructive and unnecessary — the index configuration is easily adjusted.",
+            "App Designer search filters are not a feature — Dataverse Search column configuration is the correct tool."
+          ],
+          "msRef": {
+            "label": "Configure Dataverse Search columns",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/configure-relevance-search-organization"
+          }
+        },
+        {
+          "q": "For issue 4 — wrong columns appearing in the lookup search dialog for Loan Application — which view controls this?",
+          "options": [
+            "The Quick Find View — update its columns to show relevant loan fields",
+            "The Default Lookup View — update its columns to show the fields agents expect in the lookup search dialog",
+            "The Associated View — update it to show the correct columns",
+            "The Public View set as default — change its columns to match lookup expectations"
+          ],
+          "answer": 1,
+          "explanation": "The <strong>Default Lookup View</strong> controls what columns and records appear in <strong>lookup field search dialogs</strong>. When an agent clicks a lookup field and searches, the results are governed by this view — updating it to show relevant columns (e.g. loan number, applicant name, status) fixes the issue.",
+          "wrongExplanations": [
+            "Quick Find View controls the search bar on the table's list page — not lookup dialogs.",
+            null,
+            "Associated View controls sub-grids on related record forms — not lookup dialogs.",
+            "The default Public View controls the main list page — not lookup dialogs."
+          ],
+          "msRef": {
+            "label": "Default Lookup View",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-views"
+          }
+        },
+        {
+          "q": "For issue 5 — the Loan Application table not appearing in Dataverse Search despite being configured — what should be checked first?",
+          "options": [
+            "Whether the table has any records — empty tables do not appear in search",
+            "Whether the table property 'Can enable sync to external search index' is set to true",
+            "Whether the table is included in a solution",
+            "Whether the app has been republished since the search configuration was saved"
+          ],
+          "answer": 1,
+          "explanation": "The table property <strong>'Can enable sync to external search index'</strong> must be set to <strong>true</strong> before the table can be indexed by Dataverse Search. If this property is false (which it is for some table types), the table cannot participate in Dataverse Search regardless of the index configuration.",
+          "wrongExplanations": [
+            "Empty tables can still be configured for search — the issue is the table property, not record count.",
+            null,
+            "Solution inclusion is unrelated to Dataverse Search eligibility.",
+            "App republishing is unrelated to Dataverse Search index synchronisation."
+          ],
+          "msRef": {
+            "label": "Dataverse Search table property",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/configure-relevance-search-organization"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Northwind Retail — Notifications and Email Templates",
+      "scenario": "Northwind Retail is enhancing agent productivity in their model-driven app. The following requirements must be implemented:\n\n1. When a <strong>high-priority case</strong> is assigned to an agent, they must receive an <strong>in-app notification</strong> with a link to the case record\n2. The notification must appear as a <strong>banner</strong> and also be visible in the <strong>notification bell panel</strong>\n3. The customer service team uses a standard email for acknowledging new cases — this must be consistent across all agents and reference the <strong>case number and customer name dynamically</strong>\n4. The acknowledgement email template must be available to all agents — not just the person who created it\n5. A new agent asks why they can see a field on a Case form but the value always appears blank",
+      "tags": [
+        "in-app-notifications",
+        "email-templates",
+        "columns",
+        "field-security",
+        "forms"
+      ],
+      "msRef": {
+        "label": "Notifications and templates",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+      },
+      "questions": [
+        {
+          "q": "For requirement 1 — triggering an in-app notification when a high-priority case is assigned — what is the correct implementation approach?",
+          "options": [
+            "Configure a notification rule in the model-driven App Designer",
+            "Create a Power Automate flow triggered by case assignment that creates a record in the appnotification table with the target agent as ownerid and a link to the case",
+            "Send the agent an email with a link to the case instead",
+            "Use a Business Rule on the Case form to show a pop-up when priority is High"
+          ],
+          "answer": 1,
+          "explanation": "In-app notifications are created by <strong>inserting a record into the <code>appnotification</code> Dataverse table</strong>. A <strong>Power Automate flow</strong> triggered by a case assignment condition (Priority = High and owner changed) creates the notification record with the agent's user ID as <code>ownerid</code> and a case record link in the <code>actions</code> field.",
+          "wrongExplanations": [
+            "There is no notification rule configuration in the App Designer — notifications are Dataverse records.",
+            null,
+            "Email is a separate channel — in-app notifications stay within the model-driven app.",
+            "Business Rule pop-ups are form-level UI alerts — not the in-app notification bell/banner system."
+          ],
+          "msRef": {
+            "label": "Send in-app notifications via Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+          }
+        },
+        {
+          "q": "For requirement 2 — the notification must appear as a banner and in the bell panel — which appnotification property controls this?",
+          "options": [
+            "priority — set to High",
+            "toasttype — set to the value that enables both banner and bell panel display",
+            "body — include the word BANNER in the notification body",
+            "expiry — set to a future date to keep it in the bell panel"
+          ],
+          "answer": 1,
+          "explanation": "The <strong><code>toasttype</code></strong> property on the appnotification record controls how the notification is displayed. Setting it to the appropriate value enables the notification to appear as a <strong>toast banner</strong> (temporary pop-up) and persist in the <strong>bell panel</strong>.",
+          "wrongExplanations": [
+            "The priority property affects urgency ordering — not display type.",
+            null,
+            "The body is the notification message content — display type is controlled by toasttype.",
+            "Expiry controls when the notification disappears from the bell panel — not how it is displayed initially."
+          ],
+          "msRef": {
+            "label": "In-app notification toasttype property",
+            "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/send-in-app-notifications"
+          }
+        },
+        {
+          "q": "For requirement 3 — a consistent acknowledgement email referencing case number and customer name — what must be configured in the email template?",
+          "options": [
+            "Write the case number and customer name as static placeholder text that agents replace manually",
+            "Associate the template with the Case table and insert data field slugs for case number and customer name — these resolve to actual values when the email is sent",
+            "Use a Power Fx expression in the template body to reference case fields",
+            "Create a separate template for each customer"
+          ],
+          "answer": 1,
+          "explanation": "The template must be <strong>associated with the Case table</strong> to access case fields. <strong>Data field slugs</strong> are inserted for case number (<code>{!incident:ticketnumber}</code>) and customer name — these are replaced with actual record values when an agent uses the template or it is sent by a flow.",
+          "wrongExplanations": [
+            "Static placeholders require manual replacement — defeating the purpose of a template.",
+            null,
+            "Power Fx is for canvas apps and formulas — not email template bodies.",
+            "One template per customer is completely unscalable — dynamic values handle per-customer personalisation."
+          ],
+          "msRef": {
+            "label": "Email template dynamic values",
+            "url": "https://learn.microsoft.com/en-us/power-apps/user/email-template-create"
+          }
+        },
+        {
+          "q": "For requirement 4 — the template must be available to all agents, not just the creator — what configuration change is needed?",
+          "options": [
+            "Share the template record with each agent individually",
+            "Change the template scope from User level to Organisation level",
+            "Add the template to the app in the App Designer",
+            "Publish the template via the solution"
+          ],
+          "answer": 1,
+          "explanation": "Email Templates created at <strong>User level</strong> are only visible to the creator. Changing the scope to <strong>Organisation level</strong> makes the template available to all users in the environment — administrators can promote a user template to organisation level.",
+          "wrongExplanations": [
+            "Individual sharing is unscalable for a team-wide template.",
+            null,
+            "Email templates are not added to apps via the App Designer.",
+            "Solution publishing is for customisations — email template availability is controlled by scope level, not solution deployment."
+          ],
+          "msRef": {
+            "label": "Email template scope",
+            "url": "https://learn.microsoft.com/en-us/power-apps/user/email-template-create"
+          }
+        },
+        {
+          "q": "For issue 5 — the agent sees a field on the form but the value is always blank — what is the most likely cause?",
+          "options": [
+            "The field has no data — all records genuinely have no value for that field",
+            "The agent does not have a Field Security Profile granting Read access on that column — the field is present but its value is hidden",
+            "The field is a Calculated column and the formula has an error",
+            "The field was added to the form but not published"
+          ],
+          "answer": 1,
+          "explanation": "When a column has <strong>Field Security enabled</strong> and a user has no Field Security Profile granting Read access, the field appears on the form but shows <strong>no value</strong> (blank or masked). This is exactly the described symptom — the field is visible but always blank regardless of the record.",
+          "wrongExplanations": [
+            "If all records had no value, the symptom would apply to all users — the fact that it is specific to the new agent points to a security issue.",
+            null,
+            "A Calculated column formula error would typically show an error indicator — not a consistently blank value.",
+            "An unpublished form change would prevent the field from appearing at all for anyone — not just the new agent."
+          ],
+          "msRef": {
+            "label": "Field Security Profile blank value behaviour",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/set-up-security-permissions-field"
+          }
+        }
+      ]
+    }
+  ]
+}

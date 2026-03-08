@@ -183,25 +183,27 @@
       }
     },
     {
-      "q": "When should you NOT use a BPF Action Step and instead use a Power Automate cloud flow?",
+      "q": "When should you use a Flow Step (Preview) in a BPF instead of an Action Step?",
       "options": [
-        "When the operation requires user confirmation before running",
-        "When the operation must run automatically without any user interaction, or involves external connectors outside Dataverse",
-        "When the operation needs to update a field on the current record",
-        "When the operation is specific to one BPF stage"
+        "When the operation must run automatically without any user interaction",
+        "When you want to add a cloud flow directly to a BPF stage with minimal configuration and the environment supports preview features — avoiding the need to create a Dataverse action wrapper",
+        "When the flow needs to run on a schedule rather than on demand",
+        "Flow Step and Action Step are interchangeable — use either"
       ],
       "answer": 1,
       "category": "action-steps",
       "tags": [
-        "when-to-create-action",
-        "action-vs-flow"
+        "flow-step",
+        "action-step",
+        "bpf-step-types",
+        "design-decision"
       ],
-      "explanation": "BPF Action Steps require a <strong>user to trigger them</strong> and are limited to Dataverse actions. When automation must run without user input, or when the logic involves non-Dataverse connectors (SharePoint, Teams, external APIs), a <strong>Power Automate cloud flow</strong> is the right tool.",
+      "explanation": "The <strong>Flow Step (Preview)</strong> is appropriate when you want to add a cloud flow <strong>directly to a BPF stage</strong> without the overhead of creating a Dataverse action wrapper — and you are comfortable with a preview feature. The <strong>Action Step</strong> pattern (action + 'When a Dataverse action is performed' flow subscription) is preferred for production environments where stability matters.",
       "wrongExplanations": [
-        "User confirmation is a valid use case for a BPF Action Step — agents explicitly click the action button.",
+        "Operations without user interaction are better served by automated cloud flow triggers (record created/updated) — not BPF steps which require an agent to click.",
         null,
-        "Updating a current record field is well within BPF Action Step capability.",
-        "Stage-specific operations are exactly what BPF Action Steps are designed for."
+        "Scheduled flows run on a time trigger — not from a BPF stage step at all.",
+        "They are not interchangeable — Flow Step adds the flow directly; Action Step wraps it in a Dataverse action. They have different stability profiles and configuration overhead."
       ],
       "msRef": {
         "label": "BPF action steps vs Power Automate",
@@ -342,23 +344,24 @@
     {
       "q": "What is the maximum number of steps (fields) that can be added to a single BPF stage?",
       "options": [
-        "5",
         "10",
+        "15",
         "20",
         "30"
       ],
-      "answer": 1,
+      "answer": 3,
       "category": "stages",
       "tags": [
         "max-steps",
         "stage-steps",
         "bpf-limits"
       ],
-      "explanation": "Each BPF stage supports a maximum of <strong>10 steps</strong> (data steps / field steps). This encourages keeping each stage focused on a manageable set of inputs rather than overwhelming agents with too many fields per stage.",
+      "explanation": "The maximum is <strong>30 steps per stage</strong> in a Business Process Flow (as documented in the Power Automate BPF guide). A process can also have a maximum of <strong>30 stages</strong> total and span up to <strong>5 entities</strong>.",
       "wrongExplanations": [
-        "5 steps per stage is too restrictive — the limit is 10.",
-        null,
-        "20 and 30 exceed the maximum of 10 steps per stage."
+        "10 is incorrect — the current documented limit is 30 steps per stage.",
+        "15 is not the documented limit.",
+        "20 is not the documented limit.",
+        null
       ],
       "msRef": {
         "label": "BPF steps per stage",
@@ -366,26 +369,27 @@
       }
     },
     {
-      "q": "Can Business Process Flow branch conditions use both AND and OR logic?",
+      "q": "Which logical operators can be used in BPF branch conditions, and what is the key restriction?",
       "options": [
-        "Yes — both AND and OR operators can be combined in BPF branch conditions",
-        "No — BPF conditions only support AND logic; OR requires multiple separate branches",
-        "Yes — but only OR logic is supported, not AND",
-        "No — BPF branches use a simplified equals/not-equals only without Boolean operators"
+        "Only AND logic is supported — OR requires multiple separate branches",
+        "Both AND and OR can be combined freely in a single condition rule",
+        "AND or OR can be used within a single rule, but you cannot mix both AND and OR in the same rule",
+        "Only simple equals/not-equals comparisons are supported — no Boolean operators"
       ],
-      "answer": 0,
+      "answer": 2,
       "category": "conditions",
       "tags": [
+        "branching",
         "conditions",
-        "and-or",
+        "AND-OR",
         "branch-logic"
       ],
-      "explanation": "BPF branch conditions support <strong>both AND and OR operators</strong>. Multiple conditions can be grouped with AND (all must be true) or OR (any must be true), allowing flexible conditional routing logic within the BPF designer.",
+      "explanation": "BPF branch conditions support both <strong>AND</strong> and <strong>OR</strong> operators to combine multiple conditions — but with a key restriction: <strong>you cannot mix AND and OR in the same rule</strong>. A rule can use multiple AND conditions (all must be true) or multiple OR conditions (any must be true), but not both operators together in one rule.",
       "wrongExplanations": [
+        "OR is supported — the restriction is not that OR is unavailable, but that AND and OR cannot be mixed in the same rule.",
+        "AND and OR cannot be combined in the same rule — you must choose one operator per rule.",
         null,
-        "OR logic is also supported — not AND-only.",
-        "AND logic is also supported — not OR-only.",
-        "Both AND, OR, and various comparison operators are available in BPF conditions."
+        "Both AND and OR operators are available, along with comparison operators like equals, contains, greater than, etc."
       ],
       "msRef": {
         "label": "BPF branch conditions",
@@ -525,25 +529,27 @@
       }
     },
     {
-      "q": "What type of workflow can be called from within a Business Process Flow stage?",
+      "q": "Which of the following correctly describes the three types of steps that can be added to a Business Process Flow stage?",
       "options": [
-        "Any Power Automate cloud flow",
-        "Only on-demand (manually triggered) classic workflows bound to the BPF's entity",
-        "Only real-time synchronous workflows",
-        "Any workflow regardless of type or trigger"
+        "Workflow Step (any classic workflow), Action Step (any Dataverse action), Flow Step (any Power Automate flow)",
+        "Workflow Step (on-demand classic workflow bound to the stage entity), Action Step (Dataverse action with BPF flag enabled), Flow Step Preview (solution-aware instant cloud flow using the When a record is selected trigger)",
+        "Workflow Step (real-time workflow), Action Step (scheduled flow), Flow Step (instant flow with any trigger)",
+        "There is only one step type — all automation in a BPF uses classic workflows"
       ],
       "answer": 1,
       "category": "workflows",
       "tags": [
-        "workflows-in-bpf",
-        "on-demand-workflow"
+        "workflow-step",
+        "action-step",
+        "flow-step",
+        "bpf-step-types"
       ],
-      "explanation": "BPF stages can call <strong>on-demand classic workflows</strong> (also called background workflows) that are bound to the same entity as the BPF stage. The workflow must be set as 'Available to Run' as an on-demand process to appear in the BPF workflow step.",
+      "explanation": "BPF stages support three distinct step types: <strong>Workflow Step</strong> — on-demand classic background workflows bound to the stage's entity; <strong>Action Step</strong> — Dataverse actions with 'As a Business Process Flow action step' enabled; and <strong>Flow Step (Preview)</strong> — solution-aware instant cloud flows using the <em>When a record is selected</em> Dataverse trigger. Each has different capabilities and failure behaviour.",
       "wrongExplanations": [
-        "Power Automate cloud flows cannot be directly triggered from a BPF workflow step — that requires a Dataverse action instead.",
+        "Not any classic workflow — it must be on-demand and entity-bound. Not any Dataverse action — BPF flag must be enabled. Not any cloud flow — it must be solution-aware with the correct trigger.",
         null,
-        "Real-time synchronous workflows are not the type used in BPF workflow steps.",
-        "Not all workflow types are supported — only on-demand classic workflows bound to the entity."
+        "Workflow Steps use background (not real-time) workflows. Action Steps are not scheduled flows. Flow Steps require the specific 'When a record is selected' trigger — not any trigger.",
+        "Three distinct step types exist — Workflow Step, Action Step, and Flow Step (Preview)."
       ],
       "msRef": {
         "label": "Workflows in BPF stages",
@@ -734,25 +740,27 @@
       }
     },
     {
-      "q": "A BPF has been activated. An administrator wants to apply it to records created before the BPF was activated. How is this done?",
+      "q": "A BPF has been activated. An administrator wants to apply it to existing records created before the BPF was activated. Which methods can achieve this?",
       "options": [
-        "It cannot be done — BPFs only apply to new records created after activation",
-        "The administrator runs the 'Apply Business Process Flow' bulk operation from the BPF record or via a workflow/flow",
-        "Re-activate the BPF to trigger a retroactive application",
-        "Edit each record manually and click the BPF stage bar to initialise it"
+        "It cannot be done — BPFs only apply to records created after activation",
+        "Run the 'Apply Business Process Flow' bulk operation from the BPF record to apply it to existing records en masse",
+        "Open an individual record, click the Process bar or the '...' menu, and choose Switch Process to manually apply the BPF to that record",
+        "Both B and C are valid — bulk apply for multiple records, Switch Process for individual records"
       ],
-      "answer": 1,
+      "answer": 3,
       "category": "general",
       "tags": [
-        "retroactive-bpf",
+        "bpf-lifecycle",
+        "retroactive",
+        "switch-process",
         "bulk-apply"
       ],
-      "explanation": "Administrators can apply a BPF to existing records by running a <strong>bulk operation</strong> — either through the BPF record's 'Apply Flow' capability or by using a workflow/Power Automate flow that calls the BPF activation action on each qualifying record.",
+      "explanation": "Two methods exist: (1) <strong>Bulk apply</strong> — from the BPF definition record, run 'Apply Business Process Flow' to apply it to all eligible existing records at once. (2) <strong>Switch Process</strong> — open an individual record, click the process bar or the '…' more options menu, and select <em>Switch Process</em> to manually apply (or switch to) the BPF on that specific record. Both are supported.",
       "wrongExplanations": [
-        "It can be done — retroactive application is supported via bulk operations.",
-        null,
-        "Re-activating the BPF does not retroactively create instances on existing records.",
-        "Manually editing each record is impractical at scale — the bulk operation is the designed solution."
+        "BPFs can absolutely be applied retroactively — via bulk apply or Switch Process.",
+        "Bulk apply works but Switch Process is also valid for individual records — the most complete answer covers both.",
+        "Switch Process works for individual records but bulk apply is also available — the most complete answer covers both.",
+        null
       ],
       "msRef": {
         "label": "Apply BPF to existing records",
@@ -877,7 +885,7 @@
         "data-step",
         "bpf-steps"
       ],
-      "explanation": "A <strong>Data Step</strong> in a BPF stage is a specific <strong>entity field</strong> surfaced in the BPF stage bar for agents to view or fill in. It can be marked as Required to gate stage advancement. Up to 10 data steps can be added per stage.",
+      "explanation": "A <strong>Data Step</strong> in a BPF stage is a specific <strong>entity field</strong> surfaced in the BPF stage bar for agents to view or fill in. It can be marked as Required to gate stage advancement. Up to 30 data steps can be added per stage.",
       "wrongExplanations": [
         "Data steps are not migration operations — they are field references on the stage form.",
         null,
@@ -1026,24 +1034,486 @@
       }
     },
     {
-      "q": "True or False: A Business Process Flow can call a Power Automate cloud flow directly as a step within a stage.",
+      "q": "True or False: A Business Process Flow can include a Power Automate cloud flow as a direct stage step using the Flow Step (Preview) component.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "category": "workflows",
+      "tags": [
+        "flow-step",
+        "cloud-flow",
+        "bpf-step-types",
+        "preview-feature"
+      ],
+      "explanation": "<strong>True.</strong> The <strong>Flow Step (Preview)</strong> component in the BPF designer allows a solution-aware instant cloud flow to be added directly as a stage step. The flow must use the <em>When a record is selected</em> trigger from the Dataverse connector and be inside a solution. At runtime the agent sees a <strong>Run Flow</strong> button in the stage bar. Note: this feature has been in Preview since 2019 and may have known bugs.",
+      "wrongExplanations": [
+        null,
+        "The Flow Step (Preview) component enables direct cloud flow steps in BPF stages — though the flow must be solution-aware and use the 'When a record is selected' trigger specifically."
+      ],
+      "msRef": {
+        "label": "BPF step types supported",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "A maker needs a Power Automate cloud flow to run when an agent clicks a button inside a BPF stage. Which of the following are valid approaches? Select the most complete answer.",
+      "options": [
+        "Use a Workflow Step — add the cloud flow as a background workflow in the stage",
+        "Use Flow Step (Preview) — add the solution-aware instant flow directly to the stage using the When a record is selected trigger",
+        "Use an Action Step — create a Dataverse action, enable BPF flag, subscribe a cloud flow to it via When a Dataverse action is performed trigger",
+        "Both B and C are valid approaches — Flow Step (Preview) for direct integration, Action Step pattern for a more stable production approach"
+      ],
+      "answer": 3,
+      "category": "workflows",
+      "tags": [
+        "flow-step",
+        "action-step",
+        "cloud-flow",
+        "bpf-step-types"
+      ],
+      "explanation": "Both approaches are valid: <strong>Flow Step (Preview)</strong> adds the cloud flow directly to the BPF stage — simple but still in preview with known bugs. The <strong>Action Step + 'When a Dataverse action is performed'</strong> pattern is more stable for production — the action is the stage step and the flow subscribes to it. The choice depends on stability requirements and environment maturity.",
+      "wrongExplanations": [
+        "Workflow Steps only support on-demand classic workflows — not cloud flows.",
+        "Flow Step (Preview) is valid but not the only option — the Action Step pattern is also a supported approach.",
+        "The Action Step pattern is valid but not the only option — Flow Step (Preview) also works.",
+        null
+      ],
+      "msRef": {
+        "label": "BPF Action Steps and cloud flows",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "A maker wants a Power Automate cloud flow to run when an agent triggers a BPF Action Step. They create the Dataverse custom action and enable it as a BPF action step. What is the correct way to connect the cloud flow to this action?",
+      "options": [
+        "Add an HTTP Request step inside the custom action that posts to the flow's trigger URL",
+        "In the cloud flow, use the 'When a Dataverse action is performed' trigger and select the custom action — the flow subscribes to the action being fired",
+        "Inside the custom action editor, add a 'Call Cloud Flow' step and select the flow",
+        "Register a plugin on the custom action that calls the flow via the Power Automate REST API"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "action-step",
+        "cloud-flow",
+        "when-action-performed",
+        "trigger"
+      ],
+      "explanation": "The correct pattern is to create a cloud flow with the <strong>'When a Dataverse action is performed'</strong> trigger, pointing at the custom action. The flow <strong>subscribes</strong> to the action — you do not call the flow from inside the action. When the BPF fires the action, Dataverse raises the event and the flow triggers asynchronously. Note: an alternative is the <strong>Flow Step (Preview)</strong> component which adds a cloud flow directly to the BPF stage — but this feature has been in Preview since 2019 with known stability issues.",
+      "wrongExplanations": [
+        "An HTTP Request step inside a classic action editor requires custom plugin steps — it is not available natively in the process designer.",
+        null,
+        "Cloud flows can be involved via two patterns: the Action Step subscription pattern described here, or the Flow Step (Preview) component which adds the flow directly to the stage.",
+        "A plugin approach works but is overkill — the 'When a Dataverse action is performed' trigger is the no-code designed solution."
+      ],
+      "msRef": {
+        "label": "When a Dataverse action is performed trigger",
+        "url": "https://learn.microsoft.com/en-us/power-automate/dataverse/action-trigger"
+      }
+    },
+    {
+      "q": "Why is the 'When a Dataverse action is performed' pattern considered cleaner than an HTTP call from inside the action?",
+      "options": [
+        "It is faster — cloud flows triggered this way run synchronously",
+        "The action stays simple with no connector dependencies — the flow handles all complex logic separately, and the two can be maintained independently",
+        "HTTP calls from actions are not supported in any Dataverse environment",
+        "Cloud flows triggered this way have access to the full Dataverse record automatically"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "action-step",
+        "cloud-flow",
+        "design-pattern"
+      ],
+      "explanation": "The subscription pattern keeps a <strong>clean separation of concerns</strong> — the Dataverse action stays simple (no HTTP endpoints, no connector credentials), and the cloud flow handles complex logic (approvals, Teams messages, external APIs). Either can be updated independently without touching the other.",
+      "wrongExplanations": [
+        "The flow runs <strong>asynchronously</strong> — the action fires and returns immediately; the flow runs in the background.",
+        null,
+        "HTTP calls are technically possible via plugins — the pattern is discouraged for simplicity reasons, not impossibility.",
+        "The flow receives the action's input parameters as trigger outputs — not the full record automatically. Record data must be explicitly passed as action parameters or fetched inside the flow."
+      ],
+      "msRef": {
+        "label": "Dataverse action trigger pattern",
+        "url": "https://learn.microsoft.com/en-us/power-automate/dataverse/action-trigger"
+      }
+    },
+    {
+      "q": "When a cloud flow is triggered via 'When a Dataverse action is performed', does the BPF agent wait for the flow to complete before the Action Step is considered done?",
+      "options": [
+        "Yes — the Action Step is synchronous and blocks until the flow completes",
+        "No — the Dataverse action fires and returns to the agent immediately; the cloud flow runs asynchronously in the background",
+        "It depends on whether the flow is instant or scheduled",
+        "Yes — but only if the flow has a response step configured"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "action-step",
+        "cloud-flow",
+        "async",
+        "user-experience"
+      ],
+      "explanation": "The Dataverse custom action fires and <strong>returns to the agent immediately</strong>. The cloud flow subscription is asynchronous — the flow runs in the background after the action completes. The agent sees the Action Step complete without waiting for the flow to finish.",
+      "wrongExplanations": [
+        "The Action Step itself (the Dataverse action) is synchronous — but the cloud flow it triggers via subscription runs asynchronously.",
+        null,
+        "The trigger type (instant vs scheduled) is irrelevant here — the 'When a Dataverse action is performed' trigger always fires asynchronously.",
+        "A response step would only apply if the flow were called via HTTP with a response — not via the Dataverse action trigger pattern."
+      ],
+      "msRef": {
+        "label": "Async behaviour of Dataverse action trigger",
+        "url": "https://learn.microsoft.com/en-us/power-automate/dataverse/action-trigger"
+      }
+    },
+    {
+      "q": "What is a Global Action (unbound action) in Dataverse, and how does it differ from an entity-bound action?",
+      "options": [
+        "A Global Action runs on all entities simultaneously; an entity-bound action runs on one entity only",
+        "A Global Action is not associated with any specific entity — it operates independently of a record context; an entity-bound action is scoped to a specific entity and typically operates on a record of that type",
+        "A Global Action can only be triggered from Power Automate; entity-bound actions can only be triggered from BPFs",
+        "There is no functional difference — Global and entity-bound are just naming conventions"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "global-action",
+        "unbound-action",
+        "entity-bound"
+      ],
+      "explanation": "A <strong>Global (unbound) Action</strong> has no entity context — it is not scoped to any specific Dataverse table. It can be called from anywhere (BPF, flow, plugin, API) without a record reference. An <strong>entity-bound action</strong> is scoped to a specific entity and receives a record of that type as its primary context.",
+      "wrongExplanations": [
+        "A Global Action does not run on all entities — it runs with no entity context at all.",
+        null,
+        "Both action types can be triggered from BPFs, flows, plugins, and APIs — the distinction is entity context, not trigger method.",
+        "The difference is functionally significant — entity-bound actions receive a record context; global actions do not."
+      ],
+      "msRef": {
+        "label": "Global vs entity-bound actions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/process-actions"
+      }
+    },
+    {
+      "q": "Can a Global (unbound) Dataverse action be used as a BPF Action Step?",
+      "options": [
+        "No — only entity-bound actions can be used as BPF Action Steps",
+        "Yes — a Global action with 'As a Business Process Flow action step' enabled can be added to any BPF stage regardless of the stage's entity",
+        "Yes — but only in the first and last stage of a BPF",
+        "No — Global actions cannot be activated as BPF action steps because they lack an entity context"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "global-action",
+        "unbound-action",
+        "bpf-action-step"
+      ],
+      "explanation": "A <strong>Global action</strong> with 'As a Business Process Flow action step' enabled <strong>can be added to any BPF stage</strong>. Because it is unbound, it is not restricted to a specific entity — it appears as an available Action Step across all stages in the BPF designer.",
+      "wrongExplanations": [
+        "Both entity-bound and global actions can be BPF Action Steps — entity-bound actions appear only in stages matching their entity; global actions appear in all stages.",
+        null,
+        "There is no stage position restriction — a global action can be used in any stage.",
+        "Lack of entity context is precisely what makes global actions flexible — they can be used across any stage entity."
+      ],
+      "msRef": {
+        "label": "Global actions as BPF steps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/process-actions"
+      }
+    },
+    {
+      "q": "When would you choose a Global Action over an entity-bound action for a BPF Action Step?",
+      "options": [
+        "When the logic needs to read or update the current stage's record fields directly",
+        "When the operation is generic and not tied to a specific record — such as sending a notification, logging an event, or triggering a cross-entity process that applies to multiple BPF stages",
+        "Global actions are always preferable because they are more flexible",
+        "When the BPF spans only one entity"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "global-action",
+        "unbound-action",
+        "design-pattern"
+      ],
+      "explanation": "A <strong>Global Action</strong> is the right choice when the logic is <strong>not specific to a particular record</strong> — for example, sending a Teams notification, logging a compliance event, or triggering a cross-entity lookup. For operations that read or update the current stage's record, an <strong>entity-bound action</strong> is more appropriate as it receives the record as context.",
+      "wrongExplanations": [
+        "If the operation needs to interact with the current record, an entity-bound action is the better choice — it receives the record context automatically.",
+        null,
+        "Global actions are not always preferable — entity-bound actions are better when record context is needed.",
+        "The number of entities in the BPF does not determine whether a global or entity-bound action is appropriate."
+      ],
+      "msRef": {
+        "label": "Choosing global vs entity-bound actions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/process-actions"
+      }
+    },
+    {
+      "q": "An entity-bound action is configured for the Case entity and enabled as a BPF Action Step. In which BPF stages does it appear as an available Action Step?",
+      "options": [
+        "All stages in any BPF across the environment",
+        "Only stages in BPFs where the stage's mapped entity is Case",
+        "Only the first stage of any BPF that uses the Case entity as its primary entity",
+        "Any stage in a BPF whose primary entity is Case, regardless of which entity individual stages are mapped to"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "entity-bound",
+        "action-step",
+        "stage-entity"
+      ],
+      "explanation": "An entity-bound action for Case appears only in BPF stages that are <strong>mapped to the Case entity</strong>. In a multi-entity BPF, only the stages explicitly on the Case entity show this action as an option — stages on other entities do not.",
+      "wrongExplanations": [
+        "Entity-bound actions are scoped to their entity — they do not appear in stages on other entities.",
+        null,
+        "The action appears in all Case-mapped stages, not only the first stage.",
+        "Entity binding follows the stage entity, not just the primary entity of the BPF."
+      ],
+      "msRef": {
+        "label": "Entity-bound action stage availability",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/process-actions"
+      }
+    },
+    {
+      "q": "True or False: A Global Action used as a BPF Action Step automatically receives the current record's ID as context when triggered from a BPF stage.",
       "options": [
         "True",
         "False"
       ],
       "answer": 1,
-      "category": "workflows",
+      "category": "action-steps",
       "tags": [
-        "cloud-flow",
-        "bpf-step"
+        "global-action",
+        "record-context",
+        "input-parameters"
       ],
-      "explanation": "<strong>False.</strong> BPF stages cannot directly call Power Automate cloud flows. BPF stages support <strong>classic on-demand workflows</strong> (as workflow steps) and <strong>Dataverse actions with BPF action step enabled</strong>. Cloud flows can be triggered indirectly via a Dataverse action that starts a flow.",
+      "explanation": "<strong>False.</strong> A Global Action has <strong>no implicit record context</strong> — it does not automatically receive the current record's ID. If the action needs to interact with the current record, the record reference must be <strong>explicitly passed as an EntityReference input parameter</strong> configured in the BPF Action Step.",
       "wrongExplanations": [
-        "Cloud flows cannot be directly called from a BPF stage step — use a Dataverse action or workflow instead.",
+        "Global actions are unbound — record context must be explicitly passed via input parameters, not received automatically.",
         null
       ],
       "msRef": {
-        "label": "BPF step types supported",
+        "label": "Global action record context",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/process-actions"
+      }
+    },
+    {
+      "q": "What are the specific requirements for a cloud flow to be eligible for use as a Flow Step (Preview) in a Business Process Flow?",
+      "options": [
+        "Any published cloud flow in the environment can be added as a Flow Step",
+        "The flow must be solution-aware (inside a solution) and must use the 'When a record is selected' trigger from the Dataverse connector",
+        "The flow must be an instant flow with a manual trigger and no input parameters",
+        "The flow must be owned by the System Administrator account"
+      ],
+      "answer": 1,
+      "category": "action-steps",
+      "tags": [
+        "flow-step",
+        "solution-aware",
+        "when-record-selected",
+        "requirements"
+      ],
+      "explanation": "For a Flow Step (Preview), the cloud flow must meet two requirements: (1) it must be <strong>solution-aware</strong> — created inside a Dataverse solution (not in My Flows), and (2) it must use the <strong>'When a record is selected'</strong> trigger from the Dataverse connector. This trigger provides BPF context (instance ID, stage name, entity record ID) to the flow automatically.",
+      "wrongExplanations": [
+        "Not any flow — it must be solution-aware and use the specific 'When a record is selected' trigger.",
+        null,
+        "The 'When a record is selected' trigger is required — a generic manual trigger does not provide BPF context.",
+        "Flow ownership by System Administrator is not a requirement — the flow just needs to be solution-aware."
+      ],
+      "msRef": {
+        "label": "Flow Step requirements",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "When a cloud flow is triggered via the Flow Step (Preview) in a BPF, what context does it automatically receive from the BPF?",
+      "options": [
+        "No context — the flow must use a Get Record action to fetch all data it needs",
+        "Only the current user's ID",
+        "The BPF instance ID, active stage ID and name, stage entity name, and the entity record ID of the current stage's record — via the trigger payload",
+        "The full record of the primary entity as a JSON object"
+      ],
+      "answer": 2,
+      "category": "action-steps",
+      "tags": [
+        "flow-step",
+        "bpf-context",
+        "when-record-selected"
+      ],
+      "explanation": "The <strong>'When a record is selected'</strong> trigger automatically passes rich BPF context to the flow including: <code>BPFInstanceId</code>, <code>BPFDefinitionId</code>, <code>BPFActiveStageId</code>, <code>BPFActiveStageLocalizedName</code>, <code>BPFFlowStageEntityName</code>, and <code>BPFFlowStageEntityRecordId</code>. The flow can use these to retrieve related records and take stage-aware actions.",
+      "wrongExplanations": [
+        "Rich context is passed automatically via the trigger payload — no manual Get Record is needed just for BPF context (though Get Record may still be used for related data).",
+        "Much more than just the user ID is passed — full BPF instance and stage context is included.",
+        null,
+        "The trigger passes IDs and metadata — not a full serialised JSON record. A Get Record action is used to fetch full record data using the provided entity record ID."
+      ],
+      "msRef": {
+        "label": "Flow Step BPF context",
+        "url": "https://learn.microsoft.com/en-us/power-platform/blog/power-automate/preview-instant-flow-steps-in-business-process-flows/"
+      }
+    },
+    {
+      "q": "What is the maximum branch depth allowed in a Business Process Flow?",
+      "options": [
+        "5 levels deep",
+        "10 levels deep",
+        "15 levels deep",
+        "Unlimited — there is no depth restriction"
+      ],
+      "answer": 1,
+      "category": "branching",
+      "tags": [
+        "branching",
+        "branch-depth",
+        "bpf-limits"
+      ],
+      "explanation": "Each branch in a BPF can be no more than <strong>10 levels deep</strong>. This limits how many nested conditional branches can exist within a single process path.",
+      "wrongExplanations": [
+        "5 is not the documented limit.",
+        null,
+        "15 exceeds the documented limit of 10.",
+        "There is a depth limit of 10 levels."
+      ],
+      "msRef": {
+        "label": "BPF branch depth limit",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "What is the rule for merging peer branches in a Business Process Flow?",
+      "options": [
+        "Branches can merge into different stages — each branch can converge at its own target stage",
+        "All peer branches must merge to a single shared stage, or all must end the process — a peer branch cannot both merge with some branches and end the process simultaneously",
+        "Branches must always end the process — merging back to a shared stage is not supported",
+        "Merging is optional — branches that do not merge simply run in parallel indefinitely"
+      ],
+      "answer": 1,
+      "category": "branching",
+      "tags": [
+        "branching",
+        "branch-merge",
+        "peer-branches"
+      ],
+      "explanation": "BPF branching has a strict merge rule: <strong>all peer branches must merge to a single stage</strong>, or they must all end the process. A peer branch cannot partially merge — it cannot merge with some branches while the others end the process. This ensures the process has a clear convergence point.",
+      "wrongExplanations": [
+        "All peer branches must converge at the same single stage — not different stages per branch.",
+        null,
+        "Branches can merge back — merging to a shared continuation stage is fully supported.",
+        "Branches do not run in parallel — they follow a conditional path and must resolve at a convergence point or process end."
+      ],
+      "msRef": {
+        "label": "BPF branch merging rules",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "Can multiple Business Process Flows be active on the same record simultaneously?",
+      "options": [
+        "No — only one BPF can be active on a record at a time; activating a second one deactivates the first",
+        "Yes — multiple active BPFs can run concurrently on the same record",
+        "Yes — but only if the BPFs are on different entities",
+        "No — a record can have multiple BPFs available but only one can ever be started"
+      ],
+      "answer": 1,
+      "category": "bpf-fundamentals",
+      "tags": [
+        "concurrent-bpf",
+        "multiple-active",
+        "bpf-instances"
+      ],
+      "explanation": "<strong>Multiple active Business Process Flows can run concurrently on the same record.</strong> Each BPF creates its own instance (stored in the BPF's Dataverse entity). This allows a record to simultaneously progress through, for example, a Sales Process BPF and a Compliance Review BPF at the same time.",
+      "wrongExplanations": [
+        "Multiple BPFs can be active simultaneously — activating a second BPF does not deactivate the first.",
+        null,
+        "Multiple concurrent BPFs can operate on the same entity and record — not just different entities.",
+        "Multiple BPFs can both be started and active — they run as separate instances."
+      ],
+      "msRef": {
+        "label": "Multiple active BPFs",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "A BPF is designed to span multiple entities. The same entity (e.g. Opportunity) is used in both Stage 2 and Stage 7 of the same process. Is this allowed?",
+      "options": [
+        "No — each entity can only appear once in a BPF; using the same entity twice causes a validation error",
+        "Yes — a process can revisit a table multiple times, known as a closed entity loop",
+        "Yes — but only if the two stages using the same entity are in separate branches",
+        "No — BPF stages must always progress to a new entity; returning to a previous entity is not supported"
+      ],
+      "answer": 1,
+      "category": "bpf-fundamentals",
+      "tags": [
+        "closed-entity-loop",
+        "multi-entity",
+        "bpf-design"
+      ],
+      "explanation": "BPFs support <strong>closed entity loops</strong> — the same table can be used in multiple stages of the same process. For example, Opportunity could appear in Stage 2 and Stage 7 of the same BPF. Each stage still creates its own context but references the same entity type.",
+      "wrongExplanations": [
+        "Revisiting an entity is explicitly supported — it is called a closed entity loop.",
+        null,
+        "Closed entity loops are not restricted to separate branches — they can occur in the main flow.",
+        "Returning to a previously used entity is fully supported."
+      ],
+      "msRef": {
+        "label": "BPF closed entity loops",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "An agent is on Stage 4 (Present Proposal) of a BPF but needs to go back to Stage 2 (Identify Needs) to do more research. What can they do?",
+      "options": [
+        "They cannot go back — BPF stages can only move forward",
+        "They must abandon the current BPF and start a new instance from Stage 1",
+        "They can click the Stage 2 (Identify Needs) chevron in the process bar and choose Set Active to make it the active stage",
+        "They can only go back one stage at a time using the Previous button"
+      ],
+      "answer": 2,
+      "category": "bpf-fundamentals",
+      "tags": [
+        "set-active",
+        "stage-navigation",
+        "previous-stage"
+      ],
+      "explanation": "A <strong>process can return to any previous stage regardless of table type</strong>. The agent clicks the earlier stage chevron in the BPF bar (e.g. Identify Needs) and selects <strong>Set Active</strong> — this makes that stage the current active stage. The process does not need to be abandoned or restarted.",
+      "wrongExplanations": [
+        "Going back to previous stages is fully supported via Set Active.",
+        "Abandoning the BPF is not required — Set Active on any previous stage achieves this.",
+        null,
+        "There is no 'Previous button' restriction — any earlier stage can be made active directly."
+      ],
+      "msRef": {
+        "label": "BPF stage navigation and Set Active",
+        "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
+      }
+    },
+    {
+      "q": "When configuring a multi-entity BPF, what type of table relationship must exist between entities used in consecutive stages?",
+      "options": [
+        "A Many-to-Many (N:N) relationship",
+        "A Many-to-One (N:1) relationship from child to parent",
+        "A One-to-Many (1:N) relationship between the tables",
+        "No relationship is required — the BPF designer handles the linking automatically"
+      ],
+      "answer": 2,
+      "category": "bpf-fundamentals",
+      "tags": [
+        "multi-entity",
+        "relationship",
+        "1N",
+        "bpf-design"
+      ],
+      "explanation": "When spanning multiple entities in a BPF, the table relationship used must be a <strong>1:N (One-to-Many) relationship</strong>. The BPF uses this relationship to navigate between entity records as the process progresses through stages on different tables.",
+      "wrongExplanations": [
+        "N:N relationships are not used for BPF entity spanning — 1:N is required.",
+        "The relationship is defined as 1:N — N:1 is the same relationship viewed from the other side but the BPF configuration requires selecting the 1:N relationship.",
+        null,
+        "A 1:N relationship must explicitly exist and be selected — it is not handled automatically."
+      ],
+      "msRef": {
+        "label": "Multi-entity BPF relationships",
         "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
       }
     }
@@ -1526,7 +1996,7 @@
     },
     {
       "title": "Northwind Traders — Sales BPF Design Review",
-      "scenario": "Northwind Traders' CRM administrator is reviewing a proposed Business Process Flow design for their enterprise sales process. The architect has submitted a design document with the following specifications:\n\n- <strong>Primary entity:</strong> Opportunity\n- <strong>Total stages:</strong> 32\n- <strong>Stage 5</strong> has 12 data steps\n- The BPF spans <strong>6 entities:</strong> Lead, Opportunity, Quote, Order, Invoice, and Contract\n- Stage 8 has a branch with a <strong>single condition</strong> checking if Deal Size > 100000\n- Stage 8 Branch A (large deals) has 3 stages; Branch B (standard) has 2 stages — both converge at Stage 12\n- A Power Automate cloud flow is listed as a step in Stage 10 to send an approval email\n- An on-demand classic workflow is listed as an exit step on Stage 14\n\nThe administrator must identify all design violations before development begins.",
+      "scenario": "Northwind Traders' CRM administrator is reviewing a proposed Business Process Flow design for their enterprise sales process. The architect has submitted a design document with the following specifications:\n\n- <strong>Primary entity:</strong> Opportunity\n- <strong>Total stages:</strong> 32\n- <strong>Stage 5</strong> has 35 data steps\n- The BPF spans <strong>6 entities:</strong> Lead, Opportunity, Quote, Order, Invoice, and Contract\n- Stage 8 has a branch with a <strong>single condition</strong> checking if Deal Size > 100000\n- Stage 8 Branch A (large deals) has 3 stages; Branch B (standard) has 2 stages — both converge at Stage 12\n- A Power Automate cloud flow is listed as a step in Stage 10 to send an approval email (the flow is solution-aware and uses the correct trigger)\n- An on-demand classic workflow is listed as an exit step on Stage 14\n\nThe administrator must identify all design violations before development begins.",
       "tags": [
         "bpf-limits",
         "design-review",
@@ -1547,12 +2017,12 @@
             "4 violations"
           ],
           "answer": 2,
-          "explanation": "There are <strong>3 violations</strong>: (1) 32 stages exceeds the 30-stage maximum, (2) Stage 5 has 12 data steps which exceeds the 10-step-per-stage maximum, and (3) 6 entities exceeds the 5-entity maximum per BPF. The branch design, condition, and classic workflow are all valid.",
+          "explanation": "There are <strong>3 violations</strong>: (1) 32 stages exceeds the <strong>30-stage maximum</strong>, (2) Stage 5 has 35 data steps which exceeds the <strong>30-step-per-stage maximum</strong>, and (3) 6 entities exceeds the <strong>5-entity maximum</strong> per BPF. The branch design, single condition, classic workflow exit step, and solution-aware Flow Step are all valid.",
           "wrongExplanations": [
-            "There are more than 1 violation.",
-            "There are more than 2 violations.",
+            "There is more than one violation — stages, steps per stage, and entity count all exceed limits.",
+            "Two violations misses the entity count issue — all three must be identified.",
             null,
-            "4 violations would require the classic workflow or branch to also be invalid — they are both valid configurations."
+            "Four violations overstates — the branch, condition, workflow, and Flow Step are all valid designs."
           ],
           "msRef": {
             "label": "BPF design limits reference",
@@ -1623,20 +2093,20 @@
           }
         },
         {
-          "q": "Stage 5 has 12 data steps. What is the maximum allowed and what is the recommended fix?",
+          "q": "Stage 5 has 35 data steps. What is the maximum allowed and what is the recommended fix?",
           "options": [
-            "Maximum is 15 — Stage 5 is within limits",
-            "Maximum is 10 — remove 2 data steps; consider whether some fields can be moved to the entity form instead",
-            "Maximum is 8 — remove 4 data steps",
-            "Maximum is 10 — the stage must be split into two separate stages to accommodate all 12 fields"
+            "Maximum is 30 — Stage 5 is within limits",
+            "Maximum is 30 — remove 5 data steps; move less critical fields to the entity main form instead",
+            "Maximum is 10 — remove 25 data steps",
+            "Maximum is 30 — the stage must be split into two stages to accommodate all 35 fields"
           ],
           "answer": 1,
-          "explanation": "The maximum is <strong>10 data steps per stage</strong>. Stage 5 has 12 — 2 must be removed from the BPF. The recommended approach is to review which fields are most critical for stage gating and move less critical ones to the main entity form where agents can still access them.",
+          "explanation": "The maximum is <strong>30 data steps per stage</strong>. Stage 5 has 35 — 5 must be removed from the BPF stage bar. The recommended approach is to identify which fields are critical for stage gating and move the less important ones to the entity's main form, where agents can still see and edit them without cluttering the BPF bar.",
           "wrongExplanations": [
-            "The maximum is 10, not 15.",
+            "35 steps exceeds the 30-step maximum — this is a violation.",
             null,
-            "The maximum is 10, not 8.",
-            "Splitting into two stages is an option but is not the minimum required change — removing 2 steps is simpler if the remaining 10 are well-chosen."
+            "The limit is 30 — not 10. This was a previously documented figure that has since been updated.",
+            "Splitting stages is an option but not required — removing 5 steps from Stage 5 resolves the violation without restructuring."
           ],
           "msRef": {
             "label": "BPF data steps per stage limit",
