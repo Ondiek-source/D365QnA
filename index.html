@@ -1215,7 +1215,7 @@ function checkDragDrop(){
   renderDragDrop(q);
   const status=full?'correct':partial?'partial':'wrong';
   const msg=full?q.explanation:`${correctCount}/${total} items correctly placed. ${q.explanation||''}`;
-  showFeedback(status,msg,ptsActual,q.pts*total/total,q.msRef);
+  showFeedback(status,msg,ptsActual,q.pts,q.msRef);
   document.getElementById('btnNext').className='btn-next show';
   document.getElementById('btnSkip').className='btn-skip hide';
   saveDraft();
@@ -1285,7 +1285,7 @@ function showFeedback(status,explanation,ptsEarned,ptsMax,msRef){
   lbl.textContent=labelMap[status]||'';
   document.getElementById('fbBody').innerHTML=explanation||'';
   const pts=document.getElementById('fbPts');
-  pts.innerHTML=`<span style="color:${status==='correct'?'var(--correct)':status==='partial'?'var(--warn)':'var(--wrong)'}">+${Math.round(ptsEarned)} pts</span> <span style="color:var(--muted)">/ ${ptsMax} possible</span>`;
+  pts.innerHTML=`<span style="color:${status==='correct'?'var(--correct)':status==='partial'?'var(--warn)':'var(--wrong)'}">+${Math.round(ptsEarned)} pts</span> <span style="color:var(--muted)">/ ${Math.round(ptsMax)} possible</span>`;
   if(msRef){
     const a=document.getElementById('msRefBtn');
     a.href=msRef.url; a.style.display='inline-flex';
