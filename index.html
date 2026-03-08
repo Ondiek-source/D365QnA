@@ -799,7 +799,7 @@ function buildSession(bank){
 
   // Pick case study scenarios — each scenario contributes all its sub-questions as a block
   const csPool=shuffle(bank.casestudy||[]);
-  const csBlocks=[]; // each entry = array of flattened sub-question objects
+  const csBlocks=[];
   let csCount=0;
   for(const cs of csPool){
     if(csCount>=CONFIG.COUNTS.casestudy) break;
@@ -812,30 +812,47 @@ function buildSession(bank){
       scenarioTitle:cs.title,
       csTotalSubs:cs.questions.length,
       csSubIdx:si,
-      pts:CONFIG.POINTS.casestudy,
+      // pts assigned below after scaling
       tags:cs.tags||sq.tags||[],
       msRef:sq.msRef||cs.msRef||null
     }));
     csBlocks.push(block);
     csCount+=cs.questions.length;
   }
+  const csFlat=csBlocks.flat();
 
-  // Build a flat non-CS pool (MCQ + DD individually shuffled)
+  // ── Dynamic point scaling ──────────────────────────────────────────────────
+  // Target: MCQ=60% of 1000, DD=30%, CS=10% regardless of pool depth
+  // If pool < CONFIG target, scale points up so the total stays 1000
+  const TARGET_TOTAL = CONFIG.MAX_SCORE;
+  const mcqTarget  = TARGET_TOTAL * 0.60; // 600
+  const ddTarget   = TARGET_TOTAL * 0.30; // 300
+  const csTarget   = TARGET_TOTAL * 0.10; // 100
+
+  const ptsMCQ  = mcq.length  ? mcqTarget / mcq.length  : CONFIG.POINTS.mcq;
+  const ptsDD   = dd.length   ? ddTarget  / dd.length   : CONFIG.POINTS.dragdrop;
+  const ptsCS   = csFlat.length ? csTarget / csFlat.length : CONFIG.POINTS.casestudy;
+
+  // Build a flat non-CS pool
   const nonCS=[];
-  mcq.forEach(q=>nonCS.push({...q,type:'mcq',pts:CONFIG.POINTS.mcq}));
-  dd.forEach(q=>nonCS.push({...q,type:'dragdrop',pts:CONFIG.POINTS.dragdrop}));
-  // Shuffle the non-CS items
+  mcq.forEach(q=>nonCS.push({...q,type:'mcq',pts:ptsMCQ}));
+  dd.forEach(q=>nonCS.push({...q,type:'dragdrop',pts:ptsDD}));
   shuffle(nonCS);
 
-  // Splice each CS block into a random position in the nonCS array
-  // so scenario blocks appear at varied points but remain internally ordered
+  // Assign CS pts and splice blocks into random positions
   csBlocks.forEach(block=>{
+    block.forEach(q=>q.pts=ptsCS);
     const pos=Math.floor(Math.random()*(nonCS.length+1));
     nonCS.splice(pos,0,...block);
   });
 
-  // Assign final indices
-  return nonCS.map((q,i)=>({...q,qIdx:i}));
+  // Store per-type max in the queue metadata so results screen can read it
+  const meta={ mcqMax:mcqTarget, ddMax:ddTarget, csMax:csTarget,
+               mcqCount:mcq.length, ddCount:dd.length, csCount:csFlat.length };
+
+  const queue=nonCS.map((q,i)=>({...q,qIdx:i}));
+  queue._meta=meta; // non-enumerable-friendly attachment
+  return queue;
 }
 
 /* ═══════════════════════════════════════
@@ -849,9 +866,11 @@ async function selectTopic(topicId){
     const bank=await loadQuestions(topicId);
     const topic=CONFIG.TOPICS.find(t=>t.id===topicId);
     const questions=buildSession(bank);
+    const scoreMeta=questions._meta||{mcqMax:600,ddMax:300,csMax:100};
     QS={
       topicId, topicTitle:topic.title,
       questions,
+      scoreMeta,
       current:0,
       answers:new Array(questions.length).fill(null),
       flags:new Set(),
@@ -861,9 +880,7 @@ async function selectTopic(topicId){
       timerSecs:CONFIG.SESSION_MINUTES*60,
       timerInterval:null,
       finished:false,
-      // drag state
       dragSource:null,
-      // dd answers per question idx
       ddPlacements:{},
     };
     loading(false);
@@ -1100,20 +1117,22 @@ function renderDragDrop(q){
     const placed=q.items.filter(item=>placements[item]===zone);
     let zCls='dd-zone';
     if(answered){
-      // check correctness per zone
       const correct=placed.every(item=>q.correctMapping[item]===zone);
       const allCorrectHere=q.items.filter(item=>q.correctMapping[item]===zone).every(item=>placements[item]===zone);
       if(correct&&allCorrectHere) zCls+=' zone-correct';
       else if(!correct) zCls+=' zone-wrong';
       else zCls+=' zone-partial';
     }
-    return `<div class="${zCls}" id="zone_${zone.replace(/\s+/g,'_')}"
-      ondragover="ddDragOver(event,'${zone}')"
-      ondragleave="ddDragLeave(event,'${zone}')"
-      ondrop="ddDrop(event,'${zone}')">
+    const zoneKey=zone.replace(/\s+/g,'_');
+    return `<div class="${zCls}" id="zone_${zoneKey}"
+      data-zone="${zone.replace(/"/g,'&quot;')}"
+      ondragover="ddDragOver(event,this)"
+      ondragleave="ddDragLeave(event,this)"
+      ondrop="ddDrop(event,this)">
       <div class="dd-zone-label">${zone}</div>
       ${placed.map(item=>`
-        <div class="dd-placed-item" onclick="${answered?'':`ddRemove('${item}','${zone}')`}">
+        <div class="dd-placed-item" data-item="${item.replace(/"/g,'&quot;')}" data-zone="${zone.replace(/"/g,'&quot;')}"
+          onclick="${answered?'':'ddRemoveEl(this)'}">
           <span>${item}</span>
           ${answered?'':'<span class="remove-x">✕</span>'}
         </div>`).join('')}
@@ -1122,8 +1141,9 @@ function renderDragDrop(q){
 
   const unplacedItems=q.items.filter(item=>!placements[item]);
   const poolHtml=unplacedItems.map(item=>`
-    <div class="dd-item" draggable="${answered?'false':'true'}" id="dditem_${item.replace(/\s+/g,'_')}"
-      ondragstart="ddDragStart(event,'${item}')"
+    <div class="dd-item" draggable="${answered?'false':'true'}" id="dditem_${item.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'')}"
+      data-item="${item.replace(/"/g,'&quot;')}"
+      ondragstart="ddDragStart(event,this)"
       ondragend="ddDragEnd(event)">
       <span class="dd-drag-handle">⠿</span>
       <span>${item}</span>
@@ -1151,26 +1171,28 @@ function renderDragDrop(q){
     </div>`;
 }
 
-function ddDragStart(e,item){ QS.dragSource=item; e.target.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',item); }
+function ddDragStart(e,el){ const item=el.dataset.item; QS.dragSource=item; el.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',item); }
 function ddDragEnd(e){ e.target.classList.remove('dragging'); QS.dragSource=null; }
-function ddDragOver(e,zone){ e.preventDefault(); e.dataTransfer.dropEffect='move'; document.getElementById('zone_'+zone.replace(/\s+/g,'_')).classList.add('drag-over'); }
-function ddDragLeave(e,zone){ document.getElementById('zone_'+zone.replace(/\s+/g,'_')).classList.remove('drag-over'); }
-function ddDrop(e,zone){
+function ddDragOver(e,el){ e.preventDefault(); e.dataTransfer.dropEffect='move'; el.classList.add('drag-over'); }
+function ddDragLeave(e,el){ el.classList.remove('drag-over'); }
+function ddDrop(e,el){
   e.preventDefault();
+  el.classList.remove('drag-over');
+  const zone=el.dataset.zone;
   const item=e.dataTransfer.getData('text/plain')||QS.dragSource;
-  if(!item) return;
-  document.getElementById('zone_'+zone.replace(/\s+/g,'_')).classList.remove('drag-over');
-  const qIdx=QS.current;
-  if(!QS.ddPlacements[qIdx]) QS.ddPlacements[qIdx]={};
-  // Remove from previous zone if any
-  delete QS.ddPlacements[qIdx][item];
-  QS.ddPlacements[qIdx][item]=zone;
-  renderDragDrop(QS.questions[qIdx]);
+  if(!item||!zone) return;
+  QS.ddPlacements[QS.current]=QS.ddPlacements[QS.current]||{};
+  // remove from previous zone if any
+  const prev=QS.ddPlacements[QS.current][item];
+  if(prev===zone) return;
+  QS.ddPlacements[QS.current][item]=zone;
+  renderDragDrop(QS.questions[QS.current]);
 }
-function ddRemove(item,zone){
-  const qIdx=QS.current;
-  delete QS.ddPlacements[qIdx][item];
-  renderDragDrop(QS.questions[qIdx]);
+function ddRemoveEl(el){
+  const item=el.dataset.item;
+  if(!item) return;
+  if(QS.ddPlacements[QS.current]) delete QS.ddPlacements[QS.current][item];
+  renderDragDrop(QS.questions[QS.current]);
 }
 
 function checkDragDrop(){
@@ -1331,6 +1353,7 @@ async function finishQuiz(timedOut){
     topicId:QS.topicId, topicTitle:QS.topicTitle,
     totalScore:Math.round(QS.totalScore),
     scoreBreakdown:{...QS.scoreBreakdown},
+    scoreMeta:{...QS.scoreMeta},
     passed:QS.totalScore>=CONFIG.PASSING_SCORE,
     elapsed, timedOut,
     date:new Date().toISOString(),
@@ -1369,7 +1392,9 @@ async function finishQuiz(timedOut){
    RESULTS
 ═══════════════════════════════════════ */
 function renderResults(session,allSessions,timedOut,elapsed){
-  const{topicId,topicTitle,totalScore,scoreBreakdown,passed,tagStats,answers}=session;
+  const{topicId,topicTitle,totalScore,scoreBreakdown,scoreMeta,passed,tagStats,answers}=session;
+  // Fallback for sessions saved before scoreMeta existed
+  const meta=scoreMeta||{mcqMax:600,ddMax:300,csMax:100};
   document.getElementById('resTopic').textContent=topicTitle;
 
   const circle=document.getElementById('scoreCircle');
@@ -1401,9 +1426,9 @@ function renderResults(session,allSessions,timedOut,elapsed){
   const mins=Math.floor(elapsed/60),secs=elapsed%60;
   document.getElementById('resTimeTaken').textContent=timedOut?'⏱ Session ended — time expired':`⏱ Completed in ${mins}m ${secs}s`;
 
-  document.getElementById('bdMcq').textContent=Math.round(scoreBreakdown.mcq)+'/600';
-  document.getElementById('bdDd').textContent=Math.round(scoreBreakdown.dragdrop)+'/300';
-  document.getElementById('bdCs').textContent=Math.round(scoreBreakdown.casestudy)+'/100';
+  document.getElementById('bdMcq').textContent=Math.round(scoreBreakdown.mcq)+'/'+Math.round(meta.mcqMax);
+  document.getElementById('bdDd').textContent=Math.round(scoreBreakdown.dragdrop)+'/'+Math.round(meta.ddMax);
+  document.getElementById('bdCs').textContent=Math.round(scoreBreakdown.casestudy)+'/'+Math.round(meta.csMax);
 
   // CI across all sessions
   const ts=allSessions.filter(s=>s.topicId===topicId);
@@ -1617,6 +1642,7 @@ async function saveDraft(){
     topicId: QS.topicId,
     topicTitle: QS.topicTitle,
     questions: QS.questions,
+    scoreMeta: QS.scoreMeta,
     current: QS.current,
     answers: QS.answers,
     flags: [...QS.flags],
@@ -1650,6 +1676,7 @@ async function resumeSession(){
     topicId: draft.topicId,
     topicTitle: draft.topicTitle,
     questions: draft.questions,
+    scoreMeta: draft.scoreMeta||{mcqMax:600,ddMax:300,csMax:100},
     current: draft.current,
     answers: draft.answers,
     flags: new Set(draft.flags||[]),
