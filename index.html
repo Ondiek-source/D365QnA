@@ -804,7 +804,7 @@ function buildSession(bank){
   const csBlocks=[];
   let csCount=0;
   for(const cs of csPool){
-    if(csCount>=CONFIG.COUNTS.casestudy) break;
+    if(csCount>=15) break;
     const blockId=`cs_${csBlocks.length}`;
     const block=cs.questions.map((sq,si)=>({
       ...sq,
