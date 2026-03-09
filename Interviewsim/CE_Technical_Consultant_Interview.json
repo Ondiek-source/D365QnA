@@ -1,14 +1,17 @@
 {
   "pack_name": "KPMG CRM Technical Specialist Technical Interview Pack",
-  "version": "1.1",
-  "created_utc": "2026-03-09T23:04:25.495895Z",
+  "version": "1.2",
+  "created_utc": "2026-03-09T23:43:34.921184+00:00",
   "target_role": "Dynamics 365 Customer Engagement Technical Consultant / CRM Technical Specialist",
   "interview_style": "hard-technical-panel",
-  "duration_minutes": 60,
+  "duration_minutes": 120,
   "notes": [
     "Built for high-pressure technical screening and interview rehearsal.",
     "Emphasis on D365 CE, Dataverse, integrations, security, testing, and ALM.",
-    "Includes MCQs, deep technical prompts, case studies, and scoring rules."
+    "Includes MCQs, deep technical prompts, case studies, and scoring rules.",
+    "Rebalanced to approximate a real 2-hour technical interview.",
+    "Question pools are tagged by interview_type so an engine can select by ratio.",
+    "ALM remains heavily represented in both subject matter and scenario layers."
   ],
   "scoring_model": {
     "scale_min": 0,
@@ -32,7 +35,7 @@
   ],
   "sections": [
     {
-      "section_name": "MCQ",
+      "section_name": "Subject Matter - MCQ",
       "questions": [
         {
           "id": "MCQ-001",
@@ -51,7 +54,8 @@
             "Why not post-operation?",
             "What are the performance risks of synchronous processing?",
             "How would you avoid recursion?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-002",
@@ -69,7 +73,8 @@
           "follow_up_probes": [
             "When would pre-validation be preferable?",
             "Why can too much logic in-transaction be dangerous?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-003",
@@ -87,7 +92,8 @@
           "follow_up_probes": [
             "When is cloud flow better?",
             "How do you explain the difference to a functional consultant?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-004",
@@ -105,7 +111,8 @@
           "follow_up_probes": [
             "When do owner teams help?",
             "What happens when BU design is wrong early?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-005",
@@ -123,7 +130,8 @@
           "follow_up_probes": [
             "Why not unmanaged in production?",
             "How do environment variables and connection references fit?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-006",
@@ -141,7 +149,8 @@
           "follow_up_probes": [
             "How would you secure secrets?",
             "How would you handle timeouts and idempotency?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-007",
@@ -159,7 +168,8 @@
           "follow_up_probes": [
             "How would you migrate lookups safely?",
             "How do you reconcile source vs target totals?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-008",
@@ -177,7 +187,8 @@
           "follow_up_probes": [
             "What review checklist would you use?",
             "What should block a merge?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-009",
@@ -195,7 +206,8 @@
           "follow_up_probes": [
             "When does JavaScript become the wrong choice?",
             "How do you avoid over-customising the client?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-010",
@@ -213,7 +225,8 @@
           "follow_up_probes": [
             "When would paginated reports or SSRS still be preferable?",
             "What security concerns would you raise?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-011",
@@ -231,7 +244,8 @@
           "follow_up_probes": [
             "What is wrong with relying only on depth?",
             "How else would you redesign the pattern?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-012",
@@ -249,7 +263,8 @@
           "follow_up_probes": [
             "Give one example where the simplest option is wrong.",
             "How do you defend the decision to an architect?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-013",
@@ -267,7 +282,8 @@
           "follow_up_probes": [
             "How would you recover from an already-drifted production environment?",
             "What emergency process would you define instead?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-014",
@@ -285,7 +301,8 @@
           "follow_up_probes": [
             "What should never be hardcoded?",
             "Where should secrets live?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-015",
@@ -303,7 +320,8 @@
           "follow_up_probes": [
             "What does rollback actually mean in a Power Platform context?",
             "What evidence must your pipeline retain?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "MCQ-016",
@@ -321,12 +339,13 @@
           "follow_up_probes": [
             "What exactly do you unit test in a plugin?",
             "What should be validated after deployment?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         }
       ]
     },
     {
-      "section_name": "Open Technical Drill Questions",
+      "section_name": "Subject Matter - Deep Technical Drill Questions",
       "questions": [
         {
           "id": "OPEN-001",
@@ -346,7 +365,8 @@
           "killer_followups": [
             "Give one realistic example for each stage.",
             "When would post-operation synchronous be preferable?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-002",
@@ -366,7 +386,8 @@
           "killer_followups": [
             "Apply that framework to skills-based case routing.",
             "Apply it again to SLA breach notifications."
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-003",
@@ -389,7 +410,8 @@
             "How do you stop prod drift?",
             "How do you handle solution dependencies across teams?",
             "How do you package emergency changes without bypassing governance?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-004",
@@ -408,7 +430,8 @@
           "killer_followups": [
             "What exactly do you unit test in a plugin?",
             "What is your minimum release gate before production?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-005",
@@ -428,7 +451,8 @@
           "killer_followups": [
             "What would you never leave ambiguous?",
             "How do you review offshore output before integration?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-006",
@@ -446,7 +470,8 @@
           "killer_followups": [
             "What would you recommend for regulatory reporting?",
             "What would you avoid putting directly on the transactional platform?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-007",
@@ -465,7 +490,8 @@
           "killer_followups": [
             "What breaks if the BU hierarchy mirrors the org chart too literally?",
             "How do you handle cross-region collaboration without collapsing boundaries?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "OPEN-008",
@@ -486,12 +512,203 @@
           "killer_followups": [
             "What would make you reject the weekend cutover?",
             "How do you stop flows/plugins from corrupting bulk load?"
+          ],
+          "interview_type": "subject_matter"
+        },
+        {
+          "id": "OPEN-009",
+          "domain": "Dataverse",
+          "difficulty": "hard",
+          "interview_type": "subject_matter",
+          "question": "Explain how you would model a case management data structure in Dataverse where cases can have multiple complainants, multiple respondents, evidence items, decisions, and appeals without creating an unmaintainable relational mess.",
+          "expected_points": [
+            "Core table boundaries",
+            "Appropriate one-to-many and many-to-many choices",
+            "Avoiding overloading the Case table",
+            "Lifecycle/state handling",
+            "Referential integrity",
+            "Performance and supportability"
+          ],
+          "killer_followups": [
+            "Which relationships would you avoid and why?",
+            "How would your model affect reporting and security?"
+          ]
+        },
+        {
+          "id": "OPEN-010",
+          "domain": "Custom APIs / Actions",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "When would you use a custom API instead of a plugin step, cloud flow, or JavaScript for a D365 CE solution?",
+          "expected_points": [
+            "Explicit reusable server-side operations",
+            "Clear contract-based execution",
+            "Invoked from apps or integrations",
+            "Better than UI-only logic",
+            "Maintainability and discoverability",
+            "Security considerations"
+          ],
+          "killer_followups": [
+            "Give a concrete example from case routing or entitlement validation.",
+            "Why would a plugin alone be less clean?"
+          ]
+        },
+        {
+          "id": "OPEN-011",
+          "domain": "Performance",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "What are the most common performance mistakes in D365 CE custom solutions and how do you design around them?",
+          "expected_points": [
+            "Heavy synchronous plugins",
+            "Excessive retrieves or updates",
+            "Poor filtering attribute usage",
+            "Chatty client-side scripting",
+            "Flow sprawl and trigger storms",
+            "Bad query/report design",
+            "Large form load impact"
+          ],
+          "killer_followups": [
+            "Which of these is hardest to spot early?",
+            "How would you prove where the bottleneck is?"
+          ]
+        },
+        {
+          "id": "OPEN-012",
+          "domain": "Field Service",
+          "difficulty": "hard",
+          "interview_type": "subject_matter",
+          "question": "What technical design concerns change when moving from standard Customer Service case management into Field Service and inspection-driven workflows?",
+          "expected_points": [
+            "Work order and service task model",
+            "Scheduling/resource considerations",
+            "Mobile or offline implications",
+            "Asset/location relationships",
+            "Inspection data capture",
+            "Security and operational ownership"
+          ],
+          "killer_followups": [
+            "What integration patterns become more important in Field Service?",
+            "What would you avoid over-customising?"
+          ]
+        },
+        {
+          "id": "OPEN-013",
+          "domain": "Security",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "Explain owner teams versus access teams in Dataverse like you are defending a security design decision to a client architect.",
+          "expected_points": [
+            "Ownership and record-level implications",
+            "Sharing/collaboration use cases",
+            "Administrative overhead",
+            "Scaling considerations",
+            "Why they are not interchangeable"
+          ],
+          "killer_followups": [
+            "When does access-team-heavy design become a mess?",
+            "When would owner teams still not solve the full requirement?"
+          ]
+        },
+        {
+          "id": "OPEN-014",
+          "domain": "ALM",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "What is your branching model for a D365 CE programme with parallel feature work, UAT fixes, and production hotfixes? Explain it clearly.",
+          "expected_points": [
+            "Main or trunk baseline",
+            "Feature branches",
+            "Release branch or controlled promotion path",
+            "Hotfix branch handling",
+            "Back-merge strategy",
+            "PR discipline"
+          ],
+          "killer_followups": [
+            "Where do UAT-only fixes go first?",
+            "How do you stop long-lived branches from rotting?"
+          ]
+        },
+        {
+          "id": "OPEN-015",
+          "domain": "ALM",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "How do you version and package plugins, flows, apps, and solution components so support teams can tell exactly what is deployed where?",
+          "expected_points": [
+            "Solution versioning discipline",
+            "Build identifiers",
+            "Release logs",
+            "Artifact traceability",
+            "Environment inventory or reporting",
+            "Support handover visibility"
+          ],
+          "killer_followups": [
+            "How do you answer 'what changed last Friday' in under five minutes?",
+            "What breaks when this traceability is missing?"
+          ]
+        },
+        {
+          "id": "OPEN-016",
+          "domain": "Testing",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "How would you test a plugin that depends on execution context, pre-images, post-images, security context, and external integration calls?",
+          "expected_points": [
+            "Unit isolation of logic",
+            "Mocking or stubbing execution context",
+            "Testing image-dependent behavior",
+            "Service abstraction for external calls",
+            "Negative path tests",
+            "Integration test boundaries"
+          ],
+          "killer_followups": [
+            "What would you never try to prove only with UAT?",
+            "How do you stop tests becoming useless ceremony?"
+          ]
+        },
+        {
+          "id": "OPEN-017",
+          "domain": "Reporting / BI",
+          "difficulty": "hard",
+          "interview_type": "subject_matter",
+          "question": "How do you decide whether a KPI should live in Dataverse views or dashboards, Power BI, or a downstream reporting store?",
+          "expected_points": [
+            "Operational vs analytical use",
+            "Latency and refresh needs",
+            "Data shaping complexity",
+            "User audience",
+            "Performance impact",
+            "Governance and audit needs"
+          ],
+          "killer_followups": [
+            "What should never be forced into a live transactional dashboard?",
+            "When do you build a reporting store?"
+          ]
+        },
+        {
+          "id": "OPEN-018",
+          "domain": "Integration",
+          "difficulty": "very_hard",
+          "interview_type": "subject_matter",
+          "question": "Compare Logic Apps, Power Automate, Azure Functions, and Service Bus in a D365 CE integration landscape. Do not answer vaguely.",
+          "expected_points": [
+            "Workflow orchestration differences",
+            "Enterprise integration and throughput considerations",
+            "Custom code and transformation needs",
+            "Queueing and decoupling use cases",
+            "Ops and monitoring trade-offs",
+            "Maintainability considerations"
+          ],
+          "killer_followups": [
+            "Which would you choose for a resilient asynchronous back-office sync and why?",
+            "When is Power Automate the wrong answer even if it works?"
           ]
         }
       ]
     },
     {
-      "section_name": "Case Studies",
+      "section_name": "Scenario / Problem-Solving",
       "questions": [
         {
           "id": "CASE-001",
@@ -520,7 +737,8 @@
             "No audit/explainability model",
             "No support model for supervisors",
             "No answer on scalability"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-002",
@@ -549,7 +767,8 @@
             "No secret handling plan",
             "No degraded-mode UX",
             "No timeout strategy"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-003",
@@ -575,7 +794,8 @@
             "No separation of record and field security",
             "No admin/support model",
             "Over-simplified org-wide access"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-004",
@@ -601,7 +821,8 @@
             "No source control discipline",
             "No configuration portability model",
             "No answer on hotfix governance"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-005",
@@ -627,7 +848,8 @@
             "No reconciliation approach",
             "No cutover rehearsal",
             "No exception management"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-006",
@@ -652,7 +874,8 @@
             "Dogmatic always-code or never-code answer",
             "No framework for tool selection",
             "No supportability argument"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-007",
@@ -677,7 +900,8 @@
             "Direct unmanaged edits in production as first choice",
             "No controlled communication path",
             "No separation between incident response and future governance"
-          ]
+          ],
+          "interview_type": "scenario_problem_solving"
         },
         {
           "id": "CASE-008",
@@ -703,7 +927,231 @@
             "Single giant unmanaged solution with no ownership",
             "No shared-component governance",
             "No branch or merge discipline"
+          ],
+          "interview_type": "scenario_problem_solving"
+        },
+        {
+          "id": "CASE-009",
+          "domain": "Entitlements / SLA",
+          "difficulty": "very_hard",
+          "interview_type": "scenario_problem_solving",
+          "scenario": "A client wants entitlement-driven support where premium customers get faster SLAs, specialized queues, and automatic escalation to senior agents after repeated reopenings. They also want exceptions for government-regulated complaints.",
+          "candidate_task": "Design the entitlement and SLA architecture in D365 CE, including exceptions, route overrides, reopen behavior, and operational reporting.",
+          "must_cover": [
+            "Entitlement model",
+            "SLA KPIs and pause or resume logic",
+            "Reopen handling",
+            "Queue or routing override strategy",
+            "Exception handling",
+            "Reporting and supervisor controls"
+          ],
+          "killer_followups": [
+            "Where would you place exception logic?",
+            "How would you stop this from becoming rule spaghetti?"
+          ],
+          "fail_triggers": [
+            "No distinction between customer tier and complaint type handling",
+            "No reporting or control model",
+            "No supportability plan"
           ]
+        },
+        {
+          "id": "CASE-010",
+          "domain": "Copilot / AI Governance",
+          "difficulty": "hard",
+          "interview_type": "scenario_problem_solving",
+          "scenario": "A client wants Copilot-style assistance for agents summarizing case history, suggesting next actions, and drafting responses. The data includes sensitive citizen information and legal notes.",
+          "candidate_task": "Design a safe implementation approach covering data boundaries, security, auditability, human review, and where AI suggestions should and should not be trusted.",
+          "must_cover": [
+            "Human-in-the-loop design",
+            "Sensitive data boundaries",
+            "Role-based visibility",
+            "Auditability and logging",
+            "Prompt or output risk control",
+            "Operational rollout approach"
+          ],
+          "killer_followups": [
+            "What should never be auto-sent?",
+            "How would you explain hallucination risk to a client without sounding alarmist?"
+          ],
+          "fail_triggers": [
+            "Blind trust in AI-generated output",
+            "No security or audit discussion",
+            "No phased rollout strategy"
+          ]
+        },
+        {
+          "id": "CASE-011",
+          "domain": "Environment Strategy",
+          "difficulty": "very_hard",
+          "interview_type": "scenario_problem_solving",
+          "scenario": "A client keeps using UAT as both a testing environment and a demo environment for executives. Test data gets polluted, release confidence is falling, and each demo drives last-minute configuration changes.",
+          "candidate_task": "Propose an environment and governance strategy that reduces chaos without doubling cost unnecessarily.",
+          "must_cover": [
+            "Environment purpose clarity",
+            "Release discipline",
+            "Demo data handling",
+            "Change freeze logic",
+            "Approval paths",
+            "Risk and cost trade-offs"
+          ],
+          "killer_followups": [
+            "What if they refuse to pay for another environment?",
+            "How do you protect UAT integrity in the meantime?"
+          ],
+          "fail_triggers": [
+            "No governance solution",
+            "No cost-aware trade-off",
+            "Assumes infinite environments"
+          ]
+        },
+        {
+          "id": "CASE-012",
+          "domain": "Support Model",
+          "difficulty": "hard",
+          "interview_type": "scenario_problem_solving",
+          "scenario": "After go-live, the client blames every operational issue on 'Dynamics' even when root cause is integration latency, poor master data, or unsupported process workarounds.",
+          "candidate_task": "Design a support and triage model that separates platform defects, integration failures, user issues, and data-quality problems while maintaining client trust.",
+          "must_cover": [
+            "Incident categorization",
+            "Ownership boundaries",
+            "Monitoring or logging inputs",
+            "Service reporting",
+            "Escalation path",
+            "Feedback into backlog or improvement"
+          ],
+          "killer_followups": [
+            "How do you stop the support desk becoming a political dumping ground?",
+            "What metrics would you show the client monthly?"
+          ],
+          "fail_triggers": [
+            "No operational ownership separation",
+            "No measurable service view",
+            "No triage process"
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Behavioral Proof",
+      "questions": [
+        {
+          "id": "BEH-001",
+          "domain": "Behavioral Proof / Technical Leadership",
+          "difficulty": "hard",
+          "interview_type": "behavioral_proof",
+          "question": "Tell me about a time you pushed back on a bad technical design or unrealistic delivery demand. What exactly did you do and what was the outcome?",
+          "expected_points": [
+            "Clear context",
+            "Technical risk identified",
+            "How pushback was framed",
+            "Alternative proposed",
+            "Outcome or result",
+            "Lesson learned"
+          ],
+          "killer_followups": [
+            "How did you avoid sounding obstructive?",
+            "What would you do differently now?"
+          ],
+          "recommended_answer_style": "compact_STAR"
+        },
+        {
+          "id": "BEH-002",
+          "domain": "Behavioral Proof / Delivery Failure",
+          "difficulty": "hard",
+          "interview_type": "behavioral_proof",
+          "question": "Describe a technical delivery problem that went wrong under your watch. I want the uncomfortable version, not the polished one.",
+          "expected_points": [
+            "Ownership",
+            "What failed",
+            "How it was detected",
+            "Immediate response",
+            "Recovery actions",
+            "Preventive change afterwards"
+          ],
+          "killer_followups": [
+            "What part was your fault?",
+            "What process did you change because of it?"
+          ],
+          "recommended_answer_style": "compact_STAR"
+        },
+        {
+          "id": "BEH-003",
+          "domain": "Behavioral Proof / Offshore Collaboration",
+          "difficulty": "hard",
+          "interview_type": "behavioral_proof",
+          "question": "Give me an example of handing work to another team or remote developers where quality could easily have slipped. How did you keep control without micromanaging?",
+          "expected_points": [
+            "Work package clarity",
+            "Acceptance criteria",
+            "Review or control points",
+            "Communication rhythm",
+            "Issue handling",
+            "Result"
+          ],
+          "killer_followups": [
+            "What did you leave too vague initially?",
+            "How did you catch quality issues early?"
+          ],
+          "recommended_answer_style": "compact_STAR"
+        },
+        {
+          "id": "BEH-004",
+          "domain": "Behavioral Proof / Stakeholders",
+          "difficulty": "hard",
+          "interview_type": "behavioral_proof",
+          "question": "Tell me about a time business stakeholders wanted speed and the technical reality demanded discipline. How did you handle the tension?",
+          "expected_points": [
+            "Business pressure context",
+            "Risk explanation",
+            "Negotiation or reframing",
+            "Decision reached",
+            "Outcome",
+            "Relationship impact"
+          ],
+          "killer_followups": [
+            "Did you ever lose that argument?",
+            "How do you decide when to compromise?"
+          ],
+          "recommended_answer_style": "compact_STAR"
+        },
+        {
+          "id": "BEH-005",
+          "domain": "Behavioral Proof / Learning Curve",
+          "difficulty": "hard",
+          "interview_type": "behavioral_proof",
+          "question": "Tell me about a technical area you were initially weak in but had to get good at fast to deliver.",
+          "expected_points": [
+            "Specific skill gap",
+            "Why it mattered",
+            "How learning happened",
+            "How competence was validated",
+            "Delivery outcome"
+          ],
+          "killer_followups": [
+            "What did you misunderstand at first?",
+            "How do you avoid fake confidence in unfamiliar areas?"
+          ],
+          "recommended_answer_style": "compact_STAR"
+        },
+        {
+          "id": "BEH-006",
+          "domain": "Behavioral Proof / Standards",
+          "difficulty": "hard",
+          "interview_type": "behavioral_proof",
+          "question": "Describe a time you had to enforce better engineering or ALM discipline on a team that preferred shortcuts.",
+          "expected_points": [
+            "Nature of the shortcut problem",
+            "Why it was risky",
+            "Standards introduced",
+            "Resistance encountered",
+            "Outcome and lasting change"
+          ],
+          "killer_followups": [
+            "How did you win buy-in?",
+            "What if the deadline pressure was real?"
+          ],
+          "recommended_answer_style": "compact_STAR"
         }
       ]
     },
@@ -727,7 +1175,8 @@
           "killer_followups": [
             "Where do unmanaged solutions belong and where do they not?",
             "How do you stop tribal deployment knowledge?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-002",
@@ -744,7 +1193,8 @@
           "killer_followups": [
             "What have you seen teams hardcode that they should never hardcode?",
             "What breaks when environment-specific values live in solution logic?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-003",
@@ -762,7 +1212,8 @@
           "killer_followups": [
             "When do you choose rollback instead of forward-fix?",
             "How do you stop emergency fixes from bypassing quality permanently?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-004",
@@ -781,7 +1232,8 @@
           "killer_followups": [
             "What is your minimum acceptable evidence before deploy?",
             "What would block the release outright?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-005",
@@ -798,7 +1250,8 @@
           "killer_followups": [
             "When is a shared core solution justified?",
             "How do you stop dependency explosions?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-006",
@@ -815,7 +1268,8 @@
           "killer_followups": [
             "When would uninstalling a managed solution be unsafe?",
             "When does full environment restore become justified?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-007",
@@ -833,7 +1287,8 @@
           "killer_followups": [
             "How do you manage service connections and credentials?",
             "Where do deployment runbooks live?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         },
         {
           "id": "ALM-008",
@@ -851,7 +1306,8 @@
           "killer_followups": [
             "What if business refuses a freeze window?",
             "How do you communicate risk without sounding dramatic?"
-          ]
+          ],
+          "interview_type": "subject_matter"
         }
       ]
     },
@@ -883,5 +1339,47 @@
         ]
       }
     }
-  ]
+  ],
+  "interview_mix": {
+    "subject_matter_target_percent": "60-70",
+    "scenario_problem_solving_target_percent": "20-30",
+    "behavioral_proof_target_percent": "10-20"
+  },
+  "timing_guidance": {
+    "estimated_total_minutes": 120,
+    "estimated_minutes_per_mcq": 2,
+    "estimated_minutes_per_subject_matter_deep_question": 5,
+    "estimated_minutes_per_scenario_case": 8,
+    "estimated_minutes_per_behavioral_question": 5,
+    "suggested_live_interview_mix": {
+      "subject_matter_questions": 14,
+      "scenario_problem_solving_questions": 5,
+      "behavioral_proof_questions": 3
+    },
+    "approximate_coverage": {
+      "subject_matter_percent": 65,
+      "scenario_problem_solving_percent": 23,
+      "behavioral_proof_percent": 12
+    }
+  },
+  "interview_flow": {
+    "purpose": "Lets an interview engine select questions by ratio instead of fixed section order.",
+    "recommended_order": [
+      "subject_matter",
+      "subject_matter",
+      "scenario_problem_solving",
+      "subject_matter",
+      "behavioral_proof"
+    ],
+    "selection_rules": {
+      "subject_matter_pool_size": 42,
+      "scenario_problem_solving_pool_size": 12,
+      "behavioral_proof_pool_size": 6,
+      "avoid_same_domain_back_to_back": true,
+      "prefer_ALM_at_least_twice": true,
+      "force_one_integration_case": true,
+      "force_one_security_or_data_case": true,
+      "force_one_behavioral_failure_question": true
+    }
+  }
 }

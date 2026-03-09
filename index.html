@@ -859,9 +859,9 @@ const CONFIG = {
   INTERVIEW_PACKS: [
     {
       id:'technicalconsultant',
-      title:'Technical Consultant',
+      title:'D365 CE Technical Consultant',
       icon:'🎯',
-      desc:'Technical panel simulation for Dynamics 365 CE / CRM Technical Consultant preparation.',
+      desc:'',
       file:'interviewsim/CE_Technical_Consultant_Interview.json'
     }
   ],
@@ -2803,7 +2803,7 @@ function rpJump(idx){ RP.current=idx; renderReplayQuestion(); window.scrollTo(0,
 const IS = { packs: CONFIG.INTERVIEW_PACKS||[], pack:null, packId:null, currentSection:0, currentQuestion:0, reveal:false };
 
 function escapeHtml(str){
-  return String(str??'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));
+  return String(str??'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
 function showInterviewSim(){
@@ -2820,15 +2820,9 @@ function renderInterviewSimGrid(){
     card.onclick=()=>loadInterviewPack(pack.id);
     card.innerHTML=`
       <div class="topic-head">
-        <div class="topic-icon">${pack.icon||'🎯'}</div>
         <div>
           <div class="topic-title">${pack.title}</div>
-          <div class="topic-desc">${pack.desc||''}</div>
         </div>
-      </div>
-      <div class="topic-meta">
-        <span class="topic-chip">Interview Sim</span>
-        <span class="topic-chip">${(pack.file||'').split('/').pop()}</span>
       </div>`;
     grid.appendChild(card);
   });
@@ -2858,14 +2852,23 @@ async function loadInterviewPack(packId){
 }
 
 function getInterviewSections(){
-  return (IS.pack?.sections||[]).filter(s=>Array.isArray(s.questions)||s.agent_rules);
+  return (IS.pack?.sections||[]).filter(s=>Array.isArray(s.questions)||Array.isArray(s.agent_rules));
 }
 
 function getInterviewItems(section){
   if(!section) return [];
   if(Array.isArray(section.questions)) return section.questions;
-  if(section.agent_rules) return [{id:'agent-rules', type:'agent_rules', ...section.agent_rules}];
+  if(Array.isArray(section.agent_rules)) return section.agent_rules.map((rule, idx)=>({id:`RULE-${idx+1}`, type:'agent_rule', ...rule}));
   return [];
+}
+
+function inferInterviewItemKind(item){
+  if(!item) return 'unknown';
+  if(item.type==='agent_rule') return 'agent_rule';
+  if(item.options && typeof item.options==='object') return 'mcq';
+  if(item.scenario && item.candidate_task) return 'case';
+  if(item.expected_points) return 'open';
+  return 'open';
 }
 
 function setInterviewSection(idx){
@@ -2911,64 +2914,78 @@ function renderInterviewPack(){
   const section=sections[IS.currentSection];
   const items=getInterviewItems(section);
   const item=items[Math.min(IS.currentQuestion, Math.max(0,items.length-1))]||null;
+  const itemKind = inferInterviewItemKind(item);
+
   document.getElementById('isPackTitle').textContent=pack.target_role || pack.pack_name || 'Interview Pack';
   document.getElementById('isPackMeta').innerHTML=`${escapeHtml(pack.pack_name||'')} • ${escapeHtml(pack.interview_style||'Interview Simulation')} • ${escapeHtml(String(pack.duration_minutes||''))}${pack.duration_minutes?' mins':''}`;
-  document.getElementById('isPackNotes').innerHTML=(pack.notes||[]).map(n=>`<span class="topic-chip">${escapeHtml(n)}</span>`).join('');
+
+  const noteChips=[...(pack.notes||[])].map(n=>`<span class="topic-chip">${escapeHtml(n)}</span>`);
+  if(pack.interview_mix){
+    noteChips.push(`<span class="topic-chip">SME ${escapeHtml(pack.interview_mix.subject_matter_target_percent||'')}</span>`);
+    noteChips.push(`<span class="topic-chip">Scenario ${escapeHtml(pack.interview_mix.scenario_problem_solving_target_percent||'')}</span>`);
+    noteChips.push(`<span class="topic-chip">Behavioral ${escapeHtml(pack.interview_mix.behavioral_proof_target_percent||'')}</span>`);
+  }
+  document.getElementById('isPackNotes').innerHTML=noteChips.join('');
+
   const rubric=pack.scoring_model?.rubric||{};
+  const flow = pack.interview_flow || {};
+  const timing = pack.timing_guidance || {};
   document.getElementById('isScoringBox').innerHTML=`
-    <div class="ci-title" style="margin-bottom:10px">Scoring Model</div>
-    <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:10px">Scale: ${escapeHtml(String(pack.scoring_model?.scale_min ?? 0))} to ${escapeHtml(String(pack.scoring_model?.scale_max ?? 5))}. Use this to grade your answer quality under pressure.</div>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">${Object.entries(rubric).map(([k,v])=>`<div class="bd-cell" style="padding:10px 12px"><div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--accent);margin-bottom:4px">${escapeHtml(k)}</div><div style="font-size:11px;color:var(--muted2);line-height:1.7">${escapeHtml(v)}</div></div>`).join('')}</div>`;
+    <div class="ci-title" style="margin-bottom:10px">Scoring Model & Flow</div>
+    <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:10px">Scale: ${escapeHtml(String(pack.scoring_model?.scale_min ?? 0))} to ${escapeHtml(String(pack.scoring_model?.scale_max ?? 5))}. ${escapeHtml(flow.purpose||'Use this to grade your answer quality under pressure.')}</div>
+    ${Object.keys(rubric).length?`<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px">${Object.entries(rubric).map(([k,v])=>`<div class="bd-cell" style="padding:10px 12px"><div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--accent);margin-bottom:4px">${escapeHtml(k)}</div><div style="font-size:11px;color:var(--muted2);line-height:1.7">${escapeHtml(v)}</div></div>`).join('')}</div>`:''}
+    ${flow.recommended_order?.length?`<div class="ci-card" style="padding:12px 14px;margin-bottom:10px"><div class="ci-title" style="margin-bottom:6px">Recommended Order</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${flow.recommended_order.map(x=>escapeHtml(x)).join(' → ')}</div></div>`:''}
+    ${Object.keys(timing).length?`<div class="ci-card" style="padding:12px 14px"><div class="ci-title" style="margin-bottom:6px">Timing Guidance</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${Object.entries(timing).map(([k,v])=>`<div><strong style="color:var(--text)">${escapeHtml(k.replaceAll('_',' '))}:</strong> ${escapeHtml(String(v))}</div>`).join('')}</div></div>`:''}`;
 
   document.getElementById('isSectionTabs').innerHTML=sections.map((s,idx)=>`<button class="nav-btn ${idx===IS.currentSection?'active-nav':''}" onclick="setInterviewSection(${idx})">${escapeHtml(s.section_name||'Section')}</button>`).join('');
   document.getElementById('isSectionInfo').innerHTML=`
     <div style="margin-bottom:8px"><strong style="color:var(--text)">${escapeHtml(section?.section_name||'Section')}</strong></div>
-    <div>Question ${Math.min(IS.currentQuestion+1, Math.max(1,items.length))} of ${items.length||0}</div>
+    <div>Prompt ${Math.min(IS.currentQuestion+1, Math.max(1,items.length))} of ${items.length||0}</div>
     <div style="margin-top:8px">Global probes: ${(pack.global_probe_rules||[]).length}</div>
     <div style="margin-top:8px">Current domain: ${escapeHtml(item?.domain||'General')}</div>
-    <div style="margin-top:8px">Difficulty: ${escapeHtml(item?.difficulty||'mixed')}</div>`;
+    <div style="margin-top:8px">Difficulty: ${escapeHtml(item?.difficulty||'mixed')}</div>
+    <div style="margin-top:8px">Interview type: ${escapeHtml(item?.interview_type||itemKind)}</div>`;
 
   const reveal=IS.reveal;
   let html='';
   if(!item){
-    html='<div class="question-text">No interview prompts found in this section.</div>'
-  } else if(item.type==='agent_rules'){
-    html=`<div class="q-meta-row"><div class="q-tag-chip">Runtime Rules</div><div class="q-tag-chip">Voice / Panel Guidance</div></div>
-      <div class="question-text">Voice AI Runtime Rules</div>
-      <div style="color:var(--muted2);font-size:12px;line-height:1.8;margin-bottom:16px">These rules define how the interview simulator should pressure-test answers.</div>
-      <div class="ci-card" style="padding:16px 18px">
-        <div style="font-size:12px;color:var(--muted2);line-height:1.8"><strong style="color:var(--text)">Tone:</strong> ${escapeHtml(item.tone||'')}</div>
-        <div style="font-size:12px;color:var(--muted2);line-height:1.8"><strong style="color:var(--text)">Probe depth per question:</strong> ${escapeHtml(String(item.probe_depth_per_question||''))}</div>
-        <div style="font-size:12px;color:var(--muted2);line-height:1.8"><strong style="color:var(--text)">Interrupt after seconds:</strong> ${escapeHtml(String(item.interrupt_if_waffling_after_seconds||''))}</div>
-        <div style="margin-top:12px"><strong style="color:var(--text)">Marking dimensions</strong><ul style="margin:8px 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.marking_dimensions||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
-        <div style="margin-top:12px"><strong style="color:var(--text)">Auto-fail conditions</strong><ul style="margin:8px 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.auto_fail_conditions||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
-      </div>`;
-  } else if(section.section_name==='MCQ'){
+    html='<div class="question-text">No interview prompts found in this section.</div>';
+  } else if(itemKind==='agent_rule'){
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">Runtime Rule</div></div>
+      <div class="question-text">${escapeHtml(item.rule||item.title||'Runtime Rule')}</div>
+      <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.description||item.guidance||item.value||JSON.stringify(item))}</div></div>`;
+  } else if(itemKind==='mcq'){
     const opts=Object.entries(item.options||{}).map(([k,v])=>`<div class="option ${reveal && k===item.correct_answer?'correct':''}" style="cursor:default"><div class="opt-letter">${escapeHtml(k)}</div><div>${escapeHtml(v)}</div></div>`).join('');
     html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
       <div class="question-text">${escapeHtml(item.question||'')}</div>
       <div style="margin-bottom:16px">${opts}</div>
       ${reveal?`<div class="feedback-panel show fp-correct"><div class="fb-label c">Correct answer: ${escapeHtml(item.correct_answer||'')}</div><div class="fb-body">${escapeHtml(item.why||'')}</div><div class="fb-pts">Use the follow-up probes below to pressure-test yourself.</div></div>`:''}
       ${reveal && item.follow_up_probes?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Follow-up Probes</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.follow_up_probes.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
-  } else if(section.section_name==='Case Studies'){
+  } else if(itemKind==='case'){
     html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
-      <div class="question-text">Case Study</div>
+      <div class="question-text">Scenario / Problem-Solving</div>
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Scenario</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.scenario||'')}</div></div>
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Candidate Task</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.candidate_task||'')}</div></div>
       ${reveal?`<div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Must Cover</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.must_cover||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.killer_followups||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
-      <div class="ci-card" style="padding:16px 18px"><div class="ci-title" style="margin-bottom:8px">Fail Triggers</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.fail_triggers||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
+      <div class="ci-card" style="padding:16px 18px"> <div class="ci-title" style="margin-bottom:8px">Fail Triggers</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.fail_triggers||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
   } else {
-    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'General')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
       <div class="question-text">${escapeHtml(item.question||'')}</div>
       ${reveal && item.expected_points?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Expected Points</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.expected_points.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}
-      ${reveal && item.killer_followups?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.killer_followups.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
+      ${reveal && item.killer_followups?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.killer_followups.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}
+      ${reveal && item.recommended_answer_style?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Recommended Answer Style</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.recommended_answer_style)}</div></div>`:''}`;
+  }
+
+  if(pack.global_probe_rules?.length){
+    html += `<div class="ci-card" style="padding:16px 18px;margin-top:16px"><div class="ci-title" style="margin-bottom:8px">Global Probe Rules</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${pack.global_probe_rules.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`;
   }
 
   document.getElementById('isQuestionBlock').innerHTML=html;
   document.getElementById('isRevealBtn').textContent = reveal ? 'Hide Guidance' : 'Reveal Guidance';
   document.getElementById('isPrevBtn').disabled = IS.currentSection===0 && IS.currentQuestion===0;
-  const atEnd = IS.currentSection===sections.length-1 && IS.currentQuestion===Math.max(0,items.length-1);
+  const lastSectionItems=getInterviewItems(sections[sections.length-1]||null);
+  const atEnd = IS.currentSection===sections.length-1 && IS.currentQuestion===Math.max(0,lastSectionItems.length-1);
   document.getElementById('isNextBtn').disabled = atEnd;
 }
 
