@@ -1189,7 +1189,11 @@
         "Configure route-to-queue rules": "Sends work items to the right queue or fallback queue",
         "Configure assignment rulesets": "Defines custom assignment logic beyond out-of-box methods"
       },
-      "tags": ["setup", "record-routing", "routing-design"],
+      "tags": [
+        "setup",
+        "record-routing",
+        "routing-design"
+      ],
       "explanation": "Provisioning enables the capability, table queue-enablement makes records routable, the workstream defines the channel routing context, route-to-queue picks the queue, and assignment rulesets control custom assignment behavior.",
       "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
     },
@@ -1216,7 +1220,11 @@
         "Update skill control": "Lets representatives add or remove skills at runtime for assigned work items",
         "Intelligent Skill Finder": "Uses machine learning to predict skills"
       },
-      "tags": ["skills", "isf", "runtime"],
+      "tags": [
+        "skills",
+        "isf",
+        "runtime"
+      ],
       "explanation": "Skill setup starts with skill types, specific skills are created under them, proficiency is modeled with a rating model, runtime editing uses the update skill control, and ISF predicts skills via machine learning.",
       "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
     },
@@ -1243,7 +1251,11 @@
         "Sentiment Category": "The output attribute used in later routing logic",
         "Dry run": "An option to test phrases and inspect score, category, and keywords"
       },
-      "tags": ["sentiment", "machine-learning", "classification"],
+      "tags": [
+        "sentiment",
+        "machine-learning",
+        "classification"
+      ],
       "explanation": "Sentiment prediction is preview, uses a seven-point classification scale, looks at customer messages, stores output in Sentiment Category, and can be tested with Dry run.",
       "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
     },
@@ -1270,7 +1282,11 @@
         "Overflow": "Behavior used when queue limits or thresholds are reached",
         "Preferred representative routing": "Routes work from a contact toward a preferred representative or relationship manager"
       },
-      "tags": ["queues", "overflow", "preferred-agent"],
+      "tags": [
+        "queues",
+        "overflow",
+        "preferred-agent"
+      ],
       "explanation": "These are distinct queue-related behaviors: fallback handles unmatched items, private/public control queue visibility, overflow handles threshold conditions, and preferred representative routing supports personalized assignment.",
       "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
     },
@@ -1297,7 +1313,11 @@
         "Basic routing rulesets": "Legacy/older approach that Microsoft says unified routing is recommended over for automatic record routing",
         "Unified routing FAQ": "A role-based reference for admins, supervisors, and representatives"
       },
-      "tags": ["foundational", "faq", "basic-routing"],
+      "tags": [
+        "foundational",
+        "faq",
+        "basic-routing"
+      ],
       "explanation": "Classification precedes assignment, machine learning can enrich work items during classification, Microsoft recommends unified routing over legacy basic routing for automatic record routing, and the FAQ is written for multiple role audiences.",
       "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
     },
@@ -1324,7 +1344,12 @@
         "Queue-enabled table": "Prerequisite for routing a record type",
         "Update skill control": "Runtime skill editing toggle"
       },
-      "tags": ["diagnostics", "preview", "runtime", "records"],
+      "tags": [
+        "diagnostics",
+        "preview",
+        "runtime",
+        "records"
+      ],
       "explanation": "This separates what is current guidance from what has a note attached: diagnostics is deprecated, sentiment prediction is preview, Copilot Service workspace is required for assignments, queue-enabled tables are prerequisite for record routing, and update skill control enables runtime skill changes.",
       "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
     },
@@ -1428,7 +1453,12 @@
     {
       "title": "Northwind Record Routing Foundation",
       "scenario": "Northwind is moving from manual record triage to unified routing in Dynamics 365 Customer Service. The admin team has not yet enabled unified routing. They want to route cases and custom complaint records automatically. Premium complaints must go through a dedicated routing pipeline, but the custom complaint table is not yet queue-enabled. The team also wants custom assignment behavior for specialist queues and wants representatives to receive assigned work in the correct workspace.",
-      "tags": ["provisioning", "record-routing", "assignment-rules", "workspace"],
+      "tags": [
+        "provisioning",
+        "record-routing",
+        "assignment-rules",
+        "workspace"
+      ],
       "msRef": {
         "label": "Set up unified routing for records",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-record-routing"
@@ -1524,7 +1554,12 @@
     {
       "title": "Fabrikam Skill and Sentiment Rollout",
       "scenario": "Fabrikam wants to improve first-contact resolution by using skill-based routing and sentiment-based classification for incoming support work. The admin wants to create skills such as Spanish and Premium Product Support, let representatives adjust skills at runtime for assigned work, and use a machine-learning model to identify negative sentiment from customer-submitted text. The team also wants to use existing product tables as skills instead of recreating everything manually.",
-      "tags": ["skills", "sentiment", "modeled-skills", "isf"],
+      "tags": [
+        "skills",
+        "sentiment",
+        "modeled-skills",
+        "isf"
+      ],
       "msRef": {
         "label": "Set up skill-based routing in unified routing",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-skill-based-routing"
@@ -1620,7 +1655,12 @@
     {
       "title": "Litware Queue Operations and Personalization",
       "scenario": "Litware runs multiple support teams. Standard support goes to shared public operational queues. VIP account customers should be routed toward specific relationship managers when possible. HR and legal complaint items should be visible only to a small specialist group, but security must still protect the underlying records. Queue spikes are common, so the team wants documented handling for when queues hit configured thresholds.",
-      "tags": ["queues", "private-queue", "preferred-agent", "overflow"],
+      "tags": [
+        "queues",
+        "private-queue",
+        "preferred-agent",
+        "overflow"
+      ],
       "msRef": {
         "label": "Create and manage queues for unified routing",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/queues-omnichannel"
@@ -1716,7 +1756,12 @@
     {
       "title": "Adventure Works Governance and Troubleshooting",
       "scenario": "Adventure Works wants a routing rollout that is maintainable over time. The team is debating whether to keep building on legacy basic routing rulesets or move fully to unified routing. They also want reusable routing patterns, role-friendly reference material for admins and supervisors, and clarity on which troubleshooting tools are current versus deprecated.",
-      "tags": ["best-practices", "templates", "faq", "diagnostics"],
+      "tags": [
+        "best-practices",
+        "templates",
+        "faq",
+        "diagnostics"
+      ],
       "msRef": {
         "label": "Use best practices to set up unified routing in Customer Service",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-best-practices"
