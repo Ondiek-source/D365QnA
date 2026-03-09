@@ -470,6 +470,7 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
     <div class="nav-logo">D365<span>·</span>Mastery</div>
     <div class="nav-actions">
       <button class="nav-btn" onclick="showGuided()">Guided Learning</button>
+      <button class="nav-btn" onclick="showInterviewSim()">Interview Prep Sim</button>
       <button class="nav-btn" onclick="showHistory()">History</button>
     </div>
   </nav>
@@ -728,6 +729,64 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
   </div>
 </div>
 
+
+<!-- ══════ INTERVIEW PREP SIM ══════ -->
+<div class="screen" id="interviewSimScreen">
+  <div style="max-width:960px;margin:0 auto">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn active-nav">Interview Prep Sim</button>
+        <button class="nav-btn" onclick="showGuided()">Guided Learning</button>
+        <button class="nav-btn" onclick="showHome()">Topics</button>
+      </div>
+    </nav>
+    <div class="hero-eyebrow" style="margin-bottom:16px"><div class="hero-dot"></div>Interview Practice</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px">Interview Prep Simulator</h2>
+    <p style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:620px;margin-bottom:32px">Run technical interview drills using structured packs. Work through MCQs, open technical questions, case studies, and deep-dive prompts with model answers, probes, and scoring guidance.</p>
+    <div class="section-label" style="margin-bottom:16px">Available Interview Packs</div>
+    <div class="topics-grid" id="interviewSimGrid"></div>
+  </div>
+</div>
+
+<div class="screen" id="interviewPackScreen">
+  <div style="max-width:1080px;margin:0 auto">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="showInterviewSim()">← Interview Packs</button>
+        <button class="nav-btn" onclick="showHome()">Topics</button>
+      </div>
+    </nav>
+    <div class="hero-eyebrow" style="margin-bottom:16px"><div class="hero-dot"></div>Interview Practice</div>
+    <h2 id="isPackTitle" style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px"></h2>
+    <p id="isPackMeta" style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:720px;margin-bottom:18px"></p>
+    <div id="isPackNotes" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
+    <div id="isScoringBox" class="ci-card" style="margin-bottom:18px;padding:18px 20px"></div>
+    <div id="isSectionTabs" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"></div>
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="flex:1;min-width:0">
+        <div class="q-block" id="isQuestionBlock"></div>
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-skip" id="isPrevBtn" onclick="isNavigate(-1)">← Previous</button>
+            <button class="btn-next" id="isNextBtn" onclick="isNavigate(1)">Next →</button>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-primary" id="isRevealBtn" onclick="toggleInterviewReveal()">Reveal Guidance</button>
+          </div>
+        </div>
+      </div>
+      <div style="width:min(320px,100%);position:sticky;top:16px">
+        <div class="ci-card" style="padding:18px 20px">
+          <div class="ci-title" style="margin-bottom:12px">Pack Overview</div>
+          <div id="isSectionInfo" style="font-size:12px;color:var(--muted2);line-height:1.8"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════ REPORT MODAL ══════ -->
 <div class="rpt-modal-bg" id="reportModal" style="display:none" onclick="handleReportBgClick(event)">
   <div class="rpt-modal">
@@ -796,6 +855,15 @@ const CONFIG = {
     { id:'canvasui',     title:'Canvas App UI',                  icon:'🎨', desc:'Galleries, forms, controls and layout patterns.',                                                              file:'Questions/canvasui.json',    locked:true },
     { id:'automate',     title:'Power Automate',                 icon:'🔄', desc:'Flow types, triggers, actions, and error handling.',                                                           file:'Questions/automate.json',    locked:true },
     { id:'dataverse',    title:'Dataverse',                      icon:'🗄️', desc:'Tables, relationships, security roles, and metadata.',                                                         file:'Questions/dataverse.json',   locked:true },
+  ],
+  INTERVIEW_PACKS: [
+    {
+      id:'technicalconsultant',
+      title:'Technical Consultant',
+      icon:'🎯',
+      desc:'Technical panel simulation for Dynamics 365 CE / CRM Technical Consultant preparation.',
+      file:'interviewsim/CE_Technical_Consultant_Interview.json'
+    }
   ],
   // Groups — parent cards on home screen that open a sub-topic picker screen
   GROUPS: [
@@ -2728,6 +2796,181 @@ function rpNavigate(dir){
   window.scrollTo(0,0);
 }
 function rpJump(idx){ RP.current=idx; renderReplayQuestion(); window.scrollTo(0,0); }
+
+
+
+/* ── Interview Prep Sim ── */
+const IS = { packs: CONFIG.INTERVIEW_PACKS||[], pack:null, packId:null, currentSection:0, currentQuestion:0, reveal:false };
+
+function escapeHtml(str){
+  return String(str??'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function showInterviewSim(){
+  renderInterviewSimGrid();
+  showScreen('interviewSimScreen');
+}
+
+function renderInterviewSimGrid(){
+  const grid=document.getElementById('interviewSimGrid');
+  grid.innerHTML='';
+  (CONFIG.INTERVIEW_PACKS||[]).forEach(pack=>{
+    const card=document.createElement('button');
+    card.className='topic-card';
+    card.onclick=()=>loadInterviewPack(pack.id);
+    card.innerHTML=`
+      <div class="topic-head">
+        <div class="topic-icon">${pack.icon||'🎯'}</div>
+        <div>
+          <div class="topic-title">${pack.title}</div>
+          <div class="topic-desc">${pack.desc||''}</div>
+        </div>
+      </div>
+      <div class="topic-meta">
+        <span class="topic-chip">Interview Sim</span>
+        <span class="topic-chip">${(pack.file||'').split('/').pop()}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+async function loadInterviewPack(packId){
+  const packCfg=(CONFIG.INTERVIEW_PACKS||[]).find(p=>p.id===packId);
+  if(!packCfg) return;
+  loading(true,'Loading interview pack…');
+  try{
+    const res=await fetch(packCfg.file,{cache:'no-store'});
+    if(!res.ok) throw new Error('File not found');
+    const pack=await res.json();
+    IS.pack=pack;
+    IS.packId=packId;
+    IS.currentSection=0;
+    IS.currentQuestion=0;
+    IS.reveal=false;
+    renderInterviewPack();
+    showScreen('interviewPackScreen');
+  }catch(err){
+    alert('Cannot load interview pack. Check the file path and JSON name.');
+    console.error(err);
+  }finally{
+    loading(false);
+  }
+}
+
+function getInterviewSections(){
+  return (IS.pack?.sections||[]).filter(s=>Array.isArray(s.questions)||s.agent_rules);
+}
+
+function getInterviewItems(section){
+  if(!section) return [];
+  if(Array.isArray(section.questions)) return section.questions;
+  if(section.agent_rules) return [{id:'agent-rules', type:'agent_rules', ...section.agent_rules}];
+  return [];
+}
+
+function setInterviewSection(idx){
+  IS.currentSection=idx;
+  IS.currentQuestion=0;
+  IS.reveal=false;
+  renderInterviewPack();
+}
+
+function isNavigate(dir){
+  const sections=getInterviewSections();
+  const sec=sections[IS.currentSection];
+  const items=getInterviewItems(sec);
+  let nextQ=IS.currentQuestion+dir;
+  let nextS=IS.currentSection;
+  if(nextQ<0){
+    if(nextS>0){
+      nextS--;
+      nextQ=Math.max(0,getInterviewItems(sections[nextS]).length-1);
+    } else nextQ=0;
+  }
+  if(nextQ>=items.length){
+    if(nextS<sections.length-1){
+      nextS++;
+      nextQ=0;
+    } else nextQ=Math.max(0,items.length-1);
+  }
+  IS.currentSection=nextS;
+  IS.currentQuestion=nextQ;
+  IS.reveal=false;
+  renderInterviewPack();
+  window.scrollTo(0,0);
+}
+
+function toggleInterviewReveal(){
+  IS.reveal=!IS.reveal;
+  renderInterviewPack();
+}
+
+function renderInterviewPack(){
+  const pack=IS.pack; if(!pack) return;
+  const sections=getInterviewSections();
+  const section=sections[IS.currentSection];
+  const items=getInterviewItems(section);
+  const item=items[Math.min(IS.currentQuestion, Math.max(0,items.length-1))]||null;
+  document.getElementById('isPackTitle').textContent=pack.target_role || pack.pack_name || 'Interview Pack';
+  document.getElementById('isPackMeta').innerHTML=`${escapeHtml(pack.pack_name||'')} • ${escapeHtml(pack.interview_style||'Interview Simulation')} • ${escapeHtml(String(pack.duration_minutes||''))}${pack.duration_minutes?' mins':''}`;
+  document.getElementById('isPackNotes').innerHTML=(pack.notes||[]).map(n=>`<span class="topic-chip">${escapeHtml(n)}</span>`).join('');
+  const rubric=pack.scoring_model?.rubric||{};
+  document.getElementById('isScoringBox').innerHTML=`
+    <div class="ci-title" style="margin-bottom:10px">Scoring Model</div>
+    <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:10px">Scale: ${escapeHtml(String(pack.scoring_model?.scale_min ?? 0))} to ${escapeHtml(String(pack.scoring_model?.scale_max ?? 5))}. Use this to grade your answer quality under pressure.</div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">${Object.entries(rubric).map(([k,v])=>`<div class="bd-cell" style="padding:10px 12px"><div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--accent);margin-bottom:4px">${escapeHtml(k)}</div><div style="font-size:11px;color:var(--muted2);line-height:1.7">${escapeHtml(v)}</div></div>`).join('')}</div>`;
+
+  document.getElementById('isSectionTabs').innerHTML=sections.map((s,idx)=>`<button class="nav-btn ${idx===IS.currentSection?'active-nav':''}" onclick="setInterviewSection(${idx})">${escapeHtml(s.section_name||'Section')}</button>`).join('');
+  document.getElementById('isSectionInfo').innerHTML=`
+    <div style="margin-bottom:8px"><strong style="color:var(--text)">${escapeHtml(section?.section_name||'Section')}</strong></div>
+    <div>Question ${Math.min(IS.currentQuestion+1, Math.max(1,items.length))} of ${items.length||0}</div>
+    <div style="margin-top:8px">Global probes: ${(pack.global_probe_rules||[]).length}</div>
+    <div style="margin-top:8px">Current domain: ${escapeHtml(item?.domain||'General')}</div>
+    <div style="margin-top:8px">Difficulty: ${escapeHtml(item?.difficulty||'mixed')}</div>`;
+
+  const reveal=IS.reveal;
+  let html='';
+  if(!item){
+    html='<div class="question-text">No interview prompts found in this section.</div>'
+  } else if(item.type==='agent_rules'){
+    html=`<div class="q-meta-row"><div class="q-tag-chip">Runtime Rules</div><div class="q-tag-chip">Voice / Panel Guidance</div></div>
+      <div class="question-text">Voice AI Runtime Rules</div>
+      <div style="color:var(--muted2);font-size:12px;line-height:1.8;margin-bottom:16px">These rules define how the interview simulator should pressure-test answers.</div>
+      <div class="ci-card" style="padding:16px 18px">
+        <div style="font-size:12px;color:var(--muted2);line-height:1.8"><strong style="color:var(--text)">Tone:</strong> ${escapeHtml(item.tone||'')}</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.8"><strong style="color:var(--text)">Probe depth per question:</strong> ${escapeHtml(String(item.probe_depth_per_question||''))}</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.8"><strong style="color:var(--text)">Interrupt after seconds:</strong> ${escapeHtml(String(item.interrupt_if_waffling_after_seconds||''))}</div>
+        <div style="margin-top:12px"><strong style="color:var(--text)">Marking dimensions</strong><ul style="margin:8px 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.marking_dimensions||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
+        <div style="margin-top:12px"><strong style="color:var(--text)">Auto-fail conditions</strong><ul style="margin:8px 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.auto_fail_conditions||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
+      </div>`;
+  } else if(section.section_name==='MCQ'){
+    const opts=Object.entries(item.options||{}).map(([k,v])=>`<div class="option ${reveal && k===item.correct_answer?'correct':''}" style="cursor:default"><div class="opt-letter">${escapeHtml(k)}</div><div>${escapeHtml(v)}</div></div>`).join('');
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+      <div class="question-text">${escapeHtml(item.question||'')}</div>
+      <div style="margin-bottom:16px">${opts}</div>
+      ${reveal?`<div class="feedback-panel show fp-correct"><div class="fb-label c">Correct answer: ${escapeHtml(item.correct_answer||'')}</div><div class="fb-body">${escapeHtml(item.why||'')}</div><div class="fb-pts">Use the follow-up probes below to pressure-test yourself.</div></div>`:''}
+      ${reveal && item.follow_up_probes?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Follow-up Probes</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.follow_up_probes.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
+  } else if(section.section_name==='Case Studies'){
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+      <div class="question-text">Case Study</div>
+      <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Scenario</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.scenario||'')}</div></div>
+      <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Candidate Task</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.candidate_task||'')}</div></div>
+      ${reveal?`<div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Must Cover</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.must_cover||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
+      <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.killer_followups||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
+      <div class="ci-card" style="padding:16px 18px"><div class="ci-title" style="margin-bottom:8px">Fail Triggers</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.fail_triggers||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
+  } else {
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+      <div class="question-text">${escapeHtml(item.question||'')}</div>
+      ${reveal && item.expected_points?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Expected Points</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.expected_points.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}
+      ${reveal && item.killer_followups?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.killer_followups.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
+  }
+
+  document.getElementById('isQuestionBlock').innerHTML=html;
+  document.getElementById('isRevealBtn').textContent = reveal ? 'Hide Guidance' : 'Reveal Guidance';
+  document.getElementById('isPrevBtn').disabled = IS.currentSection===0 && IS.currentQuestion===0;
+  const atEnd = IS.currentSection===sections.length-1 && IS.currentQuestion===Math.max(0,items.length-1);
+  document.getElementById('isNextBtn').disabled = atEnd;
+}
 
 /* ── Boot ── */
 async function boot(){

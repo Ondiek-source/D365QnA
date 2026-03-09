@@ -1,0 +1,887 @@
+{
+  "pack_name": "KPMG CRM Technical Specialist Technical Interview Pack",
+  "version": "1.1",
+  "created_utc": "2026-03-09T23:04:25.495895Z",
+  "target_role": "Dynamics 365 Customer Engagement Technical Consultant / CRM Technical Specialist",
+  "interview_style": "hard-technical-panel",
+  "duration_minutes": 60,
+  "notes": [
+    "Built for high-pressure technical screening and interview rehearsal.",
+    "Emphasis on D365 CE, Dataverse, integrations, security, testing, and ALM.",
+    "Includes MCQs, deep technical prompts, case studies, and scoring rules."
+  ],
+  "scoring_model": {
+    "scale_min": 0,
+    "scale_max": 5,
+    "rubric": {
+      "0": "No usable answer. Incorrect, evasive, or fabricated.",
+      "1": "Very weak. Mostly generic buzzwords with poor technical accuracy.",
+      "2": "Partial. Some correct concepts but major gaps or missing trade-offs.",
+      "3": "Competent. Correct core answer with moderate depth.",
+      "4": "Strong. Accurate, specific, and shows sound implementation judgement.",
+      "5": "Excellent. Deep, structured, realistic, and defensible under challenge."
+    }
+  },
+  "global_probe_rules": [
+    "If candidate answers generically, force a concrete project example.",
+    "If candidate chooses a tool, ask why alternatives were rejected.",
+    "If candidate says 'best practice', ask how it was implemented and enforced.",
+    "If candidate explains design, probe failure modes, supportability, and rollback.",
+    "If candidate claims leadership, ask how work was packaged and reviewed.",
+    "If candidate names ALM, ask about managed solutions, variables, connection references, approvals, and hotfixes."
+  ],
+  "sections": [
+    {
+      "section_name": "MCQ",
+      "questions": [
+        {
+          "id": "MCQ-001",
+          "domain": "Plugins",
+          "difficulty": "hard",
+          "question": "A requirement states that when a Case is created, routing logic must assign the record before it is committed, block invalid assignments immediately, and avoid asynchronous delay. What is the best implementation choice?",
+          "options": {
+            "A": "Post-operation asynchronous plugin",
+            "B": "Pre-operation synchronous plugin",
+            "C": "Cloud flow triggered on row creation",
+            "D": "Business rule on the form"
+          },
+          "correct_answer": "B",
+          "why": "Pre-operation synchronous plugins allow validation and value changes before commit inside the transaction.",
+          "follow_up_probes": [
+            "Why not post-operation?",
+            "What are the performance risks of synchronous processing?",
+            "How would you avoid recursion?"
+          ]
+        },
+        {
+          "id": "MCQ-002",
+          "domain": "Plugin Pipeline",
+          "difficulty": "hard",
+          "question": "Which statement about plugin stages is most accurate?",
+          "options": {
+            "A": "Pre-validation occurs inside the main database transaction",
+            "B": "Pre-operation occurs before the core platform operation and is inside the transaction",
+            "C": "Post-operation always runs asynchronously",
+            "D": "Pre-validation is the best place to update large sets of related records"
+          },
+          "correct_answer": "B",
+          "why": "Pre-operation executes before the core operation and inside the transaction; post-operation may be synchronous or asynchronous.",
+          "follow_up_probes": [
+            "When would pre-validation be preferable?",
+            "Why can too much logic in-transaction be dangerous?"
+          ]
+        },
+        {
+          "id": "MCQ-003",
+          "domain": "Tool Selection",
+          "difficulty": "hard",
+          "question": "Which scenario most strongly favors a plugin over a cloud flow?",
+          "options": {
+            "A": "Send a non-critical Teams notification",
+            "B": "Prevent save when a server-side rule is violated for all entry points",
+            "C": "Nightly export to SharePoint",
+            "D": "Schedule a digest email"
+          },
+          "correct_answer": "B",
+          "why": "Plugins are suitable for transactional, authoritative server-side enforcement.",
+          "follow_up_probes": [
+            "When is cloud flow better?",
+            "How do you explain the difference to a functional consultant?"
+          ]
+        },
+        {
+          "id": "MCQ-004",
+          "domain": "Security",
+          "difficulty": "hard",
+          "question": "A business wants regional users to access only records within their region, executives to see all records, and PII fields to be hidden from most users. Which combination is best?",
+          "options": {
+            "A": "Single security role only",
+            "B": "Business Units, security roles, and field security profiles",
+            "C": "Access teams only",
+            "D": "JavaScript form rules only"
+          },
+          "correct_answer": "B",
+          "why": "Record access is handled with BU/roles while sensitive fields are controlled with field security profiles.",
+          "follow_up_probes": [
+            "When do owner teams help?",
+            "What happens when BU design is wrong early?"
+          ]
+        },
+        {
+          "id": "MCQ-005",
+          "domain": "ALM",
+          "difficulty": "hard",
+          "question": "In a controlled enterprise Power Platform delivery model, what is the best default approach?",
+          "options": {
+            "A": "Build directly in production",
+            "B": "Use unmanaged solutions in every environment including production",
+            "C": "Develop unmanaged in lower environments and deploy managed to higher environments",
+            "D": "Avoid solutions and manually recreate configuration"
+          },
+          "correct_answer": "C",
+          "why": "This supports controlled promotion, repeatability, and governance.",
+          "follow_up_probes": [
+            "Why not unmanaged in production?",
+            "How do environment variables and connection references fit?"
+          ]
+        },
+        {
+          "id": "MCQ-006",
+          "domain": "Integration",
+          "difficulty": "hard",
+          "question": "You need reliable integration between D365 CE and a legacy back-end reachable only over a secured private network. Which architecture is strongest?",
+          "options": {
+            "A": "Direct form JavaScript calls to the private system",
+            "B": "Public anonymous webhook to the legacy system",
+            "C": "Azure Function or middleware bridge with secure connectivity, auth, retry, and logging",
+            "D": "Business rule on the form"
+          },
+          "correct_answer": "C",
+          "why": "A secure middleware layer isolates risk, controls auth, and supports reliability patterns.",
+          "follow_up_probes": [
+            "How would you secure secrets?",
+            "How would you handle timeouts and idempotency?"
+          ]
+        },
+        {
+          "id": "MCQ-007",
+          "domain": "Data Migration",
+          "difficulty": "hard",
+          "question": "During migration of parent and child records into Dataverse, what is the most critical planning concern?",
+          "options": {
+            "A": "Form header design",
+            "B": "Relationship dependency order, alternate keys, and reconciliation",
+            "C": "Adding JavaScript first",
+            "D": "Building dashboards before load"
+          },
+          "correct_answer": "B",
+          "why": "Migration depends on entity sequencing, key strategy, and validation.",
+          "follow_up_probes": [
+            "How would you migrate lookups safely?",
+            "How do you reconcile source vs target totals?"
+          ]
+        },
+        {
+          "id": "MCQ-008",
+          "domain": "DevOps",
+          "difficulty": "hard",
+          "question": "What is the best reason to require pull requests and code review for D365 CE custom code?",
+          "options": {
+            "A": "To slow deployments down",
+            "B": "To hide work from functional consultants",
+            "C": "To improve quality, catch defects, and enforce standards",
+            "D": "Because plugin registration requires it"
+          },
+          "correct_answer": "C",
+          "why": "PRs improve quality, maintainability, and team consistency.",
+          "follow_up_probes": [
+            "What review checklist would you use?",
+            "What should block a merge?"
+          ]
+        },
+        {
+          "id": "MCQ-009",
+          "domain": "Client-Side Customisation",
+          "difficulty": "hard",
+          "question": "Which use case is the strongest fit for JavaScript form scripting rather than a plugin?",
+          "options": {
+            "A": "Immediate field visibility changes on the form",
+            "B": "Server-side validation across all channels",
+            "C": "Background retry of failed integrations",
+            "D": "Nightly batch processing"
+          },
+          "correct_answer": "A",
+          "why": "JavaScript is appropriate for user interaction and form behavior, not authoritative server-side enforcement.",
+          "follow_up_probes": [
+            "When does JavaScript become the wrong choice?",
+            "How do you avoid over-customising the client?"
+          ]
+        },
+        {
+          "id": "MCQ-010",
+          "domain": "Reporting",
+          "difficulty": "hard",
+          "question": "Which option is generally best for interactive analytical dashboards over D365 data with slicing and drill-down for managers?",
+          "options": {
+            "A": "Power BI",
+            "B": "Business rules",
+            "C": "Classic workflows",
+            "D": "Plugin trace logs"
+          },
+          "correct_answer": "A",
+          "why": "Power BI is appropriate for analytical dashboards and exploration.",
+          "follow_up_probes": [
+            "When would paginated reports or SSRS still be preferable?",
+            "What security concerns would you raise?"
+          ]
+        },
+        {
+          "id": "MCQ-011",
+          "domain": "Plugin Safety",
+          "difficulty": "hard",
+          "question": "A plugin updates the same entity in post-operation and starts triggering itself repeatedly. What is the best first defensive measure?",
+          "options": {
+            "A": "Move everything to JavaScript",
+            "B": "Use depth checks, filtering attributes, and careful step registration",
+            "C": "Disable auditing",
+            "D": "Convert all logic to business rules"
+          },
+          "correct_answer": "B",
+          "why": "Depth checks and careful registration are standard recursion controls.",
+          "follow_up_probes": [
+            "What is wrong with relying only on depth?",
+            "How else would you redesign the pattern?"
+          ]
+        },
+        {
+          "id": "MCQ-012",
+          "domain": "Design Decisions",
+          "difficulty": "hard",
+          "question": "A consultant must choose between business rules, JavaScript, plugin, cloud flow, custom API, and Azure Function. What is the best primary decision principle?",
+          "options": {
+            "A": "Use whatever the last project used",
+            "B": "Choose the lowest-complexity tool that still satisfies enforcement scope, transaction timing, and supportability",
+            "C": "Always use plugins because they are more technical",
+            "D": "Always use cloud flows because they are easier"
+          },
+          "correct_answer": "B",
+          "why": "The best implementation depends on scope, timing, maintainability, and operational risk.",
+          "follow_up_probes": [
+            "Give one example where the simplest option is wrong.",
+            "How do you defend the decision to an architect?"
+          ]
+        },
+        {
+          "id": "MCQ-013",
+          "domain": "ALM",
+          "difficulty": "very_hard",
+          "question": "What is the biggest operational risk of making hotfixes directly in production without source control and pipeline traceability?",
+          "options": {
+            "A": "Users may like the fix too much",
+            "B": "You create environment drift and lose reproducibility across releases",
+            "C": "It makes dashboards load faster",
+            "D": "It disables security roles automatically"
+          },
+          "correct_answer": "B",
+          "why": "Direct prod changes create drift, break auditability, and undermine reproducible releases.",
+          "follow_up_probes": [
+            "How would you recover from an already-drifted production environment?",
+            "What emergency process would you define instead?"
+          ]
+        },
+        {
+          "id": "MCQ-014",
+          "domain": "ALM",
+          "difficulty": "very_hard",
+          "question": "Which statement about connection references and environment variables is most accurate in Power Platform ALM?",
+          "options": {
+            "A": "They are optional decoration and have no real deployment value",
+            "B": "They help separate deployable solution assets from environment-specific configuration",
+            "C": "They replace source control",
+            "D": "They are only needed for canvas apps"
+          },
+          "correct_answer": "B",
+          "why": "They support configuration portability and environment separation.",
+          "follow_up_probes": [
+            "What should never be hardcoded?",
+            "Where should secrets live?"
+          ]
+        },
+        {
+          "id": "MCQ-015",
+          "domain": "ALM",
+          "difficulty": "very_hard",
+          "question": "A managed solution release breaks a critical process in UAT. What is the strongest first response?",
+          "options": {
+            "A": "Edit the managed components directly in UAT",
+            "B": "Restore the environment immediately without analysis",
+            "C": "Use your governed rollback/remediation path based on the prior known-good build and deployment logs",
+            "D": "Ask users to keep testing around the issue"
+          },
+          "correct_answer": "C",
+          "why": "The right response is controlled rollback or remediation through governed release management.",
+          "follow_up_probes": [
+            "What does rollback actually mean in a Power Platform context?",
+            "What evidence must your pipeline retain?"
+          ]
+        },
+        {
+          "id": "MCQ-016",
+          "domain": "Testing",
+          "difficulty": "hard",
+          "question": "What is the strongest testing statement for plugins and integrations in enterprise delivery?",
+          "options": {
+            "A": "Manual UAT alone is enough",
+            "B": "Unit, integration, regression, and deployment validation all matter",
+            "C": "Only production monitoring matters",
+            "D": "Testing is optional if the architect reviewed the design"
+          },
+          "correct_answer": "B",
+          "why": "Serious delivery requires layered testing, not just UAT.",
+          "follow_up_probes": [
+            "What exactly do you unit test in a plugin?",
+            "What should be validated after deployment?"
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Open Technical Drill Questions",
+      "questions": [
+        {
+          "id": "OPEN-001",
+          "domain": "Plugins",
+          "difficulty": "hard",
+          "question": "Explain the Dataverse plugin execution pipeline in enough detail that a junior developer could register the correct step without guessing.",
+          "expected_points": [
+            "Pre-validation",
+            "Pre-operation",
+            "Post-operation",
+            "Sync vs async",
+            "Target entity",
+            "Filtering attributes",
+            "Pre/post images",
+            "Transaction implications"
+          ],
+          "killer_followups": [
+            "Give one realistic example for each stage.",
+            "When would post-operation synchronous be preferable?"
+          ]
+        },
+        {
+          "id": "OPEN-002",
+          "domain": "Design Decisions",
+          "difficulty": "hard",
+          "question": "Give a decision framework for choosing between business rules, JavaScript, plugin, cloud flow, custom API, and Azure Function.",
+          "expected_points": [
+            "UI-only vs server-side",
+            "Transactional enforcement",
+            "Cross-system integration",
+            "Latency tolerance",
+            "Supportability",
+            "Security",
+            "Scalability",
+            "Testing"
+          ],
+          "killer_followups": [
+            "Apply that framework to skills-based case routing.",
+            "Apply it again to SLA breach notifications."
+          ]
+        },
+        {
+          "id": "OPEN-003",
+          "domain": "DevOps / ALM",
+          "difficulty": "very_hard",
+          "question": "Describe an Azure DevOps and ALM model for D365 CE customisations, plugins, flows, apps, and integrations across Dev, Test, UAT, and Prod.",
+          "expected_points": [
+            "Repos",
+            "Branching strategy",
+            "Pull requests",
+            "Build validation",
+            "Managed solution packaging",
+            "Environment variables",
+            "Connection references",
+            "Release approvals",
+            "Hotfix path",
+            "Rollback thinking"
+          ],
+          "killer_followups": [
+            "How do you stop prod drift?",
+            "How do you handle solution dependencies across teams?",
+            "How do you package emergency changes without bypassing governance?"
+          ]
+        },
+        {
+          "id": "OPEN-004",
+          "domain": "Testing",
+          "difficulty": "hard",
+          "question": "What does serious testing look like for a D365 CE implementation with plugins, flows, JavaScript, and integrations?",
+          "expected_points": [
+            "Unit testing philosophy",
+            "Plugin testing approach",
+            "Integration testing",
+            "Regression testing",
+            "UAT",
+            "Volume/performance where relevant",
+            "Traceability to requirements"
+          ],
+          "killer_followups": [
+            "What exactly do you unit test in a plugin?",
+            "What is your minimum release gate before production?"
+          ]
+        },
+        {
+          "id": "OPEN-005",
+          "domain": "Documentation / Offshore Delivery",
+          "difficulty": "hard",
+          "question": "What must be included in a technical work package handed to an offshore development team so implementation quality does not collapse?",
+          "expected_points": [
+            "Scope and assumptions",
+            "Data model",
+            "Detailed logic",
+            "Acceptance criteria",
+            "Dependencies",
+            "Environment/config notes",
+            "Test cases",
+            "Deployment notes"
+          ],
+          "killer_followups": [
+            "What would you never leave ambiguous?",
+            "How do you review offshore output before integration?"
+          ]
+        },
+        {
+          "id": "OPEN-006",
+          "domain": "Reporting / BI",
+          "difficulty": "hard",
+          "question": "When would you choose Power BI, paginated reporting/SSRS, native dashboards, or exported operational reports in a D365 CE programme?",
+          "expected_points": [
+            "Analytical vs operational reporting",
+            "Interactive slicing",
+            "Pixel-perfect reporting",
+            "Scheduled distribution",
+            "Security implications",
+            "Refresh/data model implications"
+          ],
+          "killer_followups": [
+            "What would you recommend for regulatory reporting?",
+            "What would you avoid putting directly on the transactional platform?"
+          ]
+        },
+        {
+          "id": "OPEN-007",
+          "domain": "Security",
+          "difficulty": "hard",
+          "question": "Design a Dataverse security model for a multi-region service organisation with strict PII controls and audit requirements.",
+          "expected_points": [
+            "Business Units",
+            "Security roles",
+            "Owner teams vs access teams",
+            "Field security profiles",
+            "Audit logging",
+            "Executive visibility",
+            "Support overhead trade-offs"
+          ],
+          "killer_followups": [
+            "What breaks if the BU hierarchy mirrors the org chart too literally?",
+            "How do you handle cross-region collaboration without collapsing boundaries?"
+          ]
+        },
+        {
+          "id": "OPEN-008",
+          "domain": "Migration",
+          "difficulty": "hard",
+          "question": "Walk through a weekend data migration into D365 CE from dirty spreadsheets and line-of-business extracts. What is your sequence and risk control plan?",
+          "expected_points": [
+            "Profiling",
+            "Mapping",
+            "Transform rules",
+            "Load sequencing",
+            "Deduplication",
+            "Dry runs",
+            "Cutover plan",
+            "Reconciliation",
+            "Business sign-off"
+          ],
+          "killer_followups": [
+            "What would make you reject the weekend cutover?",
+            "How do you stop flows/plugins from corrupting bulk load?"
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Case Studies",
+      "questions": [
+        {
+          "id": "CASE-001",
+          "domain": "Case Management / Routing",
+          "difficulty": "very_hard",
+          "scenario": "A government agency receives 6,000 citizen queries per day through email, web forms, and a call centre. Current handling is manual. There are repeated SLA breaches, no entitlement enforcement, and agents are unevenly skilled. The business wants automatic routing, escalations, queue balancing, supervisor visibility, and auditability. Assignment logic must be explainable to management.",
+          "candidate_task": "Design the D365 CE solution architecture. Explain entities, routing, queues, entitlement/SLA handling, whether logic belongs in unified routing, plugin, cloud flow, or both, and how assignment becomes auditable and supportable.",
+          "must_cover": [
+            "Case lifecycle design",
+            "Queue strategy",
+            "Skills-based or weighted routing",
+            "SLA and entitlement model",
+            "Escalation model",
+            "Auditability and explainability",
+            "Avoiding brittle customisation",
+            "Operational dashboards"
+          ],
+          "killer_followups": [
+            "Why not solve everything with Power Automate?",
+            "Where exactly would your routing logic execute?",
+            "How would you handle agent absence mid-shift?",
+            "How would you test routing fairness?"
+          ],
+          "fail_triggers": [
+            "No distinction between real-time and async processing",
+            "No audit/explainability model",
+            "No support model for supervisors",
+            "No answer on scalability"
+          ]
+        },
+        {
+          "id": "CASE-002",
+          "domain": "Integration Architecture",
+          "difficulty": "very_hard",
+          "scenario": "A D365 CE case form must display live customer compliance status from a legacy regulatory platform behind a private network. The legacy system has intermittent downtime and slow response times. The business wants near-real-time lookup but cannot expose the internal platform publicly.",
+          "candidate_task": "Design the integration architecture and explain security, failure handling, timeouts, caching, logging, support boundaries, and user experience choices.",
+          "must_cover": [
+            "Middleware or bridge layer",
+            "Authentication and secret management",
+            "Retry strategy",
+            "Timeout handling",
+            "Fallback UX",
+            "Logging and traceability",
+            "Operational support ownership",
+            "Why direct client-to-legacy calls are risky"
+          ],
+          "killer_followups": [
+            "How would you stop the form from hanging?",
+            "Would you cache results?",
+            "How would you protect against duplicate retries?",
+            "What would you tell the client if they demanded pure real-time always?"
+          ],
+          "fail_triggers": [
+            "Direct browser calls to private systems",
+            "No secret handling plan",
+            "No degraded-mode UX",
+            "No timeout strategy"
+          ]
+        },
+        {
+          "id": "CASE-003",
+          "domain": "Security Model",
+          "difficulty": "very_hard",
+          "scenario": "A multinational utility wants a Field Service and HSE solution in Dataverse. Site staff should only see records relevant to their operational area. Regional managers see their region. Executives see organisation-wide reporting. Medical and incident sensitivity fields must be restricted to specific roles only. Auditors need read-only access across the estate.",
+          "candidate_task": "Design the security model. Cover business units, roles, teams, field security, audit needs, and the trade-offs of the model over time.",
+          "must_cover": [
+            "BU model",
+            "Role design",
+            "Owner vs access teams",
+            "Field security profiles",
+            "Audit logging",
+            "Report visibility implications",
+            "Support and maintenance complexity"
+          ],
+          "killer_followups": [
+            "What breaks if the BU hierarchy mirrors the org chart too literally?",
+            "When would access teams be a bad choice?",
+            "How would you manage cross-region collaboration?"
+          ],
+          "fail_triggers": [
+            "No separation of record and field security",
+            "No admin/support model",
+            "Over-simplified org-wide access"
+          ]
+        },
+        {
+          "id": "CASE-004",
+          "domain": "ALM / DevOps",
+          "difficulty": "very_hard",
+          "scenario": "A client has four environments: Dev, Test, UAT, Prod. Multiple consultants are building apps, flows, plugins, and integrations. Releases are failing because configuration differs by environment and hotfixes are being made directly in production. The client wants controlled releases with rollback confidence.",
+          "candidate_task": "Design the ALM approach. Cover source control, solution strategy, build/release pipeline, environment variables, connection references, approvals, rollback, and governance rules.",
+          "must_cover": [
+            "Branch strategy",
+            "Managed vs unmanaged",
+            "Build validation",
+            "Release approvals",
+            "Environment configuration management",
+            "Emergency hotfix process",
+            "Preventing prod drift"
+          ],
+          "killer_followups": [
+            "How do you roll back a managed solution release?",
+            "What belongs in repo and what does not?",
+            "How do you stop one consultant from breaking another team's work?"
+          ],
+          "fail_triggers": [
+            "No source control discipline",
+            "No configuration portability model",
+            "No answer on hotfix governance"
+          ]
+        },
+        {
+          "id": "CASE-005",
+          "domain": "Data Migration",
+          "difficulty": "very_hard",
+          "scenario": "A non-profit is replacing spreadsheets and paper records with D365 CE. They have 2,500 members, 300 volunteers, 120 donor organisations, duplicates, missing keys, and inconsistent contact information. They want migration over a weekend with minimal downtime and high confidence in the result.",
+          "candidate_task": "Present a migration strategy from profiling through validation. Include tooling options, sequencing, deduplication, rehearsal cycles, exception handling, and post-load verification.",
+          "must_cover": [
+            "Data profiling",
+            "Mapping and transformation",
+            "Entity load order",
+            "Deduplication and alternate keys",
+            "Tool choice rationale",
+            "Dry runs and reconciliation",
+            "Business sign-off"
+          ],
+          "killer_followups": [
+            "How do you migrate related records without stable source IDs?",
+            "What would make you reject a weekend cutover?",
+            "How do you handle plugins/flows that interfere during bulk load?"
+          ],
+          "fail_triggers": [
+            "No reconciliation approach",
+            "No cutover rehearsal",
+            "No exception management"
+          ]
+        },
+        {
+          "id": "CASE-006",
+          "domain": "Architecture Trade-offs",
+          "difficulty": "very_hard",
+          "scenario": "A solution architect says: 'Avoid code wherever possible. Use only Power Automate and business rules.' The business then asks for transactional validation, cross-table checks, weighted assignment, guaranteed prevention of invalid saves, and robust supportability under load.",
+          "candidate_task": "Respond as the technical consultant. Explain where low-code is appropriate, where code is justified, and how you would defend the design to both architect and client.",
+          "must_cover": [
+            "Low-code vs pro-code boundaries",
+            "Transactional enforcement limits",
+            "Supportability",
+            "Performance considerations",
+            "Governance and maintainability",
+            "Decision framework"
+          ],
+          "killer_followups": [
+            "What is your red line for introducing a plugin?",
+            "How do you stop pro-code from turning into vanity engineering?",
+            "How would you document these choices for offshore developers?"
+          ],
+          "fail_triggers": [
+            "Dogmatic always-code or never-code answer",
+            "No framework for tool selection",
+            "No supportability argument"
+          ]
+        },
+        {
+          "id": "CASE-007",
+          "domain": "ALM / Hotfix / Release Governance",
+          "difficulty": "very_hard",
+          "scenario": "A critical production defect is found two hours after a managed solution deployment. It affects case creation for a high-priority business unit. The client wants an immediate fix, but the root cause is still unclear and the release included multiple unrelated changes.",
+          "candidate_task": "Explain your incident and release response. Cover triage, rollback decision-making, hotfix branching, root-cause isolation, communication, and how to prevent this release pattern from happening again.",
+          "must_cover": [
+            "Incident severity triage",
+            "Known-good release reference",
+            "Hotfix branch or emergency path",
+            "Rollback vs forward-fix judgement",
+            "Stakeholder communications",
+            "Post-incident ALM improvements"
+          ],
+          "killer_followups": [
+            "When is a full environment restore justified?",
+            "How do you prove the hotfix does not reintroduce drift?",
+            "What should have been in place before deployment?"
+          ],
+          "fail_triggers": [
+            "Direct unmanaged edits in production as first choice",
+            "No controlled communication path",
+            "No separation between incident response and future governance"
+          ]
+        },
+        {
+          "id": "CASE-008",
+          "domain": "Multi-Team Delivery",
+          "difficulty": "very_hard",
+          "scenario": "Two parallel teams are delivering changes into the same CE programme: one on core case management and one on field inspections. Their solutions share tables, security roles, and flows. Releases keep colliding and one team's changes frequently break the other.",
+          "candidate_task": "Design a delivery model that reduces collisions without destroying delivery speed. Cover solution segmentation, ownership boundaries, branching, pipeline safeguards, dependency management, and review practice.",
+          "must_cover": [
+            "Solution segmentation",
+            "Ownership boundaries",
+            "Shared asset governance",
+            "Dependency controls",
+            "Branch strategy",
+            "PR and pipeline checks",
+            "Release coordination"
+          ],
+          "killer_followups": [
+            "How do you handle truly shared tables?",
+            "What do you do when both teams need the same component in the same sprint?",
+            "Who arbitrates solution boundaries?"
+          ],
+          "fail_triggers": [
+            "Single giant unmanaged solution with no ownership",
+            "No shared-component governance",
+            "No branch or merge discipline"
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "ALM Deep Dive",
+      "questions": [
+        {
+          "id": "ALM-001",
+          "difficulty": "very_hard",
+          "question": "Define a complete ALM strategy for a D365 CE programme from developer machine to production support. Speak to repos, solution segmentation, environment strategy, pipelines, approvals, and incident recovery.",
+          "expected_points": [
+            "Dev/Test/UAT/Prod strategy",
+            "Source control",
+            "Solution segmentation",
+            "Managed deployment to higher envs",
+            "Build and release validation",
+            "Connection references",
+            "Environment variables",
+            "Support and recovery model"
+          ],
+          "killer_followups": [
+            "Where do unmanaged solutions belong and where do they not?",
+            "How do you stop tribal deployment knowledge?"
+          ]
+        },
+        {
+          "id": "ALM-002",
+          "difficulty": "very_hard",
+          "question": "Explain the difference between configuration data, customisation, code, secrets, and environment-specific settings in Power Platform ALM. How should each be handled?",
+          "expected_points": [
+            "Configuration vs solution assets",
+            "Secrets not in source control",
+            "Environment variables",
+            "Connection references",
+            "Data migration/config seeding considerations",
+            "Key Vault or secure secret storage"
+          ],
+          "killer_followups": [
+            "What have you seen teams hardcode that they should never hardcode?",
+            "What breaks when environment-specific values live in solution logic?"
+          ]
+        },
+        {
+          "id": "ALM-003",
+          "difficulty": "very_hard",
+          "question": "How would you implement a safe hotfix process for production while preserving traceability and preventing drift?",
+          "expected_points": [
+            "Hotfix branch",
+            "Known-good baseline",
+            "Controlled promotion",
+            "Minimal change scope",
+            "Emergency approval path",
+            "Back-merge strategy",
+            "Validation and audit trail"
+          ],
+          "killer_followups": [
+            "When do you choose rollback instead of forward-fix?",
+            "How do you stop emergency fixes from bypassing quality permanently?"
+          ]
+        },
+        {
+          "id": "ALM-004",
+          "difficulty": "very_hard",
+          "question": "A release includes plugins, flows, app customisations, security role changes, and environment-specific integrations. What release gates would you insist on before production?",
+          "expected_points": [
+            "Build success",
+            "Solution checker or static checks where relevant",
+            "Peer review completion",
+            "Automated validation where available",
+            "Smoke testing in UAT",
+            "Config verification",
+            "Approvals and deployment plan",
+            "Rollback readiness"
+          ],
+          "killer_followups": [
+            "What is your minimum acceptable evidence before deploy?",
+            "What would block the release outright?"
+          ]
+        },
+        {
+          "id": "ALM-005",
+          "difficulty": "very_hard",
+          "question": "How do you structure solution boundaries when multiple teams work on related apps sharing Dataverse tables and security components?",
+          "expected_points": [
+            "Ownership boundaries",
+            "Shared core solution vs feature solutions",
+            "Dependency minimisation",
+            "Release coordination",
+            "Branch and merge controls",
+            "Avoiding monolithic solution sprawl"
+          ],
+          "killer_followups": [
+            "When is a shared core solution justified?",
+            "How do you stop dependency explosions?"
+          ]
+        },
+        {
+          "id": "ALM-006",
+          "difficulty": "very_hard",
+          "question": "Explain rollback in the Power Platform world. Be precise. Do not answer with generic 'restore backup' language only.",
+          "expected_points": [
+            "Rollback is not always simple uninstall",
+            "Known-good managed versions",
+            "Forward-fix vs redeploy prior build",
+            "Environment restore as last resort",
+            "Data impact considerations",
+            "Release logs and recovery rehearsals"
+          ],
+          "killer_followups": [
+            "When would uninstalling a managed solution be unsafe?",
+            "When does full environment restore become justified?"
+          ]
+        },
+        {
+          "id": "ALM-007",
+          "difficulty": "very_hard",
+          "question": "What would you store in Azure DevOps for a D365 CE project, and what would you never store there?",
+          "expected_points": [
+            "Code",
+            "Solution source where applicable",
+            "Pipeline definitions",
+            "Documentation/scripts",
+            "No secrets in repo",
+            "No uncontrolled environment-specific values",
+            "No manual-only knowledge"
+          ],
+          "killer_followups": [
+            "How do you manage service connections and credentials?",
+            "Where do deployment runbooks live?"
+          ]
+        },
+        {
+          "id": "ALM-008",
+          "difficulty": "very_hard",
+          "question": "How would you detect and remediate production drift when you inherit a project with direct prod edits and undocumented releases?",
+          "expected_points": [
+            "Establish baseline",
+            "Compare environments/solutions",
+            "Document divergence",
+            "Freeze direct edits",
+            "Reconstruct source-controlled truth",
+            "Planned remediation path",
+            "Governance reset"
+          ],
+          "killer_followups": [
+            "What if business refuses a freeze window?",
+            "How do you communicate risk without sounding dramatic?"
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Voice AI Runtime Rules",
+      "agent_rules": {
+        "tone": "direct, skeptical, professional, technically demanding",
+        "max_initial_question_length": 90,
+        "probe_depth_per_question": 3,
+        "interrupt_if_waffling_after_seconds": 20,
+        "force_example_after_generic_answer": true,
+        "ask_for_tradeoffs": true,
+        "ask_for_failure_modes": true,
+        "penalise_buzzwords_without_detail": true,
+        "marking_dimensions": [
+          "technical_accuracy",
+          "depth",
+          "tradeoff_reasoning",
+          "implementation_realism",
+          "governance_and_supportability",
+          "clarity_under_pressure"
+        ],
+        "auto_fail_conditions": [
+          "Inventing platform features that do not exist",
+          "Confusing client-side UX logic with authoritative server-side enforcement",
+          "No understanding of ALM and environment promotion",
+          "No security model beyond generic roles",
+          "Dogmatic tool selection with no trade-offs"
+        ]
+      }
+    }
+  ]
+}
