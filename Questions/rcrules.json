@@ -1,266 +1,832 @@
 {
   "_meta": {
     "topic": "Record Creation & Update Rules",
-    "description": "Automated case creation from email, conditions, Power Automate integration.",
-    "status": "in-progress"
+    "description": "Append-only expansion for automatic record creation rules covering monitoring, queue behavior, single vs multiple queue tracking, unknown senders, entitlements, wait-after-resolution, subject-change handling, multiple mailbox scenarios, customer/agent scenarios, reopen resolved case, and FAQs.",
+    "status": "append"
   },
   "mcq": [
     {
-      "q": "What is the primary purpose of Record Creation and Update Rules in Dynamics 365 Customer Service?",
+      "q": "Which activity types are supported out of the box for automatic record creation and update rules in Dynamics 365 Customer Service?",
       "options": [
-        "To define escalation actions when an SLA KPI is breached",
-        "To automatically create or update Dynamics 365 records when specific activities (such as emails) are received",
-        "To route cases to queues based on case attributes",
-        "To send automated email responses to customers"
+        "Email only",
+        "Email, social activity, task, phone call, appointment, service activity, and custom activity",
+        "Email, phone call, task, and knowledge article only",
+        "Email and custom activity only"
       ],
       "answer": 1,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "automation",
-        "email-to-case"
-      ],
-      "explanation": "<strong>Record Creation and Update Rules</strong> monitor incoming activities (emails, social activity, service activity) and automatically create or update Dynamics 365 records — most commonly creating Cases from inbound emails.",
+      "category": "supported-activities",
+      "tags": ["arc", "supported-activities", "foundational"],
+      "explanation": "Dynamics 365 Customer Service supports automatic record creation from Email, Social activity, Task, Phone call, Appointment, Service activity, and Custom activity by default.",
       "wrongExplanations": [
-        "SLA escalation actions are configured within the SLA itself — not in Record Creation Rules.",
+        "Email is common, but it is not the only supported source activity.",
         null,
-        "Routing to queues is handled by Routing Rules or Unified Routing — not Record Creation Rules.",
-        "Automated email responses are sent via Email Templates and Workflows — not Record Creation Rules."
+        "Knowledge article is not one of the supported source activities for ARC rules.",
+        "Custom activity is supported, but the supported list is broader than just email and custom activity."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "Which statement about queues in automatic record creation and update rules is correct?",
+      "options": [
+        "A queue is optional for email and mandatory for custom activities",
+        "A queue is mandatory for email source type and optional for other source types including custom activities",
+        "A queue is mandatory for all source activity types",
+        "Queues are no longer used by modern ARC rules"
+      ],
+      "answer": 1,
+      "category": "queues",
+      "tags": ["arc", "queues", "email"],
+      "explanation": "For email source type, specifying a queue is mandatory. For all other source types, including custom activities, the queue is optional.",
+      "wrongExplanations": [
+        "This reverses the documented requirement.",
+        null,
+        "Microsoft explicitly states the queue requirement is mandatory for email but optional for other source types.",
+        "Modern ARC rules still use queues."
       ],
       "msRef": {
         "label": "Set up rules to automatically create or update records",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-rules-to-automatically-create-or-update-records"
       }
     },
     {
-      "q": "In a Record Creation and Update Rule, what component defines the specific fields and values to set on the record that is created?",
+      "q": "A queue is already used in a single-queue ARC rule. What must happen before that same queue can be used in a multiple-queues tracking rule?",
       "options": [
-        "Condition",
-        "Rule Item",
-        "Action (Power Automate flow)",
-        "Channel Property"
+        "Nothing; a queue can be used in both rule types at the same time",
+        "The existing rule must be deactivated first",
+        "The queue must be converted into a shared mailbox",
+        "The queue must be removed from server-side synchronization"
+      ],
+      "answer": 1,
+      "category": "queues",
+      "tags": ["arc", "single-queue", "multiple-queues", "limits"],
+      "explanation": "A queue can't be used as part of both a single-queue tracking rule and a multiple-queues tracking rule at the same time. You must deactivate the existing rule first.",
+      "wrongExplanations": [
+        "Microsoft explicitly says the same queue cannot be used in both tracking types simultaneously.",
+        null,
+        "Mailbox type conversion is not the documented requirement.",
+        "Server-side sync removal is not the documented requirement."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "Can a single-queue ARC rule be converted into a multiple-queues ARC rule, or vice versa?",
+      "options": [
+        "Yes, by editing the Queue scope after activation",
+        "Yes, but only if no rule items exist",
+        "No; you must create a new rule",
+        "Yes, through the activity monitor"
       ],
       "answer": 2,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "power-automate",
-        "configuration"
-      ],
-      "explanation": "When a rule is triggered, the <strong>Action</strong> — now implemented as a Power Automate flow — defines what record to create and which field values to set. The flow receives the source activity and creates the target record.",
+      "category": "queues",
+      "tags": ["arc", "queue-scope", "conversion"],
+      "explanation": "You can't convert a single-queue ARC rule into a multiple-queues ARC rule, or vice versa. Microsoft says you need to create a new rule.",
       "wrongExplanations": [
-        "Conditions filter which incoming activities trigger the rule — they do not define field values.",
-        "Rule Items specify source channel and conditions — the actual record creation logic is in the associated flow.",
+        "Queue scope is not a supported conversion path for this.",
+        "The limitation is not dependent on whether rule items exist.",
         null,
-        "Channel Properties capture metadata from the incoming source — they provide input data but do not set fields directly."
+        "Activity monitor does not convert rule scope."
       ],
       "msRef": {
-        "label": "Configure record creation rules",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/automatically-create-update-records"
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
       }
     },
     {
-      "q": "An inbound email arrives and a Record Creation Rule creates a case. The customer replies to the case email notification. What prevents a duplicate case from being created?",
+      "q": "What is true about the activity monitor for automatic record creation rules?",
       "options": [
-        "The rule is deactivated after the first case is created",
-        "The email threading token in the subject line links the reply to the existing case",
-        "Duplicate detection rules block the second case",
-        "The rule only processes the first email per sender per day"
+        "It works in on-premises and online environments equally",
+        "It tracks only what happens after Power Automate runs",
+        "It works in online environments and tracks rules until they are evaluated in Customer Service, before the rule runs in Power Automate",
+        "It is available only for legacy workflow-based ARC rules"
+      ],
+      "answer": 2,
+      "category": "activity-monitor",
+      "tags": ["arc", "activity-monitor", "monitoring"],
+      "explanation": "The activity monitor works in online environments only and tracks ARC rules until they are evaluated in Customer Service, before the rule runs in Power Automate.",
+      "wrongExplanations": [
+        "Microsoft says activity monitor works in online environments only.",
+        "It does not track only post-Power-Automate execution; it tracks up to the pre-flow evaluation point.",
+        null,
+        "It is not limited to legacy workflow-based rules."
+      ],
+      "msRef": {
+        "label": "Use activity monitor to review and track rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-activity-arc"
+      }
+    },
+    {
+      "q": "Where can administrators view the activity monitor summary for the last seven days?",
+      "options": [
+        "Power Platform admin center > Environment history",
+        "Copilot Service admin center > Customer support > Overview > Case settings",
+        "Customer Service workspace > Queue diagnostics",
+        "Power Automate > Flow analytics"
       ],
       "answer": 1,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "email-threading",
-        "case-management"
-      ],
-      "explanation": "Dynamics 365 embeds a <strong>threading token</strong> (a unique identifier) in outbound case email subjects. When a customer reply arrives containing that token, the system recognises it and routes the reply as an activity on the existing case rather than creating a new one.",
+      "category": "activity-monitor",
+      "tags": ["arc", "activity-monitor", "admin-center"],
+      "explanation": "In Copilot Service admin center, Customer support > Overview > Case settings displays the number of activity monitor events that ran in the past week along with their status.",
       "wrongExplanations": [
-        "Rules remain active — they do not deactivate after creating the first case.",
+        "Environment history is not where ARC activity monitor summaries are surfaced.",
         null,
-        "Duplicate detection rules match field values like subject or email address — they are not reliable for threading replies to cases.",
-        "There is no built-in daily email limit per sender in Record Creation Rules."
+        "Queue diagnostics are not the documented location for ARC activity monitor summary.",
+        "Flow analytics is for Power Automate runs, not the ARC activity monitor summary."
       ],
       "msRef": {
-        "label": "Email threading and case correlation",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/automatically-create-update-records"
+        "label": "Use activity monitor to review and track rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-activity-arc"
       }
     },
     {
-      "q": "A Record Creation Rule is configured to create cases from inbound emails but cases are not being created. Which is the most likely cause?",
+      "q": "In advanced ARC settings, what does 'Allow emails from unknown senders' control?",
       "options": [
-        "The rule is in Draft status instead of Active",
-        "The mailbox is not configured as a queue mailbox",
-        "The email subject contains special characters",
-        "The sender does not have a Contact record in the system"
+        "Whether the queue accepts internet mail",
+        "Whether records can be created when the sender address isn't present on any contact or account",
+        "Whether replies from inactive contacts reopen a resolved case",
+        "Whether the rule can use multiple queues"
       ],
-      "answer": 0,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "troubleshooting"
-      ],
-      "explanation": "Record Creation and Update Rules must be <strong>Activated</strong> to process incoming activities. A rule left in Draft status will not trigger even if all other conditions are met.",
+      "answer": 1,
+      "category": "advanced-settings",
+      "tags": ["arc", "unknown-senders", "advanced-settings"],
+      "explanation": "Allow emails from unknown senders determines whether records are created when email messages arrive from senders whose email addresses aren't present on any contact or account records.",
       "wrongExplanations": [
+        "Queue mail acceptance is a different concern.",
         null,
-        "The mailbox does not need to be a queue mailbox specifically — the rule must be active for any processing to occur.",
-        "Special characters in email subjects do not block rule processing.",
-        "Not having a Contact record may affect how fields like Customer are populated, but the rule can still create a case without a matching contact."
+        "Resolved-case reopen behavior is a separate scenario.",
+        "Multiple queue tracking is unrelated to unknown sender handling."
       ],
       "msRef": {
-        "label": "Activate record creation rules",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
       }
     },
     {
-      "q": "Which entity does a Record Creation and Update Rule monitor to trigger case creation from inbound email?",
+      "q": "If administrators choose to manage unknown senders by mapping in Power Automate manually, what must they ensure?",
       "options": [
-        "Email Message",
-        "Email Activity",
+        "That duplicate detection is turned off",
+        "That they create a mapping in Power Automate for the Customer field",
+        "That all queues are public queues",
+        "That the rule owner is always a team"
+      ],
+      "answer": 1,
+      "category": "advanced-settings",
+      "tags": ["arc", "unknown-senders", "power-automate", "customer-field"],
+      "explanation": "Microsoft warns that if you select manual mapping for unknown senders, you must create a mapping in Power Automate for the customer field.",
+      "wrongExplanations": [
+        "Duplicate detection is not the documented requirement here.",
+        null,
+        "Queue privacy is unrelated to the customer-field mapping requirement.",
+        "Rule ownership is unrelated to this requirement."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "When 'Require a valid entitlement on the connected case' is set to Yes, under which condition can a case still be created for a contact sender with a parent account?",
+      "options": [
+        "Only if the contact itself owns the entitlement record",
+        "If the parent account has an active entitlement and the contact is listed on it, or the entitlement contact list is empty",
+        "Only if the email subject contains the case number",
+        "Only if the queue owner is a user, not a team"
+      ],
+      "answer": 1,
+      "category": "advanced-settings",
+      "tags": ["arc", "entitlement", "connected-case"],
+      "explanation": "If the sender is a contact with a parent account, a record can be created if the contact's parent account has a valid entitlement and the contact is listed in the entitlement's Contacts section, or the Contacts section is empty.",
+      "wrongExplanations": [
+        "The entitlement can belong to the parent account rather than the contact itself.",
+        null,
+        "Case number in the subject is unrelated to entitlement validation.",
+        "Queue owner type is unrelated to entitlement validation."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "What happens if 'Wait for a specific amount of time after the connected case has been resolved' is set to No and a related case already exists?",
+      "options": [
+        "The existing resolved case is reopened automatically",
+        "The system doesn't create a case",
+        "The system always creates a new case immediately",
+        "The email is deleted from the queue"
+      ],
+      "answer": 1,
+      "category": "advanced-settings",
+      "tags": ["arc", "wait-after-resolution", "related-case"],
+      "explanation": "Microsoft states that if this setting is set to No, the system doesn't create a case if a related case exists.",
+      "wrongExplanations": [
+        "Resolved cases are not reopened automatically in this scenario.",
+        null,
+        "Immediate new-case creation is not the documented behavior when this is No and a related case exists.",
+        "The email is not deleted from the queue because of this setting."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "What is the documented way to create a case without any time lapse after the connected case has been resolved?",
+      "options": [
+        "Set Wait for a specific amount of time to No",
+        "Set Wait for a specific amount of time to Yes and leave the duration blank",
+        "Set the rule item order so the new-case item runs first",
+        "Turn off queue item creation for synchronized mailboxes"
+      ],
+      "answer": 1,
+      "category": "advanced-settings",
+      "tags": ["arc", "wait-after-resolution", "no-delay"],
+      "explanation": "If you want a case to be created without any time lapse, Microsoft says to set the Wait toggle to Yes and leave the time duration unselected.",
+      "wrongExplanations": [
+        "Setting it to No does not produce that documented behavior.",
+        null,
+        "Rule item order does not replace this setting.",
+        "Queue item creation settings are unrelated."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "How are multiple ARC rule items evaluated within a rule?",
+      "options": [
+        "All matching rule items run in parallel",
+        "Rules are evaluated alphabetically by condition name",
+        "Rules run in listed order, and once a rule item matches and creates the case, the remaining rule items aren't evaluated",
+        "Only the newest rule item is evaluated"
+      ],
+      "answer": 2,
+      "category": "rule-order",
+      "tags": ["arc", "rule-order", "rule-items"],
+      "explanation": "ARC rule items are run in the order listed. If the incoming activity matches the condition in one rule item and the system creates the case, the remaining rule items aren't evaluated.",
+      "wrongExplanations": [
+        "They are not evaluated in parallel.",
+        "Alphabetical evaluation is not the documented behavior.",
+        null,
+        "Only the newest rule item is not the evaluation model."
+      ],
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "To create a new case when an email subject changes, what table should the custom flow monitor according to Microsoft's pattern?",
+      "options": [
+        "Emails",
+        "Cases",
+        "Activity monitors",
+        "Queues"
+      ],
+      "answer": 2,
+      "category": "subject-change",
+      "tags": ["arc", "subject-change", "activity-monitor", "flow"],
+      "explanation": "Microsoft's subject-change pattern uses a custom flow triggered when a row is added to the Activity monitors table with a skipped state.",
+      "wrongExplanations": [
+        "The documented trigger pattern is not a direct Email-table trigger.",
+        "Cases are not the documented trigger source for this pattern.",
+        null,
+        "Queues are not the documented trigger source for this pattern."
+      ],
+      "msRef": {
+        "label": "Create a new case when email subject changes",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-email-sub-chg"
+      }
+    },
+    {
+      "q": "Which activity monitor state is used in Microsoft's custom-flow pattern for creating a new case when the email subject changes?",
+      "options": [
+        "Ready",
+        "Skipped",
+        "Failed",
+        "Completed"
+      ],
+      "answer": 1,
+      "category": "subject-change",
+      "tags": ["arc", "subject-change", "skipped-state"],
+      "explanation": "The documented custom flow pattern is triggered when case creation is skipped for an email and there's an activity monitor entry in the Skipped state.",
+      "wrongExplanations": [
+        "Ready is not the documented state for this pattern.",
+        null,
+        "Failed is not the documented state for this pattern.",
+        "Completed is not the documented state for this pattern."
+      ],
+      "msRef": {
+        "label": "Create a new case when email subject changes",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-email-sub-chg"
+      }
+    },
+    {
+      "q": "Which of the following is a documented reason that can appear for a skipped activity monitor entry in the email-subject-change scenario?",
+      "options": [
+        "The queue owner is inactive",
+        "An active case is already connected with this record",
+        "The mailbox isn't approved",
+        "The email contains an unsupported attachment"
+      ],
+      "answer": 1,
+      "category": "subject-change",
+      "tags": ["arc", "subject-change", "skipped-reasons"],
+      "explanation": "Microsoft lists reasons such as 'An active case is already connected with this record' as one of the skip reasons you can filter on in the subject-change custom flow pattern.",
+      "wrongExplanations": [
+        "Inactive queue owner is not one of the documented reasons in this pattern.",
+        null,
+        "Mailbox approval is not one of the listed skip reasons here.",
+        "Unsupported attachment is not one of the listed skip reasons here."
+      ],
+      "msRef": {
+        "label": "Create a new case when email subject changes",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-email-sub-chg"
+      }
+    },
+    {
+      "q": "To help representatives identify all queues from which a case originated when one email was sent to multiple mailboxes, which table does Microsoft tell you to expose?",
+      "options": [
+        "Queue Item",
+        "Originating Queue Mapping",
         "Mailbox",
-        "Queue Item"
+        "Activity monitors"
       ],
       "answer": 1,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "email-activity"
-      ],
-      "explanation": "Record Creation Rules monitor the <strong>Email Activity</strong> entity. When an inbound email is tracked into Dynamics 365 and meets the rule conditions, the rule creates or updates the target record.",
+      "category": "multiple-mailboxes",
+      "tags": ["arc", "multiple-cases", "originating-queue-mapping"],
+      "explanation": "Microsoft's multiple-mailboxes guidance tells you to create a view on the Originating Queue Mapping table and add a subgrid for it to the case form.",
       "wrongExplanations": [
-        "Email Message is not a Dynamics 365 entity — emails are stored as Email Activities.",
+        "Queue Item is related but not the table Microsoft tells you to expose for this feature.",
         null,
-        "Mailboxes are the server-side sync configuration — they deliver emails into Dynamics 365 but are not monitored by creation rules directly.",
-        "Queue Items are created after routing — the creation rule acts on the Email Activity before queue routing."
+        "Mailbox is not the documented table to surface for this purpose.",
+        "Activity monitors are for monitoring rule processing, not for surfacing originating queues."
       ],
       "msRef": {
-        "label": "Record creation from email",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/automatically-create-update-records"
+        "label": "Create multiple cases from an email sent to multiple mailboxes",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-multiple-cases"
       }
     },
     {
-      "q": "When configuring a Record Creation and Update Rule in the modern interface, which technology replaces legacy Workflow actions for creating the target record?",
+      "q": "In the customer scenario, what happens when a customer forwards a service representative's reply email from Inbox to a new queue?",
       "options": [
-        "Classic Workflow",
-        "Power Automate Cloud Flow",
-        "JavaScript Web Resource",
-        "Custom Plugin"
+        "ARC always skips case creation because the mail was forwarded",
+        "ARC creates a new case for the new queue, and the email is tagged to the existing queue-originated cases and the new case",
+        "ARC reopens the original case only",
+        "ARC creates cases for every queue in the tenant"
       ],
       "answer": 1,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "power-automate",
-        "modern-interface"
-      ],
-      "explanation": "The modern Record Creation and Update Rule interface integrates with <strong>Power Automate Cloud Flows</strong> to define what happens when a rule fires. The flow receives the triggering activity as context and creates or updates the target record.",
+      "category": "customer-scenario",
+      "tags": ["arc", "customer-scenario", "forwarded-email", "new-queue"],
+      "explanation": "Microsoft documents that forwarding a representative's reply mail from the inbox to a new queue creates a new case for that new queue, and the email is tagged to the earlier queue-originated cases as well as the new case.",
       "wrongExplanations": [
-        "Classic Workflows were used in the legacy rule interface but are deprecated for new configurations in favour of Power Automate.",
+        "Forwarding to a new queue is specifically documented as a new-case scenario, not always skipped.",
         null,
-        "JavaScript Web Resources run in the browser form context — they are not triggered by server-side rule processing.",
-        "Custom Plugins can intercept record operations but are not the out-of-box mechanism used by Record Creation Rules."
+        "The documented behavior is not limited to reopening the original case.",
+        "ARC does not create cases for every queue in the tenant."
       ],
       "msRef": {
-        "label": "Migrate record creation rules to Power Automate",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/migrate-automatic-record-creation-and-sla-agreements"
+        "label": "How the automatic record creation rule works in a customer scenario",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-customer-scenario"
       }
     },
     {
-      "q": "A company wants cases created only from emails sent to support@company.com, not from all inbound emails. How is this achieved in a Record Creation Rule?",
+      "q": "When a service representative sends a new email from the case timeline, under what condition is the Related attribute set to the case?",
       "options": [
-        "Configure a separate Mailbox for support@company.com and associate it with the rule",
-        "Add a Condition to the Rule Item that filters on the email recipient address",
-        "Create a separate rule for each email address",
-        "Use a Power Automate trigger condition on the associated flow"
+        "Always, by default",
+        "Only if the OrgDBOrg setting AddParentEntityToRelatedOnNewActivityCreate is enabled",
+        "Only if the queue has ARC disabled",
+        "Only if the email is created from reply-all"
       ],
       "answer": 1,
-      "category": "record-creation",
-      "tags": [
-        "record-creation-rules",
-        "conditions",
-        "filtering"
-      ],
-      "explanation": "Rule Item <strong>Conditions</strong> filter which activities trigger the rule. By adding a condition on the email's recipient field matching support@company.com, only emails to that address create cases.",
+      "category": "agent-scenario",
+      "tags": ["arc", "agent-scenario", "related-attribute", "orgdborgsetting"],
+      "explanation": "In the agent scenario, the Related attribute is set to the case only if the administrator has enabled the OrgDBOrg setting AddParentEntityToRelatedOnNewActivityCreate.",
       "wrongExplanations": [
-        "Configuring a mailbox controls where emails are received, but the rule condition is still needed to restrict creation to only that mailbox's emails.",
+        "Microsoft says this does not happen automatically in all cases.",
         null,
-        "Multiple rules for each address is possible but unnecessary — conditions within one rule handle this more efficiently.",
-        "Power Automate flow conditions are for record field logic — the rule's own conditions should filter the source activity first."
+        "ARC enablement on the queue is unrelated to this specific behavior.",
+        "Microsoft explicitly says this applies to new emails from the timeline, not reply/reply all scenarios."
       ],
       "msRef": {
-        "label": "Add conditions to record creation rules",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+        "label": "How the automatic record creation rule works in a customer service representative scenario",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-agent-scenario"
+      }
+    },
+    {
+      "q": "In Microsoft's reopen-resolved-case pattern, where should the reopen rule item appear relative to the create-new-case rule item?",
+      "options": [
+        "Below it, so the new case logic runs first",
+        "Above it, so reopen is evaluated first",
+        "Order does not matter if both use Power Automate",
+        "In a separate rule only"
+      ],
+      "answer": 1,
+      "category": "reopen-resolved",
+      "tags": ["arc", "reopen-resolved-case", "rule-order"],
+      "explanation": "Microsoft explicitly says the reopen resolved case rule item should appear above the create new case rule item so it is evaluated first.",
+      "wrongExplanations": [
+        "That would let new-case creation run before the reopen logic.",
+        null,
+        "Order still matters.",
+        "Microsoft's documented pattern is about the ordering of rule items."
+      ],
+      "msRef": {
+        "label": "Reopen a resolved case in Dynamics 365 Customer Service",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/reopen-resolved-case"
+      }
+    },
+    {
+      "q": "Which advanced ARC setting must be configured for Microsoft's reopen-resolved-case pattern, and how should it be set?",
+      "options": [
+        "Allow emails from unknown senders = Yes",
+        "Require a valid entitlement = No",
+        "Wait for a specific amount of time after the connected case has been resolved = Yes, with no duration required",
+        "Automatically reply to email = Yes"
+      ],
+      "answer": 2,
+      "category": "reopen-resolved",
+      "tags": ["arc", "reopen-resolved-case", "advanced-settings"],
+      "explanation": "Microsoft says the Wait for a specific amount of time after the connected case has been resolved setting should be set to Yes for the reopen-resolved-case pattern, and there is no need to provide a time value.",
+      "wrongExplanations": [
+        "Unknown sender handling is unrelated to the reopen-resolved-case pattern.",
+        "Entitlement requirement is unrelated to the reopen-resolved-case pattern.",
+        null,
+        "Automatic reply is unrelated to the reopen-resolved-case pattern."
+      ],
+      "msRef": {
+        "label": "Reopen a resolved case in Dynamics 365 Customer Service",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/reopen-resolved-case"
+      }
+    }
+  ],
+  "tf": [
+    {
+      "q": "True or False: The activity monitor can be used in on-premises environments for automatic record creation rules.",
+      "answer": false,
+      "category": "activity-monitor",
+      "tags": ["arc", "activity-monitor", "online-only"],
+      "explanation": "False. Microsoft says the activity monitor works in online environments only.",
+      "msRef": {
+        "label": "Use activity monitor to review and track rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-activity-arc"
+      }
+    },
+    {
+      "q": "True or False: If a rule remains in Draft status, it can still process incoming emails as long as the queue is configured correctly.",
+      "answer": false,
+      "category": "activation",
+      "tags": ["arc", "draft", "activation"],
+      "explanation": "False. The rule remains inactive while in Draft status and won't process incoming activities until activated.",
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "True or False: If a rule owner is a team, the owner of a case created through the automatic record creation rule is the team's administrator user.",
+      "answer": true,
+      "category": "ownership",
+      "tags": ["arc", "team-owner", "case-ownership"],
+      "explanation": "True. Microsoft documents that when a case is created through an ARC rule and the rule owner is a team, the owner of the created case is the team's administrator user.",
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "True or False: If the reason is empty and the state says Ready for workflow/Power Automate in activity monitor, Microsoft says to check system jobs for modern rules.",
+      "answer": false,
+      "category": "faq",
+      "tags": ["arc", "faq", "activity-monitor", "modern-rules"],
+      "explanation": "False. Microsoft says to check system jobs if it's a legacy rule, or check flow runs if it's a modern rule.",
+      "msRef": {
+        "label": "FAQ about automatic record creation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-faqs"
       }
     }
   ],
   "dragdrop": [
     {
-      "instruction": "Classify each Record Creation and Update Rule element by its role in the rule configuration.",
+      "instruction": "Match each ARC setting or artifact to its correct meaning.",
       "items": [
-        "Rule Item Condition",
-        "Power Automate Flow Action",
-        "Source Activity Type",
-        "Rule Status Active or Draft",
-        "Channel Property"
+        "Queue to monitor",
+        "Allow emails from unknown senders",
+        "Require a valid entitlement on the connected case",
+        "Wait for a specific amount of time after the connected case has been resolved",
+        "Activity monitor"
       ],
       "zones": [
-        "Controls what triggers the rule and how it filters",
-        "Defines what record is created and field values set",
-        "Must be set correctly for the rule to process incoming activities"
+        "Mandatory for email source type and defines where the incoming activity is processed",
+        "Lets the rule create records for senders not found on contact or account",
+        "Allows case creation only when entitlement validation is satisfied",
+        "Controls whether and when a new case can be created after a related case was resolved",
+        "Tracks ARC processing health before Power Automate runs"
       ],
       "correctMapping": {
-        "Rule Item Condition": "Controls what triggers the rule and how it filters",
-        "Source Activity Type": "Controls what triggers the rule and how it filters",
-        "Channel Property": "Controls what triggers the rule and how it filters",
-        "Power Automate Flow Action": "Defines what record is created and field values set",
-        "Rule Status Active or Draft": "Must be set correctly for the rule to process incoming activities"
+        "Queue to monitor": "Mandatory for email source type and defines where the incoming activity is processed",
+        "Allow emails from unknown senders": "Lets the rule create records for senders not found on contact or account",
+        "Require a valid entitlement on the connected case": "Allows case creation only when entitlement validation is satisfied",
+        "Wait for a specific amount of time after the connected case has been resolved": "Controls whether and when a new case can be created after a related case was resolved",
+        "Activity monitor": "Tracks ARC processing health before Power Automate runs"
       },
-      "tags": [
-        "record-creation-rules",
-        "configuration"
-      ],
-      "explanation": "Rule conditions and source activity type define what triggers the rule. The Power Automate flow action defines the record creation logic. The rule must be Active — Draft rules never fire.",
+      "tags": ["arc", "advanced-settings", "monitoring"],
+      "explanation": "These settings control source queue behavior, unknown sender handling, entitlement checks, timing after case resolution, and pre-flow monitoring.",
       "msRef": {
-        "label": "Configure record creation rules",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "instruction": "Put the modern ARC setup flow in the correct order.",
+      "items": [
+        "Create the rule and enter basic details",
+        "Save so the condition/action area is enabled",
+        "Add at least one condition in the condition builder",
+        "Configure the record to create and open Power Automate",
+        "Activate the rule after configuration"
+      ],
+      "zones": ["1", "2", "3", "4", "5"],
+      "correctMapping": {
+        "Create the rule and enter basic details": "1",
+        "Save so the condition/action area is enabled": "2",
+        "Add at least one condition in the condition builder": "3",
+        "Configure the record to create and open Power Automate": "4",
+        "Activate the rule after configuration": "5"
+      },
+      "tags": ["arc", "setup", "sequence"],
+      "explanation": "Microsoft's modern ARC setup starts with creating the rule and basic details, saving it, adding at least one condition, configuring the target record and Power Automate logic, then activating the rule.",
+      "msRef": {
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+      }
+    },
+    {
+      "instruction": "Match each scenario to the documented ARC outcome.",
+      "items": [
+        "Customer forwards representative reply to same queue from Inbox",
+        "Customer forwards representative reply to a new queue from Inbox",
+        "Service representative creates a new email from case timeline",
+        "Reopen-resolved-case pattern",
+        "Subject-change custom flow"
+      ],
+      "zones": [
+        "Case creation is skipped",
+        "A new case is created for the new queue",
+        "Related is set to the case only if a specific OrgDBOrg setting is enabled",
+        "The reopen rule item must be evaluated before the create-new-case item",
+        "Uses a Skipped activity monitor entry to trigger custom logic"
+      ],
+      "correctMapping": {
+        "Customer forwards representative reply to same queue from Inbox": "Case creation is skipped",
+        "Customer forwards representative reply to a new queue from Inbox": "A new case is created for the new queue",
+        "Service representative creates a new email from case timeline": "Related is set to the case only if a specific OrgDBOrg setting is enabled",
+        "Reopen-resolved-case pattern": "The reopen rule item must be evaluated before the create-new-case item",
+        "Subject-change custom flow": "Uses a Skipped activity monitor entry to trigger custom logic"
+      },
+      "tags": ["arc", "scenarios", "customer", "agent"],
+      "explanation": "These scenario outcomes come directly from Microsoft's customer scenario, agent scenario, subject-change, and reopen-resolved-case guidance.",
+      "msRef": {
+        "label": "How the automatic record creation rule works in a customer scenario",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-customer-scenario"
       }
     }
   ],
   "casestudy": [
     {
-      "title": "Contoso Support Centre Setup",
-      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
-      "tags": [
-        "foundational",
-        "configuration",
-        "case-management",
-        "SLA",
-        "security-roles"
-      ],
+      "title": "Northwind Email-to-Case Expansion",
+      "scenario": "Northwind is expanding its email-to-case setup. The support organization uses several monitored queues, wants to allow some unknown senders, and needs rules to behave differently when related cases are active or recently resolved. The architects also want visibility into skipped and failed processing without jumping straight into Power Automate runs.",
+      "tags": ["arc", "advanced-settings", "activity-monitor", "queues"],
       "msRef": {
-        "label": "Customer Service setup overview",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+        "label": "Automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
       },
       "questions": [
         {
-          "q": "To automatically create cases from emails sent to support@contoso.com, which feature must be configured?",
+          "q": "Northwind is using email as the source activity type. What is mandatory before the rule can be activated?",
           "options": [
-            "A Routing Rule Set with an email condition",
-            "A Record Creation and Update Rule monitoring Email Activities with a condition filtering on the recipient address",
-            "A Power Automate flow triggered by Dataverse email record creation",
-            "An SLA action that creates a case on email receipt"
+            "At least one queue must be selected for the rule",
+            "The rule owner must be a team",
+            "The subject-change flow must exist",
+            "All mailboxes must be private queues"
           ],
-          "answer": 1,
-          "explanation": "A <strong>Record Creation and Update Rule</strong> monitors incoming Email Activities. By adding a condition filtering on the recipient matching support@contoso.com, only emails to that address automatically create cases.",
+          "answer": 0,
+          "explanation": "For email activity, Microsoft says you must select a queue to be able to activate the rule.",
           "wrongExplanations": [
-            "Routing Rule Sets route existing cases to queues — they do not create cases from emails.",
             null,
-            "A custom Power Automate flow could work technically, but the out-of-box Record Creation Rule is the correct and supported approach.",
-            "SLA actions fire on time-based KPI triggers — they do not create cases from inbound emails."
+            "Rule ownership by a team is not mandatory for activation.",
+            "Subject-change customization is optional and scenario-specific.",
+            "Queue privacy is unrelated."
           ],
           "msRef": {
-            "label": "Automatic case creation from email",
-            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+            "label": "Automatically create or update records",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+          }
+        },
+        {
+          "q": "Northwind wants insight into rule health before Power Automate logic starts. Which feature fits that requirement?",
+          "options": [
+            "Activity monitor",
+            "Flow analytics only",
+            "Audit history on the case",
+            "Queue item diagnostics"
+          ],
+          "answer": 0,
+          "explanation": "The activity monitor tracks ARC processing until it is evaluated in Customer Service and before the rule runs in Power Automate.",
+          "wrongExplanations": [
+            null,
+            "Flow analytics focuses on flow runs rather than the pre-flow ARC evaluation stage.",
+            "Case audit history is not the rule-health monitor.",
+            "Queue diagnostics are not the documented ARC monitor for this requirement."
+          ],
+          "msRef": {
+            "label": "Use activity monitor to review and track rules",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-activity-arc"
+          }
+        },
+        {
+          "q": "Northwind wants a case created even if no matching contact or account exists for the sender. Which advanced setting matters first?",
+          "options": [
+            "Allow emails from unknown senders",
+            "Automatically reply to email",
+            "Wait for a specific amount of time after the connected case has been resolved",
+            "Track multiple queues"
+          ],
+          "answer": 0,
+          "explanation": "Allow emails from unknown senders is the setting that controls whether records can be created when the sender address isn't present on any contact or account.",
+          "wrongExplanations": [
+            null,
+            "Automatic reply is unrelated to whether a case is created for an unknown sender.",
+            "The wait-after-resolution setting addresses related-case timing, not unknown sender creation.",
+            "Queue scope is unrelated to unknown sender handling."
+          ],
+          "msRef": {
+            "label": "Automatically create or update records",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+          }
+        },
+        {
+          "q": "Northwind wants no delay before a new case can be created after a connected case is resolved. Which configuration matches Microsoft's guidance?",
+          "options": [
+            "Set Wait after resolution to No",
+            "Set Wait after resolution to Yes and leave the duration blank",
+            "Set the duration to zero minutes",
+            "Use multiple queue tracking"
+          ],
+          "answer": 1,
+          "explanation": "Microsoft says to set the wait toggle to Yes and leave the duration blank if you want a case to be created without any time lapse.",
+          "wrongExplanations": [
+            "Setting it to No does not produce that documented behavior.",
+            null,
+            "Zero minutes is not the documented instruction.",
+            "Queue tracking mode is unrelated."
+          ],
+          "msRef": {
+            "label": "Automatically create or update records",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+          }
+        },
+        {
+          "q": "Northwind sees a skipped activity monitor entry because an active case is already connected to the record, and wants custom subject-change logic. What pattern should they use?",
+          "options": [
+            "Trigger a custom flow from the Activity monitors table on skipped entries",
+            "Create a business rule on the Email table",
+            "Use a queue routing rule to split by subject",
+            "Replace ARC with unified routing"
+          ],
+          "answer": 0,
+          "explanation": "Microsoft's subject-change guidance uses a custom flow triggered by added Activity monitor rows in the Skipped state, then checks subject change and calls the ARC child flow.",
+          "wrongExplanations": [
+            null,
+            "A business rule on Email is not the documented pattern.",
+            "Queue routing rules are not the documented pattern here.",
+            "Unified routing does not replace this ARC customization pattern."
+          ],
+          "msRef": {
+            "label": "Create a new case when email subject changes",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-email-sub-chg"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Contoso Multi-Queue and Reopen Design",
+      "scenario": "Contoso monitors several support mailboxes. One inbound email can reach multiple queues, and the company wants representatives to see all originating queues on the case. They also want emails on recently resolved issues to reopen the old case under controlled conditions instead of always creating a new one.",
+      "tags": ["arc", "multiple-cases", "reopen-resolved-case", "customer-scenario"],
+      "msRef": {
+        "label": "Create multiple cases from an email sent to multiple mailboxes",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-multiple-cases"
+      },
+      "questions": [
+        {
+          "q": "What table should Contoso expose on the case form to show all originating queues for a multi-mailbox email scenario?",
+          "options": [
+            "Originating Queue Mapping",
+            "Mailbox",
+            "Activity monitors",
+            "Queue Item"
+          ],
+          "answer": 0,
+          "explanation": "Microsoft tells administrators to create a view on the Originating Queue Mapping table and add a subgrid for it to the case form.",
+          "wrongExplanations": [
+            null,
+            "Mailbox is not the documented table to expose for this purpose.",
+            "Activity monitors are for monitoring rule health, not originating queue visibility.",
+            "Queue Item is related but not the documented table for this scenario."
+          ],
+          "msRef": {
+            "label": "Create multiple cases from an email sent to multiple mailboxes",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-multiple-cases"
+          }
+        },
+        {
+          "q": "If a customer forwards a representative's reply email from Inbox to a new queue, what does Microsoft document?",
+          "options": [
+            "ARC skips case creation because the mail was forwarded",
+            "A new case is created for the new queue",
+            "The original case is reopened automatically",
+            "No email tagging occurs on the earlier cases"
+          ],
+          "answer": 1,
+          "explanation": "In the customer scenario, Microsoft says ARC creates a new case for the new queue when the forwarded email is sent from the inbox to a new queue.",
+          "wrongExplanations": [
+            "That is the same-queue forwarded scenario, not the new-queue scenario.",
+            null,
+            "Automatic reopen is not the documented outcome here.",
+            "Microsoft says the email is tagged to earlier queue-originated cases as well."
+          ],
+          "msRef": {
+            "label": "How the automatic record creation rule works in a customer scenario",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-customer-scenario"
+          }
+        },
+        {
+          "q": "Where should the reopen-resolved-case rule item be placed relative to the create-new-case rule item?",
+          "options": [
+            "After it",
+            "Before it",
+            "In a different solution only",
+            "Order is irrelevant"
+          ],
+          "answer": 1,
+          "explanation": "Microsoft says the reopen rule item must appear above the create-new-case rule item so it is evaluated first.",
+          "wrongExplanations": [
+            "That would let create-new-case logic run too early.",
+            null,
+            "This is about rule item order, not solution packaging.",
+            "Microsoft explicitly says order matters."
+          ],
+          "msRef": {
+            "label": "Reopen a resolved case in Dynamics 365 Customer Service",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/reopen-resolved-case"
+          }
+        },
+        {
+          "q": "What should the advanced 'Wait after connected case has been resolved' setting be for Microsoft's reopen pattern?",
+          "options": [
+            "No",
+            "Yes, with no duration required",
+            "Yes, exactly one hour",
+            "Only if unknown senders are disabled"
+          ],
+          "answer": 1,
+          "explanation": "The reopen-resolved-case article says to set the wait-after-resolution setting to Yes, with no need to provide a time value.",
+          "wrongExplanations": [
+            "No is not the documented setting for the reopen pattern.",
+            null,
+            "One hour is not the documented requirement.",
+            "Unknown sender handling is unrelated."
+          ],
+          "msRef": {
+            "label": "Reopen a resolved case in Dynamics 365 Customer Service",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/reopen-resolved-case"
+          }
+        },
+        {
+          "q": "Which monitoring artifact is useful when subject-change custom logic depends on skipped ARC processing reasons?",
+          "options": [
+            "Activity monitor entries",
+            "Case audit history",
+            "App insights traces",
+            "Security role audit log"
+          ],
+          "answer": 0,
+          "explanation": "Subject-change customization is driven from Activity monitor entries in the Skipped state, where the reason can be inspected.",
+          "wrongExplanations": [
+            null,
+            "Case audit history is not the documented trigger source.",
+            "App insights traces are not the documented trigger source.",
+            "Security role audit log is unrelated."
+          ],
+          "msRef": {
+            "label": "Create a new case when email subject changes",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/arc-email-sub-chg"
           }
         }
       ]
