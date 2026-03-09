@@ -23,12 +23,16 @@
         "reuse"
       ],
       "explanation": "An entitlement template is used to quickly create entitlements that are prefilled with core support-term information such as dates, SLA, allocation type, and total term.",
-      "wrongExplanations": {
-        "0": "Entitlement channels define support terms per channel, but they do not provide template-based prefill for full entitlement creation.",
-        "2": "An SLA measures service targets but does not itself serve as a reusable entitlement creation template.",
-        "3": "A customer service schedule controls working hours, not entitlement prefill."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      "wrongExplanations": [
+        "Entitlement channels define support terms per channel, but they do not provide template-based prefill for full entitlement creation.",
+        null,
+        "An SLA measures service targets but does not itself serve as a reusable entitlement creation template.",
+        "A customer service schedule controls working hours, not entitlement prefill."
+      ],
+      "msRef": {
+        "label": "Set Up Entitlements Templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      }
     },
     {
       "q": "Which statement best describes the relationship between an entitlement template and an entitlement?",
@@ -47,12 +51,16 @@
         "lifecycle"
       ],
       "explanation": "An entitlement template contains predefined customer support terms and is used to create actual entitlements for customers.",
-      "wrongExplanations": {
-        "0": "The live, customer-specific support contract is the entitlement, not the template.",
-        "2": "Templates do not replace SLAs.",
-        "3": "Templates are optional accelerators, not a mandatory prerequisite."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      "wrongExplanations": [
+        "The live, customer-specific support contract is the entitlement, not the template.",
+        null,
+        "Templates do not replace SLAs.",
+        "Templates are optional accelerators, not a mandatory prerequisite."
+      ],
+      "msRef": {
+        "label": "Set Up Entitlements Templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      }
     },
     {
       "q": "A company wants a new entitlement created from a template to still be customer-specific and active only when assigned properly. What is true?",
@@ -71,12 +79,16 @@
         "activation"
       ],
       "explanation": "Templates prefill support-term information, but the resulting entitlement is still a customer-specific record that must be created and managed as an actual entitlement.",
-      "wrongExplanations": {
-        "0": "Templates do not auto-activate support across all customers.",
-        "2": "Cases use entitlements, not templates directly.",
-        "3": "Templates are not limited to default-entitlement scenarios."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      "wrongExplanations": [
+        "Templates do not auto-activate support across all customers.",
+        null,
+        "Cases use entitlements, not templates directly.",
+        "Templates are not limited to default-entitlement scenarios."
+      ],
+      "msRef": {
+        "label": "Set Up Entitlements Templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      }
     },
     {
       "q": "A company wants a specific entitlement to be applied automatically whenever a new case is created for a customer. Which condition must be met on the entitlement itself?",
@@ -95,12 +107,16 @@
         "active"
       ],
       "explanation": "Only an active entitlement can be set as the default entitlement for a customer, and default entitlements are the ones intended for automatic application to cases.",
-      "wrongExplanations": {
-        "1": "Channel choice does not determine whether an entitlement is the default for automatic case application.",
-        "2": "Restriction behavior is separate from default application.",
-        "3": "Template origin is irrelevant to default-entitlement status."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      "wrongExplanations": [
+        null,
+        "Channel choice does not determine whether an entitlement is the default for automatic case application.",
+        "Restriction behavior is separate from default application.",
+        "Template origin is irrelevant to default-entitlement status."
+      ],
+      "msRef": {
+        "label": "Entitlement Entities",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      }
     },
     {
       "q": "A customer already has one default entitlement. An administrator sets another active entitlement as default for the same customer. What happens?",
@@ -119,12 +135,16 @@
         "customer"
       ],
       "explanation": "If an entitlement is already set as default for a customer, setting another entitlement as default overrides the existing one and makes the new one the default.",
-      "wrongExplanations": {
-        "0": "The platform does not support multiple simultaneous defaults for the same customer in that way.",
-        "2": "Templates are not the default-support record used on cases.",
-        "3": "Default entitlement is not limited to phone cases."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      "wrongExplanations": [
+        "The platform does not support multiple simultaneous defaults for the same customer in that way.",
+        null,
+        "Templates are not the default-support record used on cases.",
+        "Default entitlement is not limited to phone cases."
+      ],
+      "msRef": {
+        "label": "Entitlement Entities",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      }
     },
     {
       "q": "An entitlement is configured to decrement remaining terms on case creation. A case was created with the entitlement, but the admin had set Decrement Entitlement Term to No on the case. Later they switch that case field back to Yes. What should they expect?",
@@ -143,12 +163,16 @@
         "manual-correction"
       ],
       "explanation": "If decrement on case creation was prevented and later switched back to Yes, the term doesn't automatically decrement retroactively. It must be decremented explicitly using workflow or programmatically.",
-      "wrongExplanations": {
-        "0": "Microsoft specifically notes it will not decrement automatically in this scenario.",
-        "1": "It can still be decremented explicitly.",
-        "3": "Case status is unrelated to this correction path."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      "wrongExplanations": [
+        "Microsoft specifically notes it will not decrement automatically in this scenario.",
+        "It can still be decremented explicitly.",
+        null,
+        "Case status is unrelated to this correction path."
+      ],
+      "msRef": {
+        "label": "Entitlement Entities",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      }
     },
     {
       "q": "Which setting controls whether entitlement terms are reduced at case creation versus case resolution?",
@@ -168,12 +192,16 @@
         "case-resolution"
       ],
       "explanation": "Decrease Remaining On determines when the remaining entitlement terms are decremented, such as on case creation or case resolution.",
-      "wrongExplanations": {
-        "0": "That setting controls blocking behavior when terms are exceeded, not the decrement timing trigger.",
-        "2": "Allocation Type defines whether support is measured in hours or cases, not when decrement happens.",
-        "3": "That setting relates to SLA application, not entitlement decrement timing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "That setting controls blocking behavior when terms are exceeded, not the decrement timing trigger.",
+        null,
+        "Allocation Type defines whether support is measured in hours or cases, not when decrement happens.",
+        "That setting relates to SLA application, not entitlement decrement timing."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "A company wants support eligibility to depend on the specific product a customer purchased. Which entitlement capability supports this?",
@@ -192,12 +220,16 @@
         "scope"
       ],
       "explanation": "Entitlements can be scoped based on the product or service that the customer purchased, allowing support levels to vary by product.",
-      "wrongExplanations": {
-        "1": "Queues do not define product-specific support eligibility.",
-        "2": "SLA type does not create product entitlement scope by itself.",
-        "3": "Holiday schedules are unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        null,
+        "Queues do not define product-specific support eligibility.",
+        "SLA type does not create product entitlement scope by itself.",
+        "Holiday schedules are unrelated."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "A company wants only a named contact at a customer to be able to consume a given support entitlement. What should be configured?",
@@ -216,12 +248,16 @@
         "support-eligibility"
       ],
       "explanation": "Entitlements can be defined so that support terms apply to specific related records such as a contact, not just broadly to the whole customer account.",
-      "wrongExplanations": {
-        "1": "SLAs define timing commitments, not who is entitled to consume support.",
-        "2": "Queue visibility is unrelated to entitlement eligibility.",
-        "3": "Schedules define work hours, not entitlement scope."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/training/modules/creating-and-managing-entitlements-in-dynamics-365/"
+      "wrongExplanations": [
+        null,
+        "SLAs define timing commitments, not who is entitled to consume support.",
+        "Queue visibility is unrelated to entitlement eligibility.",
+        "Schedules define work hours, not entitlement scope."
+      ],
+      "msRef": {
+        "label": "Creating And Managing Entitlements In Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/creating-and-managing-entitlements-in-dynamics-365/"
+      }
     },
     {
       "q": "A support manager wants separate support limits for email and phone under one support contract. Which design is correct?",
@@ -241,12 +277,16 @@
         "support-terms"
       ],
       "explanation": "Entitlement channels are used to define and track separate support terms by channel, such as Email and Phone, within a single entitlement.",
-      "wrongExplanations": {
-        "1": "SLA KPIs measure compliance but do not define channel-specific entitlement consumption.",
-        "2": "A template is not the live channel-consumption mechanism.",
-        "3": "Holiday schedules do not split support-term consumption by channel."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        null,
+        "SLA KPIs measure compliance but do not define channel-specific entitlement consumption.",
+        "A template is not the live channel-consumption mechanism.",
+        "Holiday schedules do not split support-term consumption by channel."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "Which statement about Restrict based on entitlement terms is correct?",
@@ -265,12 +305,16 @@
         "blocking"
       ],
       "explanation": "Restrict based on entitlement terms determines whether representatives can continue creating cases when remaining terms are exhausted or negative.",
-      "wrongExplanations": {
-        "0": "Allocation Type controls hours versus cases.",
-        "2": "Default-entitlement behavior is separate.",
-        "3": "This is a live entitlement setting, not template-only."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "Allocation Type controls hours versus cases.",
+        null,
+        "Default-entitlement behavior is separate.",
+        "This is a live entitlement setting, not template-only."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "A representative can still create a case even though the customer's entitlement is already overused. Which setting most likely explains this?",
@@ -289,12 +333,16 @@
         "restriction"
       ],
       "explanation": "If Restrict based on entitlement terms is set to No, representatives can still create cases and the remaining terms can become negative.",
-      "wrongExplanations": {
-        "1": "Case-based allocation does not by itself permit overuse.",
-        "2": "Default SLA is unrelated to blocking behavior.",
-        "3": "Template origin does not explain this runtime behavior."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        null,
+        "Case-based allocation does not by itself permit overuse.",
+        "Default SLA is unrelated to blocking behavior.",
+        "Template origin does not explain this runtime behavior."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "A company uses Dynamics 365 Customer Service. Two SLAs exist for cases: one for cases logged by email and one for all other cases. The SLA timer must pause whenever the Is Escalated column is set to Yes, but only for cases logged by email. What should you configure?",
@@ -314,12 +362,16 @@
         "scope"
       ],
       "explanation": "Override criteria on the SLA item is correct because it lets you pause the timer only for the SLA item used by the email-based SLA when Is Escalated = Yes.",
-      "wrongExplanations": {
-        "0": "Entity-level pause status is broader and applies to all SLAs for the selected entity.",
-        "2": "SLA KPI-level override is broader because it affects all SLA items that use that KPI.",
-        "3": "Manual override settings control SLA application behavior, not timer pausing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        "Entity-level pause status is broader and applies to all SLAs for the selected entity.",
+        null,
+        "SLA KPI-level override is broader because it affects all SLA items that use that KPI.",
+        "Manual override settings control SLA application behavior, not timer pausing."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "Pause conditions are configured at the entity level, the SLA KPI level, and the SLA item level. Which pause configuration takes highest precedence?",
@@ -338,12 +390,16 @@
         "sla-item"
       ],
       "explanation": "SLA item level pause conditions override pause conditions set at the SLA KPI level and entity level.",
-      "wrongExplanations": {
-        "0": "Entity level is the broadest, not the highest-precedence level.",
-        "1": "SLA KPI level overrides entity level, but it is still overridden by SLA item level.",
-        "3": "Precedence is based on configuration scope, not edit order."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        "Entity level is the broadest, not the highest-precedence level.",
+        "SLA KPI level overrides entity level, but it is still overridden by SLA item level.",
+        null,
+        "Precedence is based on configuration scope, not edit order."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "An administrator wants to configure pause conditions at the SLA KPI level but cannot set Override Criteria to Yes. What is the most likely reason?",
@@ -362,12 +418,16 @@
         "allow-pause-and-resume"
       ],
       "explanation": "Microsoft notes that pause configurations can be overridden only when the Allow Pause and Resume option is enabled.",
-      "wrongExplanations": {
-        "0": "Default-SLA status does not govern whether Override Criteria can be set.",
-        "2": "KPI entity choice is not the gating condition described for override criteria.",
-        "3": "Timer control affects form display, not whether pause override can be configured."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        "Default-SLA status does not govern whether Override Criteria can be set.",
+        null,
+        "KPI entity choice is not the gating condition described for override criteria.",
+        "Timer control affects form display, not whether pause override can be configured."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "When a paused SLA resumes, what happens to the current SLA KPI instance?",
@@ -386,12 +446,16 @@
         "kpi-instance"
       ],
       "explanation": "When a paused SLA resumes, the current SLA KPI instance is canceled and a new SLA KPI instance is created.",
-      "wrongExplanations": {
-        "0": "This is not how resume is documented to behave.",
-        "2": "Resume does not mark the KPI succeeded.",
-        "3": "There is no warning-only conversion behavior."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        "This is not how resume is documented to behave.",
+        null,
+        "Resume does not mark the KPI succeeded.",
+        "There is no warning-only conversion behavior."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "An SLA KPI instance has reached a terminal state of Succeeded. What is true about Paused On and Elapsed Time after that point?",
@@ -410,12 +474,16 @@
         "paused-on"
       ],
       "explanation": "After the SLA KPI instance reaches a terminal state such as Succeeded or Noncompliant, Paused On and Elapsed Time are no longer calculated.",
-      "wrongExplanations": {
-        "0": "Terminal state stops those calculations.",
-        "2": "Elapsed Time also stops being calculated.",
-        "3": "Paused On also stops being calculated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-service-level-agreements"
+      "wrongExplanations": [
+        "Terminal state stops those calculations.",
+        null,
+        "Elapsed Time also stops being calculated.",
+        "Paused On also stops being calculated."
+      ],
+      "msRef": {
+        "label": "Define Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-service-level-agreements"
+      }
     },
     {
       "q": "Which statement best distinguishes enhanced SLAs from standard SLAs?",
@@ -434,12 +502,16 @@
         "pause-resume"
       ],
       "explanation": "Enhanced SLAs support pause and resume behavior, including granular pause configuration. That is one of the main distinctions from standard SLAs.",
-      "wrongExplanations": {
-        "0": "This reverses the relationship.",
-        "2": "Custom plug-ins are optional for custom time calculation, not a basic requirement for all SLAs.",
-        "3": "Enhanced SLAs can define warning and failure actions."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-enhanced-sla"
+      "wrongExplanations": [
+        "This reverses the relationship.",
+        null,
+        "Custom plug-ins are optional for custom time calculation, not a basic requirement for all SLAs.",
+        "Enhanced SLAs can define warning and failure actions."
+      ],
+      "msRef": {
+        "label": "Create Enhanced Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-enhanced-sla"
+      }
     },
     {
       "q": "An SLA author uses a field that changes frequently in the Applicable When criteria. Why is this risky?",
@@ -458,12 +530,16 @@
         "best-practice"
       ],
       "explanation": "Microsoft recommends avoiding frequently updated fields in Applicable When because changes can cause the SLA item to be canceled.",
-      "wrongExplanations": {
-        "0": "Timer rendering is not the issue described.",
-        "2": "Field volatility does not change the SLA type.",
-        "3": "Holiday schedule calculations are unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      "wrongExplanations": [
+        "Timer rendering is not the issue described.",
+        null,
+        "Field volatility does not change the SLA type.",
+        "Holiday schedule calculations are unrelated."
+      ],
+      "msRef": {
+        "label": "Create Standard Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      }
     },
     {
       "q": "An SLA item has Applicable When set to Case Status = Active, but Success Criteria includes Case Status is not equal to Active. What is the expected behavior?",
@@ -482,12 +558,16 @@
         "conflict"
       ],
       "explanation": "If configured SLA conditions conflict with each other, the SLA is canceled before it meets the success or failure criteria.",
-      "wrongExplanations": {
-        "0": "Conflicting logic does not cause immediate success.",
-        "2": "There is no automatic warning-state fallback for this conflict.",
-        "3": "The conflicting condition is not ignored."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      "wrongExplanations": [
+        "Conflicting logic does not cause immediate success.",
+        null,
+        "There is no automatic warning-state fallback for this conflict.",
+        "The conflicting condition is not ignored."
+      ],
+      "msRef": {
+        "label": "Create Standard Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      }
     },
     {
       "q": "A company wants to calculate SLA time using custom business logic. Which combination is required?",
@@ -506,12 +586,16 @@
         "plugin"
       ],
       "explanation": "Custom time calculation requires a custom action created from the SLACustomTimeCalculationTemplate and a plug-in registered and linked to that action.",
-      "wrongExplanations": {
-        "1": "These do not implement custom time calculation.",
-        "2": "Power Automate alone is not the documented mechanism.",
-        "3": "Schedules affect time calculations but do not implement custom custom-time logic."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        null,
+        "These do not implement custom time calculation.",
+        "Power Automate alone is not the documented mechanism.",
+        "Schedules affect time calculations but do not implement custom custom-time logic."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "An organization exports an SLA that uses custom time calculation to another environment but forgets to include the SDK message step and plug-in assembly. What is the likely result?",
@@ -530,12 +614,16 @@
         "plugin"
       ],
       "explanation": "Microsoft explicitly warns to include the SDK message step and plug-in assembly in the solution. Otherwise the custom time calculation can fail because the plug-in implementation is missing.",
-      "wrongExplanations": {
-        "0": "The action template alone is not enough.",
-        "2": "Entitlement terms are unrelated to this deployment issue.",
-        "3": "Import does not convert SLA type in that way."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        "The action template alone is not enough.",
+        null,
+        "Entitlement terms are unrelated to this deployment issue.",
+        "Import does not convert SLA type in that way."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "A company wants service representatives to be blocked from creating cases once a customer's entitlement has been fully used. Which entitlement setting should be enabled?",
@@ -553,12 +641,16 @@
         "case-creation"
       ],
       "explanation": "When Restrict based on entitlement terms is set to Yes, service representatives can't create cases when Remaining Terms is less than zero or when the term remaining for a channel is less than zero.",
-      "wrongExplanations": {
-        "0": "That changes when the remaining terms decrease, not whether case creation is blocked.",
-        "2": "Allocation type alone does not block case creation.",
-        "3": "Default SLA is unrelated to entitlement restriction."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "That changes when the remaining terms decrease, not whether case creation is blocked.",
+        null,
+        "Allocation type alone does not block case creation.",
+        "Default SLA is unrelated to entitlement restriction."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "Restrict based on entitlement terms is set to No. The customer has already exceeded the entitlement. What can happen when a representative creates another case?",
@@ -576,12 +668,16 @@
         "negative-values"
       ],
       "explanation": "If Restrict based on entitlement terms is No, representatives can still create cases and Remaining Terms can be updated to a negative value.",
-      "wrongExplanations": {
-        "0": "Blocking happens when restriction is enabled.",
-        "2": "There is no such entitlement-template conversion behavior.",
-        "3": "Entitlement overuse does not automatically pause the SLA timer."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "Blocking happens when restriction is enabled.",
+        null,
+        "There is no such entitlement-template conversion behavior.",
+        "Entitlement overuse does not automatically pause the SLA timer."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "A support contract includes 40 hours of email support and 20 phone incidents. How should this be modeled in an entitlement?",
@@ -600,12 +696,16 @@
         "phone"
       ],
       "explanation": "Entitlement channels are used to define and track support terms per support channel, such as Email and Phone, each with its own terms.",
-      "wrongExplanations": {
-        "0": "That would not model different support terms by channel.",
-        "2": "SLA KPIs measure performance; they do not replace entitlement channels.",
-        "3": "Holiday schedules do not model support-channel allotments."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "That would not model different support terms by channel.",
+        null,
+        "SLA KPIs measure performance; they do not replace entitlement channels.",
+        "Holiday schedules do not model support-channel allotments."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "In the context of SLA pause configuration, what does 'scope' most directly refer to?",
@@ -624,12 +724,16 @@
         "pause-conditions"
       ],
       "explanation": "Pause scope refers to where or under what conditions the pause rule applies, such as entity level, SLA KPI level, or SLA item level, and what records it affects.",
-      "wrongExplanations": {
-        "1": "Pause scope is about applicability, not the maximum duration of a pause.",
-        "2": "User permissions are separate from pause-condition configuration.",
-        "3": "Timer control display is unrelated to the logical scope of SLA pausing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        null,
+        "Pause scope is about applicability, not the maximum duration of a pause.",
+        "User permissions are separate from pause-condition configuration.",
+        "Timer control display is unrelated to the logical scope of SLA pausing."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "What does 'precedence' mean when multiple SLA pause configurations exist?",
@@ -648,12 +752,16 @@
         "override"
       ],
       "explanation": "Precedence means the order in which pause settings override one another. Microsoft documents that SLA item-level settings override SLA KPI-level settings, which override entity-level settings.",
-      "wrongExplanations": {
-        "1": "Activation order of SLAs is a different concept.",
-        "2": "Warning-action severity is not what precedence refers to here.",
-        "3": "Entitlement-channel consumption is unrelated to SLA pause precedence."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        null,
+        "Activation order of SLAs is a different concept.",
+        "Warning-action severity is not what precedence refers to here.",
+        "Entitlement-channel consumption is unrelated to SLA pause precedence."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "Which statement best describes how SLA type affects behavior in Dynamics 365 Customer Service?",
@@ -672,12 +780,16 @@
         "behavior"
       ],
       "explanation": "SLA type affects available behavior and capabilities. For example, standard and enhanced SLAs differ in scope and features, including support for non-Case entities and more advanced behavior.",
-      "wrongExplanations": {
-        "1": "User sign-in behavior is unrelated to SLA type.",
-        "2": "Entitlement channels belong to entitlements, not SLA type behavior.",
-        "3": "Fiscal calendar behavior is unrelated to SLA type."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        null,
+        "User sign-in behavior is unrelated to SLA type.",
+        "Entitlement channels belong to entitlements, not SLA type behavior.",
+        "Fiscal calendar behavior is unrelated to SLA type."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "What does SLA recalculation refer to in Dynamics 365 Customer Service?",
@@ -696,12 +808,16 @@
         "kpi"
       ],
       "explanation": "SLA recalculation refers to recomputing SLA timings when supported changes or settings require it, such as terminal-status recalculation or documented schedule-related triggers.",
-      "wrongExplanations": {
-        "1": "Licensing cost is unrelated to SLA recalculation.",
-        "2": "Queue assignment logic is unrelated to SLA recalculation.",
-        "3": "Calendar export is a transport task, not the meaning of recalculation."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+      "wrongExplanations": [
+        null,
+        "Licensing cost is unrelated to SLA recalculation.",
+        "Queue assignment logic is unrelated to SLA recalculation.",
+        "Calendar export is a transport task, not the meaning of recalculation."
+      ],
+      "msRef": {
+        "label": "Enable Sla Recalculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+      }
     },
     {
       "q": "What is meant by custom time calculation for an SLA KPI?",
@@ -720,12 +836,16 @@
         "business-logic"
       ],
       "explanation": "Custom time calculation means using a custom process and plug-in to calculate SLA timing based on business-specific logic beyond the standard calendar-based calculation.",
-      "wrongExplanations": {
-        "1": "Timer controls display timing but do not define custom SLA calculation logic.",
-        "2": "Changing a user's time zone is not custom SLA time calculation.",
-        "3": "Entitlement channels do not replace SLA time calculation."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        null,
+        "Timer controls display timing but do not define custom SLA calculation logic.",
+        "Changing a user's time zone is not custom SLA time calculation.",
+        "Entitlement channels do not replace SLA time calculation."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "In this topic, what are entitlement controls primarily about?",
@@ -744,12 +864,16 @@
         "restrictions"
       ],
       "explanation": "Entitlement controls are about defining and enforcing how much support a customer is entitled to consume, through settings such as allocation type, remaining terms, channels, contacts, products, and restriction behavior.",
-      "wrongExplanations": {
-        "1": "Form appearance is unrelated to entitlements.",
-        "2": "Dashboard visibility is unrelated to entitlement controls.",
-        "3": "Knowledge publishing permissions are unrelated to entitlements."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        null,
+        "Form appearance is unrelated to entitlements.",
+        "Dashboard visibility is unrelated to entitlement controls.",
+        "Knowledge publishing permissions are unrelated to entitlements."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "What must happen before entitlement channels can be added to an entitlement?",
@@ -767,12 +891,16 @@
         "save-record"
       ],
       "explanation": "Microsoft states that you must save the entitlement record before you can add entitlement channels to it.",
-      "wrongExplanations": {
-        "1": "Default SLA status is unrelated to adding entitlement channels.",
-        "2": "Timer control is unrelated to entitlement-channel creation.",
-        "3": "Holiday schedules are unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        null,
+        "Default SLA status is unrelated to adding entitlement channels.",
+        "Timer control is unrelated to entitlement-channel creation.",
+        "Holiday schedules are unrelated."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "Which statement about entity-level pause status is correct?",
@@ -791,12 +919,16 @@
         "scope"
       ],
       "explanation": "Entity-level pause status applies to all SLAs of the selected entity unless a more specific pause configuration is defined at the SLA KPI or SLA item level.",
-      "wrongExplanations": {
-        "0": "It is not limited to the default SLA.",
-        "2": "The override order goes the other way; SLA item level is more specific.",
-        "3": "Microsoft states pause conditions can be set for out-of-the-box and custom entities if SLA is enabled for the entity."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        "It is not limited to the default SLA.",
+        null,
+        "The override order goes the other way; SLA item level is more specific.",
+        "Microsoft states pause conditions can be set for out-of-the-box and custom entities if SLA is enabled for the entity."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "Which statement correctly distinguishes standard and enhanced SLAs in Dynamics 365 Customer Service?",
@@ -814,12 +946,16 @@
         "case"
       ],
       "explanation": "Microsoft states that only enhanced SLAs can be created for other entities, while a standard SLA can be created only for the Case entity.",
-      "wrongExplanations": {
-        "0": "This reverses the documented rule.",
-        "2": "Enhanced SLAs are not limited to Case.",
-        "3": "There is no such split in the documentation."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        "This reverses the documented rule.",
+        null,
+        "Enhanced SLAs are not limited to Case.",
+        "There is no such split in the documentation."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "Which activity type is explicitly listed as supporting SLA enablement?",
@@ -837,12 +973,16 @@
         "entities"
       ],
       "explanation": "Appointment is listed among activity entities that can support SLAs. RecurringAppointment and its instances are explicitly excluded.",
-      "wrongExplanations": {
-        "0": "RecurringAppointment is explicitly excluded.",
-        "2": "Instances of RecurringAppointment are also excluded.",
-        "3": "Campaign Response is not the example Microsoft gives here."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        "RecurringAppointment is explicitly excluded.",
+        null,
+        "Instances of RecurringAppointment are also excluded.",
+        "Campaign Response is not the example Microsoft gives here."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "After enabling an entity for SLA in Power Apps, what should you do before expecting the setting to be available everywhere?",
@@ -860,12 +1000,16 @@
         "customizations"
       ],
       "explanation": "The documented steps include publishing the table and then publishing all customizations after enabling the SLA setting.",
-      "wrongExplanations": {
-        "0": "Save alone is not the full documented step.",
-        "2": "Export is unrelated to making the customization active.",
-        "3": "A default SLA is not the required next step."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        "Save alone is not the full documented step.",
+        null,
+        "Export is unrelated to making the customization active.",
+        "A default SLA is not the required next step."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "Microsoft recommends what maximum number of SLA KPIs per entity?",
@@ -883,12 +1027,16 @@
         "limits"
       ],
       "explanation": "Microsoft recommends a maximum of five SLA KPIs per entity.",
-      "wrongExplanations": {
-        "0": "The recommendation is higher.",
-        "2": "This exceeds the recommendation.",
-        "3": "This is the recommendation for SLA items per entity to stay under, not KPIs."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        "The recommendation is higher.",
+        null,
+        "This exceeds the recommendation.",
+        "This is the recommendation for SLA items per entity to stay under, not KPIs."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "How many entities can have active SLAs at maximum in an organization, according to the enablement guidance?",
@@ -905,12 +1053,16 @@
         "entity-limit"
       ],
       "explanation": "Microsoft notes that you can have active SLAs for a maximum of seven entities.",
-      "wrongExplanations": {
-        "0": "The documented maximum is seven.",
-        "2": "The documented maximum is lower.",
-        "3": "There is a documented maximum."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        "The documented maximum is seven.",
+        null,
+        "The documented maximum is lower.",
+        "There is a documented maximum."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "What is the documented maximum number of SLA items per SLA entity?",
@@ -927,12 +1079,16 @@
         "entity-limit"
       ],
       "explanation": "Microsoft states a maximum of 100 SLA items per SLA entity, while recommending less than 15.",
-      "wrongExplanations": {
-        "0": "Less than 15 is the recommendation, not the hard maximum.",
-        "1": "The documented maximum is higher.",
-        "3": "This exceeds the documented maximum."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "wrongExplanations": [
+        "Less than 15 is the recommendation, not the hard maximum.",
+        "The documented maximum is higher.",
+        null,
+        "This exceeds the documented maximum."
+      ],
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "q": "What is the strongest reason to choose 'User local' in the Time zone field for SLA calculations?",
@@ -950,12 +1106,16 @@
         "sla-time-scenarios"
       ],
       "explanation": "The time-scenarios article explicitly says to select User local to get accurate time calculations for your time zone.",
-      "wrongExplanations": {
-        "0": "Timezone independent is the option that behaves closer to UTC.",
-        "2": "Time zone settings do not disable calendars.",
-        "3": "Time zone choice does not disable holiday handling."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-time-scenarios"
+      "wrongExplanations": [
+        "Timezone independent is the option that behaves closer to UTC.",
+        null,
+        "Time zone settings do not disable calendars.",
+        "Time zone choice does not disable holiday handling."
+      ],
+      "msRef": {
+        "label": "Sla Time Scenarios",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-time-scenarios"
+      }
     },
     {
       "q": "If an SLA is applied to a case without attaching a calendar, from what point is time calculated?",
@@ -973,12 +1133,16 @@
         "sla-time-scenarios"
       ],
       "explanation": "Without a calendar attached, time is calculated from the creation of the case.",
-      "wrongExplanations": {
-        "0": "Assignment date is not the documented default start in this scenario.",
-        "1": "Last modified date is not the default described.",
-        "3": "First response is not the default start."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-time-scenarios"
+      "wrongExplanations": [
+        "Assignment date is not the documented default start in this scenario.",
+        "Last modified date is not the default described.",
+        null,
+        "First response is not the default start."
+      ],
+      "msRef": {
+        "label": "Sla Time Scenarios",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-time-scenarios"
+      }
     },
     {
       "q": "For a standard SLA, where is the start time for different SLA KPIs configured?",
@@ -996,12 +1160,16 @@
         "case"
       ],
       "explanation": "In a standard SLA, the start time for different SLA KPIs is set at the SLA level and can't differ across SLA KPIs. It comes from the Applicable From field value.",
-      "wrongExplanations": {
-        "0": "Standard SLA KPIs do not get separate start times per item.",
-        "2": "Timer controls display timing; they do not define the SLA start point.",
-        "3": "Entitlement channels do not define SLA KPI start time."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      "wrongExplanations": [
+        "Standard SLA KPIs do not get separate start times per item.",
+        null,
+        "Timer controls display timing; they do not define the SLA start point.",
+        "Entitlement channels do not define SLA KPI start time."
+      ],
+      "msRef": {
+        "label": "Create Standard Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      }
     },
     {
       "q": "What happens if you try to create an SLA in the web client when Copilot Service admin center is available?",
@@ -1019,12 +1187,16 @@
         "unified-interface"
       ],
       "explanation": "Microsoft documents that a deprecation message appears with an option to create the SLA in Unified Interface.",
-      "wrongExplanations": {
-        "0": "The article describes a message and option, not a silent redirect.",
-        "2": "The article mentions an option to create it in Unified Interface.",
-        "3": "That is the opposite of the deprecation guidance."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      "wrongExplanations": [
+        "The article describes a message and option, not a silent redirect.",
+        null,
+        "The article mentions an option to create it in Unified Interface.",
+        "That is the opposite of the deprecation guidance."
+      ],
+      "msRef": {
+        "label": "Create Standard Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      }
     },
     {
       "q": "In enhanced SLAs for non-Case entities, why are quick view forms typically needed for timer display?",
@@ -1042,12 +1214,16 @@
         "sla-kpi-instance"
       ],
       "explanation": "For enhanced SLAs, the SLA-related states and times are stored in the SLA KPI instance entity, so quick view forms are used to surface that related data on the primary entity form.",
-      "wrongExplanations": {
-        "0": "Dashboards are not the documented reason.",
-        "2": "The timer can work, but the data source is in the related KPI instance.",
-        "3": "Quick view forms display data; they do not calculate the SLA time."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-forms-track-time-against-enhanced-sla"
+      "wrongExplanations": [
+        "Dashboards are not the documented reason.",
+        null,
+        "The timer can work, but the data source is in the related KPI instance.",
+        "Quick view forms display data; they do not calculate the SLA time."
+      ],
+      "msRef": {
+        "label": "Add Timer Forms Track Time Against Enhanced Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-forms-track-time-against-enhanced-sla"
+      }
     },
     {
       "q": "Which option correctly describes how to apply SLAs automatically based on business logic?",
@@ -1065,12 +1241,16 @@
         "plugin"
       ],
       "explanation": "Microsoft states that SLAs can be applied automatically using workflows, Power Automate flows, or custom plug-ins.",
-      "wrongExplanations": {
-        "0": "Classic workflows are one option, not the only option.",
-        "1": "Power Automate is one option, not the only option.",
-        "3": "Entitlements can apply SLAs, but the article also documents other automation approaches."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      "wrongExplanations": [
+        "Classic workflows are one option, not the only option.",
+        "Power Automate is one option, not the only option.",
+        null,
+        "Entitlements can apply SLAs, but the article also documents other automation approaches."
+      ],
+      "msRef": {
+        "label": "Apply Slas",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      }
     },
     {
       "q": "What does the Power Automate flow currently expect when updating an SLA record automatically?",
@@ -1088,12 +1268,16 @@
         "slaid"
       ],
       "explanation": "The apply-SLAs article explicitly says the flow currently expects a GUID of the SLA record.",
-      "wrongExplanations": {
-        "0": "The article specifies a GUID, not the name.",
-        "1": "A boolean default flag is not the required input.",
-        "3": "Queue item references are unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      "wrongExplanations": [
+        "The article specifies a GUID, not the name.",
+        "A boolean default flag is not the required input.",
+        null,
+        "Queue item references are unrelated."
+      ],
+      "msRef": {
+        "label": "Apply Slas",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      }
     },
     {
       "q": "If a default SLA for an entity is deactivated, what must happen before it can be reset as default?",
@@ -1111,12 +1295,16 @@
         "deactivate"
       ],
       "explanation": "Microsoft notes that if you deactivate a default SLA, you must activate it again before resetting it as the default.",
-      "wrongExplanations": {
-        "0": "That is explicitly contradicted by the note.",
-        "1": "Duplication is not required.",
-        "3": "Entity re-enablement is not the requirement."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      "wrongExplanations": [
+        "That is explicitly contradicted by the note.",
+        "Duplication is not required.",
+        null,
+        "Entity re-enablement is not the requirement."
+      ],
+      "msRef": {
+        "label": "Apply Slas",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      }
     },
     {
       "q": "For Case records, when is setting a default SLA especially useful?",
@@ -1134,12 +1322,16 @@
         "entitlement"
       ],
       "explanation": "For Case, the default SLA is useful for cases that do not have an SLA applied through an entitlement.",
-      "wrongExplanations": {
-        "0": "That would reduce the need for a default SLA, not explain it.",
-        "2": "Calendar presence is unrelated to why a default SLA is useful.",
-        "3": "This mixes unrelated entity and SLA type concepts."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      "wrongExplanations": [
+        "That would reduce the need for a default SLA, not explain it.",
+        null,
+        "Calendar presence is unrelated to why a default SLA is useful.",
+        "This mixes unrelated entity and SLA type concepts."
+      ],
+      "msRef": {
+        "label": "Apply Slas",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      }
     },
     {
       "q": "Which pause configuration has the highest precedence when all three are defined?",
@@ -1158,12 +1350,16 @@
         "sla-item"
       ],
       "explanation": "Pause conditions can be set at entity, SLA KPI instance, and SLA item level. SLA item-level pause conditions override SLA KPI and entity-level conditions.",
-      "wrongExplanations": {
-        "0": "Entity level is the lowest of the three documented layers.",
-        "1": "KPI level overrides entity level but can itself be overridden by SLA item level.",
-        "3": "Timer control pause display is not the documented precedence layer for SLA processing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        "Entity level is the lowest of the three documented layers.",
+        "KPI level overrides entity level but can itself be overridden by SLA item level.",
+        null,
+        "Timer control pause display is not the documented precedence layer for SLA processing."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "What must be enabled before you can override pause configurations at the SLA KPI level?",
@@ -1181,12 +1377,16 @@
         "kpi"
       ],
       "explanation": "The article states you can override pause configurations only when Allow Pause and Resume is enabled in the General tab.",
-      "wrongExplanations": {
-        "1": "Default SLA has nothing to do with KPI pause overrides.",
-        "2": "Calendar export/import is unrelated.",
-        "3": "Case auto-numbering is unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "wrongExplanations": [
+        null,
+        "Default SLA has nothing to do with KPI pause overrides.",
+        "Calendar export/import is unrelated.",
+        "Case auto-numbering is unrelated."
+      ],
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "q": "Which statement about the out-of-the-box timer control is correct?",
@@ -1204,12 +1404,16 @@
         "display"
       ],
       "explanation": "Microsoft says the timer control visually shows current state or remaining/elapsed time relative to the Failure Time field of the SLA KPI instance. It does not calculate the paused duration itself.",
-      "wrongExplanations": {
-        "0": "The article explicitly says it doesn't calculate or keep track of the time for which the pause condition is true.",
-        "1": "It can be added to forms based on any entity, including custom record types.",
-        "3": "It cannot be added to the header or footer."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      "wrongExplanations": [
+        "The article explicitly says it doesn't calculate or keep track of the time for which the pause condition is true.",
+        "It can be added to forms based on any entity, including custom record types.",
+        null,
+        "It cannot be added to the header or footer."
+      ],
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      }
     },
     {
       "q": "Where can you place the out-of-the-box timer control on a form?",
@@ -1227,12 +1431,16 @@
         "timer"
       ],
       "explanation": "The documented step says the timer can be added anywhere except the form header or footer.",
-      "wrongExplanations": {
-        "0": "This ignores the explicit restriction.",
-        "1": "The article discusses entity forms, not dashboard-only placement.",
-        "3": "Quick create is not the documented placement rule."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      "wrongExplanations": [
+        "This ignores the explicit restriction.",
+        "The article discusses entity forms, not dashboard-only placement.",
+        null,
+        "Quick create is not the documented placement rule."
+      ],
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      }
     },
     {
       "q": "Which timer-control state appears if required fields in the Timer Control dialog lack values in the record?",
@@ -1250,12 +1458,16 @@
         "timer-state"
       ],
       "explanation": "The timer control shows 'Not Set' if either required field in the Timer Control dialog doesn't have a value in the record.",
-      "wrongExplanations": {
-        "0": "Paused is not the documented label for missing required values.",
-        "1": "Canceled is related to optional cancellation behavior, not missing required data.",
-        "3": "The article states a label, not silent hiding."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      "wrongExplanations": [
+        "Paused is not the documented label for missing required values.",
+        "Canceled is related to optional cancellation behavior, not missing required data.",
+        null,
+        "The article states a label, not silent hiding."
+      ],
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      }
     },
     {
       "q": "On which device experience are timer controls explicitly said not to be displayed?",
@@ -1273,12 +1485,16 @@
         "limitations"
       ],
       "explanation": "Microsoft documents that timer controls aren't displayed in Dynamics 365 for tablets.",
-      "wrongExplanations": {
-        "0": "Desktop browser display is supported.",
-        "1": "Unified Interface apps are where the screenshots are shown.",
-        "3": "This is not the documented device limitation."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      "wrongExplanations": [
+        "Desktop browser display is supported.",
+        "Unified Interface apps are where the screenshots are shown.",
+        null,
+        "This is not the documented device limitation."
+      ],
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      }
     },
     {
       "q": "What is a prerequisite to add entitlement channels to an entitlement or template?",
@@ -1296,12 +1512,16 @@
         "templates"
       ],
       "explanation": "Both entitlement and entitlement template articles say you must save the record before adding entitlement channels.",
-      "wrongExplanations": {
-        "0": "Default SLA status is unrelated to adding channels.",
-        "2": "Product association is optional and separate.",
-        "3": "Pause conditions are SLA settings, not entitlement-channel prerequisites."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "Default SLA status is unrelated to adding channels.",
+        null,
+        "Product association is optional and separate.",
+        "Pause conditions are SLA settings, not entitlement-channel prerequisites."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "If Allocation Type is set to number of cases, what does Total Term represent?",
@@ -1319,12 +1539,16 @@
         "cases"
       ],
       "explanation": "If allocation type is number of cases and Total Term is 100, the customer is entitled to support up to 100 cases.",
-      "wrongExplanations": {
-        "0": "Channels are configured separately.",
-        "1": "Dates are defined by start and end date, not total term.",
-        "3": "KPI instances are unrelated to entitlement total term."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "Channels are configured separately.",
+        "Dates are defined by start and end date, not total term.",
+        null,
+        "KPI instances are unrelated to entitlement total term."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "If 'Decrease Remaining On' is set to case resolution, what happens when a resolved case is reactivated?",
@@ -1342,12 +1566,16 @@
         "reactivation"
       ],
       "explanation": "When decrease is based on case resolution, reactivating a resolved case increases the entitlement terms.",
-      "wrongExplanations": {
-        "0": "That would be true in a different event sequence, not this one.",
-        "2": "The article explicitly describes an increase.",
-        "3": "Reactivation does not cancel the entitlement."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "That would be true in a different event sequence, not this one.",
+        null,
+        "The article explicitly describes an increase.",
+        "Reactivation does not cancel the entitlement."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "What does 'Restrict based on entitlement terms = Yes' do?",
@@ -1365,12 +1593,16 @@
         "case-creation"
       ],
       "explanation": "With this set to Yes, service representatives can't create cases when Remaining Terms is less than zero or channel term is less than zero.",
-      "wrongExplanations": {
-        "1": "Channel choice is separate from term restriction.",
-        "2": "Entitlements can still associate an SLA.",
-        "3": "Contact entitlement claim rules are separate."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        null,
+        "Channel choice is separate from term restriction.",
+        "Entitlements can still associate an SLA.",
+        "Contact entitlement claim rules are separate."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "If you don't associate a product with an entitlement, what is the default implication?",
@@ -1388,12 +1620,16 @@
         "default-behavior"
       ],
       "explanation": "The entitlement article says that if you don't add a product, the customer is entitled to support for all products.",
-      "wrongExplanations": {
-        "0": "This is the opposite of the documented behavior.",
-        "1": "There is no such first-product rule.",
-        "3": "The entitlement remains valid."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "This is the opposite of the documented behavior.",
+        "There is no such first-product rule.",
+        null,
+        "The entitlement remains valid."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "If you don't associate contacts to an entitlement, who can claim it?",
@@ -1411,12 +1647,16 @@
         "default-behavior"
       ],
       "explanation": "If contacts are not added, all contacts for the specified primary customer can use the entitlement.",
-      "wrongExplanations": {
-        "0": "Ownership does not define claimant scope here.",
-        "1": "The article says all contacts for the primary customer can use it.",
-        "3": "No manager-only requirement is documented."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "Ownership does not define claimant scope here.",
+        "The article says all contacts for the primary customer can use it.",
+        null,
+        "No manager-only requirement is documented."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "Which statement about entitlement channels is correct?",
@@ -1434,12 +1674,16 @@
         "email"
       ],
       "explanation": "Entitlement channels let you define support terms per channel, for example phone and email, and track each separately.",
-      "wrongExplanations": {
-        "0": "The record must be saved first.",
-        "2": "They supplement the entitlement and track channel-specific terms; they do not replace allocation type.",
-        "3": "They exist on both entitlements and entitlement templates."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "wrongExplanations": [
+        "The record must be saved first.",
+        null,
+        "They supplement the entitlement and track channel-specific terms; they do not replace allocation type.",
+        "They exist on both entitlements and entitlement templates."
+      ],
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "What is the default setting for calendar export and import with SLAs before you enable it?",
@@ -1457,12 +1701,16 @@
         "settings"
       ],
       "explanation": "The calendar export/import toggle is set to No by default.",
-      "wrongExplanations": {
-        "0": "You must turn it on explicitly.",
-        "2": "The article states a direct default.",
-        "3": "It does not describe inheritance from another admin center setting."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      "wrongExplanations": [
+        "You must turn it on explicitly.",
+        null,
+        "The article states a direct default.",
+        "It does not describe inheritance from another admin center setting."
+      ],
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      }
     },
     {
       "q": "What happens to calendars in the target environment when a solution import includes calendars?",
@@ -1480,12 +1728,16 @@
         "target-environment"
       ],
       "explanation": "The export/import article says calendars are overwritten when a solution is imported; the latest imported solution overwrites current calendar customizations or settings.",
-      "wrongExplanations": {
-        "0": "The documentation warns of overwrite, not merge.",
-        "1": "Imported calendars are editable.",
-        "3": "No manual approval step is described."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      "wrongExplanations": [
+        "The documentation warns of overwrite, not merge.",
+        "Imported calendars are editable.",
+        null,
+        "No manual approval step is described."
+      ],
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      }
     },
     {
       "q": "In what format are exported calendars stored inside the exported solution?",
@@ -1503,12 +1755,16 @@
         "solution"
       ],
       "explanation": "Exported calendars are present in XML format in the Calendars folder within the exported solution.",
-      "wrongExplanations": {
-        "0": "CSV is not the documented format.",
-        "1": "JSON is not the documented format.",
-        "3": "YAML is not the documented format."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      "wrongExplanations": [
+        "CSV is not the documented format.",
+        "JSON is not the documented format.",
+        null,
+        "YAML is not the documented format."
+      ],
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      }
     },
     {
       "q": "What is the recommended way to change imported calendars after moving them through a solution?",
@@ -1526,12 +1782,16 @@
         "solutions"
       ],
       "explanation": "Although imported calendars remain editable, Microsoft recommends changing them through the solution import or export process.",
-      "wrongExplanations": {
-        "0": "That goes against the recommendation.",
-        "2": "They are editable and can be changed, just not ideally ad hoc.",
-        "3": "Entitlement templates are unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      "wrongExplanations": [
+        "That goes against the recommendation.",
+        null,
+        "They are editable and can be changed, just not ideally ad hoc.",
+        "Entitlement templates are unrelated."
+      ],
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      }
     },
     {
       "q": "Which statement about custom time calculation of SLA KPIs is correct?",
@@ -1549,12 +1809,16 @@
         "sla-kpi"
       ],
       "explanation": "Microsoft states custom time calculation is supported only as part of a plug-in, not another entity such as custom workflow.",
-      "wrongExplanations": {
-        "1": "The documented setup uses the SLACustomTimeCalculationTemplate action template.",
-        "2": "The article does not restrict the feature that way.",
-        "3": "Elapsed time is specifically discussed in pause/resume scenarios."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        null,
+        "The documented setup uses the SLACustomTimeCalculationTemplate action template.",
+        "The article does not restrict the feature that way.",
+        "Elapsed time is specifically discussed in pause/resume scenarios."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "When creating the process for custom SLA time calculation, which template should be selected?",
@@ -1572,12 +1836,16 @@
         "sla-custom-time"
       ],
       "explanation": "The custom time calculation article instructs you to create a global Action from the SLACustomTimeCalculationTemplate template.",
-      "wrongExplanations": {
-        "0": "This is not the documented template name.",
-        "2": "This is not the documented template name.",
-        "3": "This is not the documented template name."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        "This is not the documented template name.",
+        null,
+        "This is not the documented template name.",
+        "This is not the documented template name."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "What toggle must be turned on at the SLA item level to use a custom time calculation process?",
@@ -1595,12 +1863,16 @@
         "custom-process"
       ],
       "explanation": "The instructions say to set the Allow Custom Time Calculation toggle to Yes and then choose the custom process.",
-      "wrongExplanations": {
-        "0": "Pause/resume is a different setting.",
-        "2": "That setting belongs to solution transport, not calculation logic.",
-        "3": "That setting is a separate recalculation feature."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        "Pause/resume is a different setting.",
+        null,
+        "That setting belongs to solution transport, not calculation logic.",
+        "That setting is a separate recalculation feature."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "Which issue does error code 10000005 address in custom time calculation setup?",
@@ -1618,12 +1890,16 @@
         "workflow"
       ],
       "explanation": "Error code 10000005 corresponds to the message 'Select the Custom Time Calculation Process.'",
-      "wrongExplanations": {
-        "0": "Missing plugin step is a different error.",
-        "2": "Deleted workflow is a different error.",
-        "3": "Invalid elapsed time returned is a different error."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        "Missing plugin step is a different error.",
+        null,
+        "Deleted workflow is a different error.",
+        "Invalid elapsed time returned is a different error."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "Which setup issue is associated with error code 10000007 for custom time calculation?",
@@ -1641,12 +1917,16 @@
         "plugin"
       ],
       "explanation": "Error 10000007 occurs when plugin implementation is missing for the custom time calculation process, such as a missing SDK step or unregistered plugin.",
-      "wrongExplanations": {
-        "0": "That is discussed under a different error scenario.",
-        "2": "Warning condition is unrelated to this error.",
-        "3": "Calendar export is unrelated to this error."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "wrongExplanations": [
+        "That is discussed under a different error scenario.",
+        null,
+        "Warning condition is unrelated to this error.",
+        "Calendar export is unrelated to this error."
+      ],
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "q": "What does the 'Recalculate SLA on terminal status' setting enable?",
@@ -1664,12 +1944,16 @@
         "other-sla-settings"
       ],
       "explanation": "The recalculation article specifically describes enabling recalculation of SLAs that reach terminal status.",
-      "wrongExplanations": {
-        "0": "Calendar import/export is a different setting.",
-        "2": "Default assignment is unrelated.",
-        "3": "Pause conditions are configured elsewhere."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+      "wrongExplanations": [
+        "Calendar import/export is a different setting.",
+        null,
+        "Default assignment is unrelated.",
+        "Pause conditions are configured elsewhere."
+      ],
+      "msRef": {
+        "label": "Enable Sla Recalculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+      }
     },
     {
       "q": "Which event is documented as one that can cause existing SLA KPIs to be affected after schedule changes?",
@@ -1687,12 +1971,16 @@
         "kpi"
       ],
       "explanation": "Changes to schedules don't affect existing SLA KPIs unless certain events occur, including the SLA KPI being paused and resumed.",
-      "wrongExplanations": {
-        "0": "Themes are irrelevant here.",
-        "2": "Dashboard edits are irrelevant.",
-        "3": "Queue icon changes are irrelevant."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+      "wrongExplanations": [
+        "Themes are irrelevant here.",
+        null,
+        "Dashboard edits are irrelevant.",
+        "Queue icon changes are irrelevant."
+      ],
+      "msRef": {
+        "label": "Enable Sla Force Recalculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+      }
     },
     {
       "q": "Which statement best reflects the modern admin guidance for service settings?",
@@ -1710,12 +1998,16 @@
         "service-terms"
       ],
       "explanation": "The Power Platform article explicitly says it describes the legacy settings experience and points to Service Terms > Other SLA Settings in the modern admin center.",
-      "wrongExplanations": {
-        "0": "That is the opposite of the article's guidance.",
-        "2": "It also covers service level agreements, not only entitlements.",
-        "3": "The article is broader than that."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+      "wrongExplanations": [
+        "That is the opposite of the article's guidance.",
+        null,
+        "It also covers service level agreements, not only entitlements.",
+        "The article is broader than that."
+      ],
+      "msRef": {
+        "label": "System Settings Dialog Box Service Tab",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+      }
     },
     {
       "q": "Which limitation is explicitly documented for SLAs created in Unified Interface apps?",
@@ -1733,12 +2025,16 @@
         "limitations"
       ],
       "explanation": "The SLA limitations article says Applicable When and Success Conditions don't work as expected if configured for related entities.",
-      "wrongExplanations": {
-        "0": "This is the opposite of the limitation.",
-        "2": "Timer controls are documented separately and can be used.",
-        "3": "Enhanced SLAs can be activated; this is not the limitation described."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-limitations"
+      "wrongExplanations": [
+        "This is the opposite of the limitation.",
+        null,
+        "Timer controls are documented separately and can be used.",
+        "Enhanced SLAs can be activated; this is not the limitation described."
+      ],
+      "msRef": {
+        "label": "Sla Limitations",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-limitations"
+      }
     },
     {
       "q": "According to the limitation article, what can happen to Success Conditions defined on a related entity?",
@@ -1756,12 +2052,16 @@
         "kpi-instance"
       ],
       "explanation": "The article states that Success Conditions defined on the related entity won't ever be true and the KPI instance remains in progress/nearing noncompliance/noncompliant states.",
-      "wrongExplanations": {
-        "0": "This is the opposite of the limitation.",
-        "2": "The limitation is not framed as standard-SLA-only.",
-        "3": "There is no automatic conversion."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-limitations"
+      "wrongExplanations": [
+        "This is the opposite of the limitation.",
+        null,
+        "The limitation is not framed as standard-SLA-only.",
+        "There is no automatic conversion."
+      ],
+      "msRef": {
+        "label": "Sla Limitations",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-limitations"
+      }
     },
     {
       "q": "Which statement about holiday and customer service schedules is most accurate for SLA tracking?",
@@ -1779,12 +2079,16 @@
         "recalculation"
       ],
       "explanation": "Schedules influence time calculation, but existing KPI instances are not retroactively affected by changes unless certain documented events occur.",
-      "wrongExplanations": {
-        "0": "The documentation explicitly warns against assuming immediate retroactive recalculation.",
-        "2": "They are central to SLA timing, not just entitlements.",
-        "3": "Warning time does not disable schedule influence."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+      "wrongExplanations": [
+        "The documentation explicitly warns against assuming immediate retroactive recalculation.",
+        null,
+        "They are central to SLA timing, not just entitlements.",
+        "Warning time does not disable schedule influence."
+      ],
+      "msRef": {
+        "label": "Enable Sla Force Recalculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+      }
     }
   ],
   "tf": [
@@ -1798,7 +2102,10 @@
         "difference"
       ],
       "explanation": "False. The active support contract applied to cases is the entitlement. A template is a predefined structure used to create entitlements.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      "msRef": {
+        "label": "Set Up Entitlements Templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      }
     },
     {
       "q": "True or False: Only an active entitlement can be set as the default entitlement for a customer.",
@@ -1810,7 +2117,10 @@
         "active"
       ],
       "explanation": "True. Microsoft states that only an active entitlement can be set as the default entitlement for a customer.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      "msRef": {
+        "label": "Entitlement Entities",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+      }
     },
     {
       "q": "True or False: If Restrict based on entitlement terms is set to No, remaining terms can become negative.",
@@ -1822,7 +2132,10 @@
         "restriction"
       ],
       "explanation": "True. Microsoft documents that representatives can still create cases and remaining terms can go negative when restriction is disabled.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "q": "True or False: Entitlement channels can be added before the entitlement record is saved for the first time.",
@@ -1834,7 +2147,10 @@
         "save-first"
       ],
       "explanation": "False. You must save the entitlement first before adding entitlement channels.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "answer": true,
@@ -1844,7 +2160,10 @@
         "case-only-standard"
       ],
       "explanation": "The enablement article explicitly says a standard SLA can be created only for the Case entity; only enhanced SLAs can be created for other entities.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements",
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      },
       "q": "Only enhanced SLAs can be created for entities other than Case."
     },
     {
@@ -1855,7 +2174,10 @@
         "recurringappointment"
       ],
       "explanation": "RecurringAppointment and its instances are explicitly excluded.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements",
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      },
       "q": "RecurringAppointment is listed as an activity entity that supports SLAs."
     },
     {
@@ -1866,7 +2188,10 @@
         "recommendation"
       ],
       "explanation": "The documented hard maximum is 100 SLA items per SLA entity, but Microsoft recommends keeping the number below 15.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements",
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      },
       "q": "Microsoft recommends having less than 15 SLA items per SLA entity."
     },
     {
@@ -1877,7 +2202,10 @@
         "utc"
       ],
       "explanation": "Timezone independent calculations are based on UTC regardless of the user's time zone.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-time-scenarios",
+      "msRef": {
+        "label": "Sla Time Scenarios",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-time-scenarios"
+      },
       "q": "For SLA time calculations, selecting Timezone independent makes the times user-local by default."
     },
     {
@@ -1888,7 +2216,10 @@
         "kpis"
       ],
       "explanation": "The start time is set at the SLA level and cannot be different across SLA KPIs within that SLA.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla",
+      "msRef": {
+        "label": "Create Standard Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+      },
       "q": "In a standard SLA, different SLA KPIs can each have different Applicable From values inside the same SLA."
     },
     {
@@ -1900,7 +2231,10 @@
         "entitlement"
       ],
       "explanation": "That is exactly the scenario the article highlights.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas",
+      "msRef": {
+        "label": "Apply Slas",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      },
       "q": "A default SLA on Case is useful when a case did not receive an SLA through an entitlement."
     },
     {
@@ -1911,7 +2245,10 @@
         "guid"
       ],
       "explanation": "The flow expects the GUID of the SLA record, not its name.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas",
+      "msRef": {
+        "label": "Apply Slas",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+      },
       "q": "Power Automate currently expects the SLA name when updating a record's SLA automatically."
     },
     {
@@ -1923,7 +2260,10 @@
         "override"
       ],
       "explanation": "The pause-conditions article says KPI-level settings can override entity-level settings.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla",
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      },
       "q": "SLA KPI-level pause settings can override entity-level pause settings."
     },
     {
@@ -1934,7 +2274,10 @@
         "precedence"
       ],
       "explanation": "SLA item-level pause conditions have the highest precedence among the three layers described.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla",
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      },
       "q": "SLA item-level pause settings override both SLA KPI-level and entity-level pause settings."
     },
     {
@@ -1945,7 +2288,10 @@
         "timer"
       ],
       "explanation": "The timer control does not calculate or keep track of the duration for which the pause condition is true.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla",
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      },
       "q": "The timer control itself calculates how long the pause condition stayed true."
     },
     {
@@ -1956,7 +2302,10 @@
         "kpis"
       ],
       "explanation": "The timer-control article explicitly says you can add multiple timer controls for different KPIs.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla",
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      },
       "q": "You can add multiple timer controls to a form for different KPIs."
     },
     {
@@ -1967,7 +2316,10 @@
         "sla-kpi-instance"
       ],
       "explanation": "That is the stated reason for using quick view forms with enhanced SLAs.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-forms-track-time-against-enhanced-sla",
+      "msRef": {
+        "label": "Add Timer Forms Track Time Against Enhanced Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-forms-track-time-against-enhanced-sla"
+      },
       "q": "For enhanced SLAs, the timer is typically surfaced using a quick view form because KPI timing data lives in the SLA KPI instance."
     },
     {
@@ -1978,7 +2330,10 @@
         "negative"
       ],
       "explanation": "With Restrict = No, cases can still be created and Remaining Terms can become negative.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer",
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      },
       "q": "If Restrict based on entitlement terms is set to No, representatives can still create cases even if remaining terms go negative."
     },
     {
@@ -1989,7 +2344,10 @@
         "scope"
       ],
       "explanation": "The entitlement article explicitly states this default behavior.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer",
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      },
       "q": "If you do not add a product to an entitlement, the entitlement applies to all products for that customer."
     },
     {
@@ -2000,7 +2358,10 @@
         "default"
       ],
       "explanation": "It is set to No by default and must be enabled explicitly.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution",
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      },
       "q": "The calendar export and import toggle is enabled by default."
     },
     {
@@ -2011,7 +2372,10 @@
         "recommendation"
       ],
       "explanation": "The article says imported calendars are editable, but recommends handling changes through solution import/export.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution",
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      },
       "q": "Imported calendars in the target organization are editable, even though Microsoft recommends changing them through solution processes."
     },
     {
@@ -2022,7 +2386,10 @@
         "supportability"
       ],
       "explanation": "The article says custom time calculation is only supported as part of plug-in and not other entities such as custom workflow.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation",
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      },
       "q": "Custom SLA time calculation is supported only through plug-ins, not through ordinary custom workflows."
     },
     {
@@ -2033,7 +2400,10 @@
         "terminal-status"
       ],
       "explanation": "The recalculation article places the toggle under Other SLA Settings > Manage.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation",
+      "msRef": {
+        "label": "Enable Sla Recalculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+      },
       "q": "Recalculate SLA on terminal status is configured under Other SLA Settings in the admin center."
     },
     {
@@ -2044,7 +2414,10 @@
         "modern"
       ],
       "explanation": "The article explicitly labels that as the legacy experience and points to the modern admin center path.",
-      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab",
+      "msRef": {
+        "label": "System Settings Dialog Box Service Tab",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+      },
       "q": "The modern guidance is to use the legacy Service tab as the main experience for SLA administration."
     },
     {
@@ -2055,7 +2428,10 @@
         "success-condition"
       ],
       "explanation": "That is the limitation documented in the SLA limitations article.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-limitations",
+      "msRef": {
+        "label": "Sla Limitations",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/sla-limitations"
+      },
       "q": "In Unified Interface SLA limitations, Success Conditions on related entities may fail to ever become true for an in-progress KPI instance."
     }
   ],
@@ -2091,7 +2467,10 @@
         "restriction"
       ],
       "explanation": "This separates reusable template design from live entitlement behavior, channel-specific term tracking, automatic default application, and blocking behavior.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      "msRef": {
+        "label": "Set Up Entitlements Templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+      }
     },
     {
       "instruction": "Match each entitlement scenario to the correct configuration choice.",
@@ -2123,7 +2502,10 @@
         "channels"
       ],
       "explanation": "The right entitlement design depends on whether the requirement is scope-based, timing-based, or channel-based.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "instruction": "Match each SLA capability or rule to the correct statement.",
@@ -2154,7 +2536,10 @@
         "default-sla"
       ],
       "explanation": "These are core distinctions across SLA type, time zone handling, and default SLA behavior.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "instruction": "Match the pause layer to its override behavior.",
@@ -2185,7 +2570,10 @@
         "precedence"
       ],
       "explanation": "Pause precedence runs from entity to KPI to SLA item, with more specific settings overriding broader ones.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      "msRef": {
+        "label": "Set Pause Conditions Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-pause-conditions-sla"
+      }
     },
     {
       "instruction": "Put the Power Apps SLA-enablement steps in the correct order.",
@@ -2213,7 +2601,10 @@
         "power-apps"
       ],
       "explanation": "After enabling the checkbox, the documented sequence is publish table and then publish all customizations.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      "msRef": {
+        "label": "Enable Entities Service Level Agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+      }
     },
     {
       "instruction": "Match the entitlement field to its meaning.",
@@ -2244,7 +2635,10 @@
         "definitions"
       ],
       "explanation": "These are the main entitlement-term controls used to define and consume support.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "instruction": "Match the calendar transport fact to the correct description.",
@@ -2275,7 +2669,10 @@
         "transport"
       ],
       "explanation": "Calendar movement has explicit defaults, overwrite behavior, and governance recommendations.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      "msRef": {
+        "label": "Export Import Solution",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+      }
     },
     {
       "instruction": "Match the timer-control state or rule to its description.",
@@ -2306,7 +2703,10 @@
         "form-design"
       ],
       "explanation": "The timer control is a display component with documented states and placement limits.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      "msRef": {
+        "label": "Add Timer Control Case Form Track Time Against Sla",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+      }
     },
     {
       "instruction": "Put the custom time calculation setup sequence in the correct order.",
@@ -2337,7 +2737,10 @@
         "action-template"
       ],
       "explanation": "The documented setup starts with a global action template and ends with SLA activation after the custom process is linked.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      "msRef": {
+        "label": "Enable Sla Custom Time Calculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+      }
     },
     {
       "instruction": "Match the event to how entitlement terms change when Decrease Remaining On is based on case creation.",
@@ -2368,7 +2771,10 @@
         "channel"
       ],
       "explanation": "The article distinguishes main term consumption rules from channel-specific term tracking.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      "msRef": {
+        "label": "Create Entitlement Define Support Terms Customer",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+      }
     },
     {
       "instruction": "Match the documented schedule-change fact to the correct statement.",
@@ -2399,7 +2805,10 @@
         "events"
       ],
       "explanation": "Schedule changes alone do not force existing KPI recalculation; the documentation lists specific events that can trigger impact.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+      "msRef": {
+        "label": "Enable Sla Force Recalculation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+      }
     },
     {
       "instruction": "Match each admin surface to its role.",
@@ -2430,7 +2839,10 @@
         "solutions"
       ],
       "explanation": "The docs split between modern admin center, legacy article, Power Apps customization, reusable templates, and solution transport.",
-      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+      "msRef": {
+        "label": "System Settings Dialog Box Service Tab",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+      }
     }
   ],
   "casestudy": [
@@ -2457,12 +2869,16 @@
           ],
           "answer": 1,
           "explanation": "A standard SLA can be created for the Case entity and fits a Case-only design.",
-          "wrongExplanations": {
-            "0": "Enhanced SLA could also exist, but the documented standard/Case fit is the intended answer here.",
-            "2": "Case absolutely supports SLAs.",
-            "3": "Templates do not replace SLAs."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+          "wrongExplanations": [
+            "Enhanced SLA could also exist, but the documented standard/Case fit is the intended answer here.",
+            null,
+            "Case absolutely supports SLAs.",
+            "Templates do not replace SLAs."
+          ],
+          "msRef": {
+            "label": "Create Standard Sla",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+          }
         },
         {
           "q": "Can different KPIs inside the same standard SLA have different start fields?",
@@ -2474,12 +2890,16 @@
           ],
           "answer": 1,
           "explanation": "For standard SLAs, the start time is set at the SLA level and cannot differ across SLA KPIs.",
-          "wrongExplanations": {
-            "0": "That is not how standard SLA timing is documented.",
-            "2": "Timer controls do not define the SLA start point.",
-            "3": "Entitlement channels are unrelated to standard SLA KPI start fields."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+          "wrongExplanations": [
+            "That is not how standard SLA timing is documented.",
+            null,
+            "Timer controls do not define the SLA start point.",
+            "Entitlement channels are unrelated to standard SLA KPI start fields."
+          ],
+          "msRef": {
+            "label": "Create Standard Sla",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-standard-sla"
+          }
         },
         {
           "q": "What is the correct purpose of setting a default SLA on Case?",
@@ -2491,12 +2911,16 @@
           ],
           "answer": 1,
           "explanation": "A default Case SLA is useful when cases do not receive an SLA through an entitlement.",
-          "wrongExplanations": {
-            "0": "Entitlements remain valid and can still apply SLAs.",
-            "2": "Time zone handling is a separate concern.",
-            "3": "Pause conditions are configured separately."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+          "wrongExplanations": [
+            "Entitlements remain valid and can still apply SLAs.",
+            null,
+            "Time zone handling is a separate concern.",
+            "Pause conditions are configured separately."
+          ],
+          "msRef": {
+            "label": "Apply Slas",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+          }
         },
         {
           "q": "If the default SLA is deactivated, what must the admin do before resetting it as default?",
@@ -2508,12 +2932,16 @@
           ],
           "answer": 1,
           "explanation": "The apply-SLAs article says a deactivated default SLA must be activated again before being reset as default.",
-          "wrongExplanations": {
-            "0": "Table re-enablement is not required.",
-            "2": "Cloning is not required.",
-            "3": "This contradicts the documented note."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+          "wrongExplanations": [
+            "Table re-enablement is not required.",
+            null,
+            "Cloning is not required.",
+            "This contradicts the documented note."
+          ],
+          "msRef": {
+            "label": "Apply Slas",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/apply-slas"
+          }
         },
         {
           "q": "Which admin experience is the recommended modern place to manage service terms rather than relying on the legacy Service tab?",
@@ -2525,12 +2953,16 @@
           ],
           "answer": 1,
           "explanation": "The Service tab article explicitly points admins to the modern admin center path for service terms.",
-          "wrongExplanations": {
-            "0": "The article labels that experience as legacy.",
-            "2": "Power Platform admin center is not the admin path stated for these SLA settings.",
-            "3": "Sales Hub is unrelated."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+          "wrongExplanations": [
+            "The article labels that experience as legacy.",
+            null,
+            "Power Platform admin center is not the admin path stated for these SLA settings.",
+            "Sales Hub is unrelated."
+          ],
+          "msRef": {
+            "label": "System Settings Dialog Box Service Tab",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/system-settings-dialog-box-service-tab"
+          }
         }
       ]
     },
@@ -2558,12 +2990,16 @@
           ],
           "answer": 1,
           "explanation": "Only enhanced SLAs can be created for entities other than Case.",
-          "wrongExplanations": {
-            "0": "Standard SLAs are Case-only.",
-            "2": "Custom entities can be enabled for SLA.",
-            "3": "Entitlements do not replace SLAs."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+          "wrongExplanations": [
+            "Standard SLAs are Case-only.",
+            null,
+            "Custom entities can be enabled for SLA.",
+            "Entitlements do not replace SLAs."
+          ],
+          "msRef": {
+            "label": "Enable Entities Service Level Agreements",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+          }
         },
         {
           "q": "Which activity listed in the docs is eligible for SLA enablement?",
@@ -2575,12 +3011,16 @@
           ],
           "answer": 1,
           "explanation": "Appointment is listed as supported, while RecurringAppointment and its instances are excluded.",
-          "wrongExplanations": {
-            "0": "Explicitly excluded.",
-            "2": "Also excluded.",
-            "3": "Appointment is supported."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+          "wrongExplanations": [
+            "Explicitly excluded.",
+            null,
+            "Also excluded.",
+            "Appointment is supported."
+          ],
+          "msRef": {
+            "label": "Enable Entities Service Level Agreements",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-service-level-agreements"
+          }
         },
         {
           "q": "Why are quick view forms typically involved when showing enhanced-SLA timing on the primary record?",
@@ -2592,12 +3032,16 @@
           ],
           "answer": 1,
           "explanation": "Enhanced SLA timing/state is stored on SLA KPI instance records, so quick view forms are used to surface it.",
-          "wrongExplanations": {
-            "0": "Not the documented reason.",
-            "2": "Quick view forms display data; they do not calculate it.",
-            "3": "Timer controls can be used on custom record types."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-forms-track-time-against-enhanced-sla"
+          "wrongExplanations": [
+            "Not the documented reason.",
+            null,
+            "Quick view forms display data; they do not calculate it.",
+            "Timer controls can be used on custom record types."
+          ],
+          "msRef": {
+            "label": "Add Timer Forms Track Time Against Enhanced Sla",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-forms-track-time-against-enhanced-sla"
+          }
         },
         {
           "q": "Where can the timer control be placed on the form?",
@@ -2609,12 +3053,16 @@
           ],
           "answer": 1,
           "explanation": "The out-of-the-box timer can be placed anywhere except the form header or footer.",
-          "wrongExplanations": {
-            "0": "Header placement is specifically disallowed.",
-            "2": "Footer placement is specifically disallowed.",
-            "3": "It is not dashboard-only."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+          "wrongExplanations": [
+            "Header placement is specifically disallowed.",
+            null,
+            "Footer placement is specifically disallowed.",
+            "It is not dashboard-only."
+          ],
+          "msRef": {
+            "label": "Add Timer Control Case Form Track Time Against Sla",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+          }
         },
         {
           "q": "What is one limitation of the timer control itself?",
@@ -2626,12 +3074,16 @@
           ],
           "answer": 2,
           "explanation": "The timer control displays status/remaining time but doesn't calculate how long the pause condition stayed true.",
-          "wrongExplanations": {
-            "0": "This is exactly what it does not do.",
-            "1": "Expired is one of the documented states.",
-            "3": "Timer controls are actually not displayed on tablets."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+          "wrongExplanations": [
+            "This is exactly what it does not do.",
+            "Expired is one of the documented states.",
+            null,
+            "Timer controls are actually not displayed on tablets."
+          ],
+          "msRef": {
+            "label": "Add Timer Control Case Form Track Time Against Sla",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-timer-control-case-form-track-time-against-sla"
+          }
         }
       ]
     },
@@ -2659,12 +3111,16 @@
           ],
           "answer": 1,
           "explanation": "Allocation Type specifies whether the entitlement is based on number of hours or number of cases.",
-          "wrongExplanations": {
-            "0": "That chooses consumption timing, not measurement type.",
-            "2": "That shows what remains, not the chosen measurement model.",
-            "3": "That controls blocking behavior, not measurement type."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          "wrongExplanations": [
+            "That chooses consumption timing, not measurement type.",
+            null,
+            "That shows what remains, not the chosen measurement model.",
+            "That controls blocking behavior, not measurement type."
+          ],
+          "msRef": {
+            "label": "Create Entitlement Define Support Terms Customer",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          }
         },
         {
           "q": "How should phone and email caps be configured?",
@@ -2676,12 +3132,16 @@
           ],
           "answer": 1,
           "explanation": "Entitlement channels are used to define and track support terms for each channel separately.",
-          "wrongExplanations": {
-            "0": "SLAs measure service targets, not channel allotments here.",
-            "2": "Products define scope, not channel caps.",
-            "3": "Timers are display controls."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          "wrongExplanations": [
+            "SLAs measure service targets, not channel allotments here.",
+            null,
+            "Products define scope, not channel caps.",
+            "Timers are display controls."
+          ],
+          "msRef": {
+            "label": "Create Entitlement Define Support Terms Customer",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          }
         },
         {
           "q": "What setting should be turned on to block case creation once remaining support is exhausted?",
@@ -2693,12 +3153,16 @@
           ],
           "answer": 0,
           "explanation": "When set to Yes, reps can't create cases once Remaining Terms or channel remaining terms drop below zero.",
-          "wrongExplanations": {
-            "1": "This controls when terms are consumed, not whether case creation is blocked.",
-            "2": "Default SLA is unrelated.",
-            "3": "Calendar transport is unrelated."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          "wrongExplanations": [
+            null,
+            "This controls when terms are consumed, not whether case creation is blocked.",
+            "Default SLA is unrelated.",
+            "Calendar transport is unrelated."
+          ],
+          "msRef": {
+            "label": "Create Entitlement Define Support Terms Customer",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          }
         },
         {
           "q": "If Northwind associates a product with the entitlement but leaves Contacts empty, who can use the entitlement?",
@@ -2710,12 +3174,16 @@
           ],
           "answer": 2,
           "explanation": "If no contacts are added, all contacts for the specified primary customer can use the entitlement.",
-          "wrongExplanations": {
-            "0": "The entitlement remains usable.",
-            "1": "Ownership is irrelevant to claimant scope.",
-            "3": "The documentation uses primary-customer contacts, not product-record contacts."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          "wrongExplanations": [
+            "The entitlement remains usable.",
+            "Ownership is irrelevant to claimant scope.",
+            null,
+            "The documentation uses primary-customer contacts, not product-record contacts."
+          ],
+          "msRef": {
+            "label": "Create Entitlement Define Support Terms Customer",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          }
         },
         {
           "q": "What must happen before entitlement channels can be added?",
@@ -2727,12 +3195,16 @@
           ],
           "answer": 0,
           "explanation": "The record must be saved before channel records can be added.",
-          "wrongExplanations": {
-            "1": "Timer controls are unrelated.",
-            "2": "Default SLA is not required.",
-            "3": "Export is irrelevant."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          "wrongExplanations": [
+            null,
+            "Timer controls are unrelated.",
+            "Default SLA is not required.",
+            "Export is irrelevant."
+          ],
+          "msRef": {
+            "label": "Create Entitlement Define Support Terms Customer",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+          }
         }
       ]
     },
@@ -2760,12 +3232,16 @@
           ],
           "answer": 1,
           "explanation": "Schedule changes don't affect existing KPI instances unless documented events such as pause/resume or certain SLA updates occur.",
-          "wrongExplanations": {
-            "0": "This is the common wrong assumption the docs push back on.",
-            "2": "The documented principle is broader than standard SLAs only.",
-            "3": "Warning time is irrelevant to this rule."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+          "wrongExplanations": [
+            "This is the common wrong assumption the docs push back on.",
+            null,
+            "The documented principle is broader than standard SLAs only.",
+            "Warning time is irrelevant to this rule."
+          ],
+          "msRef": {
+            "label": "Enable Sla Force Recalculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+          }
         },
         {
           "q": "Which of the following is one event that can make schedule changes affect an existing KPI instance?",
@@ -2777,12 +3253,16 @@
           ],
           "answer": 1,
           "explanation": "Pause and resume is one of the documented events that can affect existing KPI timing after schedule changes.",
-          "wrongExplanations": {
-            "0": "Themes are irrelevant.",
-            "2": "Dashboard edits are irrelevant.",
-            "3": "Entitlement-product changes are unrelated to KPI recalculation events."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+          "wrongExplanations": [
+            "Themes are irrelevant.",
+            null,
+            "Dashboard edits are irrelevant.",
+            "Entitlement-product changes are unrelated to KPI recalculation events."
+          ],
+          "msRef": {
+            "label": "Enable Sla Force Recalculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-force-recalculation"
+          }
         },
         {
           "q": "What is the default state of the calendar export/import toggle?",
@@ -2794,12 +3274,16 @@
           ],
           "answer": 1,
           "explanation": "The export/import option is off by default and must be enabled.",
-          "wrongExplanations": {
-            "0": "This is incorrect.",
-            "2": "The article gives a direct default.",
-            "3": "The article does not tie the default to entity type."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+          "wrongExplanations": [
+            "This is incorrect.",
+            null,
+            "The article gives a direct default.",
+            "The article does not tie the default to entity type."
+          ],
+          "msRef": {
+            "label": "Export Import Solution",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+          }
         },
         {
           "q": "What happens to the target calendar when the latest solution containing calendars is imported?",
@@ -2811,12 +3295,16 @@
           ],
           "answer": 1,
           "explanation": "Imported calendars overwrite current calendar settings/customizations in the target environment.",
-          "wrongExplanations": {
-            "0": "The docs warn of overwrite rather than merge.",
-            "2": "The docs say imported calendars are editable.",
-            "3": "They are imported when included and enabled."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+          "wrongExplanations": [
+            "The docs warn of overwrite rather than merge.",
+            null,
+            "The docs say imported calendars are editable.",
+            "They are imported when included and enabled."
+          ],
+          "msRef": {
+            "label": "Export Import Solution",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+          }
         },
         {
           "q": "Even though imported calendars are editable, what does Microsoft recommend?",
@@ -2828,12 +3316,16 @@
           ],
           "answer": 1,
           "explanation": "The recommendation is to make changes through the solution import/export process.",
-          "wrongExplanations": {
-            "0": "Not the guidance given.",
-            "2": "This goes against the recommendation.",
-            "3": "CSV is not the documented transport format."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+          "wrongExplanations": [
+            "Not the guidance given.",
+            null,
+            "This goes against the recommendation.",
+            "CSV is not the documented transport format."
+          ],
+          "msRef": {
+            "label": "Export Import Solution",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/export-import-solution"
+          }
         }
       ]
     },
@@ -2861,12 +3353,16 @@
           ],
           "answer": 1,
           "explanation": "Custom time calculation is supported only as part of a plug-in.",
-          "wrongExplanations": {
-            "0": "The article explicitly says not ordinary custom workflow.",
-            "2": "Business rules are not the documented extension model.",
-            "3": "Timer controls do not drive SLA calculation."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          "wrongExplanations": [
+            "The article explicitly says not ordinary custom workflow.",
+            null,
+            "Business rules are not the documented extension model.",
+            "Timer controls do not drive SLA calculation."
+          ],
+          "msRef": {
+            "label": "Enable Sla Custom Time Calculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          }
         },
         {
           "q": "Which template should be used to create the custom process?",
@@ -2878,12 +3374,16 @@
           ],
           "answer": 1,
           "explanation": "The setup uses a global Action created from SLACustomTimeCalculationTemplate.",
-          "wrongExplanations": {
-            "0": "Not the documented template.",
-            "2": "Not the documented template.",
-            "3": "Not the documented template."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          "wrongExplanations": [
+            "Not the documented template.",
+            null,
+            "Not the documented template.",
+            "Not the documented template."
+          ],
+          "msRef": {
+            "label": "Enable Sla Custom Time Calculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          }
         },
         {
           "q": "Which missing component is most directly associated with error code 10000007?",
@@ -2895,12 +3395,16 @@
           ],
           "answer": 1,
           "explanation": "Error 10000007 points to missing plugin implementation such as absent SDK step or plugin registration.",
-          "wrongExplanations": {
-            "0": "Queue items are unrelated.",
-            "2": "Entitlement channels are unrelated.",
-            "3": "Holiday schedules are unrelated."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          "wrongExplanations": [
+            "Queue items are unrelated.",
+            null,
+            "Entitlement channels are unrelated.",
+            "Holiday schedules are unrelated."
+          ],
+          "msRef": {
+            "label": "Enable Sla Custom Time Calculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          }
         },
         {
           "q": "Where is terminal-status SLA recalculation enabled?",
@@ -2912,12 +3416,16 @@
           ],
           "answer": 1,
           "explanation": "The recalculation toggle is configured in Other SLA Settings > Manage.",
-          "wrongExplanations": {
-            "0": "Timer controls do not enable recalculation.",
-            "2": "Entitlement templates are unrelated.",
-            "3": "Queue settings are unrelated."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+          "wrongExplanations": [
+            "Timer controls do not enable recalculation.",
+            null,
+            "Entitlement templates are unrelated.",
+            "Queue settings are unrelated."
+          ],
+          "msRef": {
+            "label": "Enable Sla Recalculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-recalculation"
+          }
         },
         {
           "q": "Why is the developer's 'custom workflow without plugin step' approach flawed?",
@@ -2929,12 +3437,16 @@
           ],
           "answer": 0,
           "explanation": "The docs are explicit: custom time calculation is supported through plug-ins, and missing plugin SDK steps trigger documented errors.",
-          "wrongExplanations": {
-            "1": "Standard vs enhanced is not the core issue here.",
-            "2": "Calendar disabling is unrelated.",
-            "3": "Entitlements are unrelated to custom time calculation support."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          "wrongExplanations": [
+            null,
+            "Standard vs enhanced is not the core issue here.",
+            "Calendar disabling is unrelated.",
+            "Entitlements are unrelated to custom time calculation support."
+          ],
+          "msRef": {
+            "label": "Enable Sla Custom Time Calculation",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-sla-custom-time-calculation"
+          }
         }
       ]
     }

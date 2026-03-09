@@ -21,12 +21,16 @@
         "default-state"
       ],
       "explanation": "Microsoft states that if Customer Service only is installed, unified routing isn't enabled by default and must be enabled through the setup process.",
-      "wrongExplanations": {
-        "0": "That would remove the need for provisioning, which Microsoft explicitly documents.",
-        "1": "It is not partially enabled for only one record type by default.",
-        "3": "Queue creation does not automatically enable unified routing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/provision-unified-routing"
+      "wrongExplanations": [
+        "That would remove the need for provisioning, which Microsoft explicitly documents.",
+        "It is not partially enabled for only one record type by default.",
+        null,
+        "Queue creation does not automatically enable unified routing."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/provision-unified-routing"
+      }
     },
     {
       "q": "Where do administrators configure unified routing?",
@@ -44,12 +48,16 @@
         "routing"
       ],
       "explanation": "Unified routing is configured through the Copilot Service admin center app.",
-      "wrongExplanations": {
-        "0": "That center is important for environments, but not the documented routing configuration location.",
-        "2": "Microsoft 365 admin center is not where unified routing is configured.",
-        "3": "Runtime and admin configuration are not the same thing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "That center is important for environments, but not the documented routing configuration location.",
+        null,
+        "Microsoft 365 admin center is not where unified routing is configured.",
+        "Runtime and admin configuration are not the same thing."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "Which statement is true about Unified Service Desk and unified routing?",
@@ -67,12 +75,16 @@
         "limitations"
       ],
       "explanation": "Microsoft explicitly states that unified routing isn't supported in Unified Service Desk.",
-      "wrongExplanations": {
-        "0": "This is the opposite of the documentation.",
-        "1": "There is no such supported voice-only exception in the cited article.",
-        "3": "Preferred representative routing does not require Unified Service Desk."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "This is the opposite of the documentation.",
+        "There is no such supported voice-only exception in the cited article.",
+        null,
+        "Preferred representative routing does not require Unified Service Desk."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "For record routing, which app do representatives need to use to receive assignments through unified routing?",
@@ -90,12 +102,16 @@
         "representatives"
       ],
       "explanation": "Representatives must use Copilot Service workspace to be assigned work through unified routing.",
-      "wrongExplanations": {
-        "0": "That is not the documented representative workspace.",
-        "1": "Customer Insights is unrelated to receiving unified routing assignments.",
-        "3": "Microsoft documents a specific required workspace, not any app."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "That is not the documented representative workspace.",
+        "Customer Insights is unrelated to receiving unified routing assignments.",
+        null,
+        "Microsoft documents a specific required workspace, not any app."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "In unified routing for records, what is a prerequisite before a table can be routed?",
@@ -113,12 +129,16 @@
         "prerequisite"
       ],
       "explanation": "Any record that you want to enable for routing needs to be enabled for queues first.",
-      "wrongExplanations": {
-        "1": "Records can be routed without being activity types, provided the table is queue-enabled.",
-        "2": "SLA is not the prerequisite documented for queue routing.",
-        "3": "Ownership model is separate from queue-enablement."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-for-queues"
+      "wrongExplanations": [
+        null,
+        "Records can be routed without being activity types, provided the table is queue-enabled.",
+        "SLA is not the prerequisite documented for queue routing.",
+        "Ownership model is separate from queue-enablement."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-for-queues"
+      }
     },
     {
       "q": "What happens to a work item if no route-to-queue rule matches and no rules are defined?",
@@ -136,12 +156,16 @@
         "rules"
       ],
       "explanation": "If no queue routing rules are defined or no rules match, the incoming work item is routed to the fallback queue of the respective workstream.",
-      "wrongExplanations": {
-        "0": "Routing failure does not delete the work item.",
-        "2": "The queue owner isn't the automatic fallback assignment target.",
-        "3": "The documented behavior is fallback queue routing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      "wrongExplanations": [
+        "Routing failure does not delete the work item.",
+        null,
+        "The queue owner isn't the automatic fallback assignment target.",
+        "The documented behavior is fallback queue routing."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      }
     },
     {
       "q": "Which statement is true about workstreams in unified routing?",
@@ -159,12 +183,16 @@
         "setup"
       ],
       "explanation": "Workstreams are created and managed for a specific channel scenario and are part of how unified routing organizes classification, route-to-queue, and assignment behavior.",
-      "wrongExplanations": {
-        "0": "Channel alignment matters in routing design.",
-        "2": "Queues remain core routing containers.",
-        "3": "Advanced queue routing relies on workstream-driven behavior."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-workstreams"
+      "wrongExplanations": [
+        "Channel alignment matters in routing design.",
+        null,
+        "Queues remain core routing containers.",
+        "Advanced queue routing relies on workstream-driven behavior."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-workstreams"
+      }
     },
     {
       "q": "Which queue-to-workstream alignment is valid in unified routing?",
@@ -182,12 +210,16 @@
         "channel-type"
       ],
       "explanation": "Microsoft documents that queues and workstreams must align by channel type. A workstream should route to queues of the same relevant type.",
-      "wrongExplanations": {
-        "0": "This breaks channel-type alignment.",
-        "1": "This also breaks channel-type alignment.",
-        "3": "Channel type alignment matters in unified routing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/queues-omnichannel"
+      "wrongExplanations": [
+        "This breaks channel-type alignment.",
+        "This also breaks channel-type alignment.",
+        null,
+        "Channel type alignment matters in unified routing."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/queues-omnichannel"
+      }
     },
     {
       "q": "Which feature lets you define custom assignment behavior beyond the out-of-box assignment methods?",
@@ -205,12 +237,16 @@
         "queues"
       ],
       "explanation": "To use custom assignment methods, administrators create assignment rulesets comprising rules.",
-      "wrongExplanations": {
-        "1": "Preferred representatives are a separate routing capability.",
-        "2": "Fallback queue is part of route-to-queue behavior, not custom assignment logic.",
-        "3": "Queue privacy controls visibility, not assignment behavior."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-assignment-rules"
+      "wrongExplanations": [
+        null,
+        "Preferred representatives are a separate routing capability.",
+        "Fallback queue is part of route-to-queue behavior, not custom assignment logic.",
+        "Queue privacy controls visibility, not assignment behavior."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-assignment-rules"
+      }
     },
     {
       "q": "What is one of the documented steps in creating assignment rulesets?",
@@ -228,12 +264,16 @@
         "order-by"
       ],
       "explanation": "When creating assignment rulesets, you configure conditions and an order-by option for the ruleset.",
-      "wrongExplanations": {
-        "1": "Built-in methods do not need to be disabled as a blanket prerequisite.",
-        "2": "Queue privacy is unrelated to assignment ruleset creation.",
-        "3": "That is not part of the documented process."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-assignment-rules"
+      "wrongExplanations": [
+        null,
+        "Built-in methods do not need to be disabled as a blanket prerequisite.",
+        "Queue privacy is unrelated to assignment ruleset creation.",
+        "That is not part of the documented process."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-assignment-rules"
+      }
     },
     {
       "q": "What business problem does preferred representative routing solve?",
@@ -251,12 +291,16 @@
         "personalization"
       ],
       "explanation": "Preferred representative routing supports a more personalized experience by routing work items from a specific contact to the customer's preferred representative or relationship manager.",
-      "wrongExplanations": {
-        "0": "Queue ownership isn't the purpose of preferred representative routing.",
-        "2": "It does not replace all routing stages.",
-        "3": "It is not restricted to bot conversations."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+      "wrongExplanations": [
+        "Queue ownership isn't the purpose of preferred representative routing.",
+        null,
+        "It does not replace all routing stages.",
+        "It is not restricted to bot conversations."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+      }
     },
     {
       "q": "Which statement about preferred representative routing is true?",
@@ -274,12 +318,16 @@
         "scope"
       ],
       "explanation": "Microsoft notes that the case information scenario in the preferred representative routing article is applicable to Customer Service only.",
-      "wrongExplanations": {
-        "1": "It is not limited to email activities.",
-        "2": "Unified Service Desk is not required and is not supported for unified routing.",
-        "3": "This is not documented as a basic-routing-only feature."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+      "wrongExplanations": [
+        null,
+        "It is not limited to email activities.",
+        "Unified Service Desk is not required and is not supported for unified routing.",
+        "This is not documented as a basic-routing-only feature."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+      }
     },
     {
       "q": "What is overflow in the context of unified routing queues?",
@@ -297,12 +345,16 @@
         "capacity"
       ],
       "explanation": "Overflow is used to manage work items when a queue reaches its configured limit or cannot continue receiving work under the defined conditions.",
-      "wrongExplanations": {
-        "0": "Overflow is not an automatic delete mechanism.",
-        "2": "Fallback queue and overflow are related to routing but are not the same thing.",
-        "3": "Overflow does not change ownership models."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-overflow"
+      "wrongExplanations": [
+        "Overflow is not an automatic delete mechanism.",
+        null,
+        "Fallback queue and overflow are related to routing but are not the same thing.",
+        "Overflow does not change ownership models."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-overflow"
+      }
     },
     {
       "q": "Which setup area is directly associated with handling work items that exceed queue handling thresholds?",
@@ -320,12 +372,16 @@
         "queue-management"
       ],
       "explanation": "Overflow settings are used to define behavior when queue thresholds or limits are reached.",
-      "wrongExplanations": {
-        "1": "Skill types are part of skill-based routing, not queue overflow control.",
-        "2": "Privacy affects visibility, not excess-work handling.",
-        "3": "SLA KPIs are separate from unified routing overflow."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-overflow"
+      "wrongExplanations": [
+        null,
+        "Skill types are part of skill-based routing, not queue overflow control.",
+        "Privacy affects visibility, not excess-work handling.",
+        "SLA KPIs are separate from unified routing overflow."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-overflow"
+      }
     },
     {
       "q": "Which statement about email in unified routing is correct?",
@@ -343,12 +399,16 @@
         "work-items"
       ],
       "explanation": "Microsoft documents that emails are an example of activity records that can be turned into work items and added to queues for representatives to work on.",
-      "wrongExplanations": {
-        "0": "This directly contradicts the email routing article.",
-        "2": "The article discusses unified routing for email records.",
-        "3": "Queues are part of the documented process."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-routing-for-email-records"
+      "wrongExplanations": [
+        "This directly contradicts the email routing article.",
+        null,
+        "The article discusses unified routing for email records.",
+        "Queues are part of the documented process."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-routing-for-email-records"
+      }
     },
     {
       "q": "Which tool is used to set up custom flow to automatically route records?",
@@ -366,12 +426,16 @@
         "record-routing"
       ],
       "explanation": "The documented setup for automatically routing records uses a custom flow created in Power Automate.",
-      "wrongExplanations": {
-        "0": "Power BI is not used to create routing flows.",
-        "2": "Azure DevOps Pipelines are unrelated to the documented runtime routing trigger setup.",
-        "3": "Dataverse Search does not create routing triggers."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/routing-trigger-automatic"
+      "wrongExplanations": [
+        "Power BI is not used to create routing flows.",
+        null,
+        "Azure DevOps Pipelines are unrelated to the documented runtime routing trigger setup.",
+        "Dataverse Search does not create routing triggers."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/routing-trigger-automatic"
+      }
     },
     {
       "q": "What is the first platform step in the documented custom-flow setup for automatic routing of records?",
@@ -389,12 +453,16 @@
         "setup"
       ],
       "explanation": "The documented process begins in Power Automate by selecting the environment and creating an Automated cloud flow.",
-      "wrongExplanations": {
-        "0": "The article documents an automated cloud flow, not a desktop flow.",
-        "2": "SLA enablement is not the first step in this flow setup.",
-        "3": "A business rule is not the documented flow trigger approach."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/routing-trigger-automatic"
+      "wrongExplanations": [
+        "The article documents an automated cloud flow, not a desktop flow.",
+        null,
+        "SLA enablement is not the first step in this flow setup.",
+        "A business rule is not the documented flow trigger approach."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/routing-trigger-automatic"
+      }
     },
     {
       "q": "Which statement is true about skill-based routing?",
@@ -412,12 +480,16 @@
         "routing"
       ],
       "explanation": "Skill-based routing matches incoming work to the best-suited representative based on defined skills and related routing logic.",
-      "wrongExplanations": {
-        "1": "Queues remain part of routing.",
-        "2": "It is not restricted to voice only.",
-        "3": "Queue privacy is unrelated to whether skill-based routing can be used."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-skill-work-distribution"
+      "wrongExplanations": [
+        null,
+        "Queues remain part of routing.",
+        "It is not restricted to voice only.",
+        "Queue privacy is unrelated to whether skill-based routing can be used."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-skill-work-distribution"
+      }
     },
     {
       "q": "Before an administrator can create a skill such as Spanish, what must already exist?",
@@ -435,12 +507,16 @@
         "setup"
       ],
       "explanation": "Microsoft states that you need at least one skill type in the system before you can create skills. For example, Language must exist before adding Spanish as a skill.",
-      "wrongExplanations": {
-        "1": "Queues are not the prerequisite for defining a skill.",
-        "2": "SLA objects are unrelated to skill creation.",
-        "3": "Private queue setup is not required for defining a skill."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
+      "wrongExplanations": [
+        null,
+        "Queues are not the prerequisite for defining a skill.",
+        "SLA objects are unrelated to skill creation.",
+        "Private queue setup is not required for defining a skill."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
+      }
     },
     {
       "q": "What is used to define proficiency levels for skills?",
@@ -458,12 +534,16 @@
         "proficiency"
       ],
       "explanation": "Skill proficiency levels are defined through a rating model.",
-      "wrongExplanations": {
-        "1": "Overflow profiles are about queue load handling.",
-        "2": "Queue counts do not define proficiency.",
-        "3": "Case category is not a proficiency definition model."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+      "wrongExplanations": [
+        null,
+        "Overflow profiles are about queue load handling.",
+        "Queue counts do not define proficiency.",
+        "Case category is not a proficiency definition model."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+      }
     },
     {
       "q": "By default, what is true about skill-based routing?",
@@ -481,12 +561,16 @@
         "routing"
       ],
       "explanation": "Microsoft states that skill-based routing is enabled by default.",
-      "wrongExplanations": {
-        "0": "This is not the documented default state.",
-        "2": "Preferred representative routing is separate.",
-        "3": "It is not documented as being limited to chat only."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+      "wrongExplanations": [
+        "This is not the documented default state.",
+        null,
+        "Preferred representative routing is separate.",
+        "It is not documented as being limited to chat only."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+      }
     },
     {
       "q": "What must an administrator enable to let representatives add or remove skills at runtime for assigned work items?",
@@ -504,12 +588,16 @@
         "update-skill-control"
       ],
       "explanation": "To let representatives add or remove skills for assigned work items at runtime, the admin must enable the update skill control toggle in the Copilot Service admin center.",
-      "wrongExplanations": {
-        "0": "Automatic work distribution is about advanced queue behavior, not runtime skill editing.",
-        "2": "Queue membership does not enable runtime skill updates.",
-        "3": "Diagnostics do not enable runtime skill editing."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+      "wrongExplanations": [
+        "Automatic work distribution is about advanced queue behavior, not runtime skill editing.",
+        null,
+        "Queue membership does not enable runtime skill updates.",
+        "Diagnostics do not enable runtime skill editing."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+      }
     },
     {
       "q": "What is the purpose of Intelligent Skill Finder (ISF) in unified routing?",
@@ -527,12 +615,16 @@
         "skills"
       ],
       "explanation": "ISF is used to configure machine learning-based skill classification rulesets that predict skills.",
-      "wrongExplanations": {
-        "0": "ISF is not an archival feature.",
-        "2": "It does not replace queues.",
-        "3": "Manual skill assignment remains possible."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-isf-model"
+      "wrongExplanations": [
+        "ISF is not an archival feature.",
+        null,
+        "It does not replace queues.",
+        "Manual skill assignment remains possible."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-isf-model"
+      }
     },
     {
       "q": "Why might an organization model existing tables as skills?",
@@ -550,12 +642,16 @@
         "skills"
       ],
       "explanation": "Microsoft says organizations can model existing tables as skills to avoid recreating data definitions as skills and avoid writing classification rules to stamp skills on incoming work items.",
-      "wrongExplanations": {
-        "1": "The feature does not disable tables.",
-        "2": "It does not convert every record into an activity.",
-        "3": "There is no such binary-only requirement."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/model-tables-as-skills-ur"
+      "wrongExplanations": [
+        null,
+        "The feature does not disable tables.",
+        "It does not convert every record into an activity.",
+        "There is no such binary-only requirement."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/model-tables-as-skills-ur"
+      }
     },
     {
       "q": "Which statement about sentiment prediction for routing is correct?",
@@ -573,12 +669,16 @@
         "ml-model"
       ],
       "explanation": "The sentiment prediction article explicitly marks the capability as a preview feature.",
-      "wrongExplanations": {
-        "0": "Microsoft explicitly says preview features aren't meant for production use.",
-        "2": "The model looks at customer-provided messages, not representative chat strings.",
-        "3": "Unified Service Desk is not the requirement here."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        "Microsoft explicitly says preview features aren't meant for production use.",
+        null,
+        "The model looks at customer-provided messages, not representative chat strings.",
+        "Unified Service Desk is not the requirement here."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "How many sentiment categories are on the documented sentiment prediction scale?",
@@ -596,12 +696,16 @@
         "classification"
       ],
       "explanation": "The sentiment model uses a seven-point scale: very positive, positive, slightly positive, neutral, slightly negative, negative, and very negative.",
-      "wrongExplanations": {
-        "0": "Three is too few for the documented model.",
-        "1": "Five is not the documented count.",
-        "3": "Ten is not the documented count."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        "Three is too few for the documented model.",
+        "Five is not the documented count.",
+        null,
+        "Ten is not the documented count."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "What does the sentiment prediction model consider when classifying sentiment?",
@@ -619,12 +723,16 @@
         "customer-message"
       ],
       "explanation": "The documented model looks for and uses the messages provided by the customer and doesn't consider chat strings sent by the representative.",
-      "wrongExplanations": {
-        "1": "This is the opposite of the documented behavior.",
-        "2": "Queue metadata is not the sentiment signal.",
-        "3": "SLA warnings are not the model input."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        null,
+        "This is the opposite of the documented behavior.",
+        "Queue metadata is not the sentiment signal.",
+        "SLA warnings are not the model input."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "When configuring the sentiment prediction model, how many input attributes can be defined?",
@@ -642,12 +750,16 @@
         "limits"
       ],
       "explanation": "You can define up to 10 attributes whose values can be used to build the prediction model.",
-      "wrongExplanations": {
-        "0": "The documented limit is higher.",
-        "1": "The documented limit is higher.",
-        "3": "There is a documented limit."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        "The documented limit is higher.",
+        "The documented limit is higher.",
+        null,
+        "There is a documented limit."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "What is true about the first sentiment-model input attribute?",
@@ -665,12 +777,16 @@
         "model-setup"
       ],
       "explanation": "At least one attribute is mandatory in the sentiment model setup, and the first one can't be deleted.",
-      "wrongExplanations": {
-        "0": "This contradicts the documented setup rule.",
-        "2": "Queue name is not the required fixed first attribute.",
-        "3": "The article does not impose a voice-only restriction here."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        "This contradicts the documented setup rule.",
+        null,
+        "Queue name is not the required fixed first attribute.",
+        "The article does not impose a voice-only restriction here."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "After enabling sentiment prediction, what rule type is used in work classification to apply it?",
@@ -688,12 +804,16 @@
         "rule-type"
       ],
       "explanation": "In work classification, the sentiment model is configured as a machine learning model rule with type set to Sentiment prediction.",
-      "wrongExplanations": {
-        "0": "Prioritization is a different concern.",
-        "2": "Overflow rules are queue handling rules.",
-        "3": "Template rulesets are reusable templates, not the ML rule type itself."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        "Prioritization is a different concern.",
+        null,
+        "Overflow rules are queue handling rules.",
+        "Template rulesets are reusable templates, not the ML rule type itself."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "What is stored as output from the sentiment prediction rule for use in later routing logic?",
@@ -711,12 +831,16 @@
         "routing"
       ],
       "explanation": "The output is stored in the Sentiment Category attribute and can be used in later rules.",
-      "wrongExplanations": {
-        "0": "Queue owner is not the ML output attribute.",
-        "2": "Representative ID is not predicted by the sentiment rule.",
-        "3": "Overflow reason is unrelated."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "wrongExplanations": [
+        "Queue owner is not the ML output attribute.",
+        null,
+        "Representative ID is not predicted by the sentiment rule.",
+        "Overflow reason is unrelated."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "q": "Which statement about basic case routing rulesets is correct?",
@@ -734,12 +858,16 @@
         "records"
       ],
       "explanation": "The basic routing rulesets article explicitly recommends enabling and using unified routing for automatically routing records in Customer Service.",
-      "wrongExplanations": {
-        "0": "This is the opposite of the recommendation.",
-        "2": "Preferred representative routing is not documented as requiring legacy basic routing.",
-        "3": "The article does not state that."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
+      "wrongExplanations": [
+        "This is the opposite of the recommendation.",
+        null,
+        "Preferred representative routing is not documented as requiring legacy basic routing.",
+        "The article does not state that."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
+      }
     },
     {
       "q": "What is true about the old unified routing diagnostics feature in Dynamics 365 Customer Service?",
@@ -757,12 +885,16 @@
         "routing"
       ],
       "explanation": "Microsoft marks the older unified routing diagnostics feature as deprecated.",
-      "wrongExplanations": {
-        "0": "That would contradict the deprecation notice.",
-        "2": "This is not what the doc states.",
-        "3": "Deprecation does not mean it replaces conversation diagnostics."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
+      "wrongExplanations": [
+        "That would contradict the deprecation notice.",
+        null,
+        "This is not what the doc states.",
+        "Deprecation does not mean it replaces conversation diagnostics."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
+      }
     },
     {
       "q": "What are routing rules templates used for?",
@@ -780,12 +912,16 @@
         "reuse"
       ],
       "explanation": "Routing rules templates are intended to help manage reusable ruleset patterns more efficiently.",
-      "wrongExplanations": {
-        "1": "Templates do not replace skills.",
-        "2": "They are not analytics export features.",
-        "3": "They do not bypass the routing pipeline."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-routing-rules-templates"
+      "wrongExplanations": [
+        null,
+        "Templates do not replace skills.",
+        "They are not analytics export features.",
+        "They do not bypass the routing pipeline."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-routing-rules-templates"
+      }
     },
     {
       "q": "Which statement best reflects Microsoft’s best-practices guidance for unified routing?",
@@ -803,12 +939,16 @@
         "design"
       ],
       "explanation": "The best-practices article emphasizes careful setup and design because deployment and management quality depend on these choices.",
-      "wrongExplanations": {
-        "0": "That is the opposite of best practice.",
-        "2": "Quantity is not the same as sound routing design.",
-        "3": "Queue privacy should follow operating need, not a blanket rule."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-best-practices"
+      "wrongExplanations": [
+        "That is the opposite of best practice.",
+        null,
+        "Quantity is not the same as sound routing design.",
+        "Queue privacy should follow operating need, not a blanket rule."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-best-practices"
+      }
     },
     {
       "q": "What audience does the unified routing FAQ explicitly mention?",
@@ -826,12 +966,16 @@
         "roles"
       ],
       "explanation": "The unified routing FAQ article explicitly says it contains questions administrators, supervisors, and representatives might have.",
-      "wrongExplanations": {
-        "0": "The article is broader than architects only.",
-        "2": "It is not limited to developers.",
-        "3": "Power BI analysts are not the named audience."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-faqs"
+      "wrongExplanations": [
+        "The article is broader than architects only.",
+        null,
+        "It is not limited to developers.",
+        "Power BI analysts are not the named audience."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-faqs"
+      }
     },
     {
       "q": "What is one documented business benefit of unified routing?",
@@ -849,12 +993,16 @@
         "matching"
       ],
       "explanation": "Microsoft lists connecting end customers with the best-suited representative to provide the right outcome on first contact as a key business benefit.",
-      "wrongExplanations": {
-        "0": "Queues remain part of the routing model.",
-        "2": "Overflow can still exist and must be managed.",
-        "3": "Machine learning is part of the documented capability set."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "Queues remain part of the routing model.",
+        null,
+        "Overflow can still exist and must be managed.",
+        "Machine learning is part of the documented capability set."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "Which statement about machine learning in unified routing is correct?",
@@ -872,12 +1020,16 @@
         "work-items"
       ],
       "explanation": "Microsoft states that rules and machine learning models can be used during classification to add information to work items.",
-      "wrongExplanations": {
-        "0": "ML is explicitly documented in classification.",
-        "2": "ML is optional, not mandatory for every workstream.",
-        "3": "Queue privacy is unrelated to whether ML can be used."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "ML is explicitly documented in classification.",
+        null,
+        "ML is optional, not mandatory for every workstream.",
+        "Queue privacy is unrelated to whether ML can be used."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "Which factor is part of assignment-stage decisioning in unified routing?",
@@ -895,12 +1047,16 @@
         "workload"
       ],
       "explanation": "The assignment stage uses factors such as work-item needs, related entities, skills, and the current state of the workforce including availability and workload.",
-      "wrongExplanations": {
-        "1": "Browser version is not the routing decision factor described.",
-        "2": "Dataverse storage capacity is not an assignment signal here.",
-        "3": "Theme preference is irrelevant."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        null,
+        "Browser version is not the routing decision factor described.",
+        "Dataverse storage capacity is not an assignment signal here.",
+        "Theme preference is irrelevant."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "Unified routing in Dynamics 365 Customer Service consists of which two main stages?",
@@ -919,12 +1075,16 @@
         "foundational"
       ],
       "explanation": "Unified routing has two main stages: <strong>classification</strong> and <strong>assignment</strong>. In classification, rules or ML can add information such as skills, urgency, or category to the work item. In assignment, the item is prioritized and assigned to the best-suited representative based on attributes, skills, availability, and capacity.",
-      "wrongExplanations": {
-        "0": "Prioritization happens inside assignment logic, but it is not one of the two named core stages.",
-        "2": "Queueing and resolution are business outcomes or downstream actions — they are not the two official stages of unified routing.",
-        "3": "Skill detection and SLA enforcement are possible features around routing, but they are not the two official stage names."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "Prioritization happens inside assignment logic, but it is not one of the two named core stages.",
+        null,
+        "Queueing and resolution are business outcomes or downstream actions — they are not the two official stages of unified routing.",
+        "Skill detection and SLA enforcement are possible features around routing, but they are not the two official stage names."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "Which application must representatives use in order to be assigned work through unified routing?",
@@ -943,12 +1103,16 @@
         "prerequisites"
       ],
       "explanation": "Representatives must use <strong>Copilot Service workspace</strong> to be assigned work through unified routing. Microsoft explicitly documents this requirement and also notes that unified routing isn't supported in Unified Service Desk.",
-      "wrongExplanations": {
-        "0": "Customer Service Hub is not the required runtime app for receiving work via unified routing.",
-        "1": "Unified Service Desk is explicitly not supported for unified routing.",
-        "3": "Unified routing runtime assignment is not available in just any model-driven app."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "wrongExplanations": [
+        "Customer Service Hub is not the required runtime app for receiving work via unified routing.",
+        "Unified Service Desk is explicitly not supported for unified routing.",
+        null,
+        "Unified routing runtime assignment is not available in just any model-driven app."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "q": "When setting up unified routing for records, which action must happen first in the documented high-level sequence?",
@@ -967,12 +1131,16 @@
         "sequence"
       ],
       "explanation": "For record routing, Microsoft documents that the first step is to <strong>provision unified routing in Service Configuration Settings</strong>. After that come user setup, queue creation, record routing configuration, workstream setup, and diagnostics.",
-      "wrongExplanations": {
-        "0": "Creating a workstream comes later in the sequence, after provisioning and queue setup.",
-        "1": "Routing diagnostics are enabled near the end of the record-routing setup flow, not first.",
-        "3": "Assignment rules are configured after the queue and routing foundation are already in place."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
+      "wrongExplanations": [
+        "Creating a workstream comes later in the sequence, after provisioning and queue setup.",
+        "Routing diagnostics are enabled near the end of the record-routing setup flow, not first.",
+        null,
+        "Assignment rules are configured after the queue and routing foundation are already in place."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
+      }
     },
     {
       "q": "How many route-to-queue rulesets can a single workstream have?",
@@ -990,12 +1158,16 @@
         "rulesets"
       ],
       "explanation": "A workstream can have <strong>one route-to-queue ruleset only</strong>. That route-to-queue ruleset is evaluated after the work classification rulesets complete.",
-      "wrongExplanations": {
-        "1": "Microsoft does not allow two route-to-queue rulesets per workstream.",
-        "2": "Five applies to the maximum number of queues in a percentage-based allocation rule, not the number of route-to-queue rulesets.",
-        "3": "The number of queues does not change the one-ruleset-per-workstream limitation."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      "wrongExplanations": [
+        null,
+        "Microsoft does not allow two route-to-queue rulesets per workstream.",
+        "Five applies to the maximum number of queues in a percentage-based allocation rule, not the number of route-to-queue rulesets.",
+        "The number of queues does not change the one-ruleset-per-workstream limitation."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      }
     },
     {
       "q": "In the unified routing evaluation order, when is the route-to-queue ruleset processed?",
@@ -1014,12 +1186,16 @@
         "rulesets"
       ],
       "explanation": "The <strong>route-to-queue ruleset runs after all work classification rulesets</strong>. Classification first enriches or updates attributes on the work item, and then route-to-queue determines which queue receives it.",
-      "wrongExplanations": {
-        "0": "This is the reverse of the documented evaluation order.",
-        "2": "Assignment rules are a different stage; route-to-queue does not wait for assignment failure.",
-        "3": "Overflow handling affects queue choice behavior, but it does not determine whether route-to-queue runs."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-work-classification"
+      "wrongExplanations": [
+        "This is the reverse of the documented evaluation order.",
+        null,
+        "Assignment rules are a different stage; route-to-queue does not wait for assignment failure.",
+        "Overflow handling affects queue choice behavior, but it does not determine whether route-to-queue runs."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-work-classification"
+      }
     },
     {
       "q": "What is the maximum percentage-based queue allocation that can be configured within a single route-to-queue rule?",
@@ -1037,12 +1213,16 @@
         "queues"
       ],
       "explanation": "Percentage-based routing can distribute work across <strong>up to five queues</strong> in a route-to-queue rule, and the total allocation across those queues must equal <strong>100%</strong>.",
-      "wrongExplanations": {
-        "0": "The documented maximum is five queues, not three.",
-        "2": "Ten queues is above the documented limit for percentage-based allocation in one rule.",
-        "3": "The percentages must add up to 100, not 80."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      "wrongExplanations": [
+        "The documented maximum is five queues, not three.",
+        null,
+        "Ten queues is above the documented limit for percentage-based allocation in one rule.",
+        "The percentages must add up to 100, not 80."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      }
     },
     {
       "q": "Which statement is TRUE about work classification rulesets in a workstream?",
@@ -1061,12 +1241,16 @@
         "workstream"
       ],
       "explanation": "Microsoft documents that you can create <strong>10 rulesets per workstream</strong>, and for each ruleset you can create up to <strong>100 rule items</strong>.",
-      "wrongExplanations": {
-        "0": "Both the ruleset count and rule item count are understated here.",
-        "2": "This reverses the documented numbers.",
-        "3": "There are explicit documented limits."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-work-classification"
+      "wrongExplanations": [
+        "Both the ruleset count and rule item count are understated here.",
+        null,
+        "This reverses the documented numbers.",
+        "There are explicit documented limits."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-work-classification"
+      }
     },
     {
       "q": "What is the defining behavior of the Highest capacity assignment method?",
@@ -1085,12 +1269,16 @@
         "round-robin"
       ],
       "explanation": "Under <strong>Highest capacity</strong>, the system assigns the work item to the representative with the highest available capacity, provided they also meet the required skills and allowed presence conditions. If multiple representatives tie on capacity, round robin is used to break the tie.",
-      "wrongExplanations": {
-        "0": "Earliest last-assignment timestamp is part of the round-robin tie-break behavior, not the core definition of Highest capacity.",
-        "2": "Highest capacity still respects required skills and allowed presence.",
-        "3": "Assignment is not random."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      "wrongExplanations": [
+        "Earliest last-assignment timestamp is part of the round-robin tie-break behavior, not the core definition of Highest capacity.",
+        null,
+        "Highest capacity still respects required skills and allowed presence.",
+        "Assignment is not random."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      }
     },
     {
       "q": "What is the defining behavior of Advanced round robin assignment?",
@@ -1109,12 +1297,16 @@
         "fairness"
       ],
       "explanation": "In <strong>Advanced round robin</strong>, the system still checks skills, presence, and capacity, but maintains a queue-wise round-robin ordering that is updated as work gets assigned. This is intended to help distribute work more fairly.",
-      "wrongExplanations": {
-        "0": "It does not favor the newest queue member.",
-        "1": "Capacity is still part of the matching criteria.",
-        "3": "Overflow is a separate queue behavior and is not a prerequisite for round-robin assignment."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      "wrongExplanations": [
+        "It does not favor the newest queue member.",
+        "Capacity is still part of the matching criteria.",
+        null,
+        "Overflow is a separate queue behavior and is not a prerequisite for round-robin assignment."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      }
     },
     {
       "q": "Which statement is TRUE about private queues in Dynamics 365 Customer Service?",
@@ -1133,12 +1325,16 @@
         "visibility"
       ],
       "explanation": "A <strong>private queue</strong> is used to let a small group of members view and work queue items, helping reduce clutter in other users' views. However, private queues <strong>do not restrict access to the records they contain</strong>; record security must still be handled through the security model.",
-      "wrongExplanations": {
-        "0": "This is the classic trap. Private queue visibility is not the same thing as record-level security.",
-        "1": "That describes neither public nor private queue behavior correctly.",
-        "3": "Private/public queue type is documented on basic queues as well; it is not limited to advanced queues."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+      "wrongExplanations": [
+        "This is the classic trap. Private queue visibility is not the same thing as record-level security.",
+        "That describes neither public nor private queue behavior correctly.",
+        null,
+        "Private/public queue type is documented on basic queues as well; it is not limited to advanced queues."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+      }
     },
     {
       "q": "What happens after you convert a basic queue to an advanced queue by setting Automatic work distribution to Yes?",
@@ -1157,12 +1353,16 @@
         "automatic-work-distribution"
       ],
       "explanation": "Microsoft states that once a basic queue is updated to an <strong>advanced queue</strong> by enabling Automatic work distribution, you <strong>can't revert it</strong> back to a basic queue. If you need a basic queue again, you must create a new one.",
-      "wrongExplanations": {
-        "0": "This is explicitly not supported.",
-        "1": "There is no supported rollback path through the workstream.",
-        "3": "Queue privacy is a separate setting and is not changed automatically by enabling advanced queue behavior."
-      },
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+      "wrongExplanations": [
+        "This is explicitly not supported.",
+        "There is no supported rollback path through the workstream.",
+        null,
+        "Queue privacy is a separate setting and is not changed automatically by enabling advanced queue behavior."
+      ],
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+      }
     }
   ],
   "dragdrop": [
@@ -1195,7 +1395,10 @@
         "routing-design"
       ],
       "explanation": "Provisioning enables the capability, table queue-enablement makes records routable, the workstream defines the channel routing context, route-to-queue picks the queue, and assignment rulesets control custom assignment behavior.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
+      }
     },
     {
       "instruction": "Match each skill-routing concept to the correct description.",
@@ -1226,7 +1429,10 @@
         "runtime"
       ],
       "explanation": "Skill setup starts with skill types, specific skills are created under them, proficiency is modeled with a rating model, runtime editing uses the update skill control, and ISF predicts skills via machine learning.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
+      }
     },
     {
       "instruction": "Match each sentiment-routing element to its correct meaning.",
@@ -1257,7 +1463,10 @@
         "classification"
       ],
       "explanation": "Sentiment prediction is preview, uses a seven-point classification scale, looks at customer messages, stores output in Sentiment Category, and can be tested with Dry run.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+      }
     },
     {
       "instruction": "Match each queue or routing concept to the correct description.",
@@ -1288,7 +1497,10 @@
         "preferred-agent"
       ],
       "explanation": "These are distinct queue-related behaviors: fallback handles unmatched items, private/public control queue visibility, overflow handles threshold conditions, and preferred representative routing supports personalized assignment.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+      }
     },
     {
       "instruction": "Match each routing stage or capability to its correct role.",
@@ -1319,7 +1531,10 @@
         "basic-routing"
       ],
       "explanation": "Classification precedes assignment, machine learning can enrich work items during classification, Microsoft recommends unified routing over legacy basic routing for automatic record routing, and the FAQ is written for multiple role audiences.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
+      }
     },
     {
       "instruction": "Match each artifact or feature to whether it is active guidance or flagged with a limitation/deprecation note.",
@@ -1351,7 +1566,10 @@
         "records"
       ],
       "explanation": "This separates what is current guidance from what has a note attached: diagnostics is deprecated, sentiment prediction is preview, Copilot Service workspace is required for assignments, queue-enabled tables are prerequisite for record routing, and update skill control enables runtime skill changes.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
+      }
     },
     {
       "instruction": "Match each unified routing concept to its correct description.",
@@ -1382,7 +1600,10 @@
         "foundational"
       ],
       "explanation": "Classification enriches the work item first, then route-to-queue places it into the correct queue, and assignment allocates it to a representative. Highest capacity and Advanced round robin are two distinct assignment methods with different distribution behavior.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+      }
     },
     {
       "instruction": "Match each queue type or setting to the correct meaning.",
@@ -1414,7 +1635,10 @@
         "advanced-queue"
       ],
       "explanation": "Public and private describe who can see and work queue items. Automatic work distribution determines whether the queue is basic or advanced for unified routing. Record access is governed separately by the security model.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+      }
     },
     {
       "instruction": "Match each route-to-queue behavior or limit to its correct rule.",
@@ -1446,7 +1670,10 @@
         "limits"
       ],
       "explanation": "A workstream gets only one route-to-queue ruleset. Hit-all is the default route evaluation policy, Hit-first stops at the first match, percentage allocation supports up to five queues summing to 100%, and work classification rulesets have documented limits per workstream.",
-      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      "msRef": {
+        "label": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+      }
     }
   ],
   "casestudy": [
@@ -1474,12 +1701,16 @@
           ],
           "answer": 1,
           "explanation": "Provisioning unified routing is the first foundational step when the capability isn't already enabled.",
-          "wrongExplanations": {
-            "0": "Queues come later in the setup flow.",
-            "2": "That is optional and unrelated to first-time enablement.",
-            "3": "Queue type choice is not the first foundational action."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/provision-unified-routing"
+          "wrongExplanations": [
+            "Queues come later in the setup flow.",
+            null,
+            "That is optional and unrelated to first-time enablement.",
+            "Queue type choice is not the first foundational action."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/provision-unified-routing"
+          }
         },
         {
           "q": "What must be true before the custom complaint table can be routed through unified routing?",
@@ -1491,12 +1722,16 @@
           ],
           "answer": 0,
           "explanation": "Records must be enabled for queues before they can participate in unified routing.",
-          "wrongExplanations": {
-            "1": "The prerequisite is queue enablement, not activity-only classification.",
-            "2": "Privacy is a queue setting, not a table prerequisite.",
-            "3": "Overflow is optional queue behavior, not a table prerequisite."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-for-queues"
+          "wrongExplanations": [
+            null,
+            "The prerequisite is queue enablement, not activity-only classification.",
+            "Privacy is a queue setting, not a table prerequisite.",
+            "Overflow is optional queue behavior, not a table prerequisite."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-entities-for-queues"
+          }
         },
         {
           "q": "Northwind wants custom assignment behavior beyond the built-in queue assignment methods. What should they configure?",
@@ -1508,12 +1743,16 @@
           ],
           "answer": 0,
           "explanation": "Custom assignment logic is configured through assignment rulesets.",
-          "wrongExplanations": {
-            "1": "Fallback queue is about queue selection when no rule matches.",
-            "2": "Microsoft recommends unified routing for automatic record routing.",
-            "3": "Diagnostics do not control assignment logic."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-assignment-rules"
+          "wrongExplanations": [
+            null,
+            "Fallback queue is about queue selection when no rule matches.",
+            "Microsoft recommends unified routing for automatic record routing.",
+            "Diagnostics do not control assignment logic."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-assignment-rules"
+          }
         },
         {
           "q": "Which workspace must representatives use to receive work assigned through unified routing?",
@@ -1525,12 +1764,16 @@
           ],
           "answer": 2,
           "explanation": "Representatives must use Copilot Service workspace for assignments through unified routing.",
-          "wrongExplanations": {
-            "0": "Unified Service Desk is not supported for unified routing.",
-            "1": "Customer Insights is not the assignment workspace.",
-            "3": "Microsoft specifies a particular workspace, not any app."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+          "wrongExplanations": [
+            "Unified Service Desk is not supported for unified routing.",
+            "Customer Insights is not the assignment workspace.",
+            null,
+            "Microsoft specifies a particular workspace, not any app."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+          }
         },
         {
           "q": "If Northwind defines no route-to-queue rule for some complaint records, where will those records go?",
@@ -1542,12 +1785,16 @@
           ],
           "answer": 1,
           "explanation": "When no route-to-queue rule matches, the work item is routed to the fallback queue.",
-          "wrongExplanations": {
-            "0": "The documented fallback behavior prevents this.",
-            "2": "Queue owners are not the documented fallback destination.",
-            "3": "Routing does not auto-close the record."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+          "wrongExplanations": [
+            "The documented fallback behavior prevents this.",
+            null,
+            "Queue owners are not the documented fallback destination.",
+            "Routing does not auto-close the record."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+          }
         }
       ]
     },
@@ -1575,12 +1822,16 @@
           ],
           "answer": 1,
           "explanation": "A skill type must exist before you can create a specific skill such as Spanish.",
-          "wrongExplanations": {
-            "0": "Queue creation is not the prerequisite.",
-            "2": "Sentiment categories are unrelated here.",
-            "3": "Preferred representative routing is separate."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
+          "wrongExplanations": [
+            "Queue creation is not the prerequisite.",
+            null,
+            "Sentiment categories are unrelated here.",
+            "Preferred representative routing is separate."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/setup-skills-assign-agents"
+          }
         },
         {
           "q": "What must the admin enable to let representatives add or remove skills during work handling?",
@@ -1592,12 +1843,16 @@
           ],
           "answer": 1,
           "explanation": "The update skill control toggle lets representatives add or remove skills at runtime for assigned work items.",
-          "wrongExplanations": {
-            "0": "Overflow handles queue capacity situations.",
-            "2": "Basic routing rulesets are unrelated.",
-            "3": "Queue privacy does not control runtime skill editing."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+          "wrongExplanations": [
+            "Overflow handles queue capacity situations.",
+            null,
+            "Basic routing rulesets are unrelated.",
+            "Queue privacy does not control runtime skill editing."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/allow-agents-update-skills"
+          }
         },
         {
           "q": "Which statement about sentiment prediction is correct for Fabrikam's design?",
@@ -1609,12 +1864,16 @@
           ],
           "answer": 1,
           "explanation": "Sentiment prediction is preview and classifies customer sentiment on a seven-point scale.",
-          "wrongExplanations": {
-            "0": "It evaluates customer-provided text, not representative chat strings.",
-            "2": "The article does not limit it to voice only.",
-            "3": "It feeds routing logic; it does not replace the routing pipeline."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+          "wrongExplanations": [
+            "It evaluates customer-provided text, not representative chat strings.",
+            null,
+            "The article does not limit it to voice only.",
+            "It feeds routing logic; it does not replace the routing pipeline."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/use-sentiment-prediction-for-routing"
+          }
         },
         {
           "q": "Why might Fabrikam model existing product tables as skills?",
@@ -1626,12 +1885,16 @@
           ],
           "answer": 0,
           "explanation": "Modeling existing tables as skills helps avoid recreating data definitions and can remove the need to write classification rules to stamp skills.",
-          "wrongExplanations": {
-            "1": "The feature does not disable ML.",
-            "2": "Queue privacy is unrelated.",
-            "3": "Rating models remain relevant for skill proficiency."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/model-tables-as-skills-ur"
+          "wrongExplanations": [
+            null,
+            "The feature does not disable ML.",
+            "Queue privacy is unrelated.",
+            "Rating models remain relevant for skill proficiency."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/model-tables-as-skills-ur"
+          }
         },
         {
           "q": "What is the role of Intelligent Skill Finder in this scenario?",
@@ -1643,12 +1906,16 @@
           ],
           "answer": 1,
           "explanation": "ISF is used to configure machine-learning-based skill classification rulesets to predict skills.",
-          "wrongExplanations": {
-            "0": "That is not its purpose.",
-            "2": "Manual skill definition remains possible.",
-            "3": "Queues remain part of the routing model."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-isf-model"
+          "wrongExplanations": [
+            "That is not its purpose.",
+            null,
+            "Manual skill definition remains possible.",
+            "Queues remain part of the routing model."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-isf-model"
+          }
         }
       ]
     },
@@ -1676,12 +1943,16 @@
           ],
           "answer": 0,
           "explanation": "Public queues are visible across the organization and fit broad operational visibility needs.",
-          "wrongExplanations": {
-            "1": "Private queues are for smaller member groups.",
-            "2": "Fallback queue is a routing outcome, not a visibility type.",
-            "3": "Overflow is a behavior, not a queue type name here."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          "wrongExplanations": [
+            null,
+            "Private queues are for smaller member groups.",
+            "Fallback queue is a routing outcome, not a visibility type.",
+            "Overflow is a behavior, not a queue type name here."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          }
         },
         {
           "q": "Which feature best fits the VIP account requirement to route work from a contact toward a specific relationship manager?",
@@ -1693,12 +1964,16 @@
           ],
           "answer": 0,
           "explanation": "Preferred representative routing is designed for routing work from a contact toward the customer's preferred representative or relationship manager.",
-          "wrongExplanations": {
-            "1": "This is not the personalization feature for preferred reps.",
-            "2": "Fallback queue is for unmatched routing.",
-            "3": "Update skill control is unrelated."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+          "wrongExplanations": [
+            null,
+            "This is not the personalization feature for preferred reps.",
+            "Fallback queue is for unmatched routing.",
+            "Update skill control is unrelated."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-preferred-agent"
+          }
         },
         {
           "q": "Which statement is correct about Litware using a private queue for HR/legal complaints?",
@@ -1710,12 +1985,16 @@
           ],
           "answer": 1,
           "explanation": "Private queue membership affects queue-item visibility, but record access must still be enforced through the security model.",
-          "wrongExplanations": {
-            "0": "This confuses visibility with security.",
-            "2": "Specialist teams are a valid private-queue use case.",
-            "3": "Private queues are not limited that way."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          "wrongExplanations": [
+            "This confuses visibility with security.",
+            null,
+            "Specialist teams are a valid private-queue use case.",
+            "Private queues are not limited that way."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          }
         },
         {
           "q": "Which configuration area should Litware use for handling queue spikes when thresholds are reached?",
@@ -1727,12 +2006,16 @@
           ],
           "answer": 0,
           "explanation": "Overflow handles queue situations where configured thresholds or limits are reached.",
-          "wrongExplanations": {
-            "1": "Rating models are for skill proficiency.",
-            "2": "Sentiment prediction is classification logic, not threshold handling.",
-            "3": "Template rulesets are for reuse patterns."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-overflow"
+          "wrongExplanations": [
+            null,
+            "Rating models are for skill proficiency.",
+            "Sentiment prediction is classification logic, not threshold handling.",
+            "Template rulesets are for reuse patterns."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-overflow"
+          }
         },
         {
           "q": "If Litware later enables Automatic work distribution on an existing basic queue, what is true?",
@@ -1744,12 +2027,16 @@
           ],
           "answer": 1,
           "explanation": "When Automatic work distribution is enabled, the queue becomes advanced and cannot be reverted back to a basic queue.",
-          "wrongExplanations": {
-            "0": "Microsoft explicitly says it can't be reverted.",
-            "2": "Privacy is a separate setting.",
-            "3": "Preferred representative routing is not disabled by that change."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          "wrongExplanations": [
+            "Microsoft explicitly says it can't be reverted.",
+            null,
+            "Privacy is a separate setting.",
+            "Preferred representative routing is not disabled by that change."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          }
         }
       ]
     },
@@ -1777,12 +2064,16 @@
           ],
           "answer": 1,
           "explanation": "Microsoft recommends enabling and using unified routing for automatically routing records in Customer Service.",
-          "wrongExplanations": {
-            "0": "This is opposite to the recommendation.",
-            "2": "That would not meet automated routing goals.",
-            "3": "Manual assignment is not the recommended automation path."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
+          "wrongExplanations": [
+            "This is opposite to the recommendation.",
+            null,
+            "That would not meet automated routing goals.",
+            "Manual assignment is not the recommended automation path."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-rules-automatically-route-cases"
+          }
         },
         {
           "q": "Which capability helps Adventure Works reuse routing logic patterns more efficiently?",
@@ -1794,12 +2085,16 @@
           ],
           "answer": 0,
           "explanation": "Routing rules templates are intended to support reuse and easier management of ruleset patterns.",
-          "wrongExplanations": {
-            "1": "Privacy affects who sees queue items, not reuse of routing patterns.",
-            "2": "Overflow handles queue thresholds.",
-            "3": "Unified Service Desk is not the answer here."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-routing-rules-templates"
+          "wrongExplanations": [
+            null,
+            "Privacy affects who sees queue items, not reuse of routing patterns.",
+            "Overflow handles queue thresholds.",
+            "Unified Service Desk is not the answer here."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/manage-routing-rules-templates"
+          }
         },
         {
           "q": "Which document is explicitly positioned as a role-friendly reference for administrators, supervisors, and representatives?",
@@ -1811,12 +2106,16 @@
           ],
           "answer": 0,
           "explanation": "The unified routing FAQ explicitly names administrators, supervisors, and representatives as its audience.",
-          "wrongExplanations": {
-            "1": "That is not the named audience doc here.",
-            "2": "This is unrelated to routing FAQ audience.",
-            "3": "API limits are a different topic."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-faqs"
+          "wrongExplanations": [
+            null,
+            "That is not the named audience doc here.",
+            "This is unrelated to routing FAQ audience.",
+            "API limits are a different topic."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-faqs"
+          }
         },
         {
           "q": "Which statement about the older unified routing diagnostics feature is correct?",
@@ -1828,12 +2127,16 @@
           ],
           "answer": 0,
           "explanation": "The old unified routing diagnostics article is explicitly marked deprecated.",
-          "wrongExplanations": {
-            "1": "That would contradict the deprecation note.",
-            "2": "It is not a prerequisite for assignment rulesets.",
-            "3": "Diagnostics and templates are different capabilities."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
+          "wrongExplanations": [
+            null,
+            "That would contradict the deprecation note.",
+            "It is not a prerequisite for assignment rulesets.",
+            "Diagnostics and templates are different capabilities."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-diagnostics"
+          }
         },
         {
           "q": "What is the best reading of Microsoft's best-practice stance for routing design?",
@@ -1845,12 +2148,16 @@
           ],
           "answer": 1,
           "explanation": "Microsoft's best-practices article stresses careful setup and design as key to successful deployment and management.",
-          "wrongExplanations": {
-            "0": "That is the opposite of best practice.",
-            "2": "Using maximum counts is not itself a best practice.",
-            "3": "Queue strategy still matters even with skills."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-best-practices"
+          "wrongExplanations": [
+            "That is the opposite of best practice.",
+            null,
+            "Using maximum counts is not itself a best practice.",
+            "Queue strategy still matters even with skills."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/unified-routing-best-practices"
+          }
         }
       ]
     },
@@ -1879,12 +2186,16 @@
           ],
           "answer": 1,
           "explanation": "For records, Microsoft documents that the first step is to <strong>provision unified routing in Service Configuration Settings</strong>. This comes before queue creation, record routing setup, workstreams, and diagnostics.",
-          "wrongExplanations": {
-            "0": "Workstream creation comes later in the documented setup sequence.",
-            "2": "Diagnostics are enabled near the end of the flow, not at the start.",
-            "3": "Assignment rules are configured after the core routing foundation exists."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
+          "wrongExplanations": [
+            "Workstream creation comes later in the documented setup sequence.",
+            null,
+            "Diagnostics are enabled near the end of the flow, not at the start.",
+            "Assignment rules are configured after the core routing foundation exists."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-routing-process"
+          }
         },
         {
           "q": "Contoso wants to add priority and product-line information to a case before deciding its queue. Which routing stage should do this work?",
@@ -1896,12 +2207,16 @@
           ],
           "answer": 1,
           "explanation": "This belongs in <strong>classification</strong>. Classification rules or ML models add or derive information on the work item before the route-to-queue and assignment logic runs.",
-          "wrongExplanations": {
-            "0": "Assignment happens after classification and focuses on choosing the representative.",
-            "2": "Overflow handles what happens when a queue can't take more work — it does not enrich the work item.",
-            "3": "Queue creation defines containers and members, not runtime enrichment logic."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+          "wrongExplanations": [
+            "Assignment happens after classification and focuses on choosing the representative.",
+            null,
+            "Overflow handles what happens when a queue can't take more work — it does not enrich the work item.",
+            "Queue creation defines containers and members, not runtime enrichment logic."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/overview-unified-routing"
+          }
         },
         {
           "q": "Contoso wants premium cases split between Vendor Queue A and Vendor Queue B in a fixed ratio. What is the correct route-to-queue design?",
@@ -1913,12 +2228,16 @@
           ],
           "answer": 1,
           "explanation": "The correct design is <strong>percentage-based allocation</strong> inside a route-to-queue rule. Microsoft allows up to five queues in this configuration, and the allocation across them must total <strong>100%</strong>.",
-          "wrongExplanations": {
-            "0": "A workstream can only have one route-to-queue ruleset.",
-            "2": "Advanced round robin is an assignment method for representatives, not a queue-splitting method.",
-            "3": "Private queue visibility has nothing to do with traffic splitting."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+          "wrongExplanations": [
+            "A workstream can only have one route-to-queue ruleset.",
+            null,
+            "Advanced round robin is an assignment method for representatives, not a queue-splitting method.",
+            "Private queue visibility has nothing to do with traffic splitting."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-route-to-queue-rules"
+          }
         },
         {
           "q": "HR complaint cases should be worked by a small specialist team only, and the architect claims that using a private queue alone will secure the case data. What is the best response?",
@@ -1930,12 +2249,16 @@
           ],
           "answer": 1,
           "explanation": "That claim is <strong>incorrect</strong>. Private queues help restrict who sees and works the queue items, but they <strong>do not secure the underlying records</strong>. Record-level access must still be enforced through the Dynamics 365 security model.",
-          "wrongExplanations": {
-            "0": "This confuses queue visibility with record security.",
-            "2": "Private queues are explicitly supported for small groups.",
-            "3": "Advanced round robin affects assignment fairness, not record security."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          "wrongExplanations": [
+            "This confuses queue visibility with record security.",
+            null,
+            "Private queues are explicitly supported for small groups.",
+            "Advanced round robin affects assignment fairness, not record security."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-queues-manage-activities-cases"
+          }
         },
         {
           "q": "The support lead wants fair distribution across equally qualified agents while still considering skills, presence, and capacity. Which assignment method best fits?",
@@ -1947,12 +2270,16 @@
           ],
           "answer": 1,
           "explanation": "<strong>Advanced round robin</strong> is the best fit when the goal is fairer distribution across equally qualified agents while still matching on skills, presence, and capacity. Hit-first and Hit-all are route-to-queue policies, not representative assignment methods.",
-          "wrongExplanations": {
-            "0": "Highest capacity is more capacity-driven and uses round robin mainly as a tie-breaker.",
-            "2": "Hit-first is a route-to-queue rule-hit policy, not an assignment method for representatives.",
-            "3": "Hit-all is also a route-to-queue rule-hit policy."
-          },
-          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+          "wrongExplanations": [
+            "Highest capacity is more capacity-driven and uses round robin mainly as a tie-breaker.",
+            null,
+            "Hit-first is a route-to-queue rule-hit policy, not an assignment method for representatives.",
+            "Hit-all is also a route-to-queue rule-hit policy."
+          ],
+          "msRef": {
+            "label": "Microsoft Learn",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+          }
         }
       ]
     }
