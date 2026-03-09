@@ -20,16 +20,12 @@
         "core-entities"
       ],
       "explanation": "<strong>Cases</strong> (also called Incidents) are the central entity in Dynamics 365 Customer Service. All customer issues, service requests, and support interactions are tracked as cases.",
-      "wrongExplanations": [
-        "Activities (calls, emails, tasks) are child records linked to a case — they are not the primary tracking record.",
-        null,
-        "Queue Items are wrappers that place records in queues for routing — they reference a case but are not the case itself.",
-        "Entitlements define support terms (hours, cases) for a customer — they govern case limits but are not the issue record."
-      ],
-      "msRef": {
-        "label": "Case management overview",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview-cases"
-      }
+      "wrongExplanations": {
+        "0": "Activities (calls, emails, tasks) are child records linked to a case — they are not the primary tracking record.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Queue Items are wrappers that place records in queues for routing — they reference a case but are not the case itself."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview-cases"
     },
     {
       "q": "A customer calls in and an agent creates a case directly from the phone call activity. Which feature enables this workflow?",
@@ -46,16 +42,12 @@
         "activities"
       ],
       "explanation": "The <strong>Convert to Case</strong> action on Activity records allows agents to create a case directly from a phone call, email, or other activity, linking the activity to the new case automatically.",
-      "wrongExplanations": [
-        "Entitlement Channels define which contact channels (phone, email, web) decrement against an entitlement — not case creation from activities.",
-        null,
-        "Case Creation Rules automatically create cases from inbound emails — agents use Convert to Case for manual activity conversion.",
-        "Unified Routing assigns cases to queues and agents based on rules — it is not used to convert activities to cases."
-      ],
-      "msRef": {
-        "label": "Create a case from an activity",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-create-a-case"
-      }
+      "wrongExplanations": {
+        "0": "Entitlement Channels define which contact channels (phone, email, web) decrement against an entitlement — not case creation from activities.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Case Creation Rules automatically create cases from inbound emails — agents use Convert to Case for manual activity conversion."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-create-a-case"
     },
     {
       "q": "When an agent resolves a case in Dynamics 365 Customer Service, which activity record is automatically created to capture the resolution details?",
@@ -72,16 +64,12 @@
         "resolution-activity"
       ],
       "explanation": "Resolving a case creates a <strong>Case Resolution Activity</strong> record that stores the resolution type, billable and total time, and the resolution description. This activity is linked to the case for audit and reporting.",
-      "wrongExplanations": [
-        "Tasks are manual activities created by agents — they are not created automatically on case resolution.",
-        null,
-        "Appointments are calendar-based activities — not created on case resolution.",
-        "Notes are manual text entries — resolution details are captured in the Resolution Activity, not a note."
-      ],
-      "msRef": {
-        "label": "Resolve a case",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
-      }
+      "wrongExplanations": {
+        "0": "Tasks are manual activities created by agents — they are not created automatically on case resolution.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Appointments are calendar-based activities — not created on case resolution."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
     },
     {
       "q": "Which case status reason is set when a case is resolved in Dynamics 365 Customer Service?",
@@ -99,16 +87,12 @@
         "case-status"
       ],
       "explanation": "When a case is resolved, its Status Reason is set to <strong>Problem Solved</strong> (the default resolution reason). Administrators can add custom resolution reasons, but Problem Solved is the system default.",
-      "wrongExplanations": [
-        "Closed is a status, not a status reason. The Status becomes Resolved when a case is resolved.",
-        "Resolved is the case Status (not Status Reason) that is set when the case is resolved.",
-        null,
-        "Completed is used in other entities like tasks — not the default case resolution reason."
-      ],
-      "msRef": {
-        "label": "Case status and status reason",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
-      }
+      "wrongExplanations": {
+        "0": "Closed is a status, not a status reason. The Status becomes Resolved when a case is resolved.",
+        "1": "Resolved is the case Status (not Status Reason) that is set when the case is resolved.",
+        "3": "This option is incorrect — see the main explanation."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
     },
     {
       "q": "A company wants agents to confirm that they have communicated the resolution to the customer before closing a case. Which configuration achieves this?",
@@ -126,16 +110,12 @@
         "configuration"
       ],
       "explanation": "<strong>Business Process Flows (BPFs)</strong> guide agents through required stages. By adding a Customer Notified step with a required field in the stage preceding resolution, agents cannot advance to the Resolved stage without completing that step.",
-      "wrongExplanations": [
-        "The Case Resolution dialog has limited customisation — adding mandatory fields there is not straightforward.",
-        "A Business Rule can enforce field requirements on a form but does not block the resolution dialog action itself.",
-        null,
-        "SLA actions fire on time-based triggers — they cannot block resolution based on a customer response condition."
-      ],
-      "msRef": {
-        "label": "Business process flows overview",
-        "url": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
-      }
+      "wrongExplanations": {
+        "0": "The Case Resolution dialog has limited customisation — adding mandatory fields there is not straightforward.",
+        "1": "A Business Rule can enforce field requirements on a form but does not block the resolution dialog action itself.",
+        "3": "This option is incorrect — see the main explanation."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
     },
     {
       "q": "Which setting controls whether a resolved case can be reactivated by agents in Dynamics 365 Customer Service?",
@@ -153,16 +133,12 @@
         "reactivation"
       ],
       "explanation": "The <strong>Service Configuration Settings</strong> in the Customer Service admin centre include an option to allow or disallow reactivation of resolved cases. When disabled, agents cannot reopen resolved cases and must create a new case instead.",
-      "wrongExplanations": [
-        "Customer Service Hub admin is where this is found, but the specific setting is within Service Configuration Settings.",
-        null,
-        "Security roles control who can perform actions but do not toggle the system-level reactivation capability.",
-        "Business Rules enforce form logic — they cannot block the system case reactivation action at the platform level."
-      ],
-      "msRef": {
-        "label": "Service configuration settings",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
-      }
+      "wrongExplanations": {
+        "0": "Customer Service Hub admin is where this is found, but the specific setting is within Service Configuration Settings.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Security roles control who can perform actions but do not toggle the system-level reactivation capability."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
     },
     {
       "q": "An agent cancels a case rather than resolving it. Which status reason is applied by default?",
@@ -180,16 +156,12 @@
         "status-reason"
       ],
       "explanation": "When an agent uses the Cancel Case action, the Status becomes Cancelled and the default Status Reason is <strong>Duplicate</strong>. Administrators can add additional cancellation reasons to accommodate different cancellation scenarios.",
-      "wrongExplanations": [
-        "Cancelled is the Status, not the Status Reason, when a case is cancelled.",
-        null,
-        "Merged is a separate status reason used when two cases are merged together — not the default cancellation reason.",
-        "Withdrawn is not a default status reason in Dynamics 365 Customer Service."
-      ],
-      "msRef": {
-        "label": "Cancel a case",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
-      }
+      "wrongExplanations": {
+        "0": "Cancelled is the Status, not the Status Reason, when a case is cancelled.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Merged is a separate status reason used when two cases are merged together — not the default cancellation reason."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
     },
     {
       "q": "Which feature allows a supervisor to combine two related cases into a single primary case and automatically close the secondary one?",
@@ -206,16 +178,12 @@
         "case-management"
       ],
       "explanation": "<strong>Case Merging</strong> combines two case records into one. The secondary case is cancelled with a Merged status reason, and all activities, notes, and child records from both cases are associated with the primary case.",
-      "wrongExplanations": [
-        "Case Routing assigns cases to queues or agents — it does not combine cases.",
-        null,
-        "Case Linking associates related cases together for reference but keeps both cases active — it does not close either one.",
-        "Case Escalation is an informal term for increasing priority — it is not a specific merge feature."
-      ],
-      "msRef": {
-        "label": "Merge cases",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-merge-cases"
-      }
+      "wrongExplanations": {
+        "0": "Case Routing assigns cases to queues or agents — it does not combine cases.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Case Linking associates related cases together for reference but keeps both cases active — it does not close either one."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-merge-cases"
     },
     {
       "q": "When configuring the Case Resolution dialog box, which admin setting allows you to require agents to provide a resolution description before closing a case?",
@@ -233,16 +201,1214 @@
         "resolution-dialog"
       ],
       "explanation": "The <strong>Service Configuration Settings</strong> in Customer Service admin include a toggle to <strong>require a resolution description</strong> in the resolution dialog. When enabled, agents cannot resolve a case without entering a description.",
-      "wrongExplanations": [
-        "The Case entity field settings do not control the resolution dialog required field behaviour.",
-        null,
-        "Business Rules operate on form logic — they do not intercept the resolution dialog popup.",
-        "Customising the Case Resolution Activity form affects the activity record after creation — not the resolution dialog prompt shown to agents."
+      "wrongExplanations": {
+        "0": "The Case entity field settings do not control the resolution dialog required field behaviour.",
+        "2": "This option is incorrect — see the main explanation.",
+        "3": "Business Rules operate on form logic — they do not intercept the resolution dialog popup."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
+    },
+    {
+      "q": "The Case table in D365 Customer Service has three possible values for the Status field. What are they?",
+      "options": [
+        "Open, In Progress, Closed",
+        "Active, Resolved, Canceled",
+        "New, Active, Closed",
+        "Draft, Active, Resolved"
       ],
-      "msRef": {
-        "label": "Modify case resolution dialog",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
-      }
+      "answer": 1,
+      "category": "status-model",
+      "tags": [
+        "status",
+        "status-reason",
+        "case-management"
+      ],
+      "explanation": "The Case (Incident) table has exactly three Status values: Active, Resolved, and Canceled. The Status Reason field provides more granular sub-states within each of these. Active status reasons include In Progress, On Hold, Waiting for Details, and Researching.",
+      "wrongExplanations": {
+        "0": "Open, In Progress, Closed are not the documented Status field values for the Case table.",
+        "2": "New is not a standard Case status value — the three values are Active, Resolved, and Canceled.",
+        "3": "Draft is not a standard Case status value."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-status-reason-transitions-case-management"
+    },
+    {
+      "q": "Which of the following is a valid Status Reason for a case with Active status in D365 Customer Service (out-of-box)?",
+      "options": [
+        "Merged",
+        "Problem Solved",
+        "Waiting for Details",
+        "Information Provided"
+      ],
+      "answer": 2,
+      "category": "status-model",
+      "tags": [
+        "status",
+        "status-reason",
+        "active"
+      ],
+      "explanation": "The out-of-box Active status reasons are: In Progress, On Hold, Waiting for Details, and Researching. 'Waiting for Details' is used when an agent is waiting for additional information from the customer before progressing the case.",
+      "wrongExplanations": {
+        "0": "Merged is a Canceled status reason — it indicates the case was merged into another.",
+        "1": "Problem Solved is a Resolved status reason, not an Active one.",
+        "3": "Information Provided is a Resolved status reason."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-status-reason-transitions-case-management"
+    },
+    {
+      "q": "A case was merged into another case. Which Status and Status Reason combination will the merged case have?",
+      "options": [
+        "Active — Merged",
+        "Resolved — Merged",
+        "Canceled — Merged",
+        "Closed — Duplicate"
+      ],
+      "answer": 2,
+      "category": "status-model",
+      "tags": [
+        "status",
+        "merge",
+        "canceled",
+        "case-management"
+      ],
+      "explanation": "When a case is merged into another, its status is set to Canceled with the Status Reason of Merged. The case is effectively closed and cannot be re-opened. All activities from the merged case are moved to the primary case.",
+      "wrongExplanations": {
+        "0": "Merged is a Canceled status reason — the status cannot be Active when a case is merged.",
+        "1": "Resolved is for cases that have been fixed — merging uses Canceled, not Resolved.",
+        "3": "'Duplicate' is not an out-of-box status reason for merged cases — Merged is the correct reason."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-status-reason-transitions-case-management"
+    },
+    {
+      "q": "An administrator wants to restrict which Status Reason values an agent can transition to from 'On Hold'. Which feature is used to configure this?",
+      "options": [
+        "Business Rules on the Case form",
+        "Status Reason Transitions defined in Power Apps",
+        "Case Resolution Dialog configuration",
+        "Workflow step on status change"
+      ],
+      "answer": 1,
+      "category": "status-model",
+      "tags": [
+        "status-reason-transitions",
+        "status",
+        "customization"
+      ],
+      "explanation": "Status Reason Transitions define which status reason values a case can move to from a given status reason. This is configured via the Status Reason column properties in Power Apps (legacy experience). This prevents agents from selecting illogical status reason combinations — for example, jumping directly from On Hold to a Resolved reason.",
+      "wrongExplanations": {
+        "0": "Business Rules on the Case form can show/hide or lock fields, but they don't restrict the Status Reason dropdown options via the transition model.",
+        "2": "The Case Resolution Dialog controls what fields appear when resolving — not which status reasons are reachable.",
+        "3": "A workflow on status change fires after the transition — it does not prevent invalid transitions."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-status-reason-transitions-case-management"
+    },
+    {
+      "q": "What are the out-of-box Status Reason values for a Resolved case in D365 Customer Service?",
+      "options": [
+        "Completed, Closed, Fixed",
+        "Problem Solved, Information Provided",
+        "Done, Resolved, Handled",
+        "Merged, Duplicate, Resolved"
+      ],
+      "answer": 1,
+      "category": "status-model",
+      "tags": [
+        "status",
+        "status-reason",
+        "resolved"
+      ],
+      "explanation": "The out-of-box Resolved status reasons are Problem Solved and Information Provided. Problem Solved is used when the technical issue was fixed; Information Provided is used when the customer just needed guidance or information rather than a fix.",
+      "wrongExplanations": {
+        "0": "Completed, Closed, and Fixed are not out-of-box Status Reason values on the Case table.",
+        "2": "Done, Resolved, and Handled are not out-of-box Status Reason values.",
+        "3": "Merged and Duplicate are Canceled status reasons — not Resolved ones."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-status-reason-transitions-case-management"
+    },
+    {
+      "q": "A custom Status Reason 'Duplicate' needs to be added to the case resolution workflow. In which TWO tables must the custom value be added and kept in sync?",
+      "options": [
+        "Case table and Case Activity table",
+        "Case table and Case Resolution table",
+        "Case table and Incident Resolution table",
+        "Status Reason table and Case Resolution table"
+      ],
+      "answer": 1,
+      "category": "status-model",
+      "tags": [
+        "case-resolution",
+        "custom-status-reason",
+        "case-resolution-table"
+      ],
+      "explanation": "When adding a custom Status Reason to the customizable case resolution dialog, the value must be added to the Status Reason column on the Case table AND the Resolution Type column on the Case Resolution table — and the numeric values must match exactly. If values don't match, the custom option won't appear in the dialog and an error may occur.",
+      "wrongExplanations": {
+        "0": "There is no 'Case Activity' table in this context — the second table is Case Resolution.",
+        "2": "The table is called Case Resolution (msdyn_caseresolution) — not Incident Resolution.",
+        "3": "There is no standalone 'Status Reason table' — the column lives on the Case and Case Resolution tables."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+    },
+    {
+      "q": "Where does an administrator configure parent and child case settings in D365 Customer Service?",
+      "options": [
+        "Settings > Service Management > Service Configuration",
+        "Copilot Service admin center > Customer Support > Case Settings > Manage > Parent child case settings",
+        "Power Apps > Tables > Case > Relationships",
+        "Settings > Advanced Settings > Case Hierarchy"
+      ],
+      "answer": 1,
+      "category": "parent-child",
+      "tags": [
+        "parent-child",
+        "case-settings",
+        "admin"
+      ],
+      "explanation": "Parent and child case settings are configured in Copilot Service admin center under Customer Support > Case Settings > Manage (for Parent child case settings). The settings include which attributes child cases inherit from the parent, the closure preference, and maximum child case count.",
+      "wrongExplanations": {
+        "0": "Service Management > Service Configuration is the legacy path — the current admin path is Copilot Service admin center.",
+        "2": "Power Apps > Tables handles data model relationships, but the business behaviour settings for parent-child cases are in the admin center.",
+        "3": "There is no 'Case Hierarchy' option in Advanced Settings."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "q": "Which two case attributes are MANDATORY when configuring what child cases inherit from their parent in D365 Customer Service?",
+      "options": [
+        "Priority and Owner",
+        "Case Title and Customer",
+        "Case Origin and Subject",
+        "SLA and Entitlement"
+      ],
+      "answer": 1,
+      "category": "parent-child",
+      "tags": [
+        "parent-child",
+        "inheritance",
+        "mandatory-fields"
+      ],
+      "explanation": "Case Title and Customer are the two mandatory inherited attributes in the parent-child case settings dialog. These cannot be removed from the Selected list. Additional attributes can be added by moving them from the Available list to the Selected list.",
+      "wrongExplanations": {
+        "0": "Priority and Owner are not the mandatory inherited fields — they can be optionally selected.",
+        "2": "Case Origin and Subject are optional — not mandatory.",
+        "3": "SLA and Entitlement are not mandatory inherited attributes in the parent-child settings."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "q": "An organisation needs to prevent an agent from closing a parent case until all child cases are resolved. Which parent-child setting achieves this?",
+      "options": [
+        "Close all child cases when parent case is closed",
+        "Don't allow parent case closure until all child cases are closed",
+        "Maximum number of child cases = 0",
+        "Enable Business Rule: Block parent if children exist"
+      ],
+      "answer": 1,
+      "category": "parent-child",
+      "tags": [
+        "parent-child",
+        "closure-preference",
+        "configuration"
+      ],
+      "explanation": "The 'Don't allow parent case closure until all child cases are closed' setting in the parent-child case settings dialog prevents agents from resolving or canceling a parent case while any child cases remain open. This enforces complete resolution at all levels.",
+      "wrongExplanations": {
+        "0": "'Close all child cases when parent case is closed' does the opposite — it cascades the closure downward, not blocks the parent from closing.",
+        "2": "Maximum child cases = 0 would prevent any child cases from being created at all.",
+        "3": "There is no built-in Business Rule for this — the closure preference setting achieves this in the admin center."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "q": "Why does Microsoft recommend specifying a smaller value for Maximum number of child cases?",
+      "options": [
+        "Licensing is calculated per child case — more children increase cost",
+        "To avoid performance issues when cases are resolved or merged",
+        "Child case limits are enforced by Dataverse row capacity",
+        "Larger child counts cause the parent case form to load slowly in all browsers"
+      ],
+      "answer": 1,
+      "category": "parent-child",
+      "tags": [
+        "parent-child",
+        "performance",
+        "best-practice"
+      ],
+      "explanation": "Microsoft's documentation explicitly recommends specifying a smaller value for Maximum number of child cases to avoid performance issues when cases are resolved or merged. Processing large numbers of related child cases in a single operation can cause timeouts or slow down the system.",
+      "wrongExplanations": {
+        "0": "Child case count does not affect licensing in D365 Customer Service.",
+        "2": "While Dataverse has storage limits, the recommendation is specifically about performance, not row capacity.",
+        "3": "The concern is about server-side processing during resolve/merge operations — not browser-side form loading."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "q": "An agent creates a child case from a parent case. Which fields will be automatically populated on the child case based on the default mandatory inherited attributes?",
+      "options": [
+        "Owner and Priority from the parent",
+        "Case Title and Customer from the parent",
+        "Subject and Case Origin from the parent",
+        "SLA and Entitlement from the parent"
+      ],
+      "answer": 1,
+      "category": "parent-child",
+      "tags": [
+        "parent-child",
+        "inheritance",
+        "child-case"
+      ],
+      "explanation": "By default, Case Title and Customer are the mandatory attributes that child cases inherit from the parent. The child case's Title and Customer fields will be pre-populated from the parent. Administrators can configure additional attributes to inherit in the parent-child case settings.",
+      "wrongExplanations": {
+        "0": "Owner and Priority are not the mandatory inherited attributes — they are optional additions.",
+        "2": "Subject and Case Origin are not mandatory inherited fields.",
+        "3": "SLA and Entitlement inheritance is configurable but not mandatory by default."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "q": "A company tracks warranty claims for products. Each claim has sub-issues (electrical fault, mechanical fault, cosmetic issue). Using parent-child case settings, which closure option should they use to ensure all sub-issues are addressed before closing the main claim?",
+      "options": [
+        "Close all child cases when parent case is closed — to batch close everything at once",
+        "Don't allow parent case closure until all child cases are closed — to enforce complete sub-issue resolution",
+        "Maximum number of child cases = 1 — to prevent splitting claims",
+        "Leave default — parent and child can be closed independently"
+      ],
+      "answer": 1,
+      "category": "parent-child",
+      "tags": [
+        "parent-child",
+        "closure-preference",
+        "scenario"
+      ],
+      "explanation": "For warranty claims where all sub-issues must be addressed, the 'Don't allow parent case closure until all child cases are closed' setting enforces this. Without it, an agent could close the main claim while sub-issues remain open. This is the correct business rule for requiring all child work to complete before the parent is done.",
+      "wrongExplanations": {
+        "0": "'Close all child cases when parent is closed' would cascade-close sub-issues regardless of whether they were actually resolved — not appropriate for warranty tracking.",
+        "2": "Limiting to 1 child case would prevent the multiple sub-issue tracking the scenario requires.",
+        "3": "Leaving the default means no enforcement — the parent could be closed while sub-issues remain open."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "q": "What is the fundamental difference between Visual Filters and Global Filters on a D365 Customer Service interactive dashboard?",
+      "options": [
+        "Visual Filters apply to streams only; Global Filters apply to charts only",
+        "Visual Filters are interactive charts that filter streams when clicked; Global Filters apply text/field criteria to all streams and charts simultaneously",
+        "Visual Filters are set by the administrator; Global Filters can be set by individual users",
+        "Visual Filters persist between sessions; Global Filters are cleared when the page refreshes"
+      ],
+      "answer": 1,
+      "category": "dashboards",
+      "tags": [
+        "dashboards",
+        "visual-filter",
+        "global-filter",
+        "interactive-dashboard"
+      ],
+      "explanation": "Visual Filters are interactive charts (pie, bar, doughnut, tag) displayed above the dashboard streams. Clicking a segment — e.g. the 'High Priority' slice — filters all streams to show only records matching that criterion. Global Filters are flyout-panel field criteria (e.g. filter by Escalated=Yes or Case Type=Request) that apply to ALL streams and charts simultaneously.",
+      "wrongExplanations": {
+        "0": "Both filter types affect streams — Visual Filters also update streams, not just charts.",
+        "2": "Both filter types are available to users on the dashboard — Visual Filter charts are configured by admins but used by anyone.",
+        "3": "Both Visual and Global filters are cleared when removed by the user or when the page is refreshed — neither persists."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "q": "A manager needs to see only escalated cases in the Tier 1 dashboard. Which filter type should they use?",
+      "options": [
+        "Visual Filter — click the Escalated chart segment",
+        "Global Filter — apply Escalated=Yes field filter",
+        "Timeframe Filter — set to Today's escalated cases",
+        "Stream sort — sort by Escalated field descending"
+      ],
+      "answer": 1,
+      "category": "dashboards",
+      "tags": [
+        "dashboards",
+        "global-filter",
+        "escalation",
+        "filtering"
+      ],
+      "explanation": "The Global Filter is used to apply field-level criteria across the entire dashboard — streams, charts, and tiles. To show only escalated cases, the manager opens the Global Filter flyout and selects Escalated=Yes, then applies it. This refreshes all dashboard components to show only matching records.",
+      "wrongExplanations": {
+        "0": "Visual Filter requires an 'Escalated' chart to be present on the dashboard and only filters streams — the Global Filter is the correct tool for field-criteria filtering.",
+        "2": "Timeframe Filter controls the date range of records displayed — it does not filter by field values like escalation status.",
+        "3": "Stream sorting changes the order of records but does not hide non-escalated cases."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "q": "On a multi-stream dashboard, an agent wants to display cases organised by Priority. What is the correct way to make the dashboard show cases by priority?",
+      "options": [
+        "Enable a Visual Filter chart configured to Cases by Priority — the chart acts as a filter when clicked",
+        "Use the Global Filter to set Priority = High, Medium, Low separately",
+        "Change the stream sort order to Priority Ascending",
+        "Create a new stream with a Cases By Priority view"
+      ],
+      "answer": 0,
+      "category": "dashboards",
+      "tags": [
+        "dashboards",
+        "visual-filter",
+        "priority",
+        "cases-by-priority"
+      ],
+      "explanation": "To display cases by priority on the dashboard, the Cases by Priority Visual Filter chart must be enabled. When an agent clicks the High Priority segment, the dashboard streams refresh to show only high priority cases. Visual Filter charts (configured per entity) are the primary tool for this type of at-a-glance priority view on interactive dashboards.",
+      "wrongExplanations": {
+        "1": "Global Filter applies field criteria — but using it for priority would require multiple separate filter applications, not a single visual split by priority.",
+        "2": "Stream sort changes the order within a stream — it does not group or separate cases by priority across the dashboard.",
+        "3": "Creating a separate stream per priority is possible but not the purpose-built solution — the Visual Filter chart is the intended tool."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "q": "Which dashboard type is most appropriate for a Tier 2 lead who monitors a small number of complex or escalated cases in a single queue?",
+      "options": [
+        "Multi-stream dashboard",
+        "Single-stream dashboard",
+        "Entity-specific multi-stream dashboard",
+        "Tile-only dashboard"
+      ],
+      "answer": 1,
+      "category": "dashboards",
+      "tags": [
+        "dashboards",
+        "single-stream",
+        "tier-2",
+        "dashboard-types"
+      ],
+      "explanation": "Single-stream dashboards display real-time data over one stream with tiles on the right side always shown. They are specifically designed for Tier 2 leads or managers who monitor fewer but more complex or escalated cases in a single view or queue, as opposed to multi-stream dashboards which suit Tier 1 agents handling many cases.",
+      "wrongExplanations": {
+        "0": "Multi-stream dashboards are optimised for Tier 1 support agents handling many cases simultaneously across multiple streams.",
+        "2": "Entity-specific multi-stream dashboards (e.g. Cases dashboard) still show multiple streams and are best for Tier 1 or general case viewing.",
+        "3": "There is no 'Tile-only dashboard' type — tiles are part of multi-stream and single-stream dashboards."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "q": "An agent is viewing an interactive dashboard with Visual Filters enabled. They click the 'High' segment on the Cases by Priority chart. Then they also apply a Global Filter for Escalated=Yes. What records will the dashboard show?",
+      "options": [
+        "All high priority cases OR all escalated cases (either condition)",
+        "Only high priority escalated cases (both conditions applied simultaneously)",
+        "Only the Global Filter applies — clicking a Visual Filter segment is ignored when a Global Filter is active",
+        "Only the Visual Filter applies — Global Filters are overridden by chart selections"
+      ],
+      "answer": 1,
+      "category": "dashboards",
+      "tags": [
+        "dashboards",
+        "visual-filter",
+        "global-filter",
+        "combined-filtering"
+      ],
+      "explanation": "Visual Filters and Global Filters can be combined. When both are active, they work as AND conditions — the dashboard shows records that satisfy BOTH the Visual Filter selection (High priority) AND the Global Filter criteria (Escalated=Yes). This layered filtering helps drill down from a large list to a very specific subset.",
+      "wrongExplanations": {
+        "0": "The filters are AND conditions — not OR. Both must be satisfied.",
+        "2": "Global Filters and Visual Filters work together — neither overrides the other.",
+        "3": "Neither filter type overrides the other — they stack as AND conditions."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "q": "On a multi-stream interactive dashboard, how does an agent access the quick actions (resolve, cancel, assign) for a case directly from the dashboard stream without opening the case form?",
+      "options": [
+        "Right-click the case row in the stream",
+        "Select the '...' (ellipsis/quick action menu) in the top right corner of the work item in the stream",
+        "Use Bulk Select and choose an action from the toolbar",
+        "Double-click the case to open a quick action flyout"
+      ],
+      "answer": 1,
+      "category": "dashboards",
+      "tags": [
+        "dashboards",
+        "quick-actions",
+        "streams",
+        "resolve-from-dashboard"
+      ],
+      "explanation": "Each work item in a dashboard stream has a '...' (ellipsis) quick action menu in its top right corner. Selecting it opens a quick action bar that includes Resolve, Cancel, and Assign. The available commands are configurable and shared between dashboards and grids — agents can action cases without leaving the dashboard.",
+      "wrongExplanations": {
+        "0": "Right-clicking does not open quick actions on dashboard stream items — the '...' menu is the correct mechanism.",
+        "2": "Bulk Select allows selecting multiple records for batch actions — the '...' menu is for individual item quick actions.",
+        "3": "Double-clicking opens the case form — not a flyout with quick actions."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "q": "What are the three case resolution dialog options available in D365 Customer Service (Copilot Service admin center)?",
+      "options": [
+        "Legacy, Enhanced, Custom",
+        "Standard dialog, Customizable dialog, Quick create dialog",
+        "Minimal dialog, Full dialog, API-only dialog",
+        "Classic, Modern, Headless"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "resolve-dialog",
+        "admin-configuration"
+      ],
+      "explanation": "In Copilot Service admin center > Case Settings > Other Settings, the Resolve case dialog dropdown offers three options: Standard dialog (the original minimal dialog), Customizable dialog (allows adding/removing fields via the Case Resolution form), and Quick create dialog. The choice determines what the agent sees when they click Resolve Case.",
+      "wrongExplanations": {
+        "0": "Legacy, Enhanced, Custom are not the documented options — Standard, Customizable, and Quick create are.",
+        "2": "Minimal, Full, and API-only are not the documented options.",
+        "3": "Classic, Modern, Headless are not the documented options for this setting."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+    },
+    {
+      "q": "An administrator selects 'Customizable dialog' for the case resolution dialog. How does an admin add the Billable Time field to this dialog?",
+      "options": [
+        "Enable it in Case Settings > Other Settings > Billable Time toggle",
+        "In Power Apps > Tables > Case Resolution > Forms — add the Billable Time field to the form",
+        "In the Case form editor — drag Billable Time to the Resolution section",
+        "Modify the Case entity Status Reason column to include Billable Time"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "customizable-dialog",
+        "billable-time",
+        "power-apps"
+      ],
+      "explanation": "With Customizable dialog selected, the dialog is driven by the Case Resolution form in Power Apps. To add Billable Time, go to Power Apps > Tables > Case Resolution > Forms, open the required form, and add the Billable Time field. Note: The Total Time field must also be present for Billable Time to auto-calculate.",
+      "wrongExplanations": {
+        "0": "There is no Billable Time toggle in Case Settings — field customisation is done via Power Apps forms.",
+        "2": "Billable Time is on the Case Resolution form (a separate table), not the Case form directly.",
+        "3": "Status Reason is a Case column — Billable Time is a Case Resolution table column."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+    },
+    {
+      "q": "What must be true for the Billable Time field to display its auto-calculated value in the customizable case resolution dialog?",
+      "options": [
+        "The SLA must be active on the case",
+        "The Total Time field must also be added to the case resolution dialog",
+        "Copilot Service workspace must be used — Customer Service Hub does not support Billable Time",
+        "The case must have at least one resolved activity before the dialog opens"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "billable-time",
+        "total-time",
+        "customizable-dialog"
+      ],
+      "explanation": "Microsoft explicitly states: 'Ensure that the Total Time field is added to the case resolution dialog, for the Billable Time field to display the amount of time a representative worked on a case automatically.' Both fields must be present on the Case Resolution form for the auto-calculation to work.",
+      "wrongExplanations": {
+        "0": "SLA activity does not drive Billable Time calculation in the resolution dialog — Total Time does.",
+        "2": "The Total Time requirement applies to both apps — it is not app-specific.",
+        "3": "Activity resolution status does not drive Billable Time auto-population."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+    },
+    {
+      "q": "What is the difference between Case Handling Time and Case Resolution Time in D365 Customer Service?",
+      "options": [
+        "They are the same — both measure total time from creation to resolution",
+        "Handling Time is the active working time spent on the case; Resolution Time is total elapsed time from creation to resolution",
+        "Handling Time is for Tier 1 cases; Resolution Time is for Tier 2 cases",
+        "Handling Time includes SLA breaches; Resolution Time excludes them"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-handling-time",
+        "resolution-time",
+        "time-tracking"
+      ],
+      "explanation": "Case Handling Time is the total time representatives actively worked on the case — communicating, troubleshooting, updating notes. Case Resolution Time is the total elapsed time from case creation to resolution. For example: a rep works 5 active hours over 5 days. Handling Time = 5 hours. Resolution Time = 5 days. They measure very different things.",
+      "wrongExplanations": {
+        "0": "They measure different things — handling time is active work time; resolution time is calendar elapsed time.",
+        "2": "The distinction is about what is measured, not case tier.",
+        "3": "SLA breach tracking is a separate SLA KPI concept — neither time metric is defined this way."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-case-handling-time"
+    },
+    {
+      "q": "The Case Handling Time widget is added to the case form but representatives say it is not tracking time automatically. In Customer Service Hub, what is the required condition for automatic time tracking?",
+      "options": [
+        "Automatic time tracking works without the widget — time is tracked in the background",
+        "The widget must be added to the case form for automatic time tracking to work in Customer Service Hub",
+        "Automatic time tracking requires Copilot Studio to be enabled",
+        "The Experience Profile must have a 'Time Tracking' app tab configured"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-handling-time",
+        "customer-service-hub",
+        "auto-tracking"
+      ],
+      "explanation": "Microsoft distinguishes the two apps: In Copilot Service workspace, time is tracked automatically in the background even without the widget on the form. In Customer Service Hub, the widget MUST be added to the case form for automatic time tracking to occur. Without the widget on the form in Customer Service Hub, no time is tracked.",
+      "wrongExplanations": {
+        "0": "That is true for Copilot Service workspace only — in Customer Service Hub the widget must be present.",
+        "2": "Copilot Studio (formerly Power Virtual Agents) is for bots — it has no role in case handling time tracking.",
+        "3": "Experience Profiles configure app tabs and features — but the specific requirement here is the widget being on the form in CSHub."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-case-handling-time"
+    },
+    {
+      "q": "By default, can an administrator update field values on a Resolved or Canceled case in D365 Customer Service?",
+      "options": [
+        "No — resolved and canceled cases are permanently read-only",
+        "Yes — updates are allowed by default via Power Automate flows or API, without reopening the case",
+        "Yes — but only from the case form directly, not via API",
+        "No — to update a resolved case you must first reactivate it, make changes, then re-resolve"
+      ],
+      "answer": 1,
+      "category": "case-management",
+      "tags": [
+        "resolved-cases",
+        "update-cases",
+        "power-automate",
+        "api"
+      ],
+      "explanation": "Allowing updates to resolved/canceled cases IS the default behaviour in D365 Customer Service. Updates must be performed via Power Automate flows or API — not via the case form UI. This is useful for GDPR data removal or audit corrections without reopening cases. The admin can restrict this in Case Settings > Other Settings > Case update after resolution.",
+      "wrongExplanations": {
+        "0": "Resolved/canceled cases are not permanently read-only — updates via Power Automate/API are allowed by default.",
+        "2": "Updates are done via Power Automate or API — not directly from the case form UI.",
+        "3": "Reactivating the case is one option, but it is not required — API/flow updates work without reactivation."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/update-resolved-canceled-cases"
+    },
+    {
+      "q": "An organisation's legal team needs to redact personal data from resolved cases for GDPR compliance. The cases must remain in Resolved status. Which approach does D365 Customer Service support?",
+      "options": [
+        "Reactivate each case, redact data, then re-resolve — mandatory workflow",
+        "Use Power Automate flows or API to update case records in resolved/canceled state without reopening",
+        "Use the Case form's GDPR Redact button available in the command bar",
+        "Resolved cases cannot be modified — data must be redacted at database level by a DBA"
+      ],
+      "answer": 1,
+      "category": "case-management",
+      "tags": [
+        "resolved-cases",
+        "gdpr",
+        "power-automate",
+        "update-cases"
+      ],
+      "explanation": "D365 Customer Service supports updating resolved and canceled cases via Power Automate flows or API without reactivating them. This is specifically documented as a GDPR compliance use case — allowing data to be removed or updated without changing the case's resolved status or history.",
+      "wrongExplanations": {
+        "0": "Reactivating is not mandatory — the platform supports direct flow/API updates on resolved cases.",
+        "2": "There is no built-in GDPR Redact button in the Case form command bar — the mechanism is Power Automate or API.",
+        "3": "Database-level manipulation is not the supported approach — Power Automate/API are the correct tools."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/update-resolved-canceled-cases"
+    },
+    {
+      "q": "What setting controls whether agents can update resolved and/or canceled cases in D365 Customer Service?",
+      "options": [
+        "Case Settings > Resolve case dialog > Allow updates toggle",
+        "Case Settings > Other Settings > Case update after resolution > Allow updates for dropdown",
+        "Settings > Service Configuration > Post-Resolution Editing",
+        "Security Role > Case entity > Write privilege scope"
+      ],
+      "answer": 1,
+      "category": "case-management",
+      "tags": [
+        "resolved-cases",
+        "admin-settings",
+        "allow-updates"
+      ],
+      "explanation": "The setting is in Copilot Service admin center > Case Settings > Other Settings > Case update after resolution. The 'Allow updates for' dropdown provides options: Resolved and canceled cases, Resolved cases only, Closed cases only, or Don't allow updates. This controls update permissions at the application level.",
+      "wrongExplanations": {
+        "0": "The Resolve case dialog setting controls the dialog type — not post-resolution update permissions.",
+        "2": "'Service Configuration > Post-Resolution Editing' does not exist as a documented path.",
+        "3": "Security Role privileges control who can write to case records — but the post-resolution update allowance is a separate application-level setting."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/update-resolved-canceled-cases"
+    },
+    {
+      "q": "An agent resolves a case but realises they chose the wrong Status Reason. The case is now in Resolved status. What is the recommended approach to correct this in D365 Customer Service?",
+      "options": [
+        "Delete the case and create a new one with the correct status reason",
+        "Reactivate the case, change the status reason to the correct value, then re-resolve",
+        "Use a Power Automate flow to update the Status Reason on the resolved case without reopening it",
+        "Both B and C are valid approaches depending on the organisation's policy"
+      ],
+      "answer": 3,
+      "category": "case-management",
+      "tags": [
+        "resolved-cases",
+        "reactivate",
+        "update",
+        "status-reason"
+      ],
+      "explanation": "Both reactivating the case (then updating and re-resolving) and using Power Automate/API to update the resolved case directly are valid approaches. Reactivation is the UI-friendly path; Power Automate/API is the approach for keeping the case in resolved state throughout. The choice depends on organisational policy — both are supported by the platform.",
+      "wrongExplanations": {
+        "0": "Deleting and recreating a case is never the recommended approach — it destroys case history and related records.",
+        "1": "Reactivating is valid, but so is Power Automate/API — making C also correct. The most accurate answer is D.",
+        "2": "Power Automate/API is valid, but reactivation is also valid — making B also correct. The most accurate answer is D."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/update-resolved-canceled-cases"
+    },
+    {
+      "q": "When an agent merges two cases in D365 Customer Service, what happens to the activities (emails, phone calls, notes) that were associated with the merged (secondary) case?",
+      "options": [
+        "Activities are permanently deleted from the system",
+        "Activities are moved to the primary case and remain visible on its timeline",
+        "Activities remain on the secondary (merged) case but the case is locked",
+        "Activities are archived separately and can only be viewed from the merge history"
+      ],
+      "answer": 1,
+      "category": "merging",
+      "tags": [
+        "merge",
+        "activities",
+        "timeline",
+        "case-management"
+      ],
+      "explanation": "When cases are merged, all activities (emails, phone calls, appointments, notes) from the secondary (merged) case are moved to the primary case. They become visible on the primary case's timeline. The secondary case gets status Canceled / Merged and its own form becomes read-only.",
+      "wrongExplanations": {
+        "0": "Activities are not deleted — they are moved to the primary case.",
+        "2": "Activities do not stay on the secondary case — they are transferred to the primary case.",
+        "3": "There is no 'merge history archive' — activities appear directly on the primary case timeline."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+    },
+    {
+      "q": "An agent has two duplicate cases for the same customer. Case A has 3 emails and an SLA KPI. Case B has 1 email. The agent merges Case B into Case A. What is the state of each case after the merge?",
+      "options": [
+        "Case A: Active (unchanged). Case B: Resolved — Merged",
+        "Case A: Active with 4 emails total. Case B: Canceled — Merged",
+        "Both cases: Resolved — Merged",
+        "Case A: Closed. Case B: Canceled — Duplicate"
+      ],
+      "answer": 1,
+      "category": "merging",
+      "tags": [
+        "merge",
+        "status",
+        "activities",
+        "case-management"
+      ],
+      "explanation": "After merging Case B into Case A: Case A (the primary) remains Active and now has all 4 emails (3 original + 1 from Case B). Case B (the secondary) is set to Canceled — Merged. The primary case retains its SLA KPI and all original data — the secondary case simply transfers its activities and becomes inactive.",
+      "wrongExplanations": {
+        "0": "The secondary case becomes Canceled — Merged (not Resolved — Merged).",
+        "2": "Only the secondary case becomes Canceled — Merged. The primary stays Active.",
+        "3": "Case A does not close — it remains Active. Canceled — Duplicate is not an out-of-box status reason."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+    },
+    {
+      "q": "Can an agent merge a case that is in Resolved or Canceled status as the primary case?",
+      "options": [
+        "Yes — any case regardless of status can be the primary in a merge",
+        "No — only Active cases can be the primary case in a merge",
+        "Yes — but only if the Resolved case has no SLA KPI active",
+        "No — merging is only available from the dashboard, not from the case form"
+      ],
+      "answer": 1,
+      "category": "merging",
+      "tags": [
+        "merge",
+        "active-status",
+        "case-management"
+      ],
+      "explanation": "Only Active cases can be selected as the primary case in a merge. Resolved and Canceled cases cannot be used as the primary. This is a system constraint — the secondary (merged) case will become Canceled — Merged, so the primary must be in an active state to continue receiving work.",
+      "wrongExplanations": {
+        "0": "Status is a constraint — only Active cases can be the primary in a merge.",
+        "2": "SLA KPI status does not affect merge eligibility — the Active status of the case is the constraint.",
+        "3": "Merging is available from the case form command bar — not only from the dashboard."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+    },
+    {
+      "q": "What happens to the SLA KPI on the primary case when a merge occurs in D365 Customer Service?",
+      "options": [
+        "The SLA KPI is reset to zero for the primary case",
+        "The SLA KPI on the primary case is unaffected — it continues as normal",
+        "The SLA KPI is recalculated based on the oldest creation date between the two cases",
+        "The SLA is deactivated on the primary case when a merge occurs"
+      ],
+      "answer": 1,
+      "category": "merging",
+      "tags": [
+        "merge",
+        "sla",
+        "kpi",
+        "case-management"
+      ],
+      "explanation": "The SLA KPI on the primary case is not affected by the merge. It continues running against the primary case's original start time. The secondary case's SLA KPI (if any) is effectively abandoned when that case becomes Canceled — Merged.",
+      "wrongExplanations": {
+        "0": "The SLA KPI is not reset — it continues from its original start time.",
+        "2": "The SLA continues from the primary case's own creation date — it is not recalculated based on the older case.",
+        "3": "The SLA remains active on the primary case after a merge."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+    },
+    {
+      "q": "An agent accidentally merged Case 1 (primary) and Case 2 (secondary). Can the merge be undone in D365 Customer Service?",
+      "options": [
+        "Yes — an Undo Merge button appears on the primary case for 24 hours after the merge",
+        "No — a merge cannot be undone. Case 2 remains in Canceled — Merged status permanently",
+        "Yes — System Administrators can reverse a merge from Settings > Case Merge History",
+        "Yes — by reactivating Case 2 and removing it from Case 1's related cases"
+      ],
+      "answer": 1,
+      "category": "merging",
+      "tags": [
+        "merge",
+        "undo",
+        "case-management"
+      ],
+      "explanation": "Case merges in D365 Customer Service are irreversible. Once Case 2 is merged into Case 1, Case 2 permanently has Canceled — Merged status and cannot be un-merged. There is no undo function for merges. This makes it important to confirm the correct primary case before proceeding.",
+      "wrongExplanations": {
+        "0": "There is no Undo Merge button — merges are permanent.",
+        "2": "There is no Case Merge History feature in Settings that allows reversal.",
+        "3": "Reactivating the secondary case and removing it from related records does not truly undo the merge — the activities have been moved and the merged status cannot be reversed."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+    },
+    {
+      "q": "Which of the following is NOT a supported source type for Automatic Record Creation and Update Rules in D365 Customer Service?",
+      "options": [
+        "Email",
+        "Social Activity",
+        "Custom Activity",
+        "Power BI Alert"
+      ],
+      "answer": 3,
+      "category": "auto-record-creation",
+      "tags": [
+        "auto-record-creation",
+        "source-types",
+        "record-creation-rules"
+      ],
+      "explanation": "The supported source types (activity types) for Automatic Record Creation and Update Rules include Email, Social Activity, and Custom Activity types (when configured). Power BI Alerts are not a supported source type — they are a reporting and alerting tool external to the D365 activity framework.",
+      "wrongExplanations": {
+        "0": "Email is a core source type — inbound emails are the most common trigger for auto case creation.",
+        "1": "Social Activity is a supported source type for creating cases from social media interactions.",
+        "2": "Custom Activities can be used as source types when they are configured as activity entities."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+    },
+    {
+      "q": "The four steps to setting up entity record channels and record routing for Automatic Record Creation rules are completed in which order?",
+      "options": [
+        "Create rule → Define conditions → Set actions → Activate",
+        "Configure channel → Create rule → Map fields → Test and activate",
+        "Enable feature → Define source → Create rule conditions → Publish",
+        "Create workstream → Create rule → Define conditions → Activate"
+      ],
+      "answer": 0,
+      "category": "auto-record-creation",
+      "tags": [
+        "auto-record-creation",
+        "configuration-sequence",
+        "record-creation-rules"
+      ],
+      "explanation": "The four steps for setting up Automatic Record Creation rules follow the sequence: Create the rule (specify source activity type and owner), Define conditions (criteria that must be met for the rule to fire), Set actions (what records to create or update and how to map fields), then Activate the rule. The rule only processes records after activation.",
+      "wrongExplanations": {
+        "1": "'Configure channel' is not the first step — creating the rule is. Field mapping is part of setting actions.",
+        "2": "'Enable feature' and 'Define source' are not named steps in the documented workflow.",
+        "3": "A workstream is for unified routing, not for Automatic Record Creation rules — the sequence starts with creating the rule."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+    },
+    {
+      "q": "An agent creates a Phone Call activity for an existing case. When they save it, the Subject field is blank. What is the consequence in D365 Customer Service?",
+      "options": [
+        "The activity is saved and appears in the timeline with 'Unknown Subject'",
+        "The save fails — Subject is a required field for Phone Call activities",
+        "The activity is saved but will not appear in the case timeline without a Subject",
+        "The system auto-fills Subject with the Case Title"
+      ],
+      "answer": 1,
+      "category": "activities",
+      "tags": [
+        "activities",
+        "phone-call",
+        "subject",
+        "mandatory-fields",
+        "timeline"
+      ],
+      "explanation": "Subject is a mandatory field for Phone Call activities in D365 Customer Service. Saving a Phone Call without a Subject will fail with a validation error. This applies to all standard activity types — Subject is the required field that identifies the activity purpose and ensures it appears correctly in the timeline.",
+      "wrongExplanations": {
+        "0": "The system does not accept 'Unknown Subject' as a substitute — Subject must be explicitly provided.",
+        "2": "The save itself fails — the activity cannot be created without Subject regardless of timeline appearance.",
+        "3": "The system does not auto-fill Subject from the Case Title — the agent must enter it manually."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "An agent creates a Task activity but forgets to set the Regarding field to a specific case. Where will this Task appear?",
+      "options": [
+        "It will not appear anywhere — Regarding is mandatory for activities",
+        "It appears in the agent's personal Activities view but NOT on any case timeline",
+        "It appears on all open cases belonging to the same customer",
+        "It appears in the queue's shared Activities view"
+      ],
+      "answer": 1,
+      "category": "activities",
+      "tags": [
+        "activities",
+        "regarding",
+        "timeline",
+        "case-management"
+      ],
+      "explanation": "The Regarding field links an activity to a specific record (case, account, contact, etc.). If Regarding is not set, the activity exists in the system but is not linked to any case. It will appear in the agent's own Activities views (My Activities) but will NOT appear on any case timeline. Setting Regarding is essential for the activity to be visible in a case's timeline.",
+      "wrongExplanations": {
+        "0": "Regarding is not a mandatory field for activity creation — the activity can be saved without it.",
+        "2": "Activities do not attach to all cases for a customer — they only appear on the specific case set in the Regarding field.",
+        "3": "Unlinked activities do not appear in queue shared views — they appear in personal activity views only."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "For an Email activity to appear in a case's Timeline control, which field on the Email must be correctly set?",
+      "options": [
+        "To and From fields must match the case customer",
+        "Regarding field must be set to the specific case",
+        "Category must be set to 'Case Email'",
+        "The Email must be sent — draft emails don't appear in timeline"
+      ],
+      "answer": 1,
+      "category": "activities",
+      "tags": [
+        "activities",
+        "email",
+        "timeline",
+        "regarding",
+        "case-management"
+      ],
+      "explanation": "The Regarding field on an Email activity must be set to the specific case for it to appear on that case's Timeline. This is the universal rule for all activity types — the Regarding lookup creates the relationship between the activity and the case record. Without it, the email won't appear in the case timeline regardless of who sent or received it.",
+      "wrongExplanations": {
+        "0": "The customer on To/From fields does not automatically associate the email with a case — only the Regarding field does.",
+        "2": "There is no 'Category = Case Email' requirement — the Regarding field is the linking mechanism.",
+        "3": "Draft emails can appear in the timeline if linked via Regarding — but the Regarding field is the primary requirement."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "What technology does the advanced similarity rules feature use to find similar cases in D365 Customer Service?",
+      "options": [
+        "Azure Cognitive Search",
+        "Relevance Search (Dataverse search)",
+        "Quick Find views",
+        "SSRS reports with duplicate detection"
+      ],
+      "answer": 1,
+      "category": "similar-cases",
+      "tags": [
+        "similar-cases",
+        "relevance-search",
+        "duplicate-detection",
+        "advanced-similarity"
+      ],
+      "explanation": "Advanced similarity rules use the Relevance Search (Dataverse search) mechanism. Rules are configured with Text Match or Exact Match criteria on case fields. When enabled, Dataverse search is recommended for most accurate results — without it, the search falls back to primary field matching only.",
+      "wrongExplanations": {
+        "0": "Azure Cognitive Search is a separate Azure service — the similarity rules use Dataverse's Relevance Search.",
+        "2": "Quick Find views are for manual search only — similarity rules use Relevance Search for automated suggestion.",
+        "3": "SSRS reports are for scheduled reporting — not for real-time similar case suggestions."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+    },
+    {
+      "q": "A Business Rule is needed to detect and flag potential duplicate cases when a new case is created. Is this achievable with Business Rules in D365 Customer Service?",
+      "options": [
+        "Yes — Business Rules can query existing cases and block save if a duplicate is found",
+        "No — Business Rules cannot query other records. Duplicate detection must use Advanced Similarity Rules or Duplicate Detection Rules",
+        "Yes — Business Rules with server-side scope can run OData queries to check for duplicates",
+        "No — duplicate detection requires Power Automate only; no built-in tools exist"
+      ],
+      "answer": 1,
+      "category": "similar-cases",
+      "tags": [
+        "duplicate-detection",
+        "business-rules",
+        "similar-cases"
+      ],
+      "explanation": "Business Rules in D365 operate on the current record only — they cannot query or compare against other records in the system. For duplicate case detection, the correct tools are Advanced Similarity Rules (for surfacing similar cases to agents) or Dataverse Duplicate Detection Rules (for system-level duplicate flagging). Business Rules simply cannot access data from other records.",
+      "wrongExplanations": {
+        "0": "Business Rules cannot query other records — they operate only on the fields of the current form/record.",
+        "2": "Server-side Business Rules still operate on the current record only — they do not execute OData queries.",
+        "3": "Built-in tools do exist — Advanced Similarity Rules and Duplicate Detection Rules are the correct mechanisms."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+    },
+    {
+      "q": "When configuring an Advanced Similarity Rule, what does setting 'Filter Result by Status = Active' do?",
+      "options": [
+        "Only active cases (where the similar rule itself is active) are used for matching",
+        "The rule only returns similar cases that currently have Active status",
+        "The search is filtered to only match fields that are active/enabled in the data model",
+        "The rule only runs when the current case has Active status"
+      ],
+      "answer": 1,
+      "category": "similar-cases",
+      "tags": [
+        "similar-cases",
+        "advanced-similarity",
+        "status-filter"
+      ],
+      "explanation": "The 'Filter Result by Status' setting on an Advanced Similarity Rule controls the status of the suggested similar cases returned. If set to Active, only currently active (open) cases are suggested. If left unset, similar cases in all statuses (active, resolved, canceled) are returned. This helps agents find relevant open cases vs. closed historical ones.",
+      "wrongExplanations": {
+        "0": "'Active' here refers to the status of the target (similar) cases returned — not the rule's own activation state.",
+        "2": "The filter is on case status, not on data model field activation.",
+        "3": "The filter controls what cases are returned in results — not when the rule executes."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+    },
+    {
+      "q": "Where does an agent view similar case suggestions in the Customer Service Hub?",
+      "options": [
+        "The Case Dashboard > Similar Cases stream",
+        "The Related section of the case form > Similar Cases tab",
+        "The Knowledge Base tab on the case form",
+        "The Activity Timeline filtered to Similar Cases"
+      ],
+      "answer": 1,
+      "category": "similar-cases",
+      "tags": [
+        "similar-cases",
+        "customer-service-hub",
+        "related-section"
+      ],
+      "explanation": "Similar case suggestions are viewed in the Related section of the case form in Customer Service Hub. The agent selects the Similar Cases option in the Related section. Note: the Similar Cases action is not available in the Business Process Flow — it must be accessed via the Related section.",
+      "wrongExplanations": {
+        "0": "There is no 'Similar Cases stream' on the Case Dashboard — similar cases are on the case form's Related section.",
+        "2": "The Knowledge Base tab shows knowledge articles — not similar case suggestions.",
+        "3": "The Timeline shows activities linked to the case — not similar case suggestions."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+    },
+    {
+      "q": "An agent shares a case with a colleague in D365 Customer Service. What does sharing do in terms of case responsibility?",
+      "options": [
+        "Sharing transfers ownership — the colleague becomes the new case owner",
+        "Sharing grants the colleague access to view or edit the case without changing the original owner",
+        "Sharing routes the case to the colleague's queue for assignment",
+        "Sharing creates a copy of the case for the colleague to work on independently"
+      ],
+      "answer": 1,
+      "category": "sharing",
+      "tags": [
+        "sharing",
+        "case-responsibility",
+        "access",
+        "owner"
+      ],
+      "explanation": "Sharing in Dynamics 365 grants another user or team specific access (Read, Write, Delete, Assign, Share, Append, Append To) to a specific record without changing the record's owner. The original owner retains ownership and responsibility. Sharing extends access — it is different from Assign, which transfers ownership.",
+      "wrongExplanations": {
+        "0": "Sharing does not change the owner — that is what Assign does.",
+        "2": "Routing to a queue is done via queue membership and routing rules — not by sharing.",
+        "3": "Sharing does not create a copy — both users access the same record."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "What is the difference between Dataverse Search (formerly Relevance Search) and Quick Find in D365 Customer Service?",
+      "options": [
+        "Quick Find is faster; Dataverse Search is more accurate",
+        "Dataverse Search searches across multiple entities and uses full-text indexing for comprehensive results; Quick Find searches within a single entity using configured search columns",
+        "Dataverse Search is only available to admins; Quick Find is available to all users",
+        "They are the same — Dataverse Search is just the new name for Quick Find"
+      ],
+      "answer": 1,
+      "category": "search",
+      "tags": [
+        "dataverse-search",
+        "quick-find",
+        "full-text-search",
+        "search"
+      ],
+      "explanation": "Dataverse Search (formerly Relevance Search) uses Azure Cognitive Service full-text indexing to search across multiple entities simultaneously, returning ranked and comprehensive results. Quick Find searches within a single entity using the configured Quick Find view columns and search fields. Dataverse Search is far more powerful for cross-entity and partial-word searches.",
+      "wrongExplanations": {
+        "0": "Speed is not the distinguishing factor — the key difference is scope (cross-entity vs. single entity) and search technology.",
+        "2": "Both search types are available to all users — Dataverse Search is not admin-only.",
+        "3": "They are technically distinct features — Dataverse Search uses Azure indexing; Quick Find uses database query on configured columns."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "A manager needs a view that shows all cases assigned to a specific team, regardless of which team member owns each case. Which view type is most appropriate?",
+      "options": [
+        "Personal view — shared with team members",
+        "System view (public) — configured by admin to filter by team ownership",
+        "Quick view — embedded in the Case form",
+        "Lookup view — used to select records from a lookup field"
+      ],
+      "answer": 1,
+      "category": "views",
+      "tags": [
+        "views",
+        "system-view",
+        "personal-view",
+        "team",
+        "case-management"
+      ],
+      "explanation": "A System view (also called a public view) is configured by an administrator and is available to all users with access. It can be set to filter cases by team ownership — for example, 'Team = Customer Support Team'. Personal views are created by individual users for their own use. Quick views are read-only embedded views inside forms. Lookup views appear in lookup field dropdowns.",
+      "wrongExplanations": {
+        "0": "Personal views are user-created and not consistently available across the team.",
+        "2": "Quick views are embedded read-only panels on forms — they display related record data, not a filterable case list.",
+        "3": "Lookup views are for selecting records in lookup fields — not for browsing and filtering case lists."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "An agent needs to find all cases created by a specific customer in the last 30 days, containing the word 'billing' anywhere in the case title or description. Which search method is most effective?",
+      "options": [
+        "Quick Find on the Cases grid — enter 'billing' in the search box",
+        "Dataverse Search — searches across all indexed fields including description with full-text capabilities",
+        "Advanced Find — create a filter for customer + created date + title contains 'billing'",
+        "Global Filter on the Cases dashboard — set customer and keyword filters"
+      ],
+      "answer": 1,
+      "category": "search",
+      "tags": [
+        "dataverse-search",
+        "full-text-search",
+        "case-search",
+        "billing"
+      ],
+      "explanation": "Dataverse Search is the most effective tool here because it uses full-text indexing across all searchable fields including description — Quick Find typically only searches the configured Quick Find view columns and may miss description. Advanced Find would also work but requires more manual setup. Dataverse Search gives comprehensive cross-field results with relevance ranking.",
+      "wrongExplanations": {
+        "0": "Quick Find only searches fields configured in the Quick Find view — it may not search the description field unless specifically added.",
+        "2": "Advanced Find is a valid option but more manual — Dataverse Search is faster and more comprehensive for keyword searches.",
+        "3": "Global Filter on the dashboard applies to dashboard streams only — it is not a dedicated search tool."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "q": "What is the purpose of the Subject Tree in D365 Customer Service case management?",
+      "options": [
+        "It controls which email subjects are monitored for auto case creation",
+        "It provides a hierarchical classification system for categorising cases, knowledge articles, and products",
+        "It defines the BPF stages for case resolution",
+        "It creates a parent-child hierarchy between cases automatically"
+      ],
+      "answer": 1,
+      "category": "subject-tree",
+      "tags": [
+        "subject-tree",
+        "case-classification",
+        "knowledge-articles"
+      ],
+      "explanation": "The Subject Tree is a hierarchical classification system used to categorise cases, knowledge articles, and products. Subjects help agents classify the nature of a case (e.g. Billing > Invoice Query > Incorrect Amount) and enable search and filtering by subject. The subject tree is configured by administrators in Case Settings.",
+      "wrongExplanations": {
+        "0": "Email subjects for auto case creation are configured via Automatic Record Creation rules — not the Subject Tree.",
+        "2": "BPF stages are configured in the Business Process Flow designer — not the Subject Tree.",
+        "3": "The Subject Tree does not create parent-child relationships between cases — parent-child case settings do."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-manage-subject-tree"
+    },
+    {
+      "q": "The Enhanced case experience in D365 Customer Service is available in which app(s)?",
+      "options": [
+        "Customer Service Hub only",
+        "Copilot Service workspace only",
+        "Both Customer Service Hub and Copilot Service workspace",
+        "All model-driven apps with the Case table enabled"
+      ],
+      "answer": 1,
+      "category": "enhanced-case-form",
+      "tags": [
+        "enhanced-case-form",
+        "copilot-service-workspace",
+        "apps"
+      ],
+      "explanation": "The Enhanced case creation experience (enhanced full case form and quick case form) is available only in the Copilot Service workspace app. Customer Service Hub does not support the enhanced case form. This distinction is explicitly documented by Microsoft.",
+      "wrongExplanations": {
+        "0": "Customer Service Hub does not support the enhanced case experience — it is Copilot Service workspace only.",
+        "2": "The enhanced experience is workspace-only, not both apps.",
+        "3": "The feature is specific to Copilot Service workspace — not all model-driven apps."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
+    },
+    {
+      "q": "What does the Queue Item Control component display on the enhanced case form?",
+      "options": [
+        "All queues the case is currently assigned to and their SLA timers",
+        "The current queue the record belongs to and the Worked By field",
+        "The full queue history showing every queue the case has been in",
+        "The queue routing rules that applied to the case at creation"
+      ],
+      "answer": 1,
+      "category": "enhanced-case-form",
+      "tags": [
+        "enhanced-case-form",
+        "queue-item-control",
+        "components"
+      ],
+      "explanation": "The Queue Item Control component displays the current queue a record belongs to and the Worked By field. The Worked By field can be edited and saved directly from the component. It is available for queue-enabled entities and requires a value in the Table Column property.",
+      "wrongExplanations": {
+        "0": "The Queue Item Control shows the current queue only — not SLA timers (those are on the SLA KPI component).",
+        "2": "Queue history is not displayed by this component — it shows the current queue only.",
+        "3": "Routing rules are system configuration — they are not displayed on the case form via this component."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
+    },
+    {
+      "q": "What is the purpose of the OptionSet Wrapper component on the enhanced case form?",
+      "options": [
+        "It creates a dropdown for all option sets in the system",
+        "It displays the selected option set values as color-coded options on the form, such as priority icons or status options",
+        "It wraps the Status and Status Reason fields into a single combined control",
+        "It allows agents to select multiple option set values simultaneously"
+      ],
+      "answer": 1,
+      "category": "enhanced-case-form",
+      "tags": [
+        "enhanced-case-form",
+        "optionset-wrapper",
+        "components",
+        "color-coded"
+      ],
+      "explanation": "The OptionSet Wrapper component displays option set field values as color-coded visual options on the form. For example, adding the Priority field shows color-coded priority icons. Adding Case Status shows color-coded status options. It is available for choices/option set field types but not for non-editable fields or fields that don't support option set types.",
+      "wrongExplanations": {
+        "0": "It does not expose all option sets — it displays a specific configured option set field as a visual, color-coded control.",
+        "2": "It does not combine Status and Status Reason — it is applied to a single option set field.",
+        "3": "Option sets are single-select by nature — the wrapper makes them visual, not multi-select."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
+    },
+    {
+      "q": "The Due Open Activities control is added to a case form. What does it display?",
+      "options": [
+        "All activities ever created for the case regardless of date",
+        "Activities that are due today or are overdue",
+        "Activities that are in Draft status and not yet saved",
+        "Activities linked to the case's SLA KPI milestones"
+      ],
+      "answer": 1,
+      "category": "enhanced-case-form",
+      "tags": [
+        "enhanced-case-form",
+        "due-open-activities",
+        "components",
+        "activities"
+      ],
+      "explanation": "The Due Open Activities control specifically shows activities that are due today or are overdue, giving agents an immediate view of urgent pending work. The Table must be set to Activities in the component configuration. It is available for all entities.",
+      "wrongExplanations": {
+        "0": "The component filters to due/overdue activities only — not all historical activities on the case.",
+        "2": "Draft status activities are not a specific filter in this component — it filters by due date.",
+        "3": "SLA KPI milestones are tracked separately — this component is about activity due dates."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
+    },
+    {
+      "q": "A case form needs to display the attachments uploaded directly, through email, notes, and conversations. Which component achieves this?",
+      "options": [
+        "Associated Grid Control — set to Attachments entity",
+        "Attachment Control — set Table Column to Pre Create Entity Attachment Id for Case",
+        "Notes Control — enables rich text note-taking with attachment viewing",
+        "Quick View form — embedded Note form showing attachments"
+      ],
+      "answer": 1,
+      "category": "enhanced-case-form",
+      "tags": [
+        "enhanced-case-form",
+        "attachment-control",
+        "components",
+        "attachments"
+      ],
+      "explanation": "The Attachment Control is the component that enables uploading and displaying attachments from multiple sources — including direct uploads, email, notes, and conversations. For the Case entity specifically, the Table Column property must be set to 'Pre Create Entity Attachment Id'. This is distinct from the Notes Control, which is for text notes only.",
+      "wrongExplanations": {
+        "0": "The Associated Grid Control displays linked related entity records as subgrids — not multi-source attachments.",
+        "2": "The Notes Control allows rich text note-taking — it is for note content, not the full attachment aggregation across emails and conversations.",
+        "3": "A Quick View form embeds another record's form — it doesn't aggregate attachments from multiple activity sources."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
     }
   ],
   "dragdrop": [
@@ -274,10 +1440,7 @@
         "core-components"
       ],
       "explanation": "Each component plays a distinct role: SLAs enforce time targets; Entitlements define support contracts; Routing Rules manage queue assignment; Subject Trees classify content; Knowledge Articles capture solutions.",
-      "msRef": {
-        "label": "Customer Service components overview",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview"
-      }
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview"
     },
     {
       "instruction": "Match each case status and status reason to the correct lifecycle stage.",
@@ -306,10 +1469,7 @@
         "case-lifecycle"
       ],
       "explanation": "Active cases (In Progress, On Hold) are still being worked. Resolved cases (Problem Solved, Information Provided) have been answered or fixed. Cancelled/Duplicate cases were closed without a true resolution.",
-      "msRef": {
-        "label": "Case status and lifecycle",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
-      }
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
     },
     {
       "instruction": "Classify each configuration action to the correct admin area where it is performed.",
@@ -338,10 +1498,296 @@
         "navigation"
       ],
       "explanation": "Customer Service settings live in the CS admin centre. Security roles are managed in the Power Platform admin centre. Timeline card forms are customised through the Power Apps form editor.",
-      "msRef": {
-        "label": "Customer Service admin centre",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/cs-admin-center-overview"
-      }
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/cs-admin-center-overview"
+    },
+    {
+      "instruction": "Match each Case Status to all of its valid out-of-box Status Reason values.",
+      "items": [
+        "Active — In Progress",
+        "Active — Waiting for Details",
+        "Active — On Hold",
+        "Active — Researching",
+        "Resolved — Problem Solved",
+        "Resolved — Information Provided",
+        "Canceled — Canceled",
+        "Canceled — Merged"
+      ],
+      "zones": [
+        "Active status reasons",
+        "Resolved status reasons",
+        "Canceled status reasons"
+      ],
+      "correctMapping": {
+        "Active — In Progress": "Active status reasons",
+        "Active — Waiting for Details": "Active status reasons",
+        "Active — On Hold": "Active status reasons",
+        "Active — Researching": "Active status reasons",
+        "Resolved — Problem Solved": "Resolved status reasons",
+        "Resolved — Information Provided": "Resolved status reasons",
+        "Canceled — Canceled": "Canceled status reasons",
+        "Canceled — Merged": "Canceled status reasons"
+      },
+      "explanation": "The Case table has three Status values each with specific out-of-box Status Reasons. Active has four: In Progress, On Hold, Waiting for Details, and Researching. Resolved has two: Problem Solved and Information Provided. Canceled has two: Canceled (standard cancellation) and Merged (case was merged into another case). Custom Status Reasons can be added per organisation need.",
+      "tags": [
+        "status",
+        "status-reason",
+        "case-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-status-reason-transitions-case-management"
+    },
+    {
+      "instruction": "Arrange the steps in the correct order to configure a customisable case resolution dialog with a custom 'Duplicate' resolution type.",
+      "items": [
+        "In Copilot Service admin center > Case Settings > Other Settings, select Customizable dialog",
+        "In Power Apps > Tables > Case > Columns > Status Reason — add 'Duplicate' under Resolved status",
+        "Copy the numeric value from the new Case Status Reason choice",
+        "In Power Apps > Tables > Case Resolution > Columns > Resolution Type — add 'Duplicate' with the SAME numeric value",
+        "Save and publish all customisations",
+        "Test by resolving a case and confirming 'Duplicate' appears in the Resolution Type dropdown"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5",
+        "Step 6"
+      ],
+      "correctMapping": {
+        "In Copilot Service admin center > Case Settings > Other Settings, select Customizable dialog": "Step 1",
+        "In Power Apps > Tables > Case > Columns > Status Reason — add 'Duplicate' under Resolved status": "Step 2",
+        "Copy the numeric value from the new Case Status Reason choice": "Step 3",
+        "In Power Apps > Tables > Case Resolution > Columns > Resolution Type — add 'Duplicate' with the SAME numeric value": "Step 4",
+        "Save and publish all customisations": "Step 5",
+        "Test by resolving a case and confirming 'Duplicate' appears in the Resolution Type dropdown": "Step 6"
+      },
+      "explanation": "The key requirement is that the numeric values for the custom Status Reason (Case table) and Resolution Type (Case Resolution table) must match exactly. Selecting Customizable dialog first enables this customisation path. Adding to Case Status Reason first, copying the value, then adding the matching value to Case Resolution ensures synchronisation. A mismatch will prevent the value from appearing and may cause errors.",
+      "tags": [
+        "case-resolution",
+        "customizable-dialog",
+        "custom-status-reason",
+        "configuration"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+    },
+    {
+      "instruction": "Match each dashboard filter type to how it works and what it affects.",
+      "items": [
+        "Visual Filter",
+        "Global Filter",
+        "Timeframe Filter",
+        "Stream Sort"
+      ],
+      "zones": [
+        "Interactive chart (pie/bar/doughnut) that filters all streams when a segment is clicked — shows at-a-glance metrics and drives drill-down",
+        "Field-level criteria applied in a flyout panel — affects all streams, charts, and tiles simultaneously as AND conditions",
+        "Date range filter (e.g. This Quarter, Last Quarter, Custom range) that limits which records appear based on creation date",
+        "Changes the order of records within a single stream — does not hide or filter records"
+      ],
+      "correctMapping": {
+        "Visual Filter": "Interactive chart (pie/bar/doughnut) that filters all streams when a segment is clicked — shows at-a-glance metrics and drives drill-down",
+        "Global Filter": "Field-level criteria applied in a flyout panel — affects all streams, charts, and tiles simultaneously as AND conditions",
+        "Timeframe Filter": "Date range filter (e.g. This Quarter, Last Quarter, Custom range) that limits which records appear based on creation date",
+        "Stream Sort": "Changes the order of records within a single stream — does not hide or filter records"
+      },
+      "explanation": "Dashboard filtering has four distinct mechanisms. Visual Filters are clickable charts that immediately filter streams — ideal for priority or status breakdowns. Global Filters apply field-level criteria (e.g. Escalated=Yes) across the whole dashboard. Timeframe Filters restrict by date range. Stream Sort changes display order within a stream but does not filter data. Visual and Global filters can be combined as AND conditions.",
+      "tags": [
+        "dashboards",
+        "visual-filter",
+        "global-filter",
+        "timeframe-filter"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+    },
+    {
+      "instruction": "Match each case scenario to the most appropriate action an agent should take.",
+      "items": [
+        "Two cases exist for the same customer's same issue — one from email, one from phone",
+        "A customer calls back about an issue that was resolved 5 days ago",
+        "An agent is going on leave and needs to hand off full case responsibility",
+        "A case involves both a billing query and a technical fault — each need separate team work",
+        "An agent is out of office temporarily — a colleague needs read access to monitor the case",
+        "A case needs to be escalated to Tier 2 and removed from the Tier 1 agent's ownership"
+      ],
+      "zones": [
+        "Merge the duplicate cases — keep the more complete case as primary",
+        "Reactivate the resolved case and continue working on it",
+        "Assign the case to the colleague — transferring ownership",
+        "Create child cases under the parent for each team to work independently",
+        "Share the case with the colleague — granting Read (and optionally Write) access",
+        "Reassign the case to the Tier 2 agent or queue"
+      ],
+      "correctMapping": {
+        "Two cases exist for the same customer's same issue — one from email, one from phone": "Merge the duplicate cases — keep the more complete case as primary",
+        "A customer calls back about an issue that was resolved 5 days ago": "Reactivate the resolved case and continue working on it",
+        "An agent is going on leave and needs to hand off full case responsibility": "Assign the case to the colleague — transferring ownership",
+        "A case involves both a billing query and a technical fault — each need separate team work": "Create child cases under the parent for each team to work independently",
+        "An agent is out of office temporarily — a colleague needs read access to monitor the case": "Share the case with the colleague — granting Read (and optionally Write) access",
+        "A case needs to be escalated to Tier 2 and removed from the Tier 1 agent's ownership": "Reassign the case to the Tier 2 agent or queue"
+      },
+      "explanation": "Each scenario maps to a specific D365 case action: Merge for true duplicates. Reactivate for returning issues on resolved cases. Assign for full ownership transfer. Child cases for splitting complex multi-team issues. Share for read access without ownership change. Reassign for escalation. Understanding when to use each action prevents data loss, duplication, and SLA confusion.",
+      "tags": [
+        "case-scenarios",
+        "merge",
+        "reactivate",
+        "assign",
+        "share",
+        "child-cases",
+        "case-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case"
+    },
+    {
+      "instruction": "Match each parent-child case closure setting to the business scenario it supports.",
+      "items": [
+        "Close all child cases when parent case is closed",
+        "Don't allow parent case closure until all child cases are closed"
+      ],
+      "zones": [
+        "A support organisation has a policy where when the main issue is resolved, all related sub-tasks can be batch-closed at the same time — e.g. closing all departmental sub-tasks when a main IT outage case is resolved",
+        "A warranty claims organisation needs to ensure every sub-fault (electrical, mechanical, cosmetic) is individually resolved and documented before the main warranty claim can be closed"
+      ],
+      "correctMapping": {
+        "Close all child cases when parent case is closed": "A support organisation has a policy where when the main issue is resolved, all related sub-tasks can be batch-closed at the same time — e.g. closing all departmental sub-tasks when a main IT outage case is resolved",
+        "Don't allow parent case closure until all child cases are closed": "A warranty claims organisation needs to ensure every sub-fault (electrical, mechanical, cosmetic) is individually resolved and documented before the main warranty claim can be closed"
+      },
+      "explanation": "The two closure settings serve opposite business needs. 'Close all children when parent closes' is appropriate when child cases are sub-tasks that naturally complete when the main issue resolves — it prevents orphaned open tasks. 'Don't allow parent closure until children are closed' enforces complete individual resolution of each child before the parent can be marked done — critical for compliance and quality-assurance workflows.",
+      "tags": [
+        "parent-child",
+        "closure-preference",
+        "configuration",
+        "scenarios"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+    },
+    {
+      "instruction": "Arrange the correct sequence of steps to enable Advanced Similarity Rules for similar case suggestions in D365 Customer Service.",
+      "items": [
+        "In Copilot Service admin center > Case Settings, go to Advanced similarity rules > Manage",
+        "Select New to create an advanced similarity rule",
+        "Set Source Entity to Case and configure Noise Key Phrases and Filter Result by Status",
+        "Save the rule, then on the Match Fields tab add Text Analytics Entity Mapping records",
+        "Configure Criteria (Text match or Exact match), Entity, and Field for each mapping",
+        "Select Activate from the command bar to enable the rule"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5",
+        "Step 6"
+      ],
+      "correctMapping": {
+        "In Copilot Service admin center > Case Settings, go to Advanced similarity rules > Manage": "Step 1",
+        "Select New to create an advanced similarity rule": "Step 2",
+        "Set Source Entity to Case and configure Noise Key Phrases and Filter Result by Status": "Step 3",
+        "Save the rule, then on the Match Fields tab add Text Analytics Entity Mapping records": "Step 4",
+        "Configure Criteria (Text match or Exact match), Entity, and Field for each mapping": "Step 5",
+        "Select Activate from the command bar to enable the rule": "Step 6"
+      },
+      "explanation": "Advanced similarity rules follow a create-configure-activate lifecycle. The rule must be saved before match fields can be added. Match fields are where the actual search criteria are defined — Text match for keyword/phrase matching and Exact match for structured field equality. Activation must be the final step — rules only process cases after being activated. Relevance Search should also be enabled for best results.",
+      "tags": [
+        "similar-cases",
+        "advanced-similarity",
+        "configuration-sequence"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+    },
+    {
+      "instruction": "Classify each item as something that happens to the Primary Case or the Secondary (Merged) Case during a case merge.",
+      "items": [
+        "Status becomes Canceled — Merged",
+        "Retains its original status (Active) and continues normal processing",
+        "All activities from the other case are moved here",
+        "SLA KPI continues running unaffected",
+        "Becomes read-only and cannot be updated",
+        "All activities are transferred away to the other case"
+      ],
+      "zones": [
+        "Primary Case (the case that survives the merge)",
+        "Secondary Case (the case that is merged/absorbed)"
+      ],
+      "correctMapping": {
+        "Status becomes Canceled — Merged": "Secondary Case (the case that is merged/absorbed)",
+        "Retains its original status (Active) and continues normal processing": "Primary Case (the case that survives the merge)",
+        "All activities from the other case are moved here": "Primary Case (the case that survives the merge)",
+        "SLA KPI continues running unaffected": "Primary Case (the case that survives the merge)",
+        "Becomes read-only and cannot be updated": "Secondary Case (the case that is merged/absorbed)",
+        "All activities are transferred away to the other case": "Secondary Case (the case that is merged/absorbed)"
+      },
+      "explanation": "In a merge: the Primary Case absorbs all activities from the secondary and continues with its status unchanged (Active), SLA KPI intact, and full editability. The Secondary Case is set to Canceled — Merged, becomes effectively read-only, and loses all its activities to the primary. Merges are irreversible — no undo mechanism exists.",
+      "tags": [
+        "merge",
+        "primary-case",
+        "secondary-case",
+        "activities",
+        "status"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+    },
+    {
+      "instruction": "Match each Automatic Record Creation rule source activity type to the most appropriate scenario for its use.",
+      "items": [
+        "Email",
+        "Social Activity",
+        "Custom Activity",
+        "Service Activity"
+      ],
+      "zones": [
+        "Inbound customer support emails arriving in a monitored mailbox automatically create cases",
+        "Customer complaints or queries posted on Twitter/Facebook automatically create cases for social media monitoring",
+        "A custom integration sends IoT device fault alerts through a bespoke activity type that triggers case creation",
+        "Service bookings or field service appointments trigger case creation or update rules"
+      ],
+      "correctMapping": {
+        "Email": "Inbound customer support emails arriving in a monitored mailbox automatically create cases",
+        "Social Activity": "Customer complaints or queries posted on Twitter/Facebook automatically create cases for social media monitoring",
+        "Custom Activity": "A custom integration sends IoT device fault alerts through a bespoke activity type that triggers case creation",
+        "Service Activity": "Service bookings or field service appointments trigger case creation or update rules"
+      },
+      "explanation": "Each source type serves a distinct channel: Email is the most common source for inbound case creation from monitored mailboxes. Social Activity sources handle social media channels (Twitter, Facebook) for social listening. Custom Activity types allow organisations to define bespoke activity entities (e.g. IoT alerts, portal submissions) that trigger rules. Service Activity connects field service and appointment scenarios to case management.",
+      "tags": [
+        "auto-record-creation",
+        "source-types",
+        "email",
+        "social-activity",
+        "custom-activity"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+    },
+    {
+      "instruction": "Match each enhanced case form component to its correct configuration requirement.",
+      "items": [
+        "Attachment Control (on Case entity)",
+        "Queue Item Control",
+        "Due Open Activities Control",
+        "OptionSet Wrapper",
+        "Associated Grid Control"
+      ],
+      "zones": [
+        "Table Column must be set to 'Pre Create Entity Attachment Id'",
+        "A value must be specified in Table Column; available for queue-enabled entities only",
+        "Table must be set to 'Activities'",
+        "Specify the required option set in Table Column; not available for non-editable fields",
+        "Configure up to four subgrids of linked related entity records"
+      ],
+      "correctMapping": {
+        "Attachment Control (on Case entity)": "Table Column must be set to 'Pre Create Entity Attachment Id'",
+        "Queue Item Control": "A value must be specified in Table Column; available for queue-enabled entities only",
+        "Due Open Activities Control": "Table must be set to 'Activities'",
+        "OptionSet Wrapper": "Specify the required option set in Table Column; not available for non-editable fields",
+        "Associated Grid Control": "Configure up to four subgrids of linked related entity records"
+      },
+      "explanation": "Each enhanced case form component has specific configuration requirements. Attachment Control needs 'Pre Create Entity Attachment Id' as the table column for case entity. Queue Item Control needs a table column value and is queue-entity-specific. Due Open Activities needs Table=Activities. OptionSet Wrapper needs the specific option set column specified and cannot wrap non-editable fields. Associated Grid Control supports up to four configurable subgrids.",
+      "tags": [
+        "enhanced-case-form",
+        "components",
+        "configuration",
+        "attachment-control",
+        "queue-item-control"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
     }
   ],
   "casestudy": [
@@ -370,16 +1816,300 @@
           ],
           "answer": 1,
           "explanation": "A <strong>Business Process Flow</strong> with a required Customer Notified field in the final active stage ensures agents cannot advance to Resolved without confirming customer notification.",
-          "wrongExplanations": [
-            "The Timeline does not have a built-in mechanism to block case resolution based on note presence.",
-            null,
-            "The Case Resolution dialog can require a description but does not support custom confirmation checkboxes.",
-            "A Power Automate flow could block resolution via a plugin pattern but this is significantly more complex — BPF is the recommended out-of-box approach."
+          "wrongExplanations": {
+            "0": "The Timeline does not have a built-in mechanism to block case resolution based on note presence.",
+            "2": "Incorrect — see explanation.",
+            "3": "The Case Resolution dialog can require a description but does not support custom confirmation checkboxes."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
+        },
+        {
+          "q": "The organisation wants to prevent agents from resolving a parent case while any child cases are still open. What specific setting achieves this?",
+          "options": [
+            "Set Maximum number of child cases to 0",
+            "Select 'Don't allow parent case closure until all child cases are closed' in parent-child case settings",
+            "Add a Business Rule on the Case form that checks child case count before save",
+            "Configure a workflow to cancel child cases automatically when parent is resolved"
           ],
-          "msRef": {
-            "label": "Business Process Flows for cases",
-            "url": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
-          }
+          "answer": 1,
+          "explanation": "The 'Don't allow parent case closure until all child cases are closed' closure preference setting directly enforces this requirement. It is configured in Copilot Service admin center > Case Settings > Parent child case settings. No custom Business Rules or workflows are needed — this is a built-in setting.",
+          "wrongExplanations": {
+            "0": "Setting maximum child cases to 0 would prevent child case creation entirely — not restrict parent closure.",
+            "2": "Business Rules on the Case form operate on individual records only and cannot count related child records in this way.",
+            "3": "Automatically canceling children would close them without resolution — not the same as requiring them to be properly resolved."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+        },
+        {
+          "q": "After enabling the Customizable dialog for case resolution, Contoso needs the Billable Time field to auto-calculate. What must they ensure is also on the Case Resolution form?",
+          "options": [
+            "The SLA KPI field must be linked on the form",
+            "The Total Time field must also be added to the case resolution form",
+            "The case handling time widget must be enabled in Experience Profiles",
+            "The Regarding field must be added to the Case Resolution form"
+          ],
+          "answer": 1,
+          "explanation": "Microsoft explicitly documents that the Total Time field must be added to the case resolution dialog for the Billable Time field to display its auto-calculated value. Without Total Time present, Billable Time cannot determine the worked time. Additionally, the Regarding field should NOT be added to the Case Resolution dialog as this is unsupported.",
+          "wrongExplanations": {
+            "0": "SLA KPI does not drive Billable Time calculation — Total Time does.",
+            "2": "Case handling time widget (Experience Profiles) is for the case form, not the resolution dialog.",
+            "3": "Adding Regarding to the Case Resolution dialog is explicitly unsupported and will break case resolution."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+        },
+        {
+          "q": "Contoso needs agents to see similar case suggestions when working on a case. Which admin area holds the configuration for this feature?",
+          "options": [
+            "Settings > Duplicate Detection Rules",
+            "Copilot Service admin center > Case Settings > Advanced similarity rules > Manage",
+            "Power Apps > Tables > Case > Business Rules",
+            "Copilot Service admin center > Routing > Classification Rules"
+          ],
+          "answer": 1,
+          "explanation": "Advanced similarity rules are configured in Copilot Service admin center under Case Settings > Advanced similarity rules > Manage. From there, admins create rules that define which case fields are used for similarity matching (Text match or Exact match). Relevance Search should also be enabled for best results.",
+          "wrongExplanations": {
+            "0": "Duplicate Detection Rules detect true duplicates on save — they don't surface similar case suggestions in the Related section.",
+            "2": "Business Rules on the Case table cannot query other records for similarity — they operate on the current record only.",
+            "3": "Classification Rules are part of unified routing for intelligent case routing — not similar case suggestion."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+        },
+        {
+          "q": "Contoso wants to update case description fields on resolved cases for GDPR compliance without reopening them. What is the supported approach?",
+          "options": [
+            "Reactivate every case, update the field, then re-resolve",
+            "Use Power Automate flows or API to update fields on resolved cases",
+            "Use the Case form command bar's 'Edit Resolved Case' button",
+            "This is not possible — resolved cases are permanently read-only"
+          ],
+          "answer": 1,
+          "explanation": "D365 Customer Service supports updating resolved and canceled cases via Power Automate flows or API without reopening them. This is the documented approach for GDPR compliance scenarios. The feature is enabled by default — configured under Case Settings > Other Settings > Case update after resolution.",
+          "wrongExplanations": {
+            "0": "Reactivating is not required — the platform supports direct updates on resolved cases via flow/API.",
+            "2": "There is no 'Edit Resolved Case' button in the command bar — updates must be done via Power Automate or API.",
+            "3": "Resolved cases can be updated via Power Automate/API — they are not permanently read-only."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/update-resolved-canceled-cases"
+        }
+      ]
+    },
+    {
+      "title": "Northgate Insurance — Case Routing and Merge Strategy",
+      "scenario": {
+        "title": "Northgate Insurance — Case Operations Challenge",
+        "background": "Northgate Insurance runs a customer service centre handling claims (technical), policy queries (billing), and complaint cases. Cases come in via email and social media. The team experiences these problems:\n\nP1. Duplicate cases regularly appear when customers email AND call about the same issue.\nP2. Complaint cases require sub-tasks for HR, Legal, and Claims — but currently all work is done on one case.\nP3. Agents can currently close a complaint case even while HR and Legal sub-tasks remain open.\nP4. The admin team needs to flag resolved cases with a custom 'Withdrawn by Customer' resolution reason.\nP5. The management team wants a dashboard that instantly shows claims by priority.\nP6. Agents cannot currently see suggested similar cases when working on claim cases.",
+        "requirements": [
+          "P1: Reduce duplicate cases from email and phone channels",
+          "P2: Separate sub-tasks per team on complaint cases",
+          "P3: Prevent complaint case closure while sub-tasks are open",
+          "P4: Add 'Withdrawn by Customer' as a custom resolution type",
+          "P5: Dashboard showing claims cases split by priority",
+          "P6: Enable similar case suggestions for claim cases"
+        ]
+      },
+      "tags": [
+        "merge",
+        "parent-child",
+        "case-resolution",
+        "dashboards",
+        "similar-cases",
+        "case-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case",
+      "questions": [
+        {
+          "q": "For P1 — duplicate cases exist from email and phone for the same issue. What is the immediate remediation an agent should take when they spot the duplicates?",
+          "options": [
+            "Resolve both cases with Status Reason 'Duplicate'",
+            "Merge the less complete case into the more complete case — keeping the more complete one as primary",
+            "Delete the phone call case and keep the email case",
+            "Create a parent case and link both duplicates as children"
+          ],
+          "answer": 1,
+          "explanation": "When duplicate cases are identified, the agent should merge them — keeping the more complete or earlier case as the primary. All activities from the secondary transfer to the primary, and the secondary becomes Canceled — Merged. This creates a single thread and preserves all customer interactions. Merging is irreversible, so the primary case must be chosen carefully.",
+          "wrongExplanations": {
+            "0": "Resolving both as 'Duplicate' would close both cases — the actual issue would go unresolved.",
+            "2": "Deleting a case permanently removes its activities and history — this is not the correct approach.",
+            "3": "Parent-child is for structurally related sub-issues — not for combining true duplicates of the same issue."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-merge-cases"
+        },
+        {
+          "q": "For P2 — complaint cases need HR, Legal, and Claims to work independently on their parts. Which case management feature enables this?",
+          "options": [
+            "Merge all team cases into one complaint case",
+            "Create child cases under the complaint as parent — one per team",
+            "Use multiple queues with the complaint case routed to each",
+            "Create separate cases per team with no relationship between them"
+          ],
+          "answer": 1,
+          "explanation": "Parent-child cases are the correct structure here. The complaint case becomes the parent. Three child cases are created — one for HR, one for Legal, one for Claims. Each team works on their own child case independently. The parent complaint case ties them all together and enables the correct closure preference to be applied.",
+          "wrongExplanations": {
+            "0": "Merging would combine everything into one case — teams cannot work independently after a merge.",
+            "2": "Routing to multiple queues still means one case — teams cannot track their work separately on a single case.",
+            "3": "Separate unlinked cases lose the connection to the parent complaint and make it impossible to enforce closure rules."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+        },
+        {
+          "q": "For P3 — to prevent complaint case closure while HR, Legal, and Claims child cases remain open, which setting should the admin apply?",
+          "options": [
+            "Set Maximum number of child cases to 3",
+            "Select 'Don't allow parent case closure until all child cases are closed'",
+            "Add a workflow that checks child case status on parent case save",
+            "Select 'Close all child cases when parent case is closed'"
+          ],
+          "answer": 1,
+          "explanation": "'Don't allow parent case closure until all child cases are closed' is the built-in setting that directly prevents the parent complaint case from being resolved or canceled until all three child cases (HR, Legal, Claims) are individually closed. This enforces the required quality gate without needing custom workflows.",
+          "wrongExplanations": {
+            "0": "Setting maximum to 3 limits how many children exist — it does not block parent closure.",
+            "2": "A workflow is possible but unnecessary — the built-in closure preference setting is the correct and simpler tool.",
+            "3": "'Close all child cases when parent is closed' does the opposite — it batch-closes children when the parent closes."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/define-settings-parent-child-cases"
+        },
+        {
+          "q": "For P4 — to add 'Withdrawn by Customer' as a custom resolution type in the Customizable dialog, which two tables must be updated with matching numeric values?",
+          "options": [
+            "Case table and Activity table",
+            "Case table (Status Reason column) and Case Resolution table (Resolution Type column)",
+            "Case Resolution table and Queue Item table",
+            "Status Reason table and Resolution Type table (separate admin tables)"
+          ],
+          "answer": 1,
+          "explanation": "To add a custom resolution type to the Customizable dialog: first add 'Withdrawn by Customer' to the Status Reason column on the Case table (under Resolved status), then copy the numeric value, and add the same label with the identical numeric value to the Resolution Type column on the Case Resolution table. If values don't match, the option won't appear and errors may occur.",
+          "wrongExplanations": {
+            "0": "The Activity table is not involved in case resolution dialog customisation.",
+            "2": "Queue Item table is not involved in this customisation — the Case and Case Resolution tables are the correct pair.",
+            "3": "There are no separate 'Status Reason table' or 'Resolution Type table' — these are columns on the Case and Case Resolution tables respectively."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/modify-case-resolution-dialog"
+        },
+        {
+          "q": "For P5 — management wants a dashboard showing claim cases split by priority. Which dashboard feature should be configured?",
+          "options": [
+            "Global Filter — set Priority field criteria in the flyout",
+            "Visual Filter — enable a Cases by Priority chart on the dashboard",
+            "Stream sort — sort all streams by Priority descending",
+            "Timeframe Filter — set to This Week to see current priority distribution"
+          ],
+          "answer": 1,
+          "explanation": "A Visual Filter configured as a 'Cases by Priority' chart (e.g. pie or doughnut chart) gives management an immediate visual breakdown of cases by priority. Clicking any segment filters the streams to show only that priority level. This is the purpose-built feature for priority-based dashboard visualisation — exactly what management needs.",
+          "wrongExplanations": {
+            "0": "Global Filter applies AND-criteria filtering but doesn't give a visual breakdown by priority — it would hide all but one priority level at a time.",
+            "2": "Stream sort changes order within streams — it does not provide a visual split or aggregate count by priority.",
+            "3": "Timeframe Filter restricts by date range — it doesn't show priority distribution."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-dashboard"
+        }
+      ]
+    },
+    {
+      "title": "Contoso Telecom — Advanced Case Configuration",
+      "scenario": {
+        "title": "Contoso Telecom — End-to-End Case Configuration",
+        "background": "Contoso Telecom is implementing D365 Customer Service. The admin team has the following configuration tasks:\n\nT1. Ensure inbound emails to support@contoso.com automatically create cases and route to the correct queue.\nT2. Allow the GDPR team to update resolved case descriptions via automation without reopening cases.\nT3. Ensure agents see related open cases when working on a new case.\nT4. The enhanced case form should show color-coded case priority and display which queue the case is in.\nT5. The Case Handling Time widget needs to be configured to track active work time for all representatives.",
+        "requirements": [
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5"
+        ]
+      },
+      "tags": [
+        "auto-record-creation",
+        "resolved-cases",
+        "similar-cases",
+        "enhanced-case-form",
+        "case-handling-time"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-create-a-case",
+      "questions": [
+        {
+          "q": "For T1 — which feature creates cases automatically from inbound emails to support@contoso.com and routes them to queues?",
+          "options": [
+            "BPF triggered by new email activities",
+            "Automatic Record Creation and Update Rules with Email as the source activity type",
+            "Unified Routing assignment rules triggered by email queue items",
+            "Power Automate flow listening to the mailbox via Exchange connector"
+          ],
+          "answer": 1,
+          "explanation": "Automatic Record Creation and Update Rules with Email as the source type is the built-in D365 Customer Service feature for this exact scenario. The rule monitors inbound email, checks configured conditions, creates a case, and can route it to the appropriate queue. This is the standard out-of-box automation for email-to-case workflows.",
+          "wrongExplanations": {
+            "0": "BPFs define case workflow stages — they do not monitor mailboxes or create cases from emails.",
+            "2": "Unified Routing assigns work items to agents and queues — it operates after case creation, not as the creation mechanism.",
+            "3": "A Power Automate flow is technically possible but is not the standard built-in tool — Automatic Record Creation rules are the correct D365 feature."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/automatically-create-update-records"
+        },
+        {
+          "q": "For T2 — the GDPR team needs to update description fields on resolved cases via automation. What setting must the admin configure and what tool does the GDPR team use?",
+          "options": [
+            "Case Settings > Resolve case dialog > Enable editable resolved cases; GDPR team uses the case form",
+            "Case Settings > Other Settings > Allow updates for = Resolved and canceled cases; GDPR team uses Power Automate flows or API",
+            "Settings > Security > Give GDPR team Write access on resolved cases; they edit directly from the form",
+            "No setting needed — resolved cases are always editable from the case form UI"
+          ],
+          "answer": 1,
+          "explanation": "The setting is in Case Settings > Other Settings > Case update after resolution > Allow updates for = Resolved and canceled cases. Updates must be performed via Power Automate flows or API — not directly from the case form UI. This allows the GDPR team to automate data redaction on resolved cases without reopening them.",
+          "wrongExplanations": {
+            "0": "There is no 'Enable editable resolved cases' toggle in the Resolve case dialog — the setting is in Other Settings.",
+            "2": "Security role Write access alone is not sufficient — resolved cases have application-level restrictions that the Other Settings configuration controls. Also, form-based editing is not supported for resolved cases.",
+            "3": "Resolved cases are not editable from the form UI by default — the Power Automate/API path is required."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/update-resolved-canceled-cases"
+        },
+        {
+          "q": "For T3 — agents need to see related open cases when working on a new case. Which feature and admin configuration achieves this?",
+          "options": [
+            "Create a Quick Find view filtered to related cases and pin it to the agent toolbar",
+            "Configure Advanced Similarity Rules in Case Settings and ensure Relevance Search is enabled",
+            "Add an Associated Grid Control to the case form linked to Related Cases",
+            "Enable the 'Show related cases' toggle in Experience Profiles"
+          ],
+          "answer": 1,
+          "explanation": "Advanced Similarity Rules configured in Copilot Service admin center (Case Settings > Advanced similarity rules) enable the system to surface similar/related cases in the Related section of the case form. Enabling Relevance Search ensures the most accurate and comprehensive matching. Agents then see similar cases in the Related section without leaving the case form.",
+          "wrongExplanations": {
+            "0": "Quick Find views are manual search tools — they don't automatically surface related cases to agents within a case form.",
+            "2": "The Associated Grid Control displays explicitly linked child/related records — not AI-suggested similar cases based on content.",
+            "3": "There is no 'Show related cases' toggle in Experience Profiles — similar cases are driven by Advanced Similarity Rules."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/suggest-similar-cases-for-a-case"
+        },
+        {
+          "q": "For T4 — color-coded priority and current queue display on the enhanced case form. Which two components achieve this?",
+          "options": [
+            "Notes Control (priority) and Associated Grid Control (queue)",
+            "OptionSet Wrapper (priority as color-coded icons) and Queue Item Control (current queue and Worked By)",
+            "Attachment Control (priority attachment) and Due Open Activities (queue activities)",
+            "Associated Grid Control (priority subgrid) and OptionSet Wrapper (queue color coding)"
+          ],
+          "answer": 1,
+          "explanation": "The OptionSet Wrapper component displays the Priority option set as color-coded icons — this is exactly what it is designed for. The Queue Item Control displays the current queue the case belongs to and the Worked By field, which can be edited directly. These two components together address both requirements in T4.",
+          "wrongExplanations": {
+            "0": "Notes Control is for rich text note-taking — it does not display priority. Associated Grid Control shows related record subgrids, not queue membership.",
+            "2": "Attachment Control manages file attachments — not priority. Due Open Activities shows overdue tasks — not queue assignment.",
+            "3": "The Associated Grid Control and OptionSet Wrapper combination is reversed — OptionSet Wrapper handles priority and Queue Item Control handles queue display."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/case-enh-config"
+        },
+        {
+          "q": "For T5 — the Case Handling Time widget must be added to the case form in Customer Service Hub for automatic time tracking. What property must be set on the Handling Time component?",
+          "options": [
+            "Table: Time Trackers; View: All Time Trackers",
+            "Table: Case; View: Active Cases",
+            "Table: Activities; View: All Activities",
+            "Table: Case Resolution; View: All Resolutions"
+          ],
+          "answer": 0,
+          "explanation": "When adding the Handling Time component to the case form, the component properties must be set to Table: Time Trackers and View: All Time Trackers. This connects the widget to the msdyn_timetracker table where automatic and manual time entries are stored. In Customer Service Hub specifically, this widget must be present on the form for time tracking to work — unlike Copilot Service workspace which tracks in the background regardless.",
+          "wrongExplanations": {
+            "1": "Table: Case / View: Active Cases connects to case records, not the time tracking table.",
+            "2": "Activities are a different entity — the time tracker table is msdyn_timetracker (Time Trackers).",
+            "3": "Case Resolution is the resolution details table — not where time tracking records are stored."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-case-handling-time"
         }
       ]
     }

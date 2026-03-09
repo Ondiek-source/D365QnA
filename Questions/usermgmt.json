@@ -21,12 +21,11 @@
         "access-control"
       ],
       "explanation": "<strong>Business Units</strong> combined with <strong>Team ownership</strong> and security roles (set to Business Unit or Team level) restrict data access so agents only see records owned by their team or business unit.",
-      "wrongExplanations": [
-        "Filter views change what is displayed in a list but do not enforce security — agents could still navigate to other records.",
-        null,
-        "Personal views are per-agent preferences — they do not enforce data access restrictions.",
-        "Entitlement channels control which communication channels count against a support contract — not data visibility."
-      ],
+      "wrongExplanations": {
+        "0": "Filter views change what is displayed in a list but do not enforce security — agents could still navigate to other records.",
+        "2": "This option is incorrect. See explanation above.",
+        "3": "Personal views are per-agent preferences — they do not enforce data access restrictions."
+      },
       "msRef": {
         "label": "Security roles and access levels",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
@@ -48,12 +47,11 @@
         "access"
       ],
       "explanation": "The <strong>Customer Service Representative</strong> role (also called CSR) is the out-of-the-box role for agents. It provides the standard access to Cases, Contacts, Accounts, Activities, Knowledge Articles, and Queues needed for day-to-day support work.",
-      "wrongExplanations": [
-        "System Administrator has unrestricted access — too broad for a standard agent.",
-        "CSR Manager is a supervisory role with additional reporting and management permissions beyond what a standard agent needs.",
-        null,
-        "Basic User provides minimal system access — not sufficient for customer service work."
-      ],
+      "wrongExplanations": {
+        "0": "System Administrator has unrestricted access — too broad for a standard agent.",
+        "1": "CSR Manager is a supervisory role with additional reporting and management permissions beyond what a standard agent needs.",
+        "3": "This option is incorrect. See explanation above."
+      },
       "msRef": {
         "label": "Customer Service security roles",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
@@ -75,12 +73,11 @@
         "privilege"
       ],
       "explanation": "Setting Write to <strong>User</strong> level means the agent can only edit records they own (or that are shared with them). Read at Organisation level allows them to see all cases, while Write at User level restricts editing to their own cases.",
-      "wrongExplanations": [
-        "Organisation write access would allow editing any case in the system — too permissive.",
-        "Business Unit write access allows editing cases owned by anyone in the team — broader than required.",
-        null,
-        "None would prevent editing any cases, including their own."
-      ],
+      "wrongExplanations": {
+        "0": "Organisation write access would allow editing any case in the system — too permissive.",
+        "1": "Business Unit write access allows editing cases owned by anyone in the team — broader than required.",
+        "3": "This option is incorrect. See explanation above."
+      },
       "msRef": {
         "label": "Security role access levels",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
@@ -102,12 +99,11 @@
         "access-levels"
       ],
       "explanation": "When multiple security roles are assigned to a user, Dynamics 365 applies the <strong>union (most permissive)</strong> privilege. Organisation-level Read is broader than User-level, so the user effectively has Organisation-level Read on Case.",
-      "wrongExplanations": [
-        "Dynamics 365 does not apply the most restrictive role — it uses the most permissive (union) principle.",
-        null,
-        "Roles never cancel each other — they combine via union.",
-        "There is no averaging of access levels — the highest (most permissive) level from any assigned role applies."
-      ],
+      "wrongExplanations": {
+        "0": "Dynamics 365 does not apply the most restrictive role — it uses the most permissive (union) principle.",
+        "2": "This option is incorrect. See explanation above.",
+        "3": "Roles never cancel each other — they combine via union."
+      },
       "msRef": {
         "label": "How security roles combine",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/how-record-access-determined"
@@ -129,12 +125,11 @@
         "supervisor"
       ],
       "explanation": "The <strong>CSR Manager</strong> role provides supervisory access — Business Unit-level read/write on Cases, Queue management, reporting access, and the ability to reassign cases — without granting full system administration.",
-      "wrongExplanations": [
-        "Customer Service Representative is an agent role — it does not include supervisory queue management or Business Unit-wide case access.",
-        null,
-        "Scheduler is a Field Service role for resource booking — not related to Customer Service supervision.",
-        "Knowledge Manager grants access to create and manage knowledge articles — not case supervision or queue management."
-      ],
+      "wrongExplanations": {
+        "0": "Customer Service Representative is an agent role — it does not include supervisory queue management or Business Unit-wide case access.",
+        "2": "This option is incorrect. See explanation above.",
+        "3": "Scheduler is a Field Service role for resource booking — not related to Customer Service supervision."
+      },
       "msRef": {
         "label": "Customer Service security roles",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
@@ -156,12 +151,11 @@
         "model-driven-app"
       ],
       "explanation": "To access a model-driven app, the security role must include the <strong>App Access privilege</strong> for that specific app. Without it, the app does not appear in the user list of available apps even if they have entity-level permissions.",
-      "wrongExplanations": [
-        "Case read access controls whether agents can see cases within the app — not whether the app appears at all.",
-        null,
-        "Write on User entity is not needed to access the Customer Service Hub app.",
-        "Queue read access allows agents to see queue records — not a requirement for the app to appear."
-      ],
+      "wrongExplanations": {
+        "0": "Case read access controls whether agents can see cases within the app — not whether the app appears at all.",
+        "2": "This option is incorrect. See explanation above.",
+        "3": "Write on User entity is not needed to access the Customer Service Hub app."
+      },
       "msRef": {
         "label": "Assign app access",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-security-roles"
@@ -183,12 +177,11 @@
         "access-control"
       ],
       "explanation": "<strong>Security Roles</strong> define what actions a user can perform and at what level (user, BU, org). <strong>Teams</strong> are groups of users that can collectively own records and have roles assigned to them — enabling group-level data ownership and shared access.",
-      "wrongExplanations": [
-        null,
-        "Security Roles are assigned to all types of users, not just administrators.",
-        "Teams do not define access levels — Security Roles do. Teams are groupings that can have roles assigned.",
-        "Security Roles and Teams serve fundamentally different purposes and are not interchangeable."
-      ],
+      "wrongExplanations": {
+        "1": "This option is incorrect. See explanation above.",
+        "2": "Security Roles are assigned to all types of users, not just administrators.",
+        "3": "Teams do not define access levels — Security Roles do. Teams are groupings that can have roles assigned."
+      },
       "msRef": {
         "label": "Teams and security roles",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-teams"
@@ -210,12 +203,11 @@
         "best-practice"
       ],
       "explanation": "Assigning the same <strong>pre-configured security role(s)</strong> to the new user is the correct and efficient approach. Security Roles are reusable — designed to be assigned to any number of users with the same access requirements.",
-      "wrongExplanations": [
-        "Field-level permissions are configured per role, not per user — individual configuration would bypass the role-based model.",
-        "You cannot directly copy another user role assignment as a configuration object — you assign existing roles to the new user.",
-        null,
-        "Granting System Administrator access is a security risk — it violates the principle of least privilege."
-      ],
+      "wrongExplanations": {
+        "0": "Field-level permissions are configured per role, not per user — individual configuration would bypass the role-based model.",
+        "1": "You cannot directly copy another user role assignment as a configuration object — you assign existing roles to the new user.",
+        "3": "This option is incorrect. See explanation above."
+      },
       "msRef": {
         "label": "Assign security roles to users",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/assign-security-roles"
@@ -237,12 +229,11 @@
         "case"
       ],
       "explanation": "Setting Delete to <strong>None</strong> means users with this security role have no delete capability on the Case entity at all — they cannot delete any case regardless of ownership or status.",
-      "wrongExplanations": [
-        "None specifically removes all delete access — not grants it.",
-        null,
-        "None means zero access — not user-level (own records) access. User-level would be a specific access level, not None.",
-        "Status-based delete restrictions are not a function of the None privilege level — None removes delete entirely."
-      ],
+      "wrongExplanations": {
+        "0": "None specifically removes all delete access — not grants it.",
+        "2": "This option is incorrect. See explanation above.",
+        "3": "None means zero access — not user-level (own records) access. User-level would be a specific access level, not None."
+      },
       "msRef": {
         "label": "Security privilege levels",
         "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
@@ -264,16 +255,1216 @@
         "configuration"
       ],
       "explanation": "The <strong>Customer Service admin centre</strong> contains <strong>Service Configuration Settings</strong> where administrators configure case prefix, auto-numbering format, SLA pause settings, resolution dialog requirements, and other Customer Service-wide options.",
-      "wrongExplanations": [
-        "Power Platform admin centre manages environment-level settings like security, capacity, and connectors — not Customer Service-specific configuration.",
-        null,
-        "Solution Explorer is for customising entities, forms, and relationships — not operational Customer Service settings.",
-        "Dataverse Environment Settings control platform-level options — Customer Service-specific settings are in the Customer Service admin centre."
-      ],
+      "wrongExplanations": {
+        "0": "Power Platform admin centre manages environment-level settings like security, capacity, and connectors — not Customer Service-specific configuration.",
+        "2": "This option is incorrect. See explanation above.",
+        "3": "Solution Explorer is for customising entities, forms, and relationships — not operational Customer Service settings."
+      },
       "msRef": {
         "label": "Customer Service admin centre configuration",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
       }
+    },
+    {
+      "q": "Which role is required by ALL users of Dynamics 365 Contact Center, regardless of what other roles they hold?",
+      "options": [
+        "Omnichannel agent",
+        "Basic User",
+        "App Profile User",
+        "Customer Service Representative"
+      ],
+      "answer": 1,
+      "category": "predefined-roles",
+      "tags": [
+        "predefined-roles",
+        "omnichannel-roles",
+        "user-management"
+      ],
+      "explanation": "The Basic User role is required by all users of Dynamics 365 Contact Center. It is a baseline role that must be assigned in addition to any functional role such as Omnichannel agent or Omnichannel supervisor.",
+      "wrongExplanations": {
+        "0": "Omnichannel agent is the role for customer service representatives specifically — not required by all users such as admins or supervisors.",
+        "2": "App Profile User is required by users of Customer Service and Dynamics 365 Contact Center but is not the universal baseline role required by every user.",
+        "3": "Customer Service Representative is required to work with the Case entity — it is not the universal baseline role for all Contact Center users."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "An administrator needs to perform admin tasks in Dynamics 365 Contact Center including managing user roles and privileges. Which combination of roles is required?",
+      "options": [
+        "Omnichannel administrator only",
+        "System Administrator only",
+        "Omnichannel administrator AND System Administrator",
+        "Omnichannel administrator AND Basic User"
+      ],
+      "answer": 2,
+      "category": "predefined-roles",
+      "tags": [
+        "predefined-roles",
+        "omnichannel-roles",
+        "system-administrator"
+      ],
+      "explanation": "The Omnichannel administrator role is required for admin tasks in Contact Center, but managing user roles and privileges specifically also requires the System Administrator role. Both must be assigned together for full administrative capability.",
+      "wrongExplanations": {
+        "0": "Omnichannel administrator alone does not grant the ability to manage user roles and privileges — that requires System Administrator.",
+        "1": "System Administrator alone gives broad platform access but does not grant the Omnichannel-specific administrator capabilities.",
+        "3": "Basic User is required for all users but is not what grants admin task capability — System Administrator is the additional requirement."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "Which out-of-box role must be assigned to enable a user to monitor, assign, and transfer conversations in Dynamics 365 Contact Center?",
+      "options": [
+        "Omnichannel administrator",
+        "Omnichannel supervisor",
+        "Omnichannel agent",
+        "App Profile Manager Administrator"
+      ],
+      "answer": 1,
+      "category": "predefined-roles",
+      "tags": [
+        "predefined-roles",
+        "supervisor",
+        "omnichannel-roles"
+      ],
+      "explanation": "The Omnichannel supervisor role grants the ability to monitor, assign, and transfer conversations. Supervisors can also view user lists, presence, workstream, and queue lists, and edit queue assignments and default presence for users.",
+      "wrongExplanations": {
+        "0": "The Omnichannel administrator manages configuration — not real-time conversation monitoring and transfer.",
+        "2": "Omnichannel agents can view queue and workstream lists but cannot monitor, assign, or transfer conversations.",
+        "3": "App Profile Manager Administrator is for creating and assigning app profiles — not conversation supervision."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "A user needs to create and assign app profiles to users of Customer Service. Which role is required?",
+      "options": [
+        "Omnichannel administrator",
+        "Productivity tools administrator",
+        "App Profile Manager Administrator",
+        "System Administrator"
+      ],
+      "answer": 2,
+      "category": "predefined-roles",
+      "tags": [
+        "predefined-roles",
+        "app-profiles",
+        "omnichannel-roles"
+      ],
+      "explanation": "The App Profile Manager Administrator role is specifically required for creating and assigning app profiles to users of Customer Service and Dynamics 365 Contact Center. The App Profile User role is the corresponding role for users of those profiles.",
+      "wrongExplanations": {
+        "0": "Omnichannel administrator manages omnichannel configuration but does not specifically own app profile creation and assignment.",
+        "1": "Productivity tools administrator manages agent scripts and macros — not app profiles.",
+        "3": "System Administrator has broad access but App Profile Manager Administrator is the specific role for this function."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "Which role should NOT be assigned to a supervisor or representative type of user in Dynamics 365 Contact Center?",
+      "options": [
+        "Basic User",
+        "Omnichannel supervisor",
+        "Omnichannel API access",
+        "App Profile User"
+      ],
+      "answer": 2,
+      "category": "predefined-roles",
+      "tags": [
+        "predefined-roles",
+        "omnichannel-roles",
+        "security"
+      ],
+      "explanation": "Microsoft explicitly states that the Omnichannel API access role must not be assigned to a supervisor or representative type of user. It is intended for application-level API access only.",
+      "wrongExplanations": {
+        "0": "Basic User is required by all users — it is appropriate for supervisors and representatives.",
+        "1": "Omnichannel supervisor is the correct role for supervisor users.",
+        "3": "App Profile User is required by users of Customer Service and Contact Center — it is appropriate for representatives."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "In Dynamics 365 Customer Service, what does the Administrator persona's recommended access level of 'Global' on the Queue table mean?",
+      "options": [
+        "The admin can only access queues in their own business unit",
+        "The admin can access and manage queues across the entire organisation regardless of business unit",
+        "The admin can read queues globally but cannot modify them",
+        "Global access on Queue is only available to the System Administrator role"
+      ],
+      "answer": 1,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "access-levels",
+        "administrator-persona",
+        "queues"
+      ],
+      "explanation": "Global access level means the user can access records across the entire organisation regardless of business unit hierarchy. For the Administrator persona on Queue, Global access with Append, Append To, Assign, Create, Delete, Read, and Update allows full queue management organisation-wide.",
+      "wrongExplanations": {
+        "0": "That describes Local access level — which is limited to the user's own business unit.",
+        "2": "The Administrator persona has full CRUD privileges on Queue at Global level — not read-only.",
+        "3": "Global access level is a configurable access level on security roles — it is not exclusive to System Administrator."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "According to the CS Administrator persona privilege table, what access level is recommended for the Bookable Resource Capacity Profile table?",
+      "options": [
+        "Basic",
+        "Local",
+        "Deep",
+        "Global"
+      ],
+      "answer": 3,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "capacity-profiles",
+        "bookable-resource",
+        "administrator-persona"
+      ],
+      "explanation": "The Administrator persona has Global access on Bookable Resource Capacity Profile with Append, Append To, Assign, Create, Delete, Read, Share, and Update privileges. This allows the admin to manage capacity profiles across the entire organisation.",
+      "wrongExplanations": {
+        "0": "Basic access limits operations to records the user owns — not appropriate for an admin managing capacity profiles org-wide.",
+        "1": "Local access limits to the user's business unit — insufficient for organisation-wide capacity profile management.",
+        "2": "Deep access covers the user's business unit and its child units — still not organisation-wide."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "The Supervisor persona needs to update the Operating Hours record. What access level does Microsoft recommend for this privilege?",
+      "options": [
+        "Global — Read only",
+        "Global — Read only (cannot create or update)",
+        "Not recommended — supervisors should not access operating hours",
+        "The supervisor has no privileges on Operating Hours"
+      ],
+      "answer": 1,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "supervisor-persona",
+        "operating-hours"
+      ],
+      "explanation": "The Supervisor persona has Read at Global access level on Operating Hours — they can view operating hours organisation-wide but cannot create, update, or delete them. Configuration of operating hours is reserved for the Administrator persona.",
+      "wrongExplanations": {
+        "0": "Correct interpretation but option 1 (index 1) is the clearest and most precise answer.",
+        "2": "Supervisors do have Read access on Operating Hours.",
+        "3": "Incorrect — supervisors have Global Read on Operating Hours."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "A new user is created in the Microsoft 365 admin center and assigned a D365 Customer Service licence. What else must happen before the user can access the Customer Service app?",
+      "options": [
+        "Nothing — the licence assignment automatically gives access to the app",
+        "A security role must be assigned to the user directly or via a group team",
+        "The user must sign in to the Microsoft 365 portal first to activate the account",
+        "An administrator must manually sync the user to Dataverse from the Power Platform admin center"
+      ],
+      "answer": 1,
+      "category": "user-creation",
+      "tags": [
+        "user-creation",
+        "security-roles",
+        "microsoft-365",
+        "user-management"
+      ],
+      "explanation": "A Microsoft 365 licence registers the user with the online service but does not grant access to customer engagement apps. A security role must also be assigned — either directly to the user or indirectly through group team membership — before the user can access the app.",
+      "wrongExplanations": {
+        "0": "A licence alone is not sufficient. The user also needs a security role assigned to access the app and its data.",
+        "2": "Signing in to the M365 portal is not a prerequisite — the requirement is a security role assignment in the Dataverse environment.",
+        "3": "Dataverse synchronisation happens automatically for licensed users in the correct security group — manual sync is not required as a standard step."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "q": "An organisation needs a user account that can access customer engagement apps programmatically via API but should never sign in through the UI. Which access mode is appropriate?",
+      "options": [
+        "Read-Write",
+        "Administrative",
+        "Non-interactive",
+        "Delegated Administrator"
+      ],
+      "answer": 2,
+      "category": "user-types",
+      "tags": [
+        "user-types",
+        "non-interactive",
+        "access-mode",
+        "user-management"
+      ],
+      "explanation": "The Non-interactive access mode is designed for programmatic access between applications — such as connectors from D365 to ERP systems. Non-interactive users cannot sign in through the web interface, do not represent a person, and up to seven can be created per environment.",
+      "wrongExplanations": {
+        "0": "Read-Write is the standard access mode for human users — it allows full UI access based on security privileges.",
+        "1": "Administrative access mode is for admin users who manage settings but have no access to customer data or app functionality.",
+        "3": "Delegated Administrator is a placeholder record for partner delegated admin users — not an access mode for API integration accounts."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "q": "How many non-interactive user accounts can be created per Dataverse environment?",
+      "options": [
+        "1",
+        "5",
+        "7",
+        "Unlimited"
+      ],
+      "answer": 2,
+      "category": "user-types",
+      "tags": [
+        "user-types",
+        "non-interactive",
+        "limits",
+        "user-management"
+      ],
+      "explanation": "Microsoft documents a maximum of 7 non-interactive user accounts per environment. Note that application users are created with non-interactive accounts but are not counted toward this limit — there is no cap on application users.",
+      "wrongExplanations": {
+        "0": "1 is too low — the documented limit is 7.",
+        "1": "5 is incorrect — the documented limit is 7 per environment.",
+        "3": "Unlimited is incorrect for non-interactive users — that applies to application users, which are a separate type."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "q": "An administrator disables a user by removing all their security roles rather than removing them from the security group. What is the problem with this approach?",
+      "options": [
+        "It is the recommended approach — removing security roles is the cleanest way to revoke access",
+        "The user's licence is still consumed and the user remains in the list of enabled users",
+        "The user's data and records are automatically deleted",
+        "The user will be permanently locked out and cannot be re-enabled"
+      ],
+      "answer": 1,
+      "category": "user-management",
+      "tags": [
+        "user-management",
+        "disable-user",
+        "security-roles",
+        "licence"
+      ],
+      "explanation": "Microsoft explicitly states that removing all security roles does not remove the user's licence and the user remains in the list of enabled users. This approach is not recommended. The correct method is to remove the user from the security group associated with the environment, or to remove their licence.",
+      "wrongExplanations": {
+        "0": "Microsoft explicitly states this approach is NOT recommended for disabling users.",
+        "2": "Removing security roles does not delete any of the user's records or data.",
+        "3": "The user can be re-enabled by reassigning security roles or adding them back to the security group."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "q": "An administrator needs to add the same skill to 50 representatives at once in Dynamics 365 Customer Service. What is the correct tool and path?",
+      "options": [
+        "Settings > Security > Users — select users and edit each record individually",
+        "Copilot Service admin center > User Management > Enhanced user management — select users, Update user attributes > Update skills",
+        "Power Platform admin center > Users — bulk skill assignment is available from the command bar",
+        "Customer Service Hub > Service > Users — bulk update skills from the service management area"
+      ],
+      "answer": 1,
+      "category": "managing-users",
+      "tags": [
+        "skills",
+        "bulk-update",
+        "enhanced-user-management",
+        "user-management"
+      ],
+      "explanation": "The Enhanced user management experience in Copilot Service admin center (User management under Customer support) is the correct tool. You select multiple users, choose Update user attributes > Update skills, select the skill and proficiency, and click Add to all. This applies the skill in bulk.",
+      "wrongExplanations": {
+        "0": "The classic Settings > Security > Users area does not have a bulk skill update capability — it requires editing each user record individually.",
+        "2": "The Power Platform admin center manages environment-level user settings but does not have a skill assignment interface.",
+        "3": "Customer Service Hub is the agent-facing app — skill management is done in the admin center, not the hub."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "q": "A supervisor wants to manually assign a work item to a representative who has already reached their capacity limit. Can the supervisor do this?",
+      "options": [
+        "No — the system enforces capacity limits and prevents assignment regardless of who performs it",
+        "Yes — supervisors can override configured capacity and manually assign work to representatives",
+        "Yes — but only if the representative's capacity profile has the Override flag enabled",
+        "No — the administrator must first temporarily increase the representative's capacity profile"
+      ],
+      "answer": 1,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "supervisor",
+        "manual-assignment",
+        "override"
+      ],
+      "explanation": "Supervisors can override a representative's configured capacity and manually assign work items even when the representative has reached their capacity limit. This is by design — supervisors need to be able to handle exceptions and contingencies without being blocked by system rules.",
+      "wrongExplanations": {
+        "0": "Capacity limits apply to automatic assignment — manual assignment by supervisors bypasses these constraints.",
+        "2": "There is no Override flag on a capacity profile — the supervisor role itself grants the override capability.",
+        "3": "No profile change is needed — the supervisor can assign directly without any capacity profile modification."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "What triggers the automatic release of a representative's capacity when working on a case in Dynamics 365 Customer Service?",
+      "options": [
+        "When the representative marks the case as In Progress",
+        "When the representative saves any update to the case record",
+        "When the representative resolves the case or removes their name from the Worked By field",
+        "When the supervisor manually releases the capacity from the supervision dashboard"
+      ],
+      "answer": 2,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "capacity-release",
+        "case",
+        "user-management"
+      ],
+      "explanation": "For cases, capacity is automatically released when the representative resolves the case. It is also released if the representative cancels the case or removes their name from the Worked By field on the Queue Item details dialog. For conversations, capacity is released when the representative ends the conversation and closes the session.",
+      "wrongExplanations": {
+        "0": "Marking a case In Progress does not release capacity — the representative is still actively working on it.",
+        "1": "Saving updates to a case record does not trigger capacity release.",
+        "3": "Capacity release is automatic on resolution — supervisors do not need to manually release it in normal operation."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "Where in Dynamics 365 Customer Service does an administrator configure individual work hours for a specific representative?",
+      "options": [
+        "Settings > Business Management > Services",
+        "The Bookable Resource record for the user — via the Work Hours link on the record",
+        "Copilot Service admin center > Calendar > Operating Hours",
+        "Power Platform admin center > Users > Work Schedule tab"
+      ],
+      "answer": 1,
+      "category": "work-hours",
+      "tags": [
+        "work-hours",
+        "scheduling",
+        "bookable-resource",
+        "user-management"
+      ],
+      "explanation": "Individual work hours for a user are set on their Bookable Resource record. In the user record, navigate via the chevron button next to the record name to reach Work Hours. This is where you define or update the schedule for that specific representative. The Bookable Resource calendar controls when the representative is available for assignment.",
+      "wrongExplanations": {
+        "0": "Settings > Business Management > Services is for configuring service capacity — not individual user work hours.",
+        "2": "Operating Hours in the admin center are organisation-level schedules for queues and channels — not individual user hours.",
+        "3": "The Power Platform admin center does not have a Work Schedule tab for individual user hour configuration."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "When setting up a new weekly recurring work schedule for a bookable resource in Dynamics 365 Customer Service, which option changes the schedule from the start date to the end date and may affect past records?",
+      "options": [
+        "This week only — applies only to the current week",
+        "From this date forward — applies from today without changing past records",
+        "Entire recurring weekly schedule from start to end — changes the full schedule including past days",
+        "Custom date range — allows specifying start and end independently"
+      ],
+      "answer": 2,
+      "category": "work-hours",
+      "tags": [
+        "work-hours",
+        "weekly-schedule",
+        "bookable-resource",
+        "scheduling"
+      ],
+      "explanation": "The 'Entire recurring weekly schedule from start to end' option changes the complete schedule across all dates from the original start to end date. Microsoft flags this explicitly as it might change past days, which can affect reports regarding hours worked in the past.",
+      "wrongExplanations": {
+        "0": "'This week only' is not one of the documented schedule editing options in this context.",
+        "1": "'From this date forward' is the option that applies changes going forward without affecting past records — not the one that changes from start to end.",
+        "3": "Custom date range is not one of the documented options in the Weekly Schedule dialog for recurring work hours."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "After assigning the Omnichannel agent role to a user, the user still cannot see the Customer Service app in their app list. What is the most likely missing configuration?",
+      "options": [
+        "The user needs the System Administrator role to see any apps",
+        "The user has not been added to the security group associated with the environment",
+        "The App Module Read privilege is missing from the user's security role",
+        "The user must be added to a queue before apps become visible"
+      ],
+      "answer": 2,
+      "category": "app-access",
+      "tags": [
+        "app-access",
+        "forms-dashboards",
+        "app-module",
+        "security-roles"
+      ],
+      "explanation": "Access to model-driven apps including the Customer Service app requires Read access on the App Module (AppModule) entity. If a custom security role is used and the App Module Read privilege is missing, the app will not appear in the user's app list even if all other privileges are correctly configured.",
+      "wrongExplanations": {
+        "0": "System Administrator is not required to see apps — users with appropriate security roles can see apps they have access to.",
+        "1": "Security group membership controls environment access — if the user already has a role assigned in the environment, this is likely not the issue.",
+        "3": "Queue membership is for work routing — it has no bearing on whether the app appears in the user's app list."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "In the Enhanced user management experience, how does an administrator add a representative as a swarm expert?",
+      "options": [
+        "Edit the representative's Bookable Resource record and set the Swarm Expert flag to Yes",
+        "Assign the Swarm Expert security role to the representative",
+        "In the Contact center users view, select the user and choose Swarming > Add as swarm expert",
+        "Swarm experts are automatically identified by the system based on case resolution history"
+      ],
+      "answer": 2,
+      "category": "swarming",
+      "tags": [
+        "swarming",
+        "enhanced-user-management",
+        "user-management"
+      ],
+      "explanation": "In the Enhanced user management experience (Copilot Service admin center > User Management), administrators can hover over a user row, select it, and choose Swarming > Add as swarm expert. Swarm experts can also be viewed using the Swarm experts view in the same interface.",
+      "wrongExplanations": {
+        "0": "There is no Swarm Expert flag on the Bookable Resource record — swarming configuration is done through the enhanced user management UI.",
+        "1": "There is no 'Swarm Expert' security role — swarming expert designation is a user attribute, not a role.",
+        "3": "Swarm experts must be manually designated by an administrator — they are not automatically identified by the system."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "q": "Which persona in D365 Customer Service has the privilege to edit a user's default presence and default capacity?",
+      "options": [
+        "Omnichannel agent only",
+        "Omnichannel supervisor only",
+        "Omnichannel administrator only",
+        "Both Omnichannel administrator and Omnichannel supervisor"
+      ],
+      "answer": 3,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "presence",
+        "capacity",
+        "administrator-persona",
+        "supervisor-persona"
+      ],
+      "explanation": "Both the Omnichannel administrator and Omnichannel supervisor can edit a user's default presence and default capacity. This allows supervisors to make real-time adjustments to representative availability without needing the full admin role.",
+      "wrongExplanations": {
+        "0": "Omnichannel agents cannot edit other users' presence or capacity — they can only view their own.",
+        "1": "While supervisors do have this privilege, so do administrators — making this answer incomplete.",
+        "2": "Administrators have this privilege, but supervisors share it — making 'administrator only' incorrect."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "The Agent persona in D365 Customer Service needs to read the Decision contract and Decision rule set tables. At what access level is this granted?",
+      "options": [
+        "Basic",
+        "Local",
+        "Deep",
+        "Global"
+      ],
+      "answer": 3,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "agent-persona",
+        "decision-contract",
+        "routing"
+      ],
+      "explanation": "Per the Agent persona privilege table, both Decision contract and Decision rule set have Read at Global access level. This allows agents to view routing rules across the organisation. They also have Assign and Share at Basic level on these tables.",
+      "wrongExplanations": {
+        "0": "Basic access limits to records owned by the user — not the documented level for agents on these tables.",
+        "1": "Local access limits to the user's business unit — agents need Global Read access on routing tables.",
+        "2": "Deep covers the user's BU and child units — not the documented recommendation."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "For the Administrator persona in D365 Customer Service, which privilege does the Persona Security Role Mapping table require?",
+      "options": [
+        "Read only at Global level",
+        "Append, Append To, Create, Delete, Read, Update at Global level",
+        "Read and Update at Global level",
+        "Create and Delete at Deep level"
+      ],
+      "answer": 1,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "administrator-persona",
+        "persona-security-role-mapping"
+      ],
+      "explanation": "The Persona Security Role Mapping table (msdyn_personasecurityrolemapping) requires the full set — Append, Append To, Create, Delete, Read, Update at Global level for the Administrator persona. This table controls how personas are mapped to security roles and requires full CRUD access for configuration.",
+      "wrongExplanations": {
+        "0": "Read-only would prevent administrators from creating or modifying persona-to-role mappings.",
+        "2": "Read and Update alone are insufficient — Create and Delete are also needed for persona mapping management.",
+        "3": "Deep level does not match the documented recommendation of Global for the Administrator persona."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "Which access level does the Supervisor persona have on the System User (User) table in D365 Customer Service?",
+      "options": [
+        "Global — full CRUD on all users across the organisation",
+        "Local — Append, Append To, Create, Read, Update within their business unit",
+        "Basic — can only manage their own user record",
+        "Deep — can manage users in their BU and all child BUs"
+      ],
+      "answer": 1,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "supervisor-persona",
+        "system-user",
+        "access-levels"
+      ],
+      "explanation": "The Supervisor persona has Local access on the System User table with Append, Append To, Create, Read, and Update privileges. This allows supervisors to manage users within their own business unit but not across the entire organisation — that requires the Administrator persona's Global access.",
+      "wrongExplanations": {
+        "0": "Global access on System User is reserved for the Administrator persona — supervisors are limited to their business unit.",
+        "2": "Basic access would only allow supervisors to manage their own record — insufficient for their supervisory responsibilities.",
+        "3": "Deep access covers child business units as well — the documented level for supervisors is Local, not Deep."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "What is the recommended access level for the Administrator persona on the Operating Hour table?",
+      "options": [
+        "Local",
+        "Deep",
+        "Global",
+        "Basic"
+      ],
+      "answer": 2,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "persona-privilege-mapping",
+        "administrator-persona",
+        "operating-hours"
+      ],
+      "explanation": "The Administrator persona has Global access on the Operating Hour table with Append, Append To, Create, Delete, Read, and Update privileges. Operating hours are an organisation-wide configuration — they must be manageable across all business units, which requires Global access.",
+      "wrongExplanations": {
+        "0": "Local access would limit operating hour management to the admin's own business unit — insufficient for organisation-wide configuration.",
+        "1": "Deep access covers child BUs but still falls short of the Global level needed for org-wide operating hour management.",
+        "3": "Basic access only allows operations on records the user owns — not appropriate for system-level configuration records."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "An administrator has assigned the Omnichannel agent role to a user. The user can view their workstream and queue lists. Which privilege in the role grants this?",
+      "options": [
+        "The App Module Read privilege",
+        "The 'Can view user list/presence list/workstream list/queue list' privilege on the Omnichannel agent role",
+        "The Queue Read at Global access level on the security role",
+        "The App Profile User role — which includes workstream visibility"
+      ],
+      "answer": 1,
+      "category": "persona-privilege-mapping",
+      "tags": [
+        "predefined-roles",
+        "omnichannel-agent",
+        "workstream",
+        "queue",
+        "visibility"
+      ],
+      "explanation": "The Omnichannel agent role explicitly includes the privilege 'Can view user list/presence list/workstream list/queue list'. This is one of only a few privileges granted to agents — they have view-only access to these operational lists but cannot edit them.",
+      "wrongExplanations": {
+        "0": "App Module Read controls whether the app appears in the app list — not workstream/queue visibility within the app.",
+        "2": "Queue Read at Global is a Dataverse privilege — the specific grant documented for agents is via the named privilege on the Omnichannel agent role.",
+        "3": "App Profile User is required for app access but does not specifically grant workstream/queue list visibility — that is an Omnichannel agent privilege."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "q": "When creating a custom security role in D365 Customer Service for an agent who will work with cases, omnichannel conversations, and agent scripts — what is the safest starting point?",
+      "options": [
+        "Start from System Administrator and remove privileges",
+        "Copy the Omnichannel agent role and the Productivity tools user role, then adjust",
+        "Create a blank role and add only the privileges the user needs",
+        "Copy the System User role and add Omnichannel-specific privileges"
+      ],
+      "answer": 1,
+      "category": "custom-security-roles",
+      "tags": [
+        "custom-security-roles",
+        "omnichannel-agent",
+        "security-roles",
+        "best-practice"
+      ],
+      "explanation": "The recommended approach when creating a custom role is to copy an existing predefined role that is closest to the required function, then add or remove specific privileges. Starting from Omnichannel agent (for conversations/cases) and Productivity tools user (for agent scripts) gives the correct baseline. Starting from System Administrator and removing is risky — it is easy to leave excess privileges.",
+      "wrongExplanations": {
+        "0": "Starting from System Administrator and removing privileges is the most dangerous approach — it is very easy to leave excessive access in place.",
+        "2": "A blank role is technically possible but extremely tedious given the large number of tables in the persona privilege matrix — copying the nearest predefined role is the practical approach.",
+        "3": "System User is a baseline read-only role — it does not include any Omnichannel-specific privileges needed for agent work."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "A custom security role in D365 Customer Service uses custom plug-ins and workflows. After assigning the role to users, the plug-ins fail. What is the most likely cause?",
+      "options": [
+        "Custom plug-ins require System Administrator to execute — standard roles cannot trigger them",
+        "The required privileges for the entities accessed by the plug-in were not granted to the custom role",
+        "Plug-ins can only be triggered by roles that have Global access on the Plugin Assembly table",
+        "The custom role must be published in a managed solution before plug-ins will respect it"
+      ],
+      "answer": 1,
+      "category": "custom-security-roles",
+      "tags": [
+        "custom-security-roles",
+        "plug-ins",
+        "privileges",
+        "workflows"
+      ],
+      "explanation": "Microsoft's documentation on personas and privileges explicitly states: if custom plug-ins and workflows are used, you must ensure the required privileges are granted to the personas/roles — otherwise plug-ins won't work. The custom role must include the appropriate entity privileges for all tables the plug-in accesses.",
+      "wrongExplanations": {
+        "0": "Custom plug-ins do not require System Administrator — any role with the correct privileges on the relevant entities can trigger them.",
+        "2": "Plugin Assembly Read at Global is for visibility — it does not in itself allow plug-ins to execute on behalf of a user.",
+        "3": "Role publishing in a managed solution is not a prerequisite for plug-in execution — it is a deployment concern, not a runtime privilege issue."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "An organisation wants to create a custom role that allows a user to access records in their business unit AND all child business units. Which access level should be set on the relevant table privileges?",
+      "options": [
+        "Basic",
+        "Local",
+        "Deep",
+        "Global"
+      ],
+      "answer": 2,
+      "category": "custom-security-roles",
+      "tags": [
+        "custom-security-roles",
+        "access-levels",
+        "business-unit",
+        "deep-access"
+      ],
+      "explanation": "Deep access level allows a user to access records owned by their business unit and all business units below it in the hierarchy. This is different from Local (own BU only) and Global (entire organisation). Deep is useful for managers who need to oversee their team's BU and all subordinate units.",
+      "wrongExplanations": {
+        "0": "Basic access limits operations to records the user personally owns.",
+        "1": "Local access covers only the user's own business unit — not child business units.",
+        "3": "Global access covers the entire organisation across all business units — broader than what is described."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+    },
+    {
+      "q": "A custom security role needs to allow a user to grant access to a Case record to another user. Which specific privilege on the Case (Incident) table enables this?",
+      "options": [
+        "Assign",
+        "Share",
+        "Write",
+        "Append To"
+      ],
+      "answer": 1,
+      "category": "custom-security-roles",
+      "tags": [
+        "custom-security-roles",
+        "share",
+        "case",
+        "privileges",
+        "access-levels"
+      ],
+      "explanation": "The Share privilege allows a user to give another user or team access to a specific record. It differs from Assign — which transfers ownership to another user. Share preserves the original owner while extending access to others. Both are standard Dataverse table privileges configurable on security roles.",
+      "wrongExplanations": {
+        "0": "Assign transfers ownership of the record to another user — it does not grant shared access while keeping the current owner.",
+        "2": "Write allows updating the record but does not control who else can access it.",
+        "3": "Append To controls whether another record can be associated to this record — not about granting user access."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+    },
+    {
+      "q": "An administrator needs to ensure a custom role can see the Customer Service workspace and its dashboards. Apart from functional entity privileges, which table privilege is essential?",
+      "options": [
+        "System Form — Read at Global",
+        "App Module — Read at Global",
+        "SavedQueryVisualizations (Charts) — Read at Global",
+        "Both App Module — Read at Global and System Form — Read at Global"
+      ],
+      "answer": 3,
+      "category": "custom-security-roles",
+      "tags": [
+        "custom-security-roles",
+        "app-access",
+        "forms",
+        "dashboards",
+        "app-module"
+      ],
+      "explanation": "Access to the app (App Module Read at Global) ensures the app appears in the user's app list. System Form Read at Global allows the user to see forms and dashboards within the app. Both are required — App Module alone shows the app launcher, but without System Form Read the user will encounter empty or inaccessible form pages. The Administrator persona privilege table lists both.",
+      "wrongExplanations": {
+        "0": "System Form Read alone is insufficient — without App Module Read the app will not appear in the user's app list.",
+        "1": "App Module Read alone shows the app in the launcher but users will not be able to see forms and dashboards without System Form Read.",
+        "2": "Charts Read at Global is for data visualisation — while it contributes to dashboard visibility, the primary access requirements are App Module and System Form."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "A custom role is created for a team lead who needs to assign Case records to other users. Which privilege on the Case table must be included?",
+      "options": [
+        "Write at Deep",
+        "Share at Global",
+        "Assign at Deep",
+        "Append at Local"
+      ],
+      "answer": 2,
+      "category": "custom-security-roles",
+      "tags": [
+        "custom-security-roles",
+        "assign",
+        "case",
+        "access-levels",
+        "privileges"
+      ],
+      "explanation": "The Assign privilege allows a user to change the ownership of a record to another user or team. Deep access means the team lead can assign cases within their own business unit and all child units. The Administrator persona privilege table shows Assign at Deep for Activity, which serves as the reference pattern for case-like entities.",
+      "wrongExplanations": {
+        "0": "Write allows editing the record but does not grant the ability to transfer ownership.",
+        "1": "Share grants access to others without changing ownership — Assign is the privilege that transfers ownership.",
+        "3": "Append controls associations between records — not record ownership transfer."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "What is the purpose of a Capacity Profile in Dynamics 365 Customer Service?",
+      "options": [
+        "It defines the operating hours during which a representative is available for contact",
+        "It specifies the maximum number and type of simultaneous work items a representative can handle",
+        "It maps a representative to a skill set and proficiency level for intelligent routing",
+        "It controls which security roles a representative can be assigned based on their workload"
+      ],
+      "answer": 1,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "routing",
+        "work-items",
+        "user-management"
+      ],
+      "explanation": "A Capacity Profile defines how many work items of each type a representative can handle simultaneously. Each profile can include unit-based limits (e.g. max concurrent chat conversations) and is assigned to a Bookable Resource. Unified routing uses capacity profiles to determine which representatives are eligible to receive new work items.",
+      "wrongExplanations": {
+        "0": "Operating hours are configured on the Bookable Resource record separately — not via a capacity profile.",
+        "2": "Skills and proficiency levels are also attributes on the Bookable Resource — they are separate from capacity profiles.",
+        "3": "Security roles are managed through the security model — capacity profiles have no relation to role assignment."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "An administrator has created a capacity profile with a unit count of 3 for chat conversations and assigned it to a representative. The representative is currently handling 3 chats. What happens when a new chat arrives?",
+      "options": [
+        "The system automatically increases the capacity limit by 1 to handle the overflow",
+        "The new chat is routed to the representative anyway — capacity profiles are advisory only",
+        "The new chat is not auto-assigned to this representative — they are at capacity",
+        "The new chat is placed on hold until one of the 3 existing chats is resolved"
+      ],
+      "answer": 2,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "routing",
+        "auto-assignment",
+        "work-items"
+      ],
+      "explanation": "When a representative reaches their capacity limit, unified routing will not auto-assign new work items to them. The new work item enters the queue and waits for an eligible representative. A supervisor can still manually assign the item if needed, overriding the capacity limit.",
+      "wrongExplanations": {
+        "0": "The system does not automatically increase capacity — the limit is enforced as configured.",
+        "1": "Capacity profiles are not advisory — they are enforced by the unified routing engine for automatic assignment.",
+        "3": "The new chat is not placed on hold against the specific representative — it enters the queue and is routed to an available representative."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "A representative's capacity profile has a unit limit of 2 for voice calls. They are currently on one call. A case with 'Default' capacity is also assigned. Does the case consume from the voice call capacity units?",
+      "options": [
+        "Yes — all work item types consume from the same shared capacity pool",
+        "No — each capacity profile tracks its own specific work item type; the case uses a different profile or no profile",
+        "Yes — but only if the case is linked to the active voice call via a relationship",
+        "No — cases never consume capacity units in Dynamics 365 Customer Service"
+      ],
+      "answer": 1,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "voice",
+        "case",
+        "work-item-types"
+      ],
+      "explanation": "Capacity profiles are defined per work item type (e.g. one profile for voice, another for chat, another for cases). Each profile tracks its own limit independently. A voice capacity profile with a limit of 2 only counts active voice conversations — a case assigned via a different profile or the default capacity does not consume voice capacity units.",
+      "wrongExplanations": {
+        "0": "Capacity profiles are type-specific — they do not share a single pool across all work item types.",
+        "2": "Capacity consumption is determined by work item type and profile assignment — not by record relationships.",
+        "3": "Cases can consume capacity — they are assigned a capacity profile (or use the default) which sets their unit cost."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "Where does an administrator assign a Capacity Profile to an individual representative in Dynamics 365 Customer Service?",
+      "options": [
+        "Settings > Security > Users — Capacity tab on the user form",
+        "The Bookable Resource record for the user — via the Capacity Profiles sub-grid",
+        "Copilot Service admin center > Routing > Capacity Profiles — assign from the profile record",
+        "Power Platform admin center > Users — Capacity Profile field in the user details pane"
+      ],
+      "answer": 1,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "bookable-resource",
+        "user-management",
+        "assignment"
+      ],
+      "explanation": "Capacity profiles are assigned to a user via their Bookable Resource record. In the Bookable Resource record, the Capacity Profiles sub-grid allows the administrator to add one or more profiles and specify the unit values for that specific representative. The Enhanced user management experience also supports bulk capacity profile assignment across multiple users.",
+      "wrongExplanations": {
+        "0": "There is no Capacity tab on the classic Security > Users form — capacity profiles are on the Bookable Resource record.",
+        "2": "The Capacity Profiles section in the admin center is for creating and configuring profiles — not for assigning them to individual representatives.",
+        "3": "The Power Platform admin center manages environment-level user settings — it does not have a Capacity Profile assignment field."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "An administrator deletes a Capacity Profile that is currently assigned to several representatives. What is the impact?",
+      "options": [
+        "The system prevents deletion if any representative has the profile assigned",
+        "Representatives retain the profile assignment but the routing engine ignores it",
+        "Representatives lose that capacity constraint — they can receive unlimited work items of that type until a new profile is assigned",
+        "Representatives are automatically assigned the Default capacity profile as a fallback"
+      ],
+      "answer": 2,
+      "category": "capacity-profiles",
+      "tags": [
+        "capacity-profiles",
+        "deletion",
+        "impact",
+        "routing"
+      ],
+      "explanation": "Deleting a capacity profile removes the constraint it enforced. Representatives who had that profile assigned will no longer have a limit on the associated work item type — the routing engine treats the absence of a capacity profile as unconstrained. A new profile must be created and assigned to restore capacity limits.",
+      "wrongExplanations": {
+        "0": "D365 does not prevent deletion of capacity profiles that are in use — administrators should verify assignments before deleting.",
+        "1": "The routing engine does not retain deleted profile references — the constraint is removed, not merely ignored.",
+        "3": "There is no automatic fallback to a Default profile — the representative simply has no capacity constraint for that work item type."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "q": "An administrator needs to configure work hours for a representative who works Monday to Friday 8AM–5PM Nairobi time. After setting hours on the Bookable Resource, what time zone consideration applies?",
+      "options": [
+        "Work hours always use UTC — the admin must convert to UTC before entering",
+        "Work hours use the time zone set on the Bookable Resource record, which should match the representative's local time zone",
+        "Work hours use the time zone of the organisation's default settings, regardless of the resource",
+        "Time zone is irrelevant — work hours are always calculated relative to the customer's time zone"
+      ],
+      "answer": 1,
+      "category": "work-hours",
+      "tags": [
+        "work-hours",
+        "scheduling",
+        "bookable-resource",
+        "time-zone"
+      ],
+      "explanation": "Work hours on a Bookable Resource are interpreted in the time zone specified on that resource record. The time zone on the Bookable Resource should be set to the representative's local time zone. This ensures that when an 8AM–5PM schedule is entered, the system correctly interprets availability in the representative's actual working hours.",
+      "wrongExplanations": {
+        "0": "Work hours do not require UTC conversion — the Bookable Resource time zone setting handles the conversion automatically.",
+        "2": "The organisation's default time zone is not applied to individual Bookable Resource schedules — the resource's own time zone takes precedence.",
+        "3": "Work hours are based on the representative's time zone — not the customer's. Customer time zones affect SLA calculations, not representative availability."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "A representative's schedule needs to be updated for a single day next week due to a company event. Which work hours edit option should the administrator choose?",
+      "options": [
+        "Entire recurring weekly schedule from start to end",
+        "From this date forward",
+        "This specific date only",
+        "New weekly schedule starting next week"
+      ],
+      "answer": 2,
+      "category": "work-hours",
+      "tags": [
+        "work-hours",
+        "scheduling",
+        "one-off",
+        "edit-options"
+      ],
+      "explanation": "To change work hours for a single day without affecting the rest of the recurring schedule, the 'This specific date only' option should be used. This creates a one-off exception on that date while leaving the recurring schedule intact before and after.",
+      "wrongExplanations": {
+        "0": "'Entire recurring weekly schedule from start to end' changes the complete recurring schedule — it would affect all dates, including past ones.",
+        "1": "'From this date forward' changes the schedule permanently from that date onward — not just for one day.",
+        "3": "Creating a new weekly schedule is the approach when the regular recurring schedule needs to change permanently — not for a single-day exception."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "An organisation sets up a new weekly schedule for a representative starting from a specific date. What does the 'From this date forward' edit option do to the previous schedule?",
+      "options": [
+        "It deletes the previous schedule entirely, including historical records",
+        "It ends the previous schedule and starts the new one from the selected date, preserving historical data",
+        "It merges the new schedule with the existing one, averaging the hours",
+        "It applies the change retroactively from the very beginning of the original schedule"
+      ],
+      "answer": 1,
+      "category": "work-hours",
+      "tags": [
+        "work-hours",
+        "weekly-schedule",
+        "from-date-forward",
+        "scheduling"
+      ],
+      "explanation": "'From this date forward' ends the previous recurring schedule at the day before the selected date and begins the new schedule from that date. Historical schedule data is preserved, so past hours worked are not affected. Only current and future scheduling is changed.",
+      "wrongExplanations": {
+        "0": "The previous schedule is not deleted — it remains visible for historical reporting purposes.",
+        "2": "Schedules are not merged or averaged — they are separate date ranges, and the new one takes over from the selected date.",
+        "3": "Retroactive changes from the very beginning describe the 'Entire recurring weekly schedule from start to end' option — not 'From this date forward'."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "A representative works a non-standard schedule — they have different hours each day of the week and also have a break in the middle of each day. How should the administrator configure this in D365 Customer Service?",
+      "options": [
+        "Non-standard schedules cannot be configured — D365 only supports standard 8-hour blocks",
+        "Set up the work hours in Outlook calendar and sync it to Dataverse via Exchange integration",
+        "On the Bookable Resource, configure a custom weekly schedule with different start/end times per day, and add break times as non-working hours within each day",
+        "Use a capacity profile with variable unit counts per day to represent different availability levels"
+      ],
+      "answer": 2,
+      "category": "work-hours",
+      "tags": [
+        "work-hours",
+        "custom-schedule",
+        "bookable-resource",
+        "breaks"
+      ],
+      "explanation": "The Bookable Resource work hours configuration supports fully custom schedules — different start and end times can be set for each day of the week, and breaks (non-working periods within a day) can be added to split a day's availability. This is done directly on the resource record's Work Hours calendar.",
+      "wrongExplanations": {
+        "0": "D365 Customer Service supports flexible and non-standard schedules — there is no restriction to 8-hour blocks.",
+        "1": "Exchange calendar sync is not the mechanism for configuring D365 routing availability — this is done on the Bookable Resource record.",
+        "3": "Capacity profiles control how many concurrent items a representative handles — not when they are available. Availability is a work hours concern."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "What is the primary purpose of the Swarming feature in Dynamics 365 Customer Service?",
+      "options": [
+        "To automatically escalate cases to the supervisor after a set SLA breach threshold",
+        "To bring together a group of experts from across the organisation to collaboratively resolve a complex or critical case",
+        "To route multiple cases simultaneously to a single specialist for batch resolution",
+        "To enable customers to be transferred between multiple queues in a single session"
+      ],
+      "answer": 1,
+      "category": "swarming",
+      "tags": [
+        "swarming",
+        "collaboration",
+        "case-resolution",
+        "expert-routing"
+      ],
+      "explanation": "Swarming in D365 Customer Service allows a representative handling a complex or critical case to invite subject matter experts from across the organisation into a collaborative session. The system uses skills-based routing to identify appropriate experts. The swarm resolves the issue and then closes, returning to normal operation.",
+      "wrongExplanations": {
+        "0": "SLA breach escalation is a separate feature using SLA KPI actions — swarming is a collaborative expert assembly mechanism, not an escalation trigger.",
+        "2": "Swarming is about gathering multiple experts on one case — not routing many cases to a single specialist.",
+        "3": "Queue-to-queue transfers are handled by routing rules and supervisor assignment — not swarming."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "q": "Who can initiate a swarm on a case in Dynamics 365 Customer Service?",
+      "options": [
+        "Only the Omnichannel administrator or Omnichannel supervisor",
+        "The customer service representative handling the case",
+        "Only swarm experts who have been pre-designated in the system",
+        "The case queue owner"
+      ],
+      "answer": 1,
+      "category": "swarming",
+      "tags": [
+        "swarming",
+        "representative",
+        "case",
+        "initiation"
+      ],
+      "explanation": "The customer service representative (agent) handling the case can initiate a swarm directly from the case record when they need expert help. They do not need to be a supervisor or admin — the swarm initiation capability is available to the representative who owns the case.",
+      "wrongExplanations": {
+        "0": "Administrators and supervisors can configure swarming — but the swarm itself is initiated by the representative working the case.",
+        "2": "Swarm experts are the people invited into a swarm — they do not initiate it. The representative with the case does.",
+        "3": "Queue ownership is a routing and management concept — it has no bearing on swarm initiation rights."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "q": "How does the system identify which swarm experts to invite when a representative initiates a swarm?",
+      "options": [
+        "The representative manually types the expert's name and searches the user directory",
+        "The system uses skill-based matching — identifying experts whose skills match the case's skill requirements",
+        "The system randomly selects three available representatives from the queue",
+        "The supervisor defines a static swarm team list that is used for all swarm requests"
+      ],
+      "answer": 1,
+      "category": "swarming",
+      "tags": [
+        "swarming",
+        "skill-based-routing",
+        "expert-matching",
+        "unified-routing"
+      ],
+      "explanation": "When a swarm is initiated, the system uses skill-based routing logic to identify experts whose skills match the requirements of the case. Swarm experts must be designated in the Enhanced user management interface and have the relevant skills configured on their Bookable Resource record to be surfaced by the routing engine.",
+      "wrongExplanations": {
+        "0": "Manual directory search is not the primary mechanism — skill-based matching is how the system surfaces the right experts automatically.",
+        "2": "Swarm expert selection is skills-based and deliberate — not random selection from a queue.",
+        "3": "There is no static swarm team list — experts are designated per-user and matched dynamically based on skills."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "q": "A custom security role includes all required entity privileges for a representative's daily work, but users report they cannot see the Customer Service workspace app in their apps list. What is the missing privilege?",
+      "options": [
+        "Queue — Read at Global",
+        "App Module — Read at Global",
+        "System Form — Read at Global",
+        "Channel Provider — Read at Global"
+      ],
+      "answer": 1,
+      "category": "app-access",
+      "tags": [
+        "app-access",
+        "app-module",
+        "custom-security-roles",
+        "forms-dashboards"
+      ],
+      "explanation": "App Module — Read at Global is the privilege that controls whether a model-driven app appears in the user's app launcher. Without this privilege, the Customer Service workspace app will not be visible to the user even if all other entity-level privileges are correctly configured.",
+      "wrongExplanations": {
+        "0": "Queue Read is needed for working with queues — not for app visibility in the launcher.",
+        "2": "System Form Read controls access to specific forms within an app — the app must first be visible before forms matter.",
+        "3": "Channel Provider Read is an Omnichannel-specific privilege — not the app visibility control."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "A representative can see the Customer Service workspace app but cannot access the Cases view and form. All required entity privileges on the Case table are correctly set. What else should the administrator check?",
+      "options": [
+        "Whether the representative's Bookable Resource record is active",
+        "Whether the System Form — Read at Global privilege is present on the security role",
+        "Whether the representative has the Omnichannel supervisor role assigned",
+        "Whether the Case table has Field Level Security profiles that override the role"
+      ],
+      "answer": 1,
+      "category": "app-access",
+      "tags": [
+        "app-access",
+        "forms",
+        "system-form",
+        "views",
+        "security-roles"
+      ],
+      "explanation": "System Form — Read at Global is required to access forms and views within a model-driven app. Even if all table-level CRUD privileges are set, without System Form Read the user cannot open the form itself. The Administrator persona privilege table explicitly lists SystemForm — Read at Global.",
+      "wrongExplanations": {
+        "0": "The Bookable Resource record is for routing and scheduling — not for form/view access in the Security model.",
+        "2": "Omnichannel supervisor role gives supervisory capabilities — it does not grant access to forms that a correctly privileged representative role should provide.",
+        "3": "Field Level Security (FLS) restricts specific field visibility within a form — it does not prevent access to the form or view itself."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "A supervisor needs to view Customer Service performance dashboards. Which privilege on the security role enables access to charts and visualisations on dashboards?",
+      "options": [
+        "SavedQuery — Read at Global",
+        "SavedQueryVisualizations (Charts) — Read at Global",
+        "Report — Read at Global",
+        "UserQueryVisualizations — Read at Global"
+      ],
+      "answer": 1,
+      "category": "app-access",
+      "tags": [
+        "app-access",
+        "dashboards",
+        "charts",
+        "savedqueryvisualizations",
+        "supervisor-persona"
+      ],
+      "explanation": "SavedQueryVisualizations — Read at Global is the privilege that enables access to system charts used in dashboards. The Administrator persona privilege table lists this explicitly. Without it, dashboard visualisations may not render or may show permission errors.",
+      "wrongExplanations": {
+        "0": "SavedQuery (Read) controls access to system views — not chart visualisations.",
+        "2": "Report Read gives access to SSRS reports — not the embedded dashboard charts which use SavedQueryVisualizations.",
+        "3": "UserQueryVisualizations are personal charts created by individual users — not the system charts used in standard dashboards."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "An administrator has created a custom Agent role. Agents can open cases but the form does not display the Timeline section. Entity privileges are all correctly set. What is the most likely cause?",
+      "options": [
+        "Timeline requires the Omnichannel supervisor role to display — agents cannot see it",
+        "The Activity entity privileges (Read at the required level) are missing from the custom role",
+        "The Timeline section must be enabled per-user in personal settings",
+        "Timeline visibility is controlled by the Case form configuration — not security roles"
+      ],
+      "answer": 1,
+      "category": "app-access",
+      "tags": [
+        "app-access",
+        "timeline",
+        "activity",
+        "forms",
+        "custom-security-roles"
+      ],
+      "explanation": "The Timeline on a Case form displays Activity records (emails, calls, appointments, notes). If the Activity entity privileges are missing or too restrictive on the custom role, the Timeline section will appear empty or hidden. The Administrator persona privilege table shows Activity requires Read at Global, along with Append, Append To, Create, Delete, Update, Assign, and Share at various levels.",
+      "wrongExplanations": {
+        "0": "Timeline is not restricted to supervisors — agents need Timeline access to review case history and communications.",
+        "2": "Timeline visibility in personal settings controls the user's preference for the Timeline section layout — not whether they can see activity records.",
+        "3": "Form configuration controls what sections are shown in the form editor — security role privileges control whether the data within those sections is accessible."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "q": "A representative in D365 Customer Service is added to multiple queues with different skills. For unified routing to correctly route a voice call to this representative, which records must be configured?",
+      "options": [
+        "Queue membership only — the system infers skills from the queue",
+        "Bookable Resource record with work hours, skills, and capacity profile assigned; plus queue membership",
+        "Security role with Omnichannel agent + a capacity profile on the user record",
+        "Bookable Resource record and a manually configured routing rule for each skill"
+      ],
+      "answer": 1,
+      "category": "scheduling-resources",
+      "tags": [
+        "scheduling-resources",
+        "bookable-resource",
+        "routing",
+        "skills",
+        "capacity-profiles"
+      ],
+      "explanation": "For unified routing to correctly assign work to a representative, their Bookable Resource record must have: work hours defined (availability), skills and proficiency levels (matching), and a capacity profile assigned (capacity constraint). Queue membership places the representative in the pool. All four elements together enable correct routing.",
+      "wrongExplanations": {
+        "0": "Queue membership alone is insufficient — the system needs skill data on the Bookable Resource to do skills-based routing.",
+        "2": "Security roles handle access permissions — they are not part of the routing eligibility criteria. A capacity profile on the 'user record' is insufficient — it must be on the Bookable Resource.",
+        "3": "Routing rules for each skill are not needed — unified routing's assignment rules use skills defined on the Bookable Resource automatically."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "q": "A representative's Bookable Resource shows work hours set to Monday–Friday 9AM–5PM EAT. A case arrives on Saturday at 11AM EAT. What does unified routing do?",
+      "options": [
+        "Routes the case to the representative anyway — routing ignores work hours for cases",
+        "Routes the case to the representative but marks it as outside working hours",
+        "Does not assign the case to this representative — they are outside their configured work hours",
+        "Automatically extends the representative's work hours to cover the incoming case"
+      ],
+      "answer": 2,
+      "category": "scheduling-resources",
+      "tags": [
+        "scheduling-resources",
+        "work-hours",
+        "routing",
+        "availability",
+        "unified-routing"
+      ],
+      "explanation": "Unified routing respects the work hours configured on the Bookable Resource. If a representative is outside their configured work hours, they are not considered available for assignment. The case remains in the queue and is routed to a representative who is currently within their work hours.",
+      "wrongExplanations": {
+        "0": "Work hours are respected for routing — representatives outside their hours are not eligible for auto-assignment.",
+        "1": "The routing engine does not assign cases with an 'outside hours' marker — it simply excludes the representative from eligibility.",
+        "3": "Work hours are never extended automatically by the routing engine — they must be modified by an administrator."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "q": "A D365 Customer Service organisation needs to schedule a resource for a service activity on a specific date, ensuring the resource is available and has the required skill. Which tool is used for this type of resource scheduling?",
+      "options": [
+        "Service Calendar in the Customer Service Hub",
+        "Scheduling Assistant in the Service Management area",
+        "The Bookable Resource Booking form with the Schedule Board",
+        "Enhanced user management — resource scheduling tab"
+      ],
+      "answer": 2,
+      "category": "scheduling-resources",
+      "tags": [
+        "scheduling-resources",
+        "schedule-board",
+        "bookable-resource",
+        "service-activity"
+      ],
+      "explanation": "The Schedule Board (accessible via the Bookable Resource Booking form or the Schedule Board view in the Scheduling module) is the tool for scheduling resources against service activities. It shows resource availability across the selected date range and allows drag-and-drop booking, taking into account work hours and skills.",
+      "wrongExplanations": {
+        "0": "The Service Calendar in Customer Service Hub shows a read-only view of service activities — it is not the primary scheduling tool.",
+        "1": "The Scheduling Assistant is a related tool but it is launched from within the service activity form to find available resources — the Schedule Board is the broader resource scheduling interface.",
+        "3": "Enhanced user management is for managing user attributes like skills, queues, and capacity profiles — it does not have a resource scheduling interface."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
     }
   ],
   "dragdrop": [
@@ -342,6 +1533,335 @@
         "label": "Customer Service security roles",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
       }
+    },
+    {
+      "instruction": "Match each Dynamics 365 Contact Center predefined role to its primary purpose.",
+      "type": "match",
+      "items": [
+        "Basic User",
+        "Omnichannel administrator",
+        "Omnichannel supervisor",
+        "Omnichannel agent",
+        "App Profile Manager Administrator",
+        "Productivity tools administrator"
+      ],
+      "zones": [
+        "Required by all Contact Center users as the baseline role",
+        "Performs admin tasks — also requires System Administrator to manage roles and privileges",
+        "Monitors, assigns, and transfers conversations; edits queue assignments",
+        "Performs customer service representative tasks; required to work with Case",
+        "Creates and assigns app profiles to Customer Service and Contact Center users",
+        "Creates and manages agent scripts, macros, and related productivity tooling"
+      ],
+      "correctMapping": {
+        "Basic User": "Required by all Contact Center users as the baseline role",
+        "Omnichannel administrator": "Performs admin tasks — also requires System Administrator to manage roles and privileges",
+        "Omnichannel supervisor": "Monitors, assigns, and transfers conversations; edits queue assignments",
+        "Omnichannel agent": "Performs customer service representative tasks; required to work with Case",
+        "App Profile Manager Administrator": "Creates and assigns app profiles to Customer Service and Contact Center users",
+        "Productivity tools administrator": "Creates and manages agent scripts, macros, and related productivity tooling"
+      },
+      "explanation": "Each predefined role has a specific, non-overlapping primary function. Basic User is the universal baseline. Omnichannel administrator needs System Administrator to manage user roles. Supervisor has real-time oversight capability. Agent needs Customer Service Representative role to access Cases. App Profile Manager Administrator owns the experience profile configuration. Productivity tools administrator owns macros and agent scripts.",
+      "tags": [
+        "predefined-roles",
+        "omnichannel-roles",
+        "user-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "instruction": "Match each Omnichannel administrator privilege to whether the Omnichannel supervisor also shares that privilege.",
+      "type": "classify",
+      "items": [
+        "Can edit roles of a user",
+        "Can add/edit/delete queues",
+        "Can add/remove users from presence",
+        "Can add/edit/delete workstreams",
+        "Can view/add/edit/delete quick replies",
+        "Can monitor, assign, and transfer conversations",
+        "Can view operating hours"
+      ],
+      "zones": [
+        "Administrator only — supervisor does NOT have this privilege",
+        "Both administrator and supervisor have this privilege"
+      ],
+      "correctMapping": {
+        "Can edit roles of a user": "Administrator only — supervisor does NOT have this privilege",
+        "Can add/edit/delete queues": "Administrator only — supervisor does NOT have this privilege",
+        "Can add/remove users from presence": "Both administrator and supervisor have this privilege",
+        "Can add/edit/delete workstreams": "Administrator only — supervisor does NOT have this privilege",
+        "Can view/add/edit/delete quick replies": "Both administrator and supervisor have this privilege",
+        "Can monitor, assign, and transfer conversations": "Both administrator and supervisor have this privilege",
+        "Can view operating hours": "Both administrator and supervisor have this privilege"
+      },
+      "explanation": "Supervisors share some operational privileges with admins: managing presence membership, quick replies, conversation oversight, and viewing operating hours. However, structural configuration tasks — editing user roles, managing queues (add/edit/delete), and workstream management — are admin-only privileges. Supervisors can add/remove queue members but cannot create or delete queues.",
+      "tags": [
+        "predefined-roles",
+        "supervisor",
+        "omnichannel-roles",
+        "privilege-comparison"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+    },
+    {
+      "instruction": "Arrange the correct sequence of steps to enable a new user to access Dynamics 365 Customer Service.",
+      "type": "sequence",
+      "items": [
+        "Create the user account in Microsoft 365 admin center",
+        "Assign a Dynamics 365 Customer Service licence to the user",
+        "Wait for or force synchronisation between M365 and the Dataverse environment",
+        "Assign the appropriate security role(s) directly to the user",
+        "Add the user to queues and configure skills, capacity profiles as needed"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5"
+      ],
+      "correctMapping": {
+        "Create the user account in Microsoft 365 admin center": "Step 1",
+        "Assign a Dynamics 365 Customer Service licence to the user": "Step 2",
+        "Wait for or force synchronisation between M365 and the Dataverse environment": "Step 3",
+        "Assign the appropriate security role(s) directly to the user": "Step 4",
+        "Add the user to queues and configure skills, capacity profiles as needed": "Step 5"
+      },
+      "explanation": "User setup follows this sequence: M365 account creation comes first, then licence assignment. Sync happens automatically but may take a few minutes — sign out and back in to force it. A security role must be assigned before the user can access the app. Queue membership, skills, and capacity profiles are the final operational setup step needed for routing and assignment.",
+      "tags": [
+        "user-creation",
+        "user-management",
+        "onboarding",
+        "sequence"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "instruction": "Match each user type in Dynamics 365 / Dataverse to its correct description.",
+      "type": "match",
+      "items": [
+        "Regular user",
+        "Non-interactive user",
+        "Application user",
+        "Administrative user",
+        "Stub user"
+      ],
+      "zones": [
+        "Standard Entra ID-synced user with Read-Write access mode for human sign-in",
+        "Programmatic API access account — no UI sign-in, max 7 per environment, requires licence removal after setup",
+        "Server-to-server authentication identity — not counted in the 7 non-interactive limit, no cap on count",
+        "Has access to settings and administration but no access to customer data or app functionality — does not require a licence",
+        "Placeholder created during data import for a user that does not exist in the system — cannot sign in or be enabled"
+      ],
+      "correctMapping": {
+        "Regular user": "Standard Entra ID-synced user with Read-Write access mode for human sign-in",
+        "Non-interactive user": "Programmatic API access account — no UI sign-in, max 7 per environment, requires licence removal after setup",
+        "Application user": "Server-to-server authentication identity — not counted in the 7 non-interactive limit, no cap on count",
+        "Administrative user": "Has access to settings and administration but no access to customer data or app functionality — does not require a licence",
+        "Stub user": "Placeholder created during data import for a user that does not exist in the system — cannot sign in or be enabled"
+      },
+      "explanation": "Each user type has a distinct purpose and licence/access profile. Non-interactive and application users are both for programmatic access but differ critically: non-interactive is limited to 7 per environment; application users have no limit and use S2S authentication. Administrative users have no access to customer data and don't need a licence once the Administrative access mode is set. Stub users cannot be enabled and can only be created through data import.",
+      "tags": [
+        "user-types",
+        "non-interactive",
+        "application-user",
+        "administrative-user",
+        "stub-user"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "instruction": "Classify each action as something that can be performed in bulk via the Enhanced user management experience, or something that requires individual record editing.",
+      "type": "classify",
+      "items": [
+        "Adding a skill to multiple representatives at once",
+        "Assigning a capacity profile to multiple representatives",
+        "Adding multiple representatives to a queue simultaneously",
+        "Designating a representative as a swarm expert",
+        "Setting an individual representative's work hours on their bookable resource",
+        "Changing a single user's security role"
+      ],
+      "zones": [
+        "Bulk action — available in Enhanced user management",
+        "Individual record action — requires editing the user/resource record directly"
+      ],
+      "correctMapping": {
+        "Adding a skill to multiple representatives at once": "Bulk action — available in Enhanced user management",
+        "Assigning a capacity profile to multiple representatives": "Bulk action — available in Enhanced user management",
+        "Adding multiple representatives to a queue simultaneously": "Bulk action — available in Enhanced user management",
+        "Designating a representative as a swarm expert": "Bulk action — available in Enhanced user management",
+        "Setting an individual representative's work hours on their bookable resource": "Individual record action — requires editing the user/resource record directly",
+        "Changing a single user's security role": "Individual record action — requires editing the user/resource record directly"
+      },
+      "explanation": "The Enhanced user management experience supports bulk updates for skills, capacity profiles, queue assignments, and swarming designation. Work hours must be configured on the individual Bookable Resource record for each user. Security role assignment is also done per-user in Settings > Security > Users or via Power Platform admin center — bulk role assignment is not part of the enhanced user management UI.",
+      "tags": [
+        "enhanced-user-management",
+        "bulk-update",
+        "skills",
+        "capacity-profiles",
+        "user-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
+    },
+    {
+      "instruction": "Match each work hours editing option to what it does when applied to a Bookable Resource schedule.",
+      "items": [
+        "This specific date only",
+        "From this date forward",
+        "Entire recurring weekly schedule from start to end",
+        "New weekly schedule"
+      ],
+      "zones": [
+        "Creates a one-off exception on a single day — all other days in the recurring schedule are unchanged",
+        "Ends the current recurring schedule and starts a new one from the selected date, preserving past records",
+        "Changes the full schedule including past days — may affect historical reporting of hours worked",
+        "Creates a brand-new recurring weekly schedule from scratch starting on the specified date"
+      ],
+      "correctMapping": {
+        "This specific date only": "Creates a one-off exception on a single day — all other days in the recurring schedule are unchanged",
+        "From this date forward": "Ends the current recurring schedule and starts a new one from the selected date, preserving past records",
+        "Entire recurring weekly schedule from start to end": "Changes the full schedule including past days — may affect historical reporting of hours worked",
+        "New weekly schedule": "Creates a brand-new recurring weekly schedule from scratch starting on the specified date"
+      },
+      "explanation": "D365 Customer Service provides four distinct editing options when modifying work hours on a Bookable Resource. 'This specific date only' is ideal for one-off exceptions. 'From this date forward' is the safe option for permanent changes going forward. 'Entire recurring weekly schedule' retroactively changes all dates and can impact historical reports. 'New weekly schedule' starts fresh.",
+      "tags": [
+        "work-hours",
+        "scheduling",
+        "bookable-resource",
+        "edit-options"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-capacity-required-service-resource"
+    },
+    {
+      "instruction": "Classify each item as either a Capacity Profile attribute (configured on the profile itself) or a Bookable Resource attribute (configured on the resource record).",
+      "items": [
+        "Unit limit for concurrent work items of a specific type",
+        "Work hours — daily start and end times",
+        "Skills and proficiency levels",
+        "Name and description of the constraint group",
+        "Time zone for interpreting the work schedule",
+        "Assignment to a specific representative"
+      ],
+      "zones": [
+        "Capacity Profile attribute",
+        "Bookable Resource attribute"
+      ],
+      "correctMapping": {
+        "Unit limit for concurrent work items of a specific type": "Capacity Profile attribute",
+        "Work hours — daily start and end times": "Bookable Resource attribute",
+        "Skills and proficiency levels": "Bookable Resource attribute",
+        "Name and description of the constraint group": "Capacity Profile attribute",
+        "Time zone for interpreting the work schedule": "Bookable Resource attribute",
+        "Assignment to a specific representative": "Bookable Resource attribute"
+      },
+      "explanation": "A Capacity Profile defines the rules — how many items and of what type. Everything about a specific representative's availability and capabilities lives on the Bookable Resource record: their work hours, skills, proficiency, and time zone. The Capacity Profile is then assigned to (linked from) the Bookable Resource record, but the profile itself only stores the constraint definition.",
+      "tags": [
+        "capacity-profiles",
+        "bookable-resource",
+        "scheduling-resources",
+        "user-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/capacity-profiles"
+    },
+    {
+      "instruction": "Arrange the steps in the correct order for creating and assigning a custom security role for a new agent persona in D365 Customer Service.",
+      "items": [
+        "Identify the closest out-of-box predefined role (e.g. Omnichannel agent) to use as a template",
+        "Copy the predefined role to create a new custom role",
+        "Add or remove table privileges to match the required access — referencing the persona privilege matrix",
+        "Assign the App Module Read at Global and System Form Read at Global privileges",
+        "Assign the custom role to the user directly (not via team) to enable persona mapping"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5"
+      ],
+      "correctMapping": {
+        "Identify the closest out-of-box predefined role (e.g. Omnichannel agent) to use as a template": "Step 1",
+        "Copy the predefined role to create a new custom role": "Step 2",
+        "Add or remove table privileges to match the required access — referencing the persona privilege matrix": "Step 3",
+        "Assign the App Module Read at Global and System Form Read at Global privileges": "Step 4",
+        "Assign the custom role to the user directly (not via team) to enable persona mapping": "Step 5"
+      },
+      "explanation": "Custom role creation follows this sequence: start with the closest predefined role, copy it, adjust privileges using the persona privilege matrix, ensure app and form access privileges are included, then assign directly to the user. Direct role assignment (not via team) is required for persona-to-role mapping to work correctly in unified routing.",
+      "tags": [
+        "custom-security-roles",
+        "security-roles",
+        "persona-privilege-mapping",
+        "best-practice"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+    },
+    {
+      "instruction": "Match each scenario to the most appropriate user type to create in Dynamics 365 / Dataverse.",
+      "items": [
+        "A service representative who logs in daily to handle customer cases",
+        "A CRM-to-ERP data sync connector that authenticates via API",
+        "A senior admin who configures the environment but must not access customer data",
+        "A bot/service registered in Azure AD that accesses Dataverse via S2S auth",
+        "A record imported from a legacy system referencing a user who does not exist in Entra ID"
+      ],
+      "zones": [
+        "Regular Read-Write user",
+        "Non-interactive user (access mode: Non-interactive)",
+        "Administrative user (access mode: Administrative)",
+        "Application user (S2S authentication)",
+        "Stub user (created automatically by data import)"
+      ],
+      "correctMapping": {
+        "A service representative who logs in daily to handle customer cases": "Regular Read-Write user",
+        "A CRM-to-ERP data sync connector that authenticates via API": "Non-interactive user (access mode: Non-interactive)",
+        "A senior admin who configures the environment but must not access customer data": "Administrative user (access mode: Administrative)",
+        "A bot/service registered in Azure AD that accesses Dataverse via S2S auth": "Application user (S2S authentication)",
+        "A record imported from a legacy system referencing a user who does not exist in Entra ID": "Stub user (created automatically by data import)"
+      },
+      "explanation": "Each user type has a distinct purpose: Regular users sign in via UI for daily work. Non-interactive users are for API connectors (max 7 per env). Administrative users configure the environment but cannot access customer data. Application users use S2S authentication with no UI login and no limit on count. Stub users are automatically created by data import for references to non-existent users.",
+      "tags": [
+        "user-types",
+        "non-interactive",
+        "application-user",
+        "administrative-user",
+        "stub-user"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+    },
+    {
+      "instruction": "Match each privilege to the action it enables on a Case (Incident) record in Dynamics 365 Customer Service.",
+      "items": [
+        "Read",
+        "Write",
+        "Create",
+        "Delete",
+        "Assign",
+        "Share"
+      ],
+      "zones": [
+        "View the case record and its data",
+        "Edit existing field values on the case",
+        "Create a new case record",
+        "Permanently remove the case record",
+        "Transfer ownership of the case to another user or team",
+        "Grant another user access to the case without changing ownership"
+      ],
+      "correctMapping": {
+        "Read": "View the case record and its data",
+        "Write": "Edit existing field values on the case",
+        "Create": "Create a new case record",
+        "Delete": "Permanently remove the case record",
+        "Assign": "Transfer ownership of the case to another user or team",
+        "Share": "Grant another user access to the case without changing ownership"
+      },
+      "explanation": "These are the six core Dataverse table privileges that apply to most entities including Case. Read, Write, Create, and Delete are the basic CRUD operations. Assign transfers record ownership to another user or team. Share gives another user or team access to a specific record while the current owner retains ownership. Access levels (Basic, Local, Deep, Global) further refine the scope of each privilege.",
+      "tags": [
+        "custom-security-roles",
+        "privileges",
+        "case",
+        "access-levels"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
     }
   ],
   "casestudy": [
@@ -401,6 +1921,57 @@
             "label": "CSR Manager role",
             "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
           }
+        },
+        {
+          "q": "The organisation wants agents to be able to read, create and update cases but not delete them. Which set of privileges should the Case entity have on the agent security role?",
+          "options": [
+            "Read, Write, Delete at Business Unit level",
+            "Read, Write, Create at the appropriate access level — no Delete privilege",
+            "Read, Write, Create, Delete at User level only",
+            "Full CRUD — agents need Delete to resolve and close cases"
+          ],
+          "answer": 1,
+          "explanation": "To prevent deletion while allowing normal case management, the role should include Read, Write, and Create — but not Delete. Closing or resolving a case is done via a status change (Write), not by deleting the record. Removing the Delete privilege from the agent role enforces this boundary.",
+          "wrongExplanations": {
+            "0": "Including Delete at Business Unit level would still allow agents to delete cases — just limited to their own BU. The requirement is no deletion at all.",
+            "2": "Including Delete even at User level still permits deletion — the requirement is to exclude Delete entirely from the role.",
+            "3": "Resolving a case changes its status — it does not require the Delete privilege. Adding Delete would be against the stated requirement."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+        },
+        {
+          "q": "A new role is created but the user reports they cannot see the Customer Service workspace app in their apps list, even though all entity privileges are correctly set. What is missing?",
+          "options": [
+            "The user has not been added to the correct queue",
+            "App Module — Read at Global is not included in the custom role",
+            "The System Administrator role is required to see any apps",
+            "The user must be in the same business unit as the app owner"
+          ],
+          "answer": 1,
+          "explanation": "App Module — Read at Global controls whether a model-driven app appears in the user's app launcher. This is a non-obvious privilege that is separate from all entity-level privileges. Without it, the app will not appear even if all other access is correctly configured.",
+          "wrongExplanations": {
+            "0": "Queue membership is for work routing — it has no bearing on app visibility in the launcher.",
+            "2": "System Administrator is not required to see or use apps — the App Module Read privilege on the custom role is what controls this.",
+            "3": "Business unit alignment affects data access scope, not app launcher visibility."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/persona-privilege-mapping"
+        },
+        {
+          "q": "Contoso wants to ensure that when multiple security roles are assigned to an agent, the agent gets the broadest possible access across all roles — not the most restrictive. Is this how D365 Customer Service works?",
+          "options": [
+            "No — D365 applies the most restrictive of the assigned roles to prevent privilege escalation",
+            "Yes — D365 uses least privilege across roles, requiring all roles to grant access before it is allowed",
+            "Yes — D365 uses the most permissive combination: if any role grants a privilege, the user has it",
+            "It depends on the role type — predefined roles use most permissive, custom roles use most restrictive"
+          ],
+          "answer": 2,
+          "explanation": "Dynamics 365 / Dataverse applies the most permissive combination when multiple security roles are assigned to a user. If any one of the assigned roles grants a particular privilege, the user has that privilege — regardless of whether another role restricts it. This is a fundamental principle of the Dataverse security model and means administrators must be careful not to inadvertently grant excess access through role combinations.",
+          "wrongExplanations": {
+            "0": "D365 does NOT apply the most restrictive role — it takes the most permissive across all assigned roles.",
+            "1": "Least privilege (requiring all roles to agree) is not how Dataverse works — any single role granting access is sufficient.",
+            "3": "There is no difference in behaviour between predefined and custom roles — both follow the most permissive combination rule."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
         }
       ]
     },
@@ -522,6 +2093,116 @@
             "label": "How multiple security roles combine",
             "url": "https://learn.microsoft.com/en-us/power-platform/admin/how-record-access-determined"
           }
+        }
+      ]
+    },
+    {
+      "title": "Northwind Contact Centre — User Setup & Role Design",
+      "scenario": {
+        "title": "Northwind Contact Centre — User Onboarding and Role Configuration Challenge",
+        "background": "Northwind Contact Centre is deploying Dynamics 365 Customer Service for a 120-person team. The team has three tiers: Tier 1 Agents (80 reps), Tier 2 Specialists (30 reps), and 10 Supervisors. The IT administrator has created all user accounts in Microsoft 365 and assigned licences. The organisation also has two system integrations using API-based connectors — one for CRM-to-ERP data sync and one for a reporting tool. The administrator has received the following requirements:\n\nR1. All agents and supervisors must be able to access the Customer Service app.\nR2. Supervisors must be able to monitor, assign, and transfer conversations.\nR3. Agents must work with Case records.\nR4. The CRM-to-ERP connector must authenticate against Dataverse without a UI login.\nR5. A lead administrator needs to configure the environment including managing user roles — but must also avoid consuming a user licence unnecessarily.\nR6. Agents should have their skills, queues, and capacity profiles configured efficiently at scale.",
+        "requirements": [
+          "R1: All agents and supervisors must be able to access the Customer Service app.",
+          "R2: Supervisors must be able to monitor, assign, and transfer conversations.",
+          "R3: Agents must work with Case records.",
+          "R4: The CRM-to-ERP connector must authenticate against Dataverse without a UI login.",
+          "R5: Lead administrator needs to configure the environment and manage user roles — no unnecessary licence consumption.",
+          "R6: Agents should have skills, queues, and capacity profiles configured efficiently at scale."
+        ]
+      },
+      "tags": [
+        "predefined-roles",
+        "user-types",
+        "user-management",
+        "capacity-profiles",
+        "enhanced-user-management"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles",
+      "questions": [
+        {
+          "q": "For R1 and R2 — which combination of roles should the 10 supervisors receive?",
+          "options": [
+            "Basic User + Omnichannel supervisor + Customer Service Representative",
+            "Basic User + Omnichannel supervisor + App Profile User",
+            "Basic User + Omnichannel administrator + Omnichannel supervisor",
+            "Omnichannel supervisor + App Profile User only"
+          ],
+          "answer": 1,
+          "explanation": "Supervisors need Basic User (required by all users), Omnichannel supervisor (for monitoring, assigning, and transferring conversations), and App Profile User (required by users of Customer Service and Contact Center). Customer Service Representative is for working with the Case entity — supervisors typically don't need this. Omnichannel administrator would give them unnecessary configuration access.",
+          "wrongExplanations": {
+            "0": "Customer Service Representative is for agents working with Case records — not the correct addition for supervisors whose primary function is oversight.",
+            "2": "Omnichannel administrator should not be assigned to supervisors — it gives configuration access they don't need and requires System Administrator for full effect.",
+            "3": "Omnichannel supervisor alone and App Profile User alone are insufficient — Basic User is required by all users as the baseline role."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+        },
+        {
+          "q": "For R3 — which additional role must Tier 1 Agents receive beyond Basic User, Omnichannel agent, and App Profile User?",
+          "options": [
+            "Omnichannel supervisor — to access the case queue",
+            "Customer Service Representative — required to work with the Case entity",
+            "System Administrator — required for Case read access",
+            "No additional role is needed — Omnichannel agent already covers Case access"
+          ],
+          "answer": 1,
+          "explanation": "The Customer Service Representative role is specifically required to work with the Case entity in Dynamics 365 Customer Service. The Omnichannel agent role alone does not grant Case entity access. This role must be added in addition to the baseline roles.",
+          "wrongExplanations": {
+            "0": "Omnichannel supervisor gives supervisory capabilities — not Case entity access for agents.",
+            "2": "System Administrator is an admin role — agents should never receive this for case access.",
+            "3": "Omnichannel agent alone does not cover Case entity access — Customer Service Representative is explicitly required for Case."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/add-users-assign-roles"
+        },
+        {
+          "q": "For R4 — the CRM-to-ERP connector needs to authenticate against Dataverse. What type of user account should be created, and what is the correct access mode?",
+          "options": [
+            "A regular Read-Write user with a dedicated D365 licence assigned permanently",
+            "A non-interactive user account — licence assigned during setup, then removed after setting the Non-interactive access mode",
+            "An administrative user account — no licence required and provides system-level API access",
+            "A stub user — automatically created when the connector first authenticates"
+          ],
+          "answer": 1,
+          "explanation": "A non-interactive user account is the correct choice for API connectors that need to authenticate without UI sign-in. The process: create the account in M365, assign a licence, set the access mode to Non-interactive in the D365 user form, then remove the licence from M365. Up to 7 non-interactive users are allowed per environment.",
+          "wrongExplanations": {
+            "0": "A permanent Read-Write user is designed for human sign-in — it consumes a licence unnecessarily and is not the intended pattern for API connectors.",
+            "2": "Administrative access mode has no access to customer data or app functionality — it cannot be used for CRM data sync operations.",
+            "3": "Stub users are placeholders created by data imports — they cannot sign in, cannot be enabled, and cannot be used for integration authentication."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+        },
+        {
+          "q": "For R5 — the lead administrator needs to configure the environment and manage user roles. Which role combination achieves this without consuming a user licence unnecessarily?",
+          "options": [
+            "Omnichannel administrator + Basic User — no licence required for admin roles",
+            "Omnichannel administrator + System Administrator — set access mode to Administrative after setup, then remove the licence",
+            "System Administrator only — licence is required permanently for this role",
+            "Omnichannel administrator + System Administrator — no licence is ever needed for admin users"
+          ],
+          "answer": 1,
+          "explanation": "To manage user roles and privileges, both Omnichannel administrator and System Administrator roles are required. For administrative users who don't access customer data, you set the access mode to Administrative after setup and then remove the licence. Microsoft documents that Global admins, Power Platform admins, and D365 admins don't need a licence to be enabled — but the licence must be removed after setting the Administrative access mode.",
+          "wrongExplanations": {
+            "0": "Omnichannel administrator + Basic User is insufficient — System Administrator is required to manage user roles and privileges.",
+            "2": "A licence is not permanently required — the administrative access mode allows licence removal after setup.",
+            "3": "A licence is needed during initial setup — it can only be removed after setting the Administrative access mode."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+        },
+        {
+          "q": "For R6 — configuring skills, queues, and capacity profiles for 80 agents individually would take days. What is the most efficient approach?",
+          "options": [
+            "Use the Power Platform admin center bulk user import feature to set skills in a CSV upload",
+            "Use the Enhanced user management in Copilot Service admin center — select multiple users and use Update user attributes to bulk-update skills, queues, and capacity profiles",
+            "Use Dataverse API bulk calls — send up to 500 change requests every 15 minutes for optimal throughput",
+            "Create a shared team in D365 and assign the team a skill set — all team members inherit the skills"
+          ],
+          "answer": 1,
+          "explanation": "The Enhanced user management experience in Copilot Service admin center is designed exactly for this scenario. Administrators can select multiple users and use Update user attributes to add skills (with proficiency), update queue assignments, and assign capacity profiles — all in bulk. This is the recommended UI approach. The Dataverse API (option 2) is valid for very large scale but is a developer/admin API approach, not the standard admin UI workflow.",
+          "wrongExplanations": {
+            "0": "The Power Platform admin center does not have a CSV skill import feature for user attributes.",
+            "2": "The API approach is valid at scale but is a technical/developer method — Enhanced user management is the intended admin UI solution for this scenario.",
+            "3": "Skills in D365 Customer Service are configured on the Bookable Resource record for each individual user — they are not inherited through team membership."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/users-user-profiles"
         }
       ]
     }
