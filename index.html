@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Power Platform Mastery</title>
+<title>Build your Dynamics 365 Edge</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -225,6 +225,76 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 .report-btn:hover{color:var(--wrong);border-color:var(--wrong)}
 .report-btn.reported{color:var(--wrong);border-color:var(--wrong);background:rgba(255,77,109,0.08)}
 
+.topic-card-group{border-color:var(--accent-dim);position:relative}
+.topic-card-group::after{content:'';position:absolute;inset:0;border:1px solid var(--accent);opacity:.15;pointer-events:none}
+/* ── GUIDED LEARNING ── */
+.gl-reader-layout{display:grid;grid-template-columns:220px 1fr;gap:0;min-height:calc(100vh - 120px);border:1px solid var(--border)}
+.gl-sidebar{background:var(--surface);border-right:1px solid var(--border);padding:0;display:flex;flex-direction:column;position:sticky;top:24px;max-height:calc(100vh - 48px);overflow-y:auto}
+.gl-sidebar-topic{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);padding:20px 18px 12px;border-bottom:1px solid var(--border)}
+.gl-sidebar-nav{flex:1;padding:8px 0}
+.gl-nav-chapter{width:100%;background:none;border:none;text-align:left;padding:10px 18px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px;line-height:1.4}
+.gl-nav-chapter:hover{color:var(--text);background:var(--surface2)}
+.gl-nav-chapter.active{color:var(--accent);background:var(--accent-dim);border-left:2px solid var(--accent)}
+.gl-nav-chapter.done{color:var(--correct)}
+.gl-nav-chapter .gl-ch-num{font-size:9px;color:var(--muted);min-width:16px}
+.gl-nav-chapter .gl-ch-tick{margin-left:auto;color:var(--correct);font-size:10px;opacity:0}
+.gl-nav-chapter.done .gl-ch-tick{opacity:1}
+.gl-back-btn{margin:12px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--muted);background:none;border:1px solid var(--border);padding:8px 12px;cursor:pointer;transition:all .2s;text-align:left}
+.gl-back-btn:hover{color:var(--text);border-color:var(--muted)}
+.gl-content{padding:36px 40px;background:var(--bg);min-height:500px}
+.gl-chapter-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.gl-chapter-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:6px;line-height:1.2}
+.gl-chapter-sub{font-size:12px;color:var(--muted2);line-height:1.7;margin-bottom:28px;max-width:600px}
+.gl-section{margin-bottom:32px}
+.gl-section h3{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.gl-prose{font-size:13px;line-height:1.9;color:var(--text);margin-bottom:16px}
+.gl-prose strong{color:var(--accent)}
+.gl-prose code{font-family:'DM Mono',monospace;font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:1px 6px;color:var(--accent3)}
+.gl-keybox{background:var(--surface);border:1px solid var(--border2);border-left:3px solid var(--accent);padding:16px 18px;margin-bottom:16px}
+.gl-keybox-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.gl-keybox ul{list-style:none;padding:0;margin:0}
+.gl-keybox ul li{font-size:12px;line-height:1.8;color:var(--muted2);padding-left:14px;position:relative}
+.gl-keybox ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:10px}
+.gl-keybox ul li strong{color:var(--text)}
+.gl-warnbox{background:var(--surface);border:1px solid var(--border2);border-left:3px solid var(--warn);padding:16px 18px;margin-bottom:16px}
+.gl-warnbox-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--warn);margin-bottom:8px}
+.gl-warnbox p{font-size:12px;line-height:1.8;color:var(--muted2);margin:0}
+.gl-warnbox p strong{color:var(--text)}
+.gl-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}
+.gl-table th{background:var(--surface2);border:1px solid var(--border);padding:10px 14px;text-align:left;font-family:'Syne',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.gl-table td{border:1px solid var(--border);padding:10px 14px;color:var(--muted2);line-height:1.6;vertical-align:top}
+.gl-table td strong{color:var(--text)}
+.gl-table tr:hover td{background:var(--surface)}
+/* Quick Check */
+.gl-qcheck{background:var(--surface);border:1px solid var(--border2);padding:24px;margin-top:32px}
+.gl-qcheck-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--warn);margin-bottom:12px}
+.gl-qcheck-q{font-size:13px;line-height:1.7;margin-bottom:16px;font-weight:500}
+.gl-qcheck-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:0}
+.gl-qcheck-opt{background:none;border:1px solid var(--border2);padding:10px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted2);cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:10px}
+.gl-qcheck-opt:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+.gl-qcheck-opt:disabled{cursor:default}
+.gl-qcheck-opt.qc-correct{border-color:var(--correct);color:var(--correct);background:var(--correct-dim)}
+.gl-qcheck-opt.qc-wrong{border-color:var(--wrong);color:var(--wrong);background:var(--wrong-dim)}
+.gl-qcheck-opt.qc-reveal{border-color:var(--correct);color:var(--correct);opacity:.5}
+.gl-qcheck-letter{font-size:9px;color:var(--muted);min-width:14px;margin-top:2px}
+.gl-qcheck-fb{margin-top:14px;font-size:12px;line-height:1.7;padding:12px 14px;border-left:3px solid var(--border2);color:var(--muted2);display:none}
+.gl-qcheck-fb.show{display:block}
+.gl-qcheck-fb.fb-ok{border-color:var(--correct);color:var(--muted2)}
+.gl-qcheck-fb.fb-wrong{border-color:var(--wrong);color:var(--muted2)}
+/* Nav footer */
+.gl-nav-footer{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border)}
+.gl-nav-footer-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;cursor:pointer;transition:all .2s;border:1px solid var(--border2);background:none;color:var(--muted)}
+.gl-nav-footer-btn:hover{color:var(--text);border-color:var(--muted)}
+.gl-nav-footer-btn.primary{background:var(--accent);color:#000;border-color:var(--accent)}
+.gl-nav-footer-btn.primary:hover{background:var(--text);border-color:var(--text)}
+.gl-progress-bar{height:2px;background:var(--border);margin-bottom:0}
+.gl-progress-fill{height:100%;background:var(--accent);transition:width .4s ease}
+@media(max-width:680px){
+  .gl-reader-layout{grid-template-columns:1fr}
+  .gl-sidebar{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--border)}
+  .gl-content{padding:24px 18px}
+}
+
 /* ── REPORT MODAL ── */
 .rpt-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .2s ease}
 .rpt-modal{background:var(--surface);border:1px solid var(--border2);max-width:460px;width:100%;padding:32px;position:relative}
@@ -397,13 +467,14 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 <!-- ══════ HOME ══════ -->
 <div class="screen active" id="homeScreen">
   <nav class="top-nav">
-    <div class="nav-logo">PP<span>·</span>Mastery</div>
+    <div class="nav-logo">D365<span>·</span>Mastery</div>
     <div class="nav-actions">
+      <button class="nav-btn" onclick="showGuided()">Guided Learning</button>
       <button class="nav-btn" onclick="showHistory()">History</button>
     </div>
   </nav>
-  <div class="hero-eyebrow"><div class="hero-dot"></div>Power Platform Certification Prep</div>
-  <h1 class="hero-title">Build your<br><em>certification</em> edge.</h1>
+  <div class="hero-eyebrow"><div class="hero-dot"></div>Dynamics 365 Career Prep</div>
+  <h1 class="hero-title">Build your<br><em>Dynamics 365</em> edge.</h1>
   <p class="hero-sub">Exam-format sessions: 60 questions, 65-minute timer, 700/1000 to pass. MCQ, drag-and-drop, and case study questions drawn from a deep question pool.</p>
   <div class="exam-info-bar">
     <div class="eib-cell"><span class="eib-n">60</span><div class="eib-l">Questions/Session</div></div>
@@ -420,6 +491,21 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
   <div class="section-label">Available Topics</div>
   <div id="unlockBanner"></div>
   <div class="topics-grid" id="topicsGrid"></div>
+</div>
+
+<!-- ══════ SUB-TOPIC PICKER ══════ -->
+<div class="screen" id="subtopicScreen">
+  <nav class="top-nav">
+    <div class="nav-logo">D365<span>·</span>Mastery</div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="showHome()">← Home</button>
+    </div>
+  </nav>
+  <div id="subtopicBreadcrumb" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px"></div>
+  <div id="subtopicGroupTitle" style="font-family:'Syne',sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin-bottom:6px"></div>
+  <div id="subtopicGroupDesc" style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:560px;margin-bottom:28px"></div>
+  <div class="section-label" style="margin-bottom:16px">Choose a topic</div>
+  <div class="topics-grid" id="subtopicGrid"></div>
 </div>
 
 <!-- ══════ RESUME PROMPT ══════ -->
@@ -593,7 +679,7 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 <div class="screen" id="historyScreen">
   <div style="max-width:860px;margin:0 auto;padding:32px 24px">
     <nav class="top-nav">
-      <div class="nav-logo">PP<span>·</span>Mastery</div>
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
       <div class="nav-actions">
         <button class="nav-btn active-nav">History</button>
         <button class="nav-btn" onclick="showHome()">Topics</button>
@@ -601,6 +687,43 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
     </nav>
     <div class="section-label" style="margin-bottom:20px">Session History</div>
     <div id="historyContent"></div>
+  </div>
+</div>
+
+<!-- ══════ GUIDED LEARNING ══════ -->
+<div class="screen" id="guidedScreen">
+  <div style="max-width:960px;margin:0 auto">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn active-nav">Guided Learning</button>
+        <button class="nav-btn" onclick="showHistory()">History</button>
+        <button class="nav-btn" onclick="showHome()">Topics</button>
+      </div>
+    </nav>
+
+    <!-- Topic picker (shown when no topic selected) -->
+    <div id="glTopicPicker">
+      <div class="hero-eyebrow" style="margin-bottom:16px"><div class="hero-dot"></div>Learn Mode</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px">Guided Learning</h2>
+      <p style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:560px;margin-bottom:32px">Read concepts, study key facts, and test yourself with inline questions — no timer, no pressure. Like W3Schools but for Dynamics 365.</p>
+      <div class="section-label" style="margin-bottom:16px">Choose a topic to study</div>
+      <div class="topics-grid" id="glTopicsGrid"></div>
+    </div>
+
+    <!-- Reader (shown when topic + chapter selected) -->
+    <div id="glReader" style="display:none">
+      <div class="gl-reader-layout">
+        <!-- Sidebar -->
+        <div class="gl-sidebar" id="glSidebar">
+          <div class="gl-sidebar-topic" id="glSidebarTopic"></div>
+          <div class="gl-sidebar-nav" id="glSidebarNav"></div>
+          <button class="gl-back-btn" onclick="glBackToTopics()">← All Topics</button>
+        </div>
+        <!-- Content -->
+        <div class="gl-content" id="glContent"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -647,17 +770,34 @@ const CONFIG = {
   POINTS: { mcq: 15, dragdrop: 25, casestudy: 12.5 },
   // MCQ: 40 × 15 = 600  |  DD: 12 × 25 = 300  |  CS: 8 × 12.5 = 100  = 1000
   COUNTS: { mcq: 40, dragdrop: 12, casestudy: 8 },
-  // Topics: add a new entry here when you add a new JSON file
+  // Leaf topics — each maps to a question bank JSON file
   TOPICS: [
-    { id:'delegation',      title:'Delegation in Power Apps',          icon:'⚡', desc:'Delegable vs non-delegable functions, data source behaviour, performance implications.',                          file:'Questions/delegation.json' },
-    { id:'bpf',             title:'Business Process Flows',            icon:'🔀', desc:'Stages, branches, merge logic, workflows, action steps, entity limits, and BPF automation patterns.',          file:'Questions/bpf.json' },
-    { id:'mdaconfig',       title:'Configure Data Model & UI',         icon:'🧩', desc:'Tables, columns, forms, views, site map, app components, Dataverse search, notifications, and email templates.',  file:'Questions/mdaconfig.json',        locked:true },
-    { id:'customerservice', title:'Customer Service Functional',       icon:'🎧', desc:'Cases, SLAs, entitlements, record creation rules, security roles, and timeline configuration.',              file:'Questions/customerservice.json' },
-    { id:'powerfx',         title:'Power Fx Formulas',                 icon:'🔷', desc:'Functions, expressions, and formula patterns in canvas apps.',                                                 file:'Questions/powerfx.json',          locked:true },
-    { id:'canvasui',        title:'Canvas App UI',                     icon:'🎨', desc:'Galleries, forms, controls and layout patterns.',                                                              file:'Questions/canvasui.json',         locked:true },
-    { id:'automate',        title:'Power Automate',                    icon:'🔄', desc:'Flow types, triggers, actions, and error handling.',                                                           file:'Questions/automate.json',         locked:true },
-    { id:'dataverse',       title:'Dataverse',                         icon:'🗄️', desc:'Tables, relationships, security roles, and metadata.',                                                         file:'Questions/dataverse.json',        locked:true },
-  ]
+    { id:'delegation',   title:'Delegation in Power Apps',       icon:'⚡', desc:'Delegable vs non-delegable functions, data source behaviour, performance implications.',                        file:'Questions/delegation.json' },
+    { id:'mdaconfig',    title:'Configure Data Model & UI',      icon:'🧩', desc:'Tables, columns, forms, views, site map, app components, Dataverse search, notifications.',                    file:'Questions/mdaconfig.json',   locked:true },
+    { id:'bpf',          title:'Business Process Flows',         icon:'🔀', desc:'Stages, branches, merge logic, workflows, action steps, entity limits, and BPF automation patterns.',          file:'Questions/bpf.json' },
+    { id:'cases',        title:'Cases & Case Management',        icon:'📋', desc:'Case lifecycle, resolution, merging, subject tree, routing rules, and case configuration.',                    file:'Questions/cases.json' },
+    { id:'queues',       title:'Queues & Routing',               icon:'📥', desc:'Public/private queues, queue items, routing rules, and automatic work distribution.',                          file:'Questions/queues.json' },
+    { id:'sla',          title:'Service Level Agreements',       icon:'⏱️', desc:'SLA types, KPI timers, pause/resume behaviour, warning actions, and escalation configuration.',               file:'Questions/sla.json' },
+    { id:'entitlements', title:'Entitlements',                   icon:'🎫', desc:'Entitlement terms, channels, renewal, products, and linking entitlements to cases.',                          file:'Questions/entitlements.json' },
+    { id:'knowledge',    title:'Knowledge Articles',             icon:'📖', desc:'Article lifecycle, subject tree, search configuration, and linking articles to cases.',                        file:'Questions/knowledge.json' },
+    { id:'rcrules',      title:'Record Creation & Update Rules', icon:'⚙️', desc:'Automated case creation from email, inbound channels, conditions, and Power Automate integration.',           file:'Questions/rcrules.json' },
+    { id:'timeline',     title:'Timeline & Agent Experience',    icon:'🕐', desc:'Timeline control configuration, card forms, notes, highlights, and activity type display.',                   file:'Questions/timeline.json' },
+    { id:'usermgmt',     title:'User Management & Security',     icon:'👤', desc:'Security roles, access levels, business units, teams, field-level security, and user administration.',        file:'Questions/usermgmt.json' },
+    { id:'powerfx',      title:'Power Fx Formulas',              icon:'🔷', desc:'Functions, expressions, and formula patterns in canvas apps.',                                                 file:'Questions/powerfx.json',     locked:true },
+    { id:'canvasui',     title:'Canvas App UI',                  icon:'🎨', desc:'Galleries, forms, controls and layout patterns.',                                                              file:'Questions/canvasui.json',    locked:true },
+    { id:'automate',     title:'Power Automate',                 icon:'🔄', desc:'Flow types, triggers, actions, and error handling.',                                                           file:'Questions/automate.json',    locked:true },
+    { id:'dataverse',    title:'Dataverse',                      icon:'🗄️', desc:'Tables, relationships, security roles, and metadata.',                                                         file:'Questions/dataverse.json',   locked:true },
+  ],
+  // Groups — parent cards on home screen that open a sub-topic picker screen
+  GROUPS: [
+    {
+      id:        'cs-app',
+      title:     'D365 Customer Service App',
+      icon:      '🎧',
+      desc:      'Full Customer Service configuration — BPF, Cases, Queues, SLAs, Entitlements, Knowledge, Record Creation Rules, Timeline, and User Management.',
+      subtopics: ['bpf','cases','queues','sla','entitlements','knowledge','rcrules','timeline','usermgmt'],
+    },
+  ],
 };
 
 /* ═══════════════════════════════════════
@@ -789,7 +929,32 @@ async function renderHome(){
 
   const grid=document.getElementById('topicsGrid');
   let html='';
-  CONFIG.TOPICS.forEach(t=>{
+
+  // IDs that belong to a group — hidden from the main home grid
+  const groupedIds = new Set(CONFIG.GROUPS.flatMap(g=>g.subtopics));
+
+  // ── Render group cards first ──
+  CONFIG.GROUPS.forEach(g=>{
+    const subtopics = g.subtopics.map(id=>CONFIG.TOPICS.find(t=>t.id===id)).filter(Boolean);
+    const groupSessions = sessions.filter(s=>g.subtopics.includes(s.topicId));
+    const readyCount = subtopics.filter(t=>!t.locked||unlocked).length;
+    html+=`<div class="topic-card topic-card-group" onclick="openGroup('${g.id}')" style="cursor:pointer">
+      <div class="card-header">
+        <div class="card-icon">${g.icon}</div>
+        <div class="card-status status-ready">📂 ${subtopics.length} Topics</div>
+      </div>
+      <div class="card-title">${g.title}</div>
+      <div class="card-desc">${g.desc}</div>
+      <div class="card-meta">
+        <span>📋 ${readyCount} ready</span>
+        ${groupSessions.length?`<span>🎯 ${groupSessions.length} sessions</span>`:''}
+      </div>
+      <div style="margin-top:12px;font-size:10px;color:var(--accent);letter-spacing:1px">Explore topics →</div>
+    </div>`;
+  });
+
+  // ── Render standalone topic cards (not in any group) ──
+  CONFIG.TOPICS.filter(t=>!groupedIds.has(t.id)).forEach(t=>{
     const ts=sessions.filter(s=>s.topicId===t.id);
     const last=ts[ts.length-1];
     const avgSc=ts.length?Math.round(ts.reduce((a,s)=>a+s.totalScore,0)/ts.length):null;
@@ -802,30 +967,19 @@ async function renderHome(){
       else{mc='var(--wrong)';ml='Needs Work';}
     }
     const prog=mastery!==null?Math.round(mastery*100):0;
-
-    // A topic is playable if it's not marked locked in config, OR user has unlocked
     const isLocked = t.locked && !unlocked;
-
     if(isLocked){
-      // Show as locked — click prompts unlock modal
-      html+=`<div class="topic-card locked" onclick="openLicenceModal()" style="cursor:pointer" title="Unlock all topics for $2">
-        <div class="card-header">
-          <div class="card-icon">${t.icon}</div>
-          <div class="card-status status-locked">🔒 Locked</div>
-        </div>
+      html+=`<div class="topic-card locked" onclick="openLicenceModal()" style="cursor:pointer" title="Unlock all topics">
+        <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status status-locked">🔒 Locked</div></div>
         <div class="card-title">${t.title}</div>
         <div class="card-desc">${t.desc}</div>
         <div class="card-meta"><span>📋 800+ questions</span></div>
-        <div style="margin-top:14px;font-size:10px;color:var(--accent2);letter-spacing:1px">Unlock all topics for $2 →</div>
+        <div style="margin-top:14px;font-size:10px;color:var(--accent2);letter-spacing:1px">Unlock all topics →</div>
       </div>`;
     } else {
-      // Free topic (delegation) or unlocked topic
-      const comingSoon = t.locked && unlocked && !['delegation','bpf','customerservice'].includes(t.id);
+      const comingSoon = t.locked && unlocked;
       html+=`<div class="topic-card${comingSoon?' locked':''}" ${comingSoon?'title="Content coming soon"':`onclick="selectTopic('${t.id}')"`}>
-        <div class="card-header">
-          <div class="card-icon">${t.icon}</div>
-          <div class="card-status ${comingSoon?'status-locked':'status-ready'}">${comingSoon?'Coming Soon':'Ready'}</div>
-        </div>
+        <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status ${comingSoon?'status-locked':'status-ready'}">${comingSoon?'Coming Soon':'Ready'}</div></div>
         <div class="card-title">${t.title}</div>
         <div class="card-desc">${t.desc}</div>
         <div class="card-meta">
@@ -833,13 +987,8 @@ async function renderHome(){
           ${ts.length?`<span>🎯 ${ts.length} sessions</span>`:''}
           ${last?`<span>Last: ${last.totalScore}/1000</span>`:''}
         </div>
-        ${mastery!==null?`
-          <div class="card-progress"><div class="card-progress-fill" style="width:${prog}%"></div></div>
-          <div class="mastery-badge">
-            <div class="mb-dot" style="background:${mc}"></div>
-            <span style="color:${mc}">${ml}</span>
-            <span style="color:var(--muted);margin-left:4px">Avg: ${avgSc}/1000</span>
-          </div>`:''}
+        ${mastery!==null?`<div class="card-progress"><div class="card-progress-fill" style="width:${prog}%"></div></div>
+          <div class="mastery-badge"><div class="mb-dot" style="background:${mc}"></div><span style="color:${mc}">${ml}</span><span style="color:var(--muted);margin-left:4px">Avg: ${avgSc}/1000</span></div>`:''}
         ${!comingSoon?`<button class="skull-btn" title="Obliterate session history for this topic" onclick="event.stopPropagation();obliterateTopic('${t.id}','${t.title}')">💀</button>`:''}
       </div>`;
     }
@@ -851,6 +1000,68 @@ async function obliterateTopic(id,title){
   if(!confirm(`💀 Obliterate ALL session history for "${title}"?\n\nThis cannot be undone.`)) return;
   await dbDeleteTopic(id);
   await renderHome();
+}
+
+/* ═══════════════════════════════════════
+   GROUP / SUB-TOPIC SCREEN
+═══════════════════════════════════════ */
+async function openGroup(groupId){
+  const group = CONFIG.GROUPS.find(g=>g.id===groupId);
+  if(!group) return;
+  const unlocked = isUnlocked();
+  const sessions = await dbGetAll();
+
+  document.getElementById('subtopicBreadcrumb').textContent = 'Topics → ' + group.title;
+  document.getElementById('subtopicGroupTitle').textContent = group.title;
+  document.getElementById('subtopicGroupDesc').textContent = group.desc;
+
+  const grid = document.getElementById('subtopicGrid');
+  let html = '';
+
+  group.subtopics.forEach(tid=>{
+    const t = CONFIG.TOPICS.find(x=>x.id===tid);
+    if(!t) return;
+    const ts = sessions.filter(s=>s.topicId===t.id);
+    const last = ts[ts.length-1];
+    const avgSc = ts.length ? Math.round(ts.reduce((a,s)=>a+s.totalScore,0)/ts.length) : null;
+    const mastery = avgSc!==null ? avgSc/1000 : null;
+    let mc='var(--muted)', ml='Not started';
+    if(mastery!==null){
+      if(mastery>=.9){mc='var(--correct)';ml='Expert';}
+      else if(mastery>=.7){mc='var(--accent)';ml='Proficient';}
+      else if(mastery>=.5){mc='var(--warn)';ml='Learning';}
+      else{mc='var(--wrong)';ml='Needs Work';}
+    }
+    const prog = mastery!==null ? Math.round(mastery*100) : 0;
+    const isLocked = t.locked && !unlocked;
+
+    if(isLocked){
+      html+=`<div class="topic-card locked" onclick="openLicenceModal()" style="cursor:pointer">
+        <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status status-locked">🔒 Locked</div></div>
+        <div class="card-title">${t.title}</div>
+        <div class="card-desc">${t.desc}</div>
+        <div class="card-meta"><span>📋 800+ questions</span></div>
+        <div style="margin-top:14px;font-size:10px;color:var(--accent2);letter-spacing:1px">Unlock all topics →</div>
+      </div>`;
+    } else {
+      const comingSoon = false; // all sub-topics have question banks
+      html+=`<div class="topic-card${comingSoon?' locked':''}" ${comingSoon?'title="Content coming soon"':`onclick="selectTopic('${t.id}')"`}>
+        <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status ${comingSoon?'status-locked':'status-ready'}">${comingSoon?'Coming Soon':'Ready'}</div></div>
+        <div class="card-title">${t.title}</div>
+        <div class="card-desc">${t.desc}</div>
+        <div class="card-meta">
+          <span>📋 ${comingSoon?'Coming soon':'800+ questions'}</span>
+          ${ts.length?`<span>🎯 ${ts.length} sessions</span>`:''}
+          ${last?`<span>Last: ${last.totalScore}/1000</span>`:''}
+        </div>
+        ${mastery!==null && !comingSoon?`<div class="card-progress"><div class="card-progress-fill" style="width:${prog}%"></div></div>
+          <div class="mastery-badge"><div class="mb-dot" style="background:${mc}"></div><span style="color:${mc}">${ml}</span><span style="color:var(--muted);margin-left:4px">Avg: ${avgSc}/1000</span></div>`:''}
+        ${!comingSoon?`<button class="skull-btn" title="Obliterate session history for this topic" onclick="event.stopPropagation();obliterateTopic('${t.id}','${t.title}')">💀</button>`:''}
+      </div>`;
+    }
+  });
+  grid.innerHTML = html;
+  showScreen('subtopicScreen');
 }
 
 /* ═══════════════════════════════════════
@@ -897,9 +1108,9 @@ function buildSession(bank){
   const ddTarget   = TARGET_TOTAL * 0.30; // 300
   const csTarget   = TARGET_TOTAL * 0.10; // 100
 
-  const ptsMCQ  = mcq.length  ? mcqTarget / mcq.length  : CONFIG.POINTS.mcq;
-  const ptsDD   = dd.length   ? ddTarget  / dd.length   : CONFIG.POINTS.dragdrop;
-  const ptsCS   = csFlat.length ? csTarget / csFlat.length : CONFIG.POINTS.casestudy;
+  const ptsMCQ  = Math.round(mcq.length  ? mcqTarget / mcq.length  : CONFIG.POINTS.mcq);
+  const ptsDD   = Math.round(dd.length   ? ddTarget  / dd.length   : CONFIG.POINTS.dragdrop);
+  const ptsCS   = Math.round(csFlat.length ? csTarget / csFlat.length : CONFIG.POINTS.casestudy);
 
   // Build a flat non-CS pool
   const nonCS=[];
@@ -1135,7 +1346,7 @@ function renderMCQ(q){
     <div class="q-block">
       <div class="q-meta-row">
         <div class="cat-tag ${cc}">${cl}</div>${tags}
-        <div class="pts-chip">+${q.pts} pts</div>
+        <div class="pts-chip">+${Math.round(q.pts)} pts</div>
       </div>
       <div class="question-text">${q.q}</div>
       <div class="options-grid">
@@ -1249,7 +1460,7 @@ function renderDragDrop(q){
     <div class="q-block">
       <div class="q-meta-row">
         ${(q.tags||[]).slice(0,2).map(t=>`<div class="q-tag-chip">${t}</div>`).join('')}
-        <div class="pts-chip">+${q.pts} pts each correct</div>
+        <div class="pts-chip">+${Math.round(q.pts)} pts each correct</div>
       </div>
       <div class="dd-instruction">${q.instruction}</div>
       <div class="dd-layout">
@@ -1330,7 +1541,7 @@ function renderCaseStudy(q){
       </div>
       <div class="q-meta-row">
         ${(q.tags||[]).slice(0,2).map(t=>`<div class="q-tag-chip">${t}</div>`).join('')}
-        <div class="pts-chip">+${q.pts} pts</div>
+        <div class="pts-chip">+${Math.round(q.pts)} pts</div>
       </div>
       <div class="question-text">${q.q}</div>
       <div class="options-grid">
@@ -1497,7 +1708,7 @@ async function submitReport(){
   };
 
   const issueTitle=`[Report] ${typeLabels[type]||type} — ${topicTitle} Q${qIdx+1}`;
-  const issueBody=`## Question Report\n\n**Topic:** ${topicTitle}\n**Question #:** ${qIdx+1} (session index)\n**Type:** ${qType.toUpperCase()}\n**Issue category:** ${typeLabels[type]||type}\n\n### Question text\n> ${qText.replace(/<[^>]*>/g,'')}\n\n### Reporter's comment\n${comment}\n\n---\n*Submitted ${new Date().toISOString()} via PP Mastery Quiz app*`;
+  const issueBody=`## Question Report\n\n**Topic:** ${topicTitle}\n**Question #:** ${qIdx+1} (session index)\n**Type:** ${qType.toUpperCase()}\n**Issue category:** ${typeLabels[type]||type}\n\n### Question text\n> ${qText.replace(/<[^>]*>/g,'')}\n\n### Reporter's comment\n${comment}\n\n---\n*Submitted ${new Date().toISOString()} via D365 Mastery Quiz app*`;
 
   try {
     const res=await fetch(`https://api.github.com/repos/${REPORT_CFG.owner}/${REPORT_CFG.repo}/issues`,{
@@ -1822,7 +2033,7 @@ function renderUnlockBanner(){
   } else {
     el.innerHTML=`<div class="unlock-banner">
       <div class="unlock-banner-text">
-        <strong>Delegation</strong> is free to try. Unlock <strong>all 5 topics</strong> with a one-off payment.
+        <strong>Delegation</strong> is free to try. Unlock <strong>all topics</strong> with a one-off payment.
       </div>
       <button class="unlock-btn" onclick="openLicenceModal()">Unlock All — $2 →</button>
     </div>`;
@@ -1894,6 +2105,321 @@ async function resumeSession(){
 async function discardSession(){
   await dbClearDraft();
   document.getElementById('resumeModal').style.display='none';
+}
+
+/* ═══════════════════════════════════════
+   GUIDED LEARNING
+═══════════════════════════════════════ */
+
+// ── Content library — each topic has chapters, each chapter has sections + a quick-check ──
+const GL_CONTENT = {
+  bpf: {
+    title: 'Business Process Flows',
+    icon: '🔀',
+    chapters: [
+      {
+        id: 'bpf-intro',
+        title: 'What is a BPF?',
+        sub: 'Purpose, design intent, and when to use Business Process Flows.',
+        sections: [
+          { heading: 'Overview', body: `A <strong>Business Process Flow (BPF)</strong> is a guided UI tool in model-driven apps that walks users through a defined sequence of stages and steps. It appears as a horizontal bar at the top of a record form, showing the current stage and prompting agents to fill in specific fields before moving forward.<br><br>BPFs are about <strong>consistency</strong> — ensuring every user follows the same process regardless of experience level. They reduce training time and prevent agents from skipping critical data entry steps.` },
+          { heading: 'Key Facts', keybox: [
+            '<strong>Guided UI only</strong> — BPFs are designed for user interaction, not automation',
+            '<strong>Stage bar</strong> appears at the top of the record form',
+            '<strong>Stage gating</strong> — required steps must be filled before advancing',
+            '<strong>Multiple BPFs</strong> can be active on the same record simultaneously',
+            '<strong>Up to 10</strong> active BPF definitions per table',
+          ]},
+          { heading: 'When to use a BPF vs a Flow', body: `Use a BPF when you need <strong>agents to follow a guided process</strong> with visible stage progression. Use a Power Automate <strong>automated flow</strong> when the process should run without user interaction — fully in the background.`, warn: { label: 'Common Mistake', text: 'Trying to fully automate a BPF with flows is possible but is an advanced pattern. If no user interaction is needed, an automated flow is the right tool — not a BPF.' } }
+        ],
+        quickCheck: { q: 'What is the primary design purpose of a Business Process Flow?', opts: ['To automate background data processing without user interaction', 'To provide a guided UI that walks agents through consistent stages and steps', 'To replace Power Automate flows for complex logic', 'To enforce field-level security on forms'], answer: 1, explanation: 'BPFs are designed as guided UI tools — they appear on the form and prompt agents through stages. Automation without user interaction belongs to Power Automate flows.' }
+      },
+      {
+        id: 'bpf-limits',
+        title: 'Limits & Eligibility',
+        sub: 'Confirmed platform limits and which tables can host a BPF.',
+        sections: [
+          { heading: 'Confirmed BPF Limits', body: 'The following limits are documented in the official BPF overview:', table: {
+            headers: ['Limit', 'Value'],
+            rows: [
+              ['Active BPF definitions per table', '<strong>10</strong> maximum'],
+              ['Stages per process', '<strong>30</strong> maximum'],
+              ['Tables in a multi-table process', '<strong>5</strong> maximum'],
+              ['Steps (data fields) per stage', 'No documented limit — add as many as needed'],
+              ['Branch depth', 'Not authoritatively documented — avoid deep nesting'],
+            ]
+          }},
+          { heading: 'Which Tables Are Eligible?', body: `Any table where the <code>IsBusinessProcessEnabled</code> property is set to <strong>true</strong> can host a BPF. This includes:<br><br>• All <strong>custom tables</strong> (you enable this when creating the table — it cannot be undone)<br>• Many <strong>standard tables</strong>: Account, Contact, Case, Lead, Opportunity, Quote, Order, Invoice, Email, Phone Call, Task, Appointment, and more<br><br>Activity tables like Email, Phone Call, and Task are <strong>supported</strong> — they appear in the eligible table list.`, warn: { label: 'Irreversible Setting', text: 'Enabling "Business process flows (fields will be created)" on a custom table cannot be undone. The BPF fields become part of the table schema permanently.' } }
+        ],
+        quickCheck: { q: 'A BPF must span 6 entities. Is this valid?', opts: ['Yes — BPFs can span any number of entities', 'No — the maximum is 5 entities in a multi-table BPF', 'Yes — but only if all entities are custom tables', 'No — BPFs can only span a single entity'], answer: 1, explanation: 'Multi-table BPFs are limited to a maximum of 5 tables. A 6-entity design would need to either remove one entity or be split into two separate BPFs.' }
+      },
+      {
+        id: 'bpf-stages',
+        title: 'Stages & Steps',
+        sub: 'How stages and data steps work inside a BPF.',
+        sections: [
+          { heading: 'Stages', body: `A <strong>stage</strong> represents a phase in the process (e.g. Qualify, Propose, Close). Each stage can be bound to a different entity in a multi-table BPF — the stage entity determines which record's fields are available as steps.<br><br>Stages can be set with a <strong>Category</strong> (Qualify, Develop, Propose, Close, Identify, Research, Resolve, Deliver) which provides a semantic label in the process bar.` },
+          { heading: 'Data Steps', body: `A <strong>data step</strong> is a field from the stage's entity surfaced in the BPF stage bar. Agents can view or fill in the field directly in the stage flyout without opening the full form.<br><br>Steps can be marked as <strong>Required</strong> — the agent cannot advance to the next stage until the field has a value. This is the core stage-gating mechanism.`, keybox: [
+            'Steps reference <strong>existing columns</strong> on the stage entity — they don\'t create new fields',
+            'Required steps with a <strong>Yes/No boolean</strong> column require the value to be Yes to pass',
+            'Hidden required columns still <strong>block stage navigation</strong>',
+          ]},
+          { heading: 'Navigating Between Stages', body: `Agents advance using the <strong>Next Stage</strong> button. They can also <strong>go back</strong> to any previous stage by clicking it and selecting <strong>Set Active</strong> — there is no restriction on returning to earlier stages regardless of entity type.` }
+        ],
+        quickCheck: { q: 'An agent on Stage 4 needs to return to Stage 2 to update some data. What should they do?', opts: ['They cannot go back — BPF stages only move forward', 'Abandon the BPF and start a new instance', 'Click the Stage 2 chevron in the process bar and select Set Active', 'Use the Previous button to step back one stage at a time'], answer: 2, explanation: 'Any previous stage can be made active by clicking it and selecting Set Active. There is no forward-only restriction — agents can navigate to any stage in the process.' }
+      },
+      {
+        id: 'bpf-branching',
+        title: 'Branching & Conditions',
+        sub: 'How to add conditional logic and merge branches.',
+        sections: [
+          { heading: 'How Branching Works', body: `A <strong>branch condition</strong> is placed between two stages. Depending on whether the condition evaluates to true or false, the process takes different paths. This allows a single BPF to handle multiple scenarios.` },
+          { heading: 'Condition Rules', keybox: [
+            'Conditions must be based on <strong>fields from the immediately preceding stage</strong>',
+            'You can combine conditions with <strong>AND</strong> or <strong>OR</strong> — but not both in the same rule',
+            'Branch paths can be <strong>no more than 10 levels deep</strong> (from the branching overview page)',
+            '<strong>All peer branches</strong> must either all merge to a single stage or all end the process',
+            'A branch <strong>cannot</strong> partially merge — some merging and some ending is not allowed',
+          ]},
+          { heading: 'AND vs OR — The Key Restriction', body: `Within a single condition rule, you can use <strong>AND</strong> (all conditions must be true) or <strong>OR</strong> (any condition must be true). You <strong>cannot mix</strong> AND and OR in the same rule.`, warn: { label: 'Exam Trap', text: 'BPF conditions do NOT support combining AND and OR in the same rule. If you need both, you must use separate condition components.' } }
+        ],
+        quickCheck: { q: 'A BPF condition rule has three criteria using AND logic, plus a fourth using OR. Is this valid?', opts: ['Yes — AND and OR can be freely mixed in condition rules', 'No — a single rule can use AND or OR but not both', 'Yes — but only if the OR condition is the last one', 'No — BPF conditions only support equals/not-equals'], answer: 1, explanation: 'BPF branch rules support AND or OR within a single rule — but not both operators combined. To achieve this logic, separate condition components would be needed.' }
+      },
+      {
+        id: 'bpf-automation',
+        title: 'BPF Step Types & Automation',
+        sub: 'Workflow Steps, Action Steps, and Flow Steps — and how cloud flows connect.',
+        sections: [
+          { heading: 'Three Step Types', body: `Beyond data steps (field inputs), BPF stages support three types of automation steps:`, table: {
+            headers: ['Step Type', 'What it calls', 'Behaviour'],
+            rows: [
+              ['<strong>Workflow Step</strong>', 'On-demand classic background workflow bound to the stage entity', 'Async — agent doesn\'t wait. Silent failure if the workflow errors.'],
+              ['<strong>Action Step</strong>', 'Dataverse custom action with "As a BPF action step" enabled', 'Sync — agent sees an error if the action fails. More reliable for critical operations.'],
+              ['<strong>Flow Step (Preview)</strong>', 'Solution-aware instant cloud flow with "When a record is selected" trigger', 'Agent clicks Run Flow button. Flow runs async. Preview feature — may have bugs.'],
+            ]
+          }},
+          { heading: 'Connecting Cloud Flows via Action Step', body: `The most stable way to trigger a cloud flow from a BPF is the <strong>Action Step + subscription pattern</strong>:<br><br>1. Create a Dataverse custom action and enable it as a BPF action step<br>2. Create a cloud flow with the <strong>"When a Dataverse action is performed"</strong> trigger pointing at that action<br>3. When the agent triggers the action step, Dataverse fires the event and the flow runs asynchronously`, keybox: [
+            'The flow <strong>subscribes</strong> to the action — you do not call the flow from inside the action',
+            'Flow runs <strong>async</strong> — the agent doesn\'t wait for it to complete',
+            'This is more stable than <strong>Flow Step (Preview)</strong> for production use',
+          ]},
+          { heading: 'Flow Step (Preview) Requirements', body: `For a cloud flow to be eligible as a Flow Step, it must:<br><br>• Be <strong>solution-aware</strong> (created inside a Dataverse solution, not in My Flows)<br>• Use the <strong>"When a record is selected"</strong> trigger from the Dataverse connector<br><br>The trigger automatically passes BPF context to the flow: instance ID, active stage name, stage entity record ID, and more.` }
+        ],
+        quickCheck: { q: 'What trigger must a cloud flow use to be eligible as a Flow Step (Preview) in a BPF?', opts: ['When a record is created or modified', 'When a Dataverse action is performed', 'When a record is selected', 'Manually trigger a flow (instant trigger)'], answer: 2, explanation: 'Flow Steps require the "When a record is selected" trigger from the Dataverse connector. This trigger provides BPF context (instance ID, stage name, entity record ID) to the flow automatically.' }
+      }
+    ]
+  },
+  delegation: {
+    title: 'Delegation in Power Apps',
+    icon: '⚡',
+    chapters: [
+      {
+        id: 'del-intro',
+        title: 'What is Delegation?',
+        sub: 'Why delegation matters and how it affects your app.',
+        sections: [
+          { heading: 'The Delegation Problem', body: `Canvas apps in Power Apps work with data sources. When you use a function like <code>Filter()</code> or <code>Search()</code>, Power Apps needs to decide: should it download all the data and process it in the browser, or should it ask the data source to process the query on the server?<br><br><strong>Delegation</strong> is when Power Apps passes the query to the data source to execute on the server — returning only the matching results. <strong>Non-delegation</strong> is when Power Apps downloads records locally and processes them in the app.` },
+          { heading: 'Why It Matters', body: `By default, Power Apps downloads a maximum of <strong>500 records</strong> (configurable up to <strong>2,000</strong>) from a data source. If your data source has 10,000 records and you use a non-delegable function, your filter only runs on the first 500 downloaded records — meaning results will be <strong>silently incomplete</strong>.`, warn: { label: 'Silent Data Loss', text: 'Non-delegable queries don\'t error — they just silently return incomplete results. This is one of the most common bugs in canvas apps.' } },
+          { heading: 'The Data Row Limit', keybox: [
+            'Default row limit: <strong>500 records</strong>',
+            'Maximum configurable limit: <strong>2,000 records</strong>',
+            'Set in: App Settings → General → Data row limit',
+            'Applies to <strong>non-delegable</strong> queries — delegable queries return all matching records',
+          ]}
+        ],
+        quickCheck: { q: 'A canvas app uses Filter() with a non-delegable condition on a SharePoint list with 3,000 rows. The data row limit is set to 500. How many records does the filter evaluate?', opts: ['All 3,000 records', 'The first 500 records only', 'The first 2,000 records', '0 records — the query will error'], answer: 1, explanation: 'Non-delegable queries download up to the row limit (500 by default) and filter locally. Only the first 500 records are evaluated — results from records 501-3000 are silently missed.' }
+      },
+      {
+        id: 'del-functions',
+        title: 'Delegable vs Non-Delegable',
+        sub: 'Which functions delegate and which do not.',
+        sections: [
+          { heading: 'Delegable Functions (for Dataverse/SharePoint)', body: `These functions can be pushed to the server — they work correctly with large datasets:`, table: {
+            headers: ['Function', 'Description', 'Notes'],
+            rows: [
+              ['<code>Filter()</code>', 'Filter records by condition', 'Delegable for most operators on indexed columns'],
+              ['<code>LookUp()</code>', 'Find first matching record', 'Delegable — returns one record from server'],
+              ['<code>SortByColumns()</code>', 'Sort by a column name (string)', 'Use this over Sort() for large datasets'],
+              ['<code>Search()</code>', 'Partial text search', '<strong>Dataverse only</strong> — not delegable for SharePoint'],
+              ['<code>CountRows()</code>', 'Count records in a table', 'Delegable for Dataverse with no filter'],
+            ]
+          }},
+          { heading: 'Non-Delegable Functions', body: `These functions <strong>cannot</strong> be pushed to the server — they always run locally on downloaded data:`, table: {
+            headers: ['Function', 'Why not delegable'],
+            rows: [
+              ['<code>CountIf()</code>', 'Conditional count — server cannot evaluate arbitrary conditions'],
+              ['<code>GroupBy()</code>', 'Client-side grouping operation'],
+              ['<code>Ungroup()</code>', 'Client-side ungrouping'],
+              ['<code>Search()</code>', 'For SharePoint — full-text search not supported server-side'],
+              ['<code>Mid()</code>, <code>Left()</code>, <code>Right()</code>', 'String manipulation — not a server operation'],
+            ]
+          }},
+          { heading: 'Sort() vs SortByColumns()', body: `<code>Sort()</code> is <strong>non-delegable</strong> for most data sources — it sorts the locally downloaded records only. <code>SortByColumns()</code> takes a column <em>name as a string</em> and is <strong>delegable</strong> for Dataverse and SharePoint — use it when working with large tables.` }
+        ],
+        quickCheck: { q: 'Which function is delegable for Dataverse but NOT for SharePoint?', opts: ['Filter()', 'LookUp()', 'Search()', 'SortByColumns()'], answer: 2, explanation: 'Search() is delegable for Dataverse (which supports full-text search server-side) but is not delegable for SharePoint. For SharePoint, use Filter() with text comparison instead.' }
+      }
+    ]
+  }
+};
+
+// ── Guided Learning State ──
+let GL = { topicId: null, chapterIdx: 0, progress: {} };
+
+function showGuided(){
+  renderGLTopicPicker();
+  showScreen('guidedScreen');
+}
+
+function renderGLTopicPicker(){
+  document.getElementById('glTopicPicker').style.display='';
+  document.getElementById('glReader').style.display='none';
+  const grid=document.getElementById('glTopicsGrid');
+  const available = CONFIG.TOPICS.filter(t => GL_CONTENT[t.id]);
+  const locked = CONFIG.TOPICS.filter(t => !GL_CONTENT[t.id]);
+  grid.innerHTML = available.map(t=>`
+    <div class="topic-card" onclick="glOpenTopic('${t.id}')" style="cursor:pointer">
+      <div class="tc-icon">${t.icon}</div>
+      <div class="tc-title">${t.title}</div>
+      <div class="tc-desc">${GL_CONTENT[t.id].chapters.length} chapters</div>
+      <div class="tc-meta"><span style="color:var(--accent);font-size:10px">▶ Start Learning</span></div>
+    </div>`).join('') +
+    locked.map(t=>`
+    <div class="topic-card" style="opacity:.4;cursor:not-allowed">
+      <div class="tc-icon">${t.icon}</div>
+      <div class="tc-title">${t.title}</div>
+      <div class="tc-desc" style="color:var(--muted)">Coming soon</div>
+    </div>`).join('');
+}
+
+function glOpenTopic(topicId){
+  GL.topicId = topicId;
+  GL.chapterIdx = 0;
+  if(!GL.progress[topicId]) GL.progress[topicId] = {};
+  document.getElementById('glTopicPicker').style.display='none';
+  document.getElementById('glReader').style.display='';
+  glRenderSidebar();
+  glRenderChapter(0);
+}
+
+function glBackToTopics(){
+  document.getElementById('glTopicPicker').style.display='';
+  document.getElementById('glReader').style.display='none';
+  renderGLTopicPicker();
+}
+
+function glRenderSidebar(){
+  const topic = GL_CONTENT[GL.topicId];
+  document.getElementById('glSidebarTopic').textContent = topic.title;
+  document.getElementById('glSidebarNav').innerHTML = topic.chapters.map((ch,i)=>{
+    const done = GL.progress[GL.topicId]?.[ch.id];
+    const active = i === GL.chapterIdx;
+    return `<button class="gl-nav-chapter${active?' active':''}${done?' done':''}" onclick="glRenderChapter(${i})">
+      <span class="gl-ch-num">${i+1}</span>
+      <span>${ch.title}</span>
+      <span class="gl-ch-tick">✓</span>
+    </button>`;
+  }).join('');
+  // Progress bar
+  const total = topic.chapters.length;
+  const done = Object.keys(GL.progress[GL.topicId]||{}).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('glSidebar').insertAdjacentHTML('afterbegin',
+    `<div class="gl-progress-bar" id="glProgressBar"><div class="gl-progress-fill" id="glProgressFill" style="width:${pct}%"></div></div>`);
+}
+
+function glUpdateSidebar(){
+  const topic = GL_CONTENT[GL.topicId];
+  const navBtns = document.querySelectorAll('.gl-nav-chapter');
+  navBtns.forEach((btn,i)=>{
+    const ch = topic.chapters[i];
+    btn.className = 'gl-nav-chapter' + (i===GL.chapterIdx?' active':'') + (GL.progress[GL.topicId]?.[ch.id]?' done':'');
+  });
+  const total = topic.chapters.length;
+  const done = Object.keys(GL.progress[GL.topicId]||{}).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  const fill = document.getElementById('glProgressFill');
+  if(fill) fill.style.width = pct+'%';
+}
+
+function glRenderChapter(idx){
+  GL.chapterIdx = idx;
+  const topic = GL_CONTENT[GL.topicId];
+  const ch = topic.chapters[idx];
+  const isFirst = idx===0;
+  const isLast = idx===topic.chapters.length-1;
+
+  let html = `
+    <div class="gl-chapter-eyebrow">Chapter ${idx+1} of ${topic.chapters.length}</div>
+    <div class="gl-chapter-title">${ch.title}</div>
+    <div class="gl-chapter-sub">${ch.sub}</div>`;
+
+  // Sections
+  ch.sections.forEach(sec=>{
+    html += `<div class="gl-section"><h3>${sec.heading}</h3>`;
+    if(sec.body) html += `<div class="gl-prose">${sec.body}</div>`;
+    if(sec.warn) html += `<div class="gl-warnbox"><div class="gl-warnbox-label">⚠ ${sec.warn.label}</div><p>${sec.warn.text}</p></div>`;
+    if(sec.keybox) html += `<div class="gl-keybox"><div class="gl-keybox-label">Key Facts</div><ul>${sec.keybox.map(k=>`<li>${k}</li>`).join('')}</ul></div>`;
+    if(sec.table){
+      html += `<table class="gl-table"><thead><tr>${sec.table.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${sec.table.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    }
+    html += `</div>`;
+  });
+
+  // Quick check
+  const qc = ch.quickCheck;
+  const letters = ['A','B','C','D'];
+  html += `<div class="gl-qcheck">
+    <div class="gl-qcheck-label">⚡ Quick Check</div>
+    <div class="gl-qcheck-q">${qc.q}</div>
+    <div class="gl-qcheck-opts" id="glQCOpts">
+      ${qc.opts.map((o,i)=>`
+        <button class="gl-qcheck-opt" onclick="glCheckAnswer(${i})" id="glOpt_${i}">
+          <span class="gl-qcheck-letter">${letters[i]}</span>
+          <span>${o}</span>
+        </button>`).join('')}
+    </div>
+    <div class="gl-qcheck-fb" id="glQCFb"></div>
+  </div>`;
+
+  // Nav footer
+  html += `<div class="gl-nav-footer">
+    <button class="gl-nav-footer-btn" onclick="glNavChapter(${idx-1})" ${isFirst?'style="visibility:hidden"':''}>← Previous</button>
+    <button class="gl-nav-footer-btn primary" id="glNextBtn" onclick="glNavChapter(${idx+1})" style="display:none">${isLast?'✓ Complete Topic':'Next Chapter →'}</button>
+  </div>`;
+
+  document.getElementById('glContent').innerHTML = html;
+  glUpdateSidebar();
+  window.scrollTo(0,0);
+}
+
+function glCheckAnswer(selected){
+  const ch = GL_CONTENT[GL.topicId].chapters[GL.chapterIdx];
+  const qc = ch.quickCheck;
+  const correct = selected === qc.answer;
+  const opts = document.querySelectorAll('.gl-qcheck-opt');
+  opts.forEach((btn,i)=>{
+    btn.disabled = true;
+    if(i===qc.answer) btn.classList.add('qc-correct');
+    else if(i===selected&&!correct) btn.classList.add('qc-wrong');
+  });
+  const fb = document.getElementById('glQCFb');
+  fb.className = 'gl-qcheck-fb show '+(correct?'fb-ok':'fb-wrong');
+  fb.innerHTML = (correct?'<strong style="color:var(--correct)">✓ Correct.</strong> ':'<strong style="color:var(--wrong)">✗ Not quite.</strong> ')+qc.explanation;
+
+  // Mark chapter done and show next button
+  if(!GL.progress[GL.topicId]) GL.progress[GL.topicId]={};
+  GL.progress[GL.topicId][ch.id] = true;
+  glUpdateSidebar();
+  document.getElementById('glNextBtn').style.display='';
+}
+
+function glNavChapter(idx){
+  const topic = GL_CONTENT[GL.topicId];
+  if(idx < 0 || idx >= topic.chapters.length){
+    glBackToTopics();
+    return;
+  }
+  glRenderChapter(idx);
 }
 
 /* ═══════════════════════════════════════

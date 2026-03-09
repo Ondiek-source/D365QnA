@@ -1,0 +1,269 @@
+{
+  "_meta": {
+    "topic": "Record Creation & Update Rules",
+    "description": "Automated case creation from email, conditions, Power Automate integration.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "What is the primary purpose of Record Creation and Update Rules in Dynamics 365 Customer Service?",
+      "options": [
+        "To define escalation actions when an SLA KPI is breached",
+        "To automatically create or update Dynamics 365 records when specific activities (such as emails) are received",
+        "To route cases to queues based on case attributes",
+        "To send automated email responses to customers"
+      ],
+      "answer": 1,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "automation",
+        "email-to-case"
+      ],
+      "explanation": "<strong>Record Creation and Update Rules</strong> monitor incoming activities (emails, social activity, service activity) and automatically create or update Dynamics 365 records — most commonly creating Cases from inbound emails.",
+      "wrongExplanations": [
+        "SLA escalation actions are configured within the SLA itself — not in Record Creation Rules.",
+        null,
+        "Routing to queues is handled by Routing Rules or Unified Routing — not Record Creation Rules.",
+        "Automated email responses are sent via Email Templates and Workflows — not Record Creation Rules."
+      ],
+      "msRef": {
+        "label": "Set up rules to automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+      }
+    },
+    {
+      "q": "In a Record Creation and Update Rule, what component defines the specific fields and values to set on the record that is created?",
+      "options": [
+        "Condition",
+        "Rule Item",
+        "Action (Power Automate flow)",
+        "Channel Property"
+      ],
+      "answer": 2,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "power-automate",
+        "configuration"
+      ],
+      "explanation": "When a rule is triggered, the <strong>Action</strong> — now implemented as a Power Automate flow — defines what record to create and which field values to set. The flow receives the source activity and creates the target record.",
+      "wrongExplanations": [
+        "Conditions filter which incoming activities trigger the rule — they do not define field values.",
+        "Rule Items specify source channel and conditions — the actual record creation logic is in the associated flow.",
+        null,
+        "Channel Properties capture metadata from the incoming source — they provide input data but do not set fields directly."
+      ],
+      "msRef": {
+        "label": "Configure record creation rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "An inbound email arrives and a Record Creation Rule creates a case. The customer replies to the case email notification. What prevents a duplicate case from being created?",
+      "options": [
+        "The rule is deactivated after the first case is created",
+        "The email threading token in the subject line links the reply to the existing case",
+        "Duplicate detection rules block the second case",
+        "The rule only processes the first email per sender per day"
+      ],
+      "answer": 1,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "email-threading",
+        "case-management"
+      ],
+      "explanation": "Dynamics 365 embeds a <strong>threading token</strong> (a unique identifier) in outbound case email subjects. When a customer reply arrives containing that token, the system recognises it and routes the reply as an activity on the existing case rather than creating a new one.",
+      "wrongExplanations": [
+        "Rules remain active — they do not deactivate after creating the first case.",
+        null,
+        "Duplicate detection rules match field values like subject or email address — they are not reliable for threading replies to cases.",
+        "There is no built-in daily email limit per sender in Record Creation Rules."
+      ],
+      "msRef": {
+        "label": "Email threading and case correlation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "A Record Creation Rule is configured to create cases from inbound emails but cases are not being created. Which is the most likely cause?",
+      "options": [
+        "The rule is in Draft status instead of Active",
+        "The mailbox is not configured as a queue mailbox",
+        "The email subject contains special characters",
+        "The sender does not have a Contact record in the system"
+      ],
+      "answer": 0,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "troubleshooting"
+      ],
+      "explanation": "Record Creation and Update Rules must be <strong>Activated</strong> to process incoming activities. A rule left in Draft status will not trigger even if all other conditions are met.",
+      "wrongExplanations": [
+        null,
+        "The mailbox does not need to be a queue mailbox specifically — the rule must be active for any processing to occur.",
+        "Special characters in email subjects do not block rule processing.",
+        "Not having a Contact record may affect how fields like Customer are populated, but the rule can still create a case without a matching contact."
+      ],
+      "msRef": {
+        "label": "Activate record creation rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+      }
+    },
+    {
+      "q": "Which entity does a Record Creation and Update Rule monitor to trigger case creation from inbound email?",
+      "options": [
+        "Email Message",
+        "Email Activity",
+        "Mailbox",
+        "Queue Item"
+      ],
+      "answer": 1,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "email-activity"
+      ],
+      "explanation": "Record Creation Rules monitor the <strong>Email Activity</strong> entity. When an inbound email is tracked into Dynamics 365 and meets the rule conditions, the rule creates or updates the target record.",
+      "wrongExplanations": [
+        "Email Message is not a Dynamics 365 entity — emails are stored as Email Activities.",
+        null,
+        "Mailboxes are the server-side sync configuration — they deliver emails into Dynamics 365 but are not monitored by creation rules directly.",
+        "Queue Items are created after routing — the creation rule acts on the Email Activity before queue routing."
+      ],
+      "msRef": {
+        "label": "Record creation from email",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/automatically-create-update-records"
+      }
+    },
+    {
+      "q": "When configuring a Record Creation and Update Rule in the modern interface, which technology replaces legacy Workflow actions for creating the target record?",
+      "options": [
+        "Classic Workflow",
+        "Power Automate Cloud Flow",
+        "JavaScript Web Resource",
+        "Custom Plugin"
+      ],
+      "answer": 1,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "power-automate",
+        "modern-interface"
+      ],
+      "explanation": "The modern Record Creation and Update Rule interface integrates with <strong>Power Automate Cloud Flows</strong> to define what happens when a rule fires. The flow receives the triggering activity as context and creates or updates the target record.",
+      "wrongExplanations": [
+        "Classic Workflows were used in the legacy rule interface but are deprecated for new configurations in favour of Power Automate.",
+        null,
+        "JavaScript Web Resources run in the browser form context — they are not triggered by server-side rule processing.",
+        "Custom Plugins can intercept record operations but are not the out-of-box mechanism used by Record Creation Rules."
+      ],
+      "msRef": {
+        "label": "Migrate record creation rules to Power Automate",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/migrate-automatic-record-creation-and-sla-agreements"
+      }
+    },
+    {
+      "q": "A company wants cases created only from emails sent to support@company.com, not from all inbound emails. How is this achieved in a Record Creation Rule?",
+      "options": [
+        "Configure a separate Mailbox for support@company.com and associate it with the rule",
+        "Add a Condition to the Rule Item that filters on the email recipient address",
+        "Create a separate rule for each email address",
+        "Use a Power Automate trigger condition on the associated flow"
+      ],
+      "answer": 1,
+      "category": "record-creation",
+      "tags": [
+        "record-creation-rules",
+        "conditions",
+        "filtering"
+      ],
+      "explanation": "Rule Item <strong>Conditions</strong> filter which activities trigger the rule. By adding a condition on the email's recipient field matching support@company.com, only emails to that address create cases.",
+      "wrongExplanations": [
+        "Configuring a mailbox controls where emails are received, but the rule condition is still needed to restrict creation to only that mailbox's emails.",
+        null,
+        "Multiple rules for each address is possible but unnecessary — conditions within one rule handle this more efficiently.",
+        "Power Automate flow conditions are for record field logic — the rule's own conditions should filter the source activity first."
+      ],
+      "msRef": {
+        "label": "Add conditions to record creation rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Classify each Record Creation and Update Rule element by its role in the rule configuration.",
+      "items": [
+        "Rule Item Condition",
+        "Power Automate Flow Action",
+        "Source Activity Type",
+        "Rule Status Active or Draft",
+        "Channel Property"
+      ],
+      "zones": [
+        "Controls what triggers the rule and how it filters",
+        "Defines what record is created and field values set",
+        "Must be set correctly for the rule to process incoming activities"
+      ],
+      "correctMapping": {
+        "Rule Item Condition": "Controls what triggers the rule and how it filters",
+        "Source Activity Type": "Controls what triggers the rule and how it filters",
+        "Channel Property": "Controls what triggers the rule and how it filters",
+        "Power Automate Flow Action": "Defines what record is created and field values set",
+        "Rule Status Active or Draft": "Must be set correctly for the rule to process incoming activities"
+      },
+      "tags": [
+        "record-creation-rules",
+        "configuration"
+      ],
+      "explanation": "Rule conditions and source activity type define what triggers the rule. The Power Automate flow action defines the record creation logic. The rule must be Active — Draft rules never fire.",
+      "msRef": {
+        "label": "Configure record creation rules",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "Contoso Support Centre Setup",
+      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
+      "tags": [
+        "foundational",
+        "configuration",
+        "case-management",
+        "SLA",
+        "security-roles"
+      ],
+      "msRef": {
+        "label": "Customer Service setup overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+      },
+      "questions": [
+        {
+          "q": "To automatically create cases from emails sent to support@contoso.com, which feature must be configured?",
+          "options": [
+            "A Routing Rule Set with an email condition",
+            "A Record Creation and Update Rule monitoring Email Activities with a condition filtering on the recipient address",
+            "A Power Automate flow triggered by Dataverse email record creation",
+            "An SLA action that creates a case on email receipt"
+          ],
+          "answer": 1,
+          "explanation": "A <strong>Record Creation and Update Rule</strong> monitors incoming Email Activities. By adding a condition filtering on the recipient matching support@contoso.com, only emails to that address automatically create cases.",
+          "wrongExplanations": [
+            "Routing Rule Sets route existing cases to queues — they do not create cases from emails.",
+            null,
+            "A custom Power Automate flow could work technically, but the out-of-box Record Creation Rule is the correct and supported approach.",
+            "SLA actions fire on time-based KPI triggers — they do not create cases from inbound emails."
+          ],
+          "msRef": {
+            "label": "Automatic case creation from email",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-rules-to-automatically-create-or-update-records"
+          }
+        }
+      ]
+    }
+  ]
+}

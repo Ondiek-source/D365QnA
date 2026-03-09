@@ -1,0 +1,387 @@
+{
+  "_meta": {
+    "topic": "Cases & Case Management",
+    "description": "Case lifecycle, resolution, merging, routing rules, and case configuration.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "Which Dynamics 365 Customer Service entity is the primary record for tracking a customer's issue or request?",
+      "options": [
+        "Activity",
+        "Case",
+        "Queue Item",
+        "Entitlement"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "case-management",
+        "core-entities"
+      ],
+      "explanation": "<strong>Cases</strong> (also called Incidents) are the central entity in Dynamics 365 Customer Service. All customer issues, service requests, and support interactions are tracked as cases.",
+      "wrongExplanations": [
+        "Activities (calls, emails, tasks) are child records linked to a case — they are not the primary tracking record.",
+        null,
+        "Queue Items are wrappers that place records in queues for routing — they reference a case but are not the case itself.",
+        "Entitlements define support terms (hours, cases) for a customer — they govern case limits but are not the issue record."
+      ],
+      "msRef": {
+        "label": "Case management overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview-cases"
+      }
+    },
+    {
+      "q": "A customer calls in and an agent creates a case directly from the phone call activity. Which feature enables this workflow?",
+      "options": [
+        "Entitlement Channel",
+        "Convert to Case",
+        "Case Creation Rule",
+        "Unified Routing"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "case-creation",
+        "activities"
+      ],
+      "explanation": "The <strong>Convert to Case</strong> action on Activity records allows agents to create a case directly from a phone call, email, or other activity, linking the activity to the new case automatically.",
+      "wrongExplanations": [
+        "Entitlement Channels define which contact channels (phone, email, web) decrement against an entitlement — not case creation from activities.",
+        null,
+        "Case Creation Rules automatically create cases from inbound emails — agents use Convert to Case for manual activity conversion.",
+        "Unified Routing assigns cases to queues and agents based on rules — it is not used to convert activities to cases."
+      ],
+      "msRef": {
+        "label": "Create a case from an activity",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-create-a-case"
+      }
+    },
+    {
+      "q": "When an agent resolves a case in Dynamics 365 Customer Service, which activity record is automatically created to capture the resolution details?",
+      "options": [
+        "Task",
+        "Case Resolution Activity",
+        "Appointment",
+        "Note"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "resolution-activity"
+      ],
+      "explanation": "Resolving a case creates a <strong>Case Resolution Activity</strong> record that stores the resolution type, billable and total time, and the resolution description. This activity is linked to the case for audit and reporting.",
+      "wrongExplanations": [
+        "Tasks are manual activities created by agents — they are not created automatically on case resolution.",
+        null,
+        "Appointments are calendar-based activities — not created on case resolution.",
+        "Notes are manual text entries — resolution details are captured in the Resolution Activity, not a note."
+      ],
+      "msRef": {
+        "label": "Resolve a case",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
+      }
+    },
+    {
+      "q": "Which case status reason is set when a case is resolved in Dynamics 365 Customer Service?",
+      "options": [
+        "Closed",
+        "Resolved",
+        "Problem Solved",
+        "Completed"
+      ],
+      "answer": 2,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "status-reason",
+        "case-status"
+      ],
+      "explanation": "When a case is resolved, its Status Reason is set to <strong>Problem Solved</strong> (the default resolution reason). Administrators can add custom resolution reasons, but Problem Solved is the system default.",
+      "wrongExplanations": [
+        "Closed is a status, not a status reason. The Status becomes Resolved when a case is resolved.",
+        "Resolved is the case Status (not Status Reason) that is set when the case is resolved.",
+        null,
+        "Completed is used in other entities like tasks — not the default case resolution reason."
+      ],
+      "msRef": {
+        "label": "Case status and status reason",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
+      }
+    },
+    {
+      "q": "A company wants agents to confirm that they have communicated the resolution to the customer before closing a case. Which configuration achieves this?",
+      "options": [
+        "Add a mandatory field to the Case Resolution dialog",
+        "Create a Business Rule that enforces the field before allowing status change",
+        "Use a Business Process Flow stage that requires a Customer Notified step before moving to Resolved",
+        "Configure an SLA action to block resolution until the customer responds"
+      ],
+      "answer": 2,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "business-process-flow",
+        "configuration"
+      ],
+      "explanation": "<strong>Business Process Flows (BPFs)</strong> guide agents through required stages. By adding a Customer Notified step with a required field in the stage preceding resolution, agents cannot advance to the Resolved stage without completing that step.",
+      "wrongExplanations": [
+        "The Case Resolution dialog has limited customisation — adding mandatory fields there is not straightforward.",
+        "A Business Rule can enforce field requirements on a form but does not block the resolution dialog action itself.",
+        null,
+        "SLA actions fire on time-based triggers — they cannot block resolution based on a customer response condition."
+      ],
+      "msRef": {
+        "label": "Business process flows overview",
+        "url": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
+      }
+    },
+    {
+      "q": "Which setting controls whether a resolved case can be reactivated by agents in Dynamics 365 Customer Service?",
+      "options": [
+        "Case Settings in Customer Service Hub admin",
+        "Service Configuration Settings — specifically the Allow resolved cases to be reactivated option",
+        "Security role privileges on the Case entity",
+        "Business Rule on the Case form"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "service-configuration",
+        "reactivation"
+      ],
+      "explanation": "The <strong>Service Configuration Settings</strong> in the Customer Service admin centre include an option to allow or disallow reactivation of resolved cases. When disabled, agents cannot reopen resolved cases and must create a new case instead.",
+      "wrongExplanations": [
+        "Customer Service Hub admin is where this is found, but the specific setting is within Service Configuration Settings.",
+        null,
+        "Security roles control who can perform actions but do not toggle the system-level reactivation capability.",
+        "Business Rules enforce form logic — they cannot block the system case reactivation action at the platform level."
+      ],
+      "msRef": {
+        "label": "Service configuration settings",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
+      }
+    },
+    {
+      "q": "An agent cancels a case rather than resolving it. Which status reason is applied by default?",
+      "options": [
+        "Cancelled",
+        "Duplicate",
+        "Merged",
+        "Withdrawn"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "case-cancellation",
+        "status-reason"
+      ],
+      "explanation": "When an agent uses the Cancel Case action, the Status becomes Cancelled and the default Status Reason is <strong>Duplicate</strong>. Administrators can add additional cancellation reasons to accommodate different cancellation scenarios.",
+      "wrongExplanations": [
+        "Cancelled is the Status, not the Status Reason, when a case is cancelled.",
+        null,
+        "Merged is a separate status reason used when two cases are merged together — not the default cancellation reason.",
+        "Withdrawn is not a default status reason in Dynamics 365 Customer Service."
+      ],
+      "msRef": {
+        "label": "Cancel a case",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
+      }
+    },
+    {
+      "q": "Which feature allows a supervisor to combine two related cases into a single primary case and automatically close the secondary one?",
+      "options": [
+        "Case Routing",
+        "Case Merging",
+        "Case Linking",
+        "Case Escalation"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-merge",
+        "case-management"
+      ],
+      "explanation": "<strong>Case Merging</strong> combines two case records into one. The secondary case is cancelled with a Merged status reason, and all activities, notes, and child records from both cases are associated with the primary case.",
+      "wrongExplanations": [
+        "Case Routing assigns cases to queues or agents — it does not combine cases.",
+        null,
+        "Case Linking associates related cases together for reference but keeps both cases active — it does not close either one.",
+        "Case Escalation is an informal term for increasing priority — it is not a specific merge feature."
+      ],
+      "msRef": {
+        "label": "Merge cases",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-merge-cases"
+      }
+    },
+    {
+      "q": "When configuring the Case Resolution dialog box, which admin setting allows you to require agents to provide a resolution description before closing a case?",
+      "options": [
+        "Make resolution description required in the Case entity field settings",
+        "Enable Require description in resolution dialog in Service Configuration Settings",
+        "Add a business rule on the Case entity for the resolution field",
+        "Customise the Case Resolution Activity form to mark the field as required"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "case-resolution",
+        "service-configuration",
+        "resolution-dialog"
+      ],
+      "explanation": "The <strong>Service Configuration Settings</strong> in Customer Service admin include a toggle to <strong>require a resolution description</strong> in the resolution dialog. When enabled, agents cannot resolve a case without entering a description.",
+      "wrongExplanations": [
+        "The Case entity field settings do not control the resolution dialog required field behaviour.",
+        null,
+        "Business Rules operate on form logic — they do not intercept the resolution dialog popup.",
+        "Customising the Case Resolution Activity form affects the activity record after creation — not the resolution dialog prompt shown to agents."
+      ],
+      "msRef": {
+        "label": "Modify case resolution dialog",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Match each Dynamics 365 Customer Service component to its primary purpose.",
+      "items": [
+        "SLA",
+        "Entitlement",
+        "Routing Rule Set",
+        "Subject Tree",
+        "Knowledge Article"
+      ],
+      "zones": [
+        "Defines time targets for case response and resolution",
+        "Defines support terms a customer is entitled to (cases or hours)",
+        "Automatically assigns cases to queues based on conditions",
+        "Provides hierarchical classification for cases and articles",
+        "Stores reusable solutions agents can link to cases"
+      ],
+      "correctMapping": {
+        "SLA": "Defines time targets for case response and resolution",
+        "Entitlement": "Defines support terms a customer is entitled to (cases or hours)",
+        "Routing Rule Set": "Automatically assigns cases to queues based on conditions",
+        "Subject Tree": "Provides hierarchical classification for cases and articles",
+        "Knowledge Article": "Stores reusable solutions agents can link to cases"
+      },
+      "tags": [
+        "foundational",
+        "core-components"
+      ],
+      "explanation": "Each component plays a distinct role: SLAs enforce time targets; Entitlements define support contracts; Routing Rules manage queue assignment; Subject Trees classify content; Knowledge Articles capture solutions.",
+      "msRef": {
+        "label": "Customer Service components overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview"
+      }
+    },
+    {
+      "instruction": "Match each case status and status reason to the correct lifecycle stage.",
+      "items": [
+        "Active / In Progress",
+        "Resolved / Problem Solved",
+        "Cancelled / Duplicate",
+        "Resolved / Information Provided",
+        "Active / On Hold"
+      ],
+      "zones": [
+        "Case is open and being worked on",
+        "Case has been completed or answered",
+        "Case was closed without resolution"
+      ],
+      "correctMapping": {
+        "Active / In Progress": "Case is open and being worked on",
+        "Active / On Hold": "Case is open and being worked on",
+        "Resolved / Problem Solved": "Case has been completed or answered",
+        "Resolved / Information Provided": "Case has been completed or answered",
+        "Cancelled / Duplicate": "Case was closed without resolution"
+      },
+      "tags": [
+        "case-resolution",
+        "status-reason",
+        "case-lifecycle"
+      ],
+      "explanation": "Active cases (In Progress, On Hold) are still being worked. Resolved cases (Problem Solved, Information Provided) have been answered or fixed. Cancelled/Duplicate cases were closed without a true resolution.",
+      "msRef": {
+        "label": "Case status and lifecycle",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-resolve-cancel-reassign-a-case"
+      }
+    },
+    {
+      "instruction": "Classify each configuration action to the correct admin area where it is performed.",
+      "items": [
+        "Configure case auto-numbering prefix",
+        "Create a new security role",
+        "Add a subject to the Subject Tree",
+        "Set up a Record Creation Rule",
+        "Configure Timeline card form fields"
+      ],
+      "zones": [
+        "Customer Service admin centre",
+        "Power Platform admin centre or Security settings",
+        "Power Apps form editor (make.powerapps.com)"
+      ],
+      "correctMapping": {
+        "Configure case auto-numbering prefix": "Customer Service admin centre",
+        "Add a subject to the Subject Tree": "Customer Service admin centre",
+        "Set up a Record Creation Rule": "Customer Service admin centre",
+        "Create a new security role": "Power Platform admin centre or Security settings",
+        "Configure Timeline card form fields": "Power Apps form editor (make.powerapps.com)"
+      },
+      "tags": [
+        "admin-areas",
+        "configuration",
+        "navigation"
+      ],
+      "explanation": "Customer Service settings live in the CS admin centre. Security roles are managed in the Power Platform admin centre. Timeline card forms are customised through the Power Apps form editor.",
+      "msRef": {
+        "label": "Customer Service admin centre",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/cs-admin-center-overview"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "Contoso Support Centre Setup",
+      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
+      "tags": [
+        "foundational",
+        "configuration",
+        "case-management",
+        "SLA",
+        "security-roles"
+      ],
+      "msRef": {
+        "label": "Customer Service setup overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+      },
+      "questions": [
+        {
+          "q": "Agents must confirm the customer was notified before resolving a case. What is the best configuration approach?",
+          "options": [
+            "Add a mandatory note to the Timeline before resolution is allowed",
+            "Use a Business Process Flow with a required Customer Notified field in the stage before Resolved",
+            "Configure the Case Resolution dialog to require a confirmation checkbox",
+            "Create a Power Automate flow that blocks resolution without a phone call activity"
+          ],
+          "answer": 1,
+          "explanation": "A <strong>Business Process Flow</strong> with a required Customer Notified field in the final active stage ensures agents cannot advance to Resolved without confirming customer notification.",
+          "wrongExplanations": [
+            "The Timeline does not have a built-in mechanism to block case resolution based on note presence.",
+            null,
+            "The Case Resolution dialog can require a description but does not support custom confirmation checkboxes.",
+            "A Power Automate flow could block resolution via a plugin pattern but this is significantly more complex — BPF is the recommended out-of-box approach."
+          ],
+          "msRef": {
+            "label": "Business Process Flows for cases",
+            "url": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
+          }
+        }
+      ]
+    }
+  ]
+}

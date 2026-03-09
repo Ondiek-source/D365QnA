@@ -211,26 +211,26 @@
       }
     },
     {
-      "q": "Which types of Dataverse entities can be used as the primary entity in a Business Process Flow?",
+      "q": "Which Dataverse tables are eligible to be used as the primary table in a Business Process Flow?",
       "options": [
-        "Any entity including system entities, activity entities, and custom entities",
-        "Only custom entities created by the organisation",
-        "Standard entities and custom entities, but not activity entities (Email, Phone Call, Task etc.)",
-        "Only entities with at least one lookup to another entity"
+        "Only custom tables created by the organisation",
+        "Standard tables and custom tables only — activity tables are always excluded",
+        "Any table where the IsBusinessProcessEnabled property is set to true — this includes standard tables, custom tables, and activity tables that have this flag enabled",
+        "Only tables that have at least one 1:N relationship to another table"
       ],
       "answer": 2,
       "category": "entities",
       "tags": [
-        "entity-types",
-        "primary-entity",
-        "activity-entity"
+        "bpf-fundamentals",
+        "table-eligibility",
+        "IsBusinessProcessEnabled"
       ],
-      "explanation": "BPFs can be created on <strong>standard entities and custom entities</strong>. However, <strong>activity entities</strong> (Email, Phone Call, Task, Appointment etc.) cannot be the primary entity for a BPF — they are excluded from BPF support.",
+      "explanation": "BPF eligibility is controlled by the <strong>IsBusinessProcessEnabled</strong> property on the table — not by table type. Standard tables (Account, Case etc.), custom tables, and activity tables can all host a BPF if this property is enabled. The BPF bar appears on the table's form when the process is active.",
       "wrongExplanations": [
-        "Activity entities are specifically excluded from BPF primary entity support.",
-        "Standard entities (like Account, Contact, Case) are fully supported.",
+        "Standard tables like Account and Case are fully supported — not just custom tables.",
+        "Activity tables are not categorically excluded — eligibility depends on the IsBusinessProcessEnabled flag on the specific table.",
         null,
-        "A lookup relationship is not required — entities without lookups can host BPFs."
+        "A lookup relationship is not a prerequisite for BPF eligibility — the IsBusinessProcessEnabled flag is the only requirement."
       ],
       "msRef": {
         "label": "Entities supported in BPF",
@@ -342,26 +342,27 @@
       }
     },
     {
-      "q": "What is the maximum number of steps (fields) that can be added to a single BPF stage?",
+      "q": "What are the three confirmed design limits for a Business Process Flow as documented in the Microsoft BPF overview?",
       "options": [
-        "10",
-        "15",
-        "20",
-        "30"
+        "Max 5 active BPFs per table, max 20 stages per process, max 3 tables",
+        "Max 10 active BPFs per table, max 30 stages per process, max 5 tables in a multi-table process",
+        "Max 10 active BPFs per table, max 50 stages per process, max 10 tables",
+        "Max 30 active BPFs per table, max 30 stages per process, max 5 tables"
       ],
-      "answer": 3,
+      "answer": 1,
       "category": "stages",
       "tags": [
-        "max-steps",
-        "stage-steps",
-        "bpf-limits"
+        "bpf-limits",
+        "stages",
+        "tables",
+        "active-processes"
       ],
-      "explanation": "The maximum is <strong>30 steps per stage</strong> in a Business Process Flow (as documented in the Power Automate BPF guide). A process can also have a maximum of <strong>30 stages</strong> total and span up to <strong>5 entities</strong>.",
+      "explanation": "The three BPF limits from the official overview are: (1) no more than <strong>10 activated BPF processes per table</strong>, (2) each process can contain no more than <strong>30 stages</strong>, and (3) multi-table processes can span no more than <strong>5 tables</strong>.",
       "wrongExplanations": [
-        "10 is incorrect — the current documented limit is 30 steps per stage.",
-        "15 is not the documented limit.",
-        "20 is not the documented limit.",
-        null
+        "The active BPF limit per table is 10, not 5. The stage limit is 30, not 20.",
+        null,
+        "The stage limit is 30, not 50. The table limit is 5, not 10.",
+        "The active BPF limit per table is 10, not 30."
       ],
       "msRef": {
         "label": "BPF steps per stage",
@@ -745,7 +746,7 @@
         "It cannot be done — BPFs only apply to records created after activation",
         "Run the 'Apply Business Process Flow' bulk operation from the BPF record to apply it to existing records en masse",
         "Open an individual record, click the Process bar or the '...' menu, and choose Switch Process to manually apply the BPF to that record",
-        "Both B and C are valid — bulk apply for multiple records, Switch Process for individual records"
+        "Bulk apply from the BPF record for multiple records at once, and Switch Process on individual records — both methods are valid"
       ],
       "answer": 3,
       "category": "general",
@@ -924,7 +925,7 @@
       }
     },
     {
-      "q": "True or False: A Business Process Flow can be triggered and managed entirely through Power Automate cloud flows without any user interaction.",
+      "q": "True or False: Business Process Flows are designed primarily as guided UI tools for users — but a cloud flow can programmatically advance BPF stages by updating the BPF instance record in Dataverse.",
       "options": [
         "True",
         "False"
@@ -932,13 +933,15 @@
       "answer": 0,
       "category": "general",
       "tags": [
-        "bpf-automation",
-        "cloud-flow"
+        "bpf-programmatic",
+        "cloud-flow",
+        "bpf-design",
+        "stage-advancement"
       ],
-      "explanation": "<strong>True.</strong> Power Automate cloud flows can interact with BPF instances via Dataverse actions — advancing stages, setting active stages, and completing the process programmatically. This enables fully automated BPF progression without user interaction.",
+      "explanation": "<strong>True.</strong> BPFs are designed as guided UI tools to walk users through a process. However, a cloud flow <em>can</em> programmatically advance stages by updating the active stage ID on the BPF instance record (stored in the BPF's custom Dataverse table). This is an advanced pattern — if the goal is <strong>fully automated, zero-user-interaction processing</strong>, a plain automated cloud flow is the more appropriate tool than a BPF.",
       "wrongExplanations": [
         null,
-        "BPFs can be automated via Power Automate — programmatic stage progression is supported through Dataverse BPF actions."
+        "A cloud flow can programmatically manipulate BPF instances via Dataverse 'Update a row' on the BPF table — but this is an advanced pattern, not the primary design intent of BPFs."
       ],
       "msRef": {
         "label": "Automate BPF with Power Automate",
@@ -1063,7 +1066,7 @@
         "Use a Workflow Step — add the cloud flow as a background workflow in the stage",
         "Use Flow Step (Preview) — add the solution-aware instant flow directly to the stage using the When a record is selected trigger",
         "Use an Action Step — create a Dataverse action, enable BPF flag, subscribe a cloud flow to it via When a Dataverse action is performed trigger",
-        "Both B and C are valid approaches — Flow Step (Preview) for direct integration, Action Step pattern for a more stable production approach"
+        "Flow Step (Preview) and the Action Step pattern are both valid — Flow Step adds the flow directly to the stage; Action Step wraps it in a Dataverse action for a more stable production approach"
       ],
       "answer": 3,
       "category": "workflows",
@@ -1355,26 +1358,26 @@
       }
     },
     {
-      "q": "What is the maximum branch depth allowed in a Business Process Flow?",
+      "q": "In a Business Process Flow, branching rules must be based on which data?",
       "options": [
-        "5 levels deep",
-        "10 levels deep",
-        "15 levels deep",
-        "Unlimited — there is no depth restriction"
+        "Any field on any table in the BPF, regardless of which stage it belongs to",
+        "Fields from the stage that immediately precedes the branch condition",
+        "Only fields on the primary entity of the BPF",
+        "Only Choice (option set) fields — text and number fields cannot be used in conditions"
       ],
       "answer": 1,
       "category": "branching",
       "tags": [
         "branching",
-        "branch-depth",
-        "bpf-limits"
+        "branch-conditions",
+        "preceding-stage"
       ],
-      "explanation": "Each branch in a BPF can be no more than <strong>10 levels deep</strong>. This limits how many nested conditional branches can exist within a single process path.",
+      "explanation": "BPF branching rules must be based on the <strong>steps (fields) in the stage that immediately precedes the condition</strong>. You cannot reference fields from earlier stages or other entities. This ensures the branching decision is grounded in data the user just entered at that point in the process.",
       "wrongExplanations": [
-        "5 is not the documented limit.",
+        "Only fields from the immediately preceding stage are available for branching rules — not any field from any stage.",
         null,
-        "15 exceeds the documented limit of 10.",
-        "There is a depth limit of 10 levels."
+        "Fields from the stage's entity (which may not be the primary entity in a multi-entity BPF) are used — not restricted to the primary entity.",
+        "Multiple field types can be used in conditions including text, numbers, choices, dates, and lookups."
       ],
       "msRef": {
         "label": "BPF branch depth limit",
@@ -1516,6 +1519,54 @@
         "label": "Multi-entity BPF relationships",
         "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
       }
+    },
+    {
+      "q": "A BPF stage has a required step pointing to a field that has Field Level Security enabled. A user without the correct FLS profile tries to advance past the stage. What happens?",
+      "options": [
+        "The user is blocked — the required step cannot be satisfied without FLS read access to the field",
+        "The BPF treats the field as if it already has a value, allowing the user to advance past the stage",
+        "The field is hidden in the stage bar and the stage is skipped entirely",
+        "The user receives an Access Denied error and the BPF instance is abandoned"
+      ],
+      "answer": 1,
+      "category": "security",
+      "tags": [
+        "field-level-security",
+        "required-step",
+        "bpf-security",
+        "stage-advancement"
+      ],
+      "explanation": "When a user lacks the correct FLS permissions for a field that is a required step in a BPF stage, the platform treats the field as if it has a value. This design prevents users from getting permanently stuck in a BPF due to missing FLS privileges. The user can advance past the stage — the FLS restriction does not create a blocking gate.",
+      "wrongExplanations": {
+        "0": "Incorrect — the BPF does not block stage advancement when FLS is the reason the field cannot be filled. It treats the field as satisfied.",
+        "2": "Incorrect — the field is not hidden and the stage is not skipped. The step is visible but the platform bypasses the required check.",
+        "3": "Incorrect — no Access Denied error is thrown in this scenario. The platform silently treats the field as having a value."
+      },
+      "msRef": "https://community.dynamics.com/blogs/post/?postid=c37247d5-db73-4528-93cc-fdf9b4452b33"
+    },
+    {
+      "q": "An administrator needs to control which Business Process Flow appears by default when a user creates a new record. Where in Power Apps / Dynamics 365 is this configured, and what is the mechanism?",
+      "options": [
+        "In the BPF designer, set the Default flag on the BPF definition record",
+        "Open the BPF in the designer and select Order Process Flow from the command bar — the topmost BPF in the list for the user's security role is applied by default",
+        "In the Security Role settings, assign the BPF as the Primary Process for that role",
+        "Edit the table's main form and set the Default Business Process Flow in the form properties"
+      ],
+      "answer": 1,
+      "category": "bpf-administration",
+      "tags": [
+        "bpf-ordering",
+        "bpf-administration",
+        "order-process-flow",
+        "default-bpf"
+      ],
+      "explanation": "To control which BPF is applied by default, open the BPF definition in the designer and select Order Process Flow from the command bar. Use the up/down arrows to set priority order. When a user creates a new record, the first active BPF available to their security role — according to this order — is applied automatically. There is no Default flag on the record itself and no form-level setting.",
+      "wrongExplanations": {
+        "0": "Incorrect — there is no Default flag on the BPF definition record. Ordering is controlled via the Order Process Flow command.",
+        "2": "Incorrect — security roles control visibility of BPFs (which roles can see them) but do not set a Primary Process designation.",
+        "3": "Incorrect — the main form properties do not include a BPF ordering or default BPF setting."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/customize/business-process-flows-overview?view=op-9-1"
     }
   ],
   "dragdrop": [
@@ -1731,11 +1782,11 @@
       "items": [
         "30 stages in a single BPF",
         "6 different entities across BPF stages",
-        "10 data steps in one stage",
-        "11 data steps in one stage",
-        "AND and OR conditions in a branch rule",
-        "Calling a Power Automate cloud flow directly as a BPF stage step",
-        "An on-demand workflow as a BPF stage step"
+        "AND and OR operators combined in the same branch rule",
+        "A solution-aware cloud flow as a Flow Step (Preview) in a BPF stage",
+        "An on-demand classic workflow as a BPF stage step",
+        "A BPF spanning 5 entities",
+        "32 stages in a single BPF"
       ],
       "zones": [
         "Valid BPF configuration",
@@ -1744,18 +1795,18 @@
       "correctMapping": {
         "30 stages in a single BPF": "Valid BPF configuration",
         "6 different entities across BPF stages": "Invalid BPF configuration",
-        "10 data steps in one stage": "Valid BPF configuration",
-        "11 data steps in one stage": "Invalid BPF configuration",
-        "AND and OR conditions in a branch rule": "Valid BPF configuration",
-        "Calling a Power Automate cloud flow directly as a BPF stage step": "Invalid BPF configuration",
-        "An on-demand workflow as a BPF stage step": "Valid BPF configuration"
+        "AND and OR operators combined in the same branch rule": "Invalid BPF configuration",
+        "A solution-aware cloud flow as a Flow Step (Preview) in a BPF stage": "Valid BPF configuration",
+        "An on-demand classic workflow as a BPF stage step": "Valid BPF configuration",
+        "A BPF spanning 5 entities": "Valid BPF configuration",
+        "32 stages in a single BPF": "Invalid BPF configuration"
       },
       "tags": [
         "bpf-limits",
         "valid-invalid",
         "configuration"
       ],
-      "explanation": "Valid: 30 stages (max), 10 steps/stage (max), AND/OR conditions, on-demand workflows. Invalid: 6 entities (max is 5), 11 steps (exceeds 10/stage limit), direct cloud flow step (not supported — use action or workflow).",
+      "explanation": "Valid: 30 stages (at the maximum), a 5-entity BPF (at the maximum), a solution-aware cloud Flow Step (Preview), and an on-demand classic workflow step. Invalid: 6 entities (exceeds the 5-table maximum), AND and OR combined in the same branch rule (you can use one or the other — not both), and 32 stages (exceeds the 30-stage maximum).",
       "msRef": {
         "label": "BPF configuration limits",
         "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
@@ -1868,6 +1919,85 @@
         "label": "BPF branch and merge design",
         "url": "https://learn.microsoft.com/en-us/power-automate/create-business-process-flow"
       }
+    },
+    {
+      "instruction": "Match each Business Process Flow security privilege to its correct definition as documented by Microsoft.",
+      "type": "match",
+      "items": [
+        "Create",
+        "Read",
+        "Write",
+        "Delete",
+        "Append",
+        "Append To"
+      ],
+      "correctMapping": {
+        "Create": "Allows creating an instance of the BPF — done at the same time as creating a new record",
+        "Read": "Allows viewing the BPF on a created record",
+        "Write": "Allows updating the BPF — for example changing state and stage navigation",
+        "Delete": "Allows deleting a BPF instance — such as when the associated record is deleted",
+        "Append": "Allows cross-entity navigation FROM an entity — for example the Lead entity in Lead to Opportunity",
+        "Append To": "Allows cross-entity navigation TO an entity — for example the Opportunity entity in Lead to Opportunity"
+      },
+      "explanation": "These are the six BPF privileges as documented by Microsoft. Create and Read are the baseline — without Create the BPF instance cannot be made, without Read the user cannot see it. Write allows stage navigation and state changes. Delete removes the instance when a record is deleted. Append and Append To together enable cross-entity navigation in multi-entity BPFs — Append is on the source entity side, Append To is on the destination entity side.",
+      "tags": [
+        "bpf-privileges",
+        "security",
+        "bpf-security"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/customize/business-process-flows-overview?view=op-9-1",
+      "zones": [
+        "Allows creating an instance of the BPF — done at the same time as creating a new record",
+        "Allows viewing the BPF on a created record",
+        "Allows updating the BPF — for example changing state and stage navigation",
+        "Allows deleting a BPF instance — such as when the associated record is deleted",
+        "Allows cross-entity navigation FROM an entity — for example the Lead entity in Lead to Opportunity",
+        "Allows cross-entity navigation TO an entity — for example the Opportunity entity in Lead to Opportunity"
+      ]
+    },
+    {
+      "instruction": "Classify each table as either eligible or not eligible to be used in a Business Process Flow, based on Microsoft's documented list of supported system entities.",
+      "type": "classify",
+      "items": [
+        "Account",
+        "Contact",
+        "Lead",
+        "Quote",
+        "Invoice",
+        "Email",
+        "Phone Call",
+        "Task",
+        "Appointment",
+        "Goal",
+        "Rollup Query",
+        "Connection"
+      ],
+      "correctMapping": {
+        "Account": "Eligible for BPF",
+        "Contact": "Eligible for BPF",
+        "Lead": "Eligible for BPF",
+        "Quote": "Eligible for BPF",
+        "Invoice": "Eligible for BPF",
+        "Email": "Eligible for BPF",
+        "Phone Call": "Eligible for BPF",
+        "Task": "Eligible for BPF",
+        "Appointment": "Eligible for BPF",
+        "Goal": "Not eligible for BPF",
+        "Rollup Query": "Not eligible for BPF",
+        "Connection": "Not eligible for BPF"
+      },
+      "explanation": "Account, Contact, Lead, Quote, Invoice, Email, Phone Call, Task, and Appointment are all on Microsoft's documented list of system entities that support BPF (they use the updated CRM 2013 forms). Goal, Rollup Query, and Connection are system tables that are not on the supported list — they do not use the updated forms required for BPF eligibility. Custom entities can always be enabled separately by checking the BPF checkbox on the entity definition.",
+      "tags": [
+        "table-eligibility",
+        "system-tables",
+        "bpf-fundamentals",
+        "activity-tables"
+      ],
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/customize/business-process-flows-overview?view=op-9-1",
+      "zones": [
+        "Eligible for BPF",
+        "Not eligible for BPF"
+      ]
     }
   ],
   "casestudy": [
@@ -1996,7 +2126,7 @@
     },
     {
       "title": "Northwind Traders — Sales BPF Design Review",
-      "scenario": "Northwind Traders' CRM administrator is reviewing a proposed Business Process Flow design for their enterprise sales process. The architect has submitted a design document with the following specifications:\n\n- <strong>Primary entity:</strong> Opportunity\n- <strong>Total stages:</strong> 32\n- <strong>Stage 5</strong> has 35 data steps\n- The BPF spans <strong>6 entities:</strong> Lead, Opportunity, Quote, Order, Invoice, and Contract\n- Stage 8 has a branch with a <strong>single condition</strong> checking if Deal Size > 100000\n- Stage 8 Branch A (large deals) has 3 stages; Branch B (standard) has 2 stages — both converge at Stage 12\n- A Power Automate cloud flow is listed as a step in Stage 10 to send an approval email (the flow is solution-aware and uses the correct trigger)\n- An on-demand classic workflow is listed as an exit step on Stage 14\n\nThe administrator must identify all design violations before development begins.",
+      "scenario": "Northwind Traders' CRM administrator is reviewing a proposed Business Process Flow design for their enterprise sales process. The architect has submitted a design document with the following specifications:\n\n- <strong>Primary entity:</strong> Opportunity\n- <strong>Total stages:</strong> 32\n- <strong>Stage 5</strong> has 8 data steps\n- The BPF spans <strong>6 entities:</strong> Lead, Opportunity, Quote, Order, Invoice, and Contract\n- Stage 8 has a branch with a <strong>single condition</strong> checking if Deal Size > 100000\n- Stage 8 Branch A (large deals) has 3 stages; Branch B (standard) has 2 stages — both converge at Stage 12\n- A Power Automate cloud flow is listed as a step in Stage 10 to send an approval email (the flow is solution-aware and uses the correct trigger)\n- An on-demand classic workflow is listed as an exit step on Stage 14\n\nThe administrator must identify all design violations before development begins.",
       "tags": [
         "bpf-limits",
         "design-review",
@@ -2016,13 +2146,13 @@
             "3 violations",
             "4 violations"
           ],
-          "answer": 2,
-          "explanation": "There are <strong>3 violations</strong>: (1) 32 stages exceeds the <strong>30-stage maximum</strong>, (2) Stage 5 has 35 data steps which exceeds the <strong>30-step-per-stage maximum</strong>, and (3) 6 entities exceeds the <strong>5-entity maximum</strong> per BPF. The branch design, single condition, classic workflow exit step, and solution-aware Flow Step are all valid.",
+          "answer": 1,
+          "explanation": "There are <strong>2 violations</strong>: (1) 32 stages exceeds the <strong>30-stage maximum</strong>, and (2) 6 entities exceeds the <strong>5-entity maximum</strong>. Stage 5's 8 data steps, the branch design, single condition, on-demand classic workflow exit step, and solution-aware Flow Step are all valid.",
           "wrongExplanations": [
-            "There is more than one violation — stages, steps per stage, and entity count all exceed limits.",
-            "Two violations misses the entity count issue — all three must be identified.",
+            "There are two violations — both stage count and entity count exceed documented limits.",
             null,
-            "Four violations overstates — the branch, condition, workflow, and Flow Step are all valid designs."
+            "Three violations overstates — the steps-per-stage count is not a documented violation.",
+            "Four violations overstates significantly."
           ],
           "msRef": {
             "label": "BPF design limits reference",
@@ -2056,7 +2186,7 @@
             "Remove Contract — it can be handled as a related record without being a BPF stage entity",
             "Split the BPF into two separate BPFs that hand off at the Order stage",
             "Replace Lead with a custom intake form that pre-populates Opportunity",
-            "Both A and B are valid approaches — either achieves compliance"
+            "Removing one entity (e.g. Contract) to reach the 5-entity limit, or splitting into two separate BPFs — either approach achieves compliance"
           ],
           "answer": 3,
           "explanation": "The 5-entity limit means one entity must be removed OR the process must be split. <strong>Removing Contract</strong> (handling it as a related record) reduces to 5 entities. <strong>Splitting into two BPFs</strong> (e.g. Lead–Quote in one, Order–Invoice in another) also achieves compliance. Both are valid design solutions.",
@@ -2093,20 +2223,20 @@
           }
         },
         {
-          "q": "Stage 5 has 35 data steps. What is the maximum allowed and what is the recommended fix?",
+          "q": "The BPF spans 6 entities. What is the maximum allowed and what is the simplest fix to bring it within limits?",
           "options": [
-            "Maximum is 30 — Stage 5 is within limits",
-            "Maximum is 30 — remove 5 data steps; move less critical fields to the entity main form instead",
-            "Maximum is 10 — remove 25 data steps",
-            "Maximum is 30 — the stage must be split into two stages to accommodate all 35 fields"
+            "Maximum is 10 entities — 6 is within limits, no fix needed",
+            "Maximum is 5 entities — remove one entity from the BPF (e.g. handle Contract as a related record rather than a BPF stage entity)",
+            "Maximum is 5 entities — the only fix is to split into two separate BPFs",
+            "Maximum is 3 entities — remove 3 entities from the process"
           ],
           "answer": 1,
-          "explanation": "The maximum is <strong>30 data steps per stage</strong>. Stage 5 has 35 — 5 must be removed from the BPF stage bar. The recommended approach is to identify which fields are critical for stage gating and move the less important ones to the entity's main form, where agents can still see and edit them without cluttering the BPF bar.",
+          "explanation": "Multi-table BPFs can span a maximum of <strong>5 tables</strong>. With 6 entities, one must be removed. The simplest fix is to drop an entity that can be handled as a related record (e.g. Contract) — reducing to 5 entities without splitting the process. Splitting into two BPFs is also valid but more complex.",
           "wrongExplanations": [
-            "35 steps exceeds the 30-step maximum — this is a violation.",
+            "The maximum is 5 tables — 6 entities is a violation.",
             null,
-            "The limit is 30 — not 10. This was a previously documented figure that has since been updated.",
-            "Splitting stages is an option but not required — removing 5 steps from Stage 5 resolves the violation without restructuring."
+            "Splitting is one option but removing a single entity is simpler and equally valid.",
+            "The maximum is 5 tables — not 3."
           ],
           "msRef": {
             "label": "BPF data steps per stage limit",

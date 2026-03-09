@@ -1,0 +1,385 @@
+{
+  "_meta": {
+    "topic": "Timeline & Agent Experience",
+    "description": "Timeline control configuration, card forms, notes, highlights, and activity types.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "What is the Timeline control in Dynamics 365 Customer Service?",
+      "options": [
+        "A Gantt chart showing the agent's scheduled activities for the day",
+        "A unified chronological feed of all activities, notes, and posts associated with a record",
+        "A visualisation of the case escalation path",
+        "A reporting widget showing case resolution trends over time"
+      ],
+      "answer": 1,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "activities",
+        "customer-engagement"
+      ],
+      "explanation": "The <strong>Timeline control</strong> displays all activities (emails, calls, tasks), notes, and posts related to a record in reverse-chronological order. It gives agents a complete interaction history in one place on the case or contact form.",
+      "wrongExplanations": [
+        "Agent schedules are managed in the scheduling board or calendar view — not the Timeline.",
+        null,
+        "Escalation paths are defined in SLAs — the Timeline shows interaction history, not escalation flows.",
+        "Reporting on resolution trends is done in dashboards and reports — not the Timeline control."
+      ],
+      "msRef": {
+        "label": "Timeline overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "An administrator wants agents to quickly see the most critical information from an email in the Timeline without opening the full record. Which feature enables this?",
+      "options": [
+        "Activity View",
+        "Card Form",
+        "Highlights Panel",
+        "Quick View Form"
+      ],
+      "answer": 1,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "card-form",
+        "configuration"
+      ],
+      "explanation": "A <strong>Card Form</strong> defines what fields are shown as the preview/summary for an activity in the Timeline. By customising the card form, administrators control which fields are visible on the collapsed timeline entry without opening the full record.",
+      "wrongExplanations": [
+        "Activity View is the full list view of activities — not the collapsed timeline preview.",
+        null,
+        "The Highlights Panel shows pinned key fields on the record itself — not timeline entry previews.",
+        "Quick View Forms are embedded read-only views of related records on a form — not the timeline entry preview."
+      ],
+      "msRef": {
+        "label": "Configure card forms for Timeline",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "In the Timeline control configuration, what is the purpose of the Highlights section?",
+      "options": [
+        "To pin specific activities to the top of the timeline",
+        "To display key fields from the parent record in a prominent summary strip above the timeline",
+        "To filter the timeline to show only flagged interactions",
+        "To highlight overdue SLA timers in red"
+      ],
+      "answer": 1,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "highlights",
+        "configuration"
+      ],
+      "explanation": "The <strong>Highlights</strong> section in the Timeline shows a configurable strip of key fields from the record itself (e.g. Case Priority, Customer, Status) directly above the activity feed — giving agents instant context without scrolling the form.",
+      "wrongExplanations": [
+        "Pinning individual activities to the top is a separate timeline feature — not the Highlights section.",
+        null,
+        "Filtering for flagged interactions is done via timeline filters — Highlights is a form field summary, not a filter.",
+        "SLA timer indicators appear in the SLA KPI section — not in the Timeline Highlights."
+      ],
+      "msRef": {
+        "label": "Timeline highlights configuration",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "Which activity types can be displayed in the Timeline control by default?",
+      "options": [
+        "Email and Phone Call only",
+        "Email, Phone Call, Task, Appointment, and Notes",
+        "Only custom activities",
+        "All standard activity types plus custom activities registered in the system"
+      ],
+      "answer": 3,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "activity-types"
+      ],
+      "explanation": "The Timeline can display <strong>all standard activity types</strong> (Email, Phone Call, Task, Appointment, Fax, Letter) <strong>plus any custom activities</strong> created in the system. Administrators can configure which types are shown or hidden.",
+      "wrongExplanations": [
+        "Email and Phone Call only is far too restrictive — the Timeline supports all activity types.",
+        "Email, Phone Call, Task, Appointment, and Notes are included but this list is not exhaustive — custom activities are also supported.",
+        "Only custom activities is incorrect — standard activity types are displayed by default.",
+        null
+      ],
+      "msRef": {
+        "label": "Configure activity types in Timeline",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "A company wants to prevent agents from deleting notes directly in the Timeline. Which configuration achieves this?",
+      "options": [
+        "Remove the Delete privilege on the Note entity in the agent security role",
+        "Disable the Delete option in the Timeline control configuration settings",
+        "Both approaches together — removing the Delete privilege on the Note entity in the security role AND disabling Delete in the Timeline control configuration",
+        "Use a Business Rule to prevent note deletion"
+      ],
+      "answer": 2,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "notes",
+        "security",
+        "configuration"
+      ],
+      "explanation": "Preventing note deletion in the Timeline requires <strong>both</strong>: removing the Delete privilege on the Note entity in the security role (platform-level enforcement), and disabling Delete in the Timeline control configuration (UI-level enforcement). Either alone can be bypassed.",
+      "wrongExplanations": [
+        "Security role alone prevents deletion via API but the Timeline UI delete button would still appear (and error). Best practice uses both.",
+        "Timeline config alone hides the button in the UI but does not prevent deletion via other means like the Notes grid or API.",
+        null,
+        "Business Rules operate on form field logic — they cannot block delete operations."
+      ],
+      "msRef": {
+        "label": "Timeline control configuration",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "What does configuring Records in the Timeline control settings refer to?",
+      "options": [
+        "Setting which case records appear in the timeline",
+        "Enabling non-activity entity records (like Knowledge Articles linked to a case) to appear in the timeline",
+        "Defining the sort order of timeline entries",
+        "Setting the maximum number of items shown in the timeline"
+      ],
+      "answer": 1,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "records",
+        "configuration"
+      ],
+      "explanation": "In the Timeline configuration, <strong>Records</strong> settings allow administrators to include <strong>non-activity entity records</strong> in the timeline — for example, showing linked Knowledge Articles or custom entity records alongside activities and notes.",
+      "wrongExplanations": [
+        "Case records are the parent — the Timeline shows child activities and records related to the case, not other case records.",
+        null,
+        "Sort order is a separate Timeline configuration option — not the Records setting.",
+        "The maximum items shown is controlled by a separate load count setting — not the Records configuration."
+      ],
+      "msRef": {
+        "label": "Configure records in Timeline",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "An agent wants to write a private note in the Timeline that should not be visible to customers in the portal. What feature is used?",
+      "options": [
+        "Sticky Note",
+        "Internal Note (Is Internal flag on Notes)",
+        "Private Activity",
+        "Hidden Comment"
+      ],
+      "answer": 1,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "notes",
+        "internal-note",
+        "portal"
+      ],
+      "explanation": "Notes in the Timeline have an <strong>Is Internal</strong> flag. When checked, the note is marked as internal and is not surfaced on the customer portal. This allows agents to add private annotations visible only to staff.",
+      "wrongExplanations": [
+        "Sticky Note is not a standard Dynamics 365 feature.",
+        null,
+        "Private Activity is not a standard concept in Dynamics 365 activities.",
+        "Hidden Comment is not a standard feature — the Is Internal flag on Notes is the correct mechanism."
+      ],
+      "msRef": {
+        "label": "Internal notes in Timeline",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "Which Timeline configuration option controls how many timeline items are initially loaded when an agent opens a case?",
+      "options": [
+        "Page Size",
+        "Load Count",
+        "Record Limit",
+        "Timeline Depth"
+      ],
+      "answer": 1,
+      "category": "timeline",
+      "tags": [
+        "timeline",
+        "performance",
+        "configuration"
+      ],
+      "explanation": "The <strong>Load Count</strong> setting in the Timeline configuration controls how many activity and note records are retrieved and displayed when the form first loads. Keeping this number low improves form load performance for cases with large interaction histories.",
+      "wrongExplanations": [
+        "Page Size is a list view concept — not a Timeline-specific setting.",
+        null,
+        "Record Limit is not the specific Timeline configuration term — it is called Load Count.",
+        "Timeline Depth is not a standard configuration setting name."
+      ],
+      "msRef": {
+        "label": "Timeline performance settings",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Match each Timeline feature to what it configures.",
+      "items": [
+        "Card Form",
+        "Highlights",
+        "Load Count",
+        "Is Internal flag on Notes",
+        "Records setting"
+      ],
+      "zones": [
+        "Controls what fields show in the collapsed timeline entry preview",
+        "Shows key record fields in a summary strip above the timeline",
+        "Controls performance by limiting initial items loaded",
+        "Hides notes from the customer portal",
+        "Adds non-activity entity records to the timeline feed"
+      ],
+      "correctMapping": {
+        "Card Form": "Controls what fields show in the collapsed timeline entry preview",
+        "Highlights": "Shows key record fields in a summary strip above the timeline",
+        "Load Count": "Controls performance by limiting initial items loaded",
+        "Is Internal flag on Notes": "Hides notes from the customer portal",
+        "Records setting": "Adds non-activity entity records to the timeline feed"
+      },
+      "tags": [
+        "timeline",
+        "configuration"
+      ],
+      "explanation": "Card Forms customise the preview. Highlights show parent record fields. Load Count is a performance setting. Is Internal hides notes from portals. Records settings add non-activity entities to the timeline.",
+      "msRef": {
+        "label": "Timeline control configuration",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "The Timeline and Agent Experience",
+      "scenario": "Fabrikam customer service team is experiencing issues with their case handling interface. Agents report the following problems:\n\n1. The Timeline on case records takes <strong>12 or more seconds</strong> to load because some cases have over 500 activities\n2. Agents cannot tell the difference between a customer complaint email and a routine update email just from the Timeline — they have to open each one\n3. A supervisor noticed agents are <strong>deleting notes</strong> from the Timeline that should be retained\n4. Agents are adding notes visible to customers via the portal when they should be internal only\n5. Product managers want <strong>linked Knowledge Articles</strong> to appear directly in the Timeline alongside activities\n\nThe admin team must resolve all five issues.",
+      "tags": [
+        "timeline",
+        "configuration",
+        "performance",
+        "security",
+        "notes"
+      ],
+      "msRef": {
+        "label": "Configure Timeline control",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      },
+      "questions": [
+        {
+          "q": "The Timeline takes 12 or more seconds to load on cases with 500 or more activities. What is the most direct configuration fix?",
+          "options": [
+            "Archive old activities to a separate table",
+            "Reduce the Timeline Load Count setting to retrieve fewer items on initial load",
+            "Upgrade to a higher Dynamics 365 tier with better performance",
+            "Split the Timeline into two separate sections — one for emails and one for other activities"
+          ],
+          "answer": 1,
+          "explanation": "The <strong>Timeline Load Count</strong> setting controls how many records are fetched on initial load. Reducing it (e.g. to 10 or 20) dramatically improves load time — agents can load more records on demand if needed.",
+          "wrongExplanations": [
+            "Archiving activities is a data management strategy — it does not fix the form load performance directly and requires significant data migration work.",
+            null,
+            "Performance tier upgrades address compute capacity — the Timeline load issue is a configuration problem solvable without a tier change.",
+            "Splitting into two Timeline sections is not a standard feature — and would not address the underlying data volume fetch problem."
+          ],
+          "msRef": {
+            "label": "Timeline load count setting",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        },
+        {
+          "q": "Agents need to distinguish email types from the collapsed Timeline view. Which configuration change achieves this?",
+          "options": [
+            "Enable colour coding for email activities in the Timeline",
+            "Customise the Card Form for Email to display the Subject, From, and a key body field as the timeline preview",
+            "Add a Required flag to emails based on content",
+            "Enable the Timeline search bar so agents can filter by keyword"
+          ],
+          "answer": 1,
+          "explanation": "Customising the <strong>Card Form</strong> for the Email activity controls what appears in the collapsed Timeline preview. Adding Subject, From, and a relevant field allows agents to identify the email type without opening it.",
+          "wrongExplanations": [
+            "Colour coding is not a standard out-of-box Timeline configuration for differentiating email types.",
+            null,
+            "Adding a Required flag does not change the visible information in the Timeline preview.",
+            "The search bar helps agents find specific records — it does not change what information is visible per activity in the Timeline."
+          ],
+          "msRef": {
+            "label": "Card forms in Timeline",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        },
+        {
+          "q": "Agents are deleting notes from the Timeline. What is the most complete way to prevent this?",
+          "options": [
+            "Remove the Delete privilege on the Note entity in the agent security role only",
+            "Disable the delete option in the Timeline configuration only",
+            "Both: remove Delete privilege on Note in the security role AND disable delete in the Timeline configuration",
+            "Enable audit logging on the Note entity to track deletions"
+          ],
+          "answer": 2,
+          "explanation": "The most complete protection combines <strong>removing Delete privilege on the Note entity</strong> (platform-level) with <strong>disabling delete in the Timeline configuration</strong> (UI-level). Security role alone leaves the button visible causing errors; Timeline config alone can be bypassed via other access methods.",
+          "wrongExplanations": [
+            "Security role alone prevents deletion via API but the Timeline delete option would still appear and show errors to agents.",
+            "Timeline configuration alone hides the UI button but does not prevent deletion through the full Notes grid or via API access.",
+            null,
+            "Audit logging tracks deletions after the fact — it does not prevent them."
+          ],
+          "msRef": {
+            "label": "Timeline and note security",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        },
+        {
+          "q": "Agents are adding notes visible to customers in the portal when they should be internal. How should agents mark notes as internal?",
+          "options": [
+            "Prefix the note with [INTERNAL] in the text body",
+            "Set the Is Internal flag when creating a note in the Timeline",
+            "Add the note to a private queue instead of the case timeline",
+            "Change the note owner to the agent supervisor"
+          ],
+          "answer": 1,
+          "explanation": "The <strong>Is Internal</strong> flag on a note, when checked, marks it as internal-only. The customer portal respects this flag and does not surface internal notes to customers — only staff can see them.",
+          "wrongExplanations": [
+            "Prefixing with [INTERNAL] is a manual convention — the portal does not recognise it and would still display the note to customers.",
+            null,
+            "Adding a note to a queue is not a standard feature — notes are attached to records, not queues.",
+            "Changing the note owner to a supervisor has no effect on portal visibility."
+          ],
+          "msRef": {
+            "label": "Internal notes in Timeline",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        },
+        {
+          "q": "Product managers want linked Knowledge Articles to appear in the Timeline alongside activities. Which Timeline setting enables this?",
+          "options": [
+            "Enable the Knowledge Article activity type in Timeline activity filters",
+            "Configure the Records setting in the Timeline to include the Knowledge Article entity",
+            "Add a subgrid for Knowledge Articles below the Timeline",
+            "Enable the Knowledge Base Search control on the case form"
+          ],
+          "answer": 1,
+          "explanation": "The Timeline <strong>Records</strong> configuration allows non-activity entities — such as Knowledge Articles — to appear in the Timeline feed alongside standard activities and notes.",
+          "wrongExplanations": [
+            "Knowledge Articles are not an activity type — they cannot be added via the activity type filter.",
+            null,
+            "A subgrid shows related records in a separate table section — not integrated into the Timeline feed.",
+            "The Knowledge Base Search control enables agents to search for articles — it does not show linked articles in the Timeline."
+          ],
+          "msRef": {
+            "label": "Records in Timeline configuration",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        }
+      ]
+    }
+  ]
+}

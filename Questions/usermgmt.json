@@ -1,0 +1,529 @@
+{
+  "_meta": {
+    "topic": "User Management & Security",
+    "description": "Security roles, access levels, business units, teams, field-level security, and user administration.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "An administrator needs agents to see only cases belonging to their team, not the entire organisation. Which mechanism best achieves this?",
+      "options": [
+        "Filter views on the case list",
+        "Business Unit and Team-based ownership with appropriate security roles",
+        "Personal views saved by each agent",
+        "Entitlement channel restrictions"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "security",
+        "business-unit",
+        "access-control"
+      ],
+      "explanation": "<strong>Business Units</strong> combined with <strong>Team ownership</strong> and security roles (set to Business Unit or Team level) restrict data access so agents only see records owned by their team or business unit.",
+      "wrongExplanations": [
+        "Filter views change what is displayed in a list but do not enforce security — agents could still navigate to other records.",
+        null,
+        "Personal views are per-agent preferences — they do not enforce data access restrictions.",
+        "Entitlement channels control which communication channels count against a support contract — not data visibility."
+      ],
+      "msRef": {
+        "label": "Security roles and access levels",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "q": "In Dynamics 365, which security role is designed for agents who handle customer cases and need access to cases, contacts, accounts, and activities?",
+      "options": [
+        "System Administrator",
+        "CSR Manager",
+        "Customer Service Representative",
+        "Basic User"
+      ],
+      "answer": 2,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "customer-service-rep",
+        "access"
+      ],
+      "explanation": "The <strong>Customer Service Representative</strong> role (also called CSR) is the out-of-the-box role for agents. It provides the standard access to Cases, Contacts, Accounts, Activities, Knowledge Articles, and Queues needed for day-to-day support work.",
+      "wrongExplanations": [
+        "System Administrator has unrestricted access — too broad for a standard agent.",
+        "CSR Manager is a supervisory role with additional reporting and management permissions beyond what a standard agent needs.",
+        null,
+        "Basic User provides minimal system access — not sufficient for customer service work."
+      ],
+      "msRef": {
+        "label": "Customer Service security roles",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
+      }
+    },
+    {
+      "q": "An agent can read all cases in the system but should only be able to edit cases assigned to them. Which access level should the Write privilege on the Case entity be set to?",
+      "options": [
+        "Organisation",
+        "Business Unit",
+        "User",
+        "None"
+      ],
+      "answer": 2,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "access-levels",
+        "privilege"
+      ],
+      "explanation": "Setting Write to <strong>User</strong> level means the agent can only edit records they own (or that are shared with them). Read at Organisation level allows them to see all cases, while Write at User level restricts editing to their own cases.",
+      "wrongExplanations": [
+        "Organisation write access would allow editing any case in the system — too permissive.",
+        "Business Unit write access allows editing cases owned by anyone in the team — broader than required.",
+        null,
+        "None would prevent editing any cases, including their own."
+      ],
+      "msRef": {
+        "label": "Security role access levels",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "q": "A user has two security roles assigned: Role A grants User-level Read on Case, Role B grants Organisation-level Read on Case. What is the user's effective access?",
+      "options": [
+        "User-level Read — the most restrictive role applies",
+        "Organisation-level Read — the least restrictive (most permissive) role applies",
+        "Neither — conflicting roles cancel each other out",
+        "Business Unit-level — Dynamics 365 averages the access levels"
+      ],
+      "answer": 1,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "role-combination",
+        "access-levels"
+      ],
+      "explanation": "When multiple security roles are assigned to a user, Dynamics 365 applies the <strong>union (most permissive)</strong> privilege. Organisation-level Read is broader than User-level, so the user effectively has Organisation-level Read on Case.",
+      "wrongExplanations": [
+        "Dynamics 365 does not apply the most restrictive role — it uses the most permissive (union) principle.",
+        null,
+        "Roles never cancel each other — they combine via union.",
+        "There is no averaging of access levels — the highest (most permissive) level from any assigned role applies."
+      ],
+      "msRef": {
+        "label": "How security roles combine",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/how-record-access-determined"
+      }
+    },
+    {
+      "q": "Which security role allows a supervisor to access all cases across their Business Unit and manage agents queues, without having full System Administrator access?",
+      "options": [
+        "Customer Service Representative",
+        "CSR Manager",
+        "Scheduler",
+        "Knowledge Manager"
+      ],
+      "answer": 1,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "CSR-manager",
+        "supervisor"
+      ],
+      "explanation": "The <strong>CSR Manager</strong> role provides supervisory access — Business Unit-level read/write on Cases, Queue management, reporting access, and the ability to reassign cases — without granting full system administration.",
+      "wrongExplanations": [
+        "Customer Service Representative is an agent role — it does not include supervisory queue management or Business Unit-wide case access.",
+        null,
+        "Scheduler is a Field Service role for resource booking — not related to Customer Service supervision.",
+        "Knowledge Manager grants access to create and manage knowledge articles — not case supervision or queue management."
+      ],
+      "msRef": {
+        "label": "Customer Service security roles",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
+      }
+    },
+    {
+      "q": "An administrator creates a custom security role but agents report they cannot see the Customer Service Hub app. What is the most likely missing permission?",
+      "options": [
+        "Read privilege on the Case entity",
+        "App Access privilege for the Customer Service Hub model-driven app",
+        "Write privilege on the User entity",
+        "Read privilege on the Queue entity"
+      ],
+      "answer": 1,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "app-access",
+        "model-driven-app"
+      ],
+      "explanation": "To access a model-driven app, the security role must include the <strong>App Access privilege</strong> for that specific app. Without it, the app does not appear in the user list of available apps even if they have entity-level permissions.",
+      "wrongExplanations": [
+        "Case read access controls whether agents can see cases within the app — not whether the app appears at all.",
+        null,
+        "Write on User entity is not needed to access the Customer Service Hub app.",
+        "Queue read access allows agents to see queue records — not a requirement for the app to appear."
+      ],
+      "msRef": {
+        "label": "Assign app access",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-security-roles"
+      }
+    },
+    {
+      "q": "What is the difference between a Security Role and a Team in Dynamics 365?",
+      "options": [
+        "Security Roles define data access permissions; Teams are groups of users that can own records and share access",
+        "Security Roles are for administrators only; Teams are for agents",
+        "Teams define data access permissions; Security Roles are groups of users",
+        "There is no difference — they are interchangeable concepts"
+      ],
+      "answer": 0,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "teams",
+        "access-control"
+      ],
+      "explanation": "<strong>Security Roles</strong> define what actions a user can perform and at what level (user, BU, org). <strong>Teams</strong> are groups of users that can collectively own records and have roles assigned to them — enabling group-level data ownership and shared access.",
+      "wrongExplanations": [
+        null,
+        "Security Roles are assigned to all types of users, not just administrators.",
+        "Teams do not define access levels — Security Roles do. Teams are groupings that can have roles assigned.",
+        "Security Roles and Teams serve fundamentally different purposes and are not interchangeable."
+      ],
+      "msRef": {
+        "label": "Teams and security roles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-teams"
+      }
+    },
+    {
+      "q": "A new agent joins the company and needs the same access as existing agents. What is the most efficient way to configure their security?",
+      "options": [
+        "Manually set field-level permissions for the new agent",
+        "Copy an existing agent security role configuration and assign it to the new user",
+        "Assign the same pre-configured security role(s) to the new user",
+        "Grant System Administrator access temporarily and restrict it later"
+      ],
+      "answer": 2,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "user-management",
+        "best-practice"
+      ],
+      "explanation": "Assigning the same <strong>pre-configured security role(s)</strong> to the new user is the correct and efficient approach. Security Roles are reusable — designed to be assigned to any number of users with the same access requirements.",
+      "wrongExplanations": [
+        "Field-level permissions are configured per role, not per user — individual configuration would bypass the role-based model.",
+        "You cannot directly copy another user role assignment as a configuration object — you assign existing roles to the new user.",
+        null,
+        "Granting System Administrator access is a security risk — it violates the principle of least privilege."
+      ],
+      "msRef": {
+        "label": "Assign security roles to users",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/assign-security-roles"
+      }
+    },
+    {
+      "q": "What is the effect of setting a security role privilege to None for Delete on the Case entity?",
+      "options": [
+        "Users with this role can delete any case",
+        "Users with this role cannot delete any case record",
+        "Users with this role can delete cases they own",
+        "Delete is blocked only on active cases"
+      ],
+      "answer": 1,
+      "category": "security",
+      "tags": [
+        "security-roles",
+        "delete-privilege",
+        "case"
+      ],
+      "explanation": "Setting Delete to <strong>None</strong> means users with this security role have no delete capability on the Case entity at all — they cannot delete any case regardless of ownership or status.",
+      "wrongExplanations": [
+        "None specifically removes all delete access — not grants it.",
+        null,
+        "None means zero access — not user-level (own records) access. User-level would be a specific access level, not None.",
+        "Status-based delete restrictions are not a function of the None privilege level — None removes delete entirely."
+      ],
+      "msRef": {
+        "label": "Security privilege levels",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "q": "Which Dynamics 365 admin area is used to configure overall Customer Service settings such as case prefix, auto-numbering, and resolution dialog options?",
+      "options": [
+        "Power Platform admin centre",
+        "Customer Service admin centre — Service Configuration Settings",
+        "Customise the System (Solution Explorer)",
+        "Environment Settings in Dataverse"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "admin-centre",
+        "service-configuration",
+        "configuration"
+      ],
+      "explanation": "The <strong>Customer Service admin centre</strong> contains <strong>Service Configuration Settings</strong> where administrators configure case prefix, auto-numbering format, SLA pause settings, resolution dialog requirements, and other Customer Service-wide options.",
+      "wrongExplanations": [
+        "Power Platform admin centre manages environment-level settings like security, capacity, and connectors — not Customer Service-specific configuration.",
+        null,
+        "Solution Explorer is for customising entities, forms, and relationships — not operational Customer Service settings.",
+        "Dataverse Environment Settings control platform-level options — Customer Service-specific settings are in the Customer Service admin centre."
+      ],
+      "msRef": {
+        "label": "Customer Service admin centre configuration",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-case-form"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Classify each security privilege level by the scope of access it grants on a Case record.",
+      "items": [
+        "None",
+        "User",
+        "Business Unit",
+        "Parent Child Business Units",
+        "Organisation"
+      ],
+      "zones": [
+        "No access to any cases",
+        "Access limited to cases the user personally owns",
+        "Access to cases owned by anyone in the same business unit or its children",
+        "Access to all cases across the entire organisation"
+      ],
+      "correctMapping": {
+        "None": "No access to any cases",
+        "User": "Access limited to cases the user personally owns",
+        "Business Unit": "Access to cases owned by anyone in the same business unit or its children",
+        "Parent Child Business Units": "Access to cases owned by anyone in the same business unit or its children",
+        "Organisation": "Access to all cases across the entire organisation"
+      },
+      "tags": [
+        "security-roles",
+        "access-levels",
+        "privileges"
+      ],
+      "explanation": "Access levels cascade: None (no access), User (own records), Business Unit (BU-wide), Parent: Child Business Units (BU hierarchy), Organisation (all records system-wide).",
+      "msRef": {
+        "label": "Security role access levels",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "instruction": "Match each out-of-box Dynamics 365 Customer Service security role to its intended user type.",
+      "items": [
+        "Customer Service Representative",
+        "CSR Manager",
+        "Knowledge Manager",
+        "Basic User",
+        "System Administrator"
+      ],
+      "zones": [
+        "Front-line agent handling cases and queues",
+        "Supervisor overseeing agents and business unit cases",
+        "Content author managing knowledge articles",
+        "Minimal access — base platform only",
+        "Unrestricted full system access"
+      ],
+      "correctMapping": {
+        "Customer Service Representative": "Front-line agent handling cases and queues",
+        "CSR Manager": "Supervisor overseeing agents and business unit cases",
+        "Knowledge Manager": "Content author managing knowledge articles",
+        "Basic User": "Minimal access — base platform only",
+        "System Administrator": "Unrestricted full system access"
+      },
+      "tags": [
+        "security-roles",
+        "role-assignment"
+      ],
+      "explanation": "Each role maps to a clear user type: CSR for agents, CSR Manager for supervisors, Knowledge Manager for article authors, Basic User for minimal access, and System Administrator for full unrestricted access.",
+      "msRef": {
+        "label": "Customer Service security roles",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "Contoso Support Centre Setup",
+      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
+      "tags": [
+        "foundational",
+        "configuration",
+        "case-management",
+        "SLA",
+        "security-roles"
+      ],
+      "msRef": {
+        "label": "Customer Service setup overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+      },
+      "questions": [
+        {
+          "q": "To ensure agents can only edit cases they personally own, what should the Write privilege on the Case entity be set to in the agent security role?",
+          "options": [
+            "Organisation",
+            "Business Unit",
+            "User",
+            "None"
+          ],
+          "answer": 2,
+          "explanation": "Setting Write to <strong>User</strong> level restricts agents to editing only the case records they own. They may still have Read at a higher level to see other cases, but Write at User level prevents modifying records they do not own.",
+          "wrongExplanations": [
+            "Organisation-level Write allows editing any case in the system — too permissive.",
+            "Business Unit-level Write allows editing cases owned by anyone in the team — broader than required.",
+            null,
+            "None would prevent editing any cases, including their own."
+          ],
+          "msRef": {
+            "label": "Security role privilege levels",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+          }
+        },
+        {
+          "q": "The supervisor needs to view and reassign all cases across the team. Which out-of-box security role is most appropriate?",
+          "options": [
+            "Customer Service Representative",
+            "CSR Manager",
+            "System Administrator",
+            "Basic User"
+          ],
+          "answer": 1,
+          "explanation": "The <strong>CSR Manager</strong> role provides Business Unit-level read/write on Cases, including the ability to reassign cases, without granting the full unrestricted access of System Administrator.",
+          "wrongExplanations": [
+            "Customer Service Representative has User-level write — supervisors cannot reassign other agents cases with this role.",
+            null,
+            "System Administrator has full unrestricted system access — inappropriate for a supervisory agent role.",
+            "Basic User has insufficient permissions for case management."
+          ],
+          "msRef": {
+            "label": "CSR Manager role",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Security Role Design Challenge",
+      "scenario": "Northwind Traders is rolling out Dynamics 365 Customer Service to three types of users:\n\n<strong>Tier 1 Agents:</strong> Handle inbound cases, can read all cases but only edit their own, cannot delete cases\n<strong>Tier 2 Specialists:</strong> Handle escalated cases, can edit any case in their business unit, can delete cases within their BU\n<strong>Supervisors:</strong> Can view, edit, and reassign any case organisation-wide, can access all queues and run reports\n\nThe admin must design security roles that match these requirements precisely without over-permissioning any group.\n\nAdditionally, some cases contain <strong>sensitive financial data</strong> in a custom field called Contract Value. Only Tier 2 Specialists and Supervisors should see this field.",
+      "tags": [
+        "security-roles",
+        "access-levels",
+        "field-security",
+        "role-design"
+      ],
+      "msRef": {
+        "label": "Design security roles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      },
+      "questions": [
+        {
+          "q": "For Tier 1 Agents — Read all cases, Write only their own, no Delete. Which privilege configuration is correct?",
+          "options": [
+            "Read: Organisation, Write: Organisation, Delete: None",
+            "Read: Organisation, Write: User, Delete: None",
+            "Read: Business Unit, Write: User, Delete: User",
+            "Read: User, Write: User, Delete: None"
+          ],
+          "answer": 1,
+          "explanation": "Read: <strong>Organisation</strong> lets Tier 1 see all cases. Write: <strong>User</strong> restricts editing to their own cases. Delete: <strong>None</strong> prevents any case deletion.",
+          "wrongExplanations": [
+            "Read: Org, Write: Org would allow editing all cases — Tier 1 agents should only edit their own.",
+            null,
+            "Read: Business Unit would restrict visibility to their BU — they need Organisation-level Read.",
+            "Read: User would prevent them from seeing other agents cases — the requirement is to read all cases."
+          ],
+          "msRef": {
+            "label": "Security role access levels",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+          }
+        },
+        {
+          "q": "For Tier 2 Specialists — edit and delete any case in their Business Unit. Which privilege configuration is correct?",
+          "options": [
+            "Read: Organisation, Write: Organisation, Delete: Organisation",
+            "Read: Business Unit, Write: Business Unit, Delete: Business Unit",
+            "Read: Organisation, Write: Business Unit, Delete: Business Unit",
+            "Read: User, Write: Business Unit, Delete: Business Unit"
+          ],
+          "answer": 2,
+          "explanation": "Read: <strong>Organisation</strong> lets Tier 2 see all cases to support escalation from any team. Write and Delete at <strong>Business Unit</strong> level restricts modifications to cases within their own BU.",
+          "wrongExplanations": [
+            "Write and Delete at Organisation would allow modifying any case in the system — too permissive for Tier 2.",
+            "Read at Business Unit would restrict visibility to their BU only — Tier 2 specialists handling escalations may need to see cases from other teams.",
+            null,
+            "Read at User only shows their own cases — Tier 2 needs broader read access."
+          ],
+          "msRef": {
+            "label": "Security role access levels",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+          }
+        },
+        {
+          "q": "Supervisors need organisation-wide access to cases. Rather than building a role from scratch, which out-of-box role is the closest starting point?",
+          "options": [
+            "Customer Service Representative",
+            "CSR Manager",
+            "System Administrator",
+            "Knowledge Manager"
+          ],
+          "answer": 1,
+          "explanation": "The <strong>CSR Manager</strong> role provides Business Unit-level supervisory access as a starting point and can be cloned and elevated to Organisation-level for the Supervisor role requirement.",
+          "wrongExplanations": [
+            "Customer Service Representative is an agent role — it does not have supervisory access levels.",
+            null,
+            "System Administrator has unrestricted full access including system customisation — far too broad for a supervisor role.",
+            "Knowledge Manager is focused on knowledge article management — not case supervision."
+          ],
+          "msRef": {
+            "label": "Customer Service security roles",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/security-roles-used-customer-service"
+          }
+        },
+        {
+          "q": "The Contract Value custom field must be hidden from Tier 1 Agents but visible to Tier 2 and Supervisors. Which feature restricts access to a specific field?",
+          "options": [
+            "Form customisation — remove the field from Tier 1 case form",
+            "Field Security Profile — restrict Read access on the Contract Value field",
+            "Business Rule — hide the field based on the user security role",
+            "Column-level permissions in the Case View"
+          ],
+          "answer": 1,
+          "explanation": "<strong>Field Security Profiles</strong> control access to individual fields at the data level. By enabling field security on Contract Value and creating a profile that grants Read access to Tier 2 and Supervisors only, Tier 1 agents cannot see the field value even via API.",
+          "wrongExplanations": [
+            "Removing the field from a form hides it in the UI but data is still accessible via other forms, views, or the API — not a true security boundary.",
+            null,
+            "Business Rules hide fields on specific forms in the browser — they do not restrict data access via API or other forms.",
+            "Column-level permissions in views are a UI display setting — not a security control that enforces data-level access."
+          ],
+          "msRef": {
+            "label": "Field security profiles",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/set-up-security-permissions-field"
+          }
+        },
+        {
+          "q": "A Tier 1 agent is accidentally assigned both the Tier 1 role (Write: User on Case) and the Tier 2 role (Write: Business Unit on Case). What is their effective Write access on Case?",
+          "options": [
+            "User — the most restrictive role takes precedence",
+            "Business Unit — the most permissive role wins (union principle)",
+            "No access — conflicting roles cancel each other",
+            "Organisation — roles are averaged upward"
+          ],
+          "answer": 1,
+          "explanation": "Dynamics 365 uses a <strong>union (most permissive)</strong> model when combining security roles. Business Unit is broader than User, so the agent effectively has Business Unit-level Write — the Tier 2 role overrides the restriction of the Tier 1 role for that privilege.",
+          "wrongExplanations": [
+            "Dynamics 365 never applies the most restrictive role — it always takes the most permissive level across all assigned roles.",
+            null,
+            "Roles never cancel — they combine via union.",
+            "There is no averaging mechanism — the highest level from any role applies."
+          ],
+          "msRef": {
+            "label": "How multiple security roles combine",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/how-record-access-determined"
+          }
+        }
+      ]
+    }
+  ]
+}

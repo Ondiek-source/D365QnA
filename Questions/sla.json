@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "topic": "Service Level Agreements",
+    "description": "SLA types, KPI timers, pause/resume behaviour, and escalation configuration.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "Which component defines the maximum time allowed to resolve a case and triggers escalation actions when breached?",
+      "options": [
+        "Entitlement",
+        "SLA (Service Level Agreement)",
+        "Routing Rule",
+        "Business Process Flow"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "SLA",
+        "KPI",
+        "escalation"
+      ],
+      "explanation": "<strong>Service Level Agreements (SLAs)</strong> define KPIs such as First Response By and Resolve By times. When a KPI is about to be breached or is breached, SLA actions can send warnings or escalate the case automatically.",
+      "wrongExplanations": [
+        "Entitlements control how many cases or hours of support a customer is entitled to — not the time targets for resolution.",
+        null,
+        "Routing Rules determine which queue or agent receives a case — they do not enforce time targets.",
+        "Business Process Flows guide agents through stages of work — they do not set or enforce time-based targets."
+      ],
+      "msRef": {
+        "label": "Define SLAs",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/define-service-level-agreements"
+      }
+    },
+    {
+      "q": "What happens to an active SLA KPI timer when a case is put On Hold?",
+      "options": [
+        "The timer continues counting — On Hold has no effect on SLA",
+        "The timer pauses and resumes from where it stopped when the case is reactivated",
+        "The timer resets to zero when the case is reactivated",
+        "The SLA is cancelled and must be manually reapplied"
+      ],
+      "answer": 1,
+      "category": "case-resolution",
+      "tags": [
+        "SLA",
+        "on-hold",
+        "KPI-timer"
+      ],
+      "explanation": "When a case status changes to a status reason configured as an <strong>On Hold</strong> status, the SLA KPI timer <strong>pauses</strong>. When the case is reactivated, the timer resumes from where it stopped — elapsed time before the hold is preserved.",
+      "wrongExplanations": [
+        "SLA timers are directly affected by On Hold status — they pause to prevent unfair breach recording while the customer holds up progress.",
+        null,
+        "The timer does not reset — it preserves elapsed time. Resetting would unfairly extend the SLA window.",
+        "The SLA is not cancelled — it resumes automatically when the case is reactivated."
+      ],
+      "msRef": {
+        "label": "SLA and On Hold status",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/define-service-level-agreements"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Match each event in a case lifecycle to the corresponding SLA timer behaviour.",
+      "items": [
+        "Case created and SLA applied",
+        "Case status set to On Hold",
+        "Case status set back to In Progress",
+        "Case resolved",
+        "Case reactivated after resolution"
+      ],
+      "zones": [
+        "SLA timer starts",
+        "SLA timer pauses",
+        "SLA timer resumes from where it stopped",
+        "SLA timer stops — KPI is met or missed",
+        "New SLA KPI may be applied depending on configuration"
+      ],
+      "correctMapping": {
+        "Case created and SLA applied": "SLA timer starts",
+        "Case status set to On Hold": "SLA timer pauses",
+        "Case status set back to In Progress": "SLA timer resumes from where it stopped",
+        "Case resolved": "SLA timer stops — KPI is met or missed",
+        "Case reactivated after resolution": "New SLA KPI may be applied depending on configuration"
+      },
+      "tags": [
+        "SLA",
+        "KPI-timer",
+        "case-lifecycle"
+      ],
+      "explanation": "SLA timers start on case creation, pause on On Hold, resume on reactivation, and stop on resolution. Reactivated cases may trigger new SLA instances depending on the SLA configuration.",
+      "msRef": {
+        "label": "SLA timer behaviour",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/define-service-level-agreements"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "Contoso Support Centre Setup",
+      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
+      "tags": [
+        "foundational",
+        "configuration",
+        "case-management",
+        "SLA",
+        "security-roles"
+      ],
+      "msRef": {
+        "label": "Customer Service setup overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+      },
+      "questions": [
+        {
+          "q": "A 4-hour resolution target with a warning at 3 hours must be configured. Which feature and KPI type achieves this?",
+          "options": [
+            "Entitlement with a 4-hour total support time allocation",
+            "SLA with a Resolve By KPI set to 4 hours and a warning action at 3 hours",
+            "Business Process Flow with a 4-hour timer between stages",
+            "Routing Rule with an escalation condition after 3 hours"
+          ],
+          "answer": 1,
+          "explanation": "An <strong>SLA</strong> with a <strong>Resolve By KPI</strong> of 4 hours is the correct configuration. SLA Actions can be configured to fire at a Warning time (3 hours) before the KPI expires, sending alerts or escalating the case.",
+          "wrongExplanations": [
+            "Entitlements control the quantity of support (number of cases or hours a customer can request) — not time targets for resolution.",
+            null,
+            "Business Process Flows do not have built-in timers that enforce resolution windows.",
+            "Routing Rules assign cases to queues based on attributes — they do not enforce time-based targets."
+          ],
+          "msRef": {
+            "label": "Configure SLA KPIs",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/define-service-level-agreements"
+          }
+        }
+      ]
+    }
+  ]
+}

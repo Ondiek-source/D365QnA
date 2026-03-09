@@ -1,0 +1,150 @@
+{
+  "_meta": {
+    "topic": "Queues & Routing",
+    "description": "Public/private queues, queue items, routing rules, and work distribution.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "In Dynamics 365 Customer Service, what is a Queue used for?",
+      "options": [
+        "Storing escalated cases that have breached an SLA",
+        "Holding records that need to be worked on, allowing agents to pick items and organise work",
+        "Archiving resolved cases for reporting",
+        "Grouping agents for performance reporting"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "queues",
+        "routing",
+        "work-management"
+      ],
+      "explanation": "<strong>Queues</strong> are holding areas for work items (cases, activities) waiting to be processed. Agents pick queue items from their assigned queues, ensuring organised work distribution.",
+      "wrongExplanations": [
+        "SLA-breached cases can be routed to queues, but queues themselves are not specifically for SLA violations.",
+        null,
+        "Resolved cases remain as Case records — queues are for active work items.",
+        "Agent groups for reporting are typically Teams or Business Units — not queues."
+      ],
+      "msRef": {
+        "label": "Work with queues",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/work-with-queues"
+      }
+    },
+    {
+      "q": "What differentiates a Public Queue from a Private Queue in Dynamics 365?",
+      "options": [
+        "Public queues are visible to all agents; private queues are only visible to agents explicitly added as members",
+        "Public queues support SLA tracking; private queues do not",
+        "Public queues are for cases; private queues are for activities only",
+        "Public queues are managed by administrators; private queues are self-managed by agents"
+      ],
+      "answer": 0,
+      "category": "foundational",
+      "tags": [
+        "queues",
+        "queue-types",
+        "security"
+      ],
+      "explanation": "<strong>Public queues</strong> are visible to all agents in the system. <strong>Private queues</strong> restrict visibility to explicitly added members only, allowing more controlled work distribution.",
+      "wrongExplanations": [
+        null,
+        "SLA tracking is based on SLA configuration and applies to cases regardless of queue type.",
+        "Both public and private queues can hold cases and activities.",
+        "Queue management permissions are determined by security roles, not by public or private queue type."
+      ],
+      "msRef": {
+        "label": "Create and manage queues",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-queues-manage-activities-cases"
+      }
+    },
+    {
+      "q": "Which record is automatically created and tracks an agent's ownership of a specific queue item?",
+      "options": [
+        "Case Assignment",
+        "Queue Item",
+        "Work Stream",
+        "Booking"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "queues",
+        "queue-item"
+      ],
+      "explanation": "A <strong>Queue Item</strong> is created when a case or activity is added to a queue. It tracks which agent has picked (is working) the item. When an agent picks an item, the Queue Item's Worked By field is set to that agent.",
+      "wrongExplanations": [
+        "Case Assignment is not a standard entity in Dynamics 365 Customer Service.",
+        null,
+        "Work Streams are Unified Routing configurations that define how work is classified and routed — not individual work ownership records.",
+        "Bookings are used in Field Service for scheduling resources — not for queue ownership in Customer Service."
+      ],
+      "msRef": {
+        "label": "Route and queue items",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/work-with-queues"
+      }
+    },
+    {
+      "q": "A company wants cases to be automatically assigned to the correct queue based on the case type. Which feature should be configured?",
+      "options": [
+        "SLA",
+        "Routing Rule Set",
+        "Record Creation Rule",
+        "Entitlement Channel"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "routing-rules",
+        "queues",
+        "case-management"
+      ],
+      "explanation": "<strong>Routing Rule Sets</strong> evaluate case attributes and automatically route cases to the appropriate queue. Each rule item defines conditions (e.g. Case Type = Question) and the target queue.",
+      "wrongExplanations": [
+        "SLAs define time targets — they do not route cases to queues.",
+        null,
+        "Record Creation Rules create cases from inbound activities — they do not route existing cases to queues.",
+        "Entitlement Channels define which contact channels count against a support entitlement — not routing logic."
+      ],
+      "msRef": {
+        "label": "Create routing rule sets",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/create-routing-rules"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Classify each Queue characteristic as belonging to a Public Queue, Private Queue, or both.",
+      "items": [
+        "Visible to all agents in the system",
+        "Restricted to explicitly added members only",
+        "Queue Item Worked By field tracks ownership",
+        "Suited for specialist team routing",
+        "Suited for general inbound triage"
+      ],
+      "zones": [
+        "Public Queue only",
+        "Private Queue only",
+        "Applies to both queue types"
+      ],
+      "correctMapping": {
+        "Visible to all agents in the system": "Public Queue only",
+        "Restricted to explicitly added members only": "Private Queue only",
+        "Queue Item Worked By field tracks ownership": "Applies to both queue types",
+        "Suited for specialist team routing": "Private Queue only",
+        "Suited for general inbound triage": "Public Queue only"
+      },
+      "tags": [
+        "queues",
+        "queue-types"
+      ],
+      "explanation": "Public queues are open to all agents and suit general triage. Private queues restrict access to members and suit specialist teams. Queue Item ownership tracking applies to both.",
+      "msRef": {
+        "label": "Create and manage queues",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-queues-manage-activities-cases"
+      }
+    }
+  ],
+  "casestudy": []
+}

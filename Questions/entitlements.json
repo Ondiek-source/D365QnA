@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "topic": "Entitlements",
+    "description": "Entitlement terms, channels, renewal, and linking to cases.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "What is an Entitlement in Dynamics 365 Customer Service?",
+      "options": [
+        "A security role granting agents access to case records",
+        "A record that defines the support terms a customer is entitled to, such as number of cases or support hours",
+        "A routing rule that assigns cases to specific agents",
+        "A template for automatically creating cases from emails"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "entitlements",
+        "customer-service-configuration"
+      ],
+      "explanation": "<strong>Entitlements</strong> define the support contract terms for a customer — specifying how many cases or hours of support they can receive in a period. Cases can be decremented against an entitlement automatically.",
+      "wrongExplanations": [
+        "Security roles control record-level access for agents — they are not entitlements.",
+        null,
+        "Routing rules assign cases to queues or agents — they are separate from entitlements.",
+        "Automatic case creation from emails is handled by Record Creation and Update Rules, not entitlements."
+      ],
+      "msRef": {
+        "label": "Create and manage entitlements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/create-entitlement-define-support-terms-customer"
+      }
+    }
+  ],
+  "dragdrop": [],
+  "casestudy": []
+}

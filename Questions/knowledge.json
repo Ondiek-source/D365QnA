@@ -1,0 +1,137 @@
+{
+  "_meta": {
+    "topic": "Knowledge Articles",
+    "description": "Article lifecycle, subject tree, search, and linking to cases.",
+    "status": "in-progress"
+  },
+  "mcq": [
+    {
+      "q": "What is the purpose of a Subject Tree in Dynamics 365 Customer Service?",
+      "options": [
+        "To define escalation paths for SLA violations",
+        "To categorise cases and knowledge articles using a hierarchical classification structure",
+        "To map routing rules to queues",
+        "To track the resolution steps of a case"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "subject-tree",
+        "configuration",
+        "knowledge-management"
+      ],
+      "explanation": "The <strong>Subject Tree</strong> provides a hierarchical taxonomy for classifying cases and knowledge articles. It enables consistent categorisation and supports filtering and reporting across the organisation.",
+      "wrongExplanations": [
+        "Escalation paths for SLA violations are handled by SLA KPIs and actions, not the subject tree.",
+        null,
+        "Routing rules map cases to queues based on conditions — subject tree is a classification tool.",
+        "Resolution steps are tracked on the case itself via the resolution activity — not via subjects."
+      ],
+      "msRef": {
+        "label": "Create and manage subjects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/create-manage-subjects-determine-products-knowledge-base-issues"
+      }
+    },
+    {
+      "q": "Which Dynamics 365 Customer Service feature stores reusable answers that agents can link to cases to assist with resolution?",
+      "options": [
+        "Quick Replies",
+        "Knowledge Articles",
+        "Email Templates",
+        "Macros"
+      ],
+      "answer": 1,
+      "category": "foundational",
+      "tags": [
+        "knowledge-management",
+        "knowledge-articles"
+      ],
+      "explanation": "<strong>Knowledge Articles</strong> are structured, searchable documents that capture solutions, procedures, and FAQs. Agents can link them to cases and customers can find them in the customer portal.",
+      "wrongExplanations": [
+        "Quick Replies are short pre-written messages used in live chat channels — not structured solution articles.",
+        null,
+        "Email Templates are pre-formatted emails for outbound communication — not knowledge content.",
+        "Macros are agent productivity scripts that automate sequences of actions — not knowledge articles."
+      ],
+      "msRef": {
+        "label": "Knowledge management overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/knowledge-management-overview"
+      }
+    }
+  ],
+  "dragdrop": [
+    {
+      "instruction": "Match each knowledge article status to its meaning in the article lifecycle.",
+      "items": [
+        "Draft",
+        "In Review",
+        "Approved",
+        "Published",
+        "Archived"
+      ],
+      "zones": [
+        "Article is being authored — not yet submitted",
+        "Article is awaiting review by a knowledge manager",
+        "Article has passed review and is ready to publish",
+        "Article is live and visible to agents and customers",
+        "Article has been retired from active use"
+      ],
+      "correctMapping": {
+        "Draft": "Article is being authored — not yet submitted",
+        "In Review": "Article is awaiting review by a knowledge manager",
+        "Approved": "Article has passed review and is ready to publish",
+        "Published": "Article is live and visible to agents and customers",
+        "Archived": "Article has been retired from active use"
+      },
+      "tags": [
+        "knowledge-management",
+        "knowledge-lifecycle"
+      ],
+      "explanation": "Knowledge Articles follow a Draft to In Review to Approved to Published to Archived lifecycle. Only Published articles are visible to agents and customers in search results.",
+      "msRef": {
+        "label": "Knowledge article lifecycle",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-knowledge-article"
+      }
+    }
+  ],
+  "casestudy": [
+    {
+      "title": "Contoso Support Centre Setup",
+      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
+      "tags": [
+        "foundational",
+        "configuration",
+        "case-management",
+        "SLA",
+        "security-roles"
+      ],
+      "msRef": {
+        "label": "Customer Service setup overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+      },
+      "questions": [
+        {
+          "q": "Contoso wants to classify cases using a standard product taxonomy such as Hardware > Laptops > Battery. Which feature supports this?",
+          "options": [
+            "Category field with an option set of product names",
+            "Subject Tree configured with a hierarchical product taxonomy",
+            "Business Process Flow stages for each product",
+            "Tag field on the Case entity"
+          ],
+          "answer": 1,
+          "explanation": "The <strong>Subject Tree</strong> supports multi-level hierarchical classification. Configuring it with Hardware > Laptops > Battery provides agents with a structured taxonomy and enables filtering and reporting by product category.",
+          "wrongExplanations": [
+            "An option set Category field is flat — it does not support the multi-level hierarchy required.",
+            null,
+            "Business Process Flows define workflow stages — they are not classification taxonomies.",
+            "A Tag field is informal text — it does not provide a governed hierarchical taxonomy."
+          ],
+          "msRef": {
+            "label": "Create subjects for classification",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/create-manage-subjects-determine-products-knowledge-base-issues"
+          }
+        }
+      ]
+    }
+  ]
+}
