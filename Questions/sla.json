@@ -7,6 +7,296 @@
   },
   "mcq": [
     {
+      "q": "A support manager wants to quickly create multiple entitlements that already include common values such as start date, end date, SLA, allocation type, and total term. What should be used?",
+      "options": [
+        "An entitlement channel",
+        "An entitlement template",
+        "A standard SLA",
+        "A customer service schedule"
+      ],
+      "answer": 1,
+      "category": "entitlement-templates",
+      "tags": [
+        "entitlements",
+        "templates",
+        "prefill",
+        "reuse"
+      ],
+      "explanation": "An entitlement template is used to quickly create entitlements that are prefilled with core support-term information such as dates, SLA, allocation type, and total term.",
+      "wrongExplanations": {
+        "0": "Entitlement channels define support terms per channel, but they do not provide template-based prefill for full entitlement creation.",
+        "2": "An SLA measures service targets but does not itself serve as a reusable entitlement creation template.",
+        "3": "A customer service schedule controls working hours, not entitlement prefill."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+    },
+    {
+      "q": "Which statement best describes the relationship between an entitlement template and an entitlement?",
+      "options": [
+        "An entitlement template is an active support contract for a customer",
+        "An entitlement template contains predefined support terms that can be used to create entitlements",
+        "An entitlement template replaces SLAs completely",
+        "An entitlement template is required before any entitlement can be created"
+      ],
+      "answer": 1,
+      "category": "entitlement-templates",
+      "tags": [
+        "entitlements",
+        "templates",
+        "difference",
+        "lifecycle"
+      ],
+      "explanation": "An entitlement template contains predefined customer support terms and is used to create actual entitlements for customers.",
+      "wrongExplanations": {
+        "0": "The live, customer-specific support contract is the entitlement, not the template.",
+        "2": "Templates do not replace SLAs.",
+        "3": "Templates are optional accelerators, not a mandatory prerequisite."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+    },
+    {
+      "q": "A company wants a new entitlement created from a template to still be customer-specific and active only when assigned properly. What is true?",
+      "options": [
+        "Creating from a template automatically activates it for all customers",
+        "Creating from a template prepopulates terms, but the entitlement still needs to be created as a customer-specific record",
+        "Templates can be applied directly to cases without creating an entitlement",
+        "Templates work only for default entitlements"
+      ],
+      "answer": 1,
+      "category": "entitlement-templates",
+      "tags": [
+        "entitlements",
+        "templates",
+        "customer-specific",
+        "activation"
+      ],
+      "explanation": "Templates prefill support-term information, but the resulting entitlement is still a customer-specific record that must be created and managed as an actual entitlement.",
+      "wrongExplanations": {
+        "0": "Templates do not auto-activate support across all customers.",
+        "2": "Cases use entitlements, not templates directly.",
+        "3": "Templates are not limited to default-entitlement scenarios."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+    },
+    {
+      "q": "A company wants a specific entitlement to be applied automatically whenever a new case is created for a customer. Which condition must be met on the entitlement itself?",
+      "options": [
+        "It must be marked as the default entitlement for that customer and be active",
+        "It must use phone as the only entitlement channel",
+        "It must have Restrict based on entitlement terms set to No",
+        "It must be created from a template"
+      ],
+      "answer": 0,
+      "category": "default-entitlement",
+      "tags": [
+        "entitlements",
+        "default",
+        "auto-apply",
+        "active"
+      ],
+      "explanation": "Only an active entitlement can be set as the default entitlement for a customer, and default entitlements are the ones intended for automatic application to cases.",
+      "wrongExplanations": {
+        "1": "Channel choice does not determine whether an entitlement is the default for automatic case application.",
+        "2": "Restriction behavior is separate from default application.",
+        "3": "Template origin is irrelevant to default-entitlement status."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+    },
+    {
+      "q": "A customer already has one default entitlement. An administrator sets another active entitlement as default for the same customer. What happens?",
+      "options": [
+        "Both entitlements remain default and the system chooses one randomly",
+        "The original default entitlement is overridden by the new default entitlement",
+        "The change is blocked because only templates can be default",
+        "The new entitlement becomes default only for phone cases"
+      ],
+      "answer": 1,
+      "category": "default-entitlement",
+      "tags": [
+        "entitlements",
+        "default",
+        "override",
+        "customer"
+      ],
+      "explanation": "If an entitlement is already set as default for a customer, setting another entitlement as default overrides the existing one and makes the new one the default.",
+      "wrongExplanations": {
+        "0": "The platform does not support multiple simultaneous defaults for the same customer in that way.",
+        "2": "Templates are not the default-support record used on cases.",
+        "3": "Default entitlement is not limited to phone cases."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+    },
+    {
+      "q": "An entitlement is configured to decrement remaining terms on case creation. A case was created with the entitlement, but the admin had set Decrement Entitlement Term to No on the case. Later they switch that case field back to Yes. What should they expect?",
+      "options": [
+        "The entitlement terms decrement automatically at that moment",
+        "The entitlement terms never decrement under any circumstances",
+        "The entitlement terms do not decrement automatically and must be decremented explicitly through workflow or code",
+        "The case is forced into resolved status"
+      ],
+      "answer": 2,
+      "category": "entitlement-decrement",
+      "tags": [
+        "entitlements",
+        "decrement",
+        "case-creation",
+        "manual-correction"
+      ],
+      "explanation": "If decrement on case creation was prevented and later switched back to Yes, the term doesn't automatically decrement retroactively. It must be decremented explicitly using workflow or programmatically.",
+      "wrongExplanations": {
+        "0": "Microsoft specifically notes it will not decrement automatically in this scenario.",
+        "1": "It can still be decremented explicitly.",
+        "3": "Case status is unrelated to this correction path."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+    },
+    {
+      "q": "Which setting controls whether entitlement terms are reduced at case creation versus case resolution?",
+      "options": [
+        "Restrict based on entitlement terms",
+        "Decrease Remaining On",
+        "Allocation Type",
+        "Apply the SLA after manual override"
+      ],
+      "answer": 1,
+      "category": "entitlement-decrement",
+      "tags": [
+        "entitlements",
+        "decrement",
+        "timing",
+        "case-creation",
+        "case-resolution"
+      ],
+      "explanation": "Decrease Remaining On determines when the remaining entitlement terms are decremented, such as on case creation or case resolution.",
+      "wrongExplanations": {
+        "0": "That setting controls blocking behavior when terms are exceeded, not the decrement timing trigger.",
+        "2": "Allocation Type defines whether support is measured in hours or cases, not when decrement happens.",
+        "3": "That setting relates to SLA application, not entitlement decrement timing."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
+      "q": "A company wants support eligibility to depend on the specific product a customer purchased. Which entitlement capability supports this?",
+      "options": [
+        "Associating the entitlement to a product",
+        "Using only public queues",
+        "Using an enhanced SLA only",
+        "Enabling holiday schedule recalculation"
+      ],
+      "answer": 0,
+      "category": "entitlement-scope",
+      "tags": [
+        "entitlements",
+        "product",
+        "support-level",
+        "scope"
+      ],
+      "explanation": "Entitlements can be scoped based on the product or service that the customer purchased, allowing support levels to vary by product.",
+      "wrongExplanations": {
+        "1": "Queues do not define product-specific support eligibility.",
+        "2": "SLA type does not create product entitlement scope by itself.",
+        "3": "Holiday schedules are unrelated."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
+      "q": "A company wants only a named contact at a customer to be able to consume a given support entitlement. What should be configured?",
+      "options": [
+        "A contact-specific entitlement",
+        "A default SLA",
+        "A private queue",
+        "A customer service schedule"
+      ],
+      "answer": 0,
+      "category": "entitlement-scope",
+      "tags": [
+        "entitlements",
+        "contact",
+        "scope",
+        "support-eligibility"
+      ],
+      "explanation": "Entitlements can be defined so that support terms apply to specific related records such as a contact, not just broadly to the whole customer account.",
+      "wrongExplanations": {
+        "1": "SLAs define timing commitments, not who is entitled to consume support.",
+        "2": "Queue visibility is unrelated to entitlement eligibility.",
+        "3": "Schedules define work hours, not entitlement scope."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/training/modules/creating-and-managing-entitlements-in-dynamics-365/"
+    },
+    {
+      "q": "A support manager wants separate support limits for email and phone under one support contract. Which design is correct?",
+      "options": [
+        "Use one entitlement with separate entitlement channels",
+        "Create one SLA KPI for email and one for phone without entitlement channels",
+        "Use one entitlement template only",
+        "Use holiday schedules for each support channel"
+      ],
+      "answer": 0,
+      "category": "entitlement-channels",
+      "tags": [
+        "entitlements",
+        "channels",
+        "email",
+        "phone",
+        "support-terms"
+      ],
+      "explanation": "Entitlement channels are used to define and track separate support terms by channel, such as Email and Phone, within a single entitlement.",
+      "wrongExplanations": {
+        "1": "SLA KPIs measure compliance but do not define channel-specific entitlement consumption.",
+        "2": "A template is not the live channel-consumption mechanism.",
+        "3": "Holiday schedules do not split support-term consumption by channel."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
+      "q": "Which statement about Restrict based on entitlement terms is correct?",
+      "options": [
+        "It controls whether support is measured in hours or cases",
+        "It controls whether representatives are prevented from creating cases when remaining terms go below zero",
+        "It determines whether the entitlement can be default",
+        "It applies only to entitlement templates"
+      ],
+      "answer": 1,
+      "category": "entitlement-restrictions",
+      "tags": [
+        "entitlements",
+        "restrict-based-on-terms",
+        "case-creation",
+        "blocking"
+      ],
+      "explanation": "Restrict based on entitlement terms determines whether representatives can continue creating cases when remaining terms are exhausted or negative.",
+      "wrongExplanations": {
+        "0": "Allocation Type controls hours versus cases.",
+        "2": "Default-entitlement behavior is separate.",
+        "3": "This is a live entitlement setting, not template-only."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
+      "q": "A representative can still create a case even though the customer's entitlement is already overused. Which setting most likely explains this?",
+      "options": [
+        "Restrict based on entitlement terms is set to No",
+        "Allocation Type is set to Number of cases",
+        "The entitlement has a default SLA",
+        "The entitlement was created from a template"
+      ],
+      "answer": 0,
+      "category": "entitlement-restrictions",
+      "tags": [
+        "entitlements",
+        "overuse",
+        "negative-terms",
+        "restriction"
+      ],
+      "explanation": "If Restrict based on entitlement terms is set to No, representatives can still create cases and the remaining terms can become negative.",
+      "wrongExplanations": {
+        "1": "Case-based allocation does not by itself permit overuse.",
+        "2": "Default SLA is unrelated to blocking behavior.",
+        "3": "Template origin does not explain this runtime behavior."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
       "q": "A company uses Dynamics 365 Customer Service. Two SLAs exist for cases: one for cases logged by email and one for all other cases. The SLA timer must pause whenever the Is Escalated column is set to Yes, but only for cases logged by email. What should you configure?",
       "options": [
         "Pause status on the Case table",
@@ -1415,6 +1705,54 @@
   ],
   "tf": [
     {
+      "q": "True or False: An entitlement template is itself the active support contract that gets applied directly to cases.",
+      "answer": false,
+      "category": "entitlement-templates",
+      "tags": [
+        "entitlements",
+        "templates",
+        "difference"
+      ],
+      "explanation": "False. The active support contract applied to cases is the entitlement. A template is a predefined structure used to create entitlements.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+    },
+    {
+      "q": "True or False: Only an active entitlement can be set as the default entitlement for a customer.",
+      "answer": true,
+      "category": "default-entitlement",
+      "tags": [
+        "entitlements",
+        "default",
+        "active"
+      ],
+      "explanation": "True. Microsoft states that only an active entitlement can be set as the default entitlement for a customer.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entitlement-entities?view=op-9-1"
+    },
+    {
+      "q": "True or False: If Restrict based on entitlement terms is set to No, remaining terms can become negative.",
+      "answer": true,
+      "category": "entitlement-restrictions",
+      "tags": [
+        "entitlements",
+        "negative-terms",
+        "restriction"
+      ],
+      "explanation": "True. Microsoft documents that representatives can still create cases and remaining terms can go negative when restriction is disabled.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
+      "q": "True or False: Entitlement channels can be added before the entitlement record is saved for the first time.",
+      "answer": false,
+      "category": "entitlement-channels",
+      "tags": [
+        "entitlements",
+        "channels",
+        "save-first"
+      ],
+      "explanation": "False. You must save the entitlement first before adding entitlement channels.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
+    {
       "statement": "Only enhanced SLAs can be created for entities other than Case.",
       "answer": true,
       "category": "sla-types",
@@ -1638,6 +1976,71 @@
     }
   ],
   "dragdrop": [
+    {
+      "instruction": "Match each entitlement concept to its correct description.",
+      "items": [
+        "Entitlement template",
+        "Entitlement",
+        "Entitlement channel",
+        "Default entitlement",
+        "Restrict based on entitlement terms"
+      ],
+      "zones": [
+        "Reusable predefined support terms used to create new customer support records",
+        "The active customer-specific support record that defines what support is allowed",
+        "A per-channel support-term record such as Email or Phone under one entitlement",
+        "The active entitlement intended for automatic application to a customer's cases",
+        "A setting that determines whether case creation is blocked when terms are exhausted"
+      ],
+      "correctMapping": {
+        "Entitlement template": "Reusable predefined support terms used to create new customer support records",
+        "Entitlement": "The active customer-specific support record that defines what support is allowed",
+        "Entitlement channel": "A per-channel support-term record such as Email or Phone under one entitlement",
+        "Default entitlement": "The active entitlement intended for automatic application to a customer's cases",
+        "Restrict based on entitlement terms": "A setting that determines whether case creation is blocked when terms are exhausted"
+      },
+      "tags": [
+        "entitlements",
+        "templates",
+        "channels",
+        "default",
+        "restriction"
+      ],
+      "explanation": "This separates reusable template design from live entitlement behavior, channel-specific term tracking, automatic default application, and blocking behavior.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-entitlements-templates"
+    },
+    {
+      "instruction": "Match each entitlement scenario to the correct configuration choice.",
+      "items": [
+        "Support differs by purchased product",
+        "Only a specific named person can consume support",
+        "Terms decrease when the case is first opened",
+        "Terms decrease only when the case is resolved",
+        "Email and phone have different support allowances"
+      ],
+      "zones": [
+        "Associate the entitlement to a product",
+        "Use contact-specific support scoping",
+        "Set Decrease Remaining On to case creation",
+        "Set Decrease Remaining On to case resolution",
+        "Use separate entitlement channels"
+      ],
+      "correctMapping": {
+        "Support differs by purchased product": "Associate the entitlement to a product",
+        "Only a specific named person can consume support": "Use contact-specific support scoping",
+        "Terms decrease when the case is first opened": "Set Decrease Remaining On to case creation",
+        "Terms decrease only when the case is resolved": "Set Decrease Remaining On to case resolution",
+        "Email and phone have different support allowances": "Use separate entitlement channels"
+      },
+      "tags": [
+        "entitlements",
+        "scope",
+        "decrement",
+        "channels"
+      ],
+      "explanation": "The right entitlement design depends on whether the requirement is scope-based, timing-based, or channel-based.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer"
+    },
     {
       "instruction": "Match each SLA capability or rule to the correct statement.",
       "items": [
