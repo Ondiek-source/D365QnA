@@ -516,7 +516,8 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
     <div class="rm-body" id="resumeBody">You were on question — of — with — remaining on the clock.</div>
     <div class="rm-actions">
       <button class="rm-resume" onclick="resumeSession()">Resume →</button>
-      <button class="rm-discard" onclick="discardSession()">Discard & Start Fresh</button>
+      <button class="rm-discard" onclick="startFreshSession()">Discard & Start Fresh</button>
+      <button class="rm-discard" onclick="dismissResumeModal()">Never mind</button>
     </div>
   </div>
 </div>
@@ -785,9 +786,9 @@ const CONFIG = {
     { id:'mdaconfig',    title:'Configure Data Model & UI',      icon:'🧩', desc:'Tables, columns, forms, views, site map, app components, Dataverse search, notifications.',                    file:'Questions/mdaconfig.json',   locked:true },
     { id:'bpf',          title:'Business Process Flows',         icon:'🔀', desc:'Stages, branches, merge logic, workflows, action steps, entity limits, and BPF automation patterns.',          file:'Questions/bpf.json' },
     { id:'cases',        title:'Cases & Case Management',        icon:'📋', desc:'Case lifecycle, resolution, merging, subject tree, routing rules, and case configuration.',                    file:'Questions/cases.json' },
-    { id:'queues',       title:'Unified Routing & Assignment',    icon:'📬', desc:'Unified routing, workstreams, queues, classification, assignment, skills, overflow, diagnostics, and best practices.', file:'Questions/UnifiedRoutingII.json' },
-    { id:'sla',          title:'SLAs & Entitlements',             icon:'⏱️', desc:'Enhanced vs standard SLAs, KPI timers, pause/resume, schedules, entitlements, channels, templates, and support terms.', file:'Questions/SLAsAndEntitlements.json' },
-    { id:'knowledge',    title:'Knowledge Articles',             icon:'📖', desc:'Article lifecycle, subject tree, search configuration, and linking articles to cases.',                        file:'Questions/knowledge.json' },
+    { id:'queues',       title:'Unified Routing & Assignment',   icon:'📬', desc:'Unified routing, workstreams, queues, classification, assignment, skills, overflow, diagnostics, and best practices.', file:'Questions/UnifiedRoutingII.json' },
+    { id:'sla',          title:'SLAs & Entitlements',            icon:'⏱️', desc:'Enhanced vs standard SLAs, KPI timers, pause/resume, schedules, entitlements, channels, templates, and support terms.', file:'Questions/SLAsAndEntitlements.json' },
+    { id:'knowledge',    title:'Knowledge Management',           icon:'📖', desc:'Article lifecycle, subject tree, search configuration, and linking articles to cases.',                        file:'Questions/knowledge.json' },
     { id:'rcrules',      title:'Record Creation & Update Rules', icon:'⚙️', desc:'Automated case creation from email, inbound channels, conditions, and Power Automate integration.',           file:'Questions/rcrules.json' },
     { id:'timeline',     title:'Timeline & Agent Experience',    icon:'🕐', desc:'Timeline control configuration, card forms, notes, highlights, and activity type display.',                   file:'Questions/timeline.json' },
     { id:'usermgmt',     title:'User Management & Security',     icon:'👤', desc:'Security roles, access levels, business units, teams, field-level security, and user administration.',        file:'Questions/usermgmt.json' },
@@ -841,10 +842,12 @@ async function dbGetAll(){ const d=await openDB(); return new Promise((res,rej)=
 async function dbGetById(id){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(STORE,'readonly'); const r=tx.objectStore(STORE).get(id); r.onsuccess=e=>res(e.target.result||null); r.onerror=e=>rej(e); }); }
 async function dbClearAll(){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(STORE,'readwrite'); tx.objectStore(STORE).clear().onsuccess=()=>res(); tx.onerror=e=>rej(e); }); }
 async function dbDeleteTopic(topicId){ const all=await dbGetAll(); const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(STORE,'readwrite'); const st=tx.objectStore(STORE); let n=all.filter(s=>s.topicId===topicId).length; if(!n) return res(); all.filter(s=>s.topicId===topicId).forEach(s=>{ const r=st.delete(s.id); r.onsuccess=()=>{ if(--n===0) res(); }; r.onerror=e=>rej(e); }); tx.onerror=e=>rej(e); }); }
-// Draft (in-progress session) — keyed by fixed id 'current'
-async function dbSaveDraft(draft){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readwrite'); tx.objectStore(DRAFT_STORE).put({...draft,id:'current'}).onsuccess=()=>res(); tx.onerror=e=>rej(e); }); }
-async function dbGetDraft(){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readonly'); const r=tx.objectStore(DRAFT_STORE).get('current'); r.onsuccess=e=>res(e.target.result||null); r.onerror=e=>rej(e); }); }
-async function dbClearDraft(){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readwrite'); tx.objectStore(DRAFT_STORE).delete('current').onsuccess=()=>res(); tx.onerror=e=>rej(e); }); }
+// Draft (in-progress session) — keyed by topic so different topics can run in parallel
+function draftKey(topicId){ return `draft:${topicId}`; }
+async function dbSaveDraft(draft){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readwrite'); tx.objectStore(DRAFT_STORE).put({...draft,id:draftKey(draft.topicId)}).onsuccess=()=>res(); tx.onerror=e=>rej(e); }); }
+async function dbGetDraft(topicId){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readonly'); const r=tx.objectStore(DRAFT_STORE).get(draftKey(topicId)); r.onsuccess=e=>res(e.target.result||null); r.onerror=e=>rej(e); }); }
+async function dbGetAllDrafts(){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readonly'); const r=tx.objectStore(DRAFT_STORE).getAll(); r.onsuccess=e=>res(e.target.result||[]); r.onerror=e=>rej(e); }); }
+async function dbClearDraft(topicId){ const d=await openDB(); return new Promise((res,rej)=>{ const tx=d.transaction(DRAFT_STORE,'readwrite'); tx.objectStore(DRAFT_STORE).delete(draftKey(topicId)).onsuccess=()=>res(); tx.onerror=e=>rej(e); }); }
 
 /* ═══════════════════════════════════════
    HELPERS
@@ -1266,8 +1269,10 @@ function buildSession(bank, topicId){
    QUIZ STATE
 ═══════════════════════════════════════ */
 let QS={};
+let PENDING_TOPIC_ID=null;
+let PENDING_TOPIC_START=null;
 
-async function selectTopic(topicId){
+async function launchFreshTopic(topicId){
   loading(true);
   try{
     const bank=await loadQuestions(topicId);
@@ -1295,13 +1300,30 @@ async function selectTopic(topicId){
     showScreen('quizScreen');
     startTimer();
     renderQuestion();
+    PENDING_TOPIC_ID=null;
+    PENDING_TOPIC_START=null;
   }catch(e){
     loading(false);
-    // Setup modal already shown by loadQuestions for known errors
     if(!e.message.includes('file://')&&!e.message.includes('HTTP')&&!e.message.includes('Network error')){
       alert('Could not load questions.\n\n'+e.message);
     }
   }
+}
+
+async function selectTopic(topicId){
+  PENDING_TOPIC_ID=topicId;
+  PENDING_TOPIC_START=()=>launchFreshTopic(topicId);
+  const draft=await dbGetDraft(topicId);
+  if(draft && draft.timerSecs>0){
+    const mins=Math.floor(draft.timerSecs/60), secs=draft.timerSecs%60;
+    const answered=(draft.answers||[]).filter(a=>a!==null&&!a.skipped).length;
+    document.getElementById('resumeBody').innerHTML=
+      `You already have <strong>${draft.topicTitle}</strong> in progress.<br><br>You were on question <strong style="color:var(--accent)">${draft.current+1}</strong> of <strong style="color:var(--accent)">${draft.questions.length}</strong> — <strong style="color:var(--accent)">${answered}</strong> answered — with <strong style="color:var(--warn)">${mins}m ${secs}s</strong> remaining.<br><br>Resume to continue, start fresh to replace this topic session, or never mind to keep it paused and go back.`;
+    document.getElementById('resumeModal').style.display='flex';
+    return;
+  }
+  if(draft && draft.timerSecs<=0) await dbClearDraft(topicId);
+  return launchFreshTopic(topicId);
 }
 
 function playAgain(){selectTopic(QS.topicId);}
@@ -1909,7 +1931,7 @@ async function finishQuiz(timedOut){
     })
   };
   await dbSave(record);
-  await dbClearDraft();
+  await dbClearDraft(QS.topicId);
   const allSessions=await dbGetAll();
   renderResults(record,allSessions,timedOut,elapsed);
   showScreen('resultsScreen');
@@ -2175,22 +2197,17 @@ async function saveDraft(){
 }
 
 async function checkForDraft(){
-  const draft = await dbGetDraft();
-  if(!draft) return;
-  // Only resume if timer still has time
-  if(draft.timerSecs<=0){ await dbClearDraft(); return; }
-  const mins=Math.floor(draft.timerSecs/60), secs=draft.timerSecs%60;
-  const answered=draft.answers.filter(a=>a!==null&&!a.skipped).length;
-  document.getElementById('resumeBody').innerHTML=
-    `You were on question <strong style="color:var(--accent)">${draft.current+1}</strong> of <strong style="color:var(--accent)">${draft.questions.length}</strong> — <strong style="color:var(--accent)">${answered}</strong> answered — with <strong style="color:var(--warn)">${mins}m ${secs}s</strong> remaining.<br><br>
-    Topic: <strong>${draft.topicTitle}</strong> &nbsp;·&nbsp; Score so far: <strong style="color:var(--accent)">${Math.round(draft.totalScore)}/1000</strong>`;
-  document.getElementById('resumeModal').style.display='flex';
+  const drafts = await dbGetAllDrafts();
+  if(!drafts?.length) return;
+  for(const draft of drafts){
+    if(draft.timerSecs<=0) await dbClearDraft(draft.topicId);
+  }
 }
 
 async function resumeSession(){
-  const draft = await dbGetDraft();
-  if(!draft){ document.getElementById('resumeModal').style.display='none'; return; }
-  // Restore QS from draft
+  if(!PENDING_TOPIC_ID){ document.getElementById('resumeModal').style.display='none'; return; }
+  const draft = await dbGetDraft(PENDING_TOPIC_ID);
+  if(!draft){ document.getElementById('resumeModal').style.display='none'; if(PENDING_TOPIC_START) return PENDING_TOPIC_START(); return; }
   QS = {
     topicId: draft.topicId,
     topicTitle: draft.topicTitle,
@@ -2213,11 +2230,20 @@ async function resumeSession(){
   showScreen('quizScreen');
   startTimer();
   renderQuestion();
+  PENDING_TOPIC_ID=null;
+  PENDING_TOPIC_START=null;
 }
 
-async function discardSession(){
-  await dbClearDraft();
+async function startFreshSession(){
+  if(PENDING_TOPIC_ID) await dbClearDraft(PENDING_TOPIC_ID);
   document.getElementById('resumeModal').style.display='none';
+  if(PENDING_TOPIC_START) return PENDING_TOPIC_START();
+}
+
+function dismissResumeModal(){
+  document.getElementById('resumeModal').style.display='none';
+  PENDING_TOPIC_ID=null;
+  PENDING_TOPIC_START=null;
 }
 
 /* ═══════════════════════════════════════

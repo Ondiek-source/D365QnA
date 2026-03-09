@@ -1,135 +1,2982 @@
 {
   "_meta": {
     "topic": "Knowledge Articles",
-    "description": "Article lifecycle, subject tree, search, and linking to cases.",
-    "status": "in-progress"
+    "description": "Knowledge management in Dynamics 365 Customer Service: lifecycle, search configuration, knowledge search controls, translations, categories, templates, analytics, external sources, and AI-assisted article creation.",
+    "status": "complete"
   },
   "mcq": [
     {
-      "q": "What is the purpose of a Subject Tree in Dynamics 365 Customer Service?",
+      "q": "By default, knowledge management is enabled for which record types when configured from the Copilot Service admin center?",
       "options": [
-        "To define escalation paths for SLA violations",
-        "To categorise cases and knowledge articles using a hierarchical classification structure",
-        "To map routing rules to queues",
-        "To track the resolution steps of a case"
+        "Case only",
+        "Case and Conversation",
+        "Conversation and Account",
+        "Case and Incident Resolution"
       ],
       "answer": 1,
-      "category": "foundational",
-      "tags": [
-        "subject-tree",
-        "configuration",
-        "knowledge-management"
-      ],
-      "explanation": "The <strong>Subject Tree</strong> provides a hierarchical taxonomy for classifying cases and knowledge articles. It enables consistent categorisation and supports filtering and reporting across the organisation.",
-      "wrongExplanations": [
-        "Escalation paths for SLA violations are handled by SLA KPIs and actions, not the subject tree.",
-        null,
-        "Routing rules map cases to queues based on conditions — subject tree is a classification tool.",
-        "Resolution steps are tracked on the case itself via the resolution activity — not via subjects."
-      ],
-      "msRef": {
-        "label": "Create and manage subjects",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/create-manage-subjects-determine-products-knowledge-base-issues"
-      }
-    },
-    {
-      "q": "Which Dynamics 365 Customer Service feature stores reusable answers that agents can link to cases to assist with resolution?",
-      "options": [
-        "Quick Replies",
-        "Knowledge Articles",
-        "Email Templates",
-        "Macros"
-      ],
-      "answer": 1,
-      "category": "foundational",
+      "category": "knowledge-setup",
       "tags": [
         "knowledge-management",
-        "knowledge-articles"
+        "record-types",
+        "default"
       ],
-      "explanation": "<strong>Knowledge Articles</strong> are structured, searchable documents that capture solutions, procedures, and FAQs. Agents can link them to cases and customers can find them in the customer portal.",
-      "wrongExplanations": [
-        "Quick Replies are short pre-written messages used in live chat channels — not structured solution articles.",
-        null,
-        "Email Templates are pre-formatted emails for outbound communication — not knowledge content.",
-        "Macros are agent productivity scripts that automate sequences of actions — not knowledge articles."
+      "explanation": "By default, knowledge management is enabled for the Case and Conversation record types.",
+      "wrongExplanations": {
+        "0": "Conversation is also enabled by default.",
+        "2": "Account is not one of the documented default record types.",
+        "3": "Incident Resolution is not listed as a default knowledge-enabled record type."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "Which statement is correct about the app side pane knowledge search control?",
+      "options": [
+        "It is available only in Customer Service Hub",
+        "It is available only in Copilot Service workspace",
+        "It is available in Unified Service Desk only",
+        "It is available only for the Case table"
       ],
-      "msRef": {
-        "label": "Knowledge management overview",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/knowledge-management-overview"
-      }
+      "answer": 1,
+      "category": "productivity-pane",
+      "tags": [
+        "productivity-pane",
+        "copilot-service-workspace",
+        "knowledge-search"
+      ],
+      "explanation": "Microsoft states that the app side pane knowledge search experience is available only in Copilot Service workspace.",
+      "wrongExplanations": {
+        "0": "The side pane is not restricted to Customer Service Hub.",
+        "2": "Unified Service Desk is not the documented target here.",
+        "3": "It can be configured for record types beyond Case."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+    },
+    {
+      "q": "What happens to the configured article-result count when even one external search provider is configured?",
+      "options": [
+        "The configured result count continues to apply to all providers",
+        "Each configured search provider displays three articles, regardless of the configured result-count setting",
+        "The configured result count doubles",
+        "No knowledge results are shown until the provider is approved"
+      ],
+      "answer": 1,
+      "category": "external-search",
+      "tags": [
+        "search-providers",
+        "results-count",
+        "external-search"
+      ],
+      "explanation": "When at least one external search provider is configured, the configured article-result count no longer applies to providers; each configured provider shows three articles with a Show more option.",
+      "wrongExplanations": {
+        "0": "This is explicitly not how the provider result behavior works.",
+        "2": "The count does not double.",
+        "3": "There is no such approval step governing whether results appear."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "q": "A custom security role must be able to see results from external search providers. Which access combination is documented as required on the federated article entities?",
+      "options": [
+        "Read only",
+        "Read, Create, Append, and AppendTo",
+        "Create and Delete only",
+        "AppendTo only"
+      ],
+      "answer": 1,
+      "category": "external-search-security",
+      "tags": [
+        "search-providers",
+        "security",
+        "federated-article"
+      ],
+      "explanation": "Custom roles need Read, Create, Append, and AppendTo permissions on Knowledge Federated Article and Knowledge Federated Article Incident to see search results from other search providers.",
+      "wrongExplanations": {
+        "0": "Read alone is not the documented full permission set.",
+        "2": "Delete is not part of the specific required set in the article.",
+        "3": "AppendTo alone is insufficient."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "q": "When configuring field mapping for an external article, what file format does Microsoft tell you to save locally before uploading it for metadata selection?",
+      "options": [
+        "PDF",
+        "Web Page, HTML Only",
+        "Word document",
+        "Plain text"
+      ],
+      "answer": 1,
+      "category": "schema-mapping",
+      "tags": [
+        "field-mapping",
+        "metadata",
+        "html"
+      ],
+      "explanation": "For metadata selection in field mapping, Microsoft instructs you to save the article locally as a Web Page, HTML Only file before uploading it.",
+      "wrongExplanations": {
+        "0": "PDF is not the documented upload format for metadata selection.",
+        "2": "Word documents are not used for this step.",
+        "3": "Plain text would not expose the meta tags required for mapping."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/int-data-mapping"
+    },
+    {
+      "q": "Which three root fields are mandatory in a custom metadata mapping template for integrated search?",
+      "options": [
+        "TitleTargetFieldName, SummaryTargetFieldName, UrlPathLeafName",
+        "UniqueTargetFieldName, ContentTargetFieldName, and ApiPathLeafName",
+        "EntityName, ContentType, and MappingVersion",
+        "RegexFieldName, MetaFieldName, and ConstantFieldName"
+      ],
+      "answer": 1,
+      "category": "metadata-schema",
+      "tags": [
+        "metadata-schema",
+        "mandatory-fields",
+        "integrated-search"
+      ],
+      "explanation": "A custom mapping template must include UniqueTargetFieldName, ContentTargetFieldName, and ApiPathLeafName with required values and related FieldDefinitions.",
+      "wrongExplanations": {
+        "0": "These are not the documented mandatory root fields.",
+        "2": "Those names are not the required schema fields Microsoft lists.",
+        "3": "These describe possible source concepts, not the mandatory root fields."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/develop/int-search-metadata-schema"
+    },
+    {
+      "q": "If you use a custom field instead of msdyn_externalreferenceid as the UniqueTargetFieldName in a metadata mapping template, what extra requirement applies?",
+      "options": [
+        "It must be a calculated column",
+        "It must be added as an alternate key",
+        "It must be hidden from forms",
+        "It must be a multiline text column only"
+      ],
+      "answer": 1,
+      "category": "metadata-schema",
+      "tags": [
+        "metadata-schema",
+        "alternate-key",
+        "externalreferenceid"
+      ],
+      "explanation": "Microsoft states that if you use a custom field for UniqueTargetFieldName, you must add that field as an alternate key.",
+      "wrongExplanations": {
+        "0": "Calculated status is not the requirement.",
+        "2": "Visibility is unrelated to the documented requirement.",
+        "3": "The doc does not restrict it to multiline text."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/develop/int-search-metadata-schema"
+    },
+    {
+      "q": "Which field source type in the metadata schema indicates that the target field value comes from a meta tag in the source article?",
+      "options": [
+        "Regex",
+        "Document",
+        "Meta",
+        "Url"
+      ],
+      "answer": 2,
+      "category": "metadata-schema",
+      "tags": [
+        "metadata-schema",
+        "field-source-types",
+        "meta-tags"
+      ],
+      "explanation": "The Meta source type is used when the target field value is obtained from a <meta> tag in the source article.",
+      "wrongExplanations": {
+        "0": "Regex is for regular-expression extraction.",
+        "1": "Document indicates the HTML content of the article.",
+        "3": "Url indicates the external source document URL."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/develop/int-search-metadata-schema"
+    },
+    {
+      "q": "What is one consequence of keeping Enable search filters set to Yes in the Copilot Service admin center?",
+      "options": [
+        "Power Apps filter configurations remain active and merge with admin-center filters",
+        "Power Apps filter configurations are deactivated, and archived/discarded status filters are no longer supported",
+        "All user personalization for filters is permanently disabled",
+        "Language defaults from Power Apps continue unchanged"
+      ],
+      "answer": 1,
+      "category": "search-filters",
+      "tags": [
+        "search-filters",
+        "power-apps",
+        "deactivation"
+      ],
+      "explanation": "With Enable search filters set to Yes, Power Apps filter configurations are deactivated, and archived and discarded status filters are no longer supported.",
+      "wrongExplanations": {
+        "0": "The doc says they are deactivated, not merged.",
+        "2": "Personalization can still be allowed through the dedicated toggle.",
+        "3": "Previous organization language defaults from Power Apps no longer apply automatically."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-knowledge-article-search-filters"
+    },
+    {
+      "q": "A knowledge admin wants specific filter values to participate automatically in filtering without representatives selecting them manually. What should the admin configure?",
+      "options": [
+        "Visibility only",
+        "Preselects",
+        "Search mode as all",
+        "Origins allowlist"
+      ],
+      "answer": 1,
+      "category": "search-filters",
+      "tags": [
+        "search-filters",
+        "preselects",
+        "defaults"
+      ],
+      "explanation": "Preselected filter values participate automatically in filtering without requiring manual selection by the representative.",
+      "wrongExplanations": {
+        "0": "Visibility controls whether values are shown, not whether they are automatically applied.",
+        "2": "Search mode is separate from per-filter default values.",
+        "3": "Origins allowlist controls allowed origins, not filter defaults."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-knowledge-article-search-filters"
+    },
+    {
+      "q": "What is the primary purpose of the Categories entity in knowledge management?",
+      "options": [
+        "To generate article numbers automatically",
+        "To create hierarchical categorical data that can be associated to records",
+        "To enforce approval workflow",
+        "To replace subjects and queues"
+      ],
+      "answer": 1,
+      "category": "categories",
+      "tags": [
+        "categories",
+        "hierarchy",
+        "classification"
+      ],
+      "explanation": "The Categories entity is used to create a logical, hierarchical structure of categorical data and associate records to one or more categories for grouping, searching, reporting, and sorting.",
+      "wrongExplanations": {
+        "0": "Article numbering is not the purpose of categories.",
+        "2": "Approval workflow is separate from categories.",
+        "3": "Categories do not replace those other concepts."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-manage-categories"
+    },
+    {
+      "q": "When creating an article template, what happens to the instructions entered for a section when a user creates a new article from that template?",
+      "options": [
+        "They remain permanently visible and cannot be removed",
+        "They appear in the body text for that section and disappear when the user starts typing",
+        "They are stored as comments only",
+        "They are converted into category names automatically"
+      ],
+      "answer": 1,
+      "category": "article-templates",
+      "tags": [
+        "article-templates",
+        "sections",
+        "instructions"
+      ],
+      "explanation": "Section instructions in an article template appear in the body text when a user creates a new article from the template and disappear when the user starts typing.",
+      "wrongExplanations": {
+        "0": "They are not meant to stay permanently visible once the user begins authoring.",
+        "2": "They are not stored as comments only.",
+        "3": "They do not become category names."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-templates-articles"
+    },
+    {
+      "q": "Which Power Automate template does Microsoft document for integrating Dataverse knowledge articles with a Copilot agent?",
+      "options": [
+        "Create incident from email and send approval",
+        "Generate answers from Dataverse knowledge articles to Power Virtual Agent",
+        "Classify article sentiment and auto-publish",
+        "Push knowledge to SharePoint and Teams"
+      ],
+      "answer": 1,
+      "category": "copilot-agent-integration",
+      "tags": [
+        "copilot-agent",
+        "power-automate",
+        "template"
+      ],
+      "explanation": "Microsoft documents using the Power Automate template named 'Generate answers from Dataverse knowledge articles to Power Virtual Agent' for this integration flow.",
+      "wrongExplanations": {
+        "0": "That is unrelated to Copilot agent knowledge retrieval.",
+        "2": "That is not the documented integration template name.",
+        "3": "That is not the documented template name either."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+    },
+    {
+      "q": "By default, the Dataverse search in the Copilot agent knowledge-management integration targets which articles?",
+      "options": [
+        "All draft and archived articles",
+        "Only external published articles where statecode = 3 and isinternal = false",
+        "Only internal unpublished articles",
+        "Only articles linked to a case"
+      ],
+      "answer": 1,
+      "category": "copilot-agent-integration",
+      "tags": [
+        "copilot-agent",
+        "dataverse-search",
+        "published-articles"
+      ],
+      "explanation": "The integration article states that the default search targets external published articles, using statecode eq 3 and isinternal eq false.",
+      "wrongExplanations": {
+        "0": "Draft and archived articles are not the default target set.",
+        "2": "The default query is not restricted to internal unpublished articles.",
+        "3": "Case linkage is not the documented default filter."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+    },
+    {
+      "q": "What is the purpose of the origins allowlist in knowledge management settings?",
+      "options": [
+        "To define which categories can be linked to articles",
+        "To add approved origin links under General settings",
+        "To limit who can publish articles",
+        "To define article numbering format"
+      ],
+      "answer": 1,
+      "category": "origins-allowlist",
+      "tags": [
+        "origins-allowlist",
+        "knowledge-settings",
+        "general-settings"
+      ],
+      "explanation": "The origins allowlist is configured under General settings by adding approved origin links to the list.",
+      "wrongExplanations": {
+        "0": "Categories are managed elsewhere.",
+        "2": "Publishing permissions are not managed through origins allowlist.",
+        "3": "Article numbering is unrelated to the allowlist."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-article-origin-allow-list"
+    },
+    {
+      "q": "A maker cannot add the Knowledge Search component to a form because the option is disabled. According to Microsoft, what is the most likely reason?",
+      "options": [
+        "Relevance Search is enabled",
+        "Knowledge management isn't set up or isn't enabled for that entity",
+        "The form is using Unified Interface",
+        "The entity already has a timer control"
+      ],
+      "answer": 1,
+      "category": "knowledge-control",
+      "tags": [
+        "knowledge-search-control",
+        "forms",
+        "troubleshooting"
+      ],
+      "explanation": "Microsoft says the Knowledge Base Search option can be disabled if knowledge management isn't set up or isn't enabled for the entity on which you're trying to add the control.",
+      "wrongExplanations": {
+        "0": "Relevance Search is not listed as the cause of the control being disabled.",
+        "2": "The documented issue is enablement, not Unified Interface itself.",
+        "3": "Timer controls are unrelated."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "In the native Dynamics 365 knowledge management solution, when is the Copy URL action available in the Knowledge Base Search control?",
+      "options": [
+        "For draft articles only",
+        "For approved and draft articles",
+        "Only for published articles",
+        "Only for articles linked to cases"
+      ],
+      "answer": 2,
+      "category": "knowledge-control",
+      "tags": [
+        "copy-url",
+        "published-articles",
+        "knowledge-search-control"
+      ],
+      "explanation": "Microsoft states that in the native Dynamics 365 customer engagement knowledge management solution, Copy URL is available only for published articles.",
+      "wrongExplanations": {
+        "0": "Draft articles do not expose Copy URL in this context.",
+        "1": "Draft is not included in the supported state here.",
+        "3": "Case linkage is not the requirement; publication state is."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "What is true about the rich text editor in knowledge management?",
+      "options": [
+        "It is disabled by default for knowledge articles and emails",
+        "It is available by default for knowledge articles and emails, and can also be added to other forms",
+        "It can be added only to single-line text fields",
+        "It is configured from the Knowledge page only"
+      ],
+      "answer": 1,
+      "category": "rich-text-editor",
+      "tags": [
+        "rich-text-editor",
+        "knowledge-articles",
+        "emails"
+      ],
+      "explanation": "The rich text editor is available by default for knowledge articles and emails, and can also be added to other forms by adding the Rich Text Editor Control to a suitable text field.",
+      "wrongExplanations": {
+        "0": "This is the opposite of the documented default behavior.",
+        "2": "It can be added to fields where you can enter single or multiple lines of text.",
+        "3": "It is added through form field controls in Power Apps, not just the Knowledge page."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/rich-text-editor-ka"
+    },
+    {
+      "q": "Which record types have knowledge management enabled by default when you configure knowledge management in Copilot Service admin center?",
+      "options": [
+        "Case only",
+        "Case and Conversation",
+        "Conversation only",
+        "Case, Conversation, and Account"
+      ],
+      "answer": 1,
+      "category": "knowledge-setup",
+      "tags": [
+        "knowledge-management",
+        "record-types",
+        "defaults",
+        "easy"
+      ],
+      "explanation": "By default, knowledge management is enabled for Case and Conversation record types in the Record Types section.",
+      "wrongExplanations": {
+        "0": "Case isn't the only default record type.",
+        "2": "Conversation isn't enabled alone; Case is also enabled by default.",
+        "3": "Account isn't listed as a default knowledge-enabled record type."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "Which combination of permissions is explicitly called out as a prerequisite to set up knowledge management in Copilot Service admin center?",
+      "options": [
+        "System Administrator or System Customizer only",
+        "Global administrator only",
+        "System Administrator or System Customizer plus Microsoft 365 tenant administrator",
+        "Knowledge manager role only"
+      ],
+      "answer": 2,
+      "category": "knowledge-setup",
+      "tags": [
+        "knowledge-management",
+        "permissions",
+        "admin-center",
+        "medium"
+      ],
+      "explanation": "Microsoft states that you need the System Administrator or System Customizer role or equivalent permissions, and you must also be the tenant administrator of Microsoft 365.",
+      "wrongExplanations": {
+        "0": "The documentation adds a Microsoft 365 tenant administrator requirement.",
+        "1": "Global or tenant-level authority alone doesn't replace the Dynamics app role requirement.",
+        "3": "Knowledge manager alone isn't the documented prerequisite for setup."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "Which legacy knowledge management solution is explicitly marked deprecated in the knowledge management setup documentation?",
+      "options": [
+        "KnowledgeArticle entity",
+        "Parature knowledgebase",
+        "Dataverse search",
+        "Customer Service Hub knowledge search"
+      ],
+      "answer": 1,
+      "category": "deprecations",
+      "tags": [
+        "knowledge-management",
+        "deprecation",
+        "parature",
+        "easy"
+      ],
+      "explanation": "The setup article explicitly states that usage of Parature knowledgebase as a knowledge management solution has been deprecated.",
+      "wrongExplanations": {
+        "0": "KnowledgeArticle is the current entity, not the deprecated solution referenced there.",
+        "2": "Dataverse search is actively used by knowledge search control.",
+        "3": "Customer Service Hub knowledge search isn't the deprecated feature referenced."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "In the knowledge search experience settings, what does enabling 'Set search mode as all' do?",
+      "options": [
+        "Returns results only when every search term matches",
+        "Uses OR-style matching to broaden results across terms",
+        "Forces results to published articles only",
+        "Disables automatic search on forms"
+      ],
+      "answer": 1,
+      "category": "internal-search",
+      "tags": [
+        "search",
+        "search-mode-as-all",
+        "knowledge-management",
+        "hard"
+      ],
+      "explanation": "The search-logic setting is intended to broaden results so the search can return articles that match across terms rather than requiring all terms to match in a narrow way.",
+      "wrongExplanations": {
+        "0": "That describes a narrower all-terms match, not the documented 'search mode as all' broadening behavior.",
+        "2": "Status filtering is configured separately from search mode.",
+        "3": "Automatic search is configured at the record-type/control level, not by this global search mode toggle."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "What does 'Enable suggest as you type' match against when service representatives type in the search box?",
+      "options": [
+        "Only article keywords",
+        "Only article body content",
+        "The title of the article",
+        "The article public number and owner only"
+      ],
+      "answer": 2,
+      "category": "internal-search",
+      "tags": [
+        "search",
+        "suggest-as-you-type",
+        "title-match",
+        "easy"
+      ],
+      "explanation": "Microsoft says the search phrase is matched against the title of the article and matching results appear in a flyout menu.",
+      "wrongExplanations": {
+        "0": "Keywords aren't stated as the matching field for suggest-as-you-type in this setting.",
+        "1": "The documentation specifically calls out article titles.",
+        "3": "Public number and owner aren't the documented match target for this feature."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "Where is the app side pane knowledge search control available?",
+      "options": [
+        "Customer Service Hub only",
+        "Copilot Service workspace only",
+        "Both Customer Service Hub and Copilot Service workspace",
+        "Any model-driven app once KnowledgeArticle is enabled"
+      ],
+      "answer": 1,
+      "category": "record-type-configuration",
+      "tags": [
+        "app-side-pane",
+        "copilot-service-workspace",
+        "knowledge-search-control",
+        "easy"
+      ],
+      "explanation": "The app side pane is available only in Copilot Service workspace.",
+      "wrongExplanations": {
+        "0": "Customer Service Hub can use other knowledge experiences, but the app side pane described here is workspace-only.",
+        "2": "The documentation does not make the app side pane available in both apps.",
+        "3": "It isn't available in any model-driven app just because the entity exists."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+    },
+    {
+      "q": "When configuring a record type for knowledge search on the app side pane, which Automatic search setting determines which record field is used to generate search results?",
+      "options": [
+        "Turn on automatic search",
+        "Provide search results using",
+        "Show article suggestions",
+        "Published article filter"
+      ],
+      "answer": 1,
+      "category": "record-type-configuration",
+      "tags": [
+        "automatic-search",
+        "record-types",
+        "search-field",
+        "medium"
+      ],
+      "explanation": "The 'Provide search results using' setting selects the record field that the system uses to provide search results for that entity.",
+      "wrongExplanations": {
+        "0": "That toggle only enables or disables automatic search.",
+        "2": "This isn't the setting name used in the app side pane configuration.",
+        "3": "Published article filtering is not the field-selection setting."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+    },
+    {
+      "q": "Which field types can appear in the dropdown used by the Knowledge Base Search control for automatic search result generation?",
+      "options": [
+        "Whole number, currency, and lookup only",
+        "Text, multi-line text, and lookup",
+        "Choice, yes/no, and image only",
+        "Any field type in the table"
+      ],
+      "answer": 1,
+      "category": "kb-search-control",
+      "tags": [
+        "forms",
+        "knowledge-base-search-control",
+        "automatic-search",
+        "easy"
+      ],
+      "explanation": "The documentation states that the dropdown can include fields that are text, multi-line text, or lookup type fields.",
+      "wrongExplanations": {
+        "0": "Whole number and currency aren't the documented eligible set here.",
+        "2": "Choice and image aren't the documented eligible field types for this dropdown.",
+        "3": "Not every field type appears in that list."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "In the native Dynamics 365 knowledge management solution, when is the Copy URL action available on the Knowledge Base Search control?",
+      "options": [
+        "For any draft, approved, or published article",
+        "Only for approved or published articles",
+        "Only for published articles",
+        "Only when the article is internal"
+      ],
+      "answer": 2,
+      "category": "kb-search-control",
+      "tags": [
+        "copy-url",
+        "published-articles",
+        "knowledge-search-control",
+        "medium"
+      ],
+      "explanation": "Microsoft says Copy URL is available only for published articles in the native Dynamics 365 customer engagement knowledge management solution.",
+      "wrongExplanations": {
+        "0": "The action is not exposed for all statuses.",
+        "1": "Approved isn't enough according to the documented rule.",
+        "3": "Internal visibility isn't the criterion given for Copy URL."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "Which configuration on the Knowledge Base Search control lets users filter results by Draft, Approved, or Published article status?",
+      "options": [
+        "Show article rating",
+        "Show status filter",
+        "Enable suggest as you type",
+        "Use default search mode"
+      ],
+      "answer": 1,
+      "category": "kb-search-control",
+      "tags": [
+        "status-filter",
+        "knowledge-search-control",
+        "forms",
+        "easy"
+      ],
+      "explanation": "The Show status filter option allows users to filter knowledge articles based on article status: Draft, Approved, or Published.",
+      "wrongExplanations": {
+        "0": "That only shows ratings.",
+        "2": "Suggest-as-you-type affects prediction in the search box, not status filtering.",
+        "3": "Default search mode doesn't expose a status filter."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "Which control option lets representatives filter results by language when using the Knowledge Base Search control?",
+      "options": [
+        "Show article owner",
+        "Show article language filter",
+        "Provide search results using",
+        "Link article"
+      ],
+      "answer": 1,
+      "category": "kb-search-control",
+      "tags": [
+        "language-filter",
+        "knowledge-search-control",
+        "forms",
+        "easy"
+      ],
+      "explanation": "The Show article language filter option allows representatives to filter search results based on the language they choose.",
+      "wrongExplanations": {
+        "0": "Owner is not the language filter.",
+        "2": "That setting chooses a source field for automatic search.",
+        "3": "Link article is an action, not a filter."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "If Relevance Search is enabled, what can happen to the 'Number of results' setting on the Knowledge Base Search control?",
+      "options": [
+        "It always shows exactly the configured number",
+        "It can differ from what you set because Relevance Search changes result behavior",
+        "It is ignored only for draft articles",
+        "It affects only language filters, not result counts"
+      ],
+      "answer": 1,
+      "category": "kb-search-control",
+      "tags": [
+        "relevance-search",
+        "number-of-results",
+        "search-control",
+        "hard"
+      ],
+      "explanation": "Microsoft notes that the number displayed might differ from what you set when Relevance Search is enabled.",
+      "wrongExplanations": {
+        "0": "The article explicitly warns that the count might differ.",
+        "2": "The limitation isn't draft-specific.",
+        "3": "The issue is about returned result counts."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "Which statement about article author assignment is true when creating a knowledge article?",
+      "options": [
+        "Primary author can be a team and still remain searchable",
+        "The article author must be a single user, not a team, for the article to be searchable and load properly",
+        "Primary author is always blank until publish time",
+        "The creator can never be the primary author"
+      ],
+      "answer": 1,
+      "category": "article-creation",
+      "tags": [
+        "primary-author",
+        "searchability",
+        "knowledge-articles",
+        "hard"
+      ],
+      "explanation": "The documentation says the knowledge article author must be a single user, not a team, for the article to be searchable and to load properly.",
+      "wrongExplanations": {
+        "0": "A team author causes issues according to Microsoft.",
+        "2": "The article isn't left blank by rule; the creator is the default primary author in many cases.",
+        "3": "By default, the creator is the primary author."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-knowledge-article"
+    },
+    {
+      "q": "What happens immediately after a new knowledge article record is created?",
+      "options": [
+        "It is created in Approved state",
+        "It is created in Published state",
+        "It is created in Draft state",
+        "It is created in Needs Review state"
+      ],
+      "answer": 2,
+      "category": "article-lifecycle",
+      "tags": [
+        "draft",
+        "lifecycle",
+        "knowledgearticle-entity",
+        "easy"
+      ],
+      "explanation": "A newly created knowledge article record is created in the Draft state.",
+      "wrongExplanations": {
+        "0": "Approval comes later in the lifecycle.",
+        "1": "Publishing happens after review/approval.",
+        "3": "Needs Review is a status reason used when marking the article for review."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "What does the root article represent in the KnowledgeArticle entity model?",
+      "options": [
+        "A published-only external portal record",
+        "A container for the primary article plus its versions and translations",
+        "A copy of the first translation only",
+        "A retired legacy KBArticle record"
+      ],
+      "answer": 1,
+      "category": "article-architecture",
+      "tags": [
+        "rootarticle",
+        "versions",
+        "translations",
+        "medium"
+      ],
+      "explanation": "Microsoft describes the root article as a container for the primary knowledge article together with all future versions and translations.",
+      "wrongExplanations": {
+        "0": "The root article is not only an external portal record.",
+        "2": "It isn't limited to the first translation.",
+        "3": "It's part of the current KnowledgeArticle model, not a legacy KBArticle copy."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "Which value stays the same across knowledge article versions and translations and is exposed to customers and partners for lookup/reference?",
+      "options": [
+        "KnowledgeArticleId",
+        "ArticlePublicNumber",
+        "RootArticleId",
+        "Version Number"
+      ],
+      "answer": 1,
+      "category": "article-architecture",
+      "tags": [
+        "articlepublicnumber",
+        "versions",
+        "translations",
+        "hard"
+      ],
+      "explanation": "ArticlePublicNumber remains the same across versions and translations and is the identifier exposed externally for lookup and reference.",
+      "wrongExplanations": {
+        "0": "KnowledgeArticleId is unique per record/version, not the public external reference across versions.",
+        "2": "RootArticleId is a container relationship attribute, not the public lookup value exposed to customers.",
+        "3": "Version numbers change with new versions."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "Which native knowledge entities are deprecated and should no longer be used for knowledge management?",
+      "options": [
+        "KnowledgeArticle, Category, Feedback",
+        "KBArticle, KBArticleTemplate, and KBArticleComment",
+        "KnowledgeArticle, LanguageLocale, and Feedback",
+        "ArticlePublicNumber, RootArticleId, and KBArticle"
+      ],
+      "answer": 1,
+      "category": "deprecations",
+      "tags": [
+        "deprecated-entities",
+        "knowledge-management",
+        "dataverse",
+        "easy"
+      ],
+      "explanation": "Microsoft states that KBArticle, KBArticleTemplate, and KBArticleComment are deprecated and that you should use KnowledgeArticle instead.",
+      "wrongExplanations": {
+        "0": "KnowledgeArticle is the supported current entity.",
+        "2": "LanguageLocale and Feedback aren't listed as the deprecated trio.",
+        "3": "ArticlePublicNumber and RootArticleId are attributes, not deprecated entities."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "What is the default process for knowledge article lifecycle described by Microsoft?",
+      "options": [
+        "Create → Publish → Translate → Review",
+        "Create → Mark for review → Approve or reject → Publish → Translate",
+        "Create → Archive → Translate → Publish",
+        "Create → Assign → Publish → Review"
+      ],
+      "answer": 1,
+      "category": "article-lifecycle",
+      "tags": [
+        "review",
+        "approval",
+        "publish",
+        "translate",
+        "easy"
+      ],
+      "explanation": "The default process is create an article, mark it for review, have a reviewer approve or reject it, then publish it; once approved and published, it can be translated.",
+      "wrongExplanations": {
+        "0": "Review happens before publish in the default process.",
+        "2": "Archive is not part of the default authoring flow.",
+        "3": "Assignment can happen during review, but it isn't the documented default sequence."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/ka-process"
+    },
+    {
+      "q": "When an article is rejected during review, what happens next according to the default review guidance?",
+      "options": [
+        "It is permanently archived",
+        "It is assigned back to the primary author",
+        "It is published with a warning",
+        "It becomes available in search but not on portal"
+      ],
+      "answer": 1,
+      "category": "review",
+      "tags": [
+        "review",
+        "reject",
+        "primary-author",
+        "medium"
+      ],
+      "explanation": "The review article states that a rejected article is assigned back to the primary author of the knowledge article.",
+      "wrongExplanations": {
+        "0": "Rejection doesn't archive the article by default.",
+        "2": "Rejected content isn't published.",
+        "3": "Rejected content isn't made available in search."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+    },
+    {
+      "q": "Where can a reviewer pick up an assigned article for review according to Microsoft’s review guidance?",
+      "options": [
+        "Only from the Power Platform admin center",
+        "From My Active Articles on My Knowledge Dashboard or from queue items available to work",
+        "Only from the article analytics tab",
+        "Only from the case form knowledge search pane"
+      ],
+      "answer": 1,
+      "category": "review",
+      "tags": [
+        "dashboard",
+        "queues",
+        "review",
+        "medium"
+      ],
+      "explanation": "Microsoft explicitly points reviewers to My Knowledge Dashboard > My Active Articles, or Queues > Items available to work on.",
+      "wrongExplanations": {
+        "0": "Review work isn't limited to the admin center.",
+        "2": "Analytics isn't the pickup queue for review work.",
+        "3": "The case form search pane is for knowledge consumption, not the primary review work queue described."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+    },
+    {
+      "q": "Which permission is required to approve a knowledge article?",
+      "options": [
+        "Delete on KnowledgeArticle",
+        "Approve on Knowledge Article record type",
+        "Append To on Feedback",
+        "Publish on Category"
+      ],
+      "answer": 1,
+      "category": "review",
+      "tags": [
+        "approve-permission",
+        "security",
+        "knowledge-article",
+        "easy"
+      ],
+      "explanation": "To approve a knowledge article, you must have Approve permissions for the Knowledge Article record type.",
+      "wrongExplanations": {
+        "0": "Delete is unrelated to approval permission.",
+        "2": "Feedback privileges do not authorize article approval.",
+        "3": "Categories don't control article approval."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+    },
+    {
+      "q": "Before you can publish a knowledge article, the article must be in which state?",
+      "options": [
+        "Draft",
+        "Needs Review",
+        "Approved",
+        "Archived"
+      ],
+      "answer": 2,
+      "category": "publish",
+      "tags": [
+        "publish",
+        "approved-state",
+        "prerequisite",
+        "easy"
+      ],
+      "explanation": "Microsoft says you open a knowledge article that's in the Approved state to publish it.",
+      "wrongExplanations": {
+        "0": "Draft is too early in the lifecycle.",
+        "1": "Needs Review indicates review pending, not publish-ready.",
+        "3": "Archived articles are not publishable."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+    },
+    {
+      "q": "Which privilege is required to update a knowledge article that is already in Published or Scheduled state?",
+      "options": [
+        "Only Approve",
+        "Only Assign",
+        "Publish privilege",
+        "Create privilege"
+      ],
+      "answer": 2,
+      "category": "publish",
+      "tags": [
+        "published-article",
+        "update",
+        "publish-privilege",
+        "hard"
+      ],
+      "explanation": "When a knowledge article is Published or Scheduled, only users who have the Publish privilege can update it.",
+      "wrongExplanations": {
+        "0": "Approve alone is not enough once the article is already Published or Scheduled.",
+        "1": "Assign doesn't grant update rights for this situation.",
+        "3": "Create privilege is unrelated."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+    },
+    {
+      "q": "What happens to expired articles after the configured expiration date is reached?",
+      "options": [
+        "They remain searchable but read-only",
+        "They are no longer available in searches",
+        "They are automatically translated",
+        "They are moved to Draft"
+      ],
+      "answer": 1,
+      "category": "publish",
+      "tags": [
+        "expiration",
+        "searchability",
+        "published-state",
+        "medium"
+      ],
+      "explanation": "The publish article documentation states that expired articles are no longer available in searches.",
+      "wrongExplanations": {
+        "0": "The doc says they are removed from search availability.",
+        "2": "Expiration does not trigger translation.",
+        "3": "Expiration status is configurable, but not specifically reset to Draft by default."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+    },
+    {
+      "q": "If you want approved related translations to be published together with the main article, which publish dialog option should be set to Yes?",
+      "options": [
+        "Publish now",
+        "Set Product Associations",
+        "Publish Approved related translations with Article",
+        "Open in new tab"
+      ],
+      "answer": 2,
+      "category": "publish",
+      "tags": [
+        "translations",
+        "publish-dialog",
+        "knowledge-articles",
+        "medium"
+      ],
+      "explanation": "The publish dialog contains an option named 'Publish Approved related translations with Article'.",
+      "wrongExplanations": {
+        "0": "That controls timing, not companion translation publishing.",
+        "1": "This is a BPF completion field, not the publish-dialog translation option.",
+        "3": "Open in new tab is a search-control action, not a publish-dialog setting."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+    },
+    {
+      "q": "When translating a knowledge article, which version choice can you make in the Create new translation dialog?",
+      "options": [
+        "Only Major",
+        "Only Minor",
+        "Either Major or Minor",
+        "Scheduled or Published"
+      ],
+      "answer": 2,
+      "category": "translations",
+      "tags": [
+        "translate",
+        "major-version",
+        "minor-version",
+        "easy"
+      ],
+      "explanation": "In the Create new translation dialog, you can select either the Major or Minor version for the translation.",
+      "wrongExplanations": {
+        "0": "Major isn't the only option.",
+        "1": "Minor isn't the only option.",
+        "3": "Scheduled and Published are article states, not translation version choices."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/translate-ka"
+    },
+    {
+      "q": "What is the override hierarchy for default knowledge article authoring language?",
+      "options": [
+        "Administrator → article → representative → knowledge manager",
+        "Representative or knowledge manager → article → administrator",
+        "Article → representative or knowledge manager → administrator",
+        "Administrator only; no override is allowed"
+      ],
+      "answer": 2,
+      "category": "translations",
+      "tags": [
+        "authoring-language",
+        "override-hierarchy",
+        "localization",
+        "hard"
+      ],
+      "explanation": "Microsoft states the override hierarchy as individual articles, representative or knowledge manager, and then administrator.",
+      "wrongExplanations": {
+        "0": "This reverses the documented order.",
+        "1": "This puts article after user-level settings, which is incorrect.",
+        "3": "Overrides are explicitly supported."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/set-knowledge-article-authoring-language"
+    },
+    {
+      "q": "What can you do with external search providers in Customer Service?",
+      "options": [
+        "Replace KnowledgeArticle with SharePoint records directly",
+        "Federate search of files, documents, and articles from sources like SharePoint or another organization",
+        "Publish articles automatically to every external website",
+        "Disable Dataverse search for cases"
+      ],
+      "answer": 1,
+      "category": "external-sources",
+      "tags": [
+        "external-search-providers",
+        "sharepoint",
+        "federated-search",
+        "easy"
+      ],
+      "explanation": "External search providers federate search of files, documents, and articles from sources such as SharePoint or another organization.",
+      "wrongExplanations": {
+        "0": "They federate search, they do not replace the KnowledgeArticle table.",
+        "2": "Automatic publishing to every external site is not what search providers do.",
+        "3": "They do not exist to disable Dataverse search."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "q": "Which external search provider option lets you search articles in another organization within Microsoft?",
+      "options": [
+        "Integrated search provider",
+        "Cross-Organizational Search",
+        "Power Automate template",
+        "JSON schema provider"
+      ],
+      "answer": 1,
+      "category": "external-sources",
+      "tags": [
+        "cross-organizational-search",
+        "search-provider",
+        "federation",
+        "medium"
+      ],
+      "explanation": "Cross-Organizational Search lets you specify an organization within Microsoft to search articles.",
+      "wrongExplanations": {
+        "0": "Integrated search provider is for third-party sources such as enterprise websites based on the site map protocol.",
+        "2": "Power Automate flow template is part of Copilot integration approaches, not the search provider type here.",
+        "3": "JSON schema is a mapping method, not a search provider type."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "q": "What is true about knowledge article schema selection when configuring an integrated search provider?",
+      "options": [
+        "You can change the schema anytime after saving",
+        "You must choose either field mapping or JSON schema, and the schema can't be changed after saving",
+        "Schema choice matters only for translations",
+        "Schema mapping is used only for internal KnowledgeArticle records"
+      ],
+      "answer": 1,
+      "category": "external-sources",
+      "tags": [
+        "schema-mapping",
+        "integrated-search-provider",
+        "json-schema",
+        "hard"
+      ],
+      "explanation": "For integrated search providers, you select and configure a knowledge article schema, choosing field mapping or JSON schema, and you can't change the schema after you save the configuration.",
+      "wrongExplanations": {
+        "0": "The documentation explicitly says you can't change it after saving.",
+        "2": "Schema choice affects article ingestion, not only translations.",
+        "3": "This mapping is specifically for ingesting external provider content."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/int-data-mapping"
+    },
+    {
+      "q": "If you apply a language filter in the Authentication and Testing section while configuring external provider ingestion, what must also be maintained?",
+      "options": [
+        "Only article ratings",
+        "Language locale mapping in the JSON schema or schema mapping section",
+        "A publish dialog customization layer",
+        "The root article public number"
+      ],
+      "answer": 1,
+      "category": "external-sources",
+      "tags": [
+        "language-locale",
+        "schema-mapping",
+        "external-provider",
+        "hard"
+      ],
+      "explanation": "If you apply a language filter, Microsoft says you must maintain the mapping for language locale either in the JSON schema or in the Knowledge article schema mapping section.",
+      "wrongExplanations": {
+        "0": "Ratings are unrelated to schema ingestion mapping.",
+        "2": "Customization layers aren't the requirement here.",
+        "3": "ArticlePublicNumber isn't the extra mapping required here."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/int-data-mapping"
+    },
+    {
+      "q": "Which prerequisite is explicitly required before integrating knowledge management with a Copilot agent?",
+      "options": [
+        "Advanced Find must be enabled",
+        "Dataverse search must be enabled",
+        "Only a private queue is required",
+        "KnowledgeArticle must be deprecated"
+      ],
+      "answer": 1,
+      "category": "copilot-integration",
+      "tags": [
+        "copilot-agent",
+        "dataverse-search",
+        "prerequisites",
+        "easy"
+      ],
+      "explanation": "Dataverse search must be enabled before integrating knowledge management with a Copilot agent.",
+      "wrongExplanations": {
+        "0": "Advanced Find isn't the documented prerequisite.",
+        "2": "Queue type is unrelated to this integration prerequisite.",
+        "3": "KnowledgeArticle is the supported entity, not something to deprecate."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+    },
+    {
+      "q": "Which two integration approaches are documented for integrating knowledge management with a Copilot agent?",
+      "options": [
+        "Cross-Organizational Search and Relevance Search",
+        "Search Dynamics 365 knowledge articles and Power Automate flow template",
+        "Queue items and smart assist only",
+        "KnowledgeArticle API and external search providers only"
+      ],
+      "answer": 1,
+      "category": "copilot-integration",
+      "tags": [
+        "copilot-agent",
+        "power-automate",
+        "knowledge-integration",
+        "medium"
+      ],
+      "explanation": "Microsoft documents two approaches: search Dynamics 365 knowledge articles or use a Power Automate flow template.",
+      "wrongExplanations": {
+        "0": "Those are not the two documented agent-integration paths in that article.",
+        "2": "These are not the documented integration methods.",
+        "3": "These features exist elsewhere but are not presented as the two integration methods there."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+    },
+    {
+      "q": "To make knowledge articles available to the Copilot agent via portal-based integration, how should the Internal field be set?",
+      "options": [
+        "Yes",
+        "No",
+        "Blank",
+        "Match the case priority"
+      ],
+      "answer": 1,
+      "category": "copilot-integration",
+      "tags": [
+        "internal-field",
+        "portal",
+        "copilot-agent",
+        "hard"
+      ],
+      "explanation": "The integration article notes that you can create and manage knowledge articles by setting the Internal field to No in the Dataverse Web API for portal exposure.",
+      "wrongExplanations": {
+        "0": "Internal=Yes would not align with the portal-oriented availability described.",
+        "2": "Blank isn't the documented instruction.",
+        "3": "Case priority is unrelated."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+    },
+    {
+      "q": "Customer Knowledge Management Agent can harvest article drafts from which sources?",
+      "options": [
+        "Cases only",
+        "Cases, conversation summaries associated to cases, emails, notes, and conversations",
+        "Queues and dashboards only",
+        "External search provider content only"
+      ],
+      "answer": 1,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "customer-knowledge-management-agent",
+        "sources",
+        "copilot",
+        "easy"
+      ],
+      "explanation": "The admin article states that the agent can harvest knowledge from cases, conversation summaries associated to the cases, emails, notes, and conversations.",
+      "wrongExplanations": {
+        "0": "Cases are only one of the supported sources.",
+        "2": "Queues and dashboards are not the harvest content sources listed.",
+        "3": "External provider content isn't the list given for this feature."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "How many custom record types can Customer Knowledge Management Agent currently support for historical article creation?",
+      "options": [
+        "Up to three",
+        "Up to five",
+        "Up to ten",
+        "Unlimited if Dataverse search is enabled"
+      ],
+      "answer": 1,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "custom-record-types",
+        "limits",
+        "customer-knowledge-management-agent",
+        "medium"
+      ],
+      "explanation": "Microsoft states you can add up to five custom record types, and currently these are supported only for historical article creation.",
+      "wrongExplanations": {
+        "0": "The documented cap is higher.",
+        "2": "Ten exceeds the documented cap.",
+        "3": "The feature has an explicit limit."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "Which fields used by Customer Knowledge Management Agent cannot be modified in the attribute mapping screen?",
+      "options": [
+        "Title and Description",
+        "Product and Subject",
+        "Email Content, Incident Resolution, and Conversation Summary",
+        "Case Notes and Subject"
+      ],
+      "answer": 2,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "attribute-mapping",
+        "customer-knowledge-management-agent",
+        "immutable-fields",
+        "hard"
+      ],
+      "explanation": "Microsoft says you can modify all fields except Email Content, Incident Resolution, and Conversation Summary.",
+      "wrongExplanations": {
+        "0": "These can be modified.",
+        "1": "These can be modified.",
+        "3": "Case Notes and Subject can be modified in mapping."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "When automatic article updates are enabled in Customer Knowledge Management Agent, what does the system create by default?",
+      "options": [
+        "A new major version",
+        "A new minor version",
+        "A translation only",
+        "An archived copy"
+      ],
+      "answer": 1,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "automatic-updates",
+        "minor-version",
+        "preview",
+        "medium"
+      ],
+      "explanation": "By default, automatic article updates create a new minor version of the article.",
+      "wrongExplanations": {
+        "0": "Major version is not the default for automatic updates.",
+        "2": "Automatic updates are not limited to translations.",
+        "3": "The system does not create an archived copy by default."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "What is true about articles with a compliance state of Non Compliant when using Customer Knowledge Management Agent?",
+      "options": [
+        "They can be published only manually",
+        "They can't be published",
+        "They can be auto-published only to internal users",
+        "They must first be translated"
+      ],
+      "answer": 1,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "compliance",
+        "non-compliant",
+        "publishing",
+        "easy"
+      ],
+      "explanation": "Microsoft explicitly states that articles with the Non Compliant status can't be published.",
+      "wrongExplanations": {
+        "0": "Manual publishing is not allowed either.",
+        "2": "The article says they cannot be published at all.",
+        "3": "Translation is not the gating issue."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "What is the purpose of categories in Dynamics 365 Customer Service knowledge management?",
+      "options": [
+        "They replace subjects for all article classification",
+        "They create hierarchical categorical data to help tag records and make searching easier",
+        "They automatically publish related articles",
+        "They determine article public numbers"
+      ],
+      "answer": 1,
+      "category": "categories",
+      "tags": [
+        "categories",
+        "tagging",
+        "searchability",
+        "easy"
+      ],
+      "explanation": "Categories create hierarchical categorical data that helps group and tag records so they can be searched, reported, sorted, and segmented more easily.",
+      "wrongExplanations": {
+        "0": "Categories do not replace subjects universally.",
+        "2": "Categories don't publish articles.",
+        "3": "Article public numbers are unrelated."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-manage-categories"
+    },
+    {
+      "q": "Which command is used to associate a category with a knowledge article?",
+      "options": [
+        "Relate Product",
+        "Associate Category",
+        "Mark Complete",
+        "Add to Queue"
+      ],
+      "answer": 1,
+      "category": "categories",
+      "tags": [
+        "associate-category",
+        "knowledge-article",
+        "command-bar",
+        "easy"
+      ],
+      "explanation": "The category article instructs users to open a knowledge article and select Associate Category on the command bar.",
+      "wrongExplanations": {
+        "0": "Relate Product links a product, not a category.",
+        "2": "Mark Complete is a BPF action, not category association.",
+        "3": "Add to Queue is for review workflow."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-pages/templates/dynamics-365-apps/configure-knowledge-categories-articles"
+    },
+    {
+      "q": "Which statement best describes the relationship between subjects and categories for knowledge articles?",
+      "options": [
+        "Only subjects can be hierarchical",
+        "Only categories can be used for searching",
+        "Subjects classify cases, products, and knowledge articles, while categories are hierarchical tags that can also be associated to records",
+        "Subjects and categories are the same feature with different labels"
+      ],
+      "answer": 2,
+      "category": "classification",
+      "tags": [
+        "subjects",
+        "categories",
+        "knowledge-articles",
+        "hard"
+      ],
+      "explanation": "Subjects are an organizational structure for cases, products, and knowledge articles; categories are hierarchical tags used to group records and aid search, sorting, and segmentation.",
+      "wrongExplanations": {
+        "0": "Both concepts can be organized hierarchically in their respective contexts.",
+        "1": "Both can contribute to findability/classification, not categories alone.",
+        "3": "They are distinct capabilities."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/define-subjects-categorize-cases-products-articles"
+    },
+    {
+      "q": "What does the thumbs-up value shown beside an article represent in Copilot Service workspace?",
+      "options": [
+        "The total number of likes only",
+        "The average rating based on feedback, not a simple total like count",
+        "The number of published versions",
+        "The number of times the article was linked to a case"
+      ],
+      "answer": 1,
+      "category": "feedback-analytics",
+      "tags": [
+        "feedback",
+        "rating",
+        "rollup-field",
+        "hard"
+      ],
+      "explanation": "Microsoft explains that the value beside the Thumbs up icon is an average rating based on normalized feedback, not simply a total number of likes.",
+      "wrongExplanations": {
+        "0": "The article explicitly says it does not represent a total count of likes.",
+        "2": "Version count is unrelated.",
+        "3": "Case-link count is unrelated."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/submit-feedback"
+    },
+    {
+      "q": "Why might rating and view count numbers on knowledge articles not update instantly?",
+      "options": [
+        "They update only during article publish",
+        "They are rollup fields",
+        "They depend on queue refresh",
+        "They are stored in browser cache only"
+      ],
+      "answer": 1,
+      "category": "feedback-analytics",
+      "tags": [
+        "rollup-fields",
+        "rating",
+        "views",
+        "easy"
+      ],
+      "explanation": "Microsoft notes that rating and view count numbers are rollup fields and therefore aren't updated instantly.",
+      "wrongExplanations": {
+        "0": "They are not publish-only updates.",
+        "2": "Queue refresh is unrelated to these metrics.",
+        "3": "They are platform-calculated values, not browser-cache-only values."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/submit-feedback"
+    },
+    {
+      "q": "How are article views normalized for users across time zones in analytics?",
+      "options": [
+        "All users always see UTC without conversion",
+        "Views are stored by the viewer's browser time zone only",
+        "Views are calculated in UTC, aggregated, then displayed according to the user's local time zone",
+        "Views are rounded to the article author's locale"
+      ],
+      "answer": 2,
+      "category": "feedback-analytics",
+      "tags": [
+        "analytics",
+        "utc",
+        "time-zones",
+        "hard"
+      ],
+      "explanation": "The analytics article states that views are calculated based on UTC, aggregated, and then displayed according to the user's local time zone.",
+      "wrongExplanations": {
+        "0": "Users do not simply see raw UTC without adjustment.",
+        "1": "The article describes server-side UTC aggregation, not browser-only storage.",
+        "3": "Author locale is not the basis for display."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/dashboards-ka"
+    },
+    {
+      "q": "Which statement about templates is correct?",
+      "options": [
+        "Templates can prepopulate fields when creating an article from them",
+        "Templates are used only for article translation",
+        "Templates automatically publish articles when selected",
+        "Templates can only be used programmatically, not in the UI"
+      ],
+      "answer": 0,
+      "category": "templates",
+      "tags": [
+        "knowledge-article-template",
+        "prepopulated-fields",
+        "authoring",
+        "easy"
+      ],
+      "explanation": "When you create an article from a template, some fields are prepopulated as defined in the template.",
+      "wrongExplanations": {
+        "1": "Templates are not limited to translation.",
+        "2": "Selecting a template does not automatically publish the article.",
+        "3": "Templates can be used in the UI and also programmatically."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-knowledge-article"
+    },
+    {
+      "q": "Which action is documented for programmatically creating a knowledge article from an existing knowledge article template?",
+      "options": [
+        "CreateKnowledgeArticleVersion",
+        "msdyn_GetKAObjectFromTemplate",
+        "CreateKnowledgeArticleTranslation",
+        "PublishKnowledgeArticle"
+      ],
+      "answer": 1,
+      "category": "templates",
+      "tags": [
+        "programmatic",
+        "template",
+        "action",
+        "hard"
+      ],
+      "explanation": "Microsoft documents the msdyn_GetKAObjectFromTemplate action for creating a knowledge article from an existing template programmatically.",
+      "wrongExplanations": {
+        "0": "This action creates a new article version, not an article from a template.",
+        "2": "This request is for translations, not template instantiation.",
+        "3": "This is not the documented action name."
+      },
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/develop/create-knowledge-article-using-template"
+    }
+  ],
+  "tf": [
+    {
+      "q": "True or False: The embedded knowledge search control is deprecated in the web client, and Microsoft directs you to use the Knowledge Settings page in Unified Interface instead.",
+      "answer": true,
+      "category": "knowledge-setup",
+      "tags": [
+        "embedded-knowledge-search",
+        "deprecated",
+        "unified-interface"
+      ],
+      "explanation": "True. The article explicitly notes that the embedded knowledge search control is deprecated in the web client and points admins to the Knowledge Settings page in Unified Interface.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "True or False: When an external search provider is configured, the Results shown on page value still strictly controls the number of provider results shown.",
+      "answer": false,
+      "category": "external-search",
+      "tags": [
+        "search-providers",
+        "results-count"
+      ],
+      "explanation": "False. Once a search provider is configured, each configured provider shows three articles, regardless of the configured page-result count.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "q": "True or False: Only filter values that are made visible can be preselected in customized knowledge search filters.",
+      "answer": true,
+      "category": "search-filters",
+      "tags": [
+        "search-filters",
+        "preselects",
+        "visibility"
+      ],
+      "explanation": "True. The filter article states that only values made visible can be preselected.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-knowledge-article-search-filters"
+    },
+    {
+      "q": "True or False: The KBArticle, KBArticleTemplate, and KBArticleComment entities are the recommended entities for modern knowledge management implementations.",
+      "answer": false,
+      "category": "knowledge-lifecycle",
+      "tags": [
+        "deprecated-entities",
+        "knowledgearticle"
+      ],
+      "explanation": "False. Microsoft says those older entities are deprecated and that you must use the newer KnowledgeArticle entity for knowledge management.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "True or False: Knowledge management setup in Copilot Service admin center requires Microsoft 365 tenant administrator rights in addition to Dynamics security permissions.",
+      "answer": true,
+      "category": "knowledge-setup",
+      "tags": [
+        "permissions",
+        "admin-center",
+        "medium"
+      ],
+      "explanation": "The setup prerequisite explicitly includes both Dynamics permissions and Microsoft 365 tenant administrator rights.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "True or False: Knowledge management is enabled by default for Account and Contact record types.",
+      "answer": false,
+      "category": "knowledge-setup",
+      "tags": [
+        "record-types",
+        "defaults",
+        "easy"
+      ],
+      "explanation": "By default it's enabled for Case and Conversation, not Account and Contact.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "q": "True or False: The app side pane knowledge search experience is available only in Copilot Service workspace.",
+      "answer": true,
+      "category": "record-type-configuration",
+      "tags": [
+        "app-side-pane",
+        "workspace",
+        "easy"
+      ],
+      "explanation": "The documentation states that the app side pane is available only in Copilot Service workspace.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+    },
+    {
+      "q": "True or False: The 'Provide search results using' dropdown can include lookup fields.",
+      "answer": true,
+      "category": "kb-search-control",
+      "tags": [
+        "forms",
+        "lookup",
+        "easy"
+      ],
+      "explanation": "The dropdown can include text, multi-line text, and lookup fields.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "True or False: Copy URL is available for draft articles in the native Dynamics 365 knowledge management solution.",
+      "answer": false,
+      "category": "kb-search-control",
+      "tags": [
+        "copy-url",
+        "published",
+        "easy"
+      ],
+      "explanation": "Copy URL is available only for published articles in the native solution.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "q": "True or False: A knowledge article can be published directly from Draft state if the user has Publish privilege.",
+      "answer": false,
+      "category": "publish",
+      "tags": [
+        "lifecycle",
+        "approved-state",
+        "easy"
+      ],
+      "explanation": "The publish process starts from an article in Approved state.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+    },
+    {
+      "q": "True or False: If an article is rejected during review, it is assigned back to the primary author.",
+      "answer": true,
+      "category": "review",
+      "tags": [
+        "reject",
+        "primary-author",
+        "easy"
+      ],
+      "explanation": "The review article states that rejected articles are assigned back to the primary author.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+    },
+    {
+      "q": "True or False: The default article creation process is Create → Approve → Translate → Publish.",
+      "answer": false,
+      "category": "article-lifecycle",
+      "tags": [
+        "default-process",
+        "easy"
+      ],
+      "explanation": "Publishing happens before translation in the default process after approval.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/ka-process"
+    },
+    {
+      "q": "True or False: ArticlePublicNumber changes for every major and minor version of an article.",
+      "answer": false,
+      "category": "article-architecture",
+      "tags": [
+        "articlepublicnumber",
+        "versions",
+        "medium"
+      ],
+      "explanation": "ArticlePublicNumber stays the same across versions and translations.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "True or False: KBArticle, KBArticleTemplate, and KBArticleComment are deprecated.",
+      "answer": true,
+      "category": "deprecations",
+      "tags": [
+        "entities",
+        "deprecated",
+        "easy"
+      ],
+      "explanation": "Microsoft explicitly marks those older entities deprecated.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+    },
+    {
+      "q": "True or False: When translating an article, you can choose either a major or minor version for the translation.",
+      "answer": true,
+      "category": "translations",
+      "tags": [
+        "versioning",
+        "translation",
+        "easy"
+      ],
+      "explanation": "The Create new translation dialog lets you choose Major or Minor.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/translate-ka"
+    },
+    {
+      "q": "True or False: In the authoring language hierarchy, administrator settings override article-level overrides.",
+      "answer": false,
+      "category": "translations",
+      "tags": [
+        "authoring-language",
+        "hierarchy",
+        "hard"
+      ],
+      "explanation": "The hierarchy is article, then representative/knowledge manager, then administrator.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/set-knowledge-article-authoring-language"
+    },
+    {
+      "q": "True or False: External search providers can federate search to SharePoint.",
+      "answer": true,
+      "category": "external-sources",
+      "tags": [
+        "sharepoint",
+        "federated-search",
+        "easy"
+      ],
+      "explanation": "SharePoint is one of the documented search provider options.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "q": "True or False: Once you save the knowledge article schema for an integrated search provider, you can later switch it from field mapping to JSON schema without recreating it.",
+      "answer": false,
+      "category": "external-sources",
+      "tags": [
+        "schema",
+        "immutability",
+        "medium"
+      ],
+      "explanation": "Microsoft says you can't change the schema after saving the configuration.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/int-data-mapping"
+    },
+    {
+      "q": "True or False: Dataverse search must be enabled before integrating knowledge management with a Copilot agent.",
+      "answer": true,
+      "category": "copilot-integration",
+      "tags": [
+        "dataverse-search",
+        "prerequisite",
+        "easy"
+      ],
+      "explanation": "The Copilot integration article lists Dataverse search as a prerequisite.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+    },
+    {
+      "q": "True or False: Customer Knowledge Management Agent can use more than five custom record types for historical article creation if the environment has premium licensing.",
+      "answer": false,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "limit",
+        "custom-record-types",
+        "medium"
+      ],
+      "explanation": "The documented limit is five custom record types.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "True or False: Customer Knowledge Management Agent creates a new major version by default when automatic updates are enabled.",
+      "answer": false,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "minor-version",
+        "automatic-updates",
+        "easy"
+      ],
+      "explanation": "It creates a new minor version by default.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "True or False: Non Compliant articles created by Customer Knowledge Management Agent can still be published manually.",
+      "answer": false,
+      "category": "ai-knowledge-creation",
+      "tags": [
+        "compliance",
+        "publishing",
+        "easy"
+      ],
+      "explanation": "The documentation says Non Compliant articles can't be published.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "q": "True or False: Categories are useful for reporting, sorting, segmenting, and categorization of records.",
+      "answer": true,
+      "category": "categories",
+      "tags": [
+        "reporting",
+        "sorting",
+        "segmenting",
+        "easy"
+      ],
+      "explanation": "The category article lists those benefits explicitly.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-manage-categories"
+    },
+    {
+      "q": "True or False: The thumbs-up value shown on an article is always the total number of positive votes.",
+      "answer": false,
+      "category": "feedback-analytics",
+      "tags": [
+        "rating",
+        "feedback",
+        "medium"
+      ],
+      "explanation": "It's an average rating indicator, not a simple total-like count.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/submit-feedback"
     }
   ],
   "dragdrop": [
     {
-      "instruction": "Match each knowledge article status to its meaning in the article lifecycle.",
+      "instruction": "Match each search-provider concept to its correct description.",
       "items": [
-        "Draft",
-        "In Review",
-        "Approved",
-        "Published",
-        "Archived"
+        "External search provider",
+        "Integrated Search API trigger flow",
+        "Insights tab",
+        "Knowledge Federated Article permissions",
+        "Schema mapping"
       ],
       "zones": [
-        "Article is being authored — not yet submitted",
-        "Article is awaiting review by a knowledge manager",
-        "Article has passed review and is ready to publish",
-        "Article is live and visible to agents and customers",
-        "Article has been retired from active use"
+        "Lets representatives search outside the current Dynamics 365 organization",
+        "A cloud flow that may need to be turned on if provisioning integrated search fails",
+        "Shows ingestion IDs and metrics such as Recognized, Created, Updated, and Failed",
+        "Custom-role access needed to see provider results",
+        "Maps source article properties to KnowledgeArticle attributes"
       ],
       "correctMapping": {
-        "Draft": "Article is being authored — not yet submitted",
-        "In Review": "Article is awaiting review by a knowledge manager",
-        "Approved": "Article has passed review and is ready to publish",
-        "Published": "Article is live and visible to agents and customers",
-        "Archived": "Article has been retired from active use"
+        "External search provider": "Lets representatives search outside the current Dynamics 365 organization",
+        "Integrated Search API trigger flow": "A cloud flow that may need to be turned on if provisioning integrated search fails",
+        "Insights tab": "Shows ingestion IDs and metrics such as Recognized, Created, Updated, and Failed",
+        "Knowledge Federated Article permissions": "Custom-role access needed to see provider results",
+        "Schema mapping": "Maps source article properties to KnowledgeArticle attributes"
+      },
+      "tags": [
+        "search-providers",
+        "insights",
+        "schema-mapping"
+      ],
+      "explanation": "These are separate parts of the integrated external-search model: provider setup, provisioning dependency, ingestion monitoring, security, and source-to-target mapping.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "instruction": "Match each metadata schema field source type to what it represents.",
+      "items": [
+        "Regex",
+        "Meta",
+        "Constant",
+        "Url",
+        "Document"
+      ],
+      "zones": [
+        "Regular expression type of data",
+        "Value obtained from a meta tag in the source article",
+        "Static value for the target field",
+        "URL of the external source document",
+        "HTML content of the article"
+      ],
+      "correctMapping": {
+        "Regex": "Regular expression type of data",
+        "Meta": "Value obtained from a meta tag in the source article",
+        "Constant": "Static value for the target field",
+        "Url": "URL of the external source document",
+        "Document": "HTML content of the article"
+      },
+      "tags": [
+        "metadata-schema",
+        "field-source-types"
+      ],
+      "explanation": "Microsoft defines these five field source types for custom metadata mapping templates used with integrated search providers.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/develop/int-search-metadata-schema"
+    },
+    {
+      "instruction": "Put the article-template creation steps in the correct order.",
+      "items": [
+        "Select Article Templates",
+        "Select New",
+        "Enter title and language",
+        "Add a section",
+        "Enter section instructions"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5"
+      ],
+      "correctMapping": {
+        "Select Article Templates": "Step 1",
+        "Select New": "Step 2",
+        "Enter title and language": "Step 3",
+        "Add a section": "Step 4",
+        "Enter section instructions": "Step 5"
+      },
+      "tags": [
+        "article-templates",
+        "sequence"
+      ],
+      "explanation": "After navigating to Article Templates, you create a new template, provide title and language, then add sections and their instructions.",
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-templates-articles"
+    },
+    {
+      "instruction": "Match each knowledge-search configuration item to the correct behavior.",
+      "items": [
+        "Preselects",
+        "Visibility",
+        "Allow representative to personalize",
+        "Origins allowlist",
+        "Automatic search"
+      ],
+      "zones": [
+        "Makes selected filter values participate by default",
+        "Controls which filter values are shown",
+        "Lets representatives save filters relevant to their area",
+        "Stores approved origin links under General settings",
+        "Runs search using a chosen field when the record opens"
+      ],
+      "correctMapping": {
+        "Preselects": "Makes selected filter values participate by default",
+        "Visibility": "Controls which filter values are shown",
+        "Allow representative to personalize": "Lets representatives save filters relevant to their area",
+        "Origins allowlist": "Stores approved origin links under General settings",
+        "Automatic search": "Runs search using a chosen field when the record opens"
+      },
+      "tags": [
+        "filters",
+        "origins-allowlist",
+        "automatic-search"
+      ],
+      "explanation": "These settings affect different parts of the search experience: default participation, visibility, user personalization, trusted origins, and automatic query behavior.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-knowledge-article-search-filters"
+    },
+    {
+      "instruction": "Match each knowledge management setup element to its purpose.",
+      "items": [
+        "Record types",
+        "General settings",
+        "Enable suggest as you type",
+        "Set search mode as all",
+        "Origins allow list"
+      ],
+      "zones": [
+        "Add and configure tables that use knowledge management",
+        "Configure overall knowledge search behavior",
+        "Show title-based suggestions while typing",
+        "Broaden search behavior across terms",
+        "Allow trusted embedded content origins for articles"
+      ],
+      "correctMapping": {
+        "Record types": "Add and configure tables that use knowledge management",
+        "General settings": "Configure overall knowledge search behavior",
+        "Enable suggest as you type": "Show title-based suggestions while typing",
+        "Set search mode as all": "Broaden search behavior across terms",
+        "Origins allow list": "Allow trusted embedded content origins for articles"
       },
       "tags": [
         "knowledge-management",
-        "knowledge-lifecycle"
+        "setup",
+        "definitions"
       ],
-      "explanation": "Knowledge Articles follow a Draft to In Review to Approved to Published to Archived lifecycle. Only Published articles are visible to agents and customers in search results.",
-      "msRef": {
-        "label": "Knowledge article lifecycle",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/customer-service-hub-user-guide-knowledge-article"
-      }
+      "explanation": "These settings live in the Knowledge area of Copilot Service admin center and control where knowledge is enabled and how search behaves.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+    },
+    {
+      "instruction": "Match each Knowledge Base Search control option to what it enables.",
+      "items": [
+        "Link article",
+        "Unlink article",
+        "Copy URL",
+        "Open in new tab",
+        "Show status filter"
+      ],
+      "zones": [
+        "Associate an article to the current primary record",
+        "Remove an article association from the primary record",
+        "Copy the article's external URL for sharing",
+        "Open the article in another tab in the same browser",
+        "Filter results by Draft, Approved, or Published status"
+      ],
+      "correctMapping": {
+        "Link article": "Associate an article to the current primary record",
+        "Unlink article": "Remove an article association from the primary record",
+        "Copy URL": "Copy the article's external URL for sharing",
+        "Open in new tab": "Open the article in another tab in the same browser",
+        "Show status filter": "Filter results by Draft, Approved, or Published status"
+      },
+      "tags": [
+        "knowledge-search-control",
+        "forms",
+        "actions"
+      ],
+      "explanation": "These are specific options and actions available when configuring the Knowledge Base Search control on forms.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-knowledge-base-search-control-forms"
+    },
+    {
+      "instruction": "Put the default knowledge article lifecycle in the correct sequence.",
+      "items": [
+        "Create article",
+        "Mark for review",
+        "Reviewer approves or rejects",
+        "Publish article",
+        "Translate article"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5"
+      ],
+      "correctMapping": {
+        "Create article": "Step 1",
+        "Mark for review": "Step 2",
+        "Reviewer approves or rejects": "Step 3",
+        "Publish article": "Step 4",
+        "Translate article": "Step 5"
+      },
+      "tags": [
+        "lifecycle",
+        "sequence",
+        "knowledge-articles"
+      ],
+      "explanation": "Microsoft's default process is create, review, approve/reject, publish, then translate.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/ka-process"
+    },
+    {
+      "instruction": "Match each review action to its documented outcome.",
+      "items": [
+        "Reject in Review stage",
+        "Approve in Review stage",
+        "Assign",
+        "Add to Queue",
+        "Add note in Timeline"
+      ],
+      "zones": [
+        "Sends article back for edits and feedback",
+        "Makes article ready to publish",
+        "Routes review ownership to another reviewer or team",
+        "Lets reviewers pick work from a queue",
+        "Adds detailed comments about requested changes"
+      ],
+      "correctMapping": {
+        "Reject in Review stage": "Sends article back for edits and feedback",
+        "Approve in Review stage": "Makes article ready to publish",
+        "Assign": "Routes review ownership to another reviewer or team",
+        "Add to Queue": "Lets reviewers pick work from a queue",
+        "Add note in Timeline": "Adds detailed comments about requested changes"
+      },
+      "tags": [
+        "review",
+        "approval",
+        "queues"
+      ],
+      "explanation": "The review guidance distinguishes approval, rejection, reassignment, queue pickup, and timeline comments.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+    },
+    {
+      "instruction": "Match each publishing option to its effect.",
+      "items": [
+        "Publish On",
+        "Published Status",
+        "Expiration Date",
+        "Expiration Status",
+        "Publish approved related translations with Article"
+      ],
+      "zones": [
+        "Schedules publication for a later date/time",
+        "Defines status after publishing",
+        "Sets when the published article should expire",
+        "Defines status after expiration",
+        "Publishes approved related translations together with the article"
+      ],
+      "correctMapping": {
+        "Publish On": "Schedules publication for a later date/time",
+        "Published Status": "Defines status after publishing",
+        "Expiration Date": "Sets when the published article should expire",
+        "Expiration Status": "Defines status after expiration",
+        "Publish approved related translations with Article": "Publishes approved related translations together with the article"
+      },
+      "tags": [
+        "publish",
+        "publish-dialog",
+        "definitions"
+      ],
+      "explanation": "These are distinct controls in the publish dialog and are easy to confuse if you haven't used the form carefully.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+    },
+    {
+      "instruction": "Match each translation or localization concept to the correct description.",
+      "items": [
+        "Translation language",
+        "Major version",
+        "Minor version",
+        "Default authoring language",
+        "Override hierarchy"
+      ],
+      "zones": [
+        "The language selected when creating a translated article",
+        "A larger version increment option when creating a translation",
+        "A smaller version increment option when creating a translation",
+        "Organization-level language default for article authoring",
+        "Order in which article and user-level preferences can supersede admin defaults"
+      ],
+      "correctMapping": {
+        "Translation language": "The language selected when creating a translated article",
+        "Major version": "A larger version increment option when creating a translation",
+        "Minor version": "A smaller version increment option when creating a translation",
+        "Default authoring language": "Organization-level language default for article authoring",
+        "Override hierarchy": "Order in which article and user-level preferences can supersede admin defaults"
+      },
+      "tags": [
+        "translations",
+        "authoring-language",
+        "definitions"
+      ],
+      "explanation": "Translation creation and authoring defaults are separate concepts but often get mixed together.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/translate-ka"
+    },
+    {
+      "instruction": "Match each external knowledge source capability to the correct meaning.",
+      "items": [
+        "Cross-Organizational Search",
+        "SharePoint search provider",
+        "Integrated search provider",
+        "Field mapping",
+        "JSON schema"
+      ],
+      "zones": [
+        "Search articles in another Microsoft organization",
+        "Search a SharePoint URL in the same Microsoft organization",
+        "Set up third-party sources such as enterprise websites based on sitemap protocol",
+        "Map incoming external fields to knowledge article fields",
+        "Define ingestion structure using JSON-based schema"
+      ],
+      "correctMapping": {
+        "Cross-Organizational Search": "Search articles in another Microsoft organization",
+        "SharePoint search provider": "Search a SharePoint URL in the same Microsoft organization",
+        "Integrated search provider": "Set up third-party sources such as enterprise websites based on sitemap protocol",
+        "Field mapping": "Map incoming external fields to knowledge article fields",
+        "JSON schema": "Define ingestion structure using JSON-based schema"
+      },
+      "tags": [
+        "external-sources",
+        "search-providers",
+        "schema-mapping"
+      ],
+      "explanation": "External provider setup combines provider type selection with ingestion schema decisions.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+    },
+    {
+      "instruction": "Match each Customer Knowledge Management Agent capability to the right statement.",
+      "items": [
+        "Custom record types",
+        "Manage attributes",
+        "Automatic article updates",
+        "Compliance state",
+        "Auto publish articles"
+      ],
+      "zones": [
+        "Supported only for historical article creation and limited in count",
+        "Lets you include or exclude mapped data fields for article generation",
+        "Creates a new minor version by default when enabled",
+        "Can block publication when set to Non Compliant",
+        "Can automatically publish compliant created articles and minor updates"
+      ],
+      "correctMapping": {
+        "Custom record types": "Supported only for historical article creation and limited in count",
+        "Manage attributes": "Lets you include or exclude mapped data fields for article generation",
+        "Automatic article updates": "Creates a new minor version by default when enabled",
+        "Compliance state": "Can block publication when set to Non Compliant",
+        "Auto publish articles": "Can automatically publish compliant created articles and minor updates"
+      },
+      "tags": [
+        "ai-knowledge-creation",
+        "copilot",
+        "definitions"
+      ],
+      "explanation": "These five settings represent distinct control points in Customer Knowledge Management Agent.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+    },
+    {
+      "instruction": "Match each article-related classification concept to the correct usage.",
+      "items": [
+        "Subject",
+        "Category",
+        "Product association",
+        "Related article",
+        "Primary author"
+      ],
+      "zones": [
+        "Organizational structure used to mark and categorize articles, cases, and products",
+        "Hierarchical tag structure used for grouping and searchability",
+        "Makes it easier to find articles related to specific products",
+        "Links an article that complements another article",
+        "Single user responsible for maintaining article content"
+      ],
+      "correctMapping": {
+        "Subject": "Organizational structure used to mark and categorize articles, cases, and products",
+        "Category": "Hierarchical tag structure used for grouping and searchability",
+        "Product association": "Makes it easier to find articles related to specific products",
+        "Related article": "Links an article that complements another article",
+        "Primary author": "Single user responsible for maintaining article content"
+      },
+      "tags": [
+        "classification",
+        "metadata",
+        "relationships"
+      ],
+      "explanation": "Subjects, categories, related products, related articles, and authorship all influence findability and governance but mean different things.",
+      "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/define-subjects-categorize-cases-products-articles"
+    },
+    {
+      "instruction": "Match each analytics or feedback concept to the correct definition.",
+      "items": [
+        "Views",
+        "Thumbs up value",
+        "Comments box",
+        "Rollup field delay",
+        "UTC aggregation"
+      ],
+      "zones": [
+        "Total number of times the article has been viewed",
+        "Average rating indicator based on feedback, not a pure like count",
+        "Optional text feedback shown when a representative gives thumbs down",
+        "Reason rating and view values may not update instantly",
+        "How article views are normalized before displaying in local time"
+      ],
+      "correctMapping": {
+        "Views": "Total number of times the article has been viewed",
+        "Thumbs up value": "Average rating indicator based on feedback, not a pure like count",
+        "Comments box": "Optional text feedback shown when a representative gives thumbs down",
+        "Rollup field delay": "Reason rating and view values may not update instantly",
+        "UTC aggregation": "How article views are normalized before displaying in local time"
+      },
+      "tags": [
+        "analytics",
+        "feedback",
+        "definitions"
+      ],
+      "explanation": "The feedback and analytics docs together explain the difference between raw views, averaged ratings, delays, and time-zone normalization.",
+      "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/submit-feedback"
     }
   ],
   "casestudy": [
     {
-      "title": "Contoso Support Centre Setup",
-      "scenario": "Contoso has recently licensed <strong>Dynamics 365 Customer Service</strong> and is setting up the system from scratch. The support centre has the following requirements:\n\n1. All inbound emails to <strong>support@contoso.com</strong> must automatically create cases\n2. Cases must be categorised using a standard product taxonomy\n3. Agents should only be able to edit cases they personally own\n4. Supervisors must be able to view and reassign all cases across the team\n5. Cases must be resolved within <strong>4 hours</strong> of creation, with a warning at 3 hours\n6. Agents must confirm the customer was notified before resolving a case\n\nThe admin team is configuring all of these requirements before going live.",
+      "title": "Contoso External Knowledge Federation",
+      "scenario": "Contoso wants representatives to search both internal Dataverse knowledge articles and articles from an external provider. The admin provisions integrated search, uploads an HTML article for metadata mapping, and creates a custom security role for support representatives. They also want to monitor ingestion runs and troubleshoot failed articles.",
       "tags": [
-        "foundational",
-        "configuration",
-        "case-management",
-        "SLA",
-        "security-roles"
+        "search-providers",
+        "schema-mapping",
+        "insights",
+        "security"
       ],
       "msRef": {
-        "label": "Customer Service setup overview",
-        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/overview"
+        "label": "Set up external search providers",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
       },
       "questions": [
         {
-          "q": "Contoso wants to classify cases using a standard product taxonomy such as Hardware > Laptops > Battery. Which feature supports this?",
+          "q": "Provisioning the integrated search provider failed. What is the first documented remediation step?",
           "options": [
-            "Category field with an option set of product names",
-            "Subject Tree configured with a hierarchical product taxonomy",
-            "Business Process Flow stages for each product",
-            "Tag field on the Case entity"
+            "Disable Dataverse search",
+            "Turn on the Integrated Search API trigger flow in the Default Solution cloud flows",
+            "Delete all external providers and start over",
+            "Recreate the KnowledgeArticle table"
           ],
           "answer": 1,
-          "explanation": "The <strong>Subject Tree</strong> supports multi-level hierarchical classification. Configuring it with Hardware > Laptops > Battery provides agents with a structured taxonomy and enables filtering and reporting by product category.",
-          "wrongExplanations": [
-            "An option set Category field is flat — it does not support the multi-level hierarchy required.",
-            null,
-            "Business Process Flows define workflow stages — they are not classification taxonomies.",
-            "A Tag field is informal text — it does not provide a governed hierarchical taxonomy."
+          "explanation": "If provisioning fails, Microsoft instructs admins to enable the Integrated Search API trigger flow in the Default Solution cloud flows.",
+          "wrongExplanations": {
+            "0": "Dataverse search is not the documented first remediation here.",
+            "2": "That is not the prescribed first fix.",
+            "3": "Recreating the table is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/add-search-provider"
+        },
+        {
+          "q": "Which local file type should the admin upload to expose meta tags for field mapping?",
+          "options": [
+            "PDF",
+            "Web Page, HTML Only",
+            "CSV",
+            "DOCX"
           ],
-          "msRef": {
-            "label": "Create subjects for classification",
-            "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/create-manage-subjects-determine-products-knowledge-base-issues"
-          }
+          "answer": 1,
+          "explanation": "Field mapping requires uploading an article saved as Web Page, HTML Only so the meta tags can be inspected and mapped.",
+          "wrongExplanations": {
+            "0": "PDF won't expose the same metadata-selection pattern described.",
+            "2": "CSV is not the documented format for metadata selection.",
+            "3": "DOCX is not the documented format either."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/int-data-mapping"
+        },
+        {
+          "q": "Support representatives with a custom security role cannot see provider results. Which missing permission set is the likely cause?",
+          "options": [
+            "Delete and Assign on KnowledgeArticle",
+            "Read, Create, Append, and AppendTo on Knowledge Federated Article entities",
+            "Share on Case",
+            "Write on Subject"
+          ],
+          "answer": 1,
+          "explanation": "Microsoft specifically lists Read, Create, Append, and AppendTo permissions on the federated article entities as required for custom roles to see search-provider results.",
+          "wrongExplanations": {
+            "0": "Those are not the permissions called out for provider visibility.",
+            "2": "Case sharing is unrelated to search-provider results visibility.",
+            "3": "Subject permissions are not the documented dependency here."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+        },
+        {
+          "q": "Where should the admin look to see whether an ingestion run created, updated, or failed articles?",
+          "options": [
+            "The Categories page",
+            "The Insights tab of the search provider",
+            "Article template properties",
+            "The rich text editor toolbar"
+          ],
+          "answer": 1,
+          "explanation": "The Insights tab displays ingestion IDs along with Recognized, Created, Updated, Failed, and related metrics.",
+          "wrongExplanations": {
+            "0": "Categories are unrelated to ingestion monitoring.",
+            "2": "Templates do not show ingestion metrics.",
+            "3": "The rich text editor does not provide ingestion analytics."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/view-and-use-insights"
+        },
+        {
+          "q": "If the admin wants to use a custom field instead of msdyn_externalreferenceid as the unique target field in the mapping template, what must they do?",
+          "options": [
+            "Make it business required",
+            "Add it as an alternate key",
+            "Convert it to a choice column",
+            "Mark it as searchable only"
+          ],
+          "answer": 1,
+          "explanation": "A custom unique target field must be added as an alternate key according to the metadata-schema guidance.",
+          "wrongExplanations": {
+            "0": "Business-required alone is not the requirement.",
+            "2": "Choice-column conversion is not the documented requirement.",
+            "3": "Searchability alone is not sufficient."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/develop/int-search-metadata-schema"
+        }
+      ]
+    },
+    {
+      "title": "Fabrikam Agent Knowledge Experience",
+      "scenario": "Fabrikam wants representatives to use internal knowledge search from the app side pane in Copilot Service workspace. They also need article templates for consistent authoring, category-based classification, customized filters with defaults, and rich text editing. For a self-service agent, they plan to integrate Dataverse knowledge articles with a Copilot agent using the documented Power Automate template.",
+      "tags": [
+        "productivity-pane",
+        "article-templates",
+        "filters",
+        "copilot-agent",
+        "rich-text-editor"
+      ],
+      "msRef": {
+        "label": "Configure knowledge search control on app side pane for entity records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+      },
+      "questions": [
+        {
+          "q": "Which app must Fabrikam use for the app side pane knowledge-search experience?",
+          "options": [
+            "Customer Service Hub",
+            "Copilot Service workspace",
+            "Unified Service Desk",
+            "Power Pages studio"
+          ],
+          "answer": 1,
+          "explanation": "The app side pane knowledge search experience is available only in Copilot Service workspace.",
+          "wrongExplanations": {
+            "0": "The side-pane article explicitly points to Copilot Service workspace, not Customer Service Hub.",
+            "2": "USD is not the target here.",
+            "3": "Power Pages studio is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+        },
+        {
+          "q": "The admin wants some filter values to be applied automatically when representatives search, without manual selection. Which feature should be used?",
+          "options": [
+            "Visibility",
+            "Preselects",
+            "Origins allowlist",
+            "Global search preview"
+          ],
+          "answer": 1,
+          "explanation": "Preselects make selected filter values participate automatically in filtering.",
+          "wrongExplanations": {
+            "0": "Visibility controls display, not automatic participation.",
+            "2": "Origins allowlist is unrelated to search filter defaults.",
+            "3": "Global search preview is a separate capability."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/enable-knowledge-article-search-filters"
+        },
+        {
+          "q": "What happens to the instructions in a section created in an article template when an author starts typing in a new article based on that template?",
+          "options": [
+            "They stay permanently visible",
+            "They disappear when the user starts typing",
+            "They become article feedback",
+            "They are converted into category labels"
+          ],
+          "answer": 1,
+          "explanation": "Template section instructions appear initially and disappear when the author begins typing in that section.",
+          "wrongExplanations": {
+            "0": "That is not the documented template behavior.",
+            "2": "Instructions are not transformed into feedback.",
+            "3": "They do not become category labels."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/power-platform/admin/create-templates-articles"
+        },
+        {
+          "q": "Which default article set is searched by the documented Copilot-agent Power Automate template unless Fabrikam adds extra filtering?",
+          "options": [
+            "All articles including drafts",
+            "External published articles",
+            "Only internal published articles",
+            "Only articles with categories"
+          ],
+          "answer": 1,
+          "explanation": "The documented default search filters target external published articles: statecode eq 3 and isinternal eq false.",
+          "wrongExplanations": {
+            "0": "Drafts are not included in the default query described.",
+            "2": "The default is not limited to internal published articles.",
+            "3": "Category presence is not the default criterion."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/integrate-km-with-pva"
+        },
+        {
+          "q": "What is true about the rich text editor in Fabrikam's knowledge-authoring scenario?",
+          "options": [
+            "It must be enabled first for knowledge articles",
+            "It is already available by default for knowledge articles and emails",
+            "It works only on single-line text columns",
+            "It is configured by adding a timeline control"
+          ],
+          "answer": 1,
+          "explanation": "Microsoft says the rich text editor functionality is available by default for knowledge articles and emails.",
+          "wrongExplanations": {
+            "0": "It does not require separate enablement for those default uses.",
+            "2": "It can be used on appropriate single- or multiple-line text fields.",
+            "3": "Timeline controls are unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/rich-text-editor-ka"
+        }
+      ]
+    },
+    {
+      "title": "Contoso Workspace Knowledge Search Rollout",
+      "scenario": "Contoso is rolling out Copilot Service workspace to service representatives. It wants knowledge search on the app side pane for Cases and a custom Warranty Claim table. Representatives should get automatic search based on a field from the open record, and administrators want typing assistance in the search box. The company also wants broad search behavior across search terms.",
+      "tags": [
+        "knowledge-management",
+        "record-types",
+        "copilot-service-workspace",
+        "search"
+      ],
+      "msRef": {
+        "label": "Configure knowledge management",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+      },
+      "questions": [
+        {
+          "q": "Which record type is already enabled for knowledge management by default and therefore doesn't need to be added from scratch?",
+          "options": [
+            "Warranty Claim",
+            "Case",
+            "Account",
+            "Product"
+          ],
+          "answer": 1,
+          "explanation": "Case is enabled by default for knowledge management, whereas Warranty Claim would need to be added as a record type.",
+          "wrongExplanations": {
+            "0": "Custom tables aren't enabled by default.",
+            "2": "Account isn't a default knowledge-enabled record type here.",
+            "3": "Product isn't a default knowledge-enabled record type here."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+        },
+        {
+          "q": "Where must the team configure app side pane knowledge search for the custom Warranty Claim table?",
+          "options": [
+            "Customer Service Hub only",
+            "Copilot Service admin center record type settings",
+            "Any model-driven form designer only",
+            "Power Platform admin center environment settings"
+          ],
+          "answer": 1,
+          "explanation": "The app side pane setup for entity records is configured in Copilot Service admin center by editing the record type.",
+          "wrongExplanations": {
+            "0": "The documented record-type edit flow is in Copilot Service admin center.",
+            "2": "Form designer alone does not configure the app side pane record type settings.",
+            "3": "This is not the environment-level admin center setting described."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+        },
+        {
+          "q": "Which setting lets administrators choose the field from Warranty Claim that drives automatic search results?",
+          "options": [
+            "Set search mode as all",
+            "Provide search results using",
+            "Publish approved related translations with Article",
+            "Show status filter"
+          ],
+          "answer": 1,
+          "explanation": "The 'Provide search results using' dropdown selects the field used for automatic search results on the entity record.",
+          "wrongExplanations": {
+            "0": "This is a general search-experience setting, not the field selector.",
+            "2": "That's a publish-dialog setting.",
+            "3": "That's a result filter, not the source field selector."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/configure-knowledge-search-control-productivity-pane"
+        },
+        {
+          "q": "Which feature should be enabled so representatives see title-based suggestions while typing in the search box?",
+          "options": [
+            "Enable suggest as you type",
+            "Show article rating",
+            "Open in new tab",
+            "Use default compliance state"
+          ],
+          "answer": 0,
+          "explanation": "Suggest-as-you-type shows relevant title-based suggestions in a flyout as representatives type.",
+          "wrongExplanations": {
+            "1": "Ratings don't provide type-ahead suggestions.",
+            "2": "Open in new tab is an article action, not a type-ahead feature.",
+            "3": "Compliance state belongs to AI-generated article governance, not search suggestions."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+        },
+        {
+          "q": "Which global setting best matches the requirement for broader matching across search terms?",
+          "options": [
+            "Set search mode as all",
+            "Show article language filter",
+            "Link article",
+            "Create new minor version"
+          ],
+          "answer": 0,
+          "explanation": "Set search mode as all is the documented general search-experience setting for broader search behavior across terms.",
+          "wrongExplanations": {
+            "1": "Language filter changes result filtering, not search-term logic.",
+            "2": "Link article is an action, not a search-mode setting.",
+            "3": "Versioning is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-knowledge-management-embedded-knowledge-search"
+        }
+      ]
+    },
+    {
+      "title": "Fabrikam Review and Publish Governance",
+      "scenario": "Fabrikam has article authors, reviewers, and knowledge managers. Authors must draft articles, mark them for review, and send them either to a specific reviewer or a queue. Reviewers can reject with comments or approve. Once approved, articles can be published immediately or scheduled, and published articles may later need updates based on feedback.",
+      "tags": [
+        "review",
+        "publish",
+        "queues",
+        "knowledge-governance"
+      ],
+      "msRef": {
+        "label": "Review knowledge articles",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+      },
+      "questions": [
+        {
+          "q": "An author wants the article to show up on the knowledge manager dashboard for review. Which status reason should the author choose before completing the review step?",
+          "options": [
+            "Approved",
+            "Published",
+            "Needs Review",
+            "Archived"
+          ],
+          "answer": 2,
+          "explanation": "To mark the article for review, the status reason is set to Needs Review and the Mark for Review field is completed in the BPF.",
+          "wrongExplanations": {
+            "0": "Approved is the result of successful review, not the pre-review status.",
+            "1": "Published is later in the lifecycle.",
+            "3": "Archived is not used to request review."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-knowledge-article"
+        },
+        {
+          "q": "If the author wants reviewers to self-pick work rather than direct-assign it, what should the author do?",
+          "options": [
+            "Select Relate Product",
+            "Select Add to Queue and choose the queue",
+            "Set Publish On",
+            "Change ArticlePublicNumber"
+          ],
+          "answer": 1,
+          "explanation": "Add to Queue lets reviewers pick the article from queue items available to work on.",
+          "wrongExplanations": {
+            "0": "Relate Product links product metadata, not review work pickup.",
+            "2": "Publish On is for scheduling publication.",
+            "3": "Public numbers are not the assignment mechanism."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-knowledge-article"
+        },
+        {
+          "q": "A reviewer rejects the content and adds the reason in the Reject Knowledge Article flyout. What is the expected routing outcome?",
+          "options": [
+            "The article is auto-published with comments hidden",
+            "The article is assigned back to the primary author",
+            "The article is archived",
+            "The article becomes read-only until translation"
+          ],
+          "answer": 1,
+          "explanation": "Rejected articles are assigned back to the primary author.",
+          "wrongExplanations": {
+            "0": "Rejected content is not published.",
+            "2": "Rejection does not archive the article.",
+            "3": "Translation is not the next state after rejection."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/review-ka"
+        },
+        {
+          "q": "The article is approved and the business wants it to go live next Monday. Which field in the publish flow supports this?",
+          "options": [
+            "Expiration Status",
+            "Publish On",
+            "Mark for Review",
+            "Provide search results using"
+          ],
+          "answer": 1,
+          "explanation": "Publish On is the field used to choose a later date and time for publication.",
+          "wrongExplanations": {
+            "0": "Expiration Status applies after expiration.",
+            "2": "Mark for Review is a review-stage step.",
+            "3": "That is a search control setting, not a publish option."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+        },
+        {
+          "q": "After publication, a knowledge manager wants to update the article based on feedback. Which privilege is still required at that point?",
+          "options": [
+            "Approve only",
+            "Assign",
+            "Publish privilege",
+            "Delete privilege"
+          ],
+          "answer": 2,
+          "explanation": "When an article is Published or Scheduled, only users with Publish privilege can update it.",
+          "wrongExplanations": {
+            "0": "Approve isn't sufficient once the article is published.",
+            "1": "Assign doesn't grant update permission.",
+            "3": "Delete is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+        }
+      ]
+    },
+    {
+      "title": "Northwind Multilingual Knowledge Strategy",
+      "scenario": "Northwind supports customers in English, French, and German. It wants one article family with multiple translations, wants authors to use an organization-wide default authoring language, but still allow article-level overrides. It also wants the main article and approved translations to publish together when appropriate.",
+      "tags": [
+        "translations",
+        "authoring-language",
+        "publish"
+      ],
+      "msRef": {
+        "label": "Translate knowledge articles",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/translate-ka"
+      },
+      "questions": [
+        {
+          "q": "When creating a translation, what version choice can the author make in the Create new translation dialog?",
+          "options": [
+            "Only draft or published",
+            "Only major",
+            "Only minor",
+            "Major or minor"
+          ],
+          "answer": 3,
+          "explanation": "The translation dialog lets the author create either a major or minor version for the translation.",
+          "wrongExplanations": {
+            "0": "These are states, not translation version options.",
+            "1": "Major is not the only option.",
+            "2": "Minor is not the only option."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/translate-ka"
+        },
+        {
+          "q": "Which supported languages can be selected for translation?",
+          "options": [
+            "Any language typed manually",
+            "Only languages supported by the Dynamics 365 instance",
+            "Only the user's browser language",
+            "Only languages that already have published articles"
+          ],
+          "answer": 1,
+          "explanation": "The translation article states you can set languages supported by your Dynamics 365 instance.",
+          "wrongExplanations": {
+            "0": "The language must come from the supported set.",
+            "2": "Browser language does not define the supported translation list.",
+            "3": "Existing published translations are not the limiting rule."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/translate-ka"
+        },
+        {
+          "q": "A knowledge manager says the organization's default authoring language must always override article-specific choices. Is that correct?",
+          "options": [
+            "Yes, admin language always wins",
+            "No, individual article override sits above user and admin settings",
+            "Yes, but only for minor versions",
+            "No, representative settings are below admin settings but above article settings"
+          ],
+          "answer": 1,
+          "explanation": "The override hierarchy places individual article choices first, then representative or knowledge manager, then administrator.",
+          "wrongExplanations": {
+            "0": "This reverses the documented hierarchy.",
+            "2": "Version type is irrelevant to the override hierarchy.",
+            "3": "Article settings are above user-level and admin settings."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/set-knowledge-article-authoring-language"
+        },
+        {
+          "q": "At publish time, what should be set if approved related translations should go live with the main article?",
+          "options": [
+            "Published Status = Scheduled",
+            "Publish Approved related translations with Article = Yes",
+            "Open in new tab",
+            "Status Reason = Needs Review"
+          ],
+          "answer": 1,
+          "explanation": "The publish dialog has a specific option named 'Publish Approved related translations with Article'.",
+          "wrongExplanations": {
+            "0": "Scheduled timing does not by itself publish related translations.",
+            "2": "Open in new tab is unrelated.",
+            "3": "Needs Review is pre-approval."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+        },
+        {
+          "q": "Why is ArticlePublicNumber important in a multilingual strategy?",
+          "options": [
+            "It changes per translation so each locale has a separate public ID",
+            "It stays the same across versions and translations for external lookup/reference",
+            "It is used only by admins in Dataverse and hidden from all external users",
+            "It is generated only for archived articles"
+          ],
+          "answer": 1,
+          "explanation": "ArticlePublicNumber stays the same across article versions and translations and is the external reference value.",
+          "wrongExplanations": {
+            "0": "It does not change per translation.",
+            "2": "It is exposed externally for lookup/reference.",
+            "3": "It is not limited to archived articles."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/work-knowledge-articles"
+        }
+      ]
+    },
+    {
+      "title": "Adventure Works External and AI Knowledge Expansion",
+      "scenario": "Adventure Works wants representatives to search internal Dynamics articles, SharePoint documents, and a third-party enterprise website. It also wants Copilot-assisted historical article creation from resolved cases and a custom Incident Summary table. Compliance is strict, and articles in noncompliant state must never be published.",
+      "tags": [
+        "external-sources",
+        "copilot",
+        "customer-knowledge-management-agent",
+        "compliance"
+      ],
+      "msRef": {
+        "label": "Set up external search providers",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+      },
+      "questions": [
+        {
+          "q": "Which provider type should the team use for SharePoint content in the same Microsoft organization?",
+          "options": [
+            "Cross-Organizational Search",
+            "SharePoint search provider",
+            "Integrated search provider only",
+            "Power Automate flow template"
+          ],
+          "answer": 1,
+          "explanation": "The SharePoint provider is the documented option for a SharePoint URL in the same Microsoft organization.",
+          "wrongExplanations": {
+            "0": "Cross-Organizational Search is for another organization.",
+            "2": "Integrated search provider targets third-party sources such as sitemap-based enterprise websites.",
+            "3": "This is not a search provider type."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+        },
+        {
+          "q": "Which provider approach best matches a third-party enterprise website based on the sitemap protocol?",
+          "options": [
+            "Integrated search provider",
+            "Category mapping",
+            "Translate article",
+            "Mark for Review"
+          ],
+          "answer": 0,
+          "explanation": "Microsoft specifically says to use the integrated search provider option for third-party knowledge sources such as enterprise websites based on the site map protocol.",
+          "wrongExplanations": {
+            "1": "Category mapping is not a provider type.",
+            "2": "Translation is unrelated.",
+            "3": "Review is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-search-providers"
+        },
+        {
+          "q": "The team wants the custom Incident Summary table available for historical AI-based article creation. What is one documented prerequisite before adding that custom record type?",
+          "options": [
+            "Turn on knowledge management for the record type",
+            "Create a translation first",
+            "Disable Dataverse search",
+            "Publish all draft articles"
+          ],
+          "answer": 0,
+          "explanation": "Before adding a custom record type to Customer Knowledge Management Agent, you must turn on knowledge management for that record type.",
+          "wrongExplanations": {
+            "1": "Translation is unrelated.",
+            "2": "Dataverse search is not the prerequisite named in the custom-record-type steps.",
+            "3": "Publishing drafts is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+        },
+        {
+          "q": "How many custom record types can be added to Customer Knowledge Management Agent?",
+          "options": [
+            "3",
+            "5",
+            "10",
+            "Unlimited"
+          ],
+          "answer": 1,
+          "explanation": "The feature supports up to five custom record types.",
+          "wrongExplanations": {
+            "0": "Too low.",
+            "2": "Too high.",
+            "3": "There is an explicit limit."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+        },
+        {
+          "q": "Which compliance rule satisfies the company's requirement that noncompliant AI-created articles must never be published?",
+          "options": [
+            "Set default compliance state to Published",
+            "Allow auto publish for all states",
+            "Rely on the rule that Non Compliant articles can't be published",
+            "Disable primary author assignment"
+          ],
+          "answer": 2,
+          "explanation": "Microsoft explicitly states that articles with the Non Compliant status can't be published.",
+          "wrongExplanations": {
+            "0": "Published is not a compliance state control.",
+            "1": "Auto-publish does not override the Non Compliant restriction.",
+            "3": "Primary author assignment is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/admin-km-agent"
+        }
+      ]
+    },
+    {
+      "title": "Tailspin Findability and Quality Improvement Program",
+      "scenario": "Tailspin has thousands of articles and inconsistent findability. It wants better tagging, product-specific retrieval, user feedback loops, and measurable analytics. Authors also want to start from templates so article structure stays consistent.",
+      "tags": [
+        "categories",
+        "subjects",
+        "feedback",
+        "analytics",
+        "templates"
+      ],
+      "msRef": {
+        "label": "Create and manage categories",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-manage-categories"
+      },
+      "questions": [
+        {
+          "q": "Which feature should administrators use to build a hierarchical tag structure specifically designed to group records and improve searchability and segmentation?",
+          "options": [
+            "Subjects only",
+            "Categories",
+            "Queues",
+            "Record creation rules"
+          ],
+          "answer": 1,
+          "explanation": "Categories create hierarchical categorical data used for grouping, tagging, and improving searchability and segmentation.",
+          "wrongExplanations": {
+            "0": "Subjects help classification too, but the hierarchical tagging/segmentation capability here is categories.",
+            "2": "Queues manage work, not article tagging.",
+            "3": "Record creation rules do not tag knowledge articles."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/create-manage-categories"
+        },
+        {
+          "q": "A product manager wants articles to be easier to find for a specific product line during publication. Which action supports that requirement?",
+          "options": [
+            "Relate Product",
+            "Add to Queue",
+            "Reject article",
+            "Set search mode as all"
+          ],
+          "answer": 0,
+          "explanation": "The publish process specifically includes Relate Product to make it easier to find articles related to specific products.",
+          "wrongExplanations": {
+            "1": "Queues are for work routing, not product metadata.",
+            "2": "Rejection is unrelated.",
+            "3": "Search mode is broad search behavior, not product linkage."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/publish-ka"
+        },
+        {
+          "q": "Representatives dislike an article and want to explain why. Which action is documented when they choose thumbs down on an article in Copilot Service workspace?",
+          "options": [
+            "They must open Advanced Find",
+            "A Comments box appears for optional feedback",
+            "The article is automatically archived",
+            "The article is removed from search instantly"
+          ],
+          "answer": 1,
+          "explanation": "When representatives choose Thumbs down, a Comments box appears where they can enter feedback.",
+          "wrongExplanations": {
+            "0": "Advanced Find is unrelated.",
+            "2": "Thumbs down does not archive the article automatically.",
+            "3": "Negative feedback does not immediately remove the article from search."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/submit-feedback"
+        },
+        {
+          "q": "The team sees rating and view counts lag behind recent activity. What is the best explanation?",
+          "options": [
+            "Counts refresh only when the article is republished",
+            "They are rollup fields and are not updated instantly",
+            "Views are stored only in browser cache",
+            "The article must first be translated"
+          ],
+          "answer": 1,
+          "explanation": "Microsoft documents that rating and view count numbers are rollup fields and therefore aren't updated instantly.",
+          "wrongExplanations": {
+            "0": "Republishing is not the refresh trigger described.",
+            "2": "Browser cache is not the documented reason.",
+            "3": "Translation is unrelated."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/submit-feedback"
+        },
+        {
+          "q": "Authors want a preformatted starting point with some fields already filled in whenever they create a new article. What should they use?",
+          "options": [
+            "A queue item",
+            "A knowledge article template",
+            "A category",
+            "A review note"
+          ],
+          "answer": 1,
+          "explanation": "Creating from a template prepopulates fields defined in that template and helps maintain consistency.",
+          "wrongExplanations": {
+            "0": "Queue items are not authoring templates.",
+            "2": "Categories classify articles; they do not prepopulate article fields.",
+            "3": "Review notes are feedback artifacts, not article starters."
+          },
+          "msRef": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/customer-service-hub-user-guide-knowledge-article"
         }
       ]
     }
