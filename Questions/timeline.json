@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "topic": "Timeline & Agent Experience",
-    "description": "Timeline control configuration, card forms, notes, highlights, and activity types.",
-    "status": "in-progress"
+    "topic": "Timeline",
+    "description": "Append-only expansion for timeline control covering records, card forms, highlighted fields, filters, sorting, quick create, notes, posts, custom connectors, and form-designer behavior.",
+    "status": "append"
   },
   "mcq": [
     {
@@ -221,6 +221,331 @@
         "label": "Timeline performance settings",
         "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
       }
+    },
+    {
+      "q": "Where do makers add or configure the Timeline component on a model-driven app form?",
+      "options": [
+        "In app settings under Site map",
+        "In the form designer, from Components, by dragging the Timeline component onto a form section",
+        "In Power Automate by adding a Dataverse trigger",
+        "In table views by enabling the timeline column"
+      ],
+      "answer": 1,
+      "category": "timeline-setup",
+      "tags": [
+        "timeline",
+        "form-designer",
+        "components"
+      ],
+      "explanation": "Microsoft says makers open the table form in the form designer, select Components, and drag the Timeline component into a section on the form.",
+      "wrongExplanations": [
+        "The site map doesn't host the timeline component configuration.",
+        null,
+        "Power Automate is unrelated to placing the timeline on a form.",
+        "Timeline is a form component, not a table view column toggle."
+      ],
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "Which Timeline setting controls whether users can create records such as phone calls, tasks, or appointments directly from the timeline?",
+      "options": [
+        "Record type filter",
+        "Quick create",
+        "Highlight fields",
+        "Card form sort"
+      ],
+      "answer": 1,
+      "category": "timeline-configuration",
+      "tags": [
+        "timeline",
+        "quick-create",
+        "record-creation"
+      ],
+      "explanation": "The Quick create setting controls whether users can create supported records directly from the timeline.",
+      "wrongExplanations": [
+        "Filters control visibility, not direct creation behavior.",
+        null,
+        "Highlighted fields affect display emphasis, not record creation.",
+        "Card form sorting is unrelated."
+      ],
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "What is the purpose of a card form in timeline configuration?",
+      "options": [
+        "It defines the columns shown in Advanced Find",
+        "It controls how a record type appears visually as a timeline card",
+        "It replaces the main form for the table",
+        "It determines security role access to the table"
+      ],
+      "answer": 1,
+      "category": "card-forms",
+      "tags": [
+        "timeline",
+        "card-forms",
+        "display"
+      ],
+      "explanation": "Card forms are used to define how records are rendered visually as cards within the timeline.",
+      "wrongExplanations": [
+        "Advanced Find view columns are unrelated to timeline card forms.",
+        null,
+        "Card forms do not replace the main form.",
+        "Security access is not controlled by card forms."
+      ],
+      "msRef": {
+        "label": "Use the model-driven app main form and its components",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/use-main-form-and-components"
+      }
+    },
+    {
+      "q": "What do highlighted fields do in the Timeline control?",
+      "options": [
+        "They force a field to become required on save",
+        "They surface selected data points prominently on the timeline card for quick scanning",
+        "They encrypt sensitive data in the timeline",
+        "They limit which users can see the record"
+      ],
+      "answer": 1,
+      "category": "highlights",
+      "tags": [
+        "timeline",
+        "highlighted-fields",
+        "cards"
+      ],
+      "explanation": "Highlighted fields are used to surface selected data points prominently on the card so users can scan important details quickly.",
+      "wrongExplanations": [
+        "Highlighting is a display behavior, not a form-validation rule.",
+        null,
+        "Timeline highlights do not encrypt data.",
+        "Visibility is controlled through security, not highlights."
+      ],
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "Which built-in content types can the Timeline control surface out of the box?",
+      "options": [
+        "Only custom connector data",
+        "Notes, posts, and activities",
+        "Queues, SLAs, and entitlements",
+        "Dashboards and charts"
+      ],
+      "answer": 1,
+      "category": "records",
+      "tags": [
+        "timeline",
+        "notes",
+        "posts",
+        "activities"
+      ],
+      "explanation": "Microsoft describes timeline as surfacing notes, posts, and activities such as emails, phone calls, appointments, and tasks.",
+      "wrongExplanations": [
+        "Custom connector data is an extension scenario, not the out-of-box-only answer.",
+        null,
+        "Queues, SLAs, and entitlements are not the out-of-box timeline content types described here.",
+        "Dashboards and charts are not timeline entries."
+      ],
+      "msRef": {
+        "label": "Timeline Overview for Users",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/add-activities"
+      }
+    },
+    {
+      "q": "If a maker wants a timeline to show external records from outside Dataverse, what Microsoft-supported extension approach is documented?",
+      "options": [
+        "Enable Power BI embedding on the form",
+        "Use custom connectors with the TimelineWallControl component",
+        "Add a quick view form under the timeline",
+        "Create a business rule on the external table"
+      ],
+      "answer": 1,
+      "category": "custom-connectors",
+      "tags": [
+        "timeline",
+        "custom-connectors",
+        "external-data"
+      ],
+      "explanation": "Microsoft documents using custom connectors with the TimelineWallControl component to surface external data as timeline records.",
+      "wrongExplanations": [
+        "Power BI embedding is unrelated to timeline record injection.",
+        null,
+        "Quick view forms don't turn external data into timeline entries.",
+        "Business rules do not extend timeline with external records."
+      ],
+      "msRef": {
+        "label": "Use custom connectors with the timeline in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/custom-connectors-timeline-control"
+      }
+    },
+    {
+      "q": "What does the initial load setting on the Timeline control influence?",
+      "options": [
+        "How many items are loaded when the timeline first opens",
+        "How many security roles can view timeline cards",
+        "How many forms can be linked to the table",
+        "How many queues can be shown on a case"
+      ],
+      "answer": 0,
+      "category": "performance",
+      "tags": [
+        "timeline",
+        "initial-load",
+        "performance"
+      ],
+      "explanation": "The initial load configuration determines how many timeline items are loaded when the control first opens.",
+      "wrongExplanations": [
+        null,
+        "Security role counts are unrelated to this setting.",
+        "Linked forms are not controlled by initial load.",
+        "Queues shown on a case are unrelated."
+      ],
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "Which statement about timeline filtering is correct?",
+      "options": [
+        "Timeline filters can be configured to let users narrow displayed record types",
+        "Timeline filters permanently delete hidden records from Dataverse",
+        "Timeline filters replace security roles",
+        "Timeline filters are available only for notes"
+      ],
+      "answer": 0,
+      "category": "filters",
+      "tags": [
+        "timeline",
+        "filters",
+        "record-types"
+      ],
+      "explanation": "Timeline configuration includes filter behavior so users can narrow the displayed content by record type or activity type.",
+      "wrongExplanations": [
+        null,
+        "Filtering affects display, not data deletion.",
+        "Filters do not replace the security model.",
+        "Filters are not restricted to notes only."
+      ],
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "q": "Which statement best describes timeline sorting?",
+      "options": [
+        "Timeline supports sorting content chronologically to help users review activity history",
+        "Timeline sorting changes the actual modified-on date of records",
+        "Timeline sorting is configured only in Power BI",
+        "Timeline sorting is available only for appointments"
+      ],
+      "answer": 0,
+      "category": "sorting",
+      "tags": [
+        "timeline",
+        "sorting",
+        "chronology"
+      ],
+      "explanation": "Timeline is intended to show information over time in a single stream, and sorting controls help users review chronology.",
+      "wrongExplanations": [
+        null,
+        "Sorting does not change stored record dates.",
+        "Power BI is unrelated to timeline sorting configuration.",
+        "Sorting is not limited to appointments."
+      ],
+      "msRef": {
+        "label": "Timeline Overview for Users",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/add-activities"
+      }
+    },
+    {
+      "q": "A maker wants users to open a record from the timeline and see a richer full-form experience than the card provides. Which statement is true?",
+      "options": [
+        "Card forms are the only forms a timeline record can ever use",
+        "Timeline cards are compact display surfaces; opening the record uses the underlying table form experience",
+        "Timeline can display records only if the table has no main form",
+        "Timeline disables full record navigation"
+      ],
+      "answer": 1,
+      "category": "card-forms",
+      "tags": [
+        "timeline",
+        "card-forms",
+        "main-form"
+      ],
+      "explanation": "Timeline cards provide compact display, but records still open into their underlying forms when users navigate into them.",
+      "wrongExplanations": [
+        "Card forms do not replace the record's normal form experience.",
+        null,
+        "Tables still use main forms for record interaction.",
+        "Timeline does not disable full navigation."
+      ],
+      "msRef": {
+        "label": "Use the model-driven app main form and its components",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/use-main-form-and-components"
+      }
+    },
+    {
+      "q": "Which form type is directly relevant when a timeline entry uses quick-create behavior for a table?",
+      "options": [
+        "Card form only",
+        "Quick create form",
+        "Quick view form",
+        "Business process flow form"
+      ],
+      "answer": 1,
+      "category": "quick-create",
+      "tags": [
+        "timeline",
+        "quick-create",
+        "forms"
+      ],
+      "explanation": "When timeline quick-create is used, it relies on the table's quick create form.",
+      "wrongExplanations": [
+        "Card forms affect card display, not quick-create data entry.",
+        null,
+        "Quick view forms are read-only display components.",
+        "Business process flow forms are unrelated."
+      ],
+      "msRef": {
+        "label": "Create or edit model-driven app quick create forms",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-quick-create-forms"
+      }
+    },
+    {
+      "q": "Which statement about notes on the timeline is correct?",
+      "options": [
+        "Notes are timeline content and can be configured for create/delete behavior",
+        "Notes can appear only through custom connectors",
+        "Notes are never part of timeline because they are not activities",
+        "Notes require unified routing to display"
+      ],
+      "answer": 0,
+      "category": "notes",
+      "tags": [
+        "timeline",
+        "notes",
+        "configuration"
+      ],
+      "explanation": "Notes are a supported timeline content type and can be configured in timeline behavior such as create/delete availability.",
+      "wrongExplanations": [
+        null,
+        "Notes are supported out of the box.",
+        "Notes are not activities, but timeline supports notes in addition to activities.",
+        "Unified routing is unrelated."
+      ],
+      "msRef": {
+        "label": "Timeline Overview for Users",
+        "url": "https://learn.microsoft.com/en-us/power-apps/user/add-activities"
+      }
     }
   ],
   "dragdrop": [
@@ -255,6 +580,109 @@
       "msRef": {
         "label": "Timeline control configuration",
         "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "instruction": "Match each timeline concept to its correct purpose.",
+      "items": [
+        "Card form",
+        "Highlighted fields",
+        "Quick create",
+        "Initial load",
+        "Custom connector"
+      ],
+      "zones": [
+        "Defines how a record appears visually on the timeline card",
+        "Surfaces selected values prominently for fast scanning",
+        "Lets users create supported records directly from the timeline",
+        "Controls how many items load when the timeline first opens",
+        "Extends timeline with external or nonstandard record sources"
+      ],
+      "correctMapping": {
+        "Card form": "Defines how a record appears visually on the timeline card",
+        "Highlighted fields": "Surfaces selected values prominently for fast scanning",
+        "Quick create": "Lets users create supported records directly from the timeline",
+        "Initial load": "Controls how many items load when the timeline first opens",
+        "Custom connector": "Extends timeline with external or nonstandard record sources"
+      },
+      "tags": [
+        "timeline",
+        "card-forms",
+        "highlights",
+        "quick-create"
+      ],
+      "explanation": "These settings control how timeline content looks, what is emphasized, how records are created, how many items load initially, and how the timeline can be extended.",
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "instruction": "Put the basic timeline setup process in the correct order.",
+      "items": [
+        "Open the table",
+        "Open the Forms area",
+        "Open the target form in the designer",
+        "Select Components",
+        "Drag the Timeline component into a section"
+      ],
+      "zones": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctMapping": {
+        "Open the table": "1",
+        "Open the Forms area": "2",
+        "Open the target form in the designer": "3",
+        "Select Components": "4",
+        "Drag the Timeline component into a section": "5"
+      },
+      "tags": [
+        "timeline",
+        "setup",
+        "sequence"
+      ],
+      "explanation": "Microsoft's documented setup path starts with the table, then Forms, then the target form, then Components, and finally dragging the Timeline component into place.",
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      }
+    },
+    {
+      "instruction": "Classify each item as a timeline display concern or a broader platform/form concern.",
+      "items": [
+        "Highlighted fields",
+        "Card form rendering",
+        "Quick create form design",
+        "Main form navigation after opening a record",
+        "Custom connector data surfacing"
+      ],
+      "zones": [
+        "Timeline display concern",
+        "Timeline display concern",
+        "Broader platform/form concern",
+        "Broader platform/form concern",
+        "Timeline display concern"
+      ],
+      "correctMapping": {
+        "Highlighted fields": "Timeline display concern",
+        "Card form rendering": "Timeline display concern",
+        "Quick create form design": "Broader platform/form concern",
+        "Main form navigation after opening a record": "Broader platform/form concern",
+        "Custom connector data surfacing": "Timeline display concern"
+      },
+      "tags": [
+        "timeline",
+        "forms",
+        "display"
+      ],
+      "explanation": "Some settings are specific to the timeline surface itself, while others depend on the wider form and table model in model-driven apps.",
+      "msRef": {
+        "label": "Use the model-driven app main form and its components",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/use-main-form-and-components"
       }
     }
   ],
@@ -377,6 +805,128 @@
           "msRef": {
             "label": "Records in Timeline configuration",
             "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Contoso Case Timeline Redesign",
+      "scenario": "Contoso wants service representatives to review customer history faster from the case form. They want key email and phone details emphasized on cards, supported activities created from the timeline, a manageable number of records loaded initially, and a way to show external records from another system inside the same timeline experience.",
+      "tags": [
+        "timeline",
+        "cards",
+        "highlights",
+        "quick-create",
+        "custom-connectors"
+      ],
+      "msRef": {
+        "label": "Add and configure the timeline control in Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+      },
+      "questions": [
+        {
+          "q": "Which feature should Contoso use to emphasize the most important fields on each timeline card?",
+          "options": [
+            "Highlighted fields",
+            "Business rules",
+            "Status reason transitions",
+            "Quick view form"
+          ],
+          "answer": 0,
+          "explanation": "Highlighted fields are used to surface selected values prominently on the card.",
+          "wrongExplanations": [
+            null,
+            "Business rules don't control visual emphasis on timeline cards.",
+            "Status reason transitions are unrelated.",
+            "Quick view forms are different form components."
+          ],
+          "msRef": {
+            "label": "Add and configure the timeline control in Power Apps",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        },
+        {
+          "q": "Contoso wants users to create calls and tasks directly from the timeline. What must be considered in addition to timeline settings?",
+          "options": [
+            "The relevant quick create forms must support the scenario",
+            "The queue must be private",
+            "A Power Automate flow is required",
+            "The case must be resolved first"
+          ],
+          "answer": 0,
+          "explanation": "Timeline quick-create relies on the relevant table quick create forms, so those forms must support the scenario.",
+          "wrongExplanations": [
+            null,
+            "Queue privacy is unrelated.",
+            "Power Automate is not required for basic timeline quick-create.",
+            "The case does not need to be resolved first."
+          ],
+          "msRef": {
+            "label": "Create or edit model-driven app quick create forms",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-quick-create-forms"
+          }
+        },
+        {
+          "q": "What setting should Contoso use to avoid overloading the form with too many timeline entries on first open?",
+          "options": [
+            "Initial load count",
+            "Security role depth",
+            "Queue item threshold",
+            "Column requirement level"
+          ],
+          "answer": 0,
+          "explanation": "Initial load controls how many timeline items are loaded when the control first opens.",
+          "wrongExplanations": [
+            null,
+            "Security role depth is unrelated.",
+            "Queue item thresholds are unrelated.",
+            "Requirement level is unrelated."
+          ],
+          "msRef": {
+            "label": "Add and configure the timeline control in Power Apps",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/set-up-timeline-control"
+          }
+        },
+        {
+          "q": "Contoso wants records from an external system in the same timeline stream. What Microsoft-supported path fits?",
+          "options": [
+            "Custom connectors with TimelineWallControl",
+            "A dashboard chart pinned to the form",
+            "A quick view form only",
+            "Status reason transitions"
+          ],
+          "answer": 0,
+          "explanation": "Microsoft documents custom connectors with TimelineWallControl for surfacing external data as timeline records.",
+          "wrongExplanations": [
+            null,
+            "Charts don't become timeline entries.",
+            "Quick view forms don't inject external rows into timeline.",
+            "Status reason transitions are unrelated."
+          ],
+          "msRef": {
+            "label": "Use custom connectors with the timeline in Power Apps",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/custom-connectors-timeline-control"
+          }
+        },
+        {
+          "q": "What do card forms primarily affect in this scenario?",
+          "options": [
+            "How timeline entries are visually rendered",
+            "Whether the case can be resolved",
+            "Whether SLAs pause",
+            "Whether the queue receives emails"
+          ],
+          "answer": 0,
+          "explanation": "Card forms affect the visual rendering of timeline entries.",
+          "wrongExplanations": [
+            null,
+            "Case resolution is unrelated.",
+            "SLA pause behavior is unrelated.",
+            "Email queue receipt is unrelated."
+          ],
+          "msRef": {
+            "label": "Use the model-driven app main form and its components",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/use-main-form-and-components"
           }
         }
       ]
