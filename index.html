@@ -862,7 +862,7 @@ const CONFIG = {
       title:'D365 CE Technical Consultant',
       icon:'🎯',
       desc:'',
-      file:'interviewsim/CE_Technical_Consultant_Interview.json'
+      file:'Interviewsim/CE_Technical_Consultant_Interview.json'
     }
   ],
   // Groups — parent cards on home screen that open a sub-topic picker screen
@@ -1020,16 +1020,20 @@ function pickBalancedCaseStudies(pool,targetSubquestions,balance){
 ═══════════════════════════════════════ */
 const _cache={};
 
-function showSetupError(file){
-  // Remove existing modal if any
+function showSetupError(file, type='questions'){
   document.getElementById('setupModal')?.remove();
   const isFileProtocol = location.protocol === 'file:';
+  const isInterview = type === 'interview';
+  const label = isInterview ? '⚠ Cannot Load Interview Pack' : '⚠ Cannot Load Questions';
+  const structureHint = isInterview
+    ? `your-repo/<br>  index.html<br>  interviewsim/<br>    CE_Technical_Consultant_Interview.json  ✓ must be here`
+    : `your-repo/<br>  index.html<br>  Questions/<br>    delegation.json  ✓ must be here`;
   const modal = document.createElement('div');
   modal.id = 'setupModal';
   modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px';
   modal.innerHTML=`
     <div style="background:var(--surface);border:1px solid var(--border);max-width:540px;width:100%;padding:32px;position:relative">
-      <div style="font-family:Syne,sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--wrong);margin-bottom:16px">⚠ Cannot Load Questions</div>
+      <div style="font-family:Syne,sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--wrong);margin-bottom:16px">${label}</div>
       <div style="font-family:Syne,sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:12px">
         ${isFileProtocol ? 'Running as a local file — a web server is required' : `File not found: <code style="color:var(--accent);font-size:.9em">${file}</code>`}
       </div>
@@ -1039,13 +1043,13 @@ function showSetupError(file){
           You need to serve the folder from a local web server.<br><br>
           <strong style="color:var(--text)">Option 1 — VS Code:</strong> Install the <em>Live Server</em> extension, right-click <code style="color:var(--accent)">index.html</code> → <em>Open with Live Server</em>.<br><br>
           <strong style="color:var(--text)">Option 2 — Python (any terminal):</strong><br>
-          <code style="display:block;background:var(--surface2);border:1px solid var(--border);padding:10px 14px;margin-top:6px;color:var(--accent3)">cd /path/to/pp-mastery<br>python -m http.server 8080</code>
+          <code style="display:block;background:var(--surface2);border:1px solid var(--border);padding:10px 14px;margin-top:6px;color:var(--accent3)">cd /path/to/your-repo<br>python -m http.server 8080</code>
           Then open <code style="color:var(--accent)">http://localhost:8080</code> in your browser.<br><br>
-          <strong style="color:var(--text)">Option 3 — Deploy:</strong> Push the folder to GitHub Pages or Netlify — it works immediately.
+          <strong style="color:var(--text)">Option 3 — Deploy:</strong> Push the folder to GitHub Pages — it works immediately.
         ` : `
-          Make sure <code style="color:var(--accent)">${file}</code> exists in the correct location relative to <code style="color:var(--accent)">index.html</code>.<br><br>
+          Make sure <code style="color:var(--accent)">${file}</code> exists at the correct path relative to <code style="color:var(--accent)">index.html</code>. GitHub Pages is case-sensitive — folder and file names must match exactly.<br><br>
           Expected structure:<br>
-          <code style="display:block;background:var(--surface2);border:1px solid var(--border);padding:10px 14px;margin-top:6px;color:var(--accent3)">pp-mastery/<br>  index.html<br>  questions/<br>    delegation.json  ✓ must be here</code>
+          <code style="display:block;background:var(--surface2);border:1px solid var(--border);padding:10px 14px;margin-top:6px;color:var(--accent3)">${structureHint}</code>
         `}
       </div>
       <button onclick="document.getElementById('setupModal').remove()" style="font-family:Syne,sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:var(--accent);color:#000;border:none;padding:12px 28px;cursor:pointer">Got it</button>
@@ -2834,7 +2838,7 @@ function renderInterviewSimGrid(){
 
 async function fetchInterviewPack(packCfg){
   if(location.protocol==='file:'){
-    showSetupError(packCfg.file);
+    showSetupError(packCfg.file,'interview');
     throw new Error('file:// protocol — serve via a web server');
   }
   const candidates=[
@@ -2852,7 +2856,7 @@ async function fetchInterviewPack(packCfg){
       lastErr=err;
     }
   }
-  showSetupError(packCfg.file);
+  showSetupError(packCfg.file,'interview');
   throw lastErr || new Error('Interview pack not found');
 }
 
@@ -2870,8 +2874,8 @@ async function loadInterviewPack(packId){
     renderInterviewPack();
     showScreen('interviewPackScreen');
   }catch(err){
-    alert('Cannot load interview pack. Check the file path and JSON name.');
-    console.error(err);
+    // showSetupError already rendered the modal — just log
+    console.error('Interview pack load failed:',err);
   }finally{
     loading(false);
   }
