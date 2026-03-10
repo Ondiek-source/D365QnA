@@ -1,0 +1,451 @@
+{
+  "_meta": {
+    "topic": "Lead Technical Design",
+    "description": "The solution architect's role, responsibilities, design leadership, Power Platform Well-Architected pillars, design decision frameworks, tradeoff identification, and governance during technical design.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "Which statement best captures the primary responsibility of a Power Platform solution architect on a project?",
+      "options": [
+        "To build and configure the solution directly, acting as the lead developer",
+        "To be responsible for the successful design, implementation, deployment, and adoption of the overall solution, ensuring it meets the customer's needs now and in the future",
+        "To manage the project plan and ensure timelines are met",
+        "To act as the primary point of contact for the customer on commercial and contractual matters"
+      ],
+      "answer": 1,
+      "category": "role-definition",
+      "tags": ["solution-architect", "role", "responsibility", "design"],
+      "explanation": "Microsoft defines the solution architect as responsible for the successful design, implementation, deployment, and adoption of the overall solution — ensuring it meets the customer's needs both now and in the future. Critically, while the architect may not 'click the buttons' during a deployment, they are ultimately accountable for the solution and work closely with the delivery team. This ownership spans the full project lifecycle, not just the design phase.",
+      "wrongExplanations": [
+        "The solution architect leads and governs technical design but does not typically build or configure the solution directly — that is the role of functional consultants and developers.",
+        "Timeline management is the project manager's primary responsibility — the architect focuses on solution quality and technical governance.",
+        "Commercial and contractual relationships are managed by account managers or engagement leads — not the solution architect."
+      ],
+      "msRef": {
+        "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+      }
+    },
+    {
+      "q": "Microsoft describes the solution architect as performing 'proactive and preventative work' throughout an engagement. What two outcomes does this work aim to achieve?",
+      "options": [
+        "Reduce project cost and accelerate go-live timelines",
+        "Increase the value of the customer's investment and promote organisational health",
+        "Ensure compliance with Microsoft's product roadmap and licence terms",
+        "Prevent scope creep and manage change requests"
+      ],
+      "answer": 1,
+      "category": "role-definition",
+      "tags": ["solution-architect", "proactive", "value", "organisational-health"],
+      "explanation": "The PL-600 study guide explicitly states that a solution architect applies knowledge and experience throughout an engagement by performing proactive and preventative work with two goals: (1) increasing the value of the customer's investment, and (2) promoting organisational health. This distinguishes the architect from a purely reactive role — they anticipate problems, surface technical debt, and help the organisation build lasting capability, not just deliver a point-in-time solution.",
+      "wrongExplanations": [
+        "While cost and timeline are valid project concerns, they are not the specific outcomes Microsoft attributes to the architect's proactive and preventative work.",
+        "Licence compliance monitoring is an admin and governance function, not the primary output of the architect's proactive engagement.",
+        "Scope and change management are project management concerns — the architect's proactive work is oriented around solution quality and organisational capability."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    },
+    {
+      "q": "A solution architect is designing a Power Platform solution. Which of the following best describes how they should balance competing design considerations?",
+      "options": [
+        "Prioritise security above all other pillars — no design decision should compromise the security posture",
+        "Prioritise functional requirements first; non-functional requirements such as performance and reliability can be addressed post go-live",
+        "Balance the project's business needs while meeting both functional and non-functional requirements, making informed tradeoffs across all pillars",
+        "Defer all design decisions to the senior developer — the architect's role is to document decisions, not make them"
+      ],
+      "answer": 2,
+      "category": "design-decisions",
+      "tags": ["solution-architect", "tradeoffs", "functional", "non-functional", "balance"],
+      "explanation": "The PL-600 study guide states that a solution architect balances the project's business needs while meeting functional and non-functional requirements. No single pillar automatically overrides others — every architectural decision involves recognised tradeoffs between reliability, security, performance efficiency, operational excellence, and experience optimisation. The architect must make those tradeoffs deliberately and transparently, not defer them or collapse them into a single dimension.",
+      "wrongExplanations": [
+        "Security is critical but is one of five equal pillars — the Power Platform Well-Architected framework requires all pillars to be considered, and over-prioritising security can introduce friction, increase cost, and harm the user experience.",
+        "Deferring non-functional requirements to post go-live is a high-risk pattern that introduces technical debt and can undermine the entire solution — these must be addressed during design.",
+        "The architect facilitates and makes design decisions — they do not delegate decision authority to developers while merely documenting outcomes."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    },
+    {
+      "q": "The Power Platform Well-Architected framework has five pillars. Four are shared with the Azure Well-Architected Framework. Which pillar is unique to Power Platform Well-Architected?",
+      "options": [
+        "Reliability",
+        "Operational Excellence",
+        "Experience Optimisation",
+        "Cost Optimisation"
+      ],
+      "answer": 2,
+      "category": "well-architected",
+      "tags": ["well-architected", "pillars", "experience-optimisation", "power-platform"],
+      "explanation": "Power Platform Well-Architected is built on five pillars: Reliability, Security, Operational Excellence, Performance Efficiency, and Experience Optimisation. The first four are based on the Azure Well-Architected Framework. Experience Optimisation is the fifth pillar and is unique to Power Platform Well-Architected — it reflects the platform's focus on maker and end-user experience quality, including usability, interaction design, and accessibility, which are particularly relevant to low-code and citizen-developer scenarios.",
+      "wrongExplanations": [
+        "Reliability is one of the four pillars shared with Azure Well-Architected — it is not unique to Power Platform.",
+        "Operational Excellence is one of the four pillars shared with Azure Well-Architected — it is not unique to Power Platform.",
+        "Cost Optimisation is a pillar in the Azure Well-Architected Framework but is NOT one of the five pillars in Power Platform Well-Architected — it was replaced by Experience Optimisation."
+      ],
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected documentation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    },
+    {
+      "q": "What are the five pillars of the Power Platform Well-Architected framework?",
+      "options": [
+        "Security, Scalability, Reliability, Governance, and Integration",
+        "Reliability, Security, Operational Excellence, Performance Efficiency, and Experience Optimisation",
+        "Availability, Security, Usability, Performance, and Cost Optimisation",
+        "Governance, Compliance, Reliability, Performance, and Developer Experience"
+      ],
+      "answer": 1,
+      "category": "well-architected",
+      "tags": ["well-architected", "pillars", "power-platform", "architecture"],
+      "explanation": "The five pillars of Power Platform Well-Architected are: (1) Reliability — meeting uptime and recovery targets through redundancy and resiliency; (2) Security — protecting confidentiality and data integrity; (3) Operational Excellence — responsible development and operations practices; (4) Performance Efficiency — meeting performance expectations under load; and (5) Experience Optimisation — ensuring the workload is easy to use for all personas. A solution architect must apply all five pillars when making design decisions, recognising that choices favouring one pillar often involve tradeoffs against others.",
+      "wrongExplanations": [
+        "Scalability, Governance, and Integration are important architectural concerns but are not named as the five formal pillars of Power Platform Well-Architected.",
+        "Availability and Usability are concepts addressed within the framework but are not the five named pillars. Cost Optimisation is an Azure WAF pillar not included in Power Platform Well-Architected.",
+        "Governance, Compliance, and Developer Experience are not the five named pillars of Power Platform Well-Architected."
+      ],
+      "msRef": {
+        "label": "Power Platform Well-Architected pillars",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+      }
+    },
+    {
+      "q": "A junior developer asks why the solution architect added a monitoring and alerting layer to the design when it was not part of the original requirements. What principle best justifies this decision?",
+      "options": [
+        "The architect is padding the project scope to justify their fee",
+        "The architect is designing for operational realities — observability and supportability — not just the happy path, which is a core principle of the architect role",
+        "The monitoring layer is required by Microsoft's product licensing terms",
+        "The architect is applying the Performance Efficiency pillar, which mandates telemetry on all solutions"
+      ],
+      "answer": 1,
+      "category": "design-principles",
+      "tags": ["solution-architect", "observability", "operational-excellence", "design-principles"],
+      "explanation": "Microsoft's guidance for cloud solution architects states explicitly that architects should design not just for the 'happy path' but also for operational realities such as observability and supportability. A solution without monitoring cannot be diagnosed when failures occur, cannot trigger proactive alerts, and cannot demonstrate SLA compliance — all of which are post-go-live operational necessities. Adding monitoring is a concrete manifestation of the Operational Excellence pillar and the architect's responsibility to ensure long-term solution health.",
+      "wrongExplanations": [
+        "Architects add monitoring because it is architecturally necessary for operational health — not to pad scope.",
+        "Monitoring is a best practice and design responsibility — it is not mandated by Microsoft licensing terms.",
+        "Monitoring benefits multiple pillars (Reliability, Operational Excellence, Performance Efficiency) — it cannot be attributed to Performance Efficiency alone, and no pillar 'mandates' telemetry as a licensing condition."
+      ],
+      "msRef": {
+        "label": "Solution Architect's Responsibilities and Guiding Principles — Azure Well-Architected Framework",
+        "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+      }
+    },
+    {
+      "q": "During a design session, the architect identifies a tradeoff: implementing comprehensive observability logging will increase system resource consumption. Which Power Platform Well-Architected principle best describes how to handle this?",
+      "options": [
+        "Always choose security and observability over performance — downgrade performance efficiency if necessary",
+        "Recognise the tradeoff explicitly, document it, inform stakeholders, and make a deliberate decision that balances both pillars based on business needs",
+        "Defer the observability decision to post go-live — performance should not be compromised during the initial release",
+        "Eliminate observability from the design — the platform's built-in diagnostics are sufficient for all scenarios"
+      ],
+      "answer": 1,
+      "category": "well-architected",
+      "tags": ["well-architected", "tradeoffs", "observability", "performance-efficiency", "stakeholders"],
+      "explanation": "Power Platform Well-Architected is explicit that design decisions involve recognised and accepted tradeoffs between pillars — for example, comprehensive observability (Operational Excellence) increases resource utilisation (a tradeoff against Performance Efficiency). The correct approach is to surface the tradeoff, document it transparently, and engage stakeholders in the decision rather than silently choosing one pillar over another. Microsoft's architect guidance states: 'Identify trade-offs and accepted risks to prevent hidden technical debt and keep stakeholders fully informed.'",
+      "wrongExplanations": [
+        "No pillar automatically overrides another — the framework requires balanced consideration, not hierarchy.",
+        "Deferring observability to post go-live accumulates technical debt and leaves the solution unmonitorable during its most risk-prone phase — this contradicts the proactive and preventative role of the architect.",
+        "Platform-built-in diagnostics do not cover all custom logic, business process monitoring, or SLA tracking scenarios — custom observability is often architecturally necessary."
+      ],
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected documentation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    },
+    {
+      "q": "A business stakeholder requests a heavily customised user interface feature that could be delivered using a third-party component or built from scratch. What should the architect evaluate first?",
+      "options": [
+        "Whether the developer team has capacity — if they do, build it from scratch for maximum control",
+        "Whether a business requirement justifies every design decision, and whether out-of-the-box or platform-provided capabilities can meet the need before considering custom development",
+        "Whether the third-party component has a Microsoft AppSource listing — if not, it should be rejected",
+        "The cost of the third-party component — custom development is always preferred if it is cheaper"
+      ],
+      "answer": 1,
+      "category": "design-decisions",
+      "tags": ["design-decisions", "out-of-the-box", "custom-development", "simplicity", "reliability"],
+      "explanation": "Power Platform Well-Architected's simplicity and efficiency design principle states that every design decision must be justified by a business requirement, and architects should highlight where out-of-the-box capabilities can be used before considering custom development. Platform-provided services reduce development and management burden, improve reliability, and accelerate delivery. Custom development introduces maintenance overhead, upgrade risk, and technical debt that compound over time — it should be a last resort, not a first choice.",
+      "wrongExplanations": [
+        "Developer capacity is an operational constraint, not the architectural criterion — the evaluation should start with business need and available platform capability.",
+        "AppSource listing is one quality signal but not the only criterion — the primary evaluation is whether a business requirement justifies the feature and whether the platform can deliver it out of the box.",
+        "Cost is a factor but not the primary architectural driver — reliability, maintainability, and upgrade risk all favour platform-native capabilities over custom builds even when custom development is initially cheaper."
+      ],
+      "msRef": {
+        "label": "Design for simplicity and efficiency — Power Platform Well-Architected",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/reliability/simplify"
+      }
+    },
+    {
+      "q": "The PL-600 study guide states that an architect should facilitate design decisions across which eight domains?",
+      "options": [
+        "Security, licensing, storage, performance, testing, deployment, support, and training",
+        "Development, configuration, integration, infrastructure, security, licensing, availability, storage, and change management",
+        "Data modelling, UX design, ALM, governance, reporting, AI, automation, and integration",
+        "Requirements, architecture, build, test, deploy, monitor, support, and retire"
+      ],
+      "answer": 1,
+      "category": "role-definition",
+      "tags": ["solution-architect", "pl-600", "design-domains", "facilitation"],
+      "explanation": "The PL-600 study guide explicitly lists the domains across which a solution architect facilitates design decisions: development, configuration, integration, infrastructure, security, licensing, availability, storage, and change management. This breadth reflects why the role requires both functional and technical knowledge — an architect who only understands one or two of these domains will create blind spots in the overall solution design.",
+      "wrongExplanations": [
+        "Training and support are post-deployment concerns that fall under adoption and operational handover — they are not listed as the eight named facilitation domains.",
+        "Data modelling, UX, and AI are specific design topics that fall within the named domains — they are not the top-level domain list.",
+        "Requirements, build, test, deploy, monitor are SDLC phases, not the named facilitation domains from the PL-600 study guide."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    },
+    {
+      "q": "Which statement about the Power Platform Well-Architected framework's intended audience is correct?",
+      "options": [
+        "It is only for solution architects — developers and functional consultants should follow the Power Platform creator hub instead",
+        "It is for anyone who participates in the lifecycle of a modern application workload with Power Platform and has authority to make decisions within the scope of a workload",
+        "It is only relevant for enterprise-scale implementations — small organisations should use simplified guidance",
+        "It is a Microsoft-internal governance framework — customers access it only through Microsoft's FastTrack programme"
+      ],
+      "answer": 1,
+      "category": "well-architected",
+      "tags": ["well-architected", "audience", "power-platform", "governance"],
+      "explanation": "Microsoft explicitly states that Power Platform Well-Architected is for anyone who participates in the lifecycle of a modern application workload and has the authority to make decisions within the scope of a workload — regardless of role (architect, developer, maker, or business stakeholder) or organisation size. The framework covers a wide range of organisational structures and sizes. A solution architect should be fluent in all five pillars but should also be able to help developers and consultants apply the relevant principles to their specific area of work.",
+      "wrongExplanations": [
+        "The framework is explicitly designed for all roles on a workload team — restricting it to architects alone misrepresents Microsoft's stated intent.",
+        "Microsoft explicitly states the guidance covers a wide range of organisational sizes — it is not limited to enterprise implementations.",
+        "Power Platform Well-Architected is publicly available documentation at learn.microsoft.com — it is not gated behind FastTrack or internal-only access."
+      ],
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected documentation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    },
+    {
+      "q": "What should a solution architect do when they discover that following a Well-Architected recommendation for one pillar introduces risk for another pillar?",
+      "options": [
+        "Abandon the recommendation — any recommendation that creates risk in another pillar is invalid",
+        "Implement the recommendation silently — all Well-Architected tradeoffs are pre-approved by Microsoft",
+        "Recognise this as an expected tradeoff, document it, assess the risk magnitude, and make a deliberate and transparent design decision with stakeholder input",
+        "Escalate to Microsoft Support for a ruling on which pillar takes precedence"
+      ],
+      "answer": 2,
+      "category": "well-architected",
+      "tags": ["well-architected", "tradeoffs", "risk", "stakeholders", "design-decisions"],
+      "explanation": "Power Platform Well-Architected explicitly states that design choices must consider all pillars and that following recommendations for one pillar often involves tradeoffs against others. The framework includes documented tradeoffs for each pillar so that architects can recognise and quantify them. The correct response is: recognise the tradeoff, document it, assess the risk, and engage stakeholders in an informed decision — not abandon the recommendation or implement it silently. Tradeoffs are a normal and expected part of architecture, not a design failure.",
+      "wrongExplanations": [
+        "Abandoning a recommendation because it creates tradeoffs would eliminate most of the Well-Architected guidance — tradeoffs are explicitly expected and documented.",
+        "Implementing silently without stakeholder awareness creates hidden technical debt — exactly what the architect's proactive and preventative role aims to prevent.",
+        "Microsoft does not issue design arbitration rulings — the architect's job is to make informed, transparent decisions using the framework, not escalate design choices."
+      ],
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected documentation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    },
+    {
+      "q": "An architect is reviewing a proposed design for a D365 Customer Service implementation. A developer suggests writing a custom plug-in to replicate functionality that is already available out of the box in Routing Rules. What should the architect do?",
+      "options": [
+        "Approve the plug-in — custom code always provides more flexibility and future-proofing than out-of-the-box features",
+        "Challenge the proposal: the architect should demonstrate that out-of-the-box Routing Rules meets the requirement, explain the maintenance and upgrade risk of the custom plug-in, and recommend using the native feature",
+        "Defer the decision to the functional consultant — custom code vs configuration is outside the architect's scope",
+        "Approve the plug-in only if the developer commits to writing full unit tests"
+      ],
+      "answer": 1,
+      "category": "design-decisions",
+      "tags": ["design-decisions", "configuration-vs-customisation", "out-of-the-box", "routing-rules", "maintenance"],
+      "explanation": "A core principle of Power Platform design is to prefer configuration over customisation, and platform capabilities over custom code. A custom plug-in that duplicates out-of-the-box functionality creates: (1) maintenance overhead for every Microsoft update; (2) regression risk when the platform evolves; (3) technical debt that future teams must manage; and (4) increased testing burden. The architect's role is to challenge unnecessary complexity, not passively approve it. Demonstrating the native capability and explaining the risk is the architect's professional responsibility.",
+      "wrongExplanations": [
+        "Custom code does not automatically provide more flexibility — it introduces maintenance risk, upgrade fragility, and complexity that outweigh theoretical flexibility benefits when a platform feature already meets the need.",
+        "Configuration vs customisation decisions are squarely within the architect's scope — deferring this to a functional consultant without architectural challenge abdicates the architect's governance responsibility.",
+        "Unit test commitment does not address the root problem — the unnecessary introduction of custom code. Testing a custom solution that should not exist is still the wrong answer."
+      ],
+      "msRef": {
+        "label": "Design for simplicity and efficiency — Power Platform Well-Architected",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/reliability/simplify"
+      }
+    },
+    {
+      "q": "During a pre-sales engagement, a customer asks the architect to design a solution before requirements have been fully gathered. What risk does the Microsoft architect guidance highlight about proceeding without this foundation?",
+      "options": [
+        "The architect will miss the opportunity to propose premium Azure services, reducing deal value",
+        "Without understanding outcomes, business constraints, budgets, timelines, compliance obligations, and growth plans, the design process can spiral into endless revisions, leading to frustration and disappointment",
+        "The architecture will be technically valid but may not qualify for Microsoft FastTrack support",
+        "The architect risks intellectual property exposure if they design without a signed NDA"
+      ],
+      "answer": 1,
+      "category": "design-principles",
+      "tags": ["solution-architect", "requirements", "stakeholder-alignment", "pre-sales", "design-risk"],
+      "explanation": "Microsoft's architect guidance is explicit: before designing a solution, the architect must understand the outcomes the system needs to deliver and the business constraints shaping every decision. This requires creating clarity and alignment with stakeholders around budgets, timelines, compliance obligations, performance expectations, and growth plans. Without this foundation, design decisions lack grounding in real requirements and lead to iterative rework. The guidance states directly that without this foundation, 'the design process can spiral into endless revisions and lead to frustration and disappointment.'",
+      "wrongExplanations": [
+        "Deal value and Azure service selection are sales concerns — the architect's risk is design quality and rework, not revenue.",
+        "FastTrack eligibility is not determined by whether requirements were gathered upfront — this is not the documented risk.",
+        "IP and NDA concerns are legal matters — the architectural risk described here is design quality and iterative rework, not legal exposure."
+      ],
+      "msRef": {
+        "label": "Solution Architect's Responsibilities and Guiding Principles — Azure Well-Architected Framework",
+        "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+      }
+    },
+    {
+      "q": "A solution architect is considering using a cloud design pattern to address a reliability requirement. Microsoft's architect guidance states that cloud design patterns should be 'at your fingertips.' What does this mean in practice?",
+      "options": [
+        "Architects should memorise every pattern verbatim from the Azure documentation",
+        "Architects should be fluent enough in proven cloud design patterns to recognise applicable ones quickly when reviewing functional and non-functional requirements, and apply them instinctively to reduce risk and accelerate delivery",
+        "Patterns should only be applied after a proof of concept has been completed and validated with the customer",
+        "Architects should only use patterns that Microsoft has explicitly approved for Power Platform workloads"
+      ],
+      "answer": 1,
+      "category": "design-principles",
+      "tags": ["design-patterns", "cloud-patterns", "architect-skills", "reliability"],
+      "explanation": "Microsoft's architect guidance states that cloud design patterns should be at the architect's fingertips — meaning architects need to recognise them quickly and apply them instinctively. When reviewing functional and non-functional requirements, the architect should map them to proven patterns. Using established patterns simplifies decisions, reduces risk, accelerates delivery, and produces more consistent architecture across projects. This fluency comes from experience and deliberate study — not just documentation lookup at the point of need.",
+      "wrongExplanations": [
+        "Verbatim memorisation is not the intent — the guidance emphasises instinctive recognition and application through experience, not rote recall.",
+        "Waiting for a proof of concept before applying any pattern would introduce significant delays — patterns should be applied during design, with PoCs used to validate specific unknowns, not every design choice.",
+        "Microsoft does not publish an approved pattern list restricted to Power Platform — the Well-Architected guidance recommends using Azure cloud design patterns and established frameworks like TOGAF."
+      ],
+      "msRef": {
+        "label": "Solution Architect's Responsibilities and Guiding Principles — Azure Well-Architected Framework",
+        "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+      }
+    },
+    {
+      "q": "The Power Platform Well-Architected framework is described as intended for 'iterative use.' What does this mean for how a solution architect should apply it?",
+      "options": [
+        "The framework is only applied once during the initial design phase — it does not apply to ongoing changes",
+        "The framework should be used as a tool for continuous improvement — periodically assessing workload maturity against its guidance and treating the assessment score as evolving with the workload",
+        "The framework must be applied in strict pillar order: Reliability first, then Security, and so on",
+        "The framework is only applicable when a formal Microsoft architecture review has been requested"
+      ],
+      "answer": 1,
+      "category": "well-architected",
+      "tags": ["well-architected", "continuous-improvement", "iterative", "assessment", "maturity"],
+      "explanation": "Microsoft explicitly states that Power Platform Well-Architected is intended for iterative use and as a tool for continuous improvement. Architects should assess the maturity of the workload against the framework's guidance over time, treating the assessment as a changing score that evolves with the workload. Architecture is not a one-time activity — as the solution grows, business needs change, and the platform evolves, the Well-Architected assessment should be revisited to ensure the design remains efficient and effective.",
+      "wrongExplanations": [
+        "Applying the framework only during initial design ignores the continuous improvement and long-term organisational health aspects of the architect's role.",
+        "The framework does not prescribe a strict pillar order — all pillars must be considered based on business needs and the specific design decision at hand.",
+        "Power Platform Well-Architected is a self-service public framework — its iterative use is not gated behind a formal Microsoft engagement."
+      ],
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected documentation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Northwind Energy — Lead Design Review",
+      "scenario": {
+        "title": "Northwind Energy — Lead Design Review",
+        "background": "Northwind Energy is mid-implementation of a D365 Customer Service solution for their 600-agent contact centre. An architecture review has surfaced the following situations requiring the solution architect's judgement:\n\nS1. The developer team has built a custom notification system from scratch using Azure Functions and a dedicated SQL database to track agent alerts — without discussing this with the architect. Northwind's D365 environment includes Dataverse with standard notification capabilities.\n\nS2. The architect notices the solution has no monitoring, logging, or alerting configured. The project manager says these were not in the requirements and adds them would increase scope.\n\nS3. A stakeholder requests a Power Automate flow that runs every 15 seconds to poll for new cases and escalate overdue ones. The architect is concerned about PPR limits.\n\nS4. The team wants to implement a comprehensive audit log that captures every field change on every table — the architect identifies that this will significantly increase Dataverse storage consumption and query performance overhead.\n\nS5. The architect has been told to approve all technical design decisions in under 24 hours to maintain project velocity.",
+        "requirements": ["S1", "S2", "S3", "S4", "S5"]
+      },
+      "tags": ["design-leadership", "well-architected", "tradeoffs", "governance", "simplicity"],
+      "msRef": {
+        "label": "Design for simplicity and efficiency — Power Platform Well-Architected",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/reliability/simplify"
+      },
+      "questions": [
+        {
+          "q": "For S1 — the developer team built a custom notification and tracking system without architectural review. What should the architect do, and what principle does this situation violate?",
+          "options": [
+            "Accept the custom system — the developers have already built it, so reversing the decision would waste effort",
+            "Conduct an immediate design review: challenge whether the custom Azure Functions + SQL solution is justified when Dataverse native notification capabilities exist, document the maintenance overhead and upgrade risk, and if no business requirement justifies the custom build, recommend replacing it with the platform-native approach",
+            "Escalate to the project manager to remove the developers from the project for bypassing the process",
+            "Add the custom system to the solution documentation and move on — architecture reviews are for future decisions, not past ones"
+        ],
+          "explanation": "The custom notification system violates the core principle that every design decision must be justified by a business requirement, and platform capabilities should be used before custom development is considered. The architect's role is to provide design governance throughout the project — not just at the start. The architect must review the existing build, assess whether a business requirement genuinely cannot be met by Dataverse-native notifications, and if not, recommend replacing the custom system with the native capability to eliminate unnecessary maintenance overhead, Azure cost, and upgrade risk. 'Already built' is not a justification — technical debt found early is far cheaper to correct than technical debt found post-go-live.",
+          "wrongExplanations": {
+            "0": "Accepting an unjustified custom build because it is already built is exactly the pattern the architect's proactive and preventative role exists to prevent — sunk cost is not an architectural justification.",
+            "2": "Escalating as a personnel matter is disproportionate and not the architect's primary response — the correct action is a design review and recommendation, not HR escalation.",
+            "3": "Retrospective documentation without challenge is an abdication of the architect's governance responsibility — architecture reviews apply to existing decisions, not just future ones."
+          },
+          "msRef": {
+            "label": "Design for simplicity and efficiency — Power Platform Well-Architected",
+            "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/reliability/simplify"
+          }
+        },
+        {
+          "q": "For S2 — the project manager says monitoring and logging were not in the requirements and adding them increases scope. How should the architect respond?",
+          "options": [
+            "Accept the project manager's position — scope management takes precedence over architectural best practice",
+            "Defer monitoring to a Phase 2 project — it can be added after go-live without impacting the initial design",
+            "Explain that designing for operational realities — including observability and supportability — is a core architect responsibility that applies regardless of whether it was explicitly listed in requirements; present the Operational Excellence pillar and the risk of operating a 600-agent contact centre blind",
+            "Add monitoring only if the customer is willing to pay for additional development days"
+        ],
+          "explanation": "Microsoft's architect guidance is explicit: design not just for the 'happy path,' but also for operational realities such as observability and supportability. A 600-agent contact centre without monitoring cannot detect failures, cannot prove SLA compliance, and cannot be diagnosed when incidents occur. The architect must advocate for this as a non-negotiable architectural requirement — not a scope option — even when it was not listed in the original requirements. The Operational Excellence pillar of Well-Architected supports this position, and the proactive and preventative nature of the architect role requires surfacing gaps like this before go-live.",
+          "wrongExplanations": {
+            "0": "The architect's role explicitly requires proactive work to promote organisational health — deferring to the PM's scope position without challenge abdicates this responsibility.",
+            "1": "Adding monitoring after go-live means operating the solution blind during its most risk-prone period. Post-go-live retrofitting of observability is also significantly more expensive and disruptive.",
+            "3": "Monitoring is an architectural necessity, not a commercial option — framing it as a billable add-on misrepresents the architect's responsibility to the customer."
+          },
+          "msRef": {
+            "label": "Solution Architect's Responsibilities and Guiding Principles — Azure Well-Architected Framework",
+            "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+          }
+        },
+        {
+          "q": "For S3 — the Power Automate flow is designed to poll every 15 seconds. What architectural concerns should the architect raise, and what is the recommended redesign?",
+          "options": [
+            "No concern — Power Automate supports 15-second minimum recurrence intervals, so this is within platform limits",
+            "The minimum recurrence interval for Power Automate is 60 seconds — a 15-second poll violates this limit. Additionally, a polling pattern consumes PPR on every run regardless of whether any cases need escalation. The architect should recommend replacing polling with an event-driven trigger: a Dataverse 'When a row is modified' trigger or a Power Automate Dataverse trigger on SLA KPI status change",
+            "The flow should be split into two flows — one to poll, one to escalate — to reduce the action count per flow run",
+            "The flow needs a Power Automate Process licence to run at sub-minute intervals"
+        ],
+          "explanation": "Two concerns: (1) The minimum recurrence interval for Power Automate automated flows is 60 seconds — a 15-second interval is below the documented platform limit. (2) A polling pattern — running every 60 seconds and querying cases regardless of activity — consumes PPR allocations even when no action is needed. The event-driven pattern using a Dataverse trigger (e.g. on SLA KPI status change or case modification) only fires when a relevant event occurs, dramatically reducing PPR consumption and eliminating unnecessary runs. This also reflects the Well-Architected reliability principle of designing for simplicity and efficiency.",
+          "wrongExplanations": {
+            "0": "15 seconds is below the documented 60-second minimum recurrence interval — this is a platform constraint, not a design preference.",
+            "2": "Splitting the flow does not address the polling anti-pattern or the minimum interval violation — the root problem is the polling design, not the flow structure.",
+            "3": "No licence tier enables sub-60-second recurrence for scheduled flows — the 60-second minimum applies across all licence tiers."
+          },
+          "msRef": {
+            "label": "Limits of automated, scheduled, and instant flows — Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+          }
+        },
+        {
+          "q": "For S4 — the team wants comprehensive audit logging on every field change across every table. The architect identifies storage and performance impacts. How should this tradeoff be handled?",
+          "options": [
+            "Approve full audit logging — compliance requirements always override performance and storage concerns",
+            "Reject audit logging entirely — storage costs make it architecturally unviable",
+            "Recognise this as a Well-Architected tradeoff between Operational Excellence/Security (audit trail) and Performance Efficiency/cost (storage and query overhead); document the tradeoff, engage stakeholders to define which tables and fields genuinely require auditing, and implement scoped auditing aligned to business and regulatory need",
+            "Implement audit logging on all tables for three months, then disable it once the system is stable"
+        ],
+          "explanation": "This is a classic Well-Architected tradeoff: comprehensive audit logging supports Security (data integrity and accountability) and Operational Excellence (change history) but impacts Performance Efficiency (query overhead) and storage cost. The architect's role is not to unilaterally approve or reject — it is to surface the tradeoff, quantify the impact, and engage stakeholders in a scoped decision. Most regulatory requirements specify which data must be audited, not a blanket requirement for every field on every table. The correct output is a scoped auditing configuration aligned to genuine business and compliance need, not a binary approve/reject.",
+          "wrongExplanations": {
+            "0": "Compliance requirements define which data needs auditing — they rarely require every field on every table. Blanket approval without scoping fails the simplicity and efficiency principle.",
+            "1": "Rejecting audit logging entirely disregards potentially genuine compliance obligations — the architect cannot dismiss compliance requirements on cost grounds alone.",
+            "3": "Implementing and then disabling audit logging is operationally unsafe — audit trails are most critical during early go-live when anomalies are most likely."
+          },
+          "msRef": {
+            "label": "How to use the Power Platform Well-Architected documentation",
+            "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+          }
+        },
+        {
+          "q": "For S5 — the architect is pressured to approve all technical decisions within 24 hours to maintain velocity. What is the correct response, and what principle does rushing architectural decisions violate?",
+          "options": [
+            "Comply — project velocity is the primary measure of the architect's performance",
+            "Approve all decisions with a note that they are 'provisional' — this maintains velocity while preserving the option to revisit",
+            "Explain that architectural decisions require sufficient analysis to identify tradeoffs and risks; time-boxed approvals without proper review create hidden technical debt and undermine the solution's long-term quality — propose a tiered decision framework where routine decisions are delegated and significant decisions receive appropriate review time",
+            "Reject all decisions that cannot be reviewed thoroughly — halt the project until proper governance is in place"
+        ],
+          "explanation": "Microsoft's architect guidance is clear: architecture is as much about clarity as design. Architects must be deliberate in how they make decisions, surface tradeoffs, and communicate rationale so stakeholders understand the path taken. Approving decisions without adequate review creates hidden technical debt — exactly the outcome the architect's proactive and preventative role aims to prevent. The correct response is to propose a governance structure: delegate routine decisions (e.g. UI choices, non-impactful configurations) to senior consultants, escalate significant decisions (e.g. data model changes, integration patterns, security model) for proper architectural review. Blanket 24-hour approvals applied to all decisions regardless of significance is a governance anti-pattern.",
+          "wrongExplanations": {
+            "0": "Project velocity is one measure — solution quality, long-term organisational health, and avoiding technical debt are equally important outputs of the architect's role.",
+            "1": "'Provisional' approvals without proper review are approvals in practice — stakeholders and developers will proceed on that basis, and revisiting becomes progressively harder.",
+            "3": "Halting all decisions is unnecessarily disruptive — the correct response is a tiered governance framework that protects significant decisions without blocking all progress."
+          },
+          "msRef": {
+            "label": "Solution Architect's Responsibilities and Guiding Principles — Azure Well-Architected Framework",
+            "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+          }
+        }
+      ]
+    }
+  ]
+}

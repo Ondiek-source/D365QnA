@@ -1,0 +1,1114 @@
+{
+  "_meta": {
+    "topic": "Architectural Limits",
+    "description": "Power Platform and Dataverse API limits, entitlement tiers, service protection limits, non-licensed identity types, and failover considerations for solution architects.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "A Dynamics 365 Customer Service Enterprise user also has a Power Apps per user licence assigned. How many Power Platform requests are they entitled to per 24-hour period?",
+      "options": [
+        "40,000",
+        "46,000",
+        "80,000",
+        "250,000"
+      ],
+      "answer": 2,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "licensing",
+        "stacking"
+      ],
+      "explanation": "Entitlement limits stack additively across licences. Dynamics 365 Customer Service Enterprise grants 40,000 requests/day and Power Apps per user grants another 40,000 requests/day, giving this user 80,000 requests per 24-hour period. A solution architect must account for this when modelling peak workloads against licence costs.",
+      "wrongExplanations": [
+        "40,000 is the entitlement for a single D365 Enterprise or Power Apps per user licence \u2014 not the combined total.",
+        "46,000 is not a documented entitlement figure.",
+        "250,000 is the entitlement for the Power Automate per flow plan, not a stacked interactive user allocation."
+      ],
+      "msRef": {
+        "label": "Requests limits and allocations \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+      }
+    },
+    {
+      "q": "A Microsoft 365 E3 user accesses a model-driven app. How many Power Platform requests per day are they entitled to?",
+      "options": [
+        "40,000",
+        "10,000",
+        "6,000",
+        "0 \u2014 Microsoft 365 licences include no Power Platform request entitlement"
+      ],
+      "answer": 2,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "licensing",
+        "M365"
+      ],
+      "explanation": "Microsoft 365 apps with Power Platform access (including E1, E3, and E5) fall into the 6,000 requests/day tier \u2014 the same band as Power Apps per app and Dynamics 365 Team Member. A solution architect designing for large M365-licensed user bases must ensure daily usage across all apps stays within this lower entitlement.",
+      "wrongExplanations": [
+        "40,000 is the premium tier for full Power Apps per user or Dynamics 365 Enterprise/Professional licences.",
+        "10,000 is not a documented entitlement figure.",
+        "Microsoft 365 licences do carry a Power Platform request entitlement \u2014 6,000 per user per day."
+      ],
+      "msRef": {
+        "label": "Requests limits and allocations \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+      }
+    },
+    {
+      "q": "Which licence tier grants the highest per-user daily Power Platform request entitlement of 250,000?",
+      "options": [
+        "Dynamics 365 Customer Service Enterprise",
+        "Power Apps per user",
+        "Power Automate per flow plan",
+        "Power Platform per user with attended RPA"
+      ],
+      "answer": 2,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "licensing",
+        "power-automate"
+      ],
+      "explanation": "The Power Automate per flow plan grants 250,000 Power Platform requests per day. This is the highest entitlement in the standard tier table and reflects the high-throughput nature of unattended automation. Microsoft Copilot Studio base offer and add-on packs share this same 250,000 tier. Solution architects should assign per-flow licences to flows that process large data volumes.",
+      "wrongExplanations": [
+        "Dynamics 365 Customer Service Enterprise grants 40,000 requests/day.",
+        "Power Apps per user grants 40,000 requests/day.",
+        "Power Platform per user with attended RPA is not in the 250,000 tier \u2014 that tier is specifically the per flow plan and Copilot Studio."
+      ],
+      "msRef": {
+        "label": "Requests limits and allocations \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+      }
+    },
+    {
+      "q": "What does the '200' figure in the 'Paid Power Apps Portals sign-in' entitlement row represent?",
+      "options": [
+        "The number of concurrent portal sessions allowed per environment",
+        "The daily API requests allocated per paid authenticated portal sign-in",
+        "The maximum number of portal pages that can be published",
+        "The monthly authenticated user cap before additional capacity must be purchased"
+      ],
+      "answer": 1,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "portals",
+        "power-pages"
+      ],
+      "explanation": "The 200 figure represents the daily Power Platform request entitlement allocated per paid authenticated Power Apps Portals (Power Pages) sign-in capacity unit. This is a much lower entitlement than interactive user licences, reflecting the read-heavy, lower-complexity workloads typical of portal scenarios. Architects must size portal capacity against expected daily page interactions.",
+      "wrongExplanations": [
+        "Concurrent session limits are a separate capability concern, not what this entitlement row describes.",
+        "Page publishing limits are a platform configuration concern, not an API request entitlement.",
+        "Monthly authenticated user caps are a Power Pages authenticated user/website subscription concept, not this specific entitlement figure."
+      ],
+      "msRef": {
+        "label": "Requests limits and allocations \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+      }
+    },
+    {
+      "q": "Which of the following operations are counted against Power Platform request entitlement limits in Dataverse?",
+      "options": [
+        "CRUD operations, share, assign, and operations performed by plug-ins and classic workflows",
+        "Only Create and Update operations initiated by interactive users via the UI",
+        "Only operations using the Web API endpoint \u2014 SOAP calls are excluded",
+        "Only external connector calls \u2014 internal Dataverse operations are excluded"
+      ],
+      "answer": 0,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "dataverse",
+        "crud"
+      ],
+      "explanation": "Dataverse entitlement limits count all CRUD (Create, Retrieve, Update, Delete), assign, and share operations. These can come from any client or endpoint \u2014 including SOAP and REST \u2014 and include operations triggered by plug-ins, classic workflows, custom controls, and ExecuteMultiple batch calls. A solution architect must account for background automation and integration traffic, not just interactive user actions.",
+      "wrongExplanations": [
+        "Only Create and Update via UI is far too narrow \u2014 all CRUD operations from any source count.",
+        "Both SOAP and REST endpoints are counted \u2014 there is no endpoint-based exemption.",
+        "Internal Dataverse operations such as plug-in executions do count against entitlement limits; the exemption only applies to service protection API limits."
+      ],
+      "msRef": {
+        "label": "API limits overview \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/api-limits-overview"
+      }
+    },
+    {
+      "q": "A solution architect is designing a high-volume nightly data migration that runs as an automated flow. Why might they choose to assign a Power Automate per flow licence to the flow rather than relying on the owner's interactive user licence?",
+      "options": [
+        "Per flow licences bypass all service protection API limits",
+        "Per flow licences grant 250,000 requests/day dedicated to that flow, preventing the owner's entitlement from being exhausted",
+        "Per flow licences allow the flow to run without a Dataverse environment",
+        "Per flow licences grant premium connector access without a per-user licence"
+      ],
+      "answer": 1,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "licensing",
+        "power-automate",
+        "per-flow"
+      ],
+      "explanation": "A Power Automate per flow licence grants 250,000 Power Platform requests per day dedicated to that specific flow. This prevents a high-volume automation from consuming the owner's interactive user entitlement (typically 40,000/day) and potentially triggering throttling across their other apps. Architects use per flow licences to isolate and protect capacity for critical batch operations.",
+      "wrongExplanations": [
+        "Per flow licences do not bypass service protection API limits \u2014 those apply to all users regardless of licence type.",
+        "Dataverse is still required \u2014 per flow licences do not change platform requirements.",
+        "Premium connector access is governed by the flow owner's licence or the per flow plan's entitlements \u2014 but the primary architectural reason described here is entitlement isolation, not connector access."
+      ],
+      "msRef": {
+        "label": "Requests limits and allocations \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+      }
+    },
+    {
+      "q": "Which three metrics does Dataverse use to enforce service protection API limits?",
+      "options": [
+        "Total daily requests, storage consumption, and concurrent plug-in executions",
+        "Number of requests per 5-minute window, combined execution time per 5-minute window, and number of concurrent requests",
+        "Number of API calls per hour, number of batch operations per day, and peak memory usage",
+        "Licence tier, environment type, and request origin (SDK vs Web API)"
+      ],
+      "answer": 1,
+      "category": "service-protection-limits",
+      "tags": [
+        "api-limits",
+        "service-protection",
+        "dataverse",
+        "throttling"
+      ],
+      "explanation": "Dataverse enforces service protection API limits across three independent metrics evaluated within a 5-minute (300-second) sliding window: (1) number of requests \u2014 a high volume of calls in 5 minutes; (2) combined execution time \u2014 the total server-side processing time across all requests in the window; and (3) concurrent requests \u2014 the number of simultaneous in-flight requests from the same user. Exceeding any single metric triggers a 429 error or OrganizationServiceFault with a Retry-After duration.",
+      "wrongExplanations": [
+        "Daily request totals belong to entitlement limits, not service protection limits. Storage and plug-in concurrency are not the three defined service protection metrics.",
+        "Hourly call counts and batch operation counts are not the documented service protection dimensions.",
+        "Licence tier, environment type, and endpoint origin do not determine service protection limit thresholds \u2014 the same limits apply to all users regardless of these factors."
+      ],
+      "msRef": {
+        "label": "Service protection API limits \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits"
+      }
+    },
+    {
+      "q": "A developer's integration is throwing 429 errors from Dataverse. The logs show 1,200 requests sent in 300 seconds from the same user account. Which service protection metric has been exceeded?",
+      "options": [
+        "Combined execution time limit \u2014 1,200 seconds of server processing in 5 minutes",
+        "Concurrent requests limit \u2014 too many simultaneous connections from one user",
+        "Number of requests limit \u2014 1,200 requests in the 300-second sliding window",
+        "Daily entitlement limit \u2014 the user has exceeded their licensed request quota"
+      ],
+      "answer": 2,
+      "category": "service-protection-limits",
+      "tags": [
+        "api-limits",
+        "service-protection",
+        "throttling",
+        "429"
+      ],
+      "explanation": "The number of requests service protection limit tracks total calls within the preceding 300-second window. Sending 1,200 requests in 300 seconds equals 4 requests per second (or 1,200 per 5 minutes), which exceeds the documented per-web-server threshold. The recommended mitigation strategies include reducing batch size, limiting parallelism, combining operations with ExecuteMultiple, and implementing exponential backoff with Retry-After.",
+      "wrongExplanations": [
+        "1,200 seconds of execution time relates to the execution time limit \u2014 a separate metric. The scenario describes count, not duration.",
+        "Concurrent requests refers to simultaneous in-flight calls, not the total count over a time window.",
+        "Daily entitlement limits are separate from service protection limits and produce different notifications \u2014 administrators are notified of entitlement overages, not 429 errors at the API level."
+      ],
+      "msRef": {
+        "label": "Service protection API limits \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits"
+      }
+    },
+    {
+      "q": "Service protection API limits are NOT applied to which of the following?",
+      "options": [
+        "External Web API calls from a canvas app",
+        "SDK calls from a custom integration tool",
+        "API calls made within plug-in code, custom workflow activities, and classic workflows",
+        "Batch (ExecuteMultiple) requests from a data migration tool"
+      ],
+      "answer": 2,
+      "category": "service-protection-limits",
+      "tags": [
+        "api-limits",
+        "service-protection",
+        "plugins",
+        "workflows"
+      ],
+      "explanation": "Service protection API limits apply only to external web service requests. Operations invoked internally \u2014 such as Dataverse API calls made within plug-in code, custom workflow activities, and classic workflows \u2014 are exempt from service protection limits. This is a critical architectural distinction: a plug-in can make additional Dataverse calls without those calls counting toward the calling user's service protection budget.",
+      "wrongExplanations": [
+        "External Web API calls from canvas apps are subject to service protection limits.",
+        "SDK calls from custom integration tools are subject to service protection limits.",
+        "ExecuteMultiple requests from data migration tools are external calls and are subject to service protection limits \u2014 they are also a common cause of hitting the execution time limit."
+      ],
+      "msRef": {
+        "label": "API limits overview \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/api-limits-overview"
+      }
+    },
+    {
+      "q": "Using ExecuteMultiple (batch operations) is a valid strategy for bypassing Dataverse entitlement limits. True or false?",
+      "options": [
+        "True \u2014 batching reduces the number of counted requests",
+        "False \u2014 entitlement limits and service protection limits are evaluated separately; batched CRUD operations still accrue against entitlement limits",
+        "True \u2014 batching bypasses both entitlement and service protection limits",
+        "False \u2014 ExecuteMultiple is no longer available in Dataverse"
+      ],
+      "answer": 1,
+      "category": "entitlement-limits",
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "executemultiple",
+        "batching"
+      ],
+      "explanation": "Batching with ExecuteMultiple does NOT bypass entitlement limits. Entitlement limits count individual CRUD operations regardless of whether they are wrapped in a batch. The two limit categories are evaluated independently. Batching can help avoid hitting service protection limits (by reducing the number of individual round-trips), but it has no effect on daily entitlement consumption. Architects must plan for the actual CRUD count, not the number of batch calls.",
+      "wrongExplanations": [
+        "Batching does not reduce the CRUD count for entitlement purposes \u2014 each record operation inside a batch still accrues.",
+        "Batching cannot bypass either limit type \u2014 it only helps with the number-of-requests service protection metric by consolidating calls.",
+        "ExecuteMultiple is still fully supported in Dataverse \u2014 the historical concurrent ExecuteMultiple limit was removed."
+      ],
+      "msRef": {
+        "label": "Service protection API limits \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits"
+      }
+    },
+    {
+      "q": "A solution architect needs to design a background integration that accesses Dataverse without consuming interactive user licence capacity. Which non-licensed identity type should they use for service-to-service integrations that authenticate via Microsoft Entra ID app registration?",
+      "options": [
+        "Non-interactive user",
+        "Application user (service principal)",
+        "Administrative user",
+        "SYSTEM user"
+      ],
+      "answer": 1,
+      "category": "non-licensed-identities",
+      "tags": [
+        "api-limits",
+        "non-licensed",
+        "application-user",
+        "service-principal",
+        "entra-id"
+      ],
+      "explanation": "An application user backed by a Microsoft Entra ID service principal is the correct identity for service-to-service integrations. It authenticates via OAuth 2.0 client credentials (app registration), does not consume an interactive user licence, and can be assigned Dataverse security roles directly. This is the recommended pattern for mission-critical flows, ALM pipelines, and integrations where the identity must survive individual team members leaving the organisation.",
+      "wrongExplanations": [
+        "Non-interactive users are created as Dataverse user records for programmatic access (e.g. connector accounts), but they authenticate with a user account \u2014 not via Entra ID app registration \u2014 and are capped at seven per environment.",
+        "Administrative users are standard licensed users with admin roles \u2014 they consume a licence.",
+        "The SYSTEM user is a Dataverse built-in placeholder for internal Microsoft support users \u2014 it cannot be used by customer integrations."
+      ],
+      "msRef": {
+        "label": "Manage application users in the Power Platform admin center",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-application-users"
+      }
+    },
+    {
+      "q": "How many non-interactive users can be created per Dataverse environment, and what is a key restriction on their use?",
+      "options": [
+        "Unlimited \u2014 non-interactive users are free and unrestricted",
+        "Up to 7 per environment \u2014 they cannot access the Dataverse web interface or admin portals, only SDK/API",
+        "Up to 7 per environment \u2014 they require a free Dataverse licence assigned in Microsoft 365",
+        "Up to 25 per tenant \u2014 they can only be used by Power Automate flows"
+      ],
+      "answer": 1,
+      "category": "non-licensed-identities",
+      "tags": [
+        "api-limits",
+        "non-licensed",
+        "non-interactive-user",
+        "dataverse"
+      ],
+      "explanation": "Dataverse allows a maximum of seven non-interactive users per environment. They are used for programmatic access (e.g. ERP connectors, service accounts) and do not represent a person. They cannot access the Dataverse web UI or admin portals \u2014 only SDK/API access is permitted. They do not consume a service licence. Architects use them for connector authentication and background service accounts where an Entra ID service principal is not appropriate.",
+      "wrongExplanations": [
+        "Non-interactive users are capped at seven per environment \u2014 they are not unlimited.",
+        "Non-interactive users do not require a licence after creation \u2014 the access mode setting is what grants the non-interactive designation.",
+        "The cap is seven per environment (not 25 per tenant), and they are not restricted to Power Automate flows \u2014 they can be used by any SDK/API integration."
+      ],
+      "msRef": {
+        "label": "Create users \u2014 Power Platform admin",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/create-users"
+      }
+    },
+    {
+      "q": "Dataverse enables identities that don't require a user licence. Which four types of non-licensed identities does Microsoft document?",
+      "options": [
+        "Non-interactive users, application users (service principals), administrative users, guest users",
+        "Non-interactive users, application users (service principals), SYSTEM user, and special free ($0) licence users (e.g. Dynamics 365 Marketing)",
+        "Service principals, managed identities, anonymous users, and bot users",
+        "Non-interactive users, guest users, external users, and anonymous portal users"
+      ],
+      "answer": 1,
+      "category": "non-licensed-identities",
+      "tags": [
+        "api-limits",
+        "non-licensed",
+        "identities",
+        "dataverse"
+      ],
+      "explanation": "Microsoft documents four non-licensed identity types in Dataverse: (1) Non-interactive users \u2014 programmatic service accounts capped at seven per environment; (2) Application users / service principals \u2014 Entra ID app registrations used for service-to-service integrations; (3) SYSTEM user \u2014 the internal built-in user for Microsoft support operations; (4) Special free ($0) licence users \u2014 used for products like Dynamics 365 Marketing that carry a special tenant-level licence. These identities share a pooled tenant-level request allocation separate from interactive user entitlements.",
+      "wrongExplanations": [
+        "Administrative users consume interactive licences \u2014 they are not non-licensed identities. Guest users from external tenants also require a licence.",
+        "Managed identities and anonymous users are Azure/portal concepts \u2014 they are not the four documented Dataverse non-licensed identity types.",
+        "External users and anonymous portal users are Power Pages access models, not the four core Dataverse non-licensed identity types."
+      ],
+      "msRef": {
+        "label": "Requests limits and allocations \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+      }
+    },
+    {
+      "q": "Power Automate action burst limits cap how many actions in a 5-minute rolling window?",
+      "options": [
+        "6,000",
+        "52,000",
+        "100,000",
+        "250,000"
+      ],
+      "answer": 2,
+      "category": "power-automate-limits",
+      "tags": [
+        "api-limits",
+        "power-automate",
+        "burst",
+        "throttling"
+      ],
+      "explanation": "Power Automate enforces an action burst limit of 100,000 actions in any 5-minute rolling window. This is separate from the daily PPR entitlement limit. Architects designing high-throughput flows that process large collections or run many parallel branches must distribute load across child flows or stagger trigger conditions to avoid hitting this cap.",
+      "wrongExplanations": [
+        "6,000 is the service protection request limit per 300-second window in Dataverse \u2014 not the Power Automate action burst limit.",
+        "52,000 is not a documented Power Automate limit.",
+        "250,000 is the daily PPR entitlement for the per flow plan \u2014 not the 5-minute action burst cap."
+      ],
+      "msRef": {
+        "label": "Understand platform limits and avoid throttling \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/guidance/coding-guidelines/understand-limits"
+      }
+    },
+    {
+      "q": "A solution architect is reviewing a JavaScript web resource that makes Dataverse Web API calls in a loop on form load. Why must they apply Retry-After logic even though the code runs inside the browser?",
+      "options": [
+        "Browser JavaScript is exempt from service protection limits, so Retry-After is optional",
+        "Service protection limits apply per authenticated user regardless of client \u2014 browser JS calls are external web service requests and subject to all three service protection metrics",
+        "Only server-side plug-ins need Retry-After logic; browser code should queue calls instead",
+        "JavaScript web resources are subject only to the concurrent connection limit, not the request count or execution time limits"
+      ],
+      "answer": 1,
+      "category": "js-limits",
+      "tags": [
+        "api-limits",
+        "service-protection",
+        "javascript",
+        "web-resource",
+        "retry"
+      ],
+      "explanation": "Service protection API limits apply to all authenticated users making external web service requests \u2014 regardless of whether the client is a browser, server-side integration, or canvas app. A JavaScript web resource making Dataverse Web API calls in a loop on form load is an external request and subject to all three service protection metrics (request count, execution time, and concurrent connections). Architects must ensure JS code implements Retry-After handling to gracefully recover when a 429 is returned.",
+      "wrongExplanations": [
+        "Browser clients are not exempt \u2014 the limits apply to the authenticated user identity, not the client type.",
+        "Only server-side code needing Retry-After is incorrect \u2014 the best practice is to apply Retry-After patterns in all clients that make high-volume Dataverse calls.",
+        "All three service protection metrics apply to browser-based clients, not just concurrent connections."
+      ],
+      "msRef": {
+        "label": "Service protection API limits \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits"
+      }
+    },
+    {
+      "q": "Which of the following correctly describes how service protection API limits differ from entitlement limits?",
+      "options": [
+        "Service protection limits are per-user daily quotas; entitlement limits are per-tenant 5-minute caps",
+        "Service protection limits protect the platform from burst traffic in a 5-minute window; entitlement limits define the number of requests a user is licensed to make per day",
+        "They are identical \u2014 both are enforced as daily request caps and produce the same 429 errors",
+        "Entitlement limits apply only to plug-ins and workflows; service protection limits apply only to external API calls"
+      ],
+      "answer": 1,
+      "category": "service-protection-limits",
+      "tags": [
+        "api-limits",
+        "service-protection",
+        "entitlement",
+        "architecture"
+      ],
+      "explanation": "The two limit categories are distinct and evaluated independently. Service protection API limits use a 5-minute sliding window to prevent any single user from placing extraordinary short-term demand on Dataverse infrastructure \u2014 they generate 429 errors. Entitlement limits represent the total daily API request quota tied to a user's licence \u2014 exceeding them triggers an administrator notification but does not immediately block users. Architects must design for both: rate-smoothing to avoid service protection errors, and licence capacity planning to stay within daily entitlements.",
+      "wrongExplanations": [
+        "Service protection limits use a 5-minute window; entitlement limits are daily \u2014 they are not swapped.",
+        "They are not identical \u2014 they use different time windows, generate different error types, and have different enforcement mechanisms.",
+        "Entitlement limits apply to all CRUD operations from any client or endpoint \u2014 not just plug-ins. Service protection limits also apply to all external API calls."
+      ],
+      "msRef": {
+        "label": "API limits overview \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/api-limits-overview"
+      }
+    },
+    {
+      "q": "What is the maximum size of an ExecuteMultiple request batch in Dataverse?",
+      "options": [
+        "100 operations",
+        "500 operations",
+        "1,000 operations",
+        "Unlimited \u2014 batch size is only constrained by payload size"
+      ],
+      "answer": 2,
+      "category": "plugin-limits",
+      "tags": [
+        "api-limits",
+        "executemultiple",
+        "batching",
+        "dataverse"
+      ],
+      "explanation": "The default maximum batch size for ExecuteMultiple is 1,000 requests per collection. Exceeding this limit throws a fault before any operation in the batch is executed. Architects designing bulk data operations must chunk operations into batches of no more than 1,000 and consider that each individual CRUD operation within the batch still accrues against entitlement limits.",
+      "wrongExplanations": [
+        "100 is far below the documented limit of 1,000.",
+        "500 is below the documented limit of 1,000.",
+        "There is a documented maximum of 1,000 operations per ExecuteMultiple request \u2014 it is not unlimited."
+      ],
+      "msRef": {
+        "label": "Execute multiple requests using the SDK for .NET \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/org-service/execute-multiple-requests"
+      }
+    },
+    {
+      "q": "Following a complete regional datacenter failure, which Power Platform component does NOT automatically fail over and requires manual architect intervention to maintain availability?",
+      "options": [
+        "Dataverse environment \u2014 automatically replicated and failed over by Microsoft",
+        "On-premises data gateway \u2014 must be reinstalled or reconfigured in a different region; data from on-premises sources is unavailable during failover",
+        "Power BI reports using import mode \u2014 remain readable from the failed-over region",
+        "Microsoft Entra ID authentication \u2014 operates as a global service and is unaffected by regional failure"
+      ],
+      "answer": 1,
+      "category": "failover",
+      "tags": [
+        "failover",
+        "disaster-recovery",
+        "gateway",
+        "bcdr",
+        "architecture"
+      ],
+      "explanation": "The on-premises data gateway is installed on a physical or virtual machine in the customer's network. When a regional datacenter failure occurs, the gateway does not fail over automatically \u2014 any Power BI reports or Power Platform flows that depend on Direct Query or Live Connect to on-premises data sources become unavailable. Microsoft documents this explicitly: gateway configuration does not change during failover, and the gateway must be manually redeployed or redirected to the recovered region. Architects must plan gateway high-availability clusters and secondary installations to mitigate this single point of failure.",
+      "wrongExplanations": [
+        "Dataverse production environments are replicated by Microsoft with managed availability using Azure availability zones, with RTO under five minutes for zone failures \u2014 this does not require manual intervention for zone-level failures.",
+        "Import-mode Power BI reports are replicated to the backup region and remain readable during failover \u2014 they do not require manual intervention.",
+        "Microsoft Entra ID is a global service with automatic redundancy \u2014 regional failures do not interrupt authentication."
+      ],
+      "msRef": {
+        "label": "Power BI high availability, failover, and disaster recovery FAQ",
+        "url": "https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-admin-failover"
+      }
+    },
+    {
+      "q": "A solution architect is planning for a regional datacenter failure of the Power Platform environment. Which self-service capability must be explicitly enabled before a disaster to support cross-region failover?",
+      "options": [
+        "Managed availability \u2014 enabled automatically for all production environments",
+        "Self-service disaster recovery \u2014 must be configured in Power Platform admin center before a disaster; database backups are not replicated cross-region without it",
+        "Azure Availability Zones \u2014 must be opted into per environment via a support ticket",
+        "Environment copy \u2014 simply copying a production environment to sandbox is sufficient for cross-region failover"
+      ],
+      "answer": 1,
+      "category": "failover",
+      "tags": [
+        "failover",
+        "disaster-recovery",
+        "bcdr",
+        "self-service",
+        "architecture"
+      ],
+      "explanation": "Self-service disaster recovery must be explicitly configured in the Power Platform admin center before a disaster occurs. Without it, database backups remain in the primary region only and cross-region failover cannot be guaranteed. When enabled, a copy of the environment is maintained in a secondary region and the architect can initiate failover drills or emergency responses directly. Managed availability (availability zones) is separate \u2014 it handles intra-region zone failures automatically but does not provide cross-region failover.",
+      "wrongExplanations": [
+        "Managed availability is automatic for production environments and handles zone-level failures \u2014 but it is not the same as cross-region self-service disaster recovery.",
+        "Azure Availability Zones for Dataverse are automatically applied as part of managed availability \u2014 no opt-in support ticket is required.",
+        "Copying to a sandbox environment does not configure replication or failover \u2014 it creates a point-in-time copy that is not kept in sync."
+      ],
+      "msRef": {
+        "label": "Business continuity and disaster recovery \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/business-continuity-disaster-recovery"
+      }
+    },
+    {
+      "q": "Managed availability in Power Platform uses Azure Availability Zones to provide what recovery time objective (RTO) for zone-level failures?",
+      "options": [
+        "Less than 30 seconds",
+        "Less than 5 minutes",
+        "Less than 15 minutes",
+        "Less than 1 hour"
+      ],
+      "answer": 1,
+      "category": "failover",
+      "tags": [
+        "failover",
+        "disaster-recovery",
+        "rto",
+        "availability-zones",
+        "bcdr"
+      ],
+      "explanation": "Microsoft's managed availability feature \u2014 which synchronously replicates production environments across Azure Availability Zones within a region \u2014 provides an RTO of less than five minutes for zone-level datacenter failures. This is automatic and requires no customer configuration. Solution architects should document this as the baseline intra-region resilience guarantee when defining SLAs for D365/Power Platform solutions.",
+      "wrongExplanations": [
+        "Less than 30 seconds is the approximate RTO for Power BI zone failover \u2014 not the general Dataverse managed availability figure.",
+        "Less than 15 minutes describes cross-region replication lag for self-service disaster recovery \u2014 not the zone-level RTO.",
+        "Less than 1 hour describes the approximate RTO for Microsoft Fabric regional failover \u2014 not Power Platform managed availability."
+      ],
+      "msRef": {
+        "label": "Managed availability \u2014 Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/managed-availability"
+      }
+    },
+    {
+      "q": "What is the hard timeout limit for a Dataverse message operation, including all registered synchronous plug-ins combined?",
+      "options": [
+        "30 seconds",
+        "2 minutes",
+        "5 minutes",
+        "10 minutes"
+      ],
+      "answer": 1,
+      "category": "plugin-limits",
+      "tags": [
+        "plugins",
+        "timeout",
+        "synchronous",
+        "architecture"
+      ],
+      "explanation": "Dataverse enforces a hard 2-minute (120-second) time limit for the entire message operation to complete. This includes the platform's own processing time AND the cumulative execution time of all registered synchronous plug-ins firing in that pipeline. If this limit is exceeded, Dataverse throws a TimeoutException and rolls back the entire operation. A solution architect must ensure that no combination of synchronous customisations in a single pipeline can approach this combined threshold, especially on heavily customised tables.",
+      "wrongExplanations": [
+        "30 seconds is far below the documented 2-minute hard limit.",
+        "5 minutes is the duration of the service protection API sliding window \u2014 not the plug-in timeout.",
+        "10 minutes applies to some async processing scenarios \u2014 synchronous plug-in pipelines are capped at 2 minutes."
+      ],
+      "msRef": {
+        "label": "Analyze plug-in performance \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/analyze-performance"
+      }
+    },
+    {
+      "q": "A developer registers an ExecuteMultiple call inside a synchronous plug-in to bulk-update child records. Why is this an anti-pattern, and what should the architect recommend instead?",
+      "options": [
+        "ExecuteMultiple is unsupported inside plug-ins \u2014 it will throw a platform exception immediately",
+        "ExecuteMultiple inside a plug-in runs its batch sequentially (not in parallel), adds latency, and risks pushing the pipeline past the 2-minute timeout \u2014 use individual service.Execute() calls or redesign to use async processing",
+        "ExecuteMultiple inside a plug-in bypasses the transaction and causes data inconsistency \u2014 use a custom API instead",
+        "ExecuteMultiple is fine inside plug-ins as long as the batch contains fewer than 100 operations"
+      ],
+      "answer": 1,
+      "category": "plugin-limits",
+      "tags": [
+        "plugins",
+        "executemultiple",
+        "anti-pattern",
+        "timeout",
+        "architecture"
+      ],
+      "explanation": "Microsoft explicitly documents that batch request types (ExecuteMultiple, ExecuteTransaction) should not be used inside plug-ins or custom workflow activities. The key reasons are: (1) batch operations inside the sandbox run sequentially, not in parallel \u2014 the performance benefit of batching disappears; (2) the cumulative latency of a large batch inside the synchronous pipeline risks triggering the 2-minute timeout, rolling back the entire transaction; (3) for bulk operations exceeding 2 minutes by design, the correct pattern is to push work to an async plug-in step or a Power Automate flow. Individual service.Execute() calls are preferred inside synchronous plug-ins.",
+      "wrongExplanations": [
+        "ExecuteMultiple is not immediately blocked in plug-ins \u2014 it executes but produces poor performance and timeout risk, which is the documented concern.",
+        "ExecuteMultiple inside a plug-in does participate in the same transaction as the outer operation \u2014 transaction isolation is not the issue; performance and timeout are.",
+        "There is no documented safe batch size threshold for ExecuteMultiple inside plug-ins \u2014 Microsoft's guidance is to avoid the pattern entirely regardless of batch size."
+      ],
+      "msRef": {
+        "label": "Don't use batch request types in plug-ins and workflow activities",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/best-practices/business-logic/avoid-batch-requests-plugin"
+      }
+    },
+    {
+      "q": "What is the maximum size of a plug-in assembly that can be uploaded to Dataverse, and what is the recommended maximum number of custom workflow activities in a single assembly?",
+      "options": [
+        "32 MB assembly size; up to 200 custom workflow activities",
+        "16 MB assembly size; no more than 50 custom workflow activities",
+        "16 MB assembly size; no more than 100 custom workflow activities",
+        "8 MB assembly size; no more than 25 custom workflow activities"
+      ],
+      "answer": 1,
+      "category": "plugin-limits",
+      "tags": [
+        "plugins",
+        "assembly",
+        "custom-workflow",
+        "limits",
+        "deployment"
+      ],
+      "explanation": "Dataverse enforces a hard 16 MB limit on plug-in assembly size \u2014 assemblies larger than this cannot be registered. Additionally, Microsoft recommends keeping no more than 50 custom workflow activities in a single assembly. Assemblies with more than 100 custom workflow activities undergo extended validation during registration, which can take several minutes and risk timing out. Solution architects reviewing customisation packages should flag oversized assemblies and recommend splitting custom workflow activities across multiple assemblies if the 50-activity threshold is approached.",
+      "wrongExplanations": [
+        "32 MB is not the documented limit \u2014 the hard cap is 16 MB.",
+        "100 is the threshold at which registration begins to risk timing out, not the recommended maximum \u2014 Microsoft recommends staying under 50.",
+        "8 MB is below the actual limit of 16 MB."
+      ],
+      "msRef": {
+        "label": "Optimize custom assembly development \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/best-practices/business-logic/optimize-assembly-development"
+      }
+    },
+    {
+      "q": "A plug-in is registered on the Update message of a table that has cascade behaviours configured. The plug-in assigns a record, which triggers cascading assignments across related records. What architectural risk does this create?",
+      "options": [
+        "The cascade operations consume the caller's Power Platform request entitlement, increasing daily licence costs",
+        "Cascading operations initiated from within a plug-in acquire row-level locks on related records, which can block concurrent transactions and cause SQL timeout errors within the 2-minute pipeline",
+        "Cascade behaviours are not triggered when operations are initiated from plug-in code \u2014 they only fire from the UI",
+        "The plug-in will automatically re-execute for each related record updated by the cascade, creating infinite recursion"
+      ],
+      "answer": 1,
+      "category": "plugin-limits",
+      "tags": [
+        "plugins",
+        "cascading",
+        "sql-timeout",
+        "locks",
+        "scalability"
+      ],
+      "explanation": "When a plug-in performs operations that trigger cascade behaviours (assign, delete, share, reparent), Dataverse applies locks to all related records being cascaded. These locks can block concurrent transactions from other users or processes on the same records, leading to SQL timeout errors within the 2-minute message pipeline. Microsoft documents this as a primary cause of SQL timeout errors in plug-ins. Architects must review relationship cascade configurations \u2014 especially Parental and User-Owned cascades on high-volume tables \u2014 and design plug-ins to minimise lock contention.",
+      "wrongExplanations": [
+        "Cascade operations are internal to the platform and do not count against the calling user's Power Platform request entitlement \u2014 entitlement counting is for external API calls.",
+        "Cascade behaviours fire regardless of whether the trigger originated from the UI, a plug-in, or an API call \u2014 they are applied at the platform level.",
+        "Plug-ins have a depth check (MaxDepth) to prevent genuine infinite recursion \u2014 but the problem described here is lock contention, which is separate and not prevented by depth checks."
+      ],
+      "msRef": {
+        "label": "Troubleshoot Dataverse plug-ins \u2014 SQL timeout errors",
+        "url": "https://learn.microsoft.com/en-us/troubleshoot/power-platform/dataverse/plug-in-execution/dataverse-plug-ins-errors"
+      }
+    },
+    {
+      "q": "What is the maximum message payload size that Dataverse will allow to pass to the plug-in sandbox, and what happens when this limit is exceeded?",
+      "options": [
+        "50 MB \u2014 Dataverse silently truncates the payload",
+        "116.85 MB \u2014 Dataverse throws a 'Message size exceeded' error and the plug-in is not invoked",
+        "256 MB \u2014 Dataverse queues the request for async processing instead",
+        "There is no documented payload limit \u2014 only the 2-minute timeout applies"
+      ],
+      "answer": 1,
+      "category": "plugin-limits",
+      "tags": [
+        "plugins",
+        "payload-size",
+        "sandbox",
+        "limits"
+      ],
+      "explanation": "The Dataverse sandbox enforces a maximum message payload size of 116.85 MB. When any registered plug-in step fires on a message whose payload exceeds this limit, the platform throws a 'Message size exceeded when sending context to Sandbox' fault \u2014 the plug-in is never executed, and the operation fails. The most common scenario is a message that includes large binary file attachments alongside records with many related entities. Architects can mitigate this by removing plug-in registrations from messages where large payloads are expected, or by redesigning to avoid retrieving large binary content in the same operation that triggers plug-in logic.",
+      "wrongExplanations": [
+        "50 MB is well below the documented limit of 116.85 MB. Dataverse does not silently truncate payloads.",
+        "256 MB exceeds the documented limit \u2014 large payloads do not result in async queuing.",
+        "There is a documented payload limit of 116.85 MB \u2014 the 2-minute timeout is a separate constraint."
+      ],
+      "msRef": {
+        "label": "Troubleshoot Dataverse plug-ins \u2014 message size exceeded",
+        "url": "https://learn.microsoft.com/en-us/troubleshoot/power-platform/dataverse/plug-in-execution/dataverse-plug-ins-errors"
+      }
+    },
+    {
+      "q": "A cloud flow is throttled for 14 consecutive days without the architect taking corrective action. What does Power Automate do automatically?",
+      "options": [
+        "The flow is permanently deleted and cannot be recovered",
+        "The flow is suspended (turned off) and the owner is notified by email \u2014 it can be re-enabled at any time",
+        "The flow is downgraded to the Low performance profile and continues running at reduced throughput",
+        "The flow is transferred to a managed environment for governance review"
+      ],
+      "answer": 1,
+      "category": "power-automate-limits",
+      "tags": [
+        "power-automate",
+        "throttling",
+        "suspension",
+        "governance"
+      ],
+      "explanation": "When a cloud flow is consistently throttled above its PPR limits for 14 consecutive days, Power Automate automatically suspends (turns off) the flow and sends an email notification to the owner. The flow is not deleted \u2014 it can be re-enabled at any time. However, if the underlying limit violation is not addressed (by redesigning the flow, reducing frequency, or assigning a higher licence such as Power Automate Process/per flow), the flow will be throttled and suspended again. Architects should monitor the Power Platform admin centre analytics and establish alert policies before flows reach the 14-day threshold.",
+      "wrongExplanations": [
+        "The flow is suspended, not permanently deleted \u2014 it retains all configuration and history.",
+        "Power Automate does not automatically downgrade performance profiles \u2014 the flow is suspended rather than silently degraded.",
+        "There is no automatic governance transfer mechanism \u2014 suspension and owner notification are the platform's documented response."
+      ],
+      "msRef": {
+        "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+      }
+    },
+    {
+      "q": "What is the maximum run duration for a single Power Automate cloud flow execution, and what happens to pending steps (such as approvals) when this limit is reached?",
+      "options": [
+        "7 days \u2014 pending steps are paused and resumed when the limit resets",
+        "30 days \u2014 pending steps time out after 30 days from the run's start time",
+        "90 days \u2014 flows are only turned off for lack of trigger activity after 90 days",
+        "Unlimited \u2014 flows remain active until all steps complete or are cancelled"
+      ],
+      "answer": 1,
+      "category": "power-automate-limits",
+      "tags": [
+        "power-automate",
+        "run-duration",
+        "approvals",
+        "limits"
+      ],
+      "explanation": "A single Power Automate cloud flow run has a maximum duration of 30 days, calculated from the run's start time. This limit applies to all pending steps \u2014 including approval requests that haven't been responded to. After 30 days, any still-pending steps in that run time out automatically. Architects designing long-running approval or human-in-the-loop workflows must account for this limit and either redesign the process to complete within 30 days, or split the workflow across chained flow invocations.",
+      "wrongExplanations": [
+        "7 days is not the documented run duration limit \u2014 the limit is 30 days.",
+        "90 days is the retention period after which flows with no trigger activity may be turned off \u2014 not the per-run execution duration limit.",
+        "Cloud flow runs are not unlimited in duration \u2014 the 30-day ceiling is a hard platform constraint."
+      ],
+      "msRef": {
+        "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+      }
+    },
+    {
+      "q": "A Power Automate flow definition has grown to 480 actions across nested conditions and loops. What architectural concern should the solution architect flag?",
+      "options": [
+        "The flow will stop running \u2014 480 actions exceeds the 400-action hard limit",
+        "The flow is approaching the 500-action limit per flow definition; performance issues during editing are likely even before the limit is hit, and exceeding it blocks saving \u2014 refactor using child flows",
+        "Actions over 250 require a premium licence tier to execute",
+        "The flow must be converted to a desktop flow at this complexity level"
+      ],
+      "answer": 1,
+      "category": "power-automate-limits",
+      "tags": [
+        "power-automate",
+        "flow-definition",
+        "actions-limit",
+        "child-flows",
+        "architecture"
+      ],
+      "explanation": "Power Automate enforces a limit of 500 actions per flow definition. Flows approaching this limit often exhibit performance issues during design-time editing even before the cap is reached. Exceeding 500 blocks saving the flow. The recommended architectural pattern is to extract logical groupings of actions into child flows (callable flows) \u2014 this reduces complexity per flow, improves maintainability, and enables reuse across multiple parent flows. An architect reviewing a 480-action flow should immediately initiate a refactoring plan to child flows.",
+      "wrongExplanations": [
+        "The hard limit is 500, not 400 \u2014 but even at 480, the editing experience degrades noticeably.",
+        "Action count does not determine licence tier requirements \u2014 those are governed by connector type (standard vs. premium) and platform limits.",
+        "There is no platform-mandated conversion to desktop flows based on cloud flow complexity \u2014 child flows are the correct pattern."
+      ],
+      "msRef": {
+        "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+      }
+    },
+    {
+      "q": "An architect is reviewing a flow that uses a Dataverse 'When a row is added, modified or deleted' trigger and creates a record in the FlowRun table with each execution. What critical design flaw does this introduce?",
+      "options": [
+        "FlowRun records are read-only and cannot be created by flows",
+        "Creating records in FlowRun (or FlowLog) tables as part of a Dataverse-triggered flow causes an infinite loop \u2014 every run creates a FlowRun record, which triggers the flow again",
+        "FlowRun records consume Power Platform request entitlement at double the normal rate",
+        "The FlowRun table is write-protected in production environments"
+      ],
+      "answer": 1,
+      "category": "power-automate-limits",
+      "tags": [
+        "power-automate",
+        "infinite-loop",
+        "flowrun",
+        "anti-pattern",
+        "dataverse"
+      ],
+      "explanation": "Microsoft explicitly warns that flows triggered by the Dataverse 'When a row is added, modified or deleted' trigger should never target the FlowRun or FlowLog tables. Every time any cloud flow runs, the platform writes a FlowRun record. If a flow is listening for insertions into that table, each run will trigger another run \u2014 creating an infinite self-reinforcing loop. This pattern rapidly exhausts PPR entitlements, floods the run history, and can cause the flow to be suspended. Architects must add a trigger condition that excludes rows in FlowRun/FlowLog tables if broad table monitoring is needed.",
+      "wrongExplanations": [
+        "FlowRun records are written by the platform automatically \u2014 they are not read-only against all operations.",
+        "FlowRun records are written by the platform itself and do not count against Power Platform request entitlements \u2014 reading them via the API does count.",
+        "FlowRun tables are not write-protected \u2014 the problem is the trigger loop, not a permission constraint."
+      ],
+      "msRef": {
+        "label": "Manage cloud flow run history in Dataverse \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/dataverse/cloud-flow-run-metadata"
+      }
+    },
+    {
+      "q": "A flow owner leaves the organisation. What happens to all cloud flows they owned, and what is the architectural mitigation?",
+      "options": [
+        "Flows are automatically transferred to the manager specified in Microsoft Entra ID",
+        "Flows revert to the Low performance profile \u2014 premium connectors stop working and the flows are at risk of degraded throughput and eventual suspension",
+        "Flows continue operating with no change \u2014 the platform retains the last known licence state",
+        "Flows are immediately deleted when the user account is removed from Entra ID"
+      ],
+      "answer": 1,
+      "category": "power-automate-limits",
+      "tags": [
+        "power-automate",
+        "flow-owner",
+        "performance-profile",
+        "governance",
+        "architecture"
+      ],
+      "explanation": "When a cloud flow owner leaves the organisation and their account is disabled or removed, the flow reverts to the Low performance profile. This means any flows that relied on the owner's Dynamics 365 or Power Automate Premium licence for the Medium or High profile now operate at reduced PPR entitlement \u2014 premium connectors may stop functioning and the flow is at risk of throttling. The architectural mitigation is to use service principal-owned flows or solution-aware flows with an environment-level service account as the owner, ensuring licence-backed performance profiles survive individual staff changes.",
+      "wrongExplanations": [
+        "There is no automatic Entra ID manager transfer for flow ownership \u2014 it must be manually reassigned via the Web API or admin centre.",
+        "The platform does not retain the departed user's licence state \u2014 flows explicitly revert to Low profile when the owning account is deprovisioned.",
+        "Flows are not immediately deleted \u2014 they persist but operate in a degraded Low performance state."
+      ],
+      "msRef": {
+        "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+      }
+    },
+    {
+      "q": "What is the maximum number of cloud flows a single user can own on the My Flows tab, and what is the recommended solution when this limit is reached?",
+      "options": [
+        "250 flows \u2014 additional flows must be created by another user",
+        "500 flows \u2014 the user must archive old flows",
+        "600 flows \u2014 use solution-aware flows (flows under solutions) which do not count toward this tab limit",
+        "There is no documented per-user flow ownership limit"
+      ],
+      "answer": 2,
+      "category": "power-automate-limits",
+      "tags": [
+        "power-automate",
+        "flow-ownership",
+        "solutions",
+        "limits"
+      ],
+      "explanation": "The My Flows tab displays a maximum of 600 flows per user. When this limit is reached, Microsoft's documented recommendation is to move flows into Power Platform solutions. Solution-aware flows are not subject to the 600-flow My Flows tab limit and provide the additional benefits of ALM (Application Lifecycle Management) \u2014 they can be exported, imported across environments, and managed within source control. Architects designing organisations with large-scale automation portfolios should mandate solution-aware flows from the outset.",
+      "wrongExplanations": [
+        "250 is not the documented My Flows limit \u2014 the cap is 600.",
+        "500 is below the actual limit of 600. Archiving does not resolve the limit \u2014 the solution-aware approach is the recommended path.",
+        "There is a documented per-user My Flows tab limit of 600 flows."
+      ],
+      "msRef": {
+        "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Contoso Global \u2014 API Limits Architecture Review",
+      "scenario": {
+        "title": "Contoso Global \u2014 API Limits Architecture Review",
+        "background": "Contoso Global is implementing a Dynamics 365 Customer Service solution with the following characteristics:\n\nT1. 800 agents with Dynamics 365 Customer Service Enterprise licences. Each agent averages 300 Dataverse operations per working day via the app, plus 150 operations from background flows running under their identity.\n\nT2. A nightly ETL integration syncs 200,000 records from an ERP into Dataverse. The integration runs as a single Entra ID application user.\n\nT3. A Power BI dashboard in the contact centre pulls live data via Direct Query from Dataverse. The on-premises data warehouse also feeds into Power BI via an on-premises data gateway.\n\nT4. The solution must achieve an RPO/RTO aligned with Microsoft's managed availability guarantee for zone-level failures.\n\nT5. A JavaScript web resource on the Case form calls the Dataverse Web API to retrieve 500 related records on load \u2014 this is causing intermittent errors in testing.",
+        "requirements": [
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5"
+        ]
+      },
+      "tags": [
+        "api-limits",
+        "entitlement",
+        "service-protection",
+        "failover",
+        "javascript",
+        "etl"
+      ],
+      "msRef": {
+        "label": "API limits overview \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/api-limits-overview"
+      },
+      "questions": [
+        {
+          "q": "For T1 \u2014 each agent has a D365 Customer Service Enterprise licence. Their average daily Dataverse operations total 450 (300 app + 150 from flows running under their identity). Is this within entitlement limits, and what is the architect's concern?",
+          "options": [
+            "Yes \u2014 450 is well within the 40,000 daily entitlement. No concern needed.",
+            "No \u2014 450 exceeds the 6,000 limit for D365 licences.",
+            "Yes \u2014 450 is within the 40,000 daily entitlement. However, the architect must monitor aggregate consumption and ensure background flows running under user identity don't spike on peak days, which could trigger notification thresholds.",
+            "No \u2014 flows running under a user's identity are counted separately and don't consume the user's entitlement."
+          ],
+          "answer": 2,
+          "explanation": "D365 Customer Service Enterprise grants 40,000 requests/day. 450 operations is well within this limit. However, flows running under the user's identity do consume that user's entitlement \u2014 they are not counted separately. The architect's concern is peak-day spikes (month-end processing, incident surges) where combined app and flow operations could multiply beyond typical averages. Monitoring via Power Platform admin center entitlement reports is essential.",
+          "wrongExplanations": {
+            "0": "While technically correct about being within limits, an architect cannot stop at 'no concern' \u2014 peak-day variance and flow consumption stacking on user entitlements are legitimate architectural risks to document.",
+            "1": "The 6,000 limit applies to M365/Dynamics Team Member licences \u2014 D365 Customer Service Enterprise is in the 40,000 tier.",
+            "3": "Flows running under a user's identity do consume that user's daily entitlement \u2014 this is a common architectural misconception."
+          },
+          "msRef": {
+            "label": "Requests limits and allocations \u2014 Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+          }
+        },
+        {
+          "q": "For T2 \u2014 the nightly ETL syncs 200,000 records via an application user. Which licence and request pool should the architect assign to this integration, and why?",
+          "options": [
+            "Use an agent's D365 licence \u2014 the ETL runs overnight so it won't compete with daytime usage",
+            "Assign a Power Automate per flow licence to the ETL flow \u2014 this grants 250,000 requests/day from the flow's own pool, isolated from agent entitlements",
+            "Application users share the tenant-level non-licensed identity pool \u2014 no additional licence is needed if the tenant has sufficient paid D365 licences",
+            "Use a non-interactive user \u2014 they have unlimited API access and don't consume any entitlement pool"
+          ],
+          "answer": 1,
+          "explanation": "Assigning a Power Automate per flow licence to the ETL flow grants 250,000 requests/day dedicated to that flow, which comfortably covers the 200,000 record sync. This isolates the ETL's consumption from the tenant-level non-licensed identity pool, preventing the integration from exhausting the shared pool used by other application users. Running the ETL under an agent's identity (option A) is a multiplexing anti-pattern and risks depleting that agent's entitlement.",
+          "wrongExplanations": {
+            "0": "Using an agent's licence for integrations is a multiplexing violation and an architectural anti-pattern \u2014 integrations should never run under interactive user identities.",
+            "2": "The non-licensed identity pool is pooled at the tenant level and shared across all non-licensed users \u2014 a 200,000-record ETL without a dedicated licence would rapidly exhaust this shared pool, impacting all other service accounts.",
+            "3": "Non-interactive users have a cap of seven per environment and do not have unlimited API access \u2014 they share the tenant-level non-licensed pool and are subject to its limits."
+          },
+          "msRef": {
+            "label": "Requests limits and allocations \u2014 Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/api-request-limits-allocations"
+          }
+        },
+        {
+          "q": "For T3 \u2014 the Power BI dashboard uses Direct Query to Dataverse, and the on-premises data warehouse is accessed via a gateway. What should the architect document about the impact of a regional datacenter failure on each data source?",
+          "options": [
+            "Both Direct Query and the on-premises gateway continue operating during regional failover",
+            "Direct Query to Dataverse continues; on-premises gateway data becomes unavailable during regional failover and requires manual gateway redeployment",
+            "Both become unavailable \u2014 Power BI enters a read-only mode that serves only cached data",
+            "The gateway fails over automatically to a secondary region; Direct Query to Dataverse is the only concern"
+          ],
+          "answer": 1,
+          "explanation": "During a Power BI regional failover, import-mode reports remain readable, but Direct Query reports from on-premises sources via the gateway stop working \u2014 the gateway configuration does not change and on-premises data is not accessible until the gateway is reconfigured or redeployed in the recovered region. Microsoft documents this explicitly. The architect must document this as a known limitation and plan for gateway HA clusters or secondary gateway installations to reduce the recovery window.",
+          "wrongExplanations": {
+            "0": "On-premises gateway data is not available during regional failover \u2014 this is explicitly documented by Microsoft.",
+            "2": "Power BI does not enter a blanket cached read-only mode for all reports \u2014 Direct Query to Dataverse can still work if the Dataverse environment is available in the failover region; it is specifically the on-premises gateway path that fails.",
+            "3": "The gateway does NOT fail over automatically \u2014 this is the core architectural risk the architect must plan for."
+          },
+          "msRef": {
+            "label": "Power BI high availability, failover, and disaster recovery FAQ",
+            "url": "https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-admin-failover"
+          }
+        },
+        {
+          "q": "For T4 \u2014 the solution must align with Microsoft's managed availability RTO. What RTO should the architect document for zone-level failures, and what action is required from Contoso?",
+          "options": [
+            "RTO less than 1 hour \u2014 Contoso must configure self-service disaster recovery in advance",
+            "RTO less than 5 minutes \u2014 managed availability is automatic for production environments; no Contoso action required for zone-level failover",
+            "RTO less than 15 minutes \u2014 Contoso must enable availability zones via a support ticket",
+            "RTO less than 30 seconds \u2014 requires Power BI Premium capacity to be pre-provisioned"
+          ],
+          "answer": 1,
+          "explanation": "Managed availability uses Azure Availability Zones with synchronous replication across zones, providing an RTO of less than five minutes for zone-level failures. This is automatically applied to all production environments \u2014 Contoso does not need to take any action for intra-region zone resilience. The architect should document this as the baseline SLA for zone failures, and separately document cross-region failover (requiring self-service disaster recovery configuration) for full regional outage scenarios.",
+          "wrongExplanations": {
+            "0": "Self-service disaster recovery is for cross-region failover \u2014 managed availability (zone-level) is automatic and does not require this configuration.",
+            "2": "Availability zones are automatically applied \u2014 no opt-in or support ticket is required.",
+            "3": "Less than 30 seconds is the Power BI zone failover figure \u2014 the general Dataverse/D365 managed availability RTO is under five minutes."
+          },
+          "msRef": {
+            "label": "Managed availability \u2014 Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/admin/managed-availability"
+          }
+        },
+        {
+          "q": "For T5 \u2014 the JavaScript web resource retrieves 500 related records on Case form load and is causing intermittent errors. Which service protection limit is most likely being exceeded, and what is the recommended architectural fix?",
+          "options": [
+            "Daily entitlement limit \u2014 upgrade agents to a higher licence tier",
+            "Concurrent connections limit \u2014 add a queue to serialise Web API calls from the form",
+            "Number of requests or execution time limit in the 5-minute window \u2014 redesign to use a single FetchXML query with pagination, implement Retry-After handling, and consider server-side pre-computation via a plug-in",
+            "ExecuteMultiple batch size limit \u2014 split the retrieval into batches of 1,000"
+          ],
+          "answer": 2,
+          "explanation": "A form-load JavaScript that fires multiple Web API calls to retrieve 500 records in rapid succession is a classic service protection anti-pattern \u2014 it can breach both the request count limit (many calls in 300 seconds) and the execution time limit (especially with complex queries). The correct fix is: (1) replace multiple individual calls with a single FetchXML/OData query using server-side filtering and pagination; (2) implement exponential backoff with Retry-After when 429 errors are returned; (3) if pre-computation is needed, push the aggregation into a plug-in where service protection limits do not apply to internal calls.",
+          "wrongExplanations": {
+            "0": "The daily entitlement limit produces admin notifications \u2014 not intermittent 429 errors in the UI. A licence upgrade will not fix this.",
+            "1": "Serialising calls on the client removes concurrency but does not reduce the total request count in the 5-minute window \u2014 this does not resolve the root cause.",
+            "3": "ExecuteMultiple is for write batching, not read retrieval of related records. The issue is the read pattern causing service protection errors, not a batch size violation."
+          },
+          "msRef": {
+            "label": "Service protection API limits \u2014 Microsoft Dataverse",
+            "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/api-limits"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Fabrikam Insurance \u2014 Plug-in and Flow Limits Review",
+      "scenario": {
+        "title": "Fabrikam Insurance \u2014 Plug-in and Flow Limits Review",
+        "background": "Fabrikam Insurance is a heavily customised D365 Customer Service implementation. An architecture review has uncovered the following issues:\n\nI1. The Claims table has 14 synchronous plug-ins registered, collectively averaging 90 seconds total execution time during peak. A new plug-in is being proposed that calls an external REST API for fraud detection.\n\nI2. A developer has built a nightly reconciliation flow using nested Apply to Each loops \u2014 an outer loop over 500 policy records, each with an inner loop over up to 50 claims records (25,000 total inner iterations).\n\nI3. The Claims Approval flow was designed for a 45-day SLA. Managers have 45 days to respond to an approval request before escalation.\n\nI4. The integration team registered an ExecuteMultiple batch of 300 updates inside a Post-Operation synchronous plug-in on the Claim Update message.\n\nI5. The flow portfolio has 580 flows owned by the automation team lead. The team lead is leaving the organisation next month.",
+        "requirements": [
+          "I1",
+          "I2",
+          "I3",
+          "I4",
+          "I5"
+        ]
+      },
+      "tags": [
+        "plugins",
+        "power-automate",
+        "limits",
+        "architecture",
+        "governance"
+      ],
+      "msRef": {
+        "label": "Analyze plug-in performance \u2014 Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/analyze-performance"
+      },
+      "questions": [
+        {
+          "q": "For I1 \u2014 the existing pipeline already averages 90 seconds. The proposed fraud detection plug-in calls an external REST API. What is the architectural risk and what should the architect recommend?",
+          "options": [
+            "No risk \u2014 each plug-in has its own 2-minute budget independent of others in the pipeline",
+            "The pipeline is critically close to the 2-minute combined timeout; adding any synchronous external API call risks pushing the total past the limit, rolling back all Claims operations \u2014 redesign the fraud check as an async post-operation or Power Automate flow",
+            "The risk is only from a licensing perspective \u2014 external API calls from plug-ins require a premium connector licence",
+            "The fraud detection call should be moved to a JavaScript web resource instead to remove it from the server-side pipeline"
+          ],
+          "answer": 1,
+          "explanation": "The 2-minute hard limit applies to the entire message operation including all synchronous plug-ins combined. At 90 seconds average, Fabrikam's pipeline has only 30 seconds of remaining budget. Any external REST API call from a synchronous plug-in introduces variable network latency \u2014 the fraud detection call alone could push the pipeline past 2 minutes, causing a TimeoutException and rolling back the entire Claims update transaction. The correct pattern is to trigger fraud detection asynchronously: register the plug-in on a Post-Operation async step or raise a custom event consumed by a Power Automate flow, so the fraud check runs outside the transactional pipeline.",
+          "wrongExplanations": {
+            "0": "The 2-minute limit is shared across all synchronous plug-ins in the pipeline \u2014 there is no per-plug-in independent budget.",
+            "2": "External API calls from plug-in code do not require premium connector licences \u2014 they are direct HTTP calls from .NET code. The risk is timeout, not licensing.",
+            "3": "Moving to JavaScript on the client removes server-side enforcement but does not protect the data integrity that a server-side fraud check provides \u2014 it also won't fire for API-based updates."
+          },
+          "msRef": {
+            "label": "Analyze plug-in performance \u2014 Microsoft Dataverse",
+            "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/analyze-performance"
+          }
+        },
+        {
+          "q": "For I2 \u2014 the nightly flow has nested loops (500 outer \u00d7 up to 50 inner = 25,000 iterations). What limit does this approach risk, and what is the recommended redesign?",
+          "options": [
+            "It risks the 30-day run duration limit \u2014 nested loops will cause the flow to run for more than a month",
+            "It risks the 100,000 action burst limit in 5 minutes and will generate a very large PPR bill \u2014 redesign using OData $expand to retrieve policies with related claims in a single query, eliminating the inner loop",
+            "Nested loops are blocked at the platform level and will cause an immediate flow failure",
+            "The only risk is the 500-action flow definition limit \u2014 split the outer loop into a separate child flow"
+          ],
+          "answer": 1,
+          "explanation": "Nested Apply to Each loops multiply iterations exponentially. 25,000 inner iterations, each with at least one action (e.g. updating a Dataverse record), produces 25,000+ PPR actions from this flow alone in a single nightly run \u2014 potentially hitting the 100,000-action 5-minute burst cap and the user's daily PPR entitlement. The recommended fix is to use OData $expand to retrieve policy records with their related claims in a single List Rows call, then process each policy record as one iteration with all claims data already present \u2014 eliminating the inner loop entirely. Alternatively, Dataverse bulk operations can process all 25,000 updates as a single counted operation.",
+          "wrongExplanations": {
+            "0": "25,000 iterations will not take 30 days \u2014 the run will complete in hours. The risk is PPR burst limits and daily entitlement, not run duration.",
+            "2": "Nested loops are not blocked at the platform level \u2014 they are permitted but subject to quotas and performance degradation.",
+            "3": "The 500-action limit applies to the flow definition (the number of action cards), not the number of runtime loop iterations \u2014 25,000 iterations is a runtime concern."
+          },
+          "msRef": {
+            "label": "Avoid anti-patterns \u2014 Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/guidance/coding-guidelines/avoid-anti-patterns"
+          }
+        },
+        {
+          "q": "For I3 \u2014 the Claims Approval flow is designed for a 45-day SLA. Managers have 45 days to approve. What platform constraint makes this design invalid?",
+          "options": [
+            "Approval connectors time out after 30 days \u2014 approvals cannot be pending for more than 30 days",
+            "Power Automate enforces a maximum run duration of 30 days per execution \u2014 any approval not responded to within 30 days of the run's start will time out automatically",
+            "Microsoft 365 email notifications for approvals expire after 14 days \u2014 managers won't receive reminders after that",
+            "45-day approvals require a Power Automate Process licence \u2014 standard per-user licences only support 30-day flows"
+          ],
+          "answer": 1,
+          "explanation": "Power Automate enforces a 30-day maximum run duration per execution, calculated from the run's start time. Any pending step \u2014 including an approval waiting for a manager response \u2014 automatically times out after 30 days. A 45-day SLA approval workflow is architecturally invalid within a single flow run. The correct design is to break the approval into sub-flows: the first flow runs for up to 30 days; if no response is received, a separate escalation flow is triggered and runs for the remaining period. Alternatively, store the approval state in Dataverse and use a scheduled flow to check and re-notify until the SLA is met.",
+          "wrongExplanations": {
+            "0": "The Approvals connector itself does not have a separate 30-day connector-level timeout \u2014 the constraint is the platform-level 30-day run duration limit.",
+            "2": "Email notification behaviour is a Microsoft 365 concern \u2014 it is not the binding architectural constraint described here. The 30-day run duration is the critical limit.",
+            "3": "Run duration limits apply to all licence tiers \u2014 a Process licence does not extend the 30-day per-run ceiling."
+          },
+          "msRef": {
+            "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+          }
+        },
+        {
+          "q": "For I4 \u2014 the integration team placed an ExecuteMultiple batch of 300 updates inside a Post-Operation synchronous plug-in. What two architectural problems does this introduce?",
+          "options": [
+            "The batch runs in parallel inside the plug-in, completing faster, but each of the 300 operations is charged at double the normal PPR rate",
+            "ExecuteMultiple inside a synchronous plug-in runs the 300 operations sequentially (no parallelism), adding cumulative latency to the 2-minute pipeline budget, and each of the 300 operations still accrues against PPR entitlement individually",
+            "The ExecuteMultiple is automatically converted to an async call when running inside a plug-in \u2014 no performance risk exists",
+            "The only issue is the 1,000-operation batch size limit \u2014 300 operations is within the cap so no change is needed"
+          ],
+          "answer": 1,
+          "explanation": "Two problems: (1) ExecuteMultiple inside a plug-in executes its operations sequentially \u2014 there is no parallel processing benefit on the server side. 300 sequential Dataverse updates inside a synchronous post-operation step adds significant latency to the pipeline, pushing it toward the 2-minute combined timeout. (2) Each of the 300 individual CRUD operations inside the batch accrues against Power Platform request entitlements \u2014 the batch wrapper provides no entitlement savings. The recommended fix is to move bulk updates to an async post-operation plug-in step or an outbound Power Automate flow, decoupling them from the synchronous transaction.",
+          "wrongExplanations": {
+            "0": "ExecuteMultiple inside a plug-in does NOT run in parallel \u2014 operations execute sequentially. There is no double-rate PPR charging.",
+            "2": "ExecuteMultiple is not automatically converted to async inside a plug-in \u2014 it executes synchronously and within the pipeline budget.",
+            "3": "300 operations is within the 1,000-batch limit, but the architectural problem is not batch size \u2014 it is the sequential latency and entitlement cost of placing bulk operations in a synchronous pipeline."
+          },
+          "msRef": {
+            "label": "Don't use batch request types in plug-ins and workflow activities",
+            "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/best-practices/business-logic/avoid-batch-requests-plugin"
+          }
+        },
+        {
+          "q": "For I5 \u2014 the team lead owns 580 flows and is leaving next month. What two risks must the architect address before the team lead departs?",
+          "options": [
+            "Only the 600-flow tab limit matters \u2014 the architect should ensure no new flows are added before ownership is transferred",
+            "All 580 flows will revert to the Low performance profile when the account is deprovisioned, degrading premium connector access and PPR throughput; additionally, 580 flows exceeds the 600-flow My Flows tab limit threshold and should be migrated to solutions for easier bulk ownership management",
+            "Power Automate automatically transfers flow ownership to the departing user's manager in Microsoft Entra ID \u2014 no action is required",
+            "Only flows using Dataverse connectors are affected \u2014 flows using other connectors retain their performance profile regardless of owner"
+          ],
+          "answer": 1,
+          "explanation": "Two risks: (1) Performance profile reversion \u2014 when the team lead's account is deprovisioned, all 580 owned flows revert to the Low performance profile. Flows using Dynamics 365 or premium connectors will fail or degrade. Ownership must be transferred to a service account with appropriate licences before departure. (2) Manageability \u2014 at 580 flows (close to the 600 My Flows tab limit), bulk ownership transfer is operationally challenging without solution-aware flows. The architect should migrate these flows into Power Platform solutions, which support better ALM, don't contribute to the 600 tab limit, and allow environment-level ownership through connection references.",
+          "wrongExplanations": {
+            "0": "The tab limit concern is secondary \u2014 the performance profile reversion is the critical risk that causes immediate production impact.",
+            "2": "Power Automate does not automatically transfer flow ownership via Entra ID manager relationships \u2014 this must be done manually via the admin centre or Web API.",
+            "3": "The performance profile applies to all flows regardless of connector type \u2014 all 580 flows are at risk of reversion, not just those using Dataverse."
+          },
+          "msRef": {
+            "label": "Limits of automated, scheduled, and instant flows \u2014 Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+          }
+        }
+      ]
+    }
+  ]
+}

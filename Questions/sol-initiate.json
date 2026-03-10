@@ -1,0 +1,429 @@
+{
+  "_meta": {
+    "topic": "Initiate Solution Planning",
+    "description": "Evaluating business requirements, identifying Power Platform solution components, selecting from existing apps and ISV/AppSource options, and estimating migration and integration effort. Covers PL-600 exam objective: Perform solution envisioning and requirement analysis > Initiate solution planning.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "A solution architect is beginning a new D365 Customer Service implementation. The customer has described a need to 'improve agent productivity.' What is the architect's first responsibility when evaluating business requirements?",
+      "options": [
+        "Map the requirement to a specific Power Platform component and begin designing the solution",
+        "Translate the high-level statement into specific, measurable business outcomes — identifying what 'improved productivity' means in terms of handle time, case volume, escalation rates, or other concrete metrics",
+        "Escalate to the project manager, as vague requirements are a scope management problem",
+        "Begin a proof of concept to show the customer what is possible before requirements are defined"
+      ],
+      "answer": 1,
+      "category": "evaluate-business-requirements",
+      "tags": ["requirements", "business-outcomes", "initiation", "solution-planning"],
+      "explanation": "Microsoft's guidance states that before designing a solution, the architect must understand the outcomes the system needs to deliver. A vague high-level objective like 'improve agent productivity' is a starting point, not a requirement. The architect must work with stakeholders to define specific, measurable outcomes — for example, reducing average handle time from 8 to 6 minutes, increasing first-contact resolution rate, or reducing escalations by 20%. Without measurable outcomes, the architect cannot determine which solution components are appropriate, cannot validate whether the design meets requirements, and cannot confirm go-live readiness.",
+      "wrongExplanations": [
+        "Mapping to a component before clarifying what 'productivity' means risks building the wrong thing entirely — solution design must follow requirement definition.",
+        "Vague requirements are an architecture and facilitation concern — the architect must resolve ambiguity through structured elicitation, not escalate it as a scope issue.",
+        "A proof of concept before requirements are defined wastes time and money, and risks anchoring the customer to the wrong solution before real needs are understood."
+      ],
+      "msRef": {
+        "label": "Solution Architect's Responsibilities and Guiding Principles",
+        "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+      }
+    },
+    {
+      "q": "Which of the following best describes how a solution architect should evaluate whether a business requirement is suitable for Power Platform versus a custom-built solution?",
+      "options": [
+        "All business requirements should be met with Power Platform — custom development is never appropriate",
+        "Evaluate whether the requirement can be satisfied by platform-native features; if not, evaluate existing Dynamics 365 apps, AppSource solutions, and Azure extensions before committing to custom development",
+        "Custom development should always be preferred — it provides more control and avoids licence dependency",
+        "The decision should be made by the development team, not the architect"
+      ],
+      "answer": 1,
+      "category": "evaluate-business-requirements",
+      "tags": ["requirements", "evaluation", "platform-native", "custom-development", "architecture"],
+      "explanation": "The PL-600 study guide and Well-Architected guidance both establish a clear evaluation hierarchy: (1) can the platform meet the requirement out-of-the-box? (2) Does a Dynamics 365 first-party app address it? (3) Is there an AppSource or ISV solution? (4) Can Azure services extend the platform to meet it? (5) Only then should custom development be considered. This hierarchy minimises maintenance overhead, upgrade risk, and total cost of ownership. The architect leads this evaluation — it is a core design responsibility, not a developer decision.",
+      "wrongExplanations": [
+        "Power Platform is highly capable but has legitimate limits — some requirements are better met by Azure services, third-party systems, or ISV solutions.",
+        "Custom development maximises control but also maximises maintenance cost, upgrade risk, and technical debt — it should always be the last resort after platform and market options are exhausted.",
+        "The evaluation hierarchy is the architect's core responsibility — delegating it to developers without architectural guidance results in inconsistent, over-engineered solutions."
+      ],
+      "msRef": {
+        "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+      }
+    },
+    {
+      "q": "A customer needs a portal for external partners to submit service requests. Which Power Platform component should the architect evaluate first?",
+      "options": [
+        "Canvas app — it is the most flexible for external users",
+        "Power Pages — it is the platform's dedicated enterprise-grade, low-code SaaS solution for external-facing websites",
+        "Model-driven app with guest access enabled",
+        "Power BI embedded in SharePoint Online"
+      ],
+      "answer": 1,
+      "category": "identify-components",
+      "tags": ["power-pages", "external-users", "portal", "component-selection"],
+      "explanation": "Power Pages is Microsoft's purpose-built, secure, enterprise-grade, low-code SaaS platform for external-facing websites and portals. It is Dataverse-native, supports authenticated and anonymous external users, integrates with Entra ID for identity management, and is designed specifically for scenarios where external users need to interact with business data — such as partner portals, self-service case submission, and customer-facing applications. Canvas apps are designed for internal users or specific embedded scenarios, not as general-purpose external portals.",
+      "wrongExplanations": [
+        "Canvas apps are primarily designed for internal users — they are not the recommended platform-native solution for external partner portal scenarios.",
+        "Model-driven apps are designed for internal business users with appropriate Dataverse licences — they do not natively support the external anonymous or authenticated partner portal scenario.",
+        "Power BI embedded in SharePoint is a data visualisation tool — it does not provide form submission or case creation capabilities for external partners."
+      ],
+      "msRef": {
+        "label": "What is Power Pages? — Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-pages/introduction"
+      }
+    },
+    {
+      "q": "A customer wants a process-driven application for case management that is data-dense, responds across devices, and requires consistent UI across 200 agents. Which Power Apps type is most appropriate, and why?",
+      "options": [
+        "Canvas app — it provides pixel-perfect control over every screen layout",
+        "Model-driven app — it is purpose-built for process-driven, data-dense scenarios; UI is automatically generated from the data model and is responsive and consistent across devices with no layout design required",
+        "Power Pages — it supports multi-device responsive design with minimal development",
+        "Power BI app — dashboards and reports provide the richest data-dense experience"
+      ],
+      "answer": 1,
+      "category": "identify-components",
+      "tags": ["model-driven-app", "canvas-app", "component-selection", "case-management", "process-driven"],
+      "explanation": "Microsoft explicitly documents that model-driven apps are best suited for process-driven, data-dense applications where users move between related records — exactly the case management scenario described. Their key advantages for this use case are: (1) UI is automatically generated from the data model and components — no pixel-perfect layout design required; (2) apps are responsive across desktop, tablet, and mobile automatically; (3) the UI is consistent across all model-driven apps, reducing agent training burden; and (4) migration between environments via solutions is straightforward. Canvas apps are better suited to targeted, pixel-perfect scenarios with specific UX requirements, not broad agent productivity tools.",
+      "wrongExplanations": [
+        "Canvas apps give complete layout control but require significant design effort for every screen — for 200 agents on a data-dense process app, the model-driven approach is far more appropriate and maintainable.",
+        "Power Pages is for external user scenarios — not internal agent productivity applications.",
+        "Power BI is a business intelligence and reporting tool — it does not support transactional case management workflows."
+      ],
+      "msRef": {
+        "label": "Overview of building a model-driven app with Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/model-driven-app-overview"
+      }
+    },
+    {
+      "q": "A customer needs an AI-powered conversational interface to handle first-contact case triage and deflect simple queries before routing to agents. Which Power Platform component should the architect evaluate?",
+      "options": [
+        "Power Automate cloud flow with a Teams connector",
+        "Power Apps canvas app with AI Builder",
+        "Microsoft Copilot Studio — a graphical low-code tool for building AI-powered agents",
+        "A JavaScript web resource embedded in the D365 Customer Service case form"
+      ],
+      "answer": 2,
+      "category": "identify-components",
+      "tags": ["copilot-studio", "virtual-agent", "ai", "component-selection", "case-deflection"],
+      "explanation": "Microsoft Copilot Studio (formerly Power Virtual Agents) is the platform's designated graphical, low-code tool for building AI-powered conversational agents. It supports natural language understanding, integration with Dataverse and external services via connectors, escalation to human agents via D365 Customer Service, and publication to multiple channels including Teams, websites, and telephony systems. It is purpose-built for the first-contact triage and case deflection scenario described. The architect should evaluate Copilot Studio first before considering custom AI development.",
+      "wrongExplanations": [
+        "Power Automate cloud flows with Teams connectors can send notifications or create tasks but cannot conduct a conversational triage interaction with a customer.",
+        "AI Builder within Power Apps provides AI models (form processing, prediction, object detection) — it is not a conversational agent platform.",
+        "A JavaScript web resource on a case form is visible only to internal agents — it cannot handle external customer interactions or first-contact deflection."
+      ],
+      "msRef": {
+        "label": "Microsoft Copilot Studio overview",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio"
+      }
+    },
+    {
+      "q": "When should a solution architect evaluate AppSource as a source of solution components?",
+      "options": [
+        "Only as a last resort after custom development has been scoped and costed",
+        "After confirming out-of-the-box platform capabilities cannot meet a requirement, but before committing to custom development — AppSource offers pre-built certified ISV solutions that may address the gap",
+        "AppSource is only relevant for consumer-facing apps — enterprise D365 implementations should not use AppSource components",
+        "AppSource should only be evaluated if the customer specifically requests it"
+      ],
+      "answer": 1,
+      "category": "select-components",
+      "tags": ["appsource", "isv", "component-selection", "build-vs-buy", "marketplace"],
+      "explanation": "The PL-600 study guide explicitly lists AppSource apps as a component source the architect must evaluate — alongside existing apps, Dynamics 365 first-party apps, Azure services, and third-party ISV components. AppSource offers thousands of certified solutions for Power Platform and Dynamics 365. Evaluating AppSource before committing to custom development follows the architect's core principle of preferring existing, maintained solutions over custom builds. AppSource solutions have been through Microsoft's certification process, reducing integration risk compared to completely unvetted third-party tools.",
+      "wrongExplanations": [
+        "AppSource should be evaluated early in the component selection process — treating it as a last resort ignores a rich source of pre-built, certified solutions.",
+        "AppSource contains enterprise-grade ISV solutions explicitly designed for Dynamics 365 and Power Platform — restricting it to consumer apps misrepresents the marketplace's purpose.",
+        "The architect is responsible for proactively identifying the best components — waiting for the customer to request AppSource evaluation abdicates this responsibility."
+      ],
+      "msRef": {
+        "label": "Microsoft AppSource overview",
+        "url": "https://learn.microsoft.com/en-us/marketplace/appsource-overview"
+      }
+    },
+    {
+      "q": "A solution architect is evaluating an ISV solution from AppSource. Which of the following factors should they assess before recommending it to the customer?",
+      "options": [
+        "Only whether the ISV solution has a Microsoft AppSource listing — presence on the marketplace is sufficient validation",
+        "Whether the ISV solution meets functional requirements, has an active maintenance track record, is compatible with the customer's Dynamics 365 version, has clear upgrade and support policies, and introduces no DLP or security concerns",
+        "Only the licence cost — the architect should select the cheapest option that meets requirements",
+        "Whether the ISV has a Gold Microsoft partner status — this is the only quality indicator needed"
+      ],
+      "answer": 1,
+      "category": "select-components",
+      "tags": ["isv", "appsource", "evaluation", "risk", "component-selection"],
+      "explanation": "An AppSource listing confirms that a solution has passed Microsoft's certification checks — it does not guarantee ongoing maintenance, D365 version compatibility, long-term ISV viability, or alignment with the customer's security model. The architect must assess: (1) functional fit against requirements; (2) compatibility with the customer's D365 and Power Platform version; (3) ISV maintenance history and release cadence; (4) upgrade and support SLA terms; (5) DLP policy implications; (6) data handling and security posture; and (7) ISV financial health and market reputation. A poorly chosen ISV solution can introduce upgrade blockers, support gaps, and security risks that outweigh the development cost savings.",
+      "wrongExplanations": [
+        "An AppSource listing is a baseline quality signal — it is not a comprehensive assessment of suitability, long-term support, or security.",
+        "Licence cost is one factor among many — choosing the cheapest option without assessing compatibility, support quality, and security risk can result in a far more expensive remediation later.",
+        "Partner status is one indicator of technical capability — it does not evaluate functional fit, upgrade policy, DLP impact, or the ISV's long-term viability."
+      ],
+      "msRef": {
+        "label": "Microsoft AppSource overview",
+        "url": "https://learn.microsoft.com/en-us/marketplace/appsource-overview"
+      }
+    },
+    {
+      "q": "Which Microsoft strategy describes migrating a legacy application to the cloud with minimal code changes, taking advantage of cloud infrastructure without a full rewrite?",
+      "options": [
+        "Rebuild — start over from scratch on the new platform",
+        "Refactor — improve the internal structure of code without adding features",
+        "Rehost (lift and shift) — migrate the application as-is to cloud infrastructure with no code changes",
+        "Replatform (lift, tinker, and shift) — move to a new runtime platform with minimal code changes"
+      ],
+      "answer": 2,
+      "category": "migration-effort",
+      "tags": ["migration", "lift-and-shift", "rehost", "strategy", "effort-estimation"],
+      "explanation": "Microsoft's 6 Rs of application modernisation framework defines Rehost (lift and shift) as migrating an application to cloud infrastructure without modifying the application's code — the fastest, lowest-risk migration strategy. It is appropriate when the priority is speed of migration and the organisation is not yet ready for more complex modernisation. A solution architect must identify which of the 6 Rs applies to each workload when estimating migration effort — a full rehost has very different effort, risk, and timeline implications compared to a replatform or rebuild.",
+      "wrongExplanations": [
+        "Rebuild means starting over entirely — it is the highest effort and highest risk strategy, not a minimal-change approach.",
+        "Refactor improves internal code structure — it involves code changes to the existing application, unlike a rehost.",
+        "Replatform (lift, tinker, and shift) involves moving to a new runtime with minimal code changes — it is distinct from rehost because some code adaptation is required, making it higher effort than a pure lift and shift."
+      ],
+      "msRef": {
+        "label": "The 6 Rs of application modernisation",
+        "url": "https://learn.microsoft.com/en-us/azure/app-modernization-guidance/plan/the-6-rs-of-application-modernization"
+      }
+    },
+    {
+      "q": "A solution architect is estimating migration effort for a customer's legacy CRM being replaced by D365 Customer Service. Which factors most significantly drive migration complexity?",
+      "options": [
+        "The number of users and the physical location of the data centre",
+        "Data volume, data quality and cleanliness, the number and complexity of custom fields and relationships, business logic embedded in the legacy system, and the availability of source system documentation",
+        "The age of the legacy system and its vendor's market share",
+        "Only the data volume — all other factors can be addressed during testing"
+      ],
+      "answer": 1,
+      "category": "migration-effort",
+      "tags": ["migration", "effort-estimation", "data-quality", "complexity", "legacy"],
+      "explanation": "Microsoft's data migration guidance identifies these as the primary migration complexity drivers: (1) data volume — the total number of records to be migrated; (2) data quality — duplicate records, missing values, inconsistent formats, and referential integrity issues multiply cleansing effort; (3) data model complexity — custom fields, relationships, and lookup configurations that must be mapped from the legacy schema to Dataverse; (4) business logic embedded in the legacy system — triggers, stored procedures, and workflows that must be replicated or redesigned; and (5) source documentation — undocumented legacy systems require reverse-engineering effort. User count and data centre location are operational concerns that do not drive migration complexity.",
+      "wrongExplanations": [
+        "User count affects change management and training effort but is not a primary driver of migration technical complexity. Data centre location is an infrastructure consideration, not a migration driver.",
+        "System age and vendor market share do not determine migration complexity — undocumented, heavily customised modern systems can be far harder to migrate than well-documented legacy mainframes.",
+        "Data volume alone does not determine complexity — a small dataset with severe quality issues and complex business logic is harder to migrate than a large, clean, well-structured dataset."
+      ],
+      "msRef": {
+        "label": "Data migration approaches — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/data-migration-approaches"
+      }
+    },
+    {
+      "q": "When estimating integration effort at the start of solution planning, which three dimensions should the architect assess for each integration point?",
+      "options": [
+        "Integration name, target system vendor, and estimated development days",
+        "Data volume and frequency (throughput), directionality (one-way vs bidirectional), and complexity of transformation logic and compliance requirements",
+        "Network latency, firewall configuration, and database version compatibility",
+        "Number of fields being exchanged, user count, and SLA requirements"
+      ],
+      "answer": 1,
+      "category": "migration-effort",
+      "tags": ["integration", "effort-estimation", "volume", "directionality", "complexity"],
+      "explanation": "Microsoft's integration requirements guidance identifies three primary dimensions for estimating integration effort: (1) Volume and frequency — how many records or transactions must be exchanged, and how often; use historical data and growth projections to estimate future load (e.g. if the system handles 10M updates/year and grows at 20% annually, the integration must support 25M/year over five years); (2) Directionality — one-way data push, bidirectional sync, or event-triggered exchange each carry different complexity and conflict-resolution requirements; (3) Transformation complexity and compliance — the more business logic required to transform data between systems, and the stricter the compliance constraints on the connection, the higher the effort. Network and firewall concerns are infrastructure inputs, not primary effort drivers.",
+      "wrongExplanations": [
+        "Development day estimates are the output of the effort estimation process — not inputs to it. Target vendor and name are identifiers, not complexity drivers.",
+        "Network latency and firewall configuration are implementation concerns — they are assessed during detailed design, not at the initial effort estimation stage.",
+        "Field count and user count are secondary considerations — volume, directionality, and transformation complexity are the primary estimation dimensions documented by Microsoft."
+      ],
+      "msRef": {
+        "label": "Determine integration requirements — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/requirements"
+      }
+    },
+    {
+      "q": "A customer has an existing Dynamics 365 Sales environment and wants to extend it for customer service. What should the architect evaluate before recommending building a separate D365 Customer Service environment?",
+      "options": [
+        "The IT team's preference for number of environments",
+        "Whether D365 Customer Service can be added to the existing Sales environment, reusing existing Dataverse tables, security model, and user licences — minimising duplication and data integration complexity",
+        "Whether the Sales users have enough storage quota for the additional data",
+        "Whether Microsoft's roadmap will merge the two apps in a future release"
+      ],
+      "answer": 1,
+      "category": "select-components",
+      "tags": ["existing-apps", "dynamics-365", "component-reuse", "environment-strategy", "sales-customer-service"],
+      "explanation": "The PL-600 study guide requires architects to evaluate 'components from existing apps' before proposing new builds or separate environments. When a customer already has Dynamics 365 Sales, D365 Customer Service can typically be added to the same Dataverse environment — sharing the contact, account, and product tables, the existing security model, and the existing user licence framework. This avoids data duplication, eliminates a cross-environment integration, and reduces licence overhead. Recommending a separate environment without evaluating this coexistence option is an architectural oversight.",
+      "wrongExplanations": [
+        "IT team preference is an operational input — the architect must first establish whether a technically superior solution exists before allowing preference to drive the decision.",
+        "Storage quota is a manageable operational concern — it does not determine whether coexistence is architecturally appropriate.",
+        "Roadmap speculation is not a valid basis for current architectural decisions — the architect must design for what is supported today, not future product merges."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    },
+    {
+      "q": "A customer is considering whether to integrate with an existing on-premises ERP or migrate the relevant ERP data into Dataverse. What is the architect's primary analytical framework for this decision?",
+      "options": [
+        "Always migrate data into Dataverse — integration with on-premises systems is always too complex",
+        "Always integrate — data migration carries too much risk",
+        "Evaluate the master system of record, data freshness requirements, volume, latency tolerance, and long-term ERP roadmap — then choose the approach that best balances integration complexity against the risks of data duplication",
+        "Make the decision based on which option the development team is more comfortable with"
+      ],
+      "answer": 2,
+      "category": "migration-effort",
+      "tags": ["integration-vs-migration", "data-migration", "ERP", "decision-framework", "architecture"],
+      "explanation": "Microsoft's guidance on 'connect to external data versus import data' requires the architect to evaluate: (1) which system is the master of record — if the ERP owns the data, integration is safer than duplication; (2) data freshness requirements — near-real-time needs favour live integration; batch needs may favour migration; (3) data volume — large volumes may be cheaper to query live than migrate; (4) latency tolerance — if Power Platform must respond within milliseconds, live ERP calls may be unsuitable; (5) ERP roadmap — if the ERP is being decommissioned, migration avoids building an integration that will be removed. There is no universal answer — the decision requires structured evaluation of these dimensions.",
+      "wrongExplanations": [
+        "Migrating all ERP data introduces duplication risk, data consistency challenges, and ongoing sync burden — it is not always the right answer.",
+        "Integration always carries connectivity, latency, and availability dependencies that may be inappropriate for some data — blanket avoidance of migration is not an architectural principle.",
+        "Developer comfort is an implementation consideration — architectural decisions must be driven by business requirements, data ownership, and technical fit."
+      ],
+      "msRef": {
+        "label": "Data migration approaches — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/data-migration-approaches"
+      }
+    },
+    {
+      "q": "Which Power Platform component is best suited for automating a multi-step approval workflow that spans multiple systems, requires branching logic, and must notify approvers via email?",
+      "options": [
+        "A plug-in registered on the Dataverse Update message",
+        "A Business Rule configured on the Case table",
+        "A Power Automate cloud flow using the Approvals connector with branching conditions and email actions",
+        "A Business Process Flow with multiple stages"
+      ],
+      "answer": 2,
+      "category": "identify-components",
+      "tags": ["power-automate", "approvals", "automation", "component-selection", "workflow"],
+      "explanation": "Power Automate cloud flows are the purpose-built Power Platform component for multi-system, multi-step automation with branching logic and external notifications. The Approvals connector provides a managed approval experience with email and Teams notifications, response tracking, and timeout handling — without requiring custom development. Plug-ins are server-side Dataverse logic for data validation and synchronous operations — not multi-system workflow orchestration. Business Rules are single-table form logic tools. Business Process Flows guide users through stages but do not automate cross-system notifications or handle branching approval logic.",
+      "wrongExplanations": [
+        "Plug-ins execute synchronously within the Dataverse pipeline — they are not designed for multi-step, cross-system approval orchestration with email notifications.",
+        "Business Rules apply client-side or server-side logic to a single table — they cannot orchestrate multi-step approvals or notify external email recipients.",
+        "Business Process Flows guide users through defined stages on a form — they require manual progression and do not automate notifications or cross-system data movement."
+      ],
+      "msRef": {
+        "label": "Get started with Power Automate approvals",
+        "url": "https://learn.microsoft.com/en-us/power-automate/get-started-approvals"
+      }
+    },
+    {
+      "q": "An architect is told that the customer wants to use Azure services as part of the solution. What is the correct framing for when Azure should be included in a Power Platform solution?",
+      "options": [
+        "Azure should be included whenever it is technically possible — it always enhances Power Platform solutions",
+        "Azure is only needed when Power Platform cannot connect to on-premises data",
+        "Azure services should be included when they address specific gaps that Power Platform cannot fill natively — such as advanced AI/ML, event streaming, complex API management, high-throughput data processing, or network security requirements",
+        "Azure should be avoided — it adds complexity that reduces the value of the low-code Power Platform investment"
+      ],
+      "answer": 2,
+      "category": "select-components",
+      "tags": ["azure", "component-selection", "integration", "architecture", "gaps"],
+      "explanation": "The PL-600 study guide lists Azure as one of the component sources architects must evaluate when identifying solution components. Azure is not a default addition — it is appropriate when Power Platform has genuine capability gaps that Azure services address: Azure Functions for complex custom logic; Azure API Management for API governance and throttling; Azure Event Hubs or Service Bus for high-throughput event streaming; Azure Cognitive Services or Azure OpenAI for advanced AI/ML; Azure VNet and private endpoints for network security. Adding Azure without a specific business or technical justification increases cost, operational complexity, and skill requirements unnecessarily.",
+      "wrongExplanations": [
+        "Azure is not automatically beneficial — adding it without addressing a specific capability gap increases solution complexity and operating cost.",
+        "Power Platform's on-premises data gateway handles on-premises connectivity — Azure is not the only or primary solution for this scenario.",
+        "Azure and Power Platform are designed to complement each other — the Well-Architected guidance explicitly supports Azure integration where it fills genuine gaps."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Meridian Housing — Solution Planning Initiation",
+      "scenario": {
+        "title": "Meridian Housing — Solution Planning Initiation",
+        "background": "Meridian Housing is a UK social housing association with 350 staff. They are replacing a 15-year-old on-premises CRM and want to 'modernise their resident experience.' The following situations require the architect's judgement during the initiation phase:\n\nP1. The business sponsor has stated the goal as 'make things easier for residents' — the architect must convert this into evaluable business requirements.\n\nP2. A developer suggests building a custom resident portal from scratch using React and Azure App Service.\n\nP3. Meridian has an existing Dynamics 365 Field Service environment used by maintenance engineers.\n\nP4. The legacy CRM contains 12 years of case history (4.2 million records), with known data quality issues — duplicate residents, inconsistent address formats, and missing contact details on 30% of records.\n\nP5. Meridian requires integration with their housing management system (HMS), which holds tenancy agreements and rent accounts. The HMS vendor API supports REST with a documented swagger file. The HMS processes 15,000 rent transactions per month.",
+        "requirements": ["P1", "P2", "P3", "P4", "P5"]
+      },
+      "tags": ["solution-planning", "requirements", "component-selection", "migration", "integration"],
+      "msRef": {
+        "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+      },
+      "questions": [
+        {
+          "q": "For P1 — 'make things easier for residents' is the business objective. What must the architect do before any design can begin?",
+          "options": [
+            "Accept the objective as a requirement and begin mapping it to Power Platform components",
+            "Ask the project manager to rewrite the objective before engaging",
+            "Facilitate structured stakeholder sessions to translate the objective into specific, measurable outcomes — such as reducing average call handling time, increasing self-service case submission rate, reducing resident repeat contacts, or improving resident satisfaction scores",
+            "Conduct a proof of concept of a Power Pages resident portal to show stakeholders what is possible"
+        ],
+          "explanation": "'Make things easier for residents' is a business aspiration, not a requirement. The architect must facilitate sessions with residents, front-line staff, and business stakeholders to identify specific outcomes: what are residents currently struggling with? Where do calls come in? What does 'easier' mean to a resident calling about a repair versus one checking rent arrears? The measurable outcomes (handle time, self-service rate, repeat contact rate, satisfaction scores) become the criteria against which the solution design is later validated. Jumping to components or proof of concepts before this foundation is built risks designing a technically impressive solution that fails to address the real pain points.",
+          "wrongExplanations": {
+            "0": "Accepting vague aspirations as requirements produces solutions that cannot be tested against any measurable standard — the architect must facilitate requirement definition, not just accept inputs.",
+            "1": "Rewriting objectives is not the project manager's job — the architect facilitates elicitation from stakeholders, translating aspiration into specific, measurable requirements.",
+            "3": "A proof of concept before requirements are defined anchors stakeholder expectations to a specific design before needs are fully understood — this is a well-documented pitfall in solution planning."
+          },
+          "msRef": {
+            "label": "Solution Architect's Responsibilities and Guiding Principles",
+            "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/fundamentals"
+          }
+        },
+        {
+          "q": "For P2 — the developer proposes a custom React/Azure App Service resident portal. What should the architect evaluate first, and what is their likely recommendation?",
+          "options": [
+            "Approve the React approach — it provides the most flexibility for a modern resident portal",
+            "Evaluate Power Pages first — as the platform-native, low-code SaaS solution designed exactly for external user portals. If it meets the resident portal requirements, recommend it over a custom build to avoid unnecessary development cost, ongoing hosting maintenance, and upgrade risk",
+            "Reject all custom development — only out-of-the-box solutions should be used",
+            "Defer the decision to the customer — they should choose between custom and low-code based on their IT team's preference"
+          ],
+          "explanation": "Power Pages is Microsoft's purpose-built platform for secure, external-facing portals — including citizen/resident-facing housing portals. It is Dataverse-native, supports authenticated and anonymous access, integrates with Entra ID, and is maintained and updated by Microsoft. The architect's first obligation is to establish whether Power Pages meets the resident portal requirements before committing to a custom React/Azure build. A custom build introduces: ongoing Azure hosting cost, frontend development effort, security hardening responsibility, and upgrade management — all of which are avoided if Power Pages meets the need. The architect challenges the custom proposal on the basis of the platform-native principle, not rejects custom development categorically.",
+          "wrongExplanations": {
+            "0": "Flexibility is not a sufficient justification for custom development when a platform-native solution exists — the architect must evaluate Power Pages first.",
+            "2": "Custom development is sometimes genuinely necessary — the architect's position is to evaluate platform options first, not categorically reject custom development.",
+            "3": "Customer IT preference is not the primary architectural criterion — the architect must provide a recommendation based on technical and business merit."
+          },
+          "msRef": {
+            "label": "What is Power Pages? — Microsoft Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-pages/introduction"
+          }
+        },
+        {
+          "q": "For P3 — Meridian has an existing D365 Field Service environment for maintenance engineers. What should the architect evaluate regarding the new resident services solution?",
+          "options": [
+            "Create a separate D365 Customer Service environment — the Field Service and Customer Service apps should never share an environment",
+            "Evaluate whether D365 Customer Service can be deployed into the existing Field Service environment — reusing the existing Dataverse instance, contact and account tables, security model, and user licences — before recommending a separate environment",
+            "Replace Field Service with Customer Service — Meridian does not need both apps",
+            "Recommend a completely new tenant for the resident services solution to ensure clean separation"
+          ],
+          "explanation": "D365 Customer Service and Field Service are designed to coexist in the same Dataverse environment. Deploying Customer Service into the existing Field Service environment would allow Meridian to: share the Contact table (avoiding duplicate resident records), reuse the existing account and address hierarchy, inherit the existing security roles and business unit structure, and avoid creating a cross-environment integration for work orders generated from resident cases. The architect must evaluate this coexistence option first — recommending a separate environment without doing so introduces unnecessary data duplication and integration complexity.",
+          "wrongExplanations": {
+            "0": "D365 Customer Service and Field Service are designed to coexist — separate environments are not a documented requirement.",
+            "2": "Field Service manages engineer scheduling, work orders, and asset management — Customer Service manages case handling. They serve different functions and both are typically needed in a housing association context.",
+            "3": "A new tenant would create a completely isolated environment with no shared identity, data, or licence benefits — this is an extreme option with no justification given the existing Field Service footprint."
+          },
+          "msRef": {
+            "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+            "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+          }
+        },
+        {
+          "q": "For P4 — the legacy CRM has 4.2 million case records with known data quality issues: duplicates, inconsistent addresses, and 30% missing contact details. How should the architect factor this into the migration effort estimate?",
+          "options": [
+            "Estimate migration as a simple data lift — 4.2 million records divided by expected throughput gives the migration duration",
+            "Exclude historical case records from the migration — 12-year-old data has no operational value",
+            "Factor in significant data cleansing effort as a distinct workstream: deduplication, address standardisation, and contact completeness remediation. These activities are labour-intensive, require business sign-off on cleansing rules, and typically represent the largest share of migration effort — often exceeding the technical migration work itself",
+            "Migrate the data as-is and plan a post-migration cleansing sprint — data quality can be fixed after go-live"
+        ],
+          "explanation": "Microsoft's data migration guidance is explicit: data quality issues are among the most significant drivers of migration complexity and effort. Deduplication, address standardisation, and missing field remediation each require: (1) technical profiling to understand the extent of the problem; (2) business-defined rules for how to resolve each issue type; (3) cleansing scripts or tools; and (4) business review and sign-off. These activities are often more time-consuming than the technical migration pipeline itself. Migrating dirty data undermines the new system's value immediately — poor data quality is one of the top cited causes of CRM implementation failure. The architect must present data cleansing as a mandatory, scoped workstream — not an afterthought.",
+          "wrongExplanations": {
+            "0": "Volume-based estimation without accounting for data quality issues will significantly underestimate effort — cleansing work often dwarfs the technical migration.",
+            "1": "12 years of case history may have genuine operational value — closed cases provide context for recurring issues, complaint history, and legal/regulatory compliance. Exclusion must be a business decision with documented rationale, not an architectural assumption.",
+            "3": "Migrating dirty data means 30% of resident records arrive in the new system with missing contacts — agents cannot work effectively from day one. Post-migration cleansing on a live production system is far more disruptive and expensive than pre-migration remediation."
+          },
+          "msRef": {
+            "label": "Data migration approaches — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/data-migration-approaches"
+          }
+        },
+        {
+          "q": "For P5 — the HMS REST API has a Swagger file and processes 15,000 rent transactions per month. What should the architect assess when estimating integration effort, and what component should they evaluate first?",
+          "options": [
+            "Estimate 5 development days — the Swagger file means the integration is trivial",
+            "Assess volume growth (is 15,000/month projected to grow?), directionality (does D365 need to read, write, or sync with HMS?), transformation complexity (do rent account fields map cleanly to Dataverse?), compliance requirements (is rent data subject to UK financial regulations?), and evaluate using a custom connector or Azure API Management before considering custom integration code",
+            "Reject REST API integration — only SOAP/XML integrations are supported with D365",
+            "Outsource the integration estimation to the HMS vendor — they know their API best"
+        ],
+          "explanation": "Microsoft's integration requirements guidance identifies volume, directionality, transformation complexity, and compliance as the primary effort dimensions. For this integration: (1) Volume — 15,000 transactions/month is modest today, but the architect should project five-year growth; (2) Directionality — does D365 read rent balances for agents, does HMS trigger D365 events on arrears, or is this bidirectional? Each carries different conflict-resolution complexity; (3) Transformation — Swagger availability reduces reverse-engineering effort, but field mapping from HMS rent schema to Dataverse still requires analysis; (4) Compliance — rent account data in the UK may be subject to FCA or housing regulation requirements that constrain data handling; (5) Component — Power Platform supports custom connectors for REST APIs, which is the low-code-native approach to evaluate before custom Azure Function or middleware code.",
+          "wrongExplanations": {
+            "0": "A Swagger file eliminates API reverse-engineering but does not eliminate transformation mapping, compliance analysis, directional design, or testing — 5 days would significantly underestimate a production-quality integration.",
+            "2": "D365 and Power Platform fully support REST API integration — Dataverse's own API is REST. SOAP support exists for legacy systems but REST is the modern standard.",
+            "3": "The architect must lead the integration effort estimation — outsourcing this to the HMS vendor abdicates architectural responsibility and produces a vendor-biased estimate."
+          },
+          "msRef": {
+            "label": "Determine integration requirements — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/requirements"
+          }
+        }
+      ]
+    }
+  ]
+}

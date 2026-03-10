@@ -1,0 +1,2173 @@
+{
+    "_meta": {
+        "topic": "Evaluate business requirements",
+        "description": "PL-600 solution architect-level bank covering discovery, stakeholder analysis, current/future state processes, requirement refinement, fit-gap, scope, migration, integration, risks, demos/PoC, AppSource/ISV evaluation, tradeoffs, and Power Platform Well-Architected alignment.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "A sponsor says, 'We need a custom portal because our service team complains about slow case handling.' What should the solution architect do first?",
+            "options": [
+                "Design the portal backlog",
+                "Clarify the business problem, current process pain points, and success measures",
+                "Estimate custom portal effort",
+                "Select a Power Pages template"
+            ],
+            "answer": 1,
+            "category": "discovery",
+            "tags": [
+                "customer-needs",
+                "root-cause",
+                "discovery"
+            ],
+            "explanation": "The architect should start by uncovering the underlying business need, current-state bottlenecks, and measurable outcomes before discussing implementation. A stated solution like 'custom portal' may be only a symptom-level request.",
+            "wrongExplanations": [
+                "Jumping to backlog design assumes the proposed solution is correct before validating the problem.",
+                null,
+                "Estimating custom effort too early anchors the team on a build path before requirements are validated.",
+                "Choosing a template is an implementation detail and is premature during early discovery."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "Which stakeholder is most critical to include early when assessing whether a proposed sales process change is realistic across regions?",
+            "options": [
+                "Only the executive sponsor",
+                "Regional sales process owners and frontline representatives",
+                "Only the implementation partner project manager",
+                "Only the licensing specialist"
+            ],
+            "answer": 1,
+            "category": "stakeholders",
+            "tags": [
+                "stakeholders",
+                "process",
+                "adoption"
+            ],
+            "explanation": "Regional process owners and frontline users provide practical insight into current-state variation, constraints, and adoption risks. Executive sponsorship matters, but process validation needs operational voices.",
+            "wrongExplanations": [
+                "An executive sponsor alone usually lacks the full operational detail required to validate real process fit.",
+                null,
+                "A partner PM can coordinate work but is not the primary source for regional process reality.",
+                "Licensing matters later, but it does not validate whether the process change works operationally."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "A business stakeholder says, 'Users should be able to create opportunities in under 30 seconds.' How should this requirement be classified?",
+            "options": [
+                "Purely functional requirement",
+                "Non-functional requirement related to performance/usability",
+                "A solution design decision",
+                "An assumption"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "non-functional",
+                "performance",
+                "usability"
+            ],
+            "explanation": "The statement describes an expected quality characteristic and measurable speed target, making it a non-functional requirement tied to usability and performance.",
+            "wrongExplanations": [
+                "It does not define a business capability alone; it defines how well the capability should perform.",
+                null,
+                "It does not prescribe a specific design pattern or technology choice.",
+                "It is not an assumption because it expresses an expected outcome that must be validated and delivered."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "Which statement is the best example of a business requirement rather than a solution idea?",
+            "options": [
+                "Implement Power Automate to route approvals",
+                "Create a custom Dataverse table for requests",
+                "Reduce approval turnaround time from three days to four hours",
+                "Build a model-driven app for managers"
+            ],
+            "answer": 2,
+            "category": "requirements",
+            "tags": [
+                "business-requirements",
+                "solution-vs-requirement",
+                "success-criteria"
+            ],
+            "explanation": "A business requirement should describe the needed business outcome, not the implementation. Reducing turnaround time is outcome-oriented and measurable.",
+            "wrongExplanations": [
+                "This is a proposed implementation using a specific product capability.",
+                "This is a data design choice, not a statement of business need.",
+                null,
+                "This is a user experience/implementation suggestion rather than the underlying requirement."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "What is the main purpose of documenting current-state business processes before defining future-state processes?",
+            "options": [
+                "To prove the existing system is outdated",
+                "To identify pain points, variations, dependencies, and what should or should not change",
+                "To force users to keep legacy steps",
+                "To avoid involving stakeholders in workshops"
+            ],
+            "answer": 1,
+            "category": "process-analysis",
+            "tags": [
+                "current-state",
+                "future-state",
+                "process-mapping"
+            ],
+            "explanation": "Understanding current-state processes reveals inefficiencies, dependencies, control points, and regional variations. That foundation helps define a realistic and improved future state.",
+            "wrongExplanations": [
+                "Current-state analysis is not about justifying replacement; it is about understanding reality.",
+                null,
+                "The goal is not to preserve legacy steps automatically, but to evaluate which ones still add value.",
+                "Current-state work increases stakeholder involvement rather than avoiding it."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "A stakeholder insists on replicating a legacy process exactly in Dynamics 365. What should the architect recommend first?",
+            "options": [
+                "Accept the request to avoid resistance",
+                "Evaluate fit-to-standard and challenge whether the legacy process still serves the business",
+                "Build a custom extension immediately",
+                "Delay the discussion until UAT"
+            ],
+            "answer": 1,
+            "category": "fit-gap",
+            "tags": [
+                "fit-to-standard",
+                "legacy-process",
+                "customization"
+            ],
+            "explanation": "Solution architects should prioritize fit-to-standard and question whether legacy processes should change. Exact replication often preserves inefficiency and increases customization cost.",
+            "wrongExplanations": [
+                "Accepting the request too early can lock the project into unnecessary customization.",
+                null,
+                "Immediate extension design skips the evaluation of standard capabilities and process redesign.",
+                "Waiting until UAT makes change harder, more expensive, and politically harder to manage."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "During discovery, a stakeholder says, 'The system must integrate with Finance.' What is the best next step?",
+            "options": [
+                "Assume a real-time API integration is required",
+                "Clarify the business events, data exchanged, timing, volume, ownership, and failure handling",
+                "Recommend dual-write immediately",
+                "Create an integration task in the backlog with no further detail"
+            ],
+            "answer": 1,
+            "category": "integration",
+            "tags": [
+                "integration",
+                "requirements",
+                "discovery"
+            ],
+            "explanation": "An integration statement is too vague. The architect must clarify what business need drives the integration, which data moves, when it moves, and what quality and support expectations exist.",
+            "wrongExplanations": [
+                "Assuming a technical pattern without understanding requirements is premature and risky.",
+                null,
+                "Choosing dual-write immediately may be wrong depending on process coupling, timing, and system boundaries.",
+                "A backlog placeholder alone is insufficient because the requirement is not yet well formed."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "Which item is the best example of a project constraint?",
+            "options": [
+                "The future system should improve agent productivity",
+                "The go-live must happen before the regulatory deadline on 1 October",
+                "Users may prefer mobile access",
+                "The approval process should be simpler"
+            ],
+            "answer": 1,
+            "category": "constraints",
+            "tags": [
+                "constraints",
+                "timeline",
+                "project"
+            ],
+            "explanation": "A fixed regulatory deadline limits delivery choices and sequencing, which makes it a project constraint. Constraints restrict the solution space.",
+            "wrongExplanations": [
+                "This is an objective or desired outcome, not a limiting condition.",
+                null,
+                "This is a tentative preference and not yet a confirmed limiting factor.",
+                "This is an improvement goal rather than a hard limitation."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "Which item is the best example of an assumption that should be explicitly documented and validated?",
+            "options": [
+                "Customer master data will be available in a clean format from the source ERP",
+                "The support team wants simpler screens",
+                "The sales team dislikes the legacy UI",
+                "The project should stay within budget"
+            ],
+            "answer": 0,
+            "category": "assumptions",
+            "tags": [
+                "assumptions",
+                "migration",
+                "risk"
+            ],
+            "explanation": "Assuming data is available and clean is risky. Data quality often becomes a major delivery issue, so assumptions like this must be documented and validated early.",
+            "wrongExplanations": [
+                null,
+                "This is a user preference or need, not an assumption about an external condition being true.",
+                "This is sentiment about the current system, not a delivery assumption to validate.",
+                "This is a project objective or boundary, not an assumption about the environment."
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "A requirement says, 'The new solution should improve customer satisfaction.' Why is this weak?",
+            "options": [
+                "It is too technical",
+                "It is not measurable enough to validate success",
+                "It is already a functional design",
+                "It can only be tested after go-live, so it should be removed"
+            ],
+            "answer": 1,
+            "category": "success-criteria",
+            "tags": [
+                "measurable",
+                "success-criteria",
+                "requirements-quality"
+            ],
+            "explanation": "A good requirement or success criterion should be measurable. 'Improve customer satisfaction' needs a concrete metric, baseline, and target to be testable and meaningful.",
+            "wrongExplanations": [
+                "The issue is not that it is technical; the issue is that it is too vague.",
+                null,
+                "It does not define a design; it defines a vague desired outcome.",
+                "It should not be removed, but refined into measurable success criteria."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "What is the strongest success criterion for a case management improvement project?",
+            "options": [
+                "Agents will like the new system",
+                "All teams will use Dynamics 365",
+                "Average first-response time will drop from 8 hours to 2 hours within 60 days of go-live",
+                "The system will be modern and scalable"
+            ],
+            "answer": 2,
+            "category": "success-criteria",
+            "tags": [
+                "measurable",
+                "kpi",
+                "service"
+            ],
+            "explanation": "The criterion is specific, measurable, time-bound, and aligned to a business outcome, making it suitable for validating whether the project succeeded.",
+            "wrongExplanations": [
+                "User sentiment may matter, but this is subjective and not precise enough as a primary success criterion.",
+                "Adoption alone does not prove business value and is not tied to the intended process outcome.",
+                null,
+                "This is aspirational but not measurable enough to validate success."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "When should a solution architect use a proof of concept (PoC)?",
+            "options": [
+                "Whenever users ask for one, regardless of risk",
+                "When there is significant uncertainty about feasibility, fit, or stakeholder alignment that needs validation",
+                "Only after build is complete",
+                "Only for custom code components"
+            ],
+            "answer": 1,
+            "category": "poc",
+            "tags": [
+                "proof-of-concept",
+                "feasibility",
+                "validation"
+            ],
+            "explanation": "A PoC is appropriate when key questions remain unresolved, such as whether a concept is feasible, whether standard capabilities fit, or whether stakeholders align around the approach.",
+            "wrongExplanations": [
+                "A PoC should be purposeful, not automatic on request.",
+                null,
+                "A PoC is for reducing uncertainty before committing deeply, not after build is finished.",
+                "PoCs can validate more than custom code, including process fit, integration feasibility, and app capability."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "What is the best use of findings from a proof of concept?",
+            "options": [
+                "Treat them as final production design with no further review",
+                "Refine requirements, confirm assumptions, and adjust solution direction based on evidence",
+                "Use them only for executive demos",
+                "Ignore them if the original timeline is tight"
+            ],
+            "answer": 1,
+            "category": "poc",
+            "tags": [
+                "proof-of-concept",
+                "requirements-refinement",
+                "evidence"
+            ],
+            "explanation": "PoC results should feed back into requirements, assumptions, feasibility assessments, and solution recommendations. Their purpose is to improve decision quality, not just to impress stakeholders.",
+            "wrongExplanations": [
+                "PoC outcomes are evidence inputs, not final production design by default.",
+                null,
+                "Executive communication may be one use, but not the primary architectural value.",
+                "Ignoring evidence because of schedule pressure increases delivery risk."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "A customer asks for a highly tailored field service scheduling experience. What should the architect evaluate before recommending custom development?",
+            "options": [
+                "Only whether the customer has budget",
+                "Whether standard Dynamics 365 capabilities, configuration, or AppSource solutions meet the need sufficiently",
+                "Whether a developer prefers custom code",
+                "Whether the customer dislikes out-of-box forms"
+            ],
+            "answer": 1,
+            "category": "apps-evaluation",
+            "tags": [
+                "appsource",
+                "fit-to-standard",
+                "dynamics-365"
+            ],
+            "explanation": "Architects should first assess standard capabilities and available ISV/AppSource options before recommending custom build. This supports maintainability, speed, and lower risk.",
+            "wrongExplanations": [
+                "Budget matters, but it does not replace fit evaluation.",
+                null,
+                "Developer preference is not an architectural basis for solution direction.",
+                "UI preference alone is not enough to justify custom development."
+            ],
+            "msRef": {
+                "label": "Choose the first-party apps that you should use",
+                "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+            }
+        },
+        {
+            "q": "Which question best helps distinguish a real requirement from a preferred implementation?",
+            "options": [
+                "Which plugin framework should we use?",
+                "What business outcome must improve, and how will you measure it?",
+                "Which table names do you want in Dataverse?",
+                "How many custom pages should be created?"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "business-outcome",
+                "discovery",
+                "solution-vs-requirement"
+            ],
+            "explanation": "The key is to redirect the conversation toward business outcomes and success measures. That exposes the real need behind an implementation preference.",
+            "wrongExplanations": [
+                "This question assumes implementation and architecture choices too early.",
+                null,
+                "Physical data design details come after requirement clarification.",
+                "Page count is a solution detail, not a way to uncover business need."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "What is the primary purpose of fit/gap analysis in a Dynamics 365 project?",
+            "options": [
+                "To list every possible customization idea",
+                "To compare business requirements against standard product capabilities and identify how gaps should be handled",
+                "To replace stakeholder workshops",
+                "To estimate user training time only"
+            ],
+            "answer": 1,
+            "category": "fit-gap",
+            "tags": [
+                "fit-gap",
+                "requirements",
+                "product-fit"
+            ],
+            "explanation": "Fit/gap analysis evaluates how requirements map to standard capabilities and highlights where configuration, process change, ISV, integration, or customization may be needed.",
+            "wrongExplanations": [
+                "Customization is only one possible gap response and should not dominate the exercise.",
+                null,
+                "Fit/gap analysis complements stakeholder discovery; it does not replace it.",
+                "Training implications may emerge, but that is not the primary purpose."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "A requirement cannot be met directly by standard features. Which option should usually be considered before custom code?",
+            "options": [
+                "Change the process to align better with standard capabilities",
+                "Ignore the requirement",
+                "Build a plugin immediately",
+                "Delay the requirement until production support"
+            ],
+            "answer": 0,
+            "category": "fit-gap",
+            "tags": [
+                "process-change",
+                "fit-to-standard",
+                "customization"
+            ],
+            "explanation": "Microsoft guidance encourages fit-to-standard thinking. Before custom code, architects should assess whether process change or configuration can close the gap with lower complexity and better maintainability.",
+            "wrongExplanations": [
+                null,
+                "Valid business requirements should not simply be ignored.",
+                "Custom code may eventually be needed, but not before lower-risk alternatives are evaluated.",
+                "Delaying a requirement is not a valid substitute for analysis."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Why should migration effort be estimated during business requirement evaluation instead of waiting until build starts?",
+            "options": [
+                "Because migration never affects scope",
+                "Because data complexity, quality, volume, and mapping can materially affect feasibility, timeline, and design choices",
+                "Because migration is owned only by the customer",
+                "Because licensing depends only on migration volume"
+            ],
+            "answer": 1,
+            "category": "migration",
+            "tags": [
+                "migration",
+                "feasibility",
+                "planning"
+            ],
+            "explanation": "Migration can become a major project driver. Early estimation helps identify effort, risks, dependencies, and whether the proposed scope and timeline are realistic.",
+            "wrongExplanations": [
+                "Migration often affects scope significantly.",
+                null,
+                "Even if the customer provides data, migration still affects project architecture and delivery risk.",
+                "Licensing is not the central reason to assess migration early."
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "Which factor most strongly indicates that an integration requirement needs deeper feasibility analysis?",
+            "options": [
+                "The source system owner is enthusiastic",
+                "The requirement involves high-volume near-real-time synchronization across systems with unclear ownership and error handling",
+                "The project sponsor likes modern APIs",
+                "The business team prefers dashboards"
+            ],
+            "answer": 1,
+            "category": "integration",
+            "tags": [
+                "integration",
+                "feasibility",
+                "risk"
+            ],
+            "explanation": "High volume, near-real-time expectations, unclear ownership, and undefined failure handling are all risk indicators that can materially affect integration feasibility and architecture.",
+            "wrongExplanations": [
+                "Enthusiasm does not reduce architectural complexity.",
+                null,
+                "API preference alone is not the key feasibility driver.",
+                "Dashboard preference is unrelated to integration feasibility."
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "What is the best reason to document risks and dependencies during requirement evaluation?",
+            "options": [
+                "To create fear around the project",
+                "To expose factors that could affect scope, sequencing, feasibility, and delivery confidence",
+                "To avoid discussing them later with leadership",
+                "To replace the project plan"
+            ],
+            "answer": 1,
+            "category": "risks",
+            "tags": [
+                "risks",
+                "dependencies",
+                "planning"
+            ],
+            "explanation": "Early risk and dependency identification helps shape realistic scope, phasing, and architecture decisions. It makes uncertainty explicit and manageable.",
+            "wrongExplanations": [
+                "Risk documentation is for informed planning, not fear.",
+                null,
+                "The goal is the opposite: to make them discussable and actionable early.",
+                "A risk log supports planning but does not replace a full project plan."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "A business user says, 'The app must work offline because our inspectors often work in remote areas.' How should the architect interpret this statement first?",
+            "options": [
+                "As a low-priority preference",
+                "As a non-functional requirement with major product and design implications",
+                "As a request for a custom connector",
+                "As a post-go-live enhancement"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "non-functional",
+                "offline",
+                "field-service"
+            ],
+            "explanation": "Offline capability is a non-functional requirement that can significantly affect app choice, data synchronization, device strategy, and feasibility. It must be validated early.",
+            "wrongExplanations": [
+                "It may be mission-critical depending on the operating context and should not be dismissed as a preference.",
+                null,
+                "Offline support is broader than a connector decision.",
+                "Deferring it may invalidate the chosen solution direction."
+            ],
+            "msRef": {
+                "label": "Choose the first-party apps that you should use",
+                "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+            }
+        },
+        {
+            "q": "Which approach best aligns with Power Platform Well-Architected guidance during early solution evaluation?",
+            "options": [
+                "Optimize only for initial delivery speed",
+                "Balance security, reliability, performance efficiency, operational excellence, and experience tradeoffs from the start",
+                "Defer all architecture quality considerations until production",
+                "Prioritize customization because it provides the most flexibility"
+            ],
+            "answer": 1,
+            "category": "well-architected",
+            "tags": [
+                "well-architected",
+                "tradeoffs",
+                "architecture"
+            ],
+            "explanation": "Well-Architected guidance emphasizes balancing quality pillars and making deliberate tradeoffs early, instead of over-optimizing for one dimension like speed alone.",
+            "wrongExplanations": [
+                "Initial speed matters, but not at the expense of long-term quality and risk.",
+                null,
+                "Deferring these concerns increases rework and operational problems.",
+                "Customization is not automatically the most flexible or the best architectural choice."
+            ],
+            "msRef": {
+                "label": "Microsoft Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            }
+        },
+        {
+            "q": "A customer requests six custom entities and a bespoke UI to manage service appointments. What should the architect evaluate first?",
+            "options": [
+                "Whether Dynamics 365 Field Service already covers the business process sufficiently",
+                "Whether the UI team can build the screens quickly",
+                "Whether custom tables are cheaper than licenses",
+                "Whether a plugin framework exists"
+            ],
+            "answer": 0,
+            "category": "apps-evaluation",
+            "tags": [
+                "field-service",
+                "first-party-apps",
+                "fit-to-standard"
+            ],
+            "explanation": "The architect should first evaluate whether a first-party app already addresses the process. Re-creating mature app capabilities with custom assets is often expensive and unnecessary.",
+            "wrongExplanations": [
+                null,
+                "Build speed should not be assessed before validating product fit.",
+                "Licensing comparisons alone do not justify ignoring functional fit and lifecycle cost.",
+                "Framework availability does not answer whether custom development is necessary."
+            ],
+            "msRef": {
+                "label": "Choose the first-party apps that you should use",
+                "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+            }
+        },
+        {
+            "q": "Which statement best describes good scope definition during requirement evaluation?",
+            "options": [
+                "Include every requested feature to avoid stakeholder conflict",
+                "Define what is in scope, out of scope, and phased, based on business value, feasibility, and constraints",
+                "Focus only on the technical backlog",
+                "Leave scope open so the team can stay agile"
+            ],
+            "answer": 1,
+            "category": "scope",
+            "tags": [
+                "scope",
+                "phasing",
+                "prioritization"
+            ],
+            "explanation": "Clear scope definition includes boundaries and phasing decisions. It should reflect business priorities, feasibility, and delivery constraints rather than attempting to include everything.",
+            "wrongExplanations": [
+                "Trying to include everything usually increases delivery risk and weakens focus.",
+                null,
+                "Technical backlog items alone do not define full business scope.",
+                "Agility does not mean the absence of boundaries or decision-making."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "Which statement is the best example of a functional requirement?",
+            "options": [
+                "The system must support 99.9% availability during business hours",
+                "Managers must be able to approve discount exceptions from a mobile device",
+                "The user interface should feel intuitive",
+                "Data synchronization should complete within five minutes"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "functional",
+                "mobility",
+                "approvals"
+            ],
+            "explanation": "Functional requirements describe what the system must do. Mobile approval capability is a business function the solution must provide.",
+            "wrongExplanations": [
+                "This is a non-functional reliability requirement.",
+                null,
+                "This is a vague usability quality statement, not a clear functional capability.",
+                "This is a non-functional performance/timing expectation."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "A stakeholder asks for a custom AI model to prioritize leads. What should the architect do before accepting the idea?",
+            "options": [
+                "Confirm whether standard capabilities or simpler approaches can satisfy the business objective",
+                "Approve the custom model because AI is strategic",
+                "Add the model to phase one because it sounds innovative",
+                "Reject AI categorically in regulated industries"
+            ],
+            "answer": 0,
+            "category": "tradeoffs",
+            "tags": [
+                "solution-ideas",
+                "alternatives",
+                "business-fit"
+            ],
+            "explanation": "The architect should evaluate the actual business objective and consider standard, simpler, or lower-risk approaches before committing to a custom AI path.",
+            "wrongExplanations": [
+                null,
+                "Strategic interest alone does not justify complexity or cost.",
+                "Innovation value does not replace requirement validation or feasibility analysis.",
+                "AI is not automatically inappropriate in regulated settings; the right response is risk-based evaluation."
+            ],
+            "msRef": {
+                "label": "Propose a solution",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        },
+        {
+            "q": "What is the best reason to evaluate AppSource solutions during requirement analysis?",
+            "options": [
+                "Because AppSource solutions are always cheaper than first-party apps",
+                "Because they may close gaps faster and with less custom development if they meet quality and fit criteria",
+                "Because they remove the need for architecture review",
+                "Because they are mandatory for all gaps"
+            ],
+            "answer": 1,
+            "category": "apps-evaluation",
+            "tags": [
+                "appsource",
+                "isv",
+                "gap-closure"
+            ],
+            "explanation": "AppSource and ISV options can reduce build effort and accelerate delivery when they fit the requirement well. They still require due diligence on fit, supportability, security, and lifecycle impact.",
+            "wrongExplanations": [
+                "They are not always cheaper when support, licensing, and fit are considered.",
+                null,
+                "Architecture review remains necessary.",
+                "They are one option, not a mandatory answer to every gap."
+            ],
+            "msRef": {
+                "label": "Choose the first-party apps that you should use",
+                "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+            }
+        },
+        {
+            "q": "Which discovery question best helps estimate migration complexity?",
+            "options": [
+                "Do users like the old interface?",
+                "Which data sets, volumes, history ranges, quality issues, and transformation rules are in scope?",
+                "Should we rename fields in the new system?",
+                "Can the old system stay online for six months?"
+            ],
+            "answer": 1,
+            "category": "migration",
+            "tags": [
+                "migration",
+                "data-scope",
+                "complexity"
+            ],
+            "explanation": "Migration complexity depends heavily on what data must move, how much exists, how clean it is, and what mapping or transformation is required.",
+            "wrongExplanations": [
+                "UI sentiment does not estimate migration complexity.",
+                null,
+                "Renaming fields may be part of design, but it does not establish full migration complexity.",
+                "Legacy coexistence matters operationally, but it is not the primary estimator of migration workload."
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "A project has a fixed deadline and limited budget, but stakeholders also want extensive extensibility for unknown future needs. What should the architect do?",
+            "options": [
+                "Design only for hypothetical future scenarios",
+                "Present tradeoffs and recommend a pragmatic scope that delivers current value without over-engineering",
+                "Ignore the budget because extensibility is always more important",
+                "Reject extensibility discussions as irrelevant"
+            ],
+            "answer": 1,
+            "category": "tradeoffs",
+            "tags": [
+                "tradeoffs",
+                "extensibility",
+                "scope"
+            ],
+            "explanation": "Architectural judgment requires balancing current business priorities with future flexibility. The right answer is to make tradeoffs explicit and avoid both over-engineering and shortsighted design.",
+            "wrongExplanations": [
+                "Over-designing for unknowns can delay value and waste budget.",
+                null,
+                "Budget and timeline are real constraints that must shape the recommendation.",
+                "Future change matters; it should not be dismissed, only balanced appropriately."
+            ],
+            "msRef": {
+                "label": "Propose a solution",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        },
+        {
+            "q": "Which discovery artifact is most useful for aligning stakeholders on how work is performed today and how it should work tomorrow?",
+            "options": [
+                "Current-state and future-state process maps",
+                "Only a data dictionary",
+                "Only a license estimate",
+                "Only a test plan"
+            ],
+            "answer": 0,
+            "category": "process-analysis",
+            "tags": [
+                "current-state",
+                "future-state",
+                "process-maps"
+            ],
+            "explanation": "Process maps help stakeholders visualize flow, decision points, handoffs, and improvements. They are especially useful when aligning on business process transformation.",
+            "wrongExplanations": [
+                null,
+                "A data dictionary supports analysis but does not show operational workflow.",
+                "Licensing estimates do not align process understanding.",
+                "Testing plans are later-stage artifacts and do not drive process alignment at discovery time."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Why is it risky to treat every stakeholder statement as a finalized requirement?",
+            "options": [
+                "Because stakeholders should not influence the solution",
+                "Because statements can reflect assumptions, preferences, or proposed solutions rather than validated business requirements",
+                "Because only architects define requirements",
+                "Because requirements should be captured only after deployment"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "requirements-quality",
+                "stakeholders",
+                "validation"
+            ],
+            "explanation": "Stakeholder input is essential, but not every statement is a well-formed requirement. Architects must probe, classify, validate, and refine what they hear.",
+            "wrongExplanations": [
+                "Stakeholders absolutely influence requirements and solution direction.",
+                null,
+                "Architects facilitate and refine requirements; they do not invent them in isolation.",
+                "Requirements must be clarified long before deployment."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "Which question best helps identify hidden non-functional requirements?",
+            "options": [
+                "What form color theme do you want?",
+                "What response times, security expectations, operating environments, and availability targets are required?",
+                "How many fields should be on the form?",
+                "Which ribbon buttons should be shown?"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "non-functional",
+                "security",
+                "availability"
+            ],
+            "explanation": "Non-functional requirements often stay hidden unless asked directly. Performance, security, reliability, and operating context all influence architecture strongly.",
+            "wrongExplanations": [
+                "Theme choices do not uncover core quality requirements.",
+                null,
+                "Field count is a UI design question, not a broad NFR discovery question.",
+                "Ribbon visibility is too narrow and implementation-specific."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "What is the best architectural response when two regions perform the same process differently and both insist their way is mandatory?",
+            "options": [
+                "Customize the system heavily to preserve both variants exactly",
+                "Analyze the business rationale, identify where standardization is possible, and document justified exceptions",
+                "Choose the preference of the loudest stakeholder",
+                "Delay the decision until after configuration begins"
+            ],
+            "answer": 1,
+            "category": "process-analysis",
+            "tags": [
+                "standardization",
+                "regional-variation",
+                "governance"
+            ],
+            "explanation": "Architects should evaluate whether differences are truly necessary, standardize where feasible, and explicitly document justified exceptions. Blindly preserving all variation increases complexity.",
+            "wrongExplanations": [
+                "Heavy customization to preserve every variation often creates long-term support and adoption problems.",
+                null,
+                "Stakeholder influence should not replace evidence-based process analysis.",
+                "Delaying the decision increases rework and conflict later."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "A customer wants to replace several legacy forms with one unified experience. What should the architect validate first?",
+            "options": [
+                "Whether all form variations represent genuine business differences or legacy inconsistency that can be simplified",
+                "Whether the old forms used classic UI",
+                "Whether there is budget for JavaScript",
+                "Whether users are attached to old labels"
+            ],
+            "answer": 0,
+            "category": "future-state",
+            "tags": [
+                "simplification",
+                "legacy",
+                "future-state"
+            ],
+            "explanation": "Before designing the unified future state, the architect should determine whether legacy variations are actually needed or can be simplified into a common model and process.",
+            "wrongExplanations": [
+                null,
+                "UI generation history is not the key business question.",
+                "Budget for scripts does not determine whether unification makes business sense.",
+                "User familiarity matters, but it is secondary to process and requirement analysis."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "Which statement best reflects good architect judgment about customization?",
+            "options": [
+                "Customization is preferable because it guarantees business fit",
+                "Customization should be chosen only after evaluating standard features, process change, and packaged options",
+                "Customization is never acceptable in enterprise projects",
+                "Customization decisions should be left entirely to developers"
+            ],
+            "answer": 1,
+            "category": "tradeoffs",
+            "tags": [
+                "customization",
+                "fit-to-standard",
+                "architect-judgment"
+            ],
+            "explanation": "Customization is sometimes necessary, but it should follow deliberate evaluation of lower-risk alternatives and business justification.",
+            "wrongExplanations": [
+                "Customization can increase cost, complexity, and maintenance burden, so it is not inherently preferable.",
+                null,
+                "That is too absolute; some justified customizations are appropriate.",
+                "Developers contribute, but solution direction is a broader architectural decision."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Which statement is the clearest reason to estimate integration effort during requirement analysis?",
+            "options": [
+                "Integration can affect app choice, sequencing, non-functional design, and project viability",
+                "Integration is easy once requirements are approved",
+                "Integration effort is only a technical issue for developers",
+                "Integration can be deferred entirely if scope is unclear"
+            ],
+            "answer": 0,
+            "category": "integration",
+            "tags": [
+                "integration",
+                "planning",
+                "architecture"
+            ],
+            "explanation": "Integration requirements can influence core solution decisions. Early effort estimation helps assess feasibility, sequencing, and design tradeoffs.",
+            "wrongExplanations": [
+                null,
+                "Integrations are often one of the hardest parts of delivery.",
+                "Integration has business, operational, and architectural implications beyond development work.",
+                "Deferral may hide major risks rather than resolve them."
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "What should the architect do when stakeholder requests conflict with Well-Architected quality goals?",
+            "options": [
+                "Ignore the quality goals to keep stakeholders happy",
+                "Make the tradeoffs explicit and recommend the option that best balances business priorities and architectural quality",
+                "Always choose the most secure option regardless of usability",
+                "Defer the decision to testing"
+            ],
+            "answer": 1,
+            "category": "well-architected",
+            "tags": [
+                "tradeoffs",
+                "well-architected",
+                "decision-making"
+            ],
+            "explanation": "Architectural decisions involve tradeoffs. The architect should surface them clearly and recommend a balanced path rather than optimize one quality dimension blindly.",
+            "wrongExplanations": [
+                "Ignoring architecture quality can create downstream reliability, security, or operational problems.",
+                null,
+                "Security is vital, but absolute prioritization without business context is not always the right answer.",
+                "Testing is too late for foundational architecture tradeoff decisions."
+            ],
+            "msRef": {
+                "label": "Microsoft Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            }
+        },
+        {
+            "q": "Which requirement statement is most likely hiding a security requirement?",
+            "options": [
+                "Managers need a dashboard",
+                "Only authorized investigators should view complaint attachments containing personal data",
+                "The form should have fewer tabs",
+                "Users want fewer clicks"
+            ],
+            "answer": 1,
+            "category": "requirements",
+            "tags": [
+                "security",
+                "non-functional",
+                "access-control"
+            ],
+            "explanation": "The statement implies restricted access to sensitive data, which is a security-related non-functional requirement with significant design implications.",
+            "wrongExplanations": [
+                "This is functional and usability-oriented, not clearly security-driven.",
+                null,
+                "This is a UI simplification preference, not a security requirement.",
+                "This is a usability concern, not an explicit security requirement."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "What is the best next step after identifying a gap between requirement and product capability?",
+            "options": [
+                "Log it as custom development by default",
+                "Evaluate response options such as process change, configuration, first-party app features, AppSource, integration, or customization",
+                "Ignore it unless the sponsor raises it again",
+                "Move it to post-go-live support"
+            ],
+            "answer": 1,
+            "category": "fit-gap",
+            "tags": [
+                "gap-response",
+                "options-analysis",
+                "architecture"
+            ],
+            "explanation": "A gap should trigger options analysis, not an automatic customization decision. Architects should compare multiple closure paths based on fit, cost, time, risk, and maintainability.",
+            "wrongExplanations": [
+                "Custom build by default is poor architect judgment.",
+                null,
+                "Known gaps should be handled proactively, not ignored.",
+                "Postponing analysis weakens scope and feasibility assessment."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Which output is most useful when recommending one solution direction over another?",
+            "options": [
+                "A tradeoff-based rationale covering business fit, cost, risk, maintainability, and timeline",
+                "A list of developer preferences",
+                "A screenshot of the preferred app",
+                "A note that the sponsor liked one option"
+            ],
+            "answer": 0,
+            "category": "tradeoffs",
+            "tags": [
+                "recommendation",
+                "tradeoffs",
+                "decision-record"
+            ],
+            "explanation": "Architectural recommendations should be grounded in tradeoff analysis and linked to business goals and delivery realities, not subjective preference.",
+            "wrongExplanations": [
+                null,
+                "Developer preference can inform feasibility but is not enough for final recommendation.",
+                "Screenshots do not explain why an option is the better strategic choice.",
+                "Sponsor preference alone is insufficient without structured analysis."
+            ],
+            "msRef": {
+                "label": "Propose a solution",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        },
+        {
+            "q": "Which action best helps uncover scope risk caused by ambiguous requirements?",
+            "options": [
+                "Freeze the backlog early",
+                "Use workshops and targeted questioning to refine unclear statements into testable requirements",
+                "Assume the delivery team will resolve ambiguity during build",
+                "Convert every vague statement into a custom story"
+            ],
+            "answer": 1,
+            "category": "scope",
+            "tags": [
+                "ambiguity",
+                "requirements-refinement",
+                "workshops"
+            ],
+            "explanation": "Ambiguity should be actively reduced through facilitated discovery, refinement, and validation. That prevents scope creep and misaligned implementation.",
+            "wrongExplanations": [
+                "Freezing an ambiguous backlog locks in misunderstanding.",
+                null,
+                "Leaving ambiguity to build time creates avoidable rework.",
+                "Custom stories do not solve ambiguity if the underlying requirement is unclear."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: A stakeholder request that names a product feature is automatically a valid business requirement.",
+            "answer": false,
+            "category": "requirements",
+            "tags": [
+                "solution-vs-requirement",
+                "discovery"
+            ],
+            "explanation": "A named feature may reflect a proposed solution rather than the underlying business requirement. The architect should uncover the business need, constraints, and success measures first.",
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "True or False: Fit-to-standard means the architect should never recommend customization under any circumstance.",
+            "answer": false,
+            "category": "fit-gap",
+            "tags": [
+                "fit-to-standard",
+                "customization"
+            ],
+            "explanation": "Fit-to-standard means standard capabilities should be evaluated first, not that customization is forbidden. Some validated gaps may justify customization after alternatives are considered.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "True or False: Non-functional requirements can materially affect product choice and architecture even when the functional process is well understood.",
+            "answer": true,
+            "category": "requirements",
+            "tags": [
+                "non-functional",
+                "architecture"
+            ],
+            "explanation": "Requirements related to security, performance, offline capability, availability, and scale can significantly influence architecture and even which product or approach is viable.",
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "True or False: A proof of concept is useful only for demonstrating custom code to executives.",
+            "answer": false,
+            "category": "poc",
+            "tags": [
+                "proof-of-concept",
+                "validation"
+            ],
+            "explanation": "A PoC can validate many things, including standard product fit, feasibility, integration approach, usability assumptions, and stakeholder alignment.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "True or False: Migration complexity should be considered during requirement evaluation because it can affect timeline, scope, and feasibility.",
+            "answer": true,
+            "category": "migration",
+            "tags": [
+                "migration",
+                "planning"
+            ],
+            "explanation": "Data quality, mapping, volume, and history requirements can materially change project effort and design decisions, so migration must be analyzed early.",
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "True or False: If a stakeholder cannot express a requirement precisely, the architect should postpone documenting it until build begins.",
+            "answer": false,
+            "category": "requirements",
+            "tags": [
+                "requirements-refinement",
+                "ambiguity"
+            ],
+            "explanation": "Ambiguous requirements should be refined during discovery through workshops, probing questions, and validation, not deferred until build.",
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "True or False: AppSource solutions can be considered as one way to close a validated gap in a Dynamics 365 solution.",
+            "answer": true,
+            "category": "apps-evaluation",
+            "tags": [
+                "appsource",
+                "isv",
+                "gap-closure"
+            ],
+            "explanation": "AppSource and ISV offerings are legitimate options to evaluate when standard capabilities do not fully meet requirements and packaged extensions may reduce custom effort.",
+            "msRef": {
+                "label": "Choose the first-party apps that you should use",
+                "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+            }
+        },
+        {
+            "q": "True or False: A measurable success criterion is usually stronger than a general aspiration because it can be validated after implementation.",
+            "answer": true,
+            "category": "success-criteria",
+            "tags": [
+                "measurable",
+                "validation"
+            ],
+            "explanation": "A measurable criterion with baseline and target makes it possible to test whether the project achieved the intended outcome.",
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "True or False: Power Platform Well-Architected guidance is relevant only after the system is deployed to production.",
+            "answer": false,
+            "category": "well-architected",
+            "tags": [
+                "well-architected",
+                "early-design"
+            ],
+            "explanation": "Well-Architected principles should inform early solution evaluation and tradeoff decisions, not just post-deployment operations.",
+            "msRef": {
+                "label": "Microsoft Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            }
+        },
+        {
+            "q": "True or False: When two regions perform a process differently, preserving both variants exactly is always the best path for user adoption.",
+            "answer": false,
+            "category": "process-analysis",
+            "tags": [
+                "standardization",
+                "regional-variation"
+            ],
+            "explanation": "Architects should assess whether the variation is truly necessary. Standardization often reduces complexity and improves maintainability, with exceptions documented only where justified.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each statement to the correct requirement category.",
+            "items": [
+                "Managers must approve discounts from a mobile device",
+                "The solution must be available 99.9% during business hours",
+                "Case attachments containing personal data must be visible only to authorized investigators",
+                "The new process must reduce average onboarding time from 10 days to 3 days"
+            ],
+            "zones": [
+                "Functional requirement",
+                "Non-functional requirement",
+                "Security-related non-functional requirement",
+                "Measurable success criterion"
+            ],
+            "correctMapping": {
+                "Managers must approve discounts from a mobile device": "Functional requirement",
+                "The solution must be available 99.9% during business hours": "Non-functional requirement",
+                "Case attachments containing personal data must be visible only to authorized investigators": "Security-related non-functional requirement",
+                "The new process must reduce average onboarding time from 10 days to 3 days": "Measurable success criterion"
+            },
+            "tags": [
+                "requirements-classification",
+                "functional",
+                "non-functional"
+            ],
+            "explanation": "Functional requirements describe what the system must do. Non-functional requirements describe qualities such as availability and security. Success criteria define measurable business outcomes.",
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "instruction": "Match each discovery activity to its main purpose.",
+            "items": [
+                "Identify stakeholders",
+                "Map current-state process",
+                "Define future-state process",
+                "Document assumptions"
+            ],
+            "zones": [
+                "Find who must validate and influence requirements",
+                "Understand how work happens today and where pain points exist",
+                "Design the target way of working after improvement",
+                "Capture conditions believed to be true but needing validation"
+            ],
+            "correctMapping": {
+                "Identify stakeholders": "Find who must validate and influence requirements",
+                "Map current-state process": "Understand how work happens today and where pain points exist",
+                "Define future-state process": "Design the target way of working after improvement",
+                "Document assumptions": "Capture conditions believed to be true but needing validation"
+            },
+            "tags": [
+                "discovery",
+                "stakeholders",
+                "process"
+            ],
+            "explanation": "These activities support structured discovery by clarifying who matters, how the business currently works, how it should work, and what uncertain conditions must be validated.",
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "instruction": "Match each gap-closing option to the scenario where it is most appropriate.",
+            "items": [
+                "Process change",
+                "Configuration",
+                "AppSource/ISV solution",
+                "Customization"
+            ],
+            "zones": [
+                "The legacy process is inefficient and does not need to be preserved",
+                "The standard product already supports the need with setup changes",
+                "A validated gap is common in the market and packaged extensions exist",
+                "A validated gap is unique and cannot be reasonably solved through standard or packaged options"
+            ],
+            "correctMapping": {
+                "Process change": "The legacy process is inefficient and does not need to be preserved",
+                "Configuration": "The standard product already supports the need with setup changes",
+                "AppSource/ISV solution": "A validated gap is common in the market and packaged extensions exist",
+                "Customization": "A validated gap is unique and cannot be reasonably solved through standard or packaged options"
+            },
+            "tags": [
+                "fit-gap",
+                "gap-closure",
+                "customization"
+            ],
+            "explanation": "A solution architect should consider multiple ways to close a gap before choosing customization. The right option depends on fit, risk, lifecycle cost, and business value.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "instruction": "Match each statement to the correct category.",
+            "items": [
+                "Go-live must occur before the 1 October regulatory deadline",
+                "Customer data from the ERP will be clean enough to migrate without major remediation",
+                "The first phase will include case intake and triage only",
+                "The average first-response time should drop from 8 hours to 2 hours"
+            ],
+            "zones": [
+                "Constraint",
+                "Assumption",
+                "Scope definition",
+                "Success criterion"
+            ],
+            "correctMapping": {
+                "Go-live must occur before the 1 October regulatory deadline": "Constraint",
+                "Customer data from the ERP will be clean enough to migrate without major remediation": "Assumption",
+                "The first phase will include case intake and triage only": "Scope definition",
+                "The average first-response time should drop from 8 hours to 2 hours": "Success criterion"
+            },
+            "tags": [
+                "constraints",
+                "assumptions",
+                "scope"
+            ],
+            "explanation": "Constraints limit choices, assumptions are believed conditions that need validation, scope defines boundaries, and success criteria specify measurable outcomes.",
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "instruction": "Match each architect concern to the most relevant evaluation area.",
+            "items": [
+                "Source data is inconsistent across three legacy systems",
+                "Order updates must appear in CRM within two minutes",
+                "Inspectors operate without network access for long periods",
+                "A packaged add-on can fill the document generation gap"
+            ],
+            "zones": [
+                "Migration effort",
+                "Integration requirement",
+                "Non-functional requirement",
+                "AppSource/ISV evaluation"
+            ],
+            "correctMapping": {
+                "Source data is inconsistent across three legacy systems": "Migration effort",
+                "Order updates must appear in CRM within two minutes": "Integration requirement",
+                "Inspectors operate without network access for long periods": "Non-functional requirement",
+                "A packaged add-on can fill the document generation gap": "AppSource/ISV evaluation"
+            },
+            "tags": [
+                "migration",
+                "integration",
+                "appsource"
+            ],
+            "explanation": "Each statement points to a different analysis domain that materially affects solution direction and delivery planning.",
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "instruction": "Match each activity to the point in architect reasoning where it fits best.",
+            "items": [
+                "Clarify the business outcome behind a requested feature",
+                "Compare requirements against standard capabilities",
+                "Validate uncertain feasibility with a limited experiment",
+                "Recommend one option using explicit tradeoffs"
+            ],
+            "zones": [
+                "Discovery",
+                "Fit/gap analysis",
+                "Proof of concept",
+                "Solution recommendation"
+            ],
+            "correctMapping": {
+                "Clarify the business outcome behind a requested feature": "Discovery",
+                "Compare requirements against standard capabilities": "Fit/gap analysis",
+                "Validate uncertain feasibility with a limited experiment": "Proof of concept",
+                "Recommend one option using explicit tradeoffs": "Solution recommendation"
+            },
+            "tags": [
+                "discovery",
+                "fit-gap",
+                "poc"
+            ],
+            "explanation": "These activities reflect the normal flow of architect reasoning from understanding the problem to evaluating fit, validating uncertainty, and recommending a direction.",
+            "msRef": {
+                "label": "Propose a solution",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        },
+        {
+            "instruction": "Put the activities in the most appropriate logical order for evaluating business requirements.",
+            "items": [
+                "Identify stakeholders and business goals",
+                "Understand current-state processes and pain points",
+                "Define and refine requirements with measurable outcomes",
+                "Perform fit/gap and recommend solution direction"
+            ],
+            "zones": [
+                "Step 1",
+                "Step 2",
+                "Step 3",
+                "Step 4"
+            ],
+            "correctMapping": {
+                "Identify stakeholders and business goals": "Step 1",
+                "Understand current-state processes and pain points": "Step 2",
+                "Define and refine requirements with measurable outcomes": "Step 3",
+                "Perform fit/gap and recommend solution direction": "Step 4"
+            },
+            "tags": [
+                "sequence",
+                "discovery",
+                "fit-gap"
+            ],
+            "explanation": "The architect should start with people and goals, then understand the current state, refine requirements, and only then compare those requirements to available solution options.",
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "instruction": "Match each statement to whether it is mostly about business need or implementation idea.",
+            "items": [
+                "Reduce claim triage time from two days to four hours",
+                "Build a Power Pages site for claim submission",
+                "Improve field inspection data capture in low-connectivity locations",
+                "Create six custom tables for claim details"
+            ],
+            "zones": [
+                "Business need",
+                "Solution idea",
+                "Business need",
+                "Solution idea"
+            ],
+            "correctMapping": {
+                "Reduce claim triage time from two days to four hours": "Business need",
+                "Build a Power Pages site for claim submission": "Solution idea",
+                "Improve field inspection data capture in low-connectivity locations": "Business need",
+                "Create six custom tables for claim details": "Solution idea"
+            },
+            "tags": [
+                "solution-vs-requirement",
+                "business-need",
+                "discovery"
+            ],
+            "explanation": "Business needs describe desired outcomes and operating realities. Solution ideas describe one possible implementation path and should not be mistaken for requirements.",
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "instruction": "Match each Well-Architected concern to the most relevant statement.",
+            "items": [
+                "Security",
+                "Reliability",
+                "Performance efficiency",
+                "Operational excellence"
+            ],
+            "zones": [
+                "Sensitive case attachments must be accessible only to authorized roles",
+                "Critical service operations must continue during transient failures",
+                "Opportunity creation should complete quickly for high-volume users",
+                "Support teams need monitoring and manageable operating processes"
+            ],
+            "correctMapping": {
+                "Security": "Sensitive case attachments must be accessible only to authorized roles",
+                "Reliability": "Critical service operations must continue during transient failures",
+                "Performance efficiency": "Opportunity creation should complete quickly for high-volume users",
+                "Operational excellence": "Support teams need monitoring and manageable operating processes"
+            },
+            "tags": [
+                "well-architected",
+                "quality-pillars",
+                "architecture"
+            ],
+            "explanation": "These concerns align closely with the Power Platform Well-Architected quality domains used to guide balanced early solution decisions.",
+            "msRef": {
+                "label": "Microsoft Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            }
+        },
+        {
+            "instruction": "Match each scenario to the strongest next architect action.",
+            "items": [
+                "Stakeholder asks for a custom app but cannot define the problem clearly",
+                "A packaged solution appears to fill a gap",
+                "Regional teams use different approval paths",
+                "Data quality from the source system is uncertain"
+            ],
+            "zones": [
+                "Probe for underlying business need and success criteria",
+                "Evaluate fit, supportability, security, and lifecycle impact",
+                "Assess standardization opportunities and justified exceptions",
+                "Document assumption and investigate migration risk"
+            ],
+            "correctMapping": {
+                "Stakeholder asks for a custom app but cannot define the problem clearly": "Probe for underlying business need and success criteria",
+                "A packaged solution appears to fill a gap": "Evaluate fit, supportability, security, and lifecycle impact",
+                "Regional teams use different approval paths": "Assess standardization opportunities and justified exceptions",
+                "Data quality from the source system is uncertain": "Document assumption and investigate migration risk"
+            },
+            "tags": [
+                "architect-actions",
+                "discovery",
+                "risk"
+            ],
+            "explanation": "Each scenario points to a disciplined next step instead of a rushed implementation decision.",
+            "msRef": {
+                "label": "Propose a solution",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study 1 - Portal Request Hiding the Real Need",
+            "scenario": "A customer service director says the company needs a custom self-service portal immediately because case handling is too slow and customers keep calling the contact center. During workshops, you learn that agents re-enter data from emails, triage rules differ by team, and escalation criteria are inconsistent. The sponsor keeps repeating the portal idea and wants estimates quickly. Frontline supervisors say the real issue may be internal triage and knowledge lookup rather than customer submission itself.",
+            "tags": [
+                "discovery",
+                "solution-vs-requirement",
+                "service"
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Estimate the custom portal backlog and staffing",
+                        "Clarify the business problem, current triage process, and measurable service outcomes",
+                        "Recommend Power Pages because it matches the sponsor request",
+                        "Start UI design workshops for the portal"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should first understand the underlying business issue, not accept the requested solution at face value. Current-state analysis and measurable outcomes are needed before solution direction.",
+                    "wrongExplanations": [
+                        "Estimating a specific build path too early anchors the project on an unvalidated idea.",
+                        null,
+                        "Matching the stated request without validating the problem can lead to solving the wrong problem.",
+                        "UI design is premature before the real requirement is understood."
+                    ],
+                    "msRef": {
+                        "label": "Define customer requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+                    }
+                },
+                {
+                    "q": "Which finding most strongly suggests the portal may not be the first problem to solve?",
+                    "options": [
+                        "Customers are calling the contact center",
+                        "Agents re-enter data and triage rules are inconsistent",
+                        "The sponsor is senior",
+                        "The company wants fast change"
+                    ],
+                    "answer": 1,
+                    "explanation": "Manual re-entry and inconsistent triage indicate internal process and operational design problems that may be driving slow resolution more than the absence of a portal.",
+                    "wrongExplanations": [
+                        "Call volume alone does not prove the portal is the root fix.",
+                        null,
+                        "Sponsor seniority does not validate root cause.",
+                        "Urgency affects delivery pressure, not root-cause diagnosis."
+                    ],
+                    "msRef": {
+                        "label": "Perform fit gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+                    }
+                },
+                {
+                    "q": "Which is the best example of reframing the sponsor's statement into a business requirement?",
+                    "options": [
+                        "Implement a Power Pages portal for case creation",
+                        "Reduce average case triage time from 6 hours to 1 hour while improving first-contact resolution",
+                        "Create custom forms for customers",
+                        "Integrate case submission with email"
+                    ],
+                    "answer": 1,
+                    "explanation": "This restates the need as a measurable business outcome rather than an implementation idea.",
+                    "wrongExplanations": [
+                        "This is a specific solution proposal, not the business requirement itself.",
+                        null,
+                        "This is a design choice, not a business outcome.",
+                        "This is an integration idea, not the underlying requirement."
+                    ],
+                    "msRef": {
+                        "label": "Gather solution requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+                    }
+                },
+                {
+                    "q": "What should the architect do if the sponsor keeps pushing for the portal estimate before discovery is complete?",
+                    "options": [
+                        "Refuse all estimates and stop engagement",
+                        "Provide a conditional estimate range tied to explicit assumptions and unresolved discovery items",
+                        "Give a precise fixed estimate immediately",
+                        "Escalate to developers to confirm the portal stack"
+                    ],
+                    "answer": 1,
+                    "explanation": "A conditional estimate with assumptions is a pragmatic way to handle pressure while making uncertainty visible. It protects decision quality better than pretending certainty exists.",
+                    "wrongExplanations": [
+                        "Stopping engagement is unnecessarily confrontational and does not help decision-making.",
+                        null,
+                        "A precise fixed estimate would be misleading given unresolved requirements.",
+                        "Technical stack escalation does not solve the missing requirement clarity."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                },
+                {
+                    "q": "Which artifact would best help align stakeholders on whether process change is needed before portal investment?",
+                    "options": [
+                        "A current-state and future-state case management process map",
+                        "A detailed plugin design",
+                        "A licensing quote only",
+                        "A final support model"
+                    ],
+                    "answer": 0,
+                    "explanation": "Process maps make workflow inefficiencies, inconsistencies, and future improvements visible, which is essential in this scenario.",
+                    "wrongExplanations": [
+                        null,
+                        "Plugin design is too low-level and solution-specific for this stage.",
+                        "Licensing alone does not align business process understanding.",
+                        "Support model matters later, but not for current discovery alignment."
+                    ],
+                    "msRef": {
+                        "label": "Perform fit gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Case Study 2 - Demand for Custom Build vs Standard or AppSource Fit",
+            "scenario": "A manufacturing company wants a custom dispatch management application for field technicians. The operations manager says the current spreadsheets are chaotic and insists that a bespoke app is the only answer. During discovery, you identify requirements for work order scheduling, mobile access, inventory visibility, and technician updates from the field. One architect on the team notes that Dynamics 365 Field Service already addresses many of these needs, and an AppSource add-on may cover one missing dispatch rule.",
+            "tags": [
+                "first-party-apps",
+                "appsource",
+                "fit-gap"
+            ],
+            "msRef": {
+                "label": "Choose the first-party apps that you should use",
+                "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+            },
+            "questions": [
+                {
+                    "q": "What should the architect evaluate first?",
+                    "options": [
+                        "Whether Dynamics 365 Field Service covers the core process needs",
+                        "How quickly developers can build a dispatch canvas app",
+                        "Which JavaScript framework to use",
+                        "Whether the current spreadsheet file can be imported directly"
+                    ],
+                    "answer": 0,
+                    "explanation": "The architect should first evaluate whether an existing first-party app already solves most of the problem before considering custom development.",
+                    "wrongExplanations": [
+                        null,
+                        "Build speed should not be evaluated before product fit.",
+                        "Framework choice is premature.",
+                        "Spreadsheet import is secondary to solution fit evaluation."
+                    ],
+                    "msRef": {
+                        "label": "Choose the first-party apps that you should use",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+                    }
+                },
+                {
+                    "q": "How should the missing dispatch rule be handled initially?",
+                    "options": [
+                        "Use it to justify a full custom build immediately",
+                        "Assess whether configuration, process adjustment, or an AppSource extension can close the gap acceptably",
+                        "Ignore it because the core app is strong",
+                        "Move it to phase three without analysis"
+                    ],
+                    "answer": 1,
+                    "explanation": "A single gap does not justify a custom build by default. The architect should compare closure options and their tradeoffs before deciding.",
+                    "wrongExplanations": [
+                        "That overreacts to one identified gap and skips structured options analysis.",
+                        null,
+                        "Ignoring a gap is poor architectural practice.",
+                        "Deferring without analysis can hide important scope and operational impacts."
+                    ],
+                    "msRef": {
+                        "label": "Perform fit gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+                    }
+                },
+                {
+                    "q": "Which argument best supports recommending fit-to-standard over bespoke build in this scenario?",
+                    "options": [
+                        "Custom development is always wrong",
+                        "First-party capabilities may deliver faster, with lower maintenance and better long-term support",
+                        "Users do not deserve tailored solutions",
+                        "AppSource products never introduce risk"
+                    ],
+                    "answer": 1,
+                    "explanation": "Fit-to-standard is often preferable because it reduces custom complexity and improves maintainability and time-to-value when business needs are sufficiently met.",
+                    "wrongExplanations": [
+                        "That is too absolute. Custom build can be valid when justified.",
+                        null,
+                        "This is not a serious architectural rationale.",
+                        "AppSource still requires due diligence and is not risk-free."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                },
+                {
+                    "q": "Which requirement in this case has strong non-functional impact?",
+                    "options": [
+                        "Technicians need mobile access from the field",
+                        "The manager dislikes spreadsheets",
+                        "The dispatch lead prefers blue screens",
+                        "The sponsor wants innovation"
+                    ],
+                    "answer": 0,
+                    "explanation": "Mobile field use affects operating environment, device strategy, connectivity assumptions, and app capability selection, all of which have major architectural implications.",
+                    "wrongExplanations": [
+                        null,
+                        "Dislike of spreadsheets does not define a strong non-functional need.",
+                        "Color preference is superficial and not architecturally important.",
+                        "Innovation preference is too vague to classify as a concrete requirement."
+                    ],
+                    "msRef": {
+                        "label": "Gather solution requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+                    }
+                },
+                {
+                    "q": "What is the best final recommendation style for this scenario?",
+                    "options": [
+                        "Choose the bespoke build because that was the initial stakeholder idea",
+                        "Recommend the option with the strongest tradeoff balance across business fit, speed, maintainability, and gap-closure path",
+                        "Let developers vote on the architecture",
+                        "Pick the lowest license cost option only"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should recommend a direction based on explicit tradeoffs, not just the first request, internal opinion, or one cost dimension.",
+                    "wrongExplanations": [
+                        "Initial stakeholder requests should be examined, not accepted blindly.",
+                        null,
+                        "Developer input matters but does not replace architectural decision-making.",
+                        "License cost alone is too narrow for a solution architect decision."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Case Study 3 - Hidden Non-Functional Requirements",
+            "scenario": "A public sector organization wants a case management solution for inspectors and investigators. Stakeholders state that users need to create cases, attach evidence, review location information, and escalate critical findings. During interviews, investigators mention they sometimes work in remote areas, evidence includes sensitive personal information, and major incidents must continue to be logged even when a dependent service is unavailable. None of these points were listed in the original backlog.",
+            "tags": [
+                "non-functional",
+                "security",
+                "reliability"
+            ],
+            "msRef": {
+                "label": "Microsoft Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            },
+            "questions": [
+                {
+                    "q": "Which hidden requirement has the strongest impact on product and design decisions?",
+                    "options": [
+                        "Users need to create cases",
+                        "Investigators work in remote areas",
+                        "Stakeholders want better reports",
+                        "Managers prefer fewer fields"
+                    ],
+                    "answer": 1,
+                    "explanation": "Remote operation implies offline or intermittent-connectivity considerations, which can strongly affect app choice, synchronization design, and feasibility.",
+                    "wrongExplanations": [
+                        "Case creation is functional, but it is not the strongest hidden architecture driver here.",
+                        null,
+                        "Reporting may matter, but it does not carry the same immediate architectural weight in this scenario.",
+                        "Field count preference is primarily a usability concern."
+                    ],
+                    "msRef": {
+                        "label": "Choose the first-party apps that you should use",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+                    }
+                },
+                {
+                    "q": "How should the statement about sensitive personal information be classified?",
+                    "options": [
+                        "A cosmetic preference",
+                        "A security-related non-functional requirement",
+                        "A request for extra tables",
+                        "A migration assumption"
+                    ],
+                    "answer": 1,
+                    "explanation": "Handling sensitive personal information implies access control, protection, and governance expectations, which are security-oriented non-functional requirements.",
+                    "wrongExplanations": [
+                        "Sensitive data handling is not cosmetic.",
+                        null,
+                        "Additional tables may result from design, but that is not the core classification.",
+                        "This is not an assumption about data readiness or project conditions."
+                    ],
+                    "msRef": {
+                        "label": "Gather solution requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+                    }
+                },
+                {
+                    "q": "Which Well-Architected concern is most directly reflected by the need to continue logging incidents when a dependent service is unavailable?",
+                    "options": [
+                        "Reliability",
+                        "Branding",
+                        "Licensing",
+                        "Training"
+                    ],
+                    "answer": 0,
+                    "explanation": "The ability to continue key operations despite failures is a reliability concern and should influence early solution design.",
+                    "wrongExplanations": [
+                        null,
+                        "Branding is unrelated.",
+                        "Licensing is not the central issue here.",
+                        "Training does not address system continuity under failure."
+                    ],
+                    "msRef": {
+                        "label": "Microsoft Power Platform Well-Architected",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+                    }
+                },
+                {
+                    "q": "What should the architect do after uncovering these hidden requirements?",
+                    "options": [
+                        "Treat them as secondary because they were not in the original backlog",
+                        "Refine the requirements set and reassess product fit, feasibility, and risks",
+                        "Keep them informal to avoid stakeholder concern",
+                        "Move them all to post-go-live enhancements"
+                    ],
+                    "answer": 1,
+                    "explanation": "Once uncovered, hidden requirements must be incorporated formally because they can materially change solution feasibility and architecture.",
+                    "wrongExplanations": [
+                        "That would understate serious design drivers.",
+                        null,
+                        "Keeping them informal weakens planning and accountability.",
+                        "Deferring them may invalidate the solution direction."
+                    ],
+                    "msRef": {
+                        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+                    }
+                },
+                {
+                    "q": "Which statement is the best measurable success criterion related to this scenario?",
+                    "options": [
+                        "The app should be secure",
+                        "Critical incident logging must remain available during dependent-service outages, with no loss of submitted records",
+                        "Investigators should like the system",
+                        "The solution should be modern"
+                    ],
+                    "answer": 1,
+                    "explanation": "This criterion ties directly to an operational reliability need and can be validated more concretely than a vague aspiration.",
+                    "wrongExplanations": [
+                        "This is too vague to verify effectively.",
+                        null,
+                        "User liking matters but is subjective and not sufficient here.",
+                        "Modernity is not a measurable operational success criterion."
+                    ],
+                    "msRef": {
+                        "label": "Microsoft Power Platform Well-Architected",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Case Study 4 - Migration-Heavy Requirements with Unclear Scope",
+            "scenario": "A company is replacing three legacy customer service systems with Dynamics 365. Stakeholders ask for all case history, notes, attachments, contact records, account hierarchies, and audit details to be available on day one. The source systems contain duplicate customers, inconsistent category values, and missing ownership data. One executive says, 'We will figure out data cleanup later; just assume it can all be migrated.' The go-live date is fixed because of a contract exit deadline.",
+            "tags": [
+                "migration",
+                "scope",
+                "risk"
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            },
+            "questions": [
+                {
+                    "q": "What is the strongest architect response to the executive's assumption?",
+                    "options": [
+                        "Accept it to maintain momentum",
+                        "Document it as a high-risk assumption and investigate data quality, scope, and migration feasibility immediately",
+                        "Ignore migration until build begins",
+                        "Reduce the project to account records only without discussion"
+                    ],
+                    "answer": 1,
+                    "explanation": "The statement introduces a major delivery risk. It should be documented as an assumption and validated early because migration complexity may threaten feasibility and timeline.",
+                    "wrongExplanations": [
+                        "Accepting it blindly hides serious project risk.",
+                        null,
+                        "Migration is too significant to defer casually.",
+                        "Reducing scope may become necessary, but not without analysis and stakeholder alignment."
+                    ],
+                    "msRef": {
+                        "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+                    }
+                },
+                {
+                    "q": "Which factor most strongly increases migration effort in this case?",
+                    "options": [
+                        "Users want dashboards",
+                        "Duplicate records, inconsistent values, and missing ownership data across multiple source systems",
+                        "Executives are interested in innovation",
+                        "The new system uses the cloud"
+                    ],
+                    "answer": 1,
+                    "explanation": "Data inconsistency and poor quality across multiple systems increase mapping, cleansing, validation, and testing effort substantially.",
+                    "wrongExplanations": [
+                        "Dashboard demand does not materially drive migration complexity here.",
+                        null,
+                        "Innovation interest is not the migration effort driver.",
+                        "Cloud deployment does not remove the underlying data complexity."
+                    ],
+                    "msRef": {
+                        "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+                    }
+                },
+                {
+                    "q": "Given the fixed contract exit date, what should the architect evaluate alongside migration complexity?",
+                    "options": [
+                        "Only UI styling",
+                        "Scope phasing and what data is truly required at go-live versus later",
+                        "Whether to stop documenting assumptions",
+                        "Whether to skip validation to save time"
+                    ],
+                    "answer": 1,
+                    "explanation": "With a hard deadline, the architect should evaluate whether all requested data must go live in phase one or whether a phased migration strategy better balances risk and value.",
+                    "wrongExplanations": [
+                        "UI styling is not the critical issue here.",
+                        null,
+                        "Assumption documentation becomes more important under deadline pressure.",
+                        "Skipping validation increases the chance of failure."
+                    ],
+                    "msRef": {
+                        "label": "Define customer requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+                    }
+                },
+                {
+                    "q": "Which statement best reflects good architect judgment in this situation?",
+                    "options": [
+                        "All historical data should always be migrated because users asked for it",
+                        "The architect should challenge the full-history request by testing business value, regulatory need, and delivery feasibility",
+                        "Data migration is a technical detail and not part of requirement evaluation",
+                        "The deadline should be ignored until design is complete"
+                    ],
+                    "answer": 1,
+                    "explanation": "Architects should challenge broad migration requests by separating true business need from convenience and by assessing feasibility and risk.",
+                    "wrongExplanations": [
+                        "That is a poor default because it may create unnecessary effort and risk.",
+                        null,
+                        "Migration is absolutely relevant during requirement evaluation.",
+                        "Hard deadlines must shape early decisions."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                },
+                {
+                    "q": "What is the best next artifact to support stakeholder decision-making?",
+                    "options": [
+                        "A migration scope and risk assessment with assumptions, dependencies, and phasing options",
+                        "A final plugin specification",
+                        "A color palette for the service app",
+                        "A complete training deck"
+                    ],
+                    "answer": 0,
+                    "explanation": "Stakeholders need a structured migration assessment that makes scope, quality issues, risks, dependencies, and phase options visible.",
+                    "wrongExplanations": [
+                        null,
+                        "Plugin details do not address the main project decision here.",
+                        "Visual design is irrelevant to the migration decision.",
+                        "Training materials are premature."
+                    ],
+                    "msRef": {
+                        "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Case Study 5 - Competing Options and Long-Term Tradeoffs",
+            "scenario": "A retail organization wants to modernize store issue management. Option A is a fast model-driven implementation using mostly standard capabilities, with some process changes and one AppSource component. Option B is a more tailored custom experience that closely mimics the legacy system and promises minimal user retraining, but it introduces more custom components and a longer delivery timeline. Leadership wants quick wins this quarter, but the architecture board warns against creating long-term support burden. The platform team also wants alignment with Power Platform Well-Architected guidance.",
+            "tags": [
+                "tradeoffs",
+                "well-architected",
+                "recommendation"
+            ],
+            "msRef": {
+                "label": "Microsoft Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            },
+            "questions": [
+                {
+                    "q": "What is the best recommendation approach?",
+                    "options": [
+                        "Choose whichever option requires less user retraining",
+                        "Compare both options using business fit, timeline, maintainability, supportability, extensibility, and risk tradeoffs",
+                        "Pick the option with more custom components because it is more flexible",
+                        "Avoid documenting tradeoffs to keep leadership aligned"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should make tradeoffs explicit across multiple dimensions and recommend the best-balanced option for business value and long-term sustainability.",
+                    "wrongExplanations": [
+                        "Retraining is only one factor and should not dominate the decision in isolation.",
+                        null,
+                        "More custom components do not automatically mean better flexibility or lower lifecycle cost.",
+                        "Hiding tradeoffs undermines informed decision-making."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                },
+                {
+                    "q": "Which factor most strongly favors Option A?",
+                    "options": [
+                        "It preserves the legacy experience exactly",
+                        "It may deliver faster with lower long-term maintenance if business fit is sufficient",
+                        "It requires the most custom code",
+                        "It guarantees no adoption effort"
+                    ],
+                    "answer": 1,
+                    "explanation": "A faster, more standard solution can reduce maintenance burden and speed value delivery, provided it meets the business need sufficiently.",
+                    "wrongExplanations": [
+                        "That actually aligns more with Option B.",
+                        null,
+                        "Option A is characterized by less, not more, customization.",
+                        "No option can guarantee zero adoption effort."
+                    ],
+                    "msRef": {
+                        "label": "Choose the first-party apps that you should use",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/solution-architect-design/3-select-first-party-apps"
+                    }
+                },
+                {
+                    "q": "Which factor most strongly supports the architecture board's concern about Option B?",
+                    "options": [
+                        "Custom-heavy solutions can increase support, upgrade, and maintenance burden over time",
+                        "Users like familiar layouts",
+                        "Quarterly goals are unimportant",
+                        "AppSource should never be used"
+                    ],
+                    "answer": 0,
+                    "explanation": "Custom-heavy designs often create more lifecycle complexity and operational burden, which is exactly what the architecture board is trying to avoid.",
+                    "wrongExplanations": [
+                        null,
+                        "User familiarity matters, but it does not neutralize long-term support burden.",
+                        "Quarterly goals remain relevant and should be balanced, not dismissed.",
+                        "That is too absolute and not supported."
+                    ],
+                    "msRef": {
+                        "label": "Microsoft Power Platform Well-Architected",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+                    }
+                },
+                {
+                    "q": "How should Well-Architected guidance influence the decision?",
+                    "options": [
+                        "It should be deferred until after production go-live",
+                        "It should inform early tradeoff analysis across reliability, security, performance, operations, and experience",
+                        "It applies only to infrastructure teams",
+                        "It means always choosing the fastest option"
+                    ],
+                    "answer": 1,
+                    "explanation": "Well-Architected guidance is useful during early design evaluation to avoid one-dimensional decisions and improve long-term solution quality.",
+                    "wrongExplanations": [
+                        "That is too late for foundational decision quality.",
+                        null,
+                        "It applies to solution design broadly, not only infrastructure concerns.",
+                        "Speed is only one consideration among many."
+                    ],
+                    "msRef": {
+                        "label": "Microsoft Power Platform Well-Architected",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+                    }
+                },
+                {
+                    "q": "If leadership still wants the fastest path but the architect sees long-term risk, what is the best final action?",
+                    "options": [
+                        "Silently accept the fastest choice",
+                        "Document the recommendation, tradeoffs, risks, and decision implications clearly for stakeholder approval",
+                        "Block the project unilaterally",
+                        "Escalate directly to developers only"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect's role is to make the implications of the decision explicit and support informed stakeholder choice, not to hide risk or act unilaterally without transparency.",
+                    "wrongExplanations": [
+                        "That avoids the architect's responsibility to surface informed tradeoffs.",
+                        null,
+                        "Blocking unilaterally is usually not the right governance posture.",
+                        "Developers alone are not the decision forum for strategic tradeoffs."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                }
+            ]
+        }
+    ]
+}
