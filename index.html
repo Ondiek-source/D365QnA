@@ -1013,6 +1013,7 @@ const CONFIG = {
   // Leaf topics — each maps to a question bank JSON file
   TOPICS: [
     { id:'delegation',   title:'Delegation in Power Apps',       icon:'⚡', desc:'Delegable vs non-delegable functions, data source behaviour, performance implications.',                        file:'Questions/delegation.json' },
+    { id:'archlimits',   title:'Architectural Limits',           icon:'📐', desc:'Platform limits, throttling thresholds, Dataverse capacity, API call limits, and design constraints for scalable D365 solutions.', file:'Questions/archlimits.json', locked:true },
     { id:'mdaconfig',    title:'Configure Data Model & UI',      icon:'🧩', desc:'Tables, columns, forms, views, site map, app components, Dataverse search, notifications.',                    file:'Questions/mdaconfig.json',   locked:true },
     { id:'bpf',          title:'Business Process Flows',         icon:'🔀', desc:'Stages, branches, merge logic, workflows, action steps, entity limits, and BPF automation patterns.',          file:'Questions/bpf.json' },
     { id:'cases',        title:'Cases & Case Management',        icon:'📋', desc:'Case lifecycle, resolution, merging, subject tree, routing rules, and case configuration.',                    file:'Questions/cases.json' },
@@ -1026,6 +1027,67 @@ const CONFIG = {
     { id:'canvasui',     title:'Canvas App UI',                  icon:'🎨', desc:'Galleries, forms, controls and layout patterns.',                                                              file:'Questions/canvasui.json',    locked:true },
     { id:'automate',     title:'Power Automate',                 icon:'🔄', desc:'Flow types, triggers, actions, and error handling.',                                                           file:'Questions/automate.json',    locked:true },
     { id:'dataverse',    title:'Dataverse',                      icon:'🗄️', desc:'Tables, relationships, security roles, and metadata.',                                                         file:'Questions/dataverse.json',   locked:true },
+    // Solution Envisioning topics
+    { id:'sol-initiate',          title:'Initiate Solution Planning',                           icon:'🚀', desc:'Kickoff activities, stakeholder alignment, project charter, and planning prerequisites for a Power Platform solution.',          file:'Questions/sol-initiate.json',          locked:true },
+    { id:'sol-eval-biz',          title:'Evaluate Business Requirements',                       icon:'📊', desc:'Techniques for analysing and validating business requirements against organisational goals and constraints.',                    file:'Questions/sol-eval-biz.json',          locked:true },
+    { id:'sol-identify-components',title:'Identify Microsoft Power Platform Solution Components',icon:'🧩', desc:'Mapping business needs to Power Apps, Power Automate, Power BI, Copilot Studio, and Dataverse components.',                   file:'Questions/sol-identify-components.json',locked:true },
+    { id:'sol-select-components', title:'Identify and Select Components',                       icon:'✅', desc:'Decision criteria for selecting the right platform components, licensing considerations, and component trade-offs.',             file:'Questions/sol-select-components.json', locked:true },
+    { id:'sol-migration',         title:'Migration and Integration Efforts',                    icon:'🔀', desc:'Estimating migration complexity, integration patterns, data migration strategies, and effort alternatives.',                   file:'Questions/sol-migration.json',         locked:true },
+    { id:'sol-org-info',          title:'Identify Organisation Information and Metrics',        icon:'📈', desc:'Gathering KPIs, business metrics, org structure data, and success indicators needed to scope a solution.',                     file:'Questions/sol-org-info.json',          locked:true },
+    { id:'sol-current-state',     title:'Understanding Current State Business Processes',       icon:'🗺️', desc:'Process mapping, as-is analysis, pain point identification, and documenting current workflows.',                               file:'Questions/sol-current-state.json',     locked:true },
+    { id:'sol-org-risk',          title:'Assess Organisational Risk Factors',                   icon:'⚠️', desc:'Risk identification, risk registers, change readiness, adoption barriers, and mitigation strategies.',                        file:'Questions/sol-org-risk.json',          locked:true },
+    { id:'sol-success-criteria',  title:'Review Key Success Criteria',                          icon:'🎯', desc:'Defining measurable success criteria, acceptance criteria, and KPIs aligned to project outcomes.',                             file:'Questions/sol-success-criteria.json',  locked:true },
+    { id:'sol-existing-systems',  title:'Identify Existing Solutions and Systems',              icon:'🔍', desc:'Inventory of existing applications, integrations, data stores, and legacy systems relevant to the proposed solution.',          file:'Questions/sol-existing-systems.json',  locked:true },
+    { id:'sol-enterprise-arch',   title:'Evaluate the Organisation Enterprise Architecture', icon:'🏗️', desc:'Assessing technology landscape, architecture principles, governance standards, and alignment to enterprise strategy.',          file:'Questions/sol-enterprise-arch.json',   locked:true },
+    { id:'sol-data-sources',      title:'Identify Data Sources Needed for a Solution',          icon:'🗄️', desc:'Data source discovery, connector availability, data residency requirements, and volume/velocity assessment.',                  file:'Questions/sol-data-sources.json',      locked:true },
+    { id:'sol-data-quality',      title:'Define Use Cases and Quality Standards for Existing Data',icon:'📋',desc:'Data profiling, data quality rules, cleansing requirements, and use case validation for existing data assets.',              file:'Questions/sol-data-quality.json',      locked:true },
+    { id:'sol-capture-req',       title:'Capture Requirements',                                 icon:'📝', desc:'Workshop facilitation, user story writing, requirement elicitation techniques, and documentation standards.',                   file:'Questions/sol-capture-req.json',       locked:true },
+    { id:'sol-refine-req',        title:'Refine High-Level Requirements',                       icon:'🔧', desc:'Iterative refinement, backlog grooming, prioritisation frameworks, and requirement traceability.',                             file:'Questions/sol-refine-req.json',        locked:true },
+    { id:'sol-functional-req',    title:'Identify Functional Requirements',                     icon:'⚙️', desc:'Functional decomposition, use case modelling, acceptance criteria, and functional specification techniques.',                  file:'Questions/sol-functional-req.json',    locked:true },
+    { id:'sol-nonfunctional-req', title:'Identify Non-Functional Requirements',                 icon:'🛡️', desc:'Performance, scalability, security, availability, and compliance requirements for Power Platform solutions.',                 file:'Questions/sol-nonfunctional-req.json', locked:true },
+    { id:'sol-future-biz',        title:'Guide Future State Business Process Design',           icon:'🔮', desc:'To-be process design, improvement facilitation, change management, and future-state documentation.',                           file:'Questions/sol-future-biz.json',        locked:true },
+    { id:'sol-fitgap',            title:'Performing Fit/Gap Analyses',                          icon:'📐', desc:'Structured fit/gap methodology, gap categorisation, workaround identification, and build-vs-buy analysis.',                   file:'Questions/sol-fitgap.json',            locked:true },
+    { id:'sol-feasibility',       title:'Feasibility Assessment',                               icon:'⚖️', desc:'Technical, financial, and operational feasibility evaluation for proposed Power Platform solutions.',                           file:'Questions/sol-feasibility.json',       locked:true },
+    { id:'sol-functional-gaps',   title:'Addressing Functional Gaps',                           icon:'🔩', desc:'Gap resolution strategies, customisation vs configuration decisions, ISV solutions, and escalation paths.',                   file:'Questions/sol-functional-gaps.json',   locked:true },
+    { id:'sol-scope',             title:'Determining Scope',                                    icon:'🗂️', desc:'Scope definition, scope creep management, MoSCoW prioritisation, and phased delivery planning.',                              file:'Questions/sol-scope.json',             locked:true },
+    // Architect a Solution topics
+    { id:'arc-lead-design',      title:'Leading the Design Process',                        icon:'🎨', desc:'Facilitating architecture workshops, design governance, decision records, and leading technical design sessions.',              file:'Questions/arc-lead-design.json',      locked:true },
+    { id:'arc-topology',         title:'Designing the Solution Topology',                   icon:'🗺️', desc:'Solution architecture topology, environment boundaries, component placement, and infrastructure design decisions.',            file:'Questions/arc-topology.json',         locked:true },
+    { id:'arc-ux-proto',         title:'Designing and Validating UX Prototypes',            icon:'🖼️', desc:'Prototyping approaches, wireframing, user validation techniques, and iterative UX design for Power Platform apps.',            file:'Questions/arc-ux-proto.json',         locked:true },
+    { id:'arc-comms',            title:'Communicating System Design',                       icon:'📢', desc:'Architecture documentation, stakeholder communication, diagramming standards, and presenting design decisions.',               file:'Questions/arc-comms.json',            locked:true },
+    { id:'arc-data-migration',   title:'The Data Migration Strategy',                       icon:'📦', desc:'Migration planning, data mapping, staging environments, cutover strategies, and rollback planning for D365 migrations.',      file:'Questions/arc-data-migration.json',   locked:true },
+    { id:'arc-data-viz',         title:'Data Visualization Strategy',                      icon:'📊', desc:'Power BI integration, embedded analytics, dashboard design principles, and reporting architecture for D365 solutions.',       file:'Questions/arc-data-viz.json',         locked:true },
+    { id:'arc-automation',       title:'The Automation Strategy',                           icon:'🤖', desc:'Automation platform selection, Power Automate vs Logic Apps, RPA placement, and end-to-end automation architecture.',        file:'Questions/arc-automation.json',       locked:true },
+    { id:'arc-env-strategy',     title:'Designing the Environment Strategy',                icon:'🌐', desc:'Environment types, ALM pipeline design, solution layering, managed environments, and deployment pipeline architecture.',      file:'Questions/arc-env-strategy.json',     locked:true },
+    { id:'arc-data-model',       title:'Designing the Data Model',                         icon:'🗄️', desc:'Dataverse table design, column types, keys, indexing strategies, and data model best practices for scalable solutions.',      file:'Questions/arc-data-model.json',       locked:true },
+    { id:'arc-relationships',    title:'Designing Relationships and Relationship Behaviours',icon:'🔗', desc:'Relationship types, cascade behaviours, parental vs referential, connection roles, and many-to-many design patterns.',      file:'Questions/arc-relationships.json',    locked:true },
+    { id:'arc-complex-dm',       title:'Designing Data Models for Complex Requirements',    icon:'🧩', desc:'Polymorphic lookups, activity parties, virtual tables, elastic tables, and handling complex data model requirements.',         file:'Questions/arc-complex-dm.json',       locked:true },
+    { id:'arc-integrations',     title:'Designing Integrations',                           icon:'🔀', desc:'Integration patterns, middleware selection, synchronous vs asynchronous, error handling, and idempotency design.',             file:'Questions/arc-integrations.json',     locked:true },
+    { id:'arc-collab',           title:'Designing the Collaboration Suite',                icon:'💬', desc:'Microsoft Teams and SharePoint integration with D365 — embedded apps, document management, and collaboration architecture.',   file:'Questions/arc-collab.json',           locked:true },
+    { id:'arc-int-d365',         title:'Designing Integrations (Dynamics 365 Apps)',       icon:'🔄', desc:'Cross-app D365 integration patterns, dual-write, virtual tables, and connecting CE, Finance, and Supply Chain.',             file:'Questions/arc-int-d365.json',         locked:true },
+    { id:'arc-int-existing',     title:'Designing Integrations (Other Existing Systems)',  icon:'🔌', desc:'Legacy system integration, ESB patterns, API management, and connecting existing enterprise systems to Power Platform.',      file:'Questions/arc-int-existing.json',     locked:true },
+    { id:'arc-int-thirdparty',   title:'Designing Third-Party Integrations',               icon:'🧲', desc:'ISV connector architecture, webhook design, OAuth flows, and managing third-party API dependencies in D365 solutions.',      file:'Questions/arc-int-thirdparty.json',   locked:true },
+    { id:'arc-auth',             title:'Designing an Authentication Strategy',             icon:'🔐', desc:'Azure AD B2B/B2C, MFA, conditional access, service principals, managed identities, and Power Platform authentication.',      file:'Questions/arc-auth.json',             locked:true },
+    { id:'arc-bcp',              title:'Designing a Business Continuity Strategy',         icon:'🛡️', desc:'DR planning, RTO/RPO targets, backup strategies, geo-redundancy, and business continuity design for D365 environments.',     file:'Questions/arc-bcp.json',              locked:true },
+    { id:'arc-rpa',              title:'Designing for Robotic Process Automation (RPA)',   icon:'🦾', desc:'Power Automate Desktop, attended vs unattended RPA, bot architecture, machine groups, and RPA governance patterns.',         file:'Questions/arc-rpa.json',              locked:true },
+    { id:'arc-sec-model',        title:'Designing the Security Model',                    icon:'🔒', desc:'Security architecture, management policies, access governance, privilege model design, and zero-trust principles in D365.',   file:'Questions/arc-sec-model.json',        locked:true },
+    { id:'arc-sec-roles',        title:'Designing the Security Roles',                    icon:'👤', desc:'Role design principles, privilege minimisation, custom role architecture, and security role inheritance patterns.',            file:'Questions/arc-sec-roles.json',        locked:true },
+    { id:'arc-bu-teams',         title:'Designing the Business Unit and Team Structure',   icon:'🏢', desc:'Business unit hierarchy design, team types, owner teams vs access teams, and multi-BU architecture patterns.',              file:'Questions/arc-bu-teams.json',         locked:true },
+    { id:'arc-col-row-sec',      title:'Designing Column and Row Level Security',          icon:'🔑', desc:'Field-level security profiles, column permissions, row-level security patterns, and data access control architecture.',      file:'Questions/arc-col-row-sec.json',      locked:true },
+    { id:'arc-dlp',              title:'Designing Data Loss Prevention (DLP) Policies',   icon:'🚧', desc:'DLP policy design, connector classification, environment-level vs tenant-level policies, and DLP governance for Power Platform.',file:'Questions/arc-dlp.json',             locked:true },
+    { id:'arc-external-users',   title:'Determining External Users Access',               icon:'🌍', desc:'Guest access, Power Pages, Entra B2B, sharing model, external-facing app design, and licensing for external users.',         file:'Questions/arc-external-users.json',   locked:true },
+    // Implementing the Solution topics
+    { id:'impl-validate-design',  title:'Validating Your Solution Design',                      icon:'✅', desc:'Design review techniques, validation checkpoints, solution health scoring, and pre-build validation gates.',                   file:'Questions/impl-validate-design.json',  locked:true },
+    { id:'impl-eval-design',      title:'Evaluating Your Designs and Implementation',            icon:'🔍', desc:'Post-build evaluation, implementation quality assessment, design drift identification, and corrective action planning.',     file:'Questions/impl-eval-design.json',      locked:true },
+    { id:'impl-api-limits',       title:'Power Platform API Limits',                            icon:'⚡', desc:'Service protection API limits, entitlement limits, throttling behaviour, retry patterns, and designing within API boundaries.',file:'Questions/impl-api-limits.json',       locked:true },
+    { id:'impl-perf-impact',      title:'Assessing Solution Performance and Resource Impact',   icon:'📈', desc:'Performance profiling, resource consumption analysis, Dataverse capacity planning, and identifying performance bottlenecks.',  file:'Questions/impl-perf-impact.json',      locked:true },
+    { id:'impl-automation-conf',  title:'Resolving Automation Conflicts',                       icon:'⚙️', desc:'Flow conflict detection, concurrency handling, duplicate detection rules, and resolving conflicting automation logic.',      file:'Questions/impl-automation-conf.json',  locked:true },
+    { id:'impl-integration-conf', title:'Resolving Integration Conflicts',                      icon:'🔀', desc:'Integration conflict diagnosis, duplicate sync resolution, error loop prevention, and conflict management strategies.',      file:'Questions/impl-integration-conf.json', locked:true },
+    { id:'impl-golive',           title:'Supporting Go-Live',                                   icon:'🚀', desc:'Go-live planning, cutover execution, hypercare period management, stakeholder communication, and post-launch support.',      file:'Questions/impl-golive.json',           locked:true },
+    { id:'impl-perf-issues',      title:'Identify and Resolve Performance Issues',              icon:'🔧', desc:'Performance issue triage, root cause analysis, query optimisation, plugin profiling, and remediation strategies.',          file:'Questions/impl-perf-issues.json',      locked:true },
+    { id:'impl-data-mig-issues',  title:'Escalating Data Migration Issues',                    icon:'📦', desc:'Migration issue classification, escalation paths, data reconciliation failures, rollback triggers, and stakeholder escalation.',file:'Questions/impl-data-mig-issues.json',  locked:true },
+    { id:'impl-deploy-issues',    title:'Resolving Issues with Deployment Plans',               icon:'🛠️', desc:'Deployment failure diagnosis, solution import errors, dependency resolution, and environment-specific deployment issues.',    file:'Questions/impl-deploy-issues.json',    locked:true },
+    { id:'impl-golive-readiness', title:'Impact Assessment: Go-Live Readiness',                icon:'🎯', desc:'Readiness scoring frameworks, risk-based go/no-go decisions, impact assessment criteria, and readiness sign-off processes.',  file:'Questions/impl-golive-readiness.json', locked:true },
   ],
   INTERVIEW_PACKS: [
     {
@@ -1044,6 +1106,83 @@ const CONFIG = {
       icon:      '🎧',
       desc:      'Full Customer Service configuration — BPF, Cases, Unified Routing, SLAs & Entitlements, Knowledge, Record Creation Rules, Timeline, and User Management.',
       subtopics: ['bpf','cases','queues','sla','knowledge','rcrules','timeline','usermgmt'],
+    },
+    {
+      id:        'solution-architect',
+      title:     'Solution Architect',
+      icon:      '🏛️',
+      desc:      'Architecture patterns, platform limits, and design decisions for enterprise-scale Dynamics 365 and Power Platform solutions.',
+      subtopics: [],
+      subgroups: ['sol-envisioning','arc-solution','impl-solution'],
+    },
+    {
+      id:        'pp-developer',
+      title:     'Power Platform Developer',
+      icon:      '⚙️',
+      desc:      'Canvas app development, Power Fx formulas, delegation, UI patterns, Power Automate flows, and Dataverse integration for professional app builders.',
+      subtopics: ['delegation','powerfx','canvasui','automate','dataverse'],
+    },
+  ],
+  // Sub-groups — rendered as nested group cards inside a parent group's subtopic screen
+  SUBGROUPS: [
+    {
+      id:        'sol-envisioning',
+      parentGroup: 'solution-architect',
+      title:     'Solution Envisioning & Requirement Analysis',
+      icon:      '🔭',
+      desc:      'End-to-end requirement gathering, fit/gap analysis, feasibility assessment, and solution scoping for Power Platform and D365 implementations.',
+      subtopics: [
+        'archlimits',
+        'sol-initiate',
+        'sol-eval-biz',
+        'sol-identify-components',
+        'sol-select-components',
+        'sol-migration',
+        'sol-org-info',
+        'sol-current-state',
+        'sol-org-risk',
+        'sol-success-criteria',
+        'sol-existing-systems',
+        'sol-enterprise-arch',
+        'sol-data-sources',
+        'sol-data-quality',
+        'sol-capture-req',
+        'sol-refine-req',
+        'sol-functional-req',
+        'sol-nonfunctional-req',
+        'sol-future-biz',
+        'sol-fitgap',
+        'sol-feasibility',
+        'sol-functional-gaps',
+        'sol-scope',
+      ],
+    },
+    {
+      id:        'arc-solution',
+      parentGroup: 'solution-architect',
+      title:     'Architect a Solution',
+      icon:      '🏗️',
+      desc:      'Solution design across topology, data models, integrations, security, automation, environment strategy, and collaboration — from prototype to production architecture.',
+      subtopics: [
+        'arc-lead-design','arc-topology','arc-ux-proto','arc-comms',
+        'arc-data-migration','arc-data-viz','arc-automation','arc-env-strategy',
+        'arc-data-model','arc-relationships','arc-complex-dm',
+        'arc-integrations','arc-collab','arc-int-d365','arc-int-existing','arc-int-thirdparty',
+        'arc-auth','arc-bcp','arc-rpa',
+        'arc-sec-model','arc-sec-roles','arc-bu-teams','arc-col-row-sec','arc-dlp','arc-external-users',
+      ],
+    },
+    {
+      id:        'impl-solution',
+      parentGroup: 'solution-architect',
+      title:     'Implementing the Solution',
+      icon:      '🔨',
+      desc:      'Solution validation, performance assessment, conflict resolution, go-live support, and readiness evaluation for Power Platform and D365 implementations.',
+      subtopics: [
+        'impl-validate-design','impl-eval-design','impl-api-limits','impl-perf-impact',
+        'impl-automation-conf','impl-integration-conf','impl-golive',
+        'impl-perf-issues','impl-data-mig-issues','impl-deploy-issues','impl-golive-readiness',
+      ],
     },
   ],
 };
@@ -1272,8 +1411,11 @@ async function renderHome(){
   const grid=document.getElementById('topicsGrid');
   let html='';
 
-  // IDs that belong to a group — hidden from the main home grid
-  const groupedIds = new Set(CONFIG.GROUPS.flatMap(g=>g.subtopics));
+  // IDs that belong to a group or subgroup — hidden from the main home grid
+  const groupedIds = new Set([
+    ...CONFIG.GROUPS.flatMap(g=>g.subtopics||[]),
+    ...(CONFIG.SUBGROUPS||[]).flatMap(sg=>sg.subtopics||[]),
+  ]);
 
   // ── Render group cards first ──
   CONFIG.GROUPS.forEach(g=>{
@@ -1347,6 +1489,44 @@ async function obliterateTopic(id,title){
 /* ═══════════════════════════════════════
    GROUP / SUB-TOPIC SCREEN
 ═══════════════════════════════════════ */
+function renderTopicCard(t, sessions, unlocked, backFn) {
+  const ts = sessions.filter(s=>s.topicId===t.id);
+  const last = ts[ts.length-1];
+  const avgSc = ts.length ? Math.round(ts.reduce((a,s)=>a+s.totalScore,0)/ts.length) : null;
+  const mastery = avgSc!==null ? avgSc/1000 : null;
+  let mc='var(--muted)', ml='Not started';
+  if(mastery!==null){
+    if(mastery>=.9){mc='var(--correct)';ml='Expert';}
+    else if(mastery>=.7){mc='var(--accent)';ml='Proficient';}
+    else if(mastery>=.5){mc='var(--warn)';ml='Learning';}
+    else{mc='var(--wrong)';ml='Needs Work';}
+  }
+  const prog = mastery!==null ? Math.round(mastery*100) : 0;
+  const isLocked = t.locked && !unlocked;
+  if(isLocked){
+    return `<div class="topic-card locked" onclick="openLicenceModal()" style="cursor:pointer">
+      <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status status-locked">🔒 Locked</div></div>
+      <div class="card-title">${t.title}</div>
+      <div class="card-desc">${t.desc}</div>
+      <div class="card-meta"><span>📋 800+ questions</span></div>
+      <div style="margin-top:14px;font-size:10px;color:var(--accent2);letter-spacing:1px">Unlock all topics →</div>
+    </div>`;
+  }
+  return `<div class="topic-card" onclick="selectTopic('${t.id}')">
+    <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status status-ready">Ready</div></div>
+    <div class="card-title">${t.title}</div>
+    <div class="card-desc">${t.desc}</div>
+    <div class="card-meta">
+      <span>📋 800+ questions</span>
+      ${ts.length?`<span>🎯 ${ts.length} sessions</span>`:''}
+      ${last?`<span>Last: ${last.totalScore}/1000</span>`:''}
+    </div>
+    ${mastery!==null?`<div class="card-progress"><div class="card-progress-fill" style="width:${prog}%"></div></div>
+      <div class="mastery-badge"><div class="mb-dot" style="background:${mc}"></div><span style="color:${mc}">${ml}</span><span style="color:var(--muted);margin-left:4px">Avg: ${avgSc}/1000</span></div>`:''}
+    <button class="skull-btn" title="Obliterate session history for this topic" onclick="event.stopPropagation();obliterateTopic('${t.id}','${t.title}')">💀</button>
+  </div>`;
+}
+
 async function openGroup(groupId){
   const group = CONFIG.GROUPS.find(g=>g.id===groupId);
   if(!group) return;
@@ -1356,53 +1536,68 @@ async function openGroup(groupId){
   document.getElementById('subtopicBreadcrumb').textContent = 'Topics → ' + group.title;
   document.getElementById('subtopicGroupTitle').textContent = group.title;
   document.getElementById('subtopicGroupDesc').textContent = group.desc;
+  // Store back context for the nav button
+  const navBtn = document.querySelector('#subtopicScreen .nav-btn');
+  navBtn.onclick = showHome;
+  navBtn.textContent = '← Home';
 
-  const grid = document.getElementById('subtopicGrid');
   let html = '';
 
-  group.subtopics.forEach(tid=>{
+  // Render any sub-group cards first
+  (group.subgroups || []).forEach(sgId => {
+    const sg = (CONFIG.SUBGROUPS || []).find(s=>s.id===sgId);
+    if(!sg) return;
+    const sgTopics = sg.subtopics.map(id=>CONFIG.TOPICS.find(t=>t.id===id)).filter(Boolean);
+    const sgSessions = sessions.filter(s=>sg.subtopics.includes(s.topicId));
+    const readyCount = sgTopics.filter(t=>!t.locked||unlocked).length;
+    html+=`<div class="topic-card topic-card-group" onclick="openSubGroup('${sg.id}','${groupId}')" style="cursor:pointer">
+      <div class="card-header">
+        <div class="card-icon">${sg.icon}</div>
+        <div class="card-status status-ready">📂 ${sgTopics.length} Topics</div>
+      </div>
+      <div class="card-title">${sg.title}</div>
+      <div class="card-desc">${sg.desc}</div>
+      <div class="card-meta">
+        <span>📋 ${readyCount} ready</span>
+        ${sgSessions.length?`<span>🎯 ${sgSessions.length} sessions</span>`:''}
+      </div>
+      <div style="margin-top:12px;font-size:10px;color:var(--accent);letter-spacing:1px">Explore topics →</div>
+    </div>`;
+  });
+
+  // Then render direct subtopics
+  (group.subtopics || []).forEach(tid=>{
     const t = CONFIG.TOPICS.find(x=>x.id===tid);
     if(!t) return;
-    const ts = sessions.filter(s=>s.topicId===t.id);
-    const last = ts[ts.length-1];
-    const avgSc = ts.length ? Math.round(ts.reduce((a,s)=>a+s.totalScore,0)/ts.length) : null;
-    const mastery = avgSc!==null ? avgSc/1000 : null;
-    let mc='var(--muted)', ml='Not started';
-    if(mastery!==null){
-      if(mastery>=.9){mc='var(--correct)';ml='Expert';}
-      else if(mastery>=.7){mc='var(--accent)';ml='Proficient';}
-      else if(mastery>=.5){mc='var(--warn)';ml='Learning';}
-      else{mc='var(--wrong)';ml='Needs Work';}
-    }
-    const prog = mastery!==null ? Math.round(mastery*100) : 0;
-    const isLocked = t.locked && !unlocked;
-
-    if(isLocked){
-      html+=`<div class="topic-card locked" onclick="openLicenceModal()" style="cursor:pointer">
-        <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status status-locked">🔒 Locked</div></div>
-        <div class="card-title">${t.title}</div>
-        <div class="card-desc">${t.desc}</div>
-        <div class="card-meta"><span>📋 800+ questions</span></div>
-        <div style="margin-top:14px;font-size:10px;color:var(--accent2);letter-spacing:1px">Unlock all topics →</div>
-      </div>`;
-    } else {
-      const comingSoon = false; // all sub-topics have question banks
-      html+=`<div class="topic-card${comingSoon?' locked':''}" ${comingSoon?'title="Content coming soon"':`onclick="selectTopic('${t.id}')"`}>
-        <div class="card-header"><div class="card-icon">${t.icon}</div><div class="card-status ${comingSoon?'status-locked':'status-ready'}">${comingSoon?'Coming Soon':'Ready'}</div></div>
-        <div class="card-title">${t.title}</div>
-        <div class="card-desc">${t.desc}</div>
-        <div class="card-meta">
-          <span>📋 ${comingSoon?'Coming soon':'800+ questions'}</span>
-          ${ts.length?`<span>🎯 ${ts.length} sessions</span>`:''}
-          ${last?`<span>Last: ${last.totalScore}/1000</span>`:''}
-        </div>
-        ${mastery!==null && !comingSoon?`<div class="card-progress"><div class="card-progress-fill" style="width:${prog}%"></div></div>
-          <div class="mastery-badge"><div class="mb-dot" style="background:${mc}"></div><span style="color:${mc}">${ml}</span><span style="color:var(--muted);margin-left:4px">Avg: ${avgSc}/1000</span></div>`:''}
-        ${!comingSoon?`<button class="skull-btn" title="Obliterate session history for this topic" onclick="event.stopPropagation();obliterateTopic('${t.id}','${t.title}')">💀</button>`:''}
-      </div>`;
-    }
+    html += renderTopicCard(t, sessions, unlocked);
   });
-  grid.innerHTML = html;
+
+  document.getElementById('subtopicGrid').innerHTML = html;
+  showScreen('subtopicScreen');
+}
+
+async function openSubGroup(subGroupId, parentGroupId){
+  const sg = (CONFIG.SUBGROUPS || []).find(s=>s.id===subGroupId);
+  if(!sg) return;
+  const unlocked = isUnlocked();
+  const sessions = await dbGetAll();
+  const parentGroup = CONFIG.GROUPS.find(g=>g.id===parentGroupId);
+
+  document.getElementById('subtopicBreadcrumb').textContent = `Topics → ${parentGroup?.title || ''} → ${sg.title}`;
+  document.getElementById('subtopicGroupTitle').textContent = sg.title;
+  document.getElementById('subtopicGroupDesc').textContent = sg.desc;
+  // Back button returns to parent group
+  document.querySelector('#subtopicScreen .nav-btn').onclick = () => openGroup(parentGroupId);
+  document.querySelector('#subtopicScreen .nav-btn').textContent = `← ${parentGroup?.title || 'Back'}`;
+
+  let html = '';
+  sg.subtopics.forEach(tid=>{
+    const t = CONFIG.TOPICS.find(x=>x.id===tid);
+    if(!t) return;
+    html += renderTopicCard(t, sessions, unlocked);
+  });
+
+  document.getElementById('subtopicGrid').innerHTML = html;
   showScreen('subtopicScreen');
 }
 
