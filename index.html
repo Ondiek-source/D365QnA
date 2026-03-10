@@ -453,6 +453,98 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 .lm-gumroad{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--accent2);border:1px solid rgba(255,107,53,0.4);padding:13px;cursor:pointer;text-decoration:none;transition:all .2s}
 .lm-gumroad:hover{background:rgba(255,107,53,0.08);border-color:var(--accent2)}
 .lm-note{font-size:10px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.7}
+
+/* ══ VOICE INTERVIEW ══════════════════════════════════════════════════════ */
+/* Name entry modal */
+.vi-name-bg{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9990;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .25s ease}
+.vi-name-modal{background:var(--surface);border:1px solid var(--border2);max-width:460px;width:100%;padding:40px;position:relative}
+.vi-name-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.vi-name-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.vi-name-sub{font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:28px}
+.vi-name-input{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;padding:14px 16px;outline:none;margin-bottom:18px;transition:border-color .2s}
+.vi-name-input:focus{border-color:var(--accent)}
+.vi-name-btn{width:100%;font-family:'Syne',sans-serif;font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;background:var(--accent);color:#000;border:none;padding:14px;cursor:pointer;transition:all .2s}
+.vi-name-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,229,255,.3)}
+.vi-name-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Main voice screen */
+#voiceInterviewScreen{background:var(--bg)}
+.vi-layout{display:grid;grid-template-columns:1fr 340px;min-height:100vh;max-height:100vh;overflow:hidden}
+@media(max-width:700px){.vi-layout{grid-template-columns:1fr}}
+
+/* Left — black stage */
+.vi-stage{background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:100vh}
+.vi-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,229,255,.04) 0%,transparent 70%);pointer-events:none}
+
+/* Waveform */
+.vi-waveform{display:flex;align-items:center;justify-content:center;gap:3px;height:80px;margin-bottom:32px}
+.vi-bar{width:3px;border-radius:2px;background:var(--accent);transition:height .08s ease;opacity:.7}
+.vi-bar.ai-bar{background:var(--accent2)}
+
+/* AI emoji mood */
+.vi-mood{font-size:56px;margin-bottom:16px;transition:all .4s ease;filter:drop-shadow(0 0 20px rgba(0,229,255,.3));line-height:1}
+.vi-mood.mood-thinking{filter:drop-shadow(0 0 20px rgba(255,209,102,.4))}
+.vi-mood.mood-probing{filter:drop-shadow(0 0 20px rgba(255,107,53,.4))}
+.vi-mood.mood-critical{filter:drop-shadow(0 0 20px rgba(255,77,109,.4))}
+.vi-mood.mood-impressed{filter:drop-shadow(0 0 20px rgba(127,255,107,.4))}
+
+/* Status label */
+.vi-status{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.vi-status.listening{color:var(--accent);animation:pulse 2s infinite}
+.vi-status.speaking{color:var(--accent2)}
+.vi-status.thinking{color:var(--warn)}
+
+/* Current question displayed on stage */
+.vi-question-display{max-width:520px;text-align:center;padding:0 24px}
+.vi-q-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.vi-q-text{font-family:'Syne',sans-serif;font-size:clamp(.95rem,2vw,1.15rem);font-weight:700;line-height:1.55;color:var(--text)}
+
+/* Controls */
+.vi-controls{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:16px}
+.vi-mic-btn{width:64px;height:64px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .2s;box-shadow:0 0 0 0 rgba(0,229,255,.4)}
+.vi-mic-btn.recording{background:var(--wrong);animation:micPulse 1.2s infinite}
+.vi-mic-btn:disabled{opacity:.35;cursor:not-allowed;animation:none}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(255,77,109,.5)}70%{box-shadow:0 0 0 18px rgba(255,77,109,0)}100%{box-shadow:0 0 0 0 rgba(255,77,109,0)}}
+.vi-end-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border2);padding:10px 20px;cursor:pointer;transition:all .2s}
+.vi-end-btn:hover{color:var(--wrong);border-color:rgba(255,77,109,.4)}
+
+/* Right — transcript panel */
+.vi-panel{background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.vi-panel-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.vi-panel-title{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.vi-panel-meta{font-size:10px;color:var(--muted)}
+.vi-progress-wrap{padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.vi-progress-track{height:2px;background:var(--border);margin-bottom:6px}
+.vi-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
+.vi-progress-label{font-size:10px;color:var(--muted);display:flex;justify-content:space-between}
+.vi-transcript{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.vi-entry{animation:fadeUp .25s ease}
+.vi-entry-role{font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.vi-entry-role.ai{color:var(--accent2)}
+.vi-entry-role.user{color:var(--accent)}
+.vi-entry-bubble{font-size:11px;line-height:1.75;color:var(--muted2);padding:10px 14px;background:var(--surface2);border:1px solid var(--border)}
+.vi-entry-bubble.ai-bubble{border-color:rgba(255,107,53,.2)}
+.vi-entry-bubble.user-bubble{border-color:rgba(0,229,255,.15)}
+.vi-entry-score{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:10px;color:var(--muted)}
+.vi-entry-score-dot{width:6px;height:6px;border-radius:50%}
+.vi-panel-footer{padding:14px 20px;border-top:1px solid var(--border);flex-shrink:0;display:flex;gap:8px}
+.vi-dl-btn{flex:1;font-family:'Syne',sans-serif;font-weight:700;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--muted2);border:1px solid var(--border2);padding:10px;cursor:pointer;transition:all .2s;text-align:center}
+.vi-dl-btn:hover{color:var(--text);border-color:var(--muted2)}
+
+/* Results screen */
+#viResultsScreen{background:var(--bg)}
+.vi-results-wrap{max-width:860px;margin:0 auto;padding:40px 24px}
+.vi-score-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:36px}
+.vi-score-ring{width:140px;height:140px;border-radius:50%;border:3px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.vi-score-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(0,229,255,.2)}
+.vi-score-num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--accent);line-height:1}
+.vi-score-denom{font-size:11px;color:var(--muted);margin-top:2px}
+.vi-score-band{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:6px}
+.vi-q-result{background:var(--surface);border:1px solid var(--border);padding:18px 20px;margin-bottom:12px}
+.vi-q-result-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.vi-q-result-score{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;flex-shrink:0}
+.vi-q-result-q{font-size:11px;color:var(--muted2);line-height:1.6;flex:1}
+.vi-q-result-reasoning{font-size:11px;color:var(--muted);line-height:1.7;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
@@ -784,6 +876,85 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<!-- ══════ VOICE INTERVIEW NAME MODAL ══════ -->
+<div class="vi-name-bg" id="viNameModal" style="display:none">
+  <div class="vi-name-modal">
+    <div class="vi-name-eyebrow">🎙 Interview Prep Simulator</div>
+    <div class="vi-name-title" id="viNamePackTitle">Technical Interview</div>
+    <div class="vi-name-sub">Enter your name so the interviewer can address you naturally. The session will be recorded and scored using the pack's rubric.</div>
+    <input class="vi-name-input" id="viNameInput" type="text" placeholder="Your first name…" maxlength="40" oninput="viNameInputChanged()" onkeydown="if(event.key==='Enter')viStartInterview()">
+    <button class="vi-name-btn" id="viNameBtn" onclick="viStartInterview()" disabled>Begin Interview →</button>
+  </div>
+</div>
+
+<!-- ══════ VOICE INTERVIEW SCREEN ══════ -->
+<div class="screen" id="voiceInterviewScreen">
+  <div class="vi-layout">
+    <!-- Left: black stage -->
+    <div class="vi-stage">
+      <div class="vi-mood" id="viMood">🎙️</div>
+      <div class="vi-status" id="viStatusLabel">Ready</div>
+      <div class="vi-waveform" id="viWaveform"></div>
+      <div class="vi-question-display">
+        <div class="vi-q-label" id="viQLabel">Question 0 of 0</div>
+        <div class="vi-q-text" id="viQText">Preparing your interview…</div>
+      </div>
+      <div class="vi-controls">
+        <button class="vi-end-btn" onclick="viConfirmEnd()">End Interview</button>
+        <button class="vi-mic-btn" id="viMicBtn" onclick="viToggleMic()" disabled title="Hold to answer">🎤</button>
+        <button class="vi-end-btn" onclick="viSkipQuestion()" id="viSkipBtn" style="opacity:0;pointer-events:none">Skip →</button>
+      </div>
+    </div>
+    <!-- Right: transcript panel -->
+    <div class="vi-panel">
+      <div class="vi-panel-header">
+        <div class="vi-panel-title">Live Transcript</div>
+        <div class="vi-panel-meta" id="viPanelMeta">Waiting to begin…</div>
+      </div>
+      <div class="vi-progress-wrap">
+        <div class="vi-progress-track"><div class="vi-progress-fill" id="viProgressFill" style="width:0%"></div></div>
+        <div class="vi-progress-label"><span id="viProgressLabel">0 of 0 questions</span><span id="viTimerLabel">0:00</span></div>
+      </div>
+      <div class="vi-transcript" id="viTranscript"></div>
+      <div class="vi-panel-footer">
+        <button class="vi-dl-btn" onclick="viDownloadTranscript()">⬇ Download Transcript</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ VOICE INTERVIEW RESULTS ══════ -->
+<div class="screen" id="viResultsScreen">
+  <div class="vi-results-wrap">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="showInterviewSim()">← Interview Packs</button>
+        <button class="nav-btn" onclick="showHome()">Home</button>
+      </div>
+    </nav>
+    <div class="hero-eyebrow" style="margin-bottom:20px"><div class="hero-dot"></div>Interview Complete</div>
+    <div class="vi-score-hero">
+      <div class="vi-score-ring">
+        <div class="vi-score-num" id="viResScore">—</div>
+        <div class="vi-score-denom" id="viResDenom">/5 avg</div>
+        <div class="vi-score-band" id="viResBand"></div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px" id="viResHeading"></div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:16px" id="viResMsg"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-primary" onclick="viDownloadTranscript()">⬇ Download Transcript</button>
+          <button class="btn-ghost" onclick="showInterviewSim()">← Back to Packs</button>
+        </div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-bottom:16px">Question Breakdown</div>
+    <div id="viResBreakdown"></div>
   </div>
 </div>
 
@@ -3018,6 +3189,653 @@ function renderInterviewPack(){
   const atEnd = IS.currentSection===sections.length-1 && IS.currentQuestion===Math.max(0,lastSectionItems.length-1);
   document.getElementById('isNextBtn').disabled = atEnd;
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   VOICE INTERVIEW ENGINE
+══════════════════════════════════════════════════════════════════════════ */
+
+/* ── State ── */
+const VI = {
+  pack: null, packId: null, packCfg: null,
+  candidateName: '',
+  queue: [],          // flat list of question objects to ask
+  qIdx: 0,           // current position in queue
+  followUpCount: 0,   // follow-ups asked on current question
+  transcript: [],     // [{role,text,score?,reasoning?,mood?}]
+  scores: [],         // [{questionId, question, score, reasoning, mood}]
+  sessionId: null,
+  startTime: null,
+  elapsedSecs: 0,
+  timerInterval: null,
+  // Speech
+  synth: window.speechSynthesis || null,
+  recognition: null,
+  isRecording: false,
+  isSpeaking: false,
+  // Waveform
+  waveInterval: null,
+  audioCtx: null,
+  analyser: null,
+  micStream: null,
+  animFrame: null,
+};
+
+/* ── Moods ── */
+const MOODS = {
+  neutral:   { emoji: '🎙️', cls: '' },
+  thinking:  { emoji: '🤔', cls: 'mood-thinking' },
+  probing:   { emoji: '🧐', cls: 'mood-probing' },
+  critical:  { emoji: '😤', cls: 'mood-critical' },
+  impressed: { emoji: '😊', cls: 'mood-impressed' },
+};
+
+function viSetMood(key) {
+  const m = MOODS[key] || MOODS.neutral;
+  const el = document.getElementById('viMood');
+  el.textContent = m.emoji;
+  el.className = 'vi-mood ' + m.cls;
+}
+
+/* ── Waveform bars setup ── */
+function viInitWaveform() {
+  const wf = document.getElementById('viWaveform');
+  wf.innerHTML = '';
+  const N = 32;
+  for (let i = 0; i < N; i++) {
+    const b = document.createElement('div');
+    b.className = 'vi-bar';
+    b.style.height = '4px';
+    wf.appendChild(b);
+  }
+}
+
+function viAnimateWaveform(source) {
+  // source: 'ai' | 'user' | 'idle'
+  cancelAnimationFrame(VI.animFrame);
+  const bars = document.querySelectorAll('.vi-bar');
+  if (source === 'idle') {
+    bars.forEach(b => { b.style.height = '4px'; b.classList.remove('ai-bar'); });
+    return;
+  }
+
+  if (source === 'user' && VI.analyser) {
+    const data = new Uint8Array(VI.analyser.frequencyBinCount);
+    const step = () => {
+      VI.analyser.getByteFrequencyData(data);
+      bars.forEach((b, i) => {
+        const val = data[Math.floor(i * data.length / bars.length)];
+        const h = 4 + (val / 255) * 68;
+        b.style.height = h + 'px';
+        b.classList.remove('ai-bar');
+      });
+      VI.animFrame = requestAnimationFrame(step);
+    };
+    step();
+    return;
+  }
+
+  // AI speaking — synthetic wave
+  bars.forEach(b => b.classList.add('ai-bar'));
+  let t = 0;
+  const step = () => {
+    t += 0.12;
+    bars.forEach((b, i) => {
+      const h = 4 + 32 + Math.sin(t + i * 0.4) * 28 + Math.sin(t * 1.7 + i * 0.2) * 14;
+      b.style.height = Math.max(4, h) + 'px';
+    });
+    VI.animFrame = requestAnimationFrame(step);
+  };
+  step();
+}
+
+/* ── TTS: AI speaks ── */
+function viSpeak(text, onEnd) {
+  if (!VI.synth) { onEnd && onEnd(); return; }
+  VI.synth.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.rate = 0.92;
+  utt.pitch = 1.0;
+  // Prefer a natural-sounding voice
+  const voices = VI.synth.getVoices();
+  const preferred = voices.find(v => /Google UK English Male|Daniel|Alex|Arthur/i.test(v.name))
+    || voices.find(v => v.lang === 'en-GB')
+    || voices.find(v => v.lang.startsWith('en'))
+    || voices[0];
+  if (preferred) utt.voice = preferred;
+  utt.onstart = () => {
+    VI.isSpeaking = true;
+    viSetStatus('speaking');
+    viAnimateWaveform('ai');
+    viSetMood('neutral');
+  };
+  utt.onend = () => {
+    VI.isSpeaking = false;
+    viAnimateWaveform('idle');
+    onEnd && onEnd();
+  };
+  utt.onerror = () => { VI.isSpeaking = false; viAnimateWaveform('idle'); onEnd && onEnd(); };
+  VI.synth.speak(utt);
+}
+
+/* ── STT: User speaks ── */
+async function viStartListening() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    viAddTranscriptEntry('ai', '⚠ Your browser does not support speech recognition. Please use Chrome or Edge.', null);
+    return;
+  }
+  if (!VI.audioCtx) {
+    try {
+      VI.micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      VI.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      VI.analyser = VI.audioCtx.createAnalyser();
+      VI.analyser.fftSize = 256;
+      const src = VI.audioCtx.createMediaStreamSource(VI.micStream);
+      src.connect(VI.analyser);
+    } catch(e) {
+      viAddTranscriptEntry('ai', '⚠ Microphone access denied. Please allow mic access and try again.', null);
+      return;
+    }
+  }
+
+  const rec = new SpeechRecognition();
+  rec.lang = 'en-GB';
+  rec.continuous = true;
+  rec.interimResults = false;
+  VI.recognition = rec;
+
+  let finalTranscript = '';
+  rec.onresult = e => {
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) finalTranscript += e.results[i][0].transcript + ' ';
+    }
+  };
+  rec.onend = () => {
+    if (VI.isRecording) {
+      // Was manually stopped — process the answer
+      viProcessAnswer(finalTranscript.trim());
+    }
+  };
+  rec.onerror = e => {
+    console.warn('Speech recognition error:', e.error);
+    if (VI.isRecording) viStopListening();
+  };
+
+  VI.isRecording = true;
+  viSetMicState(true);
+  viSetStatus('listening');
+  viAnimateWaveform('user');
+  rec.start();
+}
+
+function viStopListening() {
+  if (VI.recognition) { VI.recognition.stop(); VI.recognition = null; }
+  VI.isRecording = false;
+  viSetMicState(false);
+  viSetStatus('thinking');
+  viAnimateWaveform('idle');
+}
+
+function viToggleMic() {
+  if (VI.isSpeaking) return;
+  if (VI.isRecording) viStopListening();
+  else viStartListening();
+}
+
+/* ── Build question queue ── */
+function viBuildQueue(pack) {
+  const rules = pack.interview_flow?.selection_rules || {};
+  let pool = [];
+  (pack.sections || []).forEach(sec => {
+    const items = sec.items || sec.questions || [];
+    items.forEach(item => {
+      if (item && (item.question || item.scenario || item.candidate_task)) pool.push({ ...item, _section: sec.section_name });
+    });
+  });
+
+  // Shuffle then apply selection rules
+  pool = shuffle(pool);
+
+  // Force at least one integration case and one security case
+  const pickDomain = (domain, arr) => arr.find(x => (x.domain || '').toLowerCase().includes(domain));
+  const selected = [];
+  const usedIds = new Set();
+
+  const add = (item) => { if (item && !usedIds.has(item.id)) { usedIds.add(item.id); selected.push(item); } };
+
+  if (rules.force_one_integration_case) add(pickDomain('integration', pool));
+  if (rules.force_one_security_or_data_case) add(pickDomain('security', pool) || pickDomain('data', pool));
+  if (rules.force_one_behavioral_failure_question) add(pool.find(x => (x.domain || '').toLowerCase().includes('failure')));
+  if (rules.prefer_ALM_at_least_twice) {
+    pool.filter(x => (x.domain || '').toLowerCase().includes('alm')).slice(0, 2).forEach(add);
+  }
+
+  // Fill remaining up to ~12 questions total, avoid same domain back to back
+  let lastDomain = '';
+  for (const item of pool) {
+    if (selected.length >= 12) break;
+    if (usedIds.has(item.id)) continue;
+    if (item.domain === lastDomain && rules.avoid_same_domain_back_to_back) continue;
+    add(item);
+    lastDomain = item.domain || '';
+  }
+
+  return selected;
+}
+
+/* ── Status label ── */
+function viSetStatus(s) {
+  const el = document.getElementById('viStatusLabel');
+  const labels = { idle: 'Ready', listening: '● Listening…', speaking: 'Interviewer Speaking', thinking: 'Analysing…' };
+  el.textContent = labels[s] || s;
+  el.className = 'vi-status ' + (s === 'listening' ? 'listening' : s === 'speaking' ? 'speaking' : s === 'thinking' ? 'thinking' : '');
+}
+
+function viSetMicState(recording) {
+  const btn = document.getElementById('viMicBtn');
+  btn.classList.toggle('recording', recording);
+  btn.title = recording ? 'Click to stop and submit answer' : 'Click to start speaking';
+  btn.textContent = recording ? '⏹' : '🎤';
+}
+
+/* ── Transcript ── */
+function viAddTranscriptEntry(role, text, score, reasoning, mood) {
+  const entry = { role, text, score, reasoning, mood, ts: Date.now() };
+  VI.transcript.push(entry);
+  const container = document.getElementById('viTranscript');
+  const div = document.createElement('div');
+  div.className = 'vi-entry';
+  const scoreColor = score === null || score === undefined ? 'var(--muted)' :
+    score >= 4 ? 'var(--correct)' : score >= 2 ? 'var(--warn)' : 'var(--wrong)';
+  div.innerHTML = `
+    <div class="vi-entry-role ${role}">${role === 'ai' ? 'Interviewer' : VI.candidateName || 'You'}</div>
+    <div class="vi-entry-bubble ${role}-bubble">${escapeHtml(text)}
+      ${score !== null && score !== undefined ? `<div class="vi-entry-score"><div class="vi-entry-score-dot" style="background:${scoreColor}"></div><span style="color:${scoreColor}">Score: ${score}/5</span>${reasoning ? ` — ${escapeHtml(reasoning.slice(0, 80))}…` : ''}</div>` : ''}
+    </div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+/* ── Progress ── */
+function viUpdateProgress() {
+  const total = VI.queue.length;
+  const done = Math.min(VI.qIdx, total);
+  const pct = total ? (done / total) * 100 : 0;
+  document.getElementById('viProgressFill').style.width = pct + '%';
+  document.getElementById('viProgressLabel').textContent = `${done} of ${total} questions`;
+  document.getElementById('viQLabel').textContent = `Question ${Math.min(VI.qIdx + 1, total)} of ${total}`;
+}
+
+/* ── Timer ── */
+function viStartTimer() {
+  VI.startTime = Date.now();
+  VI.timerInterval = setInterval(() => {
+    VI.elapsedSecs++;
+    const m = Math.floor(VI.elapsedSecs / 60), s = VI.elapsedSecs % 60;
+    document.getElementById('viTimerLabel').textContent = `${m}:${s.toString().padStart(2, '0')}`;
+  }, 1000);
+}
+
+/* ── Ask a question ── */
+function viAskQuestion() {
+  if (VI.qIdx >= VI.queue.length) { viConclude(); return; }
+  const item = VI.queue[VI.qIdx];
+  VI.followUpCount = 0;
+
+  // Build spoken question text
+  let spoken = item.question || '';
+  if (!spoken && item.scenario) spoken = `Here is a scenario. ${item.scenario} Your task: ${item.candidate_task || ''}`;
+
+  document.getElementById('viQText').textContent = spoken.slice(0, 180) + (spoken.length > 180 ? '…' : '');
+  viUpdateProgress();
+  viAddTranscriptEntry('ai', spoken, null, null, 'neutral');
+  viSetMood('neutral');
+
+  const skipBtn = document.getElementById('viSkipBtn');
+  skipBtn.style.opacity = '1'; skipBtn.style.pointerEvents = 'auto';
+
+  const micBtn = document.getElementById('viMicBtn');
+  micBtn.disabled = true;
+
+  viSpeak(spoken, () => {
+    micBtn.disabled = false;
+    viSetStatus('idle');
+    viSetMood('thinking');
+  });
+}
+
+/* ── Skip question ── */
+function viSkipQuestion() {
+  if (VI.isSpeaking) VI.synth?.cancel();
+  if (VI.isRecording) viStopListening();
+  VI.scores.push({ questionId: VI.queue[VI.qIdx]?.id || '?', question: VI.queue[VI.qIdx]?.question || '', score: 0, reasoning: 'Skipped', mood: 'neutral' });
+  VI.qIdx++;
+  VI.followUpCount = 0;
+  viAskQuestion();
+}
+
+/* ── Process a user answer through Claude ── */
+async function viProcessAnswer(transcript) {
+  if (!transcript) { viAddTranscriptEntry('ai', "I didn't catch that — please try again.", null); viSpeak("I didn't catch that — please try again.", () => viSetStatus('idle')); return; }
+  viAddTranscriptEntry('user', transcript, null);
+  viSetStatus('thinking');
+  viSetMood('thinking');
+  document.getElementById('viMicBtn').disabled = true;
+
+  const item = VI.queue[VI.qIdx];
+  const pack = VI.pack;
+  const globalProbes = (pack.global_probe_rules || []).join('\n');
+  const expectedPoints = (item.expected_points || []).join(', ') || 'General technical accuracy and depth';
+  const followUps = (item.killer_followups || item.follow_up_probes || []).join('\n') || '';
+  const failTriggers = (item.fail_triggers || []).join('\n') || '';
+
+  const systemPrompt = `You are a senior technical interviewer conducting a real D365 CE technical interview. 
+The candidate is ${VI.candidateName}. 
+Pack: ${pack.pack_name}. Role: ${pack.target_role}.
+Scoring rubric (0-5): ${JSON.stringify(pack.scoring_model?.rubric || {})}.
+Global probe rules: ${globalProbes}
+
+You must respond with ONLY valid JSON, no markdown, no explanation outside the JSON. Format:
+{
+  "score": <0-5 integer>,
+  "mood": <"neutral"|"thinking"|"probing"|"critical"|"impressed">,
+  "reasoning": "<one sentence on why this score>",
+  "follow_up": "<a follow-up question to ask, or empty string if done>",
+  "done": <true|false — true means move to next question>
+}
+
+Rules:
+- If the answer is excellent (score 4-5), set done:true and follow_up:"".
+- If the answer is weak or generic, set done:false and provide a killer follow-up or probe from the list below.
+- Maximum 2 follow-ups per question then always set done:true.
+- If fail triggers are detected in the answer, set mood:"critical" and probe directly.
+- Keep follow_up questions short and sharp — one sentence.`;
+
+  const userMsg = `Question asked: "${item.question || item.scenario || ''}"
+Expected points: ${expectedPoints}
+Killer follow-ups available: ${followUps}
+Fail triggers to watch for: ${failTriggers}
+Follow-ups already asked this question: ${VI.followUpCount}
+
+Candidate answer: "${transcript}"`;
+
+  let result = { score: 2, mood: 'thinking', reasoning: 'Response noted.', follow_up: '', done: true };
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+    const data = await res.json();
+    const raw = data.content?.[0]?.text || '{}';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    result = JSON.parse(clean);
+  } catch(e) {
+    console.warn('Claude API error:', e);
+  }
+
+  // Record score on transcript for this answer
+  const lastEntry = document.querySelector('#viTranscript .vi-entry:last-child .vi-entry-bubble.user-bubble');
+  if (lastEntry) {
+    const scoreColor = result.score >= 4 ? 'var(--correct)' : result.score >= 2 ? 'var(--warn)' : 'var(--wrong)';
+    const scoreDiv = document.createElement('div');
+    scoreDiv.className = 'vi-entry-score';
+    scoreDiv.innerHTML = `<div class="vi-entry-score-dot" style="background:${scoreColor}"></div><span style="color:${scoreColor}">Score: ${result.score}/5 — ${escapeHtml((result.reasoning||'').slice(0,80))}…</span>`;
+    lastEntry.appendChild(scoreDiv);
+  }
+
+  viSetMood(result.mood || 'neutral');
+
+  if (result.done || VI.followUpCount >= 2) {
+    // Save score and move on
+    VI.scores.push({
+      questionId: item.id || '?',
+      question: item.question || item.scenario || '',
+      score: result.score,
+      reasoning: result.reasoning || '',
+      mood: result.mood || 'neutral'
+    });
+    VI.qIdx++;
+    VI.followUpCount = 0;
+
+    // Brief acknowledgement then next question
+    const ack = result.score >= 4
+      ? `Good answer, ${VI.candidateName}. Let's move on.`
+      : result.score <= 1
+        ? `I'd like to see more depth there. Let's continue.`
+        : `Thank you. Moving to the next question.`;
+
+    viAddTranscriptEntry('ai', ack, null);
+    viSpeak(ack, () => {
+      document.getElementById('viMicBtn').disabled = false;
+      viSetStatus('idle');
+      viAskQuestion();
+    });
+  } else if (result.follow_up) {
+    VI.followUpCount++;
+    viAddTranscriptEntry('ai', result.follow_up, null, null, result.mood);
+    document.getElementById('viQText').textContent = result.follow_up;
+    document.getElementById('viMicBtn').disabled = true;
+    viSpeak(result.follow_up, () => {
+      document.getElementById('viMicBtn').disabled = false;
+      viSetStatus('idle');
+    });
+  } else {
+    // No follow-up, move on
+    VI.scores.push({ questionId: item.id || '?', question: item.question || item.scenario || '', score: result.score, reasoning: result.reasoning || '', mood: result.mood || 'neutral' });
+    VI.qIdx++;
+    VI.followUpCount = 0;
+    viAskQuestion();
+  }
+
+  viSaveDraft();
+}
+
+/* ── Draft persistence ── */
+async function viSaveDraft() {
+  try {
+    const draft = {
+      id: `vi_draft_${VI.packId}`,
+      type: 'voice_interview_draft',
+      packId: VI.packId,
+      candidateName: VI.candidateName,
+      queue: VI.queue,
+      qIdx: VI.qIdx,
+      transcript: VI.transcript,
+      scores: VI.scores,
+      elapsedSecs: VI.elapsedSecs,
+      startTime: VI.startTime,
+      savedAt: Date.now()
+    };
+    const d = await openDB();
+    await new Promise((res, rej) => {
+      const tx = d.transaction(DRAFT_STORE, 'readwrite');
+      tx.objectStore(DRAFT_STORE).put(draft).onsuccess = () => res();
+      tx.onerror = e => rej(e);
+    });
+  } catch(e) { console.warn('Draft save failed:', e); }
+}
+
+async function viClearDraft() {
+  try {
+    const d = await openDB();
+    await new Promise((res) => {
+      const tx = d.transaction(DRAFT_STORE, 'readwrite');
+      tx.objectStore(DRAFT_STORE).delete(`vi_draft_${VI.packId}`).onsuccess = () => res();
+    });
+  } catch(e) {}
+}
+
+/* ── Conclude: score and save ── */
+async function viConclude() {
+  clearInterval(VI.timerInterval);
+  viSetMood('impressed');
+  viSetStatus('idle');
+  viAnimateWaveform('idle');
+  document.getElementById('viMicBtn').disabled = true;
+
+  const total = VI.scores.reduce((a, s) => a + (s.score || 0), 0);
+  const avg = VI.scores.length ? Math.round((total / VI.scores.length) * 10) / 10 : 0;
+
+  const closing = `Thank you, ${VI.candidateName}. That concludes our interview. You averaged ${avg} out of 5. Your full transcript and scores are now available. Well done.`;
+  viAddTranscriptEntry('ai', closing, null);
+  viSpeak(closing, async () => {
+    // Save to history
+    const record = {
+      type: 'voice_interview',
+      packId: VI.packId,
+      packName: VI.pack?.pack_name || '',
+      candidateName: VI.candidateName,
+      scores: VI.scores,
+      avgScore: avg,
+      totalScore: Math.round(avg * 100),  // normalise for history display
+      transcript: VI.transcript,
+      elapsedSecs: VI.elapsedSecs,
+      questionCount: VI.scores.length,
+      date: Date.now(),
+      topicId: `vi_${VI.packId}`,
+      topicTitle: VI.pack?.target_role || 'Voice Interview',
+    };
+    await dbSave(record);
+    await viClearDraft();
+    viShowResults(avg, record);
+  });
+}
+
+/* ── Results screen ── */
+function viShowResults(avg, record) {
+  showScreen('viResultsScreen');
+  const band = avg >= 4.5 ? 'OUTSTANDING' : avg >= 3.5 ? 'STRONG' : avg >= 2.5 ? 'COMPETENT' : avg >= 1.5 ? 'DEVELOPING' : 'NEEDS WORK';
+  const bandColor = avg >= 4 ? 'var(--correct)' : avg >= 2.5 ? 'var(--warn)' : 'var(--wrong)';
+  const msg = avg >= 4 ? `Excellent performance, ${VI.candidateName}. You demonstrated strong technical depth across the board.`
+    : avg >= 2.5 ? `Solid effort, ${VI.candidateName}. Some areas showed good depth — focus on the lower-scored questions before your real interview.`
+    : `There are clear gaps to address, ${VI.candidateName}. Review the reasoning on each question and drill the weaker domains.`;
+
+  document.getElementById('viResScore').textContent = avg.toFixed(1);
+  document.getElementById('viResScore').style.color = bandColor;
+  document.getElementById('viResBand').textContent = band;
+  document.getElementById('viResBand').style.color = bandColor;
+  document.getElementById('viResHeading').textContent = `${band} — ${avg.toFixed(1)} / 5`;
+  document.getElementById('viResMsg').textContent = msg;
+
+  const breakdown = document.getElementById('viResBreakdown');
+  const moodEmoji = { neutral: '🎙️', thinking: '🤔', probing: '🧐', critical: '😤', impressed: '😊' };
+  breakdown.innerHTML = (record.scores || []).map((s, i) => {
+    const c = s.score >= 4 ? 'var(--correct)' : s.score >= 2 ? 'var(--warn)' : 'var(--wrong)';
+    return `<div class="vi-q-result">
+      <div class="vi-q-result-header">
+        <div class="vi-q-result-score" style="color:${c}">${moodEmoji[s.mood] || '🎙️'} ${s.score}/5</div>
+        <div class="vi-q-result-q">${escapeHtml((s.question || '').slice(0, 120))}${(s.question || '').length > 120 ? '…' : ''}</div>
+      </div>
+      <div class="vi-q-result-reasoning">${escapeHtml(s.reasoning || '')}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Download transcript ── */
+function viDownloadTranscript() {
+  const lines = VI.transcript.map(e => {
+    const role = e.role === 'ai' ? 'INTERVIEWER' : VI.candidateName.toUpperCase() || 'CANDIDATE';
+    const score = (e.score !== null && e.score !== undefined) ? ` [Score: ${e.score}/5]` : '';
+    return `[${role}]${score}\n${e.text}\n`;
+  }).join('\n');
+  const header = `D365 MASTERY — VOICE INTERVIEW TRANSCRIPT\nPack: ${VI.pack?.pack_name || ''}\nCandidate: ${VI.candidateName}\nDate: ${new Date().toLocaleString()}\nDuration: ${Math.floor(VI.elapsedSecs/60)}m ${VI.elapsedSecs%60}s\n${'─'.repeat(60)}\n\n`;
+  const blob = new Blob([header + lines], { type: 'text/plain' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `interview_transcript_${VI.candidateName.replace(/\s+/g,'_')}_${new Date().toISOString().slice(0,10)}.txt`;
+  a.click();
+}
+
+/* ── Entry points ── */
+function viNameInputChanged() {
+  const val = document.getElementById('viNameInput').value.trim();
+  document.getElementById('viNameBtn').disabled = val.length < 2;
+}
+
+async function viStartInterview() {
+  const name = document.getElementById('viNameInput').value.trim();
+  if (name.length < 2) return;
+  document.getElementById('viNameModal').style.display = 'none';
+
+  VI.candidateName = name;
+  VI.qIdx = 0;
+  VI.followUpCount = 0;
+  VI.transcript = [];
+  VI.scores = [];
+  VI.elapsedSecs = 0;
+  VI.sessionId = Date.now();
+
+  viInitWaveform();
+  viSetMood('neutral');
+  viSetStatus('idle');
+  document.getElementById('viMicBtn').disabled = true;
+  document.getElementById('viSkipBtn').style.opacity = '0';
+  document.getElementById('viSkipBtn').style.pointerEvents = 'none';
+  document.getElementById('viTranscript').innerHTML = '';
+  document.getElementById('viPanelMeta').textContent = `${VI.pack?.pack_name || 'Interview'} · ${name}`;
+
+  VI.queue = viBuildQueue(VI.pack);
+  viUpdateProgress();
+  showScreen('voiceInterviewScreen');
+  viStartTimer();
+
+  // Greeting + interview plan
+  const sections = [...new Set(VI.queue.map(q => q._section || q.domain || 'General').filter(Boolean))].slice(0, 4);
+  const plan = sections.join(', ');
+  const greeting = `Hello ${name}, I'm your technical interviewer today. We're conducting the ${VI.pack?.target_role || 'technical'} interview. We'll cover ${VI.queue.length} questions across ${plan}, and a few others. I'll follow up where I need more depth. When you're ready to answer, press the microphone button. Let's begin.`;
+
+  viAddTranscriptEntry('ai', greeting, null, null, 'neutral');
+  viSetStatus('speaking');
+  viSpeak(greeting, () => {
+    viSetStatus('idle');
+    document.getElementById('viMicBtn').disabled = false;
+    viAskQuestion();
+  });
+}
+
+function viConfirmEnd() {
+  if (confirm('End the interview now? Your progress so far will be scored and saved.')) {
+    if (VI.isRecording) viStopListening();
+    if (VI.isSpeaking) VI.synth?.cancel();
+    // Score whatever we have so far
+    viConclude();
+  }
+}
+
+/* ── Hook into loadInterviewPack — show name modal instead ── */
+async function loadInterviewPack(packId) {
+  const packCfg = (CONFIG.INTERVIEW_PACKS || []).find(p => p.id === packId);
+  if (!packCfg) return;
+  loading(true, 'Loading interview pack…');
+  try {
+    const pack = await fetchInterviewPack(packCfg);
+    // Store on VI state
+    VI.pack = pack;
+    VI.packId = packId;
+    VI.packCfg = packCfg;
+
+    // Also keep IS state for backwards compat
+    IS.pack = pack; IS.packId = packId;
+
+    loading(false);
+    // Show name modal
+    document.getElementById('viNamePackTitle').textContent = pack.target_role || pack.pack_name || 'Technical Interview';
+    document.getElementById('viNameInput').value = '';
+    document.getElementById('viNameBtn').disabled = true;
+    document.getElementById('viNameModal').style.display = 'flex';
+  } catch(err) {
+    console.error('Interview pack load failed:', err);
+    loading(false);
+  }
+}
+
 
 /* ── Boot ── */
 async function boot(){
