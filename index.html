@@ -3761,11 +3761,23 @@ async function viClearDraft() {
 }
 
 /* ── Conclude: score and save ── */
+function viReleaseMic() {
+  // Stop recognition if active
+  if (VI.recognition) { try { VI.recognition.stop(); } catch(e){} VI.recognition = null; }
+  VI.isRecording = false;
+  // Stop all mic tracks — releases the browser mic indicator
+  if (VI.micStream) { VI.micStream.getTracks().forEach(t => t.stop()); VI.micStream = null; }
+  // Close audio context
+  if (VI.audioCtx) { try { VI.audioCtx.close(); } catch(e){} VI.audioCtx = null; VI.analyser = null; }
+  cancelAnimationFrame(VI.animFrame);
+  viAnimateWaveform('idle');
+}
+
 async function viConclude() {
   clearInterval(VI.timerInterval);
+  viReleaseMic();
   viSetMood('impressed');
   viSetStatus('idle');
-  viAnimateWaveform('idle');
   document.getElementById('viMicBtn').disabled = true;
 
   const total = VI.scores.reduce((a, s) => a + (s.score || 0), 0);
@@ -3908,9 +3920,8 @@ async function viStartInterview() {
 
 function viConfirmEnd() {
   if (confirm('End the interview now? Your progress so far will be scored and saved.')) {
-    if (VI.isRecording) viStopListening();
     if (VI.isSpeaking) VI.synth?.cancel();
-    // Score whatever we have so far
+    viReleaseMic();
     viConclude();
   }
 }
