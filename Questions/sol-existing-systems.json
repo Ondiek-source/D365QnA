@@ -1,0 +1,505 @@
+{
+    "_meta": {
+        "topic": "Identify Existing Solutions and Systems",
+        "description": "Inventory of existing applications, integrations, data stores, and legacy systems relevant to the proposed solution.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the primary reason a solution architect should inventory existing applications and systems early in a PL-600 engagement?",
+            "options": [
+                "To decide branding standards for the new app",
+                "To understand dependencies, overlap, constraints, integration needs, and opportunities to reuse existing capabilities",
+                "To avoid involving stakeholders in workshops",
+                "To guarantee that all legacy systems are retired immediately"
+            ],
+            "answer": 1,
+            "category": "discovery",
+            "tags": [
+                "existing-systems",
+                "dependencies",
+                "enterprise-architecture"
+            ],
+            "explanation": "Inventorying existing systems early helps the architect understand the current landscape, identify dependencies and data flows, avoid duplicating capabilities, and shape realistic solution direction.",
+            "wrongExplanations": [
+                "Branding is not the main architectural reason for system inventory.",
+                null,
+                "System inventory complements stakeholder workshops; it does not replace them.",
+                "Many legacy systems may remain or need phased retirement rather than immediate removal."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "Which discovery question best helps identify whether an existing system should remain part of the future solution landscape?",
+            "options": [
+                "What color theme do users prefer?",
+                "What business capability does the system currently provide, who owns it, and what would break if it were removed?",
+                "How many fields are on its main form?",
+                "Which consultant built it originally?"
+            ],
+            "answer": 1,
+            "category": "system-assessment",
+            "tags": [
+                "capabilities",
+                "ownership",
+                "dependencies"
+            ],
+            "explanation": "The key is understanding business capability, ownership, and dependency impact. Those factors determine whether the system should be retained, replaced, integrated, or retired.",
+            "wrongExplanations": [
+                "Theme preferences do not help evaluate architectural role.",
+                null,
+                "Field counts are too low-level and do not establish business significance.",
+                "Original builder information is usually not the core architectural determinant."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "A customer says, \"We already have a billing platform, a warehouse system, and a customer portal.\" What should the architect clarify next?",
+            "options": [
+                "Only the UI technology stack of each system",
+                "The purpose, ownership, master data, integrations, and business processes each system supports",
+                "Whether users like the logos in those systems",
+                "Only whether those systems are cloud-hosted"
+            ],
+            "answer": 1,
+            "category": "inventory",
+            "tags": [
+                "system-inventory",
+                "processes",
+                "ownership"
+            ],
+            "explanation": "Knowing the system purpose, data ownership, integrations, and supported processes is essential for mapping the current enterprise landscape and designing around it.",
+            "wrongExplanations": [
+                "UI stack details may matter later, but they are not the first priority in discovery.",
+                null,
+                "Visual preferences do not define architectural role.",
+                "Hosting model matters, but alone it is not enough to understand system relevance."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "Why is it risky to identify existing systems only at a high level, such as naming them without documenting their business role and data responsibilities?",
+            "options": [
+                "Because licensing cannot be purchased",
+                "Because hidden dependencies, duplicate capabilities, and integration scope may be missed",
+                "Because users will reject model-driven apps",
+                "Because Dataverse requires a full CMDB"
+            ],
+            "answer": 1,
+            "category": "risk",
+            "tags": [
+                "dependencies",
+                "integration",
+                "scope"
+            ],
+            "explanation": "A shallow inventory can miss critical dependencies, overlapping functionality, and data ownership boundaries, which creates design and delivery risk later.",
+            "wrongExplanations": [
+                "Licensing is not the main reason this is risky.",
+                null,
+                "Model-driven app acceptance is unrelated to the inventory issue described.",
+                "Dataverse does not require a formal CMDB to be used."
+            ],
+            "msRef": {
+                "label": "Integrate your Dynamics 365 apps with other solutions",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+            }
+        },
+        {
+            "q": "Which statement best indicates that an existing system may be a system of record that must be considered carefully in solution design?",
+            "options": [
+                "It has a colorful dashboard",
+                "It is the authoritative source for customer credit status used by multiple downstream processes",
+                "It was built by a previous vendor",
+                "It has more than 20 tables"
+            ],
+            "answer": 1,
+            "category": "system-of-record",
+            "tags": [
+                "data-ownership",
+                "source-of-truth",
+                "enterprise-architecture"
+            ],
+            "explanation": "If a system is the authoritative source for business-critical data consumed elsewhere, it must be treated carefully during future-state design and integration planning.",
+            "wrongExplanations": [
+                "Dashboard appearance does not indicate data authority.",
+                null,
+                "Vendor history alone does not establish system-of-record status.",
+                "Table count does not define business authority."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "What is the best reason to identify existing integrations when assessing current systems?",
+            "options": [
+                "To maximize the number of interfaces in the future design",
+                "To understand coupling, latency, data movement, sequencing, and operational dependencies",
+                "To avoid documenting data sources",
+                "To prove that all current integrations are obsolete"
+            ],
+            "answer": 1,
+            "category": "integration",
+            "tags": [
+                "existing-integrations",
+                "dependencies",
+                "data-flow"
+            ],
+            "explanation": "Existing integrations reveal how systems depend on one another, how data moves, what timing expectations exist, and where future design or cutover risk may appear.",
+            "wrongExplanations": [
+                "The goal is not to create more interfaces, but to understand and rationalize them.",
+                null,
+                "Data sources remain critical and should still be documented.",
+                "Some existing integrations may remain necessary in the future state."
+            ],
+            "msRef": {
+                "label": "Overcome integration challenges in Dynamics 365 projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+            }
+        },
+        {
+            "q": "A stakeholder says a legacy system is 'only used for reporting.' What should the architect do?",
+            "options": [
+                "Assume it can be retired without further analysis",
+                "Validate what data it uses, which teams depend on it, how often it is used, and whether it fills a capability gap",
+                "Ignore it because it is not transactional",
+                "Move it out of scope immediately"
+            ],
+            "answer": 1,
+            "category": "legacy-analysis",
+            "tags": [
+                "reporting",
+                "dependency-analysis",
+                "legacy-systems"
+            ],
+            "explanation": "Reporting systems can still be business-critical. The architect should confirm usage, dependency patterns, data sources, and whether the capability must be replaced or integrated.",
+            "wrongExplanations": [
+                "That is a dangerous assumption; reporting dependencies are often underestimated.",
+                null,
+                "Non-transactional systems can still be critical.",
+                "Scope decisions should follow analysis, not assumptions."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "Which question best helps identify duplicate or overlapping solutions in the current landscape?",
+            "options": [
+                "How many developers support the environment?",
+                "Which systems perform similar business functions or store the same business entities?",
+                "Which systems use Microsoft Entra ID?",
+                "Which users prefer dark mode?"
+            ],
+            "answer": 1,
+            "category": "overlap-analysis",
+            "tags": [
+                "duplicate-capabilities",
+                "data-overlap",
+                "rationalization"
+            ],
+            "explanation": "Overlapping business functions and duplicate entity storage are strong indicators of duplicate or fragmented solutions that may need rationalization.",
+            "wrongExplanations": [
+                "Developer support count does not identify overlapping capability.",
+                null,
+                "Identity method alone does not reveal functional duplication.",
+                "UI preference is irrelevant."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "When documenting existing data stores relevant to a proposed solution, what should be identified first?",
+            "options": [
+                "Only physical storage size",
+                "What data each store holds, who owns it, quality considerations, and how it is used by business processes",
+                "Only the number of tables or files",
+                "Only backup frequency"
+            ],
+            "answer": 1,
+            "category": "data-sources",
+            "tags": [
+                "data-stores",
+                "ownership",
+                "data-quality"
+            ],
+            "explanation": "A useful inventory of data stores starts with business meaning, ownership, quality, and usage. Those factors matter more than raw technical counts alone.",
+            "wrongExplanations": [
+                "Storage size may matter later, but it is not the first discovery priority.",
+                null,
+                "Object counts alone do not explain business relevance.",
+                "Backup frequency is operational detail, not the primary discovery input."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "What is the strongest architect reason to inventory legacy systems before recommending migration or coexistence?",
+            "options": [
+                "To preserve every legacy workflow exactly",
+                "To understand what must be retained, replaced, integrated, synchronized, or phased out",
+                "To avoid discussing future-state processes",
+                "To eliminate the need for fit/gap analysis"
+            ],
+            "answer": 1,
+            "category": "migration-planning",
+            "tags": [
+                "legacy-systems",
+                "coexistence",
+                "migration"
+            ],
+            "explanation": "A clear legacy inventory helps determine what belongs in the future-state solution, what should remain temporarily, and what can be retired or transformed.",
+            "wrongExplanations": [
+                "Preserving every legacy workflow is usually poor fit-to-standard practice.",
+                null,
+                "Future-state process discussions are still necessary.",
+                "Fit/gap analysis is still needed to compare needs with capabilities."
+            ],
+            "msRef": {
+                "label": "Key considerations for migrating to Dynamics 365 Sales",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/reference-architectures/sales-phased-migration"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Identifying existing systems is only about listing applications by name.",
+            "answer": false,
+            "category": "inventory",
+            "tags": [
+                "existing-systems",
+                "discovery"
+            ],
+            "explanation": "A useful system inventory must go beyond names to include business role, data ownership, integrations, dependencies, and relevance to future-state design.",
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "True or False: Existing systems that are not customer-facing can still be critical to solution design.",
+            "answer": true,
+            "category": "system-assessment",
+            "tags": [
+                "back-office-systems",
+                "dependencies",
+                "architecture"
+            ],
+            "explanation": "Back-office and non-customer-facing systems often own master data, provide integrations, or support critical business processes and must be considered in architecture decisions.",
+            "msRef": {
+                "label": "Integrate your Dynamics 365 apps with other solutions",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+            }
+        },
+        {
+            "q": "True or False: Unknown external system ownership is a delivery risk when integrations are in scope.",
+            "answer": true,
+            "category": "risk",
+            "tags": [
+                "dependencies",
+                "ownership",
+                "integration-risk"
+            ],
+            "explanation": "If ownership and support contacts are unclear, design, testing, issue resolution, and operational readiness become significantly riskier.",
+            "msRef": {
+                "label": "Overcome integration challenges in Dynamics 365 projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+            }
+        },
+        {
+            "q": "True or False: If two systems store the same customer data, the architect should ignore the overlap until after go-live.",
+            "answer": false,
+            "category": "data-sources",
+            "tags": [
+                "data-overlap",
+                "source-of-truth",
+                "risk"
+            ],
+            "explanation": "Overlapping data ownership should be analyzed early because it affects source-of-truth decisions, migration, synchronization, and process design.",
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each inventory item to the main reason it matters.",
+            "items": [
+                "Existing billing platform",
+                "Legacy reporting database",
+                "Warehouse management system",
+                "Customer portal"
+            ],
+            "zones": [
+                "May own financial transactions or account status needed by the proposed solution",
+                "May contain business-critical outputs or historical data dependencies",
+                "May drive fulfillment and inventory process integration requirements",
+                "May already provide customer-facing capabilities that affect future-state design"
+            ],
+            "correctMapping": {
+                "Existing billing platform": "May own financial transactions or account status needed by the proposed solution",
+                "Legacy reporting database": "May contain business-critical outputs or historical data dependencies",
+                "Warehouse management system": "May drive fulfillment and inventory process integration requirements",
+                "Customer portal": "May already provide customer-facing capabilities that affect future-state design"
+            },
+            "tags": [
+                "system-inventory",
+                "capabilities",
+                "dependencies"
+            ],
+            "explanation": "An inventory is valuable when each system is tied to its business role and future-state impact, not just listed by name.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "instruction": "Match each architect concern to the most relevant current-state element.",
+            "items": [
+                "Who owns the authoritative customer credit status?",
+                "Which systems exchange order updates and when?",
+                "What historical service data must remain accessible after cutover?",
+                "Which application currently supports field technicians in offline scenarios?"
+            ],
+            "zones": [
+                "System of record",
+                "Existing integration",
+                "Legacy data retention need",
+                "Existing business capability"
+            ],
+            "correctMapping": {
+                "Who owns the authoritative customer credit status?": "System of record",
+                "Which systems exchange order updates and when?": "Existing integration",
+                "What historical service data must remain accessible after cutover?": "Legacy data retention need",
+                "Which application currently supports field technicians in offline scenarios?": "Existing business capability"
+            },
+            "tags": [
+                "current-state",
+                "enterprise-architecture",
+                "inventory"
+            ],
+            "explanation": "These questions map to key architectural concerns that a system inventory should uncover: source-of-truth, integration flow, historical data obligations, and supported business capabilities.",
+            "msRef": {
+                "label": "Integrate your Dynamics 365 apps with other solutions",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Understanding the Current Landscape Before Recommending the Future",
+            "scenario": "A distributor wants to implement Dynamics 365 for sales and service. During early discovery, stakeholders mention an ERP for finance and inventory, a legacy service application used by one region, a customer portal, a reporting database, and several spreadsheet-based workarounds. The sponsor says the legacy service application is probably obsolete, but regional managers insist it still handles warranty exceptions that are not visible elsewhere. The integration team also notes that order status currently flows through a middleware component that nobody on the business side mentioned. Customer and warranty data appear in multiple places, and no one is yet certain which system is the authoritative source for each.",
+            "tags": [
+                "existing-systems",
+                "current-state",
+                "dependencies"
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            },
+            "questions": [
+                {
+                    "q": "What should the architect do first?",
+                    "options": [
+                        "Assume the legacy service application can be retired because the sponsor thinks so",
+                        "Create a current-state inventory covering systems, business capabilities, data ownership, and integrations",
+                        "Design the future-state app navigation immediately",
+                        "Focus only on the ERP because it is the biggest system"
+                    ],
+                    "answer": 1,
+                    "explanation": "The right first step is to build a structured current-state inventory so the future-state recommendation is based on actual system roles, data ownership, and dependencies.",
+                    "wrongExplanations": [
+                        "Sponsor assumptions should be validated, especially where regional dependency may still exist.",
+                        null,
+                        "Navigation design is premature before the current landscape is understood.",
+                        "Focusing only on the ERP would miss other critical systems and workarounds."
+                    ],
+                    "msRef": {
+                        "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+                    }
+                },
+                {
+                    "q": "Why is the legacy service application especially important to investigate?",
+                    "options": [
+                        "Because older systems always need to be rebuilt",
+                        "Because it may still support unique warranty exception processes not covered elsewhere",
+                        "Because regional managers dislike change",
+                        "Because it probably has the best user interface"
+                    ],
+                    "answer": 1,
+                    "explanation": "Even if a sponsor sees it as obsolete, the system may still carry business-critical capability that must be replaced, integrated, or retained in some form.",
+                    "wrongExplanations": [
+                        "Legacy age alone does not decide what to do with a system.",
+                        null,
+                        "Resistance to change is not the main architectural reason to investigate it.",
+                        "User interface quality is not the core issue."
+                    ],
+                    "msRef": {
+                        "label": "Workshops for Dynamics 365 implementation projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+                    }
+                },
+                {
+                    "q": "What risk is most strongly indicated by the unnoticed middleware component for order status?",
+                    "options": [
+                        "A hidden integration dependency",
+                        "A color branding issue",
+                        "An excess of dashboards",
+                        "A low training budget"
+                    ],
+                    "answer": 0,
+                    "explanation": "An undocumented middleware component indicates a hidden integration dependency that could affect future architecture, cutover planning, and operational reliability.",
+                    "wrongExplanations": [
+                        null,
+                        "Branding is unrelated.",
+                        "Dashboard count is irrelevant here.",
+                        "Training budget is not the main issue described."
+                    ],
+                    "msRef": {
+                        "label": "Overcome integration challenges in Dynamics 365 projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+                    }
+                },
+                {
+                    "q": "What should the architect do about customer and warranty data appearing in multiple places?",
+                    "options": [
+                        "Ignore it until UAT",
+                        "Identify source-of-truth ownership and define how the future solution will handle duplication and synchronization",
+                        "Pick the newest system as the default authority",
+                        "Move all data into spreadsheets temporarily"
+                    ],
+                    "answer": 1,
+                    "explanation": "Multiple copies of important business data require explicit source-of-truth and synchronization decisions early, otherwise migration, integration, and process design will be unstable.",
+                    "wrongExplanations": [
+                        "This issue is too important to defer.",
+                        null,
+                        "Newest does not equal authoritative.",
+                        "That would increase, not reduce, architectural disorder."
+                    ],
+                    "msRef": {
+                        "label": "Key considerations for migrating to Dynamics 365 Sales",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/reference-architectures/sales-phased-migration"
+                    }
+                }
+            ]
+        }
+    ]
+}

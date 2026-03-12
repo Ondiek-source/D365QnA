@@ -1,0 +1,912 @@
+{
+    "_meta": {
+        "topic": "Identify Functional Requirements",
+        "description": "Functional decomposition, use case modelling, acceptance criteria, and functional specification techniques.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the main purpose of identifying functional requirements in a PL-600 engagement?",
+            "options": [
+                "To collect technical implementation ideas",
+                "To define what the solution must do to support business processes and user tasks",
+                "To decide infrastructure sizing",
+                "To replace fit/gap analysis"
+            ],
+            "answer": 1,
+            "category": "functional-requirements",
+            "tags": [
+                "functional",
+                "business-process",
+                "user-needs"
+            ],
+            "explanation": "Functional requirements describe the behaviors, capabilities, and actions the solution must provide to support business processes and user outcomes.",
+            "wrongExplanations": [
+                "Implementation ideas may come later, but they are not the definition of functional requirements.",
+                null,
+                "Infrastructure sizing is a separate architectural concern.",
+                "Fit/gap analysis still compares requirements to capabilities after they are identified."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Which statement is the best example of a functional requirement?",
+            "options": [
+                "The system should feel modern",
+                "Managers must be able to approve discount exceptions from a mobile device",
+                "The app should load quickly",
+                "Customer data must remain in a specific geography"
+            ],
+            "answer": 1,
+            "category": "functional-requirements",
+            "tags": [
+                "functional",
+                "mobility",
+                "approvals"
+            ],
+            "explanation": "A functional requirement defines something the solution must allow a user to do. Mobile approval capability is a concrete business function.",
+            "wrongExplanations": [
+                "This is vague and subjective.",
+                null,
+                "This is mainly a non-functional performance expectation.",
+                "This is primarily a data residency constraint."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the strongest reason to decompose a broad functional requirement into smaller parts?",
+            "options": [
+                "To make documents look more detailed",
+                "To expose distinct capabilities, rules, dependencies, and validation conditions",
+                "To avoid speaking with stakeholders again",
+                "To guarantee the same sprint size"
+            ],
+            "answer": 1,
+            "category": "functional-decomposition",
+            "tags": [
+                "decomposition",
+                "dependencies",
+                "validation"
+            ],
+            "explanation": "Decomposition turns broad needs into clearer functional capabilities that can be prioritized, validated, and compared against solution options.",
+            "wrongExplanations": [
+                "More detail is not the goal by itself.",
+                null,
+                "Stakeholder validation is still needed after decomposition.",
+                "Sprint size is not the main architectural reason to decompose."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"We need better service handling.\" What is the best next step to identify the functional requirement?",
+            "options": [
+                "Build a service dashboard prototype immediately",
+                "Ask what users need to do differently, which business steps must be supported, and what successful handling looks like",
+                "Estimate custom tables for service handling",
+                "Convert it into a single backlog item called Improve service"
+            ],
+            "answer": 1,
+            "category": "elicitation",
+            "tags": [
+                "functional",
+                "elicitation",
+                "service"
+            ],
+            "explanation": "The architect should uncover the user actions, process steps, and intended outcomes that define the real functional need.",
+            "wrongExplanations": [
+                "Prototyping before clarifying the requirement can lock the team into the wrong path.",
+                null,
+                "Technical estimates are premature.",
+                "That keeps the requirement vague."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "Which requirement statement is written best for functional analysis?",
+            "options": [
+                "Create three forms and two custom tables",
+                "As a case worker, I need to assign a case to a specialist with a due date so that urgent issues are tracked to completion",
+                "Users should be happier",
+                "The solution should be scalable"
+            ],
+            "answer": 1,
+            "category": "use-cases",
+            "tags": [
+                "user-story",
+                "functional",
+                "business-value"
+            ],
+            "explanation": "This statement clearly identifies actor, action, and business purpose, which makes it useful for functional analysis and design.",
+            "wrongExplanations": [
+                "This is implementation detail rather than a functional requirement statement.",
+                null,
+                "This is too vague to analyze functionally.",
+                "This is non-functional rather than functional."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the main value of use case modelling when identifying functional requirements?",
+            "options": [
+                "It replaces workshop facilitation",
+                "It shows how actors interact with the solution across scenarios and helps reveal missing steps or conditions",
+                "It focuses only on database schema",
+                "It guarantees no customization will be needed"
+            ],
+            "answer": 1,
+            "category": "use-cases",
+            "tags": [
+                "use-case-modelling",
+                "actors",
+                "scenarios"
+            ],
+            "explanation": "Use case modelling helps visualize who interacts with the solution, what they need to do, and where functional gaps or alternate flows may exist.",
+            "wrongExplanations": [
+                "Workshops are still needed to discover and validate requirements.",
+                null,
+                "Use case modelling is broader than schema design.",
+                "It does not guarantee standard fit."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "Which question best helps identify hidden functional requirements?",
+            "options": [
+                "Which color theme should the app use?",
+                "What must users be able to create, update, review, approve, or escalate that they cannot do effectively today?",
+                "Which icon set do managers prefer?",
+                "How many developers are on the project?"
+            ],
+            "answer": 1,
+            "category": "elicitation",
+            "tags": [
+                "hidden-requirements",
+                "user-actions",
+                "discovery"
+            ],
+            "explanation": "This question focuses on the actual business actions users need to perform, which is where hidden functional needs usually surface.",
+            "wrongExplanations": [
+                "Theme choice is not a core functional discovery question.",
+                null,
+                "Icon preference does not identify business function.",
+                "Team staffing does not define user needs."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the strongest reason to map functional requirements to business processes?",
+            "options": [
+                "To make the requirement list longer",
+                "To show where each requirement fits in the end-to-end flow and expose missing or duplicate behavior",
+                "To avoid documenting assumptions",
+                "To remove the need for use cases"
+            ],
+            "answer": 1,
+            "category": "process-alignment",
+            "tags": [
+                "business-process",
+                "mapping",
+                "functional"
+            ],
+            "explanation": "Mapping requirements to processes helps the team understand where functions are needed and whether the full business scenario is supported.",
+            "wrongExplanations": [
+                "More text is not the goal.",
+                null,
+                "Assumptions may still need to be documented.",
+                "Use cases and process mapping can complement each other."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "A requirement says, \"Integrate with finance.\" Why is this not yet a usable functional requirement?",
+            "options": [
+                "Because integrations are non-functional only",
+                "Because it does not explain which business events, data, actions, and outcomes the solution must support",
+                "Because finance systems cannot be integrated",
+                "Because it is already detailed enough"
+            ],
+            "answer": 1,
+            "category": "functional-decomposition",
+            "tags": [
+                "integration",
+                "vague-requirement",
+                "decomposition"
+            ],
+            "explanation": "The statement is too broad. A usable functional requirement must clarify what business behavior the integration enables and under what conditions.",
+            "wrongExplanations": [
+                "Integrations often support functional behavior and are not purely non-functional.",
+                null,
+                "Finance systems can absolutely be integrated depending on context.",
+                "It is too vague for design."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "What is the primary role of acceptance criteria in functional requirement work?",
+            "options": [
+                "To define whether the functional behavior has been specified clearly enough to test and accept",
+                "To replace user stories",
+                "To describe infrastructure topology",
+                "To estimate project budget"
+            ],
+            "answer": 0,
+            "category": "acceptance-criteria",
+            "tags": [
+                "acceptance",
+                "testing",
+                "validation"
+            ],
+            "explanation": "Acceptance criteria make functional expectations testable and help verify whether the requirement has been met.",
+            "wrongExplanations": [
+                null,
+                "User stories and acceptance criteria serve different purposes.",
+                "Infrastructure topology is unrelated.",
+                "Acceptance criteria do not estimate budget."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Which is the best example of acceptance criteria for a functional requirement?",
+            "options": [
+                "Managers should like the approval process",
+                "A discount request can be submitted only when amount, reason, and approver are present, and an approver receives notification after submission",
+                "The solution should be intuitive",
+                "The app should be modern"
+            ],
+            "answer": 1,
+            "category": "acceptance-criteria",
+            "tags": [
+                "functional-validation",
+                "business-rules",
+                "approvals"
+            ],
+            "explanation": "This defines concrete functional conditions and expected system behavior, making the requirement testable.",
+            "wrongExplanations": [
+                "This is subjective and not testable enough.",
+                null,
+                "This is too vague and more usability-oriented.",
+                "This is aspirational, not acceptance logic."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Why should alternate flows and exception paths be considered when identifying functional requirements?",
+            "options": [
+                "Because they often reveal missing behavior the core happy path does not cover",
+                "Because they reduce the need for validation",
+                "Because only exception paths matter in design",
+                "Because they guarantee the need for customization"
+            ],
+            "answer": 0,
+            "category": "use-cases",
+            "tags": [
+                "alternate-flows",
+                "exceptions",
+                "functional-completeness"
+            ],
+            "explanation": "Functional completeness depends on more than the ideal path. Alternate and exception flows often reveal missing requirements and operational realities.",
+            "wrongExplanations": [
+                null,
+                "Validation is still required.",
+                "Happy paths still matter too.",
+                "Exception handling does not automatically force customization."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "Which statement best reflects good functional specification technique?",
+            "options": [
+                "Document only the intended screens",
+                "Describe actors, triggers, behavior, rules, data needed, and outcomes clearly enough to support design and validation",
+                "Record stakeholder comments without interpretation",
+                "Focus only on database entities"
+            ],
+            "answer": 1,
+            "category": "functional-specification",
+            "tags": [
+                "specification",
+                "actors",
+                "rules"
+            ],
+            "explanation": "A useful functional specification captures the behavior, rules, data, and context required for design and testing.",
+            "wrongExplanations": [
+                "Screen descriptions alone are too narrow.",
+                null,
+                "Raw comments often preserve ambiguity.",
+                "Database entities alone do not define functional behavior."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "A stakeholder demands a custom console for agents. Which architect question is best for uncovering the underlying functional need?",
+            "options": [
+                "Which framework should be used for the console?",
+                "What actions do agents need to perform in one place that they cannot perform efficiently today?",
+                "How many tabs should the console have?",
+                "Can we start a prototype tomorrow?"
+            ],
+            "answer": 1,
+            "category": "elicitation",
+            "tags": [
+                "solution-vs-requirement",
+                "agent-experience",
+                "functional"
+            ],
+            "explanation": "The architect should translate the requested interface into the underlying user actions and capability needs.",
+            "wrongExplanations": [
+                "This jumps to implementation.",
+                null,
+                "Tab count is premature.",
+                "A prototype before requirement clarity is risky."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "What is the best reason to identify dependencies between functional requirements?",
+            "options": [
+                "To make the backlog more complex",
+                "To understand sequencing, design impact, and whether one capability depends on another existing first",
+                "To avoid stakeholder discussion",
+                "To reduce documentation effort"
+            ],
+            "answer": 1,
+            "category": "functional-decomposition",
+            "tags": [
+                "dependencies",
+                "sequencing",
+                "planning"
+            ],
+            "explanation": "Dependencies affect delivery order, design choices, and how capability groups should be planned.",
+            "wrongExplanations": [
+                "Complexity is not the goal.",
+                null,
+                "Stakeholder discussion is still needed.",
+                "Dependency analysis usually requires more deliberate documentation, not less."
+            ],
+            "msRef": {
+                "label": "Plan a Dynamics 365 implementation strategy",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy"
+            }
+        },
+        {
+            "q": "Which requirement statement is most clearly functional rather than non-functional?",
+            "options": [
+                "The system must support 99.9% availability",
+                "Sales reps must be able to convert a qualified lead into an opportunity",
+                "The app must open within three seconds",
+                "Data must remain in the EU"
+            ],
+            "answer": 1,
+            "category": "functional-requirements",
+            "tags": [
+                "functional",
+                "sales",
+                "classification"
+            ],
+            "explanation": "This describes a business action the system must support, which is the core of a functional requirement.",
+            "wrongExplanations": [
+                "This is reliability-oriented and non-functional.",
+                null,
+                "This is performance-oriented and non-functional.",
+                "This is a residency/compliance constraint."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the strongest reason to group functional requirements by role or task?",
+            "options": [
+                "To make documentation look organized",
+                "To design applications and experiences around how different users actually work",
+                "To avoid business process analysis",
+                "To eliminate security design"
+            ],
+            "answer": 1,
+            "category": "use-cases",
+            "tags": [
+                "roles",
+                "tasks",
+                "user-experience"
+            ],
+            "explanation": "Grouping by role or task helps ensure the solution supports real working patterns rather than a generic undifferentiated feature list.",
+            "wrongExplanations": [
+                "Organization alone is not the main value.",
+                null,
+                "Business process analysis is still needed.",
+                "Security design remains necessary."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "Why should functional requirements be reviewed against standard Dynamics 365 capabilities before customization is recommended?",
+            "options": [
+                "Because standard capability may already satisfy the required function with less complexity",
+                "Because customization is never allowed",
+                "Because requirements should be rewritten as code first",
+                "Because only ISV products can close gaps"
+            ],
+            "answer": 0,
+            "category": "fit-gap",
+            "tags": [
+                "standard-capability",
+                "customization",
+                "functional-fit"
+            ],
+            "explanation": "The architect should compare functional needs to standard capabilities first, because standard fit may reduce cost, complexity, and maintenance burden.",
+            "wrongExplanations": [
+                null,
+                "Customization can be valid when justified.",
+                "Requirements should not be rewritten as code first.",
+                "ISV products are one option, not the only one."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Which statement best shows that a functional requirement is still too vague?",
+            "options": [
+                "Users must be able to submit a service request with category, priority, and attachments",
+                "Managers should have better visibility",
+                "Approvers must receive a notification when a request is submitted",
+                "Agents must be able to reassign a case with a reason"
+            ],
+            "answer": 1,
+            "category": "refinement",
+            "tags": [
+                "vague-requirement",
+                "clarity",
+                "functional"
+            ],
+            "explanation": "Better visibility is too broad and needs refinement into specific user actions, data needs, or outcomes.",
+            "wrongExplanations": [
+                "This is already functionally concrete.",
+                null,
+                "This is a specific functional behavior.",
+                "This is also specific and testable."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the best functional analysis response when different regions want different approval flows?",
+            "options": [
+                "Capture all differences as mandatory by default",
+                "Analyze which variations are truly required and which can be standardized into a common functional model",
+                "Ignore the differences until UAT",
+                "Ask developers to choose one flow"
+            ],
+            "answer": 1,
+            "category": "functional-decomposition",
+            "tags": [
+                "regional-variation",
+                "standardization",
+                "approvals"
+            ],
+            "explanation": "The architect should distinguish justified variation from legacy inconsistency so the functional model is not unnecessarily complex.",
+            "wrongExplanations": [
+                "That often preserves unnecessary complexity.",
+                null,
+                "UAT is too late.",
+                "This is not purely a developer decision."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Why are triggers and outcomes important in a functional specification?",
+            "options": [
+                "They define when the function starts and what result it must produce",
+                "They replace process mapping",
+                "They are only needed for custom code",
+                "They matter only for integration stories"
+            ],
+            "answer": 0,
+            "category": "functional-specification",
+            "tags": [
+                "triggers",
+                "outcomes",
+                "behavior"
+            ],
+            "explanation": "A clear functional specification should explain what starts the behavior and what the expected result is.",
+            "wrongExplanations": [
+                null,
+                "Process mapping can still add context.",
+                "They matter for functional behavior generally, not only custom code.",
+                "They matter beyond integration scenarios."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Functional requirements describe what users or processes must be able to do in the solution.",
+            "answer": true,
+            "category": "functional-requirements",
+            "tags": [
+                "functional",
+                "user-actions",
+                "process-support"
+            ],
+            "explanation": "That is the core meaning of functional requirements in Microsoft’s requirements guidance. :contentReference[oaicite:1]{index=1}",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "True or False: Acceptance criteria help determine whether a functional requirement has been implemented correctly enough to validate and accept.",
+            "answer": true,
+            "category": "acceptance-criteria",
+            "tags": [
+                "acceptance",
+                "validation",
+                "testing"
+            ],
+            "explanation": "Acceptance criteria make requirements testable and support validation of expected behavior.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "True or False: Use case modelling is useless once workshops have been completed.",
+            "answer": false,
+            "category": "use-cases",
+            "tags": [
+                "use-cases",
+                "workshops",
+                "analysis"
+            ],
+            "explanation": "Use case modelling remains useful after workshops because it helps structure and validate what was learned across scenarios and actors.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "True or False: A requirement written only as a proposed screen or custom component is usually not strong enough as a functional requirement.",
+            "answer": true,
+            "category": "functional-specification",
+            "tags": [
+                "solution-vs-requirement",
+                "clarity",
+                "functional"
+            ],
+            "explanation": "A proposed screen or component may be part of a solution idea, but it does not fully express the business function, rules, triggers, and outcomes needed for proper requirement analysis.",
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "True or False: Alternate and exception flows can reveal missing functional requirements that a happy-path-only view would miss.",
+            "answer": true,
+            "category": "use-cases",
+            "tags": [
+                "exceptions",
+                "alternate-flows",
+                "completeness"
+            ],
+            "explanation": "That is one of the practical reasons to model scenarios beyond the happy path.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each example to the correct category.",
+            "items": [
+                "As a sales rep, I need to convert a qualified lead to an opportunity so that the pipeline is tracked correctly",
+                "A discount request can be submitted only when amount, reason, and approver are present",
+                "Managers should have better visibility",
+                "The system must support case creation within 3 seconds"
+            ],
+            "zones": [
+                "Functional requirement / user-centered expression",
+                "Acceptance criterion",
+                "Vague requirement needing refinement",
+                "Non-functional requirement"
+            ],
+            "correctMapping": {
+                "As a sales rep, I need to convert a qualified lead to an opportunity so that the pipeline is tracked correctly": "Functional requirement / user-centered expression",
+                "A discount request can be submitted only when amount, reason, and approver are present": "Acceptance criterion",
+                "Managers should have better visibility": "Vague requirement needing refinement",
+                "The system must support case creation within 3 seconds": "Non-functional requirement"
+            },
+            "tags": [
+                "classification",
+                "functional",
+                "acceptance"
+            ],
+            "explanation": "Functional work is stronger when the team can distinguish functional capability, acceptance logic, vague statements, and non-functional expectations.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "instruction": "Match each activity to the main purpose.",
+            "items": [
+                "Decompose a broad requirement",
+                "Model a use case",
+                "Define acceptance criteria",
+                "Map a requirement to a business process"
+            ],
+            "zones": [
+                "Reveal smaller capabilities and dependencies",
+                "Understand actor interactions and scenario flow",
+                "Make behavior testable",
+                "Show where the function fits in end-to-end operations"
+            ],
+            "correctMapping": {
+                "Decompose a broad requirement": "Reveal smaller capabilities and dependencies",
+                "Model a use case": "Understand actor interactions and scenario flow",
+                "Define acceptance criteria": "Make behavior testable",
+                "Map a requirement to a business process": "Show where the function fits in end-to-end operations"
+            },
+            "tags": [
+                "functional-analysis",
+                "use-cases",
+                "process-alignment"
+            ],
+            "explanation": "These activities support different parts of strong functional requirement work: clarity, scenario understanding, validation, and process context.",
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "instruction": "Match each architect concern to the most relevant question.",
+            "items": [
+                "Hidden user task",
+                "Unclear business rule",
+                "Missing exception flow",
+                "Premature solution idea"
+            ],
+            "zones": [
+                "What else must this user do that is not currently documented?",
+                "Under what conditions is this action allowed or blocked?",
+                "What happens when the standard path fails or the data is incomplete?",
+                "What business outcome are you trying to achieve rather than what tool do you want built?"
+            ],
+            "correctMapping": {
+                "Hidden user task": "What else must this user do that is not currently documented?",
+                "Unclear business rule": "Under what conditions is this action allowed or blocked?",
+                "Missing exception flow": "What happens when the standard path fails or the data is incomplete?",
+                "Premature solution idea": "What business outcome are you trying to achieve rather than what tool do you want built?"
+            },
+            "tags": [
+                "elicitation",
+                "functional",
+                "analysis"
+            ],
+            "explanation": "Good architect questioning helps surface hidden tasks, rules, exception handling, and business intent behind proposed solutions.",
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Functional Requirements Hidden Inside a Solution Request",
+            "scenario": "A customer wants a new service workspace for handling warranty claims. During workshops, managers ask for a custom console, dashboards, quick actions, and automated escalations. Frontline agents explain that the real problems are incomplete claim information, inconsistent approval thresholds, difficulty finding related warranty history, and confusion about when claims must be escalated. Regional teams also handle exception claims differently. The initial notes mix desired screens, missing business rules, functional gaps, and a few performance expectations.",
+            "tags": [
+                "functional-requirements",
+                "use-cases",
+                "acceptance-criteria"
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Approve the custom console direction and start wireframes",
+                        "Separate solution ideas from user actions, rules, and outcomes so the true functional requirements can be defined",
+                        "Ignore the frontline agent input because managers own the budget",
+                        "Convert every request into a custom development item"
+                    ],
+                    "answer": 1,
+                    "explanation": "The first job is to separate proposed implementation from the actual behaviors, rules, and outcomes that the solution must support.",
+                    "wrongExplanations": [
+                        "That would anchor the team on a solution before the requirement is clear.",
+                        null,
+                        "Frontline operational detail is critical for functional analysis.",
+                        "That would preserve ambiguity and likely over-customize."
+                    ],
+                    "msRef": {
+                        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+                    }
+                },
+                {
+                    "q": "Which issue most clearly points to a missing functional requirement?",
+                    "options": [
+                        "The app should be fast",
+                        "Agents struggle to find related warranty history during claim handling",
+                        "Data must stay in one geography",
+                        "Managers prefer a single screen"
+                    ],
+                    "answer": 1,
+                    "explanation": "Difficulty finding warranty history points to a missing user capability the solution must support during the claim-handling process.",
+                    "wrongExplanations": [
+                        "This is a non-functional performance concern.",
+                        null,
+                        "This is a residency constraint rather than a functional capability.",
+                        "This is closer to a UX preference than a clearly defined functional requirement."
+                    ],
+                    "msRef": {
+                        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+                    }
+                },
+                {
+                    "q": "What is the best way to refine the inconsistent approval thresholds problem?",
+                    "options": [
+                        "Capture a single requirement saying approvals differ",
+                        "Define the specific approval triggers, threshold rules, approver roles, and exception conditions by scenario",
+                        "Leave it for UAT",
+                        "Let developers infer the rules from sample data"
+                    ],
+                    "answer": 1,
+                    "explanation": "Approval logic is functional behavior driven by explicit business rules. Those rules must be clarified by scenario to become design-ready.",
+                    "wrongExplanations": [
+                        "That is still too vague.",
+                        null,
+                        "UAT is too late to discover core business rules.",
+                        "Developers should not infer business rules."
+                    ],
+                    "msRef": {
+                        "label": "Define your requirements for your Dynamics 365 solution",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+                    }
+                },
+                {
+                    "q": "Which acceptance criterion is strongest for the claim escalation function?",
+                    "options": [
+                        "Escalations should feel easy",
+                        "A claim must be escalated automatically when claim value exceeds the approved threshold or required warranty evidence is missing",
+                        "Managers need visibility into escalations",
+                        "The app should support urgent work"
+                    ],
+                    "answer": 1,
+                    "explanation": "This is specific, rule-based, and testable, which makes it strong acceptance logic for a functional requirement.",
+                    "wrongExplanations": [
+                        "This is subjective and not testable enough.",
+                        null,
+                        "This is a broader functional need, not acceptance logic.",
+                        "This is too vague."
+                    ],
+                    "msRef": {
+                        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+                    }
+                },
+                {
+                    "q": "What should the architect do about regional exception-claim differences?",
+                    "options": [
+                        "Capture every variation as mandatory by default",
+                        "Analyze which exception flows are truly required and which can be standardized into the core process",
+                        "Ignore them because they affect only edge cases",
+                        "Design a separate application for each region immediately"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should evaluate whether the variations are justified business needs or legacy inconsistency before carrying them into the functional model.",
+                    "wrongExplanations": [
+                        "That often creates unnecessary complexity.",
+                        null,
+                        "Edge cases can still be business-critical.",
+                        "Separate applications are a premature and extreme response."
+                    ],
+                    "msRef": {
+                        "label": "Perform fit gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+                    }
+                },
+                {
+                    "q": "Which statement from the workshop is most clearly a premature solution idea rather than a functional requirement?",
+                    "options": [
+                        "Agents need faster access to related warranty history",
+                        "Claims must escalate when evidence is missing",
+                        "We need a custom console",
+                        "Approvals depend on claim value and region"
+                    ],
+                    "answer": 2,
+                    "explanation": "A custom console is a proposed implementation. The underlying requirement is about what users need to do and why.",
+                    "wrongExplanations": [
+                        "This is a user capability need.",
+                        "This is a functional business rule.",
+                        null,
+                        "This is also a functional rule statement."
+                    ],
+                    "msRef": {
+                        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+                    }
+                },
+                {
+                    "q": "What is the best final output from this stage of analysis?",
+                    "options": [
+                        "A list of requested screens only",
+                        "A refined set of actor-based functional requirements, rules, exception flows, and acceptance criteria mapped to the warranty-claim process",
+                        "A developer-only task list",
+                        "A branding guide for the service workspace"
+                    ],
+                    "answer": 1,
+                    "explanation": "That output gives the team a usable functional model for design, validation, fit-gap work, and prioritization.",
+                    "wrongExplanations": [
+                        "Screens alone are too narrow.",
+                        null,
+                        "A developer-only list loses business context.",
+                        "Branding does not solve the functional definition problem."
+                    ],
+                    "msRef": {
+                        "label": "Define your requirements for your Dynamics 365 solution",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+                    }
+                }
+            ]
+        }
+    ]
+}

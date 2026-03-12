@@ -1,0 +1,505 @@
+{
+    "_meta": {
+        "topic": "Review Key Success Criteria",
+        "description": "Defining measurable success criteria, acceptance criteria, and KPIs aligned to project outcomes.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "A stakeholder says, \"We want the new sales solution to be better for users.\" What is the best architect response?",
+            "options": [
+                "Accept it as a complete success criterion",
+                "Translate it into measurable outcomes such as reduced time to create an opportunity and improved adoption rate",
+                "Replace it with a technical design decision",
+                "Defer success criteria until after go-live"
+            ],
+            "answer": 1,
+            "category": "measurable-criteria",
+            "tags": [
+                "success-criteria",
+                "kpi",
+                "requirements-quality"
+            ],
+            "explanation": "A strong success criterion must be measurable and tied to a business outcome. Vague statements like \"better for users\" need concrete metrics, baselines, and targets.",
+            "wrongExplanations": [
+                "It is too vague to validate objectively.",
+                null,
+                "A technical design choice is not the same as a success criterion.",
+                "Success criteria should be defined early so they can shape scope and validation."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "Which statement is the best example of a measurable success criterion?",
+            "options": [
+                "Users should like the new system",
+                "The app should be modern and scalable",
+                "Average case resolution time should decrease from 3 days to 1 day within 90 days of go-live",
+                "Managers want better dashboards"
+            ],
+            "answer": 2,
+            "category": "measurable-criteria",
+            "tags": [
+                "kpi",
+                "time-bound",
+                "service"
+            ],
+            "explanation": "This statement is specific, measurable, and time-bound, making it suitable for validating whether the project delivered the intended business result.",
+            "wrongExplanations": [
+                "This is subjective and not measurable enough.",
+                "This is aspirational but too vague to validate.",
+                null,
+                "This is a preference, not a measurable outcome."
+            ],
+            "msRef": {
+                "label": "Choose the best methods and tools to measure business value",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+            }
+        },
+        {
+            "q": "What is the main difference between a success criterion and an acceptance criterion?",
+            "options": [
+                "Success criteria measure business outcomes, while acceptance criteria define the conditions a deliverable must meet to be accepted",
+                "Success criteria are only technical, while acceptance criteria are only business-related",
+                "There is no practical difference",
+                "Acceptance criteria are set only after production deployment"
+            ],
+            "answer": 0,
+            "category": "criteria-types",
+            "tags": [
+                "success-criteria",
+                "acceptance-criteria",
+                "validation"
+            ],
+            "explanation": "Success criteria focus on whether the initiative achieved intended business value. Acceptance criteria focus on whether a specific feature, process, or deliverable meets agreed conditions.",
+            "wrongExplanations": [
+                null,
+                "Both can involve business and technical aspects depending on context.",
+                "They are related but not identical concepts.",
+                "Acceptance criteria are usually defined well before deployment to guide build and testing."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "Which KPI is most appropriate for a project intended to improve lead qualification efficiency?",
+            "options": [
+                "Number of ribbon buttons on the form",
+                "Average time from lead capture to qualified opportunity",
+                "Number of custom tables created",
+                "Percentage of users who changed their profile picture"
+            ],
+            "answer": 1,
+            "category": "kpis",
+            "tags": [
+                "kpi",
+                "sales",
+                "process-efficiency"
+            ],
+            "explanation": "A good KPI measures the business process the project is trying to improve. Lead-to-opportunity time directly reflects qualification efficiency.",
+            "wrongExplanations": [
+                "This is a UI detail, not a business KPI.",
+                null,
+                "Custom table count is a build metric, not a business outcome metric.",
+                "This does not relate to lead qualification efficiency."
+            ],
+            "msRef": {
+                "label": "Choose the best methods and tools to measure business value",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+            }
+        },
+        {
+            "q": "A customer wants to standardize service processes across regions. What should the architect do before finalizing KPIs?",
+            "options": [
+                "Use whatever KPIs one region already tracks",
+                "Establish the current baseline and define how the future-state process will be measured consistently",
+                "Avoid KPIs until the process is fully deployed",
+                "Measure only user sentiment"
+            ],
+            "answer": 1,
+            "category": "baseline",
+            "tags": [
+                "baseline",
+                "standardization",
+                "measurement"
+            ],
+            "explanation": "Meaningful KPIs require a baseline and a consistent way to measure the improved process, especially when standardizing across regions.",
+            "wrongExplanations": [
+                "One region's metrics may not represent the enterprise baseline.",
+                null,
+                "Waiting too long weakens planning and validation.",
+                "Sentiment can supplement measurement but is not enough on its own."
+            ],
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        },
+        {
+            "q": "Which statement is the best example of an acceptance criterion for a feature?",
+            "options": [
+                "Service operations should improve overall",
+                "A case can be escalated only when priority is High or Critical and escalation reason is entered",
+                "Customer satisfaction should go up over time",
+                "The app should feel intuitive to new users"
+            ],
+            "answer": 1,
+            "category": "acceptance-criteria",
+            "tags": [
+                "feature-validation",
+                "business-rules",
+                "testing"
+            ],
+            "explanation": "Acceptance criteria define concrete conditions that must be true for a feature or deliverable to be accepted. This option is specific and testable.",
+            "wrongExplanations": [
+                "This is too broad and not testable enough as a feature-level condition.",
+                null,
+                "This is a broader business outcome, not a feature acceptance condition.",
+                "This is subjective and not sufficiently testable."
+            ],
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "What is the strongest reason to define success criteria before finalizing solution scope?",
+            "options": [
+                "It helps determine what outcomes matter and prevents scope from drifting toward low-value work",
+                "It removes the need for workshops",
+                "It guarantees that no change requests will occur",
+                "It replaces fit/gap analysis"
+            ],
+            "answer": 0,
+            "category": "scope-alignment",
+            "tags": [
+                "scope",
+                "prioritization",
+                "outcomes"
+            ],
+            "explanation": "Success criteria clarify what the project is trying to achieve, which helps prioritize scope around value instead of feature volume.",
+            "wrongExplanations": [
+                null,
+                "Workshops are still needed to discover and refine requirements.",
+                "Clear criteria help, but they do not eliminate change.",
+                "Fit/gap analysis is still needed to compare needs to capabilities."
+            ],
+            "msRef": {
+                "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        },
+        {
+            "q": "Which metric is the best fit for validating adoption of a new case management process?",
+            "options": [
+                "Number of fields on the case form",
+                "Percentage of cases handled through the new standardized process versus off-system workarounds",
+                "Number of developer commits per week",
+                "Length of the project status meeting"
+            ],
+            "answer": 1,
+            "category": "adoption-kpis",
+            "tags": [
+                "adoption",
+                "process-compliance",
+                "kpi"
+            ],
+            "explanation": "Adoption is best validated by actual use of the intended process, not by build activity or superficial UI counts.",
+            "wrongExplanations": [
+                "Field count does not measure adoption.",
+                null,
+                "Developer activity is not a business adoption metric.",
+                "Meeting length is irrelevant to process adoption."
+            ],
+            "msRef": {
+                "label": "Choose the best methods and tools to measure business value",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+            }
+        },
+        {
+            "q": "A stakeholder proposes the success criterion, \"The system must be fast.\" How should the architect improve it?",
+            "options": [
+                "Replace it with a measurable target such as a maximum response time for a key user action",
+                "Keep it as written because everyone understands speed",
+                "Convert it into a branding guideline",
+                "Delete it because performance cannot be measured early"
+            ],
+            "answer": 0,
+            "category": "performance-targets",
+            "tags": [
+                "performance",
+                "measurable",
+                "non-functional"
+            ],
+            "explanation": "Performance expectations should be expressed as clear targets or ranges for important user actions so they can be tested and managed.",
+            "wrongExplanations": [
+                null,
+                "Shared intuition is not enough for validation.",
+                "Branding is unrelated to performance expectations.",
+                "Performance targets should be defined early, not ignored."
+            ],
+            "msRef": {
+                "label": "Define performance targets recommendation for Power Platform workload",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/performance-efficiency/performance-targets"
+            }
+        },
+        {
+            "q": "Which outcome best shows that KPIs are aligned to project goals rather than to technical activity?",
+            "options": [
+                "Tracking number of plugins deployed",
+                "Tracking reduction in onboarding time after the new process is introduced",
+                "Tracking number of environment refreshes",
+                "Tracking how many forms were modified"
+            ],
+            "answer": 1,
+            "category": "kpi-alignment",
+            "tags": [
+                "business-outcomes",
+                "kpi",
+                "project-goals"
+            ],
+            "explanation": "KPIs should reflect the business improvements the project exists to deliver, not internal build effort.",
+            "wrongExplanations": [
+                "This is a technical delivery metric, not a business outcome.",
+                null,
+                "This is an operational admin metric, not an outcome KPI.",
+                "This is a build metric rather than a project value metric."
+            ],
+            "msRef": {
+                "label": "Choose the best methods and tools to measure business value",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: A success criterion is stronger when it includes a baseline and a target value.",
+            "answer": true,
+            "category": "measurable-criteria",
+            "tags": [
+                "baseline",
+                "target",
+                "kpi"
+            ],
+            "explanation": "A baseline shows current performance and a target defines the desired improvement, making the criterion meaningful and testable.",
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        },
+        {
+            "q": "True or False: Acceptance criteria are mainly used to define whether a feature or deliverable meets agreed conditions.",
+            "answer": true,
+            "category": "acceptance-criteria",
+            "tags": [
+                "feature-validation",
+                "testing"
+            ],
+            "explanation": "Acceptance criteria provide specific testable conditions for accepting a deliverable or capability.",
+            "msRef": {
+                "label": "Gather solution requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+            }
+        },
+        {
+            "q": "True or False: KPIs should be selected only after go-live because early KPI definition is speculative.",
+            "answer": false,
+            "category": "kpis",
+            "tags": [
+                "planning",
+                "measurement",
+                "outcomes"
+            ],
+            "explanation": "KPIs should be defined early so they can guide scope, design priorities, and validation planning.",
+            "msRef": {
+                "label": "Choose the best methods and tools to measure business value",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+            }
+        },
+        {
+            "q": "True or False: Performance targets are a form of measurable success criteria for non-functional expectations.",
+            "answer": true,
+            "category": "performance-targets",
+            "tags": [
+                "performance",
+                "non-functional",
+                "well-architected"
+            ],
+            "explanation": "Performance targets turn vague performance expectations into measurable objectives that can be validated and improved.",
+            "msRef": {
+                "label": "Define performance targets recommendation for Power Platform workload",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/performance-efficiency/performance-targets"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each statement to the correct category.",
+            "items": [
+                "Reduce average first-response time from 8 hours to 2 hours within 60 days",
+                "A case cannot be closed unless resolution code is entered",
+                "Percentage of orders processed without manual rework",
+                "Open account form should load within 3 seconds for standard users"
+            ],
+            "zones": [
+                "Success criterion",
+                "Acceptance criterion",
+                "KPI",
+                "Performance target"
+            ],
+            "correctMapping": {
+                "Reduce average first-response time from 8 hours to 2 hours within 60 days": "Success criterion",
+                "A case cannot be closed unless resolution code is entered": "Acceptance criterion",
+                "Percentage of orders processed without manual rework": "KPI",
+                "Open account form should load within 3 seconds for standard users": "Performance target"
+            },
+            "tags": [
+                "classification",
+                "success-criteria",
+                "kpi"
+            ],
+            "explanation": "Success criteria define intended business outcomes, acceptance criteria define feature conditions, KPIs track ongoing performance, and performance targets quantify non-functional expectations.",
+            "msRef": {
+                "label": "Choose the best methods and tools to measure business value",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+            }
+        },
+        {
+            "instruction": "Match each architect action to the reason it matters.",
+            "items": [
+                "Establish a baseline before implementation",
+                "Define acceptance criteria during requirements refinement",
+                "Choose KPIs tied to business process outcomes",
+                "Set performance targets for important user actions"
+            ],
+            "zones": [
+                "Makes improvement measurable",
+                "Makes features testable and acceptable",
+                "Keeps measurement aligned to project value",
+                "Makes non-functional expectations verifiable"
+            ],
+            "correctMapping": {
+                "Establish a baseline before implementation": "Makes improvement measurable",
+                "Define acceptance criteria during requirements refinement": "Makes features testable and acceptable",
+                "Choose KPIs tied to business process outcomes": "Keeps measurement aligned to project value",
+                "Set performance targets for important user actions": "Makes non-functional expectations verifiable"
+            },
+            "tags": [
+                "measurement",
+                "validation",
+                "architect-actions"
+            ],
+            "explanation": "Each action strengthens the link between project intent, measurable value, and testable delivery outcomes.",
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Success Criteria That Actually Mean Something",
+            "scenario": "A customer is replacing a manual case intake and triage process with Dynamics 365 Customer Service. The sponsor says success means the new system should be easier to use and should improve service quality. Service managers add that agents currently spend too much time routing cases manually, first-response times vary by team, and many cases are worked outside the intended process. The project team has drafted several features, but there is still no agreed baseline, no KPI set, and no acceptance criteria for the key triage capability.",
+            "tags": [
+                "success-criteria",
+                "kpi",
+                "acceptance-criteria"
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            },
+            "questions": [
+                {
+                    "q": "What should the architect do first?",
+                    "options": [
+                        "Finalize the feature backlog immediately",
+                        "Turn the sponsor statements into measurable outcomes and establish current baselines",
+                        "Wait until user acceptance testing to define success",
+                        "Focus only on technical telemetry"
+                    ],
+                    "answer": 1,
+                    "explanation": "The first step is to make success measurable by defining business outcomes clearly and establishing baselines that future performance can be compared against.",
+                    "wrongExplanations": [
+                        "Backlog detail without measurable outcomes can lead to feature delivery without proven value.",
+                        null,
+                        "Waiting until UAT is too late to shape project priorities.",
+                        "Technical telemetry alone does not define project success."
+                    ],
+                    "msRef": {
+                        "label": "Choose the best methods and tools to measure business value",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+                    }
+                },
+                {
+                    "q": "Which is the best KPI for this scenario?",
+                    "options": [
+                        "Number of forms customized",
+                        "Average first-response time and percentage of cases routed through the standard triage process",
+                        "Number of environments created",
+                        "Count of plugin assemblies deployed"
+                    ],
+                    "answer": 1,
+                    "explanation": "These KPIs directly reflect whether the service operation is improving and whether users are following the intended new process.",
+                    "wrongExplanations": [
+                        "This is a build metric, not a service outcome metric.",
+                        null,
+                        "Environment count does not measure business improvement.",
+                        "Plugin count is a technical delivery metric."
+                    ],
+                    "msRef": {
+                        "label": "Choose the best methods and tools to measure business value",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/business-value-methods"
+                    }
+                },
+                {
+                    "q": "Which statement is the best acceptance criterion for the triage feature?",
+                    "options": [
+                        "Agents should find triage easier",
+                        "When a case is created, priority and category must determine routing according to the approved triage rules",
+                        "Service quality should improve over time",
+                        "Managers want better visibility"
+                    ],
+                    "answer": 1,
+                    "explanation": "This defines a specific, testable condition for how the feature must behave in order to be accepted.",
+                    "wrongExplanations": [
+                        "This is subjective and not sufficiently testable.",
+                        null,
+                        "This is a broad outcome, not a feature-level acceptance condition.",
+                        "This is a general desire, not an acceptance criterion."
+                    ],
+                    "msRef": {
+                        "label": "Gather solution requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/lead-requirements-gathering/2-gather-solution-requirements"
+                    }
+                },
+                {
+                    "q": "Why is the lack of a baseline a problem?",
+                    "options": [
+                        "Because the team will not know whether the new process actually improved outcomes",
+                        "Because branding decisions cannot be made",
+                        "Because Dataverse requires a baseline before configuration",
+                        "Because acceptance criteria become optional"
+                    ],
+                    "answer": 0,
+                    "explanation": "Without a baseline, post-implementation results cannot be compared meaningfully to the starting point, so proving business value becomes weak or impossible.",
+                    "wrongExplanations": [
+                        null,
+                        "Branding is unrelated.",
+                        "Dataverse does not require this as a product prerequisite.",
+                        "Acceptance criteria remain necessary regardless."
+                    ],
+                    "msRef": {
+                        "label": "Standardize business processes during a Dynamics 365 implementation",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+                    }
+                }
+            ]
+        }
+    ]
+}

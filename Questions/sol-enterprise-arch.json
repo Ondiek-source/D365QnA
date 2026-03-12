@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Evaluate the Organisation Enterprise Architecture",
+        "description": "Assessing technology landscape, architecture principles, governance standards, and alignment to enterprise strategy.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "Why should a solution architect evaluate the organisation's enterprise architecture before recommending a Power Platform or Dynamics 365 solution?",
+            "options": [
+                "To choose a color theme that matches the corporate brand",
+                "To ensure the proposed solution aligns with existing technology standards, governance controls, and strategic architecture direction",
+                "To avoid discussing business processes",
+                "To guarantee that every legacy system is retired immediately"
+            ],
+            "answer": 1,
+            "category": "enterprise-architecture",
+            "tags": [
+                "alignment",
+                "strategy",
+                "governance"
+            ],
+            "explanation": "Enterprise architecture evaluation helps the architect understand the technology direction, governance model, and design constraints so the proposed solution fits the organisation instead of conflicting with it.",
+            "wrongExplanations": [
+                "Branding is not the primary reason to assess enterprise architecture.",
+                null,
+                "Business process analysis is still required.",
+                "Enterprise architecture does not automatically require immediate retirement of all legacy systems."
+            ],
+            "msRef": {
+                "label": "Design a solution architecture that works for you",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars"
+            }
+        },
+        {
+            "q": "Which organisational finding most strongly affects whether a proposed solution fits the enterprise architecture?",
+            "options": [
+                "The company has a preferred PowerPoint template",
+                "The organisation has formal standards for identity, integration, security, and environment governance",
+                "One team prefers shorter forms",
+                "Users want fewer clicks"
+            ],
+            "answer": 1,
+            "category": "governance-standards",
+            "tags": [
+                "standards",
+                "security",
+                "integration"
+            ],
+            "explanation": "Formal standards for identity, integration, security, and environments directly shape what solution patterns are acceptable in the enterprise architecture.",
+            "wrongExplanations": [
+                "Presentation templates do not materially affect enterprise solution fit.",
+                null,
+                "UI preferences are not the strongest enterprise architecture factor.",
+                "This is a usability concern, not a core enterprise architecture standard."
+            ],
+            "msRef": {
+                "label": "Use methodologies for your solution design - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars-methodology"
+            }
+        },
+        {
+            "q": "A customer wants a new solution, but the enterprise architecture team requires all workload designs to fit within approved governance controls and landing zone patterns. What should the solution architect do first?",
+            "options": [
+                "Ignore enterprise constraints until after build begins",
+                "Review the applicable governance and landing zone constraints before finalizing solution direction",
+                "Assume the architecture board will make an exception later",
+                "Recommend custom infrastructure for every workload"
+            ],
+            "answer": 1,
+            "category": "landing-zones",
+            "tags": [
+                "landing-zones",
+                "governance",
+                "constraints"
+            ],
+            "explanation": "If the organisation uses landing zone and governance controls, the architect should understand those constraints early so the design fits the approved operational and security model.",
+            "wrongExplanations": [
+                "Ignoring enterprise constraints early creates redesign risk later.",
+                null,
+                "Assuming an exception without evidence is poor architect judgment.",
+                "Custom infrastructure by default conflicts with standardization goals."
+            ],
+            "msRef": {
+                "label": "What is an Azure landing zone?",
+                "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/"
+            }
+        },
+        {
+            "q": "Which question best tests alignment of a proposed Power Platform solution with enterprise strategy?",
+            "options": [
+                "Which team wants the most custom pages?",
+                "How does this solution support the organisation's target operating model, security posture, and platform standards?",
+                "How many forms can be built this week?",
+                "Which users prefer a dark theme?"
+            ],
+            "answer": 1,
+            "category": "strategy-alignment",
+            "tags": [
+                "enterprise-strategy",
+                "operating-model",
+                "platform-standards"
+            ],
+            "explanation": "The strongest alignment question links the solution to how the organisation intends to operate, govern, secure, and scale its platforms.",
+            "wrongExplanations": [
+                "Custom page count does not test strategic alignment.",
+                null,
+                "Delivery speed alone does not prove alignment.",
+                "Theme preference is irrelevant to enterprise strategy."
+            ],
+            "msRef": {
+                "label": "Design a solution architecture that works for you",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars"
+            }
+        },
+        {
+            "q": "What is the best reason to review existing environment strategy and data policy controls during enterprise architecture assessment?",
+            "options": [
+                "To decide whether users should get more dashboards",
+                "To understand how environments, connector use, and data movement are governed across the organisation",
+                "To avoid discussing integrations",
+                "To replace requirements gathering"
+            ],
+            "answer": 1,
+            "category": "platform-governance",
+            "tags": [
+                "environments",
+                "dlp",
+                "governance"
+            ],
+            "explanation": "Environment strategy and data policies show how the organisation governs separation, lifecycle, and connector-based data movement, which directly affects solution feasibility and design.",
+            "wrongExplanations": [
+                "Dashboard preferences are not the main architectural concern.",
+                null,
+                "Integrations remain important and often depend on these controls.",
+                "Governance assessment complements rather than replaces requirements work."
+            ],
+            "msRef": {
+                "label": "Data policies - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+            }
+        },
+        {
+            "q": "A proposed solution depends on unrestricted connector usage, but the organisation enforces strict data policies. What is the best architect response?",
+            "options": [
+                "Assume the policies can be ignored in production",
+                "Assess whether the solution can work within policy constraints or whether a governed exception process is required",
+                "Move all data through spreadsheets",
+                "Tell the customer governance is purely an admin issue"
+            ],
+            "answer": 1,
+            "category": "policy-alignment",
+            "tags": [
+                "dlp",
+                "connector-governance",
+                "exceptions"
+            ],
+            "explanation": "The architect should treat governance policy as a design constraint and determine whether the solution can comply or requires a formal exception path.",
+            "wrongExplanations": [
+                "Ignoring policy is not a viable architectural approach.",
+                null,
+                "Spreadsheets are not a sound governance workaround.",
+                "Governance materially affects architecture and is not just an admin issue."
+            ],
+            "msRef": {
+                "label": "Environment and data policy management - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/coe/env-mgmt"
+            }
+        },
+        {
+            "q": "Which statement best reflects good enterprise architecture judgment for a PL-600 solution architect?",
+            "options": [
+                "Every project should define its own standards independently",
+                "The solution should align to enterprise standards where possible and challenge only where business value clearly justifies an exception",
+                "Enterprise standards should be ignored if they slow delivery",
+                "Only infrastructure teams need to care about architecture principles"
+            ],
+            "answer": 1,
+            "category": "architecture-principles",
+            "tags": [
+                "standards",
+                "exceptions",
+                "architect-judgment"
+            ],
+            "explanation": "Good architect judgment balances conformity to enterprise standards with pragmatic exception handling when there is a clear business case.",
+            "wrongExplanations": [
+                "Independent standards create fragmentation and governance problems.",
+                null,
+                "Ignoring enterprise standards creates risk and rework.",
+                "Enterprise architecture decisions affect workload and application design too."
+            ],
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        },
+        {
+            "q": "Why should the architect assess operational excellence expectations when evaluating enterprise architecture alignment?",
+            "options": [
+                "Because release management, monitoring, and support practices influence whether the solution can be run sustainably",
+                "Because operational excellence is only relevant after the project ends",
+                "Because it determines the logo placement in apps",
+                "Because it eliminates the need for ALM"
+            ],
+            "answer": 0,
+            "category": "operational-excellence",
+            "tags": [
+                "operations",
+                "alm",
+                "supportability"
+            ],
+            "explanation": "Operational excellence includes practices such as release management, monitoring, and support. These practices are part of whether the solution fits the enterprise operating model.",
+            "wrongExplanations": [
+                null,
+                "Operational excellence matters during design, not just after delivery.",
+                "Logo placement is irrelevant.",
+                "Operational excellence works with ALM; it does not remove it."
+            ],
+            "msRef": {
+                "label": "Operational Excellence design principles - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+            }
+        },
+        {
+            "q": "What is the strongest reason to review the organisation's preferred ALM and environment lifecycle approach during architecture assessment?",
+            "options": [
+                "To determine whether the solution can be governed, deployed, and changed consistently across environments",
+                "To decide how many tabs to place on a form",
+                "To avoid involving testing teams",
+                "To reduce the need for source control"
+            ],
+            "answer": 0,
+            "category": "alm-governance",
+            "tags": [
+                "alm",
+                "environment-strategy",
+                "lifecycle"
+            ],
+            "explanation": "Preferred ALM and environment lifecycle practices are core parts of enterprise architecture because they govern how solutions move safely and consistently through delivery stages.",
+            "wrongExplanations": [
+                null,
+                "Form tab design is unrelated.",
+                "Testing still remains essential.",
+                "Source control becomes more important, not less."
+            ],
+            "msRef": {
+                "label": "Set up environments and data policies - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/sap/templates/sap-procurement/administer/set-up-environments-data-policies"
+            }
+        },
+        {
+            "q": "Which enterprise architecture concern is most directly raised when different business units create unmanaged solutions and inconsistent environment patterns across the tenant?",
+            "options": [
+                "Brand consistency",
+                "Governance fragmentation and reduced operational control",
+                "User interface innovation",
+                "Lower report count"
+            ],
+            "answer": 1,
+            "category": "tenant-governance",
+            "tags": [
+                "managed-environments",
+                "governance",
+                "consistency"
+            ],
+            "explanation": "Inconsistent environment and solution management patterns create governance fragmentation, weaker control, and higher lifecycle risk across the platform.",
+            "wrongExplanations": [
+                "Brand consistency is not the main risk.",
+                null,
+                "Innovation is not the core architectural issue described.",
+                "Report count is irrelevant."
+            ],
+            "msRef": {
+                "label": "Managed Environments overview - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/managed-environment-overview"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Evaluating enterprise architecture is only about reviewing current technology products, not governance or strategy.",
+            "answer": false,
+            "category": "enterprise-architecture",
+            "tags": [
+                "strategy",
+                "governance",
+                "technology-landscape"
+            ],
+            "explanation": "Enterprise architecture assessment includes technology landscape, governance standards, architecture principles, and strategic direction, not just product inventory.",
+            "msRef": {
+                "label": "Design a solution architecture that works for you",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars"
+            }
+        },
+        {
+            "q": "True or False: Landing zone and governance constraints should be understood before locking in solution direction.",
+            "answer": true,
+            "category": "landing-zones",
+            "tags": [
+                "constraints",
+                "governance",
+                "architecture"
+            ],
+            "explanation": "If the organisation uses landing zones or formal governance controls, they shape design choices and should be understood early.",
+            "msRef": {
+                "label": "Azure landing zone design areas",
+                "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-areas"
+            }
+        },
+        {
+            "q": "True or False: Data policies in Power Platform can act as governance guardrails for connector use and data movement.",
+            "answer": true,
+            "category": "platform-governance",
+            "tags": [
+                "dlp",
+                "connectors",
+                "guardrails"
+            ],
+            "explanation": "Microsoft describes data policies as guardrails that help reduce the risk of unintentionally exposing organizational data through connectors.",
+            "msRef": {
+                "label": "Data policies - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+            }
+        },
+        {
+            "q": "True or False: Enterprise architecture alignment has no real connection to supportability or operational excellence.",
+            "answer": false,
+            "category": "operational-excellence",
+            "tags": [
+                "supportability",
+                "operations",
+                "well-architected"
+            ],
+            "explanation": "Enterprise architecture alignment directly affects how supportable, governable, and operationally sustainable a solution will be.",
+            "msRef": {
+                "label": "Operational Excellence design principles - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each enterprise architecture concern to the most relevant area.",
+            "items": [
+                "Approved identity and access standards",
+                "Restrictions on connector combinations and data movement",
+                "Standard approach for governed workload placement and controls",
+                "Preferred release management and monitoring practices"
+            ],
+            "zones": [
+                "Security architecture",
+                "Data policy governance",
+                "Landing zone / platform governance",
+                "Operational excellence"
+            ],
+            "correctMapping": {
+                "Approved identity and access standards": "Security architecture",
+                "Restrictions on connector combinations and data movement": "Data policy governance",
+                "Standard approach for governed workload placement and controls": "Landing zone / platform governance",
+                "Preferred release management and monitoring practices": "Operational excellence"
+            },
+            "tags": [
+                "enterprise-architecture",
+                "governance",
+                "alignment"
+            ],
+            "explanation": "Enterprise architecture assessment should connect each organizational concern to the architectural domain it constrains or enables.",
+            "msRef": {
+                "label": "Power Platform Well-Architected pillars",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/pillars"
+            }
+        },
+        {
+            "instruction": "Match each architect action to the reason it matters during enterprise architecture evaluation.",
+            "items": [
+                "Review environment strategy",
+                "Assess governance standards and exception paths",
+                "Understand enterprise integration patterns",
+                "Check alignment with the target operating model"
+            ],
+            "zones": [
+                "Confirms how solutions are separated and managed through lifecycle",
+                "Shows whether the solution can comply or needs formal approval for deviations",
+                "Reduces the risk of proposing patterns that conflict with enterprise design",
+                "Ensures the solution fits how the organisation intends to run technology and teams"
+            ],
+            "correctMapping": {
+                "Review environment strategy": "Confirms how solutions are separated and managed through lifecycle",
+                "Assess governance standards and exception paths": "Shows whether the solution can comply or needs formal approval for deviations",
+                "Understand enterprise integration patterns": "Reduces the risk of proposing patterns that conflict with enterprise design",
+                "Check alignment with the target operating model": "Ensures the solution fits how the organisation intends to run technology and teams"
+            },
+            "tags": [
+                "architect-actions",
+                "enterprise-architecture",
+                "governance"
+            ],
+            "explanation": "These actions keep the solution aligned with enterprise patterns instead of letting the project drift into isolated local design choices.",
+            "msRef": {
+                "label": "Use methodologies for your solution design - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars-methodology"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Designing Inside Enterprise Constraints",
+            "scenario": "A multinational organisation wants to implement a new Power Platform and Dynamics 365 solution for service operations. The business is pushing for rapid delivery, but the enterprise architecture team has defined standards for identity, integration, environment separation, connector governance, release controls, and approved workload placement. The organisation also uses landing zone principles for governed environments and expects projects to align to its operating model. During workshops, one regional team requests direct connector access to several unsanctioned services, while the delivery team proposes shortcuts that bypass the usual ALM and monitoring approach to save time.",
+            "tags": [
+                "enterprise-architecture",
+                "governance",
+                "operating-model"
+            ],
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Approve the shortcuts so the project can move faster",
+                        "Assess the proposed solution against enterprise standards, governance controls, and landing zone constraints before committing to direction",
+                        "Ignore enterprise architecture because this is an application project",
+                        "Wait until go-live planning to review constraints"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should evaluate the proposed design against enterprise standards and constraints early, before solution direction hardens.",
+                    "wrongExplanations": [
+                        "Speed does not justify bypassing governance without informed assessment.",
+                        null,
+                        "Enterprise architecture absolutely matters for application solutions.",
+                        "Late review increases rework risk."
+                    ],
+                    "msRef": {
+                        "label": "What is an Azure landing zone?",
+                        "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/"
+                    }
+                },
+                {
+                    "q": "What is the strongest concern with the regional request for unsanctioned connector access?",
+                    "options": [
+                        "It may conflict with organizational data policy governance and require a formal exception path",
+                        "It guarantees a better user experience",
+                        "It removes the need for integration design",
+                        "It means Dataverse is not needed"
+                    ],
+                    "answer": 0,
+                    "explanation": "Unsanctioned connector access can violate governance guardrails around data movement and connector use, so it must be assessed against policy and exception processes.",
+                    "wrongExplanations": [
+                        null,
+                        "User experience does not override governance constraints.",
+                        "Connector access does not remove the need for integration design.",
+                        "This does not imply Dataverse is unnecessary."
+                    ],
+                    "msRef": {
+                        "label": "Data policies - Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+                    }
+                },
+                {
+                    "q": "Why is bypassing the usual ALM and monitoring approach risky from an enterprise architecture perspective?",
+                    "options": [
+                        "Because it can reduce governance consistency, supportability, and operational control",
+                        "Because it always makes forms slower",
+                        "Because it prevents users from signing in",
+                        "Because it changes the company logo"
+                    ],
+                    "answer": 0,
+                    "explanation": "Skipping standard ALM and monitoring practices weakens operational excellence and can make the solution harder to govern, support, and evolve safely.",
+                    "wrongExplanations": [
+                        null,
+                        "Form speed is not the central enterprise architecture risk here.",
+                        "Authentication failure is not the direct implied consequence.",
+                        "Branding is irrelevant."
+                    ],
+                    "msRef": {
+                        "label": "Operational Excellence design principles - Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+                    }
+                },
+                {
+                    "q": "What is the best final recommendation style in this scenario?",
+                    "options": [
+                        "Recommend the fastest path only",
+                        "Recommend the option that best balances business urgency with enterprise standards, governance, and operational sustainability",
+                        "Let each region choose its own architecture pattern",
+                        "Defer all enterprise architecture decisions to post-go-live support"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should make tradeoffs explicit and recommend a path that delivers value while still aligning with enterprise architecture and governance expectations.",
+                    "wrongExplanations": [
+                        "Fastest alone is too narrow and may create long-term risk.",
+                        null,
+                        "Allowing each region to diverge fragments enterprise architecture.",
+                        "These decisions must be made before go-live, not after."
+                    ],
+                    "msRef": {
+                        "label": "Design a solution architecture that works for you",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars"
+                    }
+                }
+            ]
+        }
+    ]
+}

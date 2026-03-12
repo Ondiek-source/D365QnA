@@ -295,16 +295,6 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
   .gl-content{padding:24px 18px}
 }
 
-/* ── INTERVIEW TOPIC BANNER ── */
-.is-topic-banner{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border:1px solid var(--border2);border-left:3px solid var(--accent);margin-bottom:18px}
-.is-topic-eyebrow{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);flex-shrink:0}
-.is-topic-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--accent);letter-spacing:.5px;flex:1}
-.is-topic-diff{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border:1px solid;flex-shrink:0}
-.diff-senior{color:var(--wrong);border-color:var(--wrong)}
-.diff-mid{color:var(--warn);border-color:var(--warn)}
-.diff-junior{color:var(--accent3);border-color:var(--accent3)}
-.diff-mixed{color:var(--muted2);border-color:var(--border2)}
-
 /* ── REPORT MODAL ── */
 .rpt-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .2s ease}
 .rpt-modal{background:var(--surface);border:1px solid var(--border2);max-width:460px;width:100%;padding:32px;position:relative}
@@ -1106,14 +1096,6 @@ const CONFIG = {
       icon:'🎯',
       desc:'',
       file:'Interviewsim/CE_Technical_Consultant_Interview.json'
-    },
-    {
-      id:'kpmg-mbs',
-      title:'KPMG MBS — Dynamics CE Consultant',
-      icon:'🏢',
-      desc:'KPMG MBS Malta stage-2 technical interview. 77 questions across plugin development, ALM, Dataverse, integrations, security, stakeholder delivery, and behavioural proof.',
-      file:'Interviewsim/kpmg_interview_prep.json',
-      isQuizBank: true
     }
   ],
   // Groups — parent cards on home screen that open a sub-topic picker screen
@@ -3262,94 +3244,17 @@ function renderInterviewSimGrid(){
     const card=document.createElement('div');
     card.className='topic-card';
     card.style.cursor='pointer';
-    const isQuiz = !!pack.isQuizBank;
-    card.onclick = isQuiz ? ()=>launchKpmgQuiz(pack) : ()=>loadInterviewPack(pack.id);
-    const modeBadge = isQuiz ? '🎯 Timed quiz session' : '🎙️ Interview simulation';
-    const desc = pack.desc || 'Technical interview screening pack — MCQ, deep-drill, and scenario formats.';
+    card.onclick=()=>loadInterviewPack(pack.id);
     card.innerHTML=`
       <div class="card-header">
-        <div class="card-icon" style="display:flex;align-items:center;font-size:22px">${pack.icon||'🎯'}</div>
+        <div class="card-icon" style="display:flex;align-items:center">${d365Img}</div>
         <div class="card-status status-ready">Ready</div>
       </div>
       <div class="card-title">${pack.title}</div>
-      <div class="card-desc">${desc}</div>
-      <div class="card-meta"><span>${modeBadge}</span></div>`;
+      <div class="card-desc">CE Technical Consultant screening — Plugins, ALM, Dataverse, integrations, security, and case management across MCQ, deep-drill, and scenario formats.</div>
+      <div class="card-meta"><span>🎙️ Interview simulation</span></div>`;
     grid.appendChild(card);
   });
-}
-
-/* Launch KPMG quiz-bank pack as a timed quiz session */
-async function launchKpmgQuiz(packCfg){
-  if(location.protocol==='file:'){
-    showSetupError(packCfg.file,'interview');
-    return;
-  }
-  loading(true,'Loading KPMG interview bank…');
-  try{
-    const res = await fetch(packCfg.file, {cache:'no-store'});
-    if(!res.ok) throw new Error('File not found: '+packCfg.file);
-    const bank = await res.json();
-    // Inject as a virtual topic into QS
-    const topicId = packCfg.id;
-    const topicTitle = packCfg.title;
-    const counts = {
-      mcq: Math.min((bank.mcq||[]).length, 40),
-      tf: 0,
-      dragdrop: Math.min((bank.dragdrop||[]).length, 6),
-      casestudy: 0
-    };
-    const mcq = shuffle(bank.mcq||[]).slice(0, counts.mcq);
-    const dd  = shuffle(bank.dragdrop||[]).slice(0, counts.dragdrop);
-
-    const TARGET = 1000;
-    const mcqW = 0.70, ddW = 0.30;
-    const ptsMCQ = Math.round(mcq.length ? TARGET * mcqW / mcq.length : 15);
-    const ptsDD  = Math.round(dd.length  ? TARGET * ddW  / dd.length  : 25);
-
-    const nonCS = [];
-    mcq.forEach(q => nonCS.push({...q, type:'mcq', pts:ptsMCQ}));
-    dd.forEach(q  => nonCS.push({...q, type:'dragdrop', pts:ptsDD}));
-    shuffle(nonCS);
-
-    const questions = nonCS.map((q,i)=>({...q, qIdx:i}));
-    questions.forEach(q=>{
-      if((q.type==='mcq')&&Array.isArray(q.options)){
-        const orig=q.answer;
-        const idx=[...q.options.keys()];
-        for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
-        q.shuffledOptions=idx.map(i=>q.options[i]);
-        q.shuffledAnswer=idx.indexOf(orig);
-        if(q.wrongExplanations) q.shuffledWrongExplanations=idx.map(i=>q.wrongExplanations[i]);
-      }
-    });
-    questions._meta = { mcqMax: TARGET*mcqW, ddMax: TARGET*ddW, csMax:0, mcqCount:mcq.length, ddCount:dd.length, csCount:0 };
-
-    QS = {
-      topicId, topicTitle,
-      sessionMinutes: 65,
-      questions,
-      scoreMeta: questions._meta,
-      current: 0,
-      answers: new Array(questions.length).fill(null),
-      flags: new Set(),
-      totalScore: 0,
-      scoreBreakdown: {mcq:0, dragdrop:0, casestudy:0},
-      startTime: Date.now(),
-      timerSecs: 65*60,
-      timerInterval: null,
-      finished: false,
-      dragSource: null,
-      ddPlacements: {}
-    };
-    loading(false);
-    showScreen('quizScreen');
-    startTimer();
-    renderQuestion();
-  } catch(err){
-    loading(false);
-    showSetupError(packCfg.file,'interview');
-    console.error(err);
-  }
 }
 
 async function fetchInterviewPack(packCfg){
@@ -3454,22 +3359,6 @@ function toggleInterviewReveal(){
   renderInterviewPack();
 }
 
-function buildTopicBanner(item){
-  if(!item) return '';
-  const domain = item.domain || item.section_name || 'General';
-  const diff   = (item.difficulty||'').toLowerCase();
-  const diffCls = diff.includes('senior')||diff.includes('hard') ? 'diff-senior'
-                : diff.includes('mid')||diff.includes('intermediate') ? 'diff-mid'
-                : diff.includes('junior')||diff.includes('easy') ? 'diff-junior'
-                : 'diff-mixed';
-  const diffLabel = diff || 'mixed';
-  return `<div class="is-topic-banner">
-    <span class="is-topic-eyebrow">Topic</span>
-    <span class="is-topic-name">${escapeHtml(domain)}</span>
-    <span class="is-topic-diff ${diffCls}">${escapeHtml(diffLabel)}</span>
-  </div>`;
-}
-
 function renderInterviewPack(){
   const pack=IS.pack; if(!pack) return;
   const sections=getInterviewSections();
@@ -3513,18 +3402,18 @@ function renderInterviewPack(){
   if(!item){
     html='<div class="question-text">No interview prompts found in this section.</div>';
   } else if(itemKind==='agent_rule'){
-    html=`${buildTopicBanner(item)}<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">Runtime Rule</div></div>
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">Runtime Rule</div></div>
       <div class="question-text">${escapeHtml(item.rule||item.title||'Runtime Rule')}</div>
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.description||item.guidance||item.value||JSON.stringify(item))}</div></div>`;
   } else if(itemKind==='mcq'){
     const opts=Object.entries(item.options||{}).map(([k,v])=>`<div class="option ${reveal && k===item.correct_answer?'correct':''}" style="cursor:default"><div class="opt-letter">${escapeHtml(k)}</div><div>${escapeHtml(v)}</div></div>`).join('');
-    html=`${buildTopicBanner(item)}<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
       <div class="question-text">${escapeHtml(item.question||'')}</div>
       <div style="margin-bottom:16px">${opts}</div>
       ${reveal?`<div class="feedback-panel show fp-correct"><div class="fb-label c">Correct answer: ${escapeHtml(item.correct_answer||'')}</div><div class="fb-body">${escapeHtml(item.why||'')}</div><div class="fb-pts">Use the follow-up probes below to pressure-test yourself.</div></div>`:''}
       ${reveal && item.follow_up_probes?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Follow-up Probes</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.follow_up_probes.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
   } else if(itemKind==='case'){
-    html=`${buildTopicBanner(item)}<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
       <div class="question-text">Scenario / Problem-Solving</div>
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Scenario</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.scenario||'')}</div></div>
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Candidate Task</div><div style="font-size:12px;color:var(--muted2);line-height:1.8">${escapeHtml(item.candidate_task||'')}</div></div>
@@ -3532,7 +3421,7 @@ function renderInterviewPack(){
       <div class="ci-card" style="padding:16px 18px;margin-bottom:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.killer_followups||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>
       <div class="ci-card" style="padding:16px 18px"> <div class="ci-title" style="margin-bottom:8px">Fail Triggers</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${(item.fail_triggers||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}`;
   } else {
-    html=`${buildTopicBanner(item)}<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'General')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
+    html=`<div class="q-meta-row"><div class="q-tag-chip">${escapeHtml(item.id||'')}</div><div class="q-tag-chip">${escapeHtml(item.domain||'General')}</div><div class="q-tag-chip">${escapeHtml(item.difficulty||'')}</div></div>
       <div class="question-text">${escapeHtml(item.question||'')}</div>
       ${reveal && item.expected_points?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Expected Points</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.expected_points.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}
       ${reveal && item.killer_followups?.length?`<div class="ci-card" style="padding:16px 18px;margin-top:14px"><div class="ci-title" style="margin-bottom:8px">Killer Follow-ups</div><ul style="margin:0 0 0 18px;color:var(--muted2);font-size:12px;line-height:1.8">${item.killer_followups.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`:''}

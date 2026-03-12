@@ -1,0 +1,425 @@
+{
+  "_meta": {
+    "topic": "Identify Organisation Information and Metrics",
+    "description": "Covers PL-600 exam objective: Perform solution envisioning and requirement analysis > Identify organisation information and metrics. Three sub-objectives: (1) Guide the process of collecting the current state business processes — as-is/to-be mapping, process catalogs, process mining vs task mining, event log requirements, business process catalog; (2) Assess an organisation's risk factors — Success by Design risk categories, findings types (assertions/risks/issues), proactive vs reactive engagement, change management and executive sponsorship risks; (3) Review key success criteria — success measures, KPIs vs OKRs, measurable outcomes, Success by Design tracking categories.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "Microsoft's process-focused implementation guidance explains why business processes are a superior basis for defining project scope compared to a flat list of written requirements. Which statement best captures this documented reasoning?",
+      "options": [
+        "Business processes are shorter to document and reduce the volume of paperwork the project team must produce",
+        "Business processes describe the activities, roles, functions, data, and systems involved in operations — they are richer in context than a requirements list, show the connections between different business units and systems, are naturally hierarchical, and can be expressed at different levels of detail depending on their intended purpose",
+        "Written requirements are legally binding documents that create contractual risk — business processes avoid this problem",
+        "Business processes are preferred only for Agile projects — waterfall projects still rely on written requirements"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["business-processes", "scope", "process-catalog", "as-is", "process-focused"],
+      "explanation": "Microsoft's implementation guidance states: 'Your business processes describe the activities, roles, functions, data, and systems that are involved in your operations. They show the connections and dependencies between different parts of your organization.' The guidance provides five specific reasons processes are superior scope vehicles: (1) users understand them because they are expressed in the language they know best; (2) they are richer in context than a requirements list; (3) they show connections between different business units, roles, functions, task-level steps, and systems; (4) they are naturally hierarchical and can be expressed in different levels of detail; (5) they are the connectors that show the data and people feedback loop. These properties make process-based scope definitions far more useful than flat requirement lists.",
+      "wrongExplanations": [
+        "Documentation volume is not the reasoning — process catalogs are often more detailed than requirement lists, not shorter.",
+        "Legal risk around requirements documents is not the documented rationale — the guidance focuses on richness of context and business communication.",
+        "Microsoft's guidance explicitly states the process-focused approach 'can create a solution that reflects and improves your business operations, regardless of the underlying methodology' — it applies to Agile, Waterfall, and hybrid approaches alike."
+      ],
+      "msRef": {
+        "label": "Base the implementation lifecycle on your business processes — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-implementation-lifecycle"
+      }
+    },
+    {
+      "q": "When collecting current state business processes, what is the recommended approach for organising and structuring them in Microsoft's guidance?",
+      "options": [
+        "Document each process as a free-form narrative in Word and store them in SharePoint",
+        "Build a process catalog — a structured and hierarchical list of processes that are numbered, labelled, and referenced, grouping processes by business value streams, departments, roles, or functions to define a process taxonomy",
+        "Create one swimlane diagram per department and treat each as independent",
+        "Capture all processes in a single flat Excel spreadsheet with no hierarchy"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["process-catalog", "as-is", "taxonomy", "hierarchy", "scope-definition"],
+      "explanation": "Microsoft's implementation guidance explicitly defines the process catalog as: 'a structured and hierarchical list of your processes. Number, label, and reference your processes in the catalog. Group your processes by business value streams, departments, roles, or functions. This helps you define the process taxonomy or structure.' The guidance also recommends using Microsoft's Dynamics 365 Business Process Catalog (downloadable from aka.ms/BusinessProcessCatalog, updated at least four times per year) as a starting structure. The Azure DevOps template for the catalog includes Priority, Risk, Effort, Business Value, and Time Criticality fields to help prioritise design work.",
+      "wrongExplanations": [
+        "Free-form Word narratives lack the hierarchy, numbering, and taxonomy that make processes reusable across design, build, test, and training phases.",
+        "Independent per-department swimlane diagrams miss the cross-functional connections and dependencies that are one of the core strengths of a process-based approach.",
+        "A flat Excel spreadsheet without hierarchy cannot express the hierarchical nature of processes or support the assignment and tracking capabilities the Azure DevOps template provides."
+      ],
+      "msRef": {
+        "label": "Base the implementation lifecycle on your business processes — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-implementation-lifecycle"
+      }
+    },
+    {
+      "q": "During current state collection, the architect is asked whether to use process mining or task mining to analyse the organisation's existing processes. What is the key distinction between these two capabilities in Power Automate?",
+      "options": [
+        "Process mining is for technical staff; task mining is for business users — the audience determines which to use",
+        "Process mining works with event log data from systems of record to discover and analyse organisation-wide process flows, inefficiencies, and variants. Task mining records individual user interactions on a desktop to identify what tasks a user performs and how long each step takes, enabling automation discovery",
+        "Task mining is only available in Power Automate Premium; process mining is included in all Power Automate licences at no additional cost",
+        "Process mining and task mining are two names for the same feature — they produce identical outputs"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["process-mining", "task-mining", "as-is", "bottlenecks", "Power-Automate"],
+      "explanation": "Microsoft's documentation clearly distinguishes the two: Process mining — 'better suited for discovery of inefficiencies in organisation-wide processes. It enables you to gain a deep understanding of your processes using event log files that you can get from your system of record. The process mining capability displays maps of your processes with data and metrics to recognise performance issues.' Examples: accounts receivable, order-to-cash. Task mining — 'analyses existing recordings to identify any bottlenecks within the business process.' It records what users actually do on their desktops, identifying the applications used, time per step, and automation opportunities. The outputs serve different purposes: process mining reveals how the system-recorded process actually flows (often different from documented processes); task mining reveals how individual users perform tasks.",
+      "wrongExplanations": [
+        "Audience is not the determining factor — both capabilities are used by architects and analysts; the choice depends on whether the source data is system event logs (process mining) or desktop recordings (task mining).",
+        "Both capabilities require a Power Automate Premium licence for full functionality — the claim that process mining is universally free is incorrect.",
+        "Process mining and task mining are distinctly different capabilities with different data sources, analysis methods, and outputs — they are not interchangeable."
+      ],
+      "msRef": {
+        "label": "Overview of process mining and task mining in Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/process-advisor-overview"
+      }
+    },
+    {
+      "q": "An architect wants to use process mining to analyse the organisation's case resolution process in D365 Customer Service. What data is required as input, and what are the three mandatory fields it must contain?",
+      "options": [
+        "A Dataverse view exported to Excel — process mining reads directly from Dataverse tables",
+        "Event log data (an activity log table from the system of record) containing at minimum: Case ID (instance identifier), Activity Name (the task or action that occurred), and a Timestamp (when the activity occurred)",
+        "A BPMN diagram in XML format — process mining converts process models into analytics automatically",
+        "A CSV of all users and their job titles — process mining analyses who performed each task by role"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["process-mining", "event-log", "Case-ID", "data-requirements", "Power-Automate"],
+      "explanation": "Microsoft's process mining documentation specifies: 'Event logs and activity logs are tables stored in your system of record that document when an event or activity occurs.' The three mandatory fields are: (1) Case ID — 'should represent an instance of your process and is often the object that the process acts on' (e.g. a Case ID for case resolution, Order ID for order processing, Request ID for approvals); (2) Activity Name — describes the task or action performed; (3) Timestamp — when the activity occurred. Optional enrichment attributes include: Resource (the person or system performing the activity), custom dimensional attributes (e.g. Department), and financial attributes (e.g. Invoice Amount). Note: the Dataverse connector is not currently supported for Power Automate Process Mining — event log data must be provided via supported connectors like Text/CSV via OneDrive for Business.",
+      "wrongExplanations": [
+        "The Dataverse connector is explicitly not supported for Power Automate Process Mining — Dataverse views cannot be used directly as a process mining data source.",
+        "BPMN diagrams describe how a process should work — process mining analyses how it actually does work based on recorded event data, not from models.",
+        "User job title data alone cannot produce a process map — activity sequencing requires Case ID plus Activity Name plus Timestamp as a minimum."
+      ],
+      "msRef": {
+        "label": "Prepare processes and data — Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/process-mining-processes-and-data"
+      }
+    },
+    {
+      "q": "When documenting current state (as-is) processes during the Initiate phase, Microsoft's guidance also requires producing to-be (future state) process maps. What is the documented purpose of to-be process mapping at this stage?",
+      "options": [
+        "To-be process maps replace as-is maps once they are complete — the architect discards as-is documentation",
+        "To-be process maps describe the processes the organisation wants to use after implementing Dynamics 365, and may include changes, improvements, or innovations — they use Dynamics 365 capabilities and features to guide what improvements are achievable, forming the basis of the solution blueprint and fit-gap analysis",
+        "To-be process maps are only produced in the Design phase — they are too early for the Initiate phase",
+        "To-be processes are created by the business independently and handed to the architect — the architect's role ends with as-is documentation"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["as-is", "to-be", "process-mapping", "future-state", "solution-blueprint"],
+      "explanation": "Microsoft's guidance states: 'Map your future or to-be processes as well, the processes you want to use after you implement Dynamics 365. They might include changes, improvements, or innovations that you want to achieve with the new solution. Use the Dynamics 365 capabilities and features to guide your to-be process mapping.' The as-is/to-be gap is the foundation of the fit-gap analysis that follows. To-be maps must be developed in the Initiate phase because they inform the solution blueprint and establish what the implementation is trying to achieve — not just document what exists today.",
+      "wrongExplanations": [
+        "As-is and to-be maps serve different purposes and both are retained — as-is documents current state, to-be documents target state, and the gap between them drives the solution design.",
+        "To-be process maps are explicitly part of the Initiate phase scope — waiting until the Design phase is too late because scope and solution blueprint depend on them.",
+        "The architect facilitates and guides the to-be process design — this is one of the architect's core responsibilities under PL-600 objective 'Guide the process of collecting the current state business processes.'"
+      ],
+      "msRef": {
+        "label": "Base the implementation lifecycle on your business processes — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-implementation-lifecycle"
+      }
+    },
+    {
+      "q": "Success by Design classifies review findings into three types. Which description correctly matches all three types?",
+      "options": [
+        "Red findings (critical blockers), Yellow findings (warnings), and Green findings (confirmations) — matching a traffic light model",
+        "Assertions (what the project team is doing well, aligned with best practices), Risks (potential roadblocks that could negatively impact the project if left unaddressed, requiring mitigation), and Issues (current active problems that are already impacting the project negatively, requiring immediate action)",
+        "Functional findings (UX/configuration problems), Technical findings (code and integration defects), and Process findings (workflow and business rule gaps)",
+        "Pre-go-live findings, Post-go-live findings, and Ongoing findings — categorised by when they are discovered"
+      ],
+      "answer": 1,
+      "category": "risk-factors",
+      "tags": ["Success-by-Design", "findings", "assertions", "risks", "issues"],
+      "explanation": "Microsoft's Success by Design documentation defines the three finding types precisely: 'Assertions — findings that capture noteworthy aspects of the solution or approach. Assertions highlight what the project team is doing right, typically in line with best practices.' 'Risks — findings that could potentially influence the implementation negatively if not mitigated. They require some type of actionable mitigation plan.' 'Issues — findings that are currently impacting implementation negatively or will do so if not resolved. They require immediate, actionable attention.' All findings should be matched to known patterns — this matching step leads to recommendations that give the project team a roadmap for addressing each finding.",
+      "wrongExplanations": [
+        "Red/Yellow/Green is the colour coding used for success measure health tracking — it is not the classification of finding types.",
+        "Functional/Technical/Process is a useful informal taxonomy, but it is not the Success by Design documented classification — the exam tests the Assertions/Risks/Issues framework.",
+        "Pre/post/ongoing is a timing classification — not how Success by Design categorises findings."
+      ],
+      "msRef": {
+        "label": "Introduction to Success by Design — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+      }
+    },
+    {
+      "q": "What is the fundamental principle that distinguishes Success by Design's approach to risk from a traditional reactive project management approach?",
+      "options": [
+        "Success by Design assigns a dedicated risk manager to every project who monitors risks on a daily basis",
+        "Success by Design is a proactive practice — it invites a purpose-built dialogue that touches all levels and dimensions of the project early in the lifecycle, enabling the identification and mitigation of risks before they manifest as problems, rather than reacting after problems have already impacted the project",
+        "Success by Design outsources risk management to Microsoft's FastTrack team — the implementation partner has no risk responsibility",
+        "Success by Design eliminates project risk by enforcing standard out-of-the-box configurations and prohibiting customisations"
+      ],
+      "answer": 1,
+      "category": "risk-factors",
+      "tags": ["Success-by-Design", "proactive", "risk-identification", "early-engagement", "FastTrack"],
+      "explanation": "Microsoft's 'inside look' at Success by Design history explicitly describes this transition: 'We found that this approach kept us in a reactive mode. We kept revising our approach and eventually we got it right. From this experimentation, Success by Design was born: a proactive practice that invites a purpose-built dialogue that touches all levels and dimensions of the project.' The primary value of Success by Design is early risk detection — 'the common pressures of time, budget, and resources can prevent the teams from pausing to understand and address technical and project risks before it's too late in the project lifecycle.' Success by Design is designed specifically to counteract this pressure by scheduling structured reviews at key project stages.",
+      "wrongExplanations": [
+        "A dedicated daily risk manager is not the SbD model — the framework operates through structured review workshops at defined project milestones, not continuous daily monitoring by a single person.",
+        "The implementation partner carries shared responsibility — FastTrack's role is advisory and assurance, not ownership. Microsoft's guidance explicitly states SbD 'joins the customer, our partners, and the product team in a manner that ensures alignment between all three.'",
+        "Success by Design does not prohibit customisations — it provides guidance on when and how to customise responsibly, identifying excessive or unsupported customisation as a risk finding."
+      ],
+      "msRef": {
+        "label": "An inside look at Success by Design — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design-story"
+      }
+    },
+    {
+      "q": "An architect is conducting an initial risk assessment for a Dynamics 365 Customer Service implementation at a large public sector organisation. The executive sponsor has delegated their attendance at the Solution Blueprint Review to a junior project manager, and no change management workstream has been defined. How should the architect classify and respond to these observations?",
+      "options": [
+        "These are administrative matters — the architect should note them informally but focus the risk assessment on technical factors like data model and integrations",
+        "Both observations are Risk findings: absent or disengaged executive sponsorship is a documented high-impact implementation risk, and the absence of a change management workstream is similarly a risk. The architect must formally raise both, document mitigation plans, and escalate to the steering committee",
+        "The absence of change management is an Issue (actively impacting the project); absent executive sponsorship is only a concern if it persists past go-live",
+        "These observations should be shared with the project manager privately — they should not be formally recorded in Success by Design findings to avoid political damage"
+      ],
+      "answer": 1,
+      "category": "risk-factors",
+      "tags": ["risk-assessment", "executive-sponsorship", "change-management", "findings", "Risk"],
+      "explanation": "Microsoft's guidance on solution architecture design pillars and Success by Design consistently identifies two of the highest-impact implementation risks: (1) absent or disengaged executive sponsorship — the executive sponsor drives organisational alignment, removes blockers, and signals priority to the business; delegating this role to a junior PM removes critical authority; (2) undefined change management — Microsoft's guidance states 'without a change management plan, you risk your organisation's goals' and that change management 'works best when you start it at the beginning of a project.' Both are Risk findings under the SbD framework because they could potentially influence the implementation negatively if not mitigated. The architect's responsibility is to formally document them, match them to known patterns, and bring mitigation recommendations to the steering committee — not to manage them informally or avoid political discomfort.",
+      "wrongExplanations": [
+        "Executive sponsorship and change management are not administrative matters — they are among the most commonly cited factors in Dynamics 365 implementation failures, and Success by Design explicitly includes them as review dimensions.",
+        "Whether they are Issues vs Risks depends on current impact: at this stage, they are Risks (potential negative impact if unmitigated) — they become Issues if they are actively blocking delivery. Change management is not yet active, so it is a Risk, not yet an Issue.",
+        "Informally managing political risks rather than formally documenting them defeats the purpose of Success by Design and leaves the organisation without a documented mitigation plan — the architect's proactive responsibility is explicit documentation."
+      ],
+      "msRef": {
+        "label": "Introduction to Success by Design — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+      }
+    },
+    {
+      "q": "Success by Design tracks project health across how many categories and success measures?",
+      "options": [
+        "3 categories and 10 success measures — covering architecture, governance, and testing",
+        "5 categories and 20 success measures — mapping to the five SbD phases",
+        "7 categories and over 30 success measures — covering architecture, key areas, implementation, product features, fit for purpose, project governance, competency, and support",
+        "10 categories and 50+ success measures — one for each major D365 feature area"
+      ],
+      "answer": 2,
+      "category": "success-criteria",
+      "tags": ["Success-by-Design", "success-measures", "tracking", "project-health", "KPIs"],
+      "explanation": "Microsoft's Success by Design documentation states: 'Success by Design empowers project teams to track the health of projects across seven categories and over 30 success measures.' The categories are: architecture, key areas, implementation, product features, fit for purpose, project governance, competency, and support. Each success measure is updated as Red, Yellow, or Green following a Success by Design review or compelling project event, enabling stakeholders to assess overall project health at a glance. Macro-level tracking across multiple projects can also reveal systemic patterns — for example, an ALM problem affecting multiple implementations.",
+      "wrongExplanations": [
+        "3 categories and 10 measures is too narrow — it would not capture the breadth of dimensions across architecture, governance, implementation practices, and product fit.",
+        "5 categories mapping to 5 phases is a logical assumption but is incorrect — the 7 categories are content-based (architecture, product features, etc.), not phase-based.",
+        "10 categories and 50+ measures is an overstatement — the documentation specifies 7 categories and over 30 measures."
+      ],
+      "msRef": {
+        "label": "Introduction to Success by Design — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+      }
+    },
+    {
+      "q": "A business stakeholder defines the project's success criterion as 'improve our customer service.' The architect challenges this definition. What is the correct reason for doing so, and what should the architect guide the stakeholder to produce instead?",
+      "options": [
+        "The criterion is fine — aspirational objectives are preferable to rigid metrics because they allow flexibility during implementation",
+        "'Improve customer service' is not measurable and cannot be used to confirm whether the solution delivered value. The architect should guide the stakeholder to define a specific, measurable success criterion — for example, 'Reduce average case resolution time from 4.2 days to 2.5 days within 6 months of go-live' or 'Achieve a customer satisfaction score of 4.2 out of 5.0 on post-resolution surveys within 90 days'",
+        "Success criteria are defined by the project manager, not the architect — the architect should not challenge stakeholder language",
+        "The criterion is acceptable — it should be translated directly into a business requirement and passed to the functional consultant"
+      ],
+      "answer": 1,
+      "category": "success-criteria",
+      "tags": ["success-criteria", "measurable-outcomes", "KPI", "OKR", "stakeholder-management"],
+      "explanation": "Microsoft's guidance on evaluating business requirements establishes that success criteria must be measurable outcomes — not aspirational statements. The PL-600 study guide explicitly lists 'Review key success criteria' as a sub-objective under 'Identify organisation information and metrics.' The architect's role is to guide stakeholders to define criteria that: (1) are specific and quantifiable; (2) have a baseline (current state metric); (3) have a target value; (4) have a defined timeframe for measurement. This is directly analogous to the OKR (Objective + Key Results) framework — where the objective is the direction and the key results are the measurable outcomes. Vague criteria like 'improve customer service' cannot be used to validate solution success, justify investment continuation, or trigger go-live decisions.",
+      "wrongExplanations": [
+        "Aspirational objectives without measurable results are the most common reason implementations fail to demonstrate ROI — the architect's proactive challenge is essential.",
+        "Reviewing and guiding key success criteria is an explicit PL-600 sub-objective for the solution architect — it is not solely the project manager's responsibility.",
+        "Vague criteria passed to functional consultants as requirements produce vague solutions — measurable success criteria must be established before requirements capture begins."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    },
+    {
+      "q": "Process mining in Power Automate uses two key analytical concepts: process variants and bottleneck identification. What do these terms mean?",
+      "options": [
+        "A process variant is a version of the Power Automate flow code; a bottleneck is a flow step that causes a time-out error",
+        "A process variant is a unique sequence from start to finish of the process where each variant differs from others by at least one activity; a bottleneck is an activity or transition where mean duration or wait time is disproportionately high relative to other steps",
+        "A process variant is a user segment; a bottleneck is a step that more than 50% of users skip",
+        "Process variants and bottlenecks are synonymous — both describe steps where rework occurs"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["process-mining", "variants", "bottlenecks", "analysis", "performance"],
+      "explanation": "Microsoft's process mining documentation defines: 'A process variant is a unique sequence from start to finish of the process. Each variant differs from the others by at least one activity.' Variants are visualised in the Variant DNA view, colour-coded and abbreviated to show the order of activities. High variant counts indicate process non-standardisation. Bottlenecks are identified through time analysis — the Time Analysis capability 'allows you to drill down into time bottlenecks by cases, variants, and activity,' showing average time spent per case and per variant ordered by time spent. Activities with disproportionately high mean duration are candidates for process improvement or automation. In the documented AP refunds example, 'Refund With Standard Voucher' was identified as adding significant mean duration to the overall process — a bottleneck driving rework.",
+      "wrongExplanations": [
+        "Flow code versions and time-out errors are technical concepts unrelated to process mining's analytical output — process mining works at the business process level, not the flow code level.",
+        "A user segment is a persona or demographic group — unrelated to process variants. Skipped steps are tracked differently through completeness analysis, not variant definitions.",
+        "Variants and bottlenecks are distinct concepts — variants describe path diversity, bottlenecks describe time concentration at specific steps."
+      ],
+      "msRef": {
+        "label": "Visualize and gain insights from processes — Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/process-mining-visualize"
+      }
+    },
+    {
+      "q": "The Solution Blueprint Review is described as a 'mandatory' review in Success by Design. What is its specific purpose and timing, and what does it trigger?",
+      "options": [
+        "It is conducted after go-live to review what went wrong and document lessons learned",
+        "It is conducted at the beginning of the Initiate phase once the high-level solution design is available — it assesses whether the implementation follows recommended patterns and practices, identifies risks and issues in the proposed architecture, and its findings trigger Implementation Reviews for specific topic areas requiring deeper investigation",
+        "It is a licence compliance review conducted by Microsoft's licensing team before the project can begin",
+        "It is an optional review requested by the customer only if they are enrolled in the FastTrack programme"
+      ],
+      "answer": 1,
+      "category": "risk-factors",
+      "tags": ["Solution-Blueprint-Review", "Success-by-Design", "mandatory", "initiate-phase", "Implementation-Reviews"],
+      "explanation": "Microsoft's Success by Design documentation states: 'The Solution Blueprint Review serves as the starting point of Success by Design. We suggest the Solution Blueprint Review to be a mandatory review for the project because findings that come from it lead to Implementation Reviews, which offer project teams the opportunity to drill down into topic-specific areas where deeper dives are deemed necessary for further understanding project and solution risk.' Timing: 'When the project team has produced the high-level solution design (in the Discover phase), and the related project workstreams are more or less defined, Success by Design begins with the Solution Blueprint Review.' It is followed by topic-specific Implementation Reviews (data model, security, integration, ALM, performance, etc.) and culminates in the Go-Live Readiness Review.",
+      "wrongExplanations": [
+        "The post-go-live retrospective corresponds to the Operate phase closure activities — the Solution Blueprint Review is an early-project proactive review, not a retrospective.",
+        "Licence compliance is a separate process — the Solution Blueprint Review covers architecture, risks, design decisions, and recommended practice alignment.",
+        "Microsoft recommends the Solution Blueprint Review for all Dynamics 365 implementations — the guidance states 'Success by Design framework is available for use on any Dynamics 365 implementation project,' not only FastTrack-enrolled projects."
+      ],
+      "msRef": {
+        "label": "Introduction to Success by Design — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+      }
+    },
+    {
+      "q": "An architect is reviewing a process catalog built using the Dynamics 365 Business Process Catalog template in Azure DevOps. The team asks whether they can rename the process sequence IDs to match the organisation's internal numbering system. What does Microsoft's guidance recommend?",
+      "options": [
+        "Renaming process sequence IDs is encouraged — using the organisation's internal language improves stakeholder adoption",
+        "Process sequence IDs should not be changed. Preserving the unique identifiers makes it easier to take future catalog updates from Microsoft. Business process names can be renamed for organisational context, but the sequence ID should remain as issued",
+        "The Azure DevOps template does not use sequence IDs — only process names matter",
+        "Sequence IDs can be changed but must follow a specific Microsoft-defined numbering convention"
+      ],
+      "answer": 1,
+      "category": "current-state-processes",
+      "tags": ["business-process-catalog", "Azure-DevOps", "sequence-ID", "process-naming", "catalog-management"],
+      "explanation": "Microsoft's guidance on the business process catalog states: 'We advise that you don't change the process sequence ID in the catalog. When these unique identifiers are preserved, it's easier for you to take updates to the catalog from Microsoft later.' The guidance further distinguishes: 'We recommend that you rename business processes where appropriate for your organisation, and that you train your users on the standard language that is chosen. When possible, using the Microsoft standard language can make downstream communications easier, but make sure you document carefully why changes are being made.' In summary: rename process names for context if needed, but never change the sequence IDs.",
+      "wrongExplanations": [
+        "While process names can be adapted, the sequence IDs must be preserved — otherwise catalog updates from Microsoft cannot be applied cleanly.",
+        "The Azure DevOps template explicitly includes sequence IDs as the stable identifiers for catalog work items — they are central to how the catalog is maintained and updated.",
+        "There is no alternative Microsoft numbering convention for replacement IDs — the guidance is simply to preserve the IDs as issued."
+      ],
+      "msRef": {
+        "label": "Base the implementation lifecycle on your business processes — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-implementation-lifecycle"
+      }
+    },
+    {
+      "q": "Why does Microsoft's guidance recommend that change management activities begin at the start of the project rather than near go-live?",
+      "options": [
+        "Change management is only needed at go-live — before that, technical delivery is the priority",
+        "Change management 'works best when you start it at the beginning of a project and integrate it into your project activities.' Starting early allows the change manager to address the people side of change through leadership engagement, communication planning, and training preparation — well before users are expected to adopt the new system",
+        "Starting change management early reduces the project budget because training materials cost less to produce in the early phases",
+        "Change management at the start is only required for migrations from on-premises systems — cloud-to-cloud projects do not need early change management"
+      ],
+      "answer": 1,
+      "category": "risk-factors",
+      "tags": ["change-management", "adoption", "risk", "people-change", "governance"],
+      "explanation": "Microsoft's solution architecture design pillars documentation on methodology states: 'To drive adoption with your users and get value faster, use a strong change management approach. It works best when you start it at the beginning of a project and integrate it into your project activities.' The benefits are: 'it focuses on the people side of organisational change; it seeks individual and organisational perspectives; it requires action and involvement by leaders and managers throughout the organisation.' Starting late means that user resistance, communication gaps, and training shortfalls are discovered at UAT or after go-live — when they are far more expensive and disruptive to address. Absent change management is classified as a Risk finding in Success by Design.",
+      "wrongExplanations": [
+        "Positioning change management as a go-live-only activity is one of the most common and costly implementation mistakes — the guidance explicitly contradicts this approach.",
+        "Budget efficiency is not the documented rationale — the reason is adoption, engagement, and risk reduction, not cost.",
+        "Change management applies to any significant system change regardless of whether it is a cloud-to-cloud or on-premises-to-cloud migration — the people impact exists in both scenarios."
+      ],
+      "msRef": {
+        "label": "Use methodologies for your solution design — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars-methodology"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Meridian Housing Trust — Organisation Information Assessment",
+      "scenario": {
+        "title": "Meridian Housing Trust — Organisation Information Assessment",
+        "background": "Meridian Housing Trust is replacing its legacy housing management system with D365 Customer Service and Power Platform. The architect has been engaged at the start of the project. Initial discovery sessions reveal the following:\n\nO1. When asked about current processes, the housing team produces a 200-page requirements document. No process maps exist. The CEO wants to start configuring D365 immediately.\n\nO2. The architect proposes using Power Automate Process Mining to understand the repairs request process. The IT team says they have a CRM event log going back 3 years, but it only contains repair job ID, assigned technician, and a timestamp for when each job was closed.\n\nO3. During the risk assessment, the architect discovers: (a) the executive sponsor (Head of Housing) has delegated day-to-day project involvement to a contractor PM who joined 2 weeks ago; (b) no communications plan exists; (c) there is no test environment — all configuration is happening directly in production.\n\nO4. The Head of Housing defines success as 'tenants should feel more satisfied.' The CFO defines it as 'the project should deliver value for money.'\n\nO5. The project plan does not include a Solution Blueprint Review. The partner's delivery manager says it adds time and cost and is only needed for large enterprise projects.",
+        "requirements": ["O1", "O2", "O3", "O4", "O5"]
+      },
+      "tags": ["current-state-processes", "risk-assessment", "success-criteria", "process-mining", "Solution-Blueprint-Review"],
+      "questions": [
+        {
+          "q": "For O1 — the team has a 200-page requirements document and no process maps, and the CEO wants to start configuring immediately. What should the architect recommend, and why?",
+          "options": [
+            "Begin configuration immediately using the requirements document — it contains all the information needed",
+            "Pause configuration and invest time in producing as-is process maps and a to-be process catalog. A requirements document lacks the hierarchical context, cross-functional connections, and process taxonomy needed to guide a sound solution blueprint. Configuring without mapped processes risks building the wrong solution, discovering misalignments in UAT, and producing customisations that don't reflect actual workflows",
+            "Accept the requirements document as the process catalog — rename the chapters as business value streams",
+            "Ask the CEO to produce the process maps themselves — the architect should not be involved in as-is documentation"
+          ],
+          "explanation": "Microsoft's guidance is clear: business processes are superior to requirements lists because they describe the activities, roles, functions, data, and systems involved in operations and show cross-functional connections that requirements lists miss. The guidance also explicitly states processes are 'richer in context than a requirements list.' A 200-page requirements document may contain valuable detail but cannot substitute for mapped processes as the basis for scope definition and solution design. The correct action is to use process mapping to create as-is visualisations and build a to-be process catalog aligned to the Dynamics 365 Business Process Catalog — before configuration begins. This protects the project from scope drift and misaligned customisations.",
+          "wrongExplanations": {
+            "0": "Using a requirements list as the sole basis for configuration is the pattern that Success by Design was designed to prevent — it produces isolated, decontextualised configurations that don't reflect end-to-end workflows.",
+            "2": "Renaming document chapters as value streams does not produce mapped processes — it creates a falsely labelled requirements document without the hierarchical, relational process structure the guidance requires.",
+            "3": "Guiding the process of collecting current state business processes is an explicit PL-600 architect responsibility — delegating it entirely to the CEO abandons a core architect duty."
+          },
+          "msRef": {
+            "label": "Base the implementation lifecycle on your business processes — Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-implementation-lifecycle"
+          }
+        },
+        {
+          "q": "For O2 — the IT team has a CRM event log with repair job ID, assigned technician, and closed timestamp. Is this sufficient for process mining, and if not, what is missing?",
+          "options": [
+            "This is sufficient — process mining only needs a unique record ID and a timestamp",
+            "This is insufficient for process mining. The three mandatory fields are Case ID (present as repair job ID), Activity Name (missing — the log does not record what activity or step occurred at each point in the process), and Timestamp (partially present — only the close timestamp exists, not individual activity timestamps). Without Activity Name, process mining cannot construct a process map or identify variants or bottlenecks",
+            "The event log is sufficient — process mining will infer activity names from the technician names",
+            "The 3-year history is too old — process mining only accepts event logs from the last 12 months"
+          ],
+          "explanation": "Microsoft's documentation defines three mandatory fields for process mining: (1) Case ID — present (repair job ID); (2) Activity Name — absent (the log does not record individual activities/steps within the repair process, only that the job was eventually closed); (3) Timestamp — only partially present (a single close timestamp exists, but no timestamps for intermediate activities). Without Activity Name, process mining cannot distinguish process steps or create a process map — it only has two data points per repair job (opened and closed). The architect needs to work with IT to identify whether intermediate activities are logged elsewhere (e.g. status change timestamps, assignment timestamps, inspection sign-offs) or consider using task mining with desktop recordings as an alternative.",
+          "wrongExplanations": {
+            "0": "A unique ID and timestamp alone produce only a process that goes from 'start' to 'end' in one step — no activity sequence, no variants, no bottleneck analysis.",
+            "2": "Process mining cannot infer activity names from technician names — technician is an optional Resource attribute, not a replacement for Activity Name.",
+            "3": "There is no 12-month recency limit documented for process mining event logs — the guidance does not restrict data age."
+          },
+          "msRef": {
+            "label": "Prepare processes and data — Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/process-mining-processes-and-data"
+          }
+        },
+        {
+          "q": "For O3 — the architect has found: (a) delegated executive sponsor, (b) no communications plan, (c) no test environment. How should these be classified and addressed under the Success by Design framework?",
+          "options": [
+            "All three are minor administrative concerns — log them in the project risk register but take no formal escalation action",
+            "All three are Risk findings that must be formally documented and escalated to the steering committee with recommended mitigations: (a) absent/disengaged executive sponsorship — recommend formal re-engagement of the Head of Housing with clearly defined decision rights; (b) no communications plan — recommend a change management workstream with a communications plan as a priority deliverable; (c) configuration in production — this may be an Issue (actively impacting the project) as it creates an unrecoverable risk to production data — immediate creation of a dedicated development/sandbox environment is required",
+            "Items (a) and (b) are process risks; item (c) is a technical risk — they should be handled by different teams independently",
+            "Only item (c) is a formal Risk finding — executive sponsorship and communications are soft factors outside the architect's scope"
+          ],
+          "explanation": "Under Success by Design, all three observations are formal findings: (a) delegated executive sponsorship — a Risk: absence of executive authority slows decisions and reduces organisational commitment; (b) no communications plan — a Risk: without communications, user awareness and adoption are jeopardised, a direct change management failure; (c) configuring in production — this is likely an Issue rather than a Risk because it is currently and actively harming the project (any bad configuration change could corrupt live data with no rollback path). The architect's obligation is to document all three formally, match them to known patterns (all are documented in SbD guidance), and present recommendations to the steering committee — including immediate environment strategy remediation. Treating them as informal concerns violates the proactive purpose of Success by Design.",
+          "wrongExplanations": {
+            "0": "Logging in a risk register without escalation is reactive — Success by Design's purpose is proactive identification and action, not passive registration.",
+            "2": "Separating findings by team creates silos in the risk response — all three must be surfaced holistically to the steering committee because they compound each other.",
+            "3": "Executive sponsorship and change management are explicitly among the most commonly cited risk factors in Dynamics 365 implementations — they are well within the architect's scope and SbD review agenda."
+          },
+          "msRef": {
+            "label": "Introduction to Success by Design — Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+          }
+        },
+        {
+          "q": "For O4 — the Head of Housing says success is 'tenants should feel more satisfied' and the CFO says the project should deliver 'value for money.' What must the architect do with these definitions?",
+          "options": [
+            "Accept both as valid success criteria — sentiment and financial value are appropriate measures for a public sector project",
+            "Challenge both definitions and guide each stakeholder to produce specific, measurable success criteria with a baseline, target value, and measurement timeframe — for example: 'Increase tenant repair satisfaction survey score from 3.1 to 4.0 out of 5 within 6 months of go-live' and 'Reduce average cost per repair case by 15% within 12 months of go-live through automation of administrative tasks'",
+            "The success criteria definitions are business decisions — the architect should document them as stated and proceed",
+            "Ask the project manager to resolve the conflict between the two stakeholders' definitions before the architect gets involved"
+          ],
+          "explanation": "'Review key success criteria' is an explicit PL-600 sub-objective under 'Identify organisation information and metrics.' The architect's responsibility is not merely to record what stakeholders say, but to guide them toward measurable, specific, time-bound criteria that can actually be used to confirm solution success. 'Tenants should feel more satisfied' is aspirational — it has no baseline, no target, and no measurement mechanism. 'Value for money' is equally unmeasurable without quantification. The architect must facilitate a conversation that converts these into specific KPIs: baseline current measurement, define target, specify measurement method and timeframe. This is directly required to support go-live readiness assessment and post-implementation value realisation reviews.",
+          "wrongExplanations": {
+            "0": "Sentiment and financial value are legitimate measurement domains, but as stated they are not measurable criteria — 'satisfied' without a scale, baseline, and target cannot confirm whether the project succeeded.",
+            "2": "Accepting vague success criteria and proceeding produces implementations that cannot demonstrate value and are vulnerable to scope creep ('we need more because we're still not satisfied').",
+            "3": "Resolving the conflict between stakeholder definitions is precisely the architect's facilitation role — delegating this to the project manager abandons the PL-600 objective."
+          },
+          "msRef": {
+            "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+            "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+          }
+        },
+        {
+          "q": "For O5 — the delivery manager claims the Solution Blueprint Review is optional and only needed for large enterprise projects. How should the architect respond?",
+          "options": [
+            "Agree with the delivery manager — the Solution Blueprint Review is optional and can be deferred to the Implement phase if the project is small",
+            "Disagree. Microsoft's Success by Design documentation explicitly states the Solution Blueprint Review is a 'mandatory review.' It is the starting point of Success by Design and its findings trigger topic-specific Implementation Reviews. It is not reserved for large enterprises — the framework is available for and recommended for any Dynamics 365 implementation. Skipping it means proceeding without a structured risk assessment of the high-level solution design, leaving issues undiscovered until they become far more expensive to resolve",
+            "Compromise — conduct a shortened version of the Solution Blueprint Review as a single 30-minute call",
+            "Escalate the disagreement to Microsoft's licensing team — they determine whether the review is mandatory"
+          ],
+          "explanation": "Microsoft's documentation is unambiguous: 'We suggest the Solution Blueprint Review to be a mandatory review for the project.' The rationale: findings from the Blueprint Review lead to Implementation Reviews, which allow topic-specific deep dives before the build is too far advanced. Microsoft also notes: 'The Success by Design framework is available for use on any Dynamics 365 implementation project' — not just large enterprises. The delivery manager's objection ('adds time and cost') reflects exactly the pressure Microsoft designed SbD to counteract: 'the common pressures of time, budget, and resources can prevent the teams from pausing to understand and address technical and project risks before it's too late in the project lifecycle.' The cost of the review is negligible compared to the cost of discovering architectural risks in UAT or post-go-live.",
+          "wrongExplanations": {
+            "0": "Deferring to the Implement phase would mean the build is already underway before risks are identified — precisely the reactive pattern SbD was designed to prevent.",
+            "2": "A 30-minute call cannot satisfy the Blueprint Review's purpose of comprehensive review against known patterns across architecture, integrations, security, ALM, and data model — a structured workshop with relevant artefacts is required.",
+            "3": "The Solution Blueprint Review is a methodology recommendation, not a licence requirement — Microsoft's licensing team has no role in determining whether it is conducted."
+          },
+          "msRef": {
+            "label": "Introduction to Success by Design — Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+          }
+        }
+      ]
+    }
+  ]
+}

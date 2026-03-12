@@ -1,0 +1,429 @@
+{
+  "_meta": {
+    "topic": "Migration and Integration Efforts",
+    "description": "Data migration strategy tiers (simple/medium/complex), staging database patterns, ETL tooling selection, table sequencing and cyclic dependencies, plug-in/workflow disabling during migration, integration pattern selection (synchronous vs asynchronous vs batch), Power Automate vs Azure services, idempotency, and effort estimation. Covers PL-600 exam objective: Initiate solution planning > Identify and estimate migration and integration efforts and alternatives.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "Microsoft classifies data migrations into three tiers based on volume and complexity. Which combination correctly describes the 'medium' migration tier?",
+      "options": [
+        "Under 1 GB or fewer than 50,000 records with flat data structures",
+        "Between 1 GB and 50 GB or 50,000–500,000 records with hierarchical or relational data such as accounts with associated contacts and opportunities",
+        "Over 50 GB or more than 500,000 records with custom tables, complex relationships, and interdependent workflows",
+        "Any migration involving custom Dataverse tables, regardless of volume"
+      ],
+      "answer": 1,
+      "category": "migration-tiers",
+      "tags": ["migration", "data-volume", "complexity", "tiers", "planning"],
+      "explanation": "Microsoft's data migration documentation defines three tiers: Simple — up to 1 GB or fewer than 50,000 records, flat data structures, importable via Dataverse's built-in import wizard; Medium — 1 GB to 50 GB or 50,000 to 500,000 records, moderate complexity with hierarchical or relational data (for example, accounts with associated contacts and opportunities), requiring ETL tools such as Azure Data Factory and batch migration with test runs in a staging environment; Complex — over 50 GB or more than 500,000 records, high complexity including custom tables, complex relationships, and interdependent workflows, requiring specialised tools and phased migration. Architects must select the approach, tooling, and timeline based on which tier applies.",
+      "wrongExplanations": [
+        "That describes the Simple tier — the Dataverse built-in import wizard is sufficient, and basic data quality checks are all that is needed.",
+        "That describes the Complex tier — it requires specialised tools such as Azure Data Factory, SSIS, Azure Synapse, or Microsoft Fabric, plus phased migration and continuous validation.",
+        "Custom tables alone do not define a tier — volume and complexity of relationships together determine the tier classification."
+      ],
+      "msRef": {
+        "label": "Data migration approaches — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/data-migration-approaches"
+      }
+    },
+    {
+      "q": "For a complex migration of over 500,000 records from a legacy CRM with custom relationships, which tooling options does Microsoft document as appropriate?",
+      "options": [
+        "Dataverse's built-in import wizard and Excel CSV exports",
+        "Power Automate cloud flows with the Dataverse connector",
+        "Azure Data Factory, SSIS (SQL Server Integration Services), Azure Synapse Analytics, Microsoft Fabric, KingswaySoft, or custom migration solutions",
+        "Configuration Migration Tool and XrmToolBox"
+      ],
+      "answer": 2,
+      "category": "migration-tooling",
+      "tags": ["migration", "tools", "ADF", "SSIS", "KingswaySoft", "complex-migration"],
+      "explanation": "Microsoft explicitly documents the following tools as appropriate for complex data migrations (over 50 GB or 500,000+ records): Azure Data Factory for scalable ETL orchestration; SSIS (SQL Server Integration Services) for on-premises ETL pipelines; Azure Synapse Analytics for large-scale analytical and migration workloads; Microsoft Fabric for unified data estate scenarios; KingswaySoft as a widely used third-party SSIS connector suite for Dataverse; Scribe and XrmToolBox's Data Transporter for targeted scenarios. The Dataverse import wizard is only suitable for simple migrations; Power Automate cloud flows lack the throughput and error management required for complex large-scale migrations.",
+      "wrongExplanations": [
+        "The Dataverse import wizard and CSV exports are the Simple tier approach — they cannot handle 500,000+ records with complex relationships reliably.",
+        "Power Automate cloud flows are subject to PPR limits, lack batch error management, and are not designed for complex high-volume ETL workloads.",
+        "The Configuration Migration Tool moves configuration data (reference data, picklists) between environments — it is not designed for large-scale historical data migration from legacy CRM systems."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "Why does Microsoft recommend using a staging database as an intermediary in large-scale data migrations rather than migrating directly from source to Dataverse?",
+      "options": [
+        "Dataverse does not support direct API-based data loads — a staging layer is technically required",
+        "A staging database decouples the source and target systems, enabling thorough transformation and validation before production impact, error isolation without affecting source or target, auditability of data lineage, and support for repeatable phased or incremental migration approaches",
+        "Staging databases reduce the number of Power Platform request licences consumed during migration",
+        "It is only recommended when the source system is on-premises — cloud-to-cloud migrations do not need a staging layer"
+      ],
+      "answer": 1,
+      "category": "staging-database",
+      "tags": ["staging", "ETL", "data-quality", "migration", "architecture"],
+      "explanation": "Microsoft's staging database reference architecture states: 'Rather than transferring data directly from the source system to the target environment, the process introduces an intermediate staging layer. Data is first ingested into a temporary migration staging database, where it undergoes transformation and validation. Only after these steps are completed, the data is loaded into Dataverse.' Key benefits documented: data quality assurance — the staging layer enables validation and transformation before production; error isolation — issues are resolved in staging without impacting source or target; scalability — handles large volumes and complex transformation logic; auditability — tracks data lineage and transformation history. The pattern also supports rollback and reprocessing of specific data segments.",
+      "wrongExplanations": [
+        "Dataverse fully supports direct API-based data loads — the staging recommendation is architectural best practice, not a technical requirement.",
+        "PPR licence consumption is not changed by the staging pattern — each Dataverse write still accrues against entitlements.",
+        "The staging pattern is recommended for any complex migration regardless of whether source or target is cloud or on-premises — data quality and auditability benefits apply equally."
+      ],
+      "msRef": {
+        "label": "Use a staging database for data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/staging-database-approach"
+      }
+    },
+    {
+      "q": "When sequencing tables for loading into Dataverse during a complex migration, what is the correct ordering principle to minimise cyclic dependency errors?",
+      "options": [
+        "Load tables alphabetically — this distributes load evenly across the migration window",
+        "Load the largest tables first to front-load risk into the migration",
+        "Sort tables in ascending order by the number of unique lookup columns — tables with fewer lookups load first because they have fewer unresolved foreign key dependencies at load time",
+        "Load all tables simultaneously in parallel to maximise throughput"
+      ],
+      "answer": 2,
+      "category": "migration-workflow",
+      "tags": ["table-sequencing", "cyclic-dependencies", "lookups", "migration-order", "architecture"],
+      "explanation": "Microsoft's complex migration workflow documentation defines the table sequencing rule: list all eligible tables, count unique lookups per table (excluding system fields like 'Created By'), sort in ascending order by lookup count — tables with zero lookups first, then one lookup, then two, and so on. This approach minimises cyclic dependencies because independent tables are loaded before the tables that reference them, ensuring lookup GUIDs are already present in Dataverse when dependent records are inserted. For true cyclic dependencies (tables that reference each other), the documented pattern is: insert records without the circular lookup, then update the lookup after both tables have been loaded.",
+      "wrongExplanations": [
+        "Alphabetical ordering ignores referential integrity — a table starting with 'A' may have many lookups to tables starting with 'C', causing foreign key failures.",
+        "Loading largest tables first front-loads risk without resolving referential integrity — referenced lookup tables may not yet exist.",
+        "Parallel loading of all tables simultaneously creates mass foreign key constraint violations because dependent tables attempt to insert records before referenced tables exist."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "Why should an architect recommend disabling plug-ins and workflows before loading large volumes of records into Dataverse during a migration?",
+      "options": [
+        "Plug-ins and workflows cause data corruption during bulk inserts",
+        "Plug-ins and workflows that fire on each record insert add significant processing overhead — for example, a post-create plug-in firing on 500,000 inserts multiplies server-side execution time and can exhaust the 2-minute pipeline budget, causing failures and dramatically slowing migration throughput",
+        "Dataverse prevents plug-ins from running during migration sessions automatically",
+        "Plug-ins and workflows consume Power Platform request entitlement, which would exhaust the daily licence quota during a migration"
+      ],
+      "answer": 1,
+      "category": "migration-workflow",
+      "tags": ["plugins", "workflows", "migration-performance", "bulk-operations", "throughput"],
+      "explanation": "Microsoft's migration performance guidance explicitly recommends disabling plug-ins and workflows during bulk data loads. Out-of-the-box tables like Contact and Account have built-in plug-ins and background jobs that fire on every insert — these are the reason Microsoft recommends smaller batch sizes (200–300 records) for OOB tables versus larger batches for custom tables. For high-volume migrations, each plug-in execution adds to the server-side processing time per record. On 500,000 inserts, even a 50ms plug-in adds nearly 7 hours of additional processing time. Disabling non-critical plug-ins for the duration of the migration window dramatically improves throughput and reduces timeout risk.",
+      "wrongExplanations": [
+        "Plug-ins do not corrupt data — they add processing overhead. Data integrity issues during migration come from schema mismatches, invalid lookups, and string length violations.",
+        "Dataverse does not automatically disable plug-ins during migration sessions — this must be done explicitly by the architect or developer.",
+        "Operations initiated inside plug-in code are exempt from service protection API limits — but the argument here is throughput performance, not entitlement consumption."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "Microsoft documents specific batch size and thread count recommendations for loading data into Dataverse during migration. Which statement correctly describes the recommended settings for OOB tables such as Contact and Account?",
+      "options": [
+        "Batch size 1,000, up to 100 threads — OOB tables are optimised for high parallelism",
+        "Batch size 200–300, up to 30 threads (if 10 or fewer lookups and 50–70 columns) — OOB tables are slower due to built-in plug-ins and background jobs",
+        "Batch size 10,000, single-threaded — avoid concurrency to prevent lock contention",
+        "Batch size and thread count do not affect OOB table performance — only custom tables require tuning"
+      ],
+      "answer": 1,
+      "category": "migration-workflow",
+      "tags": ["batch-size", "threading", "migration-performance", "OOB-tables", "Contact", "Account"],
+      "explanation": "Microsoft's migration workflow documentation provides explicit batch size and thread recommendations per table type. For OOB tables (Contact, Account, Lead): recommended batch size 200–300 with up to 30 threads (if the table has 10 or fewer lookups and 50–70 columns) — these tables are slower due to built-in plug-ins and background jobs that fire on every operation. For simple custom tables with few or no lookups: batch size up to 10 with up to 50 threads. For large/complex custom tables (more than 100 columns, more than 20 lookups): batch size 10–20 with up to 10–20 threads to reduce errors. The key insight is that more complex tables — whether due to built-in logic or column/lookup density — require smaller batches to avoid timeouts.",
+      "wrongExplanations": [
+        "1,000 batch size with 100 threads would overwhelm OOB table built-in logic and cause widespread timeout failures — OOB tables need smaller batches.",
+        "Single-threaded migration is unnecessarily slow — multi-threading is recommended and the guidance specifies up to 30 threads for OOB tables.",
+        "Batch size and thread count significantly affect all table types — OOB tables are specifically called out as requiring conservative tuning due to their built-in logic."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "During migration, a developer proposes setting the status of Case records to 'Resolved' immediately after insert to match the source system. Why should the architect challenge this approach?",
+      "options": [
+        "Resolved cases cannot be created during migration — they must be created as Active and manually closed afterwards",
+        "Microsoft documents that for special tables like Case, Opportunity, and Lead, status updates should be delayed until the end of the migration. Once a Case is resolved/closed it cannot be modified unless reopened — a time-consuming process that risks data integrity if issues are discovered post-load",
+        "Resolved cases consume double the Dataverse storage of active cases",
+        "Status updates require a premium Dataverse licence that may not be available during migration"
+      ],
+      "answer": 1,
+      "category": "migration-workflow",
+      "tags": ["case-status", "migration", "special-tables", "data-integrity", "status-update"],
+      "explanation": "Microsoft's migration workflow documentation explicitly states: 'For special tables like Case, Opportunity, or Lead, delay status updates until the end of the migration. Once these records are closed, they can't be modified unless reopened — a time-consuming process that risks data integrity.' The recommended pattern is: (1) insert all records in Active/Open status first; (2) validate data completeness and integrity across all records; (3) only then update records to their final status (Resolved, Won, Lost, etc.) in a separate bulk update pass. This prevents a scenario where a data issue is discovered post-close — where fixing it requires reopening every affected record, multiplying remediation effort.",
+      "wrongExplanations": [
+        "Resolved cases can technically be created or updated during migration — the guidance is about sequencing status updates safely, not a technical impossibility.",
+        "Resolved cases do not consume double storage — the concern is the inability to modify closed records, not storage.",
+        "Status updates are standard Dataverse operations that do not require a separate premium licence."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "What is the recommended infrastructure placement for the migration tool or VM running data migration scripts, and why?",
+      "options": [
+        "On the project team's local laptops — this avoids additional Azure infrastructure cost",
+        "In the same Azure region as the Dataverse environment — this significantly reduces network latency and speeds up the entire migration process",
+        "In the closest physical office to the customer — proximity to stakeholders is more important than proximity to Dataverse",
+        "On the source system's on-premises server — running migration from the source reduces data transfer overhead"
+      ],
+      "answer": 1,
+      "category": "migration-infrastructure",
+      "tags": ["migration", "infrastructure", "Azure-region", "latency", "performance"],
+      "explanation": "Microsoft's migration workflow documentation includes an explicit infrastructure tip: 'To maximize data migration performance, run your migration from a virtual machine (VM) located in the same region as your Dataverse environment. This approach significantly reduces latency and speeds up the entire process.' Network latency between the migration tool and Dataverse is multiplied across every record operation — for a 500,000-record migration with 10ms of extra round-trip latency per call, the cumulative impact is over 83 minutes of additional processing time. Architects must provision migration VMs in the same Azure region as the target Dataverse environment.",
+      "wrongExplanations": [
+        "Local laptops have high, variable network latency, limited bandwidth, and no guaranteed uptime — entirely inappropriate for a production data migration run.",
+        "Physical office proximity to stakeholders has no relevance to migration performance — data travels over the internet regardless of office location.",
+        "Running from the source server may reduce extraction latency but does not reduce the load latency to Dataverse — and the load phase is the bottleneck. The VM must be co-located with Dataverse."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "A migration architect is designing the optionset conversion step in the staging pipeline. What is the recommended approach for transforming text-based optionset values from the legacy system to Dataverse integer values?",
+      "options": [
+        "Manually update each optionset value record-by-record in Dataverse after load",
+        "Use a hardcoded CASE statement in the ETL script for each optionset column in each table",
+        "Create an OptionSetMapping reference table in the staging database that maps source text to target Dataverse integer values — then apply bulk UPDATE queries against it to transform all optionset columns before loading",
+        "Leave optionset columns as text and use a Power Automate flow to convert them after migration"
+      ],
+      "answer": 2,
+      "category": "migration-workflow",
+      "tags": ["optionset", "transformation", "staging", "OptionSetMapping", "ETL"],
+      "explanation": "Microsoft's migration workflow documentation defines a specific pattern for optionset conversion: create an OptionSetMapping reference table in the staging database with columns for source table name, target table name, source text, target text, and target integer value. Apply bulk UPDATE queries joining the staging data to the OptionSetMapping table to transform all optionset text values to Dataverse integers in one pass per table. This is reusable, auditable, and efficient — it handles all optionset columns across all tables without hardcoded CASE statements. The hardcoded CASE approach is brittle and unmaintainable when optionset values change or new tables are added.",
+      "wrongExplanations": [
+        "Record-by-record updates in Dataverse after load are extremely slow for large datasets and bypass the staging layer's purpose of pre-validating data before production load.",
+        "Hardcoded CASE statements per column per table create maintenance overhead — any optionset change requires updating the ETL script. The OptionSetMapping table pattern is reusable and maintainable.",
+        "Leaving optionset columns as text would cause Dataverse load failures — Dataverse integer optionset fields do not accept text values. Post-migration Power Automate conversion would also be slow and hit PPR limits."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    },
+    {
+      "q": "When should a solution architect recommend a synchronous integration pattern over an asynchronous one?",
+      "options": [
+        "Always — synchronous integrations are more reliable because the caller immediately knows the result",
+        "When the business process requires an immediate response before proceeding — for example, real-time inventory availability check before confirming a sales order, or identity verification that must complete before a portal page loads",
+        "When the data volume is high — synchronous integrations process more records per second than asynchronous ones",
+        "When the target system is on-premises — cloud systems always require asynchronous integration"
+      ],
+      "answer": 1,
+      "category": "integration-patterns",
+      "tags": ["synchronous", "integration", "real-time", "pattern-selection", "architecture"],
+      "explanation": "Microsoft's integration pattern guidance states: 'The synchronous integration pattern is primarily used for real-time data exchanges, ensuring immediate consistency across systems.' The architect selects synchronous integration when the business process cannot proceed until the response is received — such as a real-time stock check before order confirmation, or a fraud score that must gate a transaction. However, Microsoft also cautions: 'Synchronous integration can be more fragile in a cloud solution' — if the target system is unavailable, the calling process fails immediately. Architects should evaluate whether synchronous is truly required or whether asynchronous would provide equivalent business value with greater resilience.",
+      "wrongExplanations": [
+        "Synchronous integrations are more immediately visible when they fail, but they are also more fragile — a target system outage blocks the calling process entirely. Asynchronous patterns with retry are often more reliable overall.",
+        "High data volume is a characteristic that favours asynchronous batch patterns — synchronous patterns are unsuitable for bulk data exchange because each call blocks until completion.",
+        "On-premises vs cloud is not the determining factor — the business requirement for immediate response determines synchronous vs asynchronous choice."
+      ],
+      "msRef": {
+        "label": "Choose the right pattern for your integration strategy — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-choose-pattern"
+      }
+    },
+    {
+      "q": "A business requirement states that order data must flow from D365 Sales to an ERP every night. The ERP processes orders in scheduled batch windows. Which integration pattern is most appropriate?",
+      "options": [
+        "Synchronous real-time — trigger an ERP API call every time an order record is updated in D365",
+        "Batch asynchronous — extract changed order records at a scheduled interval and send them to the ERP in a single batch during the ERP's processing window",
+        "Presentation layer integration — display ERP order data inside D365 via a PCF control",
+        "Event-driven with Dataverse webhooks — fire a webhook for every individual order update immediately"
+      ],
+      "answer": 1,
+      "category": "integration-patterns",
+      "tags": ["batch", "asynchronous", "ERP", "integration-pattern", "scheduled"],
+      "explanation": "Microsoft's integration guidance defines batch processing as: 'collecting data over a period of time and then processing it in batches — useful when dealing with large volumes of data or when the processing requires significant resources.' The scenario describes exactly a batch pattern: (1) the ERP processes in scheduled windows, not in real time; (2) nightly cadence means data freshness tolerance is ~24 hours; (3) batch reduces the number of API calls and overhead compared to per-record real-time calls. Firing a Dataverse webhook for every individual order update would generate thousands of calls to the ERP with no business benefit over a nightly batch, and would fail during ERP maintenance windows.",
+      "wrongExplanations": [
+        "Synchronous real-time triggers on every order update would generate API calls to the ERP throughout the day, even though the ERP only processes in nightly batches — wasting resources and creating failure risk during ERP downtime.",
+        "Presentation layer integration (PCF controls displaying ERP data) is for read-only data surfacing within an app UI — it is not an order data transfer pattern.",
+        "Event-driven webhooks per order update are a near-real-time push pattern — they are inappropriate when the consuming system only processes in nightly batches and cannot act on individual events."
+      ],
+      "msRef": {
+        "label": "Data integration patterns — Microsoft industry clouds",
+        "url": "https://learn.microsoft.com/en-us/industry/well-architected/cross-industry/data-integration-patterns"
+      }
+    },
+    {
+      "q": "An integration architect is designing an event-driven integration where Dataverse publishes events to an external system. Microsoft documents that Power Automate is asynchronous and does not guarantee real-time performance. What must the architect communicate to business stakeholders about this?",
+      "options": [
+        "Nothing — Power Automate always delivers events within 5 seconds, which is acceptable for all business scenarios",
+        "Set realistic expectations early: Power Automate cloud flows do not guarantee real-time event delivery. If users expect immediate data availability in the target system, the architect must clarify this limitation and evaluate whether a synchronous pattern or Azure Event Grid/Service Bus is required",
+        "Replace Power Automate with Azure Logic Apps — it guarantees real-time delivery",
+        "Use a scheduled flow polling every 60 seconds instead — this provides near-real-time performance"
+      ],
+      "answer": 1,
+      "category": "integration-patterns",
+      "tags": ["Power-Automate", "real-time", "asynchronous", "stakeholder-expectations", "integration"],
+      "explanation": "Microsoft's integration patterns documentation explicitly states: 'Power Automate is asynchronous and doesn't guarantee real-time performance. If business users expect immediate data availability, clarify limitations early in the design process.' This is a critical stakeholder communication responsibility for the architect — failing to set this expectation leads to post-go-live complaints when users find that target systems take minutes rather than seconds to reflect changes. If genuine real-time delivery is a hard requirement, the architect evaluates: synchronous Dataverse webhooks (near-real-time push), Azure Event Grid (event-driven with millisecond dispatch), or Azure Service Bus (queued delivery with controlled consumption).",
+      "wrongExplanations": [
+        "Power Automate flow execution time varies based on trigger queue depth, connector availability, and platform load — a 5-second guarantee is not documented.",
+        "Azure Logic Apps shares the same asynchronous execution model as Power Automate (it uses the same runtime engine) — it does not guarantee real-time delivery either.",
+        "A 60-second polling flow is a pull pattern, not event-driven — it introduces a structural latency of up to 60 seconds and also does not guarantee delivery time."
+      ],
+      "msRef": {
+        "label": "Explore integration patterns — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/patterns"
+      }
+    },
+    {
+      "q": "Why must integration architects design integrations to be idempotent, and what does idempotency mean in this context?",
+      "options": [
+        "Idempotency means the integration completes in under 1 second — it is a performance requirement",
+        "Idempotency means that executing the same message or operation multiple times produces the same result as executing it once — this is essential because retry logic, network failures, and duplicate message delivery must not cause duplicate records or corrupted data",
+        "Idempotency means the integration works identically in all environments — dev, test, and production",
+        "Idempotency means the integration uses a single thread — parallel execution is not permitted"
+      ],
+      "answer": 1,
+      "category": "integration-patterns",
+      "tags": ["idempotency", "integration", "retry", "duplicate-prevention", "reliability"],
+      "explanation": "Microsoft's integration guidance states: 'Make sure your requests can't be duplicated because of retries. Keep them unique, or idempotent.' In integration design, idempotency means that processing the same message multiple times produces no additional side effects beyond the first execution. This is critical because: network failures cause retries; message queues (Service Bus) guarantee at-least-once delivery, not exactly-once; Power Automate retries failed connector calls; any of these scenarios can deliver a message more than once. Without idempotency, a duplicate order message creates a duplicate order record. Idempotency is typically implemented using unique identifiers (external IDs, importsequencenumber) with upsert operations that update an existing record rather than creating a duplicate.",
+      "wrongExplanations": [
+        "Idempotency is a correctness guarantee about repeated execution, not a latency or performance metric.",
+        "Consistency across environments describes environment parity — a separate concern from idempotency.",
+        "Single-threaded execution is a concurrency control strategy — it is not what idempotency means."
+      ],
+      "msRef": {
+        "label": "Choose the right pattern for your integration strategy — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-choose-pattern"
+      }
+    },
+    {
+      "q": "A data migration analyst proposes letting Dataverse auto-generate GUIDs for all migrated records. A developer on the team argues for supplying the source system's IDs as custom GUIDs. What is Microsoft's documented recommendation, and why?",
+      "options": [
+        "Supply custom GUIDs from the source system — this preserves traceability and simplifies rollback",
+        "Let Dataverse auto-generate GUIDs — supplying custom GUIDs causes index fragmentation and performance issues in Dataverse's underlying SQL store",
+        "Use custom GUIDs for parent records only — Dataverse should generate GUIDs for all child records",
+        "Custom GUIDs are required — Dataverse will not accept records without a pre-specified GUID"
+      ],
+      "answer": 1,
+      "category": "migration-workflow",
+      "tags": ["GUIDs", "migration", "performance", "index-fragmentation", "Dataverse"],
+      "explanation": "Microsoft's migration workflow documentation explicitly states: 'Avoid custom GUIDs — let Dataverse generate GUIDs to prevent fragmentation and performance issues.' Dataverse stores records in SQL Server tables where the primary key is a GUID. SQL Server's clustered index performance degrades when GUIDs are inserted in random order (non-sequential), causing page splits and index fragmentation. Sequential GUIDs generated by Dataverse are optimised for insert performance. Custom GUIDs derived from source system IDs (which are rarely sequential) create fragmentation that degrades query performance over time. The recommended pattern for preserving source system traceability is to store the source system's original ID in a dedicated migration tracking column (e.g. importsequencenumber) rather than forcing it as the Dataverse primary key.",
+      "wrongExplanations": [
+        "While source ID traceability is valuable, it should be preserved in a dedicated tracking column — not by forcing custom GUIDs that degrade performance.",
+        "Auto-generating is the correct recommendation, but 'only parent records use custom GUIDs' is not the documented guidance — the recommendation is to avoid custom GUIDs for all records.",
+        "Dataverse accepts records with pre-specified GUIDs — but Microsoft's guidance is to avoid this for performance reasons."
+      ],
+      "msRef": {
+        "label": "Suggested workflow for a complex data migration — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Vantage Rail — Migration and Integration Architecture Review",
+      "scenario": {
+        "title": "Vantage Rail — Migration and Integration Architecture Review",
+        "background": "Vantage Rail is migrating from a 10-year-old on-premises CRM to D365 Customer Service. The migration includes 1.2 million customer records, 3.8 million case records, and 14 million activity records across 18 custom tables. In parallel, three integration streams must be designed:\n\nM1. The migration team proposes using Dataverse's built-in import wizard to migrate all 5 million+ records directly from CSV exports.\n\nM2. The Contact table has 8 lookup columns pointing to Account, Territory, Agent, Product, Region, Category, Source, and Channel. The Account table has 3 lookups. The developer wants to load all tables simultaneously in parallel.\n\nM3. An integration with Vantage Rail's ticketing system (ServiceNow) must notify D365 Customer Service when a ServiceNow ticket is resolved. The business wants this to update the linked case in D365 immediately when the ServiceNow agent marks the ticket resolved — with no delay.\n\nM4. A nightly integration pushes daily operational KPIs from D365 Dataverse to a reporting data warehouse. The data warehouse accepts batch file uploads. Volume is approximately 50,000 rows per night.\n\nM5. A developer proposes mapping the legacy CRM's customer record ID as the Dataverse Contact GUID to preserve traceability.",
+        "requirements": ["M1", "M2", "M3", "M4", "M5"]
+      },
+      "tags": ["migration", "integration", "staging", "sequencing", "idempotency", "GUIDs"],
+      "msRef": {
+        "label": "Data migration approaches — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/data-migration-approaches"
+      },
+      "questions": [
+        {
+          "q": "For M1 — the team proposes the Dataverse import wizard and CSV exports for 5 million+ records across 18 custom tables. What should the architect recommend instead, and why?",
+          "options": [
+            "Approve the import wizard — it handles any volume if CSV files are split into batches of 50,000",
+            "Reject the proposal. At 5 million+ records with complex custom table relationships, this is a Complex tier migration requiring specialised tooling — Azure Data Factory, SSIS with KingswaySoft, or similar. A staging database must be introduced for transformation, validation, and error handling before any data reaches Dataverse production",
+            "Use Power Automate cloud flows to iterate through each CSV row and insert records — this is more controllable than bulk tooling",
+            "The import wizard is suitable — CSV batch splitting is the only optimisation needed for this volume"
+          ],
+          "explanation": "5 million+ records across 18 custom tables with complex relationships is firmly in the Complex tier (over 500,000 records, custom tables, complex relationships). Microsoft defines this as requiring specialised tools — Azure Data Factory, SSIS, Azure Synapse, KingswaySoft, or custom migration solutions — along with a staging database, phased migration, continuous validation, and post-migration optimisation. The Dataverse import wizard is documented only for the Simple tier (up to 50,000 records with flat data). Using CSV imports for 5 million+ records with 18 interdependent custom tables would produce unmanageable error handling, referential integrity failures, and no auditability.",
+          "wrongExplanations": {
+            "0": "Splitting CSVs into 50,000-record batches does not resolve the complex relationship sequencing, optionset transformation, error handling, or staging requirements — the import wizard is fundamentally unsuitable for this tier.",
+            "2": "Power Automate cloud flows at 5 million records would exhaust PPR entitlements, take days to complete, and lack the batch error management and retry infrastructure needed for complex migrations.",
+            "3": "CSV batch splitting is a Simple tier optimisation — it does not provide the staging, transformation, error isolation, or sequencing capabilities required for this complex migration."
+          },
+          "msRef": {
+            "label": "Data migration approaches — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/data-migration-approaches"
+          }
+        },
+        {
+          "q": "For M2 — the Contact table has 8 lookups, Account has 3. The developer wants to load all tables in parallel. What table loading order should the architect enforce, and how should the 8-lookup Contact dependency be handled?",
+          "options": [
+            "Load all tables in parallel — Dataverse handles referential integrity violations automatically",
+            "Load tables in ascending order of lookup count: Account (3 lookups) first, then Contact (8 lookups) after Account GUIDs exist. For contacts, preload Account GUIDs from the success table after Account loads, resolving the Account lookup before Contact records are inserted",
+            "Load Contact first — it is the most important table and should be prioritised",
+            "Load all tables alphabetically to distribute risk evenly"
+          ],
+          "explanation": "The correct sequencing rule is ascending lookup count: tables with fewer foreign key dependencies load first. Account (3 lookups) has fewer dependencies than Contact (8 lookups) so Account loads first. After Account loads successfully, its Dataverse GUIDs are captured in the success table and preloaded into the Contact staging table to resolve the Account lookup column. Contact then loads with the Account GUIDs already present. Parallel loading causes mass foreign key failures because Contact records reference Account GUIDs that do not yet exist in Dataverse. For the remaining 6 Contact lookups (Territory, Agent, Product, Region, Category, Source, Channel), each of those reference tables must also be loaded before Contact.",
+          "wrongExplanations": {
+            "0": "Dataverse does not automatically handle referential integrity violations during bulk imports — lookup fields pointing to non-existent records will fail or insert null, corrupting the data model.",
+            "2": "Loading Contact first when it has 8 unresolved lookup dependencies would cause the majority of Contact records to fail — all 8 reference tables must exist in Dataverse before Contact loads.",
+            "3": "Alphabetical ordering ignores lookup dependencies entirely — 'Account' happens to come before 'Contact' alphabetically, but this is coincidental and provides no guarantee for the other 16 tables."
+          },
+          "msRef": {
+            "label": "Suggested workflow for a complex data migration — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+          }
+        },
+        {
+          "q": "For M3 — the business wants D365 Case to update immediately when a ServiceNow ticket is resolved, with no delay. Which integration pattern and technology is most appropriate?",
+          "options": [
+            "Batch integration — collect ServiceNow resolutions every hour and send them in bulk to D365",
+            "A scheduled Power Automate cloud flow polling ServiceNow every 60 seconds for newly resolved tickets",
+            "A synchronous or near-real-time event-driven integration: ServiceNow fires a webhook or calls the Dataverse Web API directly when a ticket is resolved, or ServiceNow publishes a resolution event to Azure Service Bus which a Power Automate flow consumes immediately",
+            "Presentation layer integration — display a ServiceNow status iframe inside the D365 Case form"
+          ],
+          "explanation": "The business requirement is immediate update with no delay — this is a real-time or near-real-time requirement that precludes batch or polling patterns. The appropriate options are: (1) ServiceNow fires a direct webhook to Dataverse when a ticket is resolved — this is a synchronous near-real-time push; (2) ServiceNow publishes a resolution event to Azure Service Bus, which a Power Automate cloud flow consumes as soon as the message arrives — near-real-time asynchronous. Both patterns deliver the update within seconds of the ServiceNow resolution. A 60-second polling flow introduces up to 60 seconds of latency; hourly batch introduces up to 60 minutes. The architect must also communicate that Power Automate cloud flows are asynchronous and do not guarantee sub-second delivery.",
+          "wrongExplanations": {
+            "0": "Hourly batch integration delivers updates up to 60 minutes after resolution — this violates the 'no delay' business requirement.",
+            "1": "A 60-second polling flow introduces up to 60 seconds of latency and consumes PPR entitlement on every poll regardless of activity — a push/event-driven pattern is more appropriate.",
+            "3": "Presentation layer integration displays data from another system in the UI — it does not write data to Dataverse. The requirement is to update the Case record, not display ServiceNow status."
+          },
+          "msRef": {
+            "label": "Choose the right pattern for your integration strategy — Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-choose-pattern"
+          }
+        },
+        {
+          "q": "For M4 — 50,000 rows of KPI data pushed nightly to a data warehouse that accepts batch file uploads. Which integration approach and tool is most appropriate?",
+          "options": [
+            "Synchronous real-time — push each D365 record change to the warehouse as it happens",
+            "A scheduled Power Automate cloud flow or Azure Data Factory pipeline that extracts 50,000 rows from Dataverse overnight using Dataverse connectors or the Export to Azure Data Lake / Fabric Link feature, transforms into the required format, and delivers the batch file to the warehouse",
+            "A desktop flow using RPA to navigate the D365 UI and export a CSV manually each night",
+            "Webhooks firing on every Dataverse record update, batching them into a file at the warehouse end"
+          ],
+          "explanation": "This is a textbook batch asynchronous scenario: 50,000 rows, nightly cadence, target system accepts batch files. The appropriate approach is a scheduled Azure Data Factory pipeline or Power Automate cloud flow that runs overnight. For Dataverse-to-data-warehouse patterns Microsoft recommends: Azure Data Lake export (Synapse Link for Dataverse / Fabric Link) for continuous incremental export, or Azure Data Factory with the Dataverse connector for orchestrated extraction. The 50,000 row volume is well within the Medium tier — ADF or scheduled cloud flows are both appropriate. Real-time push is over-engineered for a system that only processes nightly batches.",
+          "wrongExplanations": {
+            "0": "Real-time push to a batch-processing data warehouse is wasted infrastructure — the warehouse cannot process individual events in real time and the data just accumulates until the nightly batch anyway.",
+            "2": "RPA for a scheduled data export is the wrong tool when API-based connectors exist — desktop flows should only be used when no API is available.",
+            "3": "Webhooks per record update would generate thousands of individual events that must be accumulated and assembled into a batch file at the warehouse — this is far more complex and fragile than a scheduled extract."
+          },
+          "msRef": {
+            "label": "Data integration patterns — Microsoft industry clouds",
+            "url": "https://learn.microsoft.com/en-us/industry/well-architected/cross-industry/data-integration-patterns"
+          }
+        },
+        {
+          "q": "For M5 — the developer proposes using legacy CRM customer record IDs as Dataverse Contact GUIDs. The architect must respond. What is the correct recommendation and the documented reason?",
+          "options": [
+            "Approve the custom GUIDs — preserving source IDs as Dataverse primary keys simplifies rollback and audit",
+            "Reject custom GUIDs for Contact primary keys. Let Dataverse auto-generate GUIDs to prevent SQL index fragmentation and performance issues. Store the legacy CRM ID in a dedicated migration tracking column (e.g. cr_legacyid or importsequencenumber) to preserve traceability without compromising Dataverse performance",
+            "Custom GUIDs are only a problem for OOB tables — for custom tables they are acceptable",
+            "Use custom GUIDs only during migration and then re-key all records to auto-generated GUIDs post-migration"
+          ],
+          "explanation": "Microsoft's migration workflow documentation explicitly states: 'Avoid custom GUIDs — let Dataverse generate GUIDs to prevent fragmentation and performance issues.' Dataverse uses SQL Server's clustered index on the GUID primary key. Legacy CRM IDs used as GUIDs are typically sequential within the legacy system but are not UUIDs — when inserted into Dataverse they are treated as random GUIDs, causing index page splits and fragmentation that degrades query performance permanently. The correct traceability pattern is to store the legacy ID in a dedicated column (importsequencenumber or a custom field like cr_legacyid) and use it as the upsert key during migration — enabling rollback and lookup without corrupting the clustered index.",
+          "wrongExplanations": {
+            "0": "Rollback and audit traceability can be achieved through a dedicated legacy ID column — forcing custom GUIDs is not necessary for traceability and causes index fragmentation.",
+            "2": "Microsoft's guidance applies to all Dataverse tables — the fragmentation concern is the SQL index behaviour, which applies equally to OOB and custom tables.",
+            "3": "Re-keying all records post-migration is an enormously complex and error-prone operation — all foreign key references in related tables would need to be updated simultaneously. This is far worse than avoiding custom GUIDs from the start."
+          },
+          "msRef": {
+            "label": "Suggested workflow for a complex data migration — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/data-migration/workflow-complex-data-migration"
+          }
+        }
+      ]
+    }
+  ]
+}

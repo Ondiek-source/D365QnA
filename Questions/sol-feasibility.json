@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Feasibility Assessment",
+        "description": "Technical, financial, and operational feasibility evaluation for proposed Power Platform solutions.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the main purpose of feasibility assessment in a PL-600 engagement?",
+            "options": [
+                "To confirm that stakeholders like the proposed interface",
+                "To evaluate whether the proposed solution is realistically achievable from technical, financial, and operational perspectives",
+                "To replace requirements gathering",
+                "To prove that custom development is always justified"
+            ],
+            "answer": 1,
+            "category": "feasibility-basics",
+            "tags": [
+                "feasibility",
+                "technical",
+                "financial"
+            ],
+            "explanation": "Feasibility assessment is about determining whether a proposed solution can be delivered and operated successfully within real constraints such as technology fit, cost, timeline, ownership, and support readiness.",
+            "wrongExplanations": [
+                "Stakeholder preference can matter, but it is not the core purpose of feasibility assessment.",
+                null,
+                "Requirements gathering still matters and usually happens before or alongside feasibility work.",
+                "Feasibility assessment often prevents unjustified custom development rather than proving it."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Which statement best reflects technical feasibility assessment?",
+            "options": [
+                "Checking only whether users like the proposed screens",
+                "Evaluating whether the required integrations, data patterns, security model, and platform capabilities can support the solution",
+                "Counting the number of backlog items",
+                "Choosing a logo for the app"
+            ],
+            "answer": 1,
+            "category": "technical-feasibility",
+            "tags": [
+                "technical-feasibility",
+                "integrations",
+                "platform-fit"
+            ],
+            "explanation": "Technical feasibility focuses on whether the solution can work with the available platform capabilities, data flows, integrations, architecture constraints, and required quality attributes.",
+            "wrongExplanations": [
+                "User preference alone does not determine technical feasibility.",
+                null,
+                "Backlog size is not the same as technical feasibility.",
+                "Branding is irrelevant."
+            ],
+            "msRef": {
+                "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+            }
+        },
+        {
+            "q": "Which statement best reflects financial feasibility assessment?",
+            "options": [
+                "Determining whether the solution can meet business goals within realistic cost, licensing, delivery, and support expectations",
+                "Estimating only developer salaries",
+                "Choosing the cheapest possible approach regardless of fit",
+                "Ignoring long-term maintenance costs"
+            ],
+            "answer": 0,
+            "category": "financial-feasibility",
+            "tags": [
+                "financial-feasibility",
+                "cost",
+                "licensing"
+            ],
+            "explanation": "Financial feasibility considers total realistic cost, including delivery, licensing, support, and long-term ownership, while keeping business value and fit in view.",
+            "wrongExplanations": [
+                null,
+                "Developer salaries are only one cost factor.",
+                "Cheapest alone is not a sound architect decision if the solution does not fit.",
+                "Long-term maintenance is a major part of feasibility."
+            ],
+            "msRef": {
+                "label": "Project goals for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+            }
+        },
+        {
+            "q": "What is the strongest example of operational feasibility concern?",
+            "options": [
+                "The proposed solution needs support ownership, release processes, and monitoring, but none are defined",
+                "The app icon has not been chosen",
+                "A screen mockup is incomplete",
+                "Users asked for a lighter color palette"
+            ],
+            "answer": 0,
+            "category": "operational-feasibility",
+            "tags": [
+                "operational-feasibility",
+                "support",
+                "operations"
+            ],
+            "explanation": "Operational feasibility is about whether the organization can realistically run, support, govern, and evolve the solution after delivery.",
+            "wrongExplanations": [
+                null,
+                "Icon design is not an operational feasibility issue.",
+                "Mockup completeness is not the key operational concern here.",
+                "Color preference is irrelevant."
+            ],
+            "msRef": {
+                "label": "Operational Excellence design principles - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+            }
+        },
+        {
+            "q": "A requirement depends on near-real-time integration with a legacy on-premises system whose owner is unknown and whose API limits are unclear. What should the architect conclude first?",
+            "options": [
+                "The solution is definitely infeasible",
+                "There is a significant technical and operational feasibility risk that needs validation before committing",
+                "The project should ignore the integration",
+                "The issue can be solved later during UAT"
+            ],
+            "answer": 1,
+            "category": "technical-feasibility",
+            "tags": [
+                "integration-risk",
+                "dependencies",
+                "validation"
+            ],
+            "explanation": "Unknown ownership, unclear limits, and near-real-time expectations are clear feasibility risk signals. The right move is to validate before committing, not to assume success or failure.",
+            "wrongExplanations": [
+                "The scenario signals risk, but not guaranteed infeasibility.",
+                null,
+                "Ignoring the integration would be poor architect practice.",
+                "Waiting until UAT is too late."
+            ],
+            "msRef": {
+                "label": "Overcome integration challenges in Dynamics 365 projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+            }
+        },
+        {
+            "q": "Why should migration complexity be included in feasibility assessment?",
+            "options": [
+                "Because migration never affects scope",
+                "Because data quality, volume, mapping, and business cutover needs can materially affect timeline, cost, and deliverability",
+                "Because migration is only a DBA problem",
+                "Because it guarantees the need for custom code"
+            ],
+            "answer": 1,
+            "category": "technical-feasibility",
+            "tags": [
+                "migration",
+                "data-quality",
+                "timeline"
+            ],
+            "explanation": "Migration is often a major driver of effort and risk. Data issues, mapping complexity, and cutover expectations can change whether a proposal is realistic.",
+            "wrongExplanations": [
+                "Migration often affects scope significantly.",
+                null,
+                "Migration is broader than a DBA concern and involves business, architecture, and delivery planning.",
+                "Migration does not automatically require custom code."
+            ],
+            "msRef": {
+                "label": "Migrate and integrate in Dynamics 365 Customer Engagement apps",
+                "url": "https://learn.microsoft.com/en-us/training/modules/migrate-integrate-dynamics-365/"
+            }
+        },
+        {
+            "q": "What is the best architect response when a proposed solution is technically possible but operationally weak because support, ALM, and ownership are immature?",
+            "options": [
+                "Approve it anyway because technical possibility is enough",
+                "Flag operational feasibility risk and recommend remediation, phasing, or a different solution direction",
+                "Ignore operations because the project team will disband later",
+                "Treat the issue as purely cosmetic"
+            ],
+            "answer": 1,
+            "category": "operational-feasibility",
+            "tags": [
+                "alm",
+                "support-model",
+                "risk"
+            ],
+            "explanation": "A technically possible design may still be a poor choice if the organization cannot operate it reliably. Operational readiness is part of real feasibility.",
+            "wrongExplanations": [
+                "Technical possibility alone is not enough.",
+                null,
+                "That would create downstream support and governance problems.",
+                "This is not cosmetic at all."
+            ],
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        },
+        {
+            "q": "Which statement best shows good financial feasibility judgment?",
+            "options": [
+                "Choose the lowest upfront cost option only",
+                "Compare options using delivery cost, licensing, support effort, business value, and long-term maintainability",
+                "Ignore support costs until after go-live",
+                "Approve custom build because it sounds strategic"
+            ],
+            "answer": 1,
+            "category": "financial-feasibility",
+            "tags": [
+                "tradeoffs",
+                "total-cost",
+                "maintainability"
+            ],
+            "explanation": "Financial feasibility is about total realistic cost and value, not just the cheapest initial implementation path.",
+            "wrongExplanations": [
+                "Upfront cost alone is too narrow.",
+                null,
+                "Support costs are part of total solution feasibility and should not be ignored.",
+                "Strategy language alone does not justify cost."
+            ],
+            "msRef": {
+                "label": "Project goals for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+            }
+        },
+        {
+            "q": "When is a proof of concept most useful in feasibility assessment?",
+            "options": [
+                "When the team wants better screenshots",
+                "When significant uncertainty remains about technical fit, operational viability, or solution direction",
+                "Only after development is complete",
+                "Only for custom UI work"
+            ],
+            "answer": 1,
+            "category": "feasibility-method",
+            "tags": [
+                "proof-of-concept",
+                "uncertainty",
+                "validation"
+            ],
+            "explanation": "A proof of concept is useful when the project needs evidence to reduce uncertainty about whether a proposed approach is viable.",
+            "wrongExplanations": [
+                "Screenshots are not the main purpose.",
+                null,
+                "That is too late for feasibility validation.",
+                "PoCs can validate much more than UI."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Why should Power Platform Well-Architected tradeoffs matter during feasibility assessment?",
+            "options": [
+                "Because feasibility is only about whether code can be written",
+                "Because a technically workable idea may still be a poor choice if reliability, security, performance, or operations tradeoffs are unacceptable",
+                "Because tradeoffs are only relevant after production deployment",
+                "Because Well-Architected applies only to Azure infrastructure teams"
+            ],
+            "answer": 1,
+            "category": "well-architected-feasibility",
+            "tags": [
+                "tradeoffs",
+                "well-architected",
+                "quality-pillars"
+            ],
+            "explanation": "Feasibility includes judging whether the solution is viable across quality dimensions, not just whether it can be built in some narrow sense.",
+            "wrongExplanations": [
+                "That is too narrow for architect-level feasibility.",
+                null,
+                "Tradeoffs matter during design, not just after go-live.",
+                "Power Platform Well-Architected applies to workload design more broadly."
+            ],
+            "msRef": {
+                "label": "Power Platform Well-Architected pillars",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/pillars"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: A requirement can be functionally desirable but still be judged infeasible because of cost, operational readiness, or dependency risk.",
+            "answer": true,
+            "category": "feasibility-basics",
+            "tags": [
+                "tradeoffs",
+                "dependencies",
+                "operations"
+            ],
+            "explanation": "Feasibility assessment considers more than functional desirability. Cost, support model, timing, dependencies, and readiness all matter.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "True or False: Technical feasibility assessment should include integration and data considerations, not just application screens and workflows.",
+            "answer": true,
+            "category": "technical-feasibility",
+            "tags": [
+                "integration",
+                "data",
+                "architecture"
+            ],
+            "explanation": "A technically feasible solution must consider integrations, data movement, constraints, security, and platform behavior, not just front-end functionality.",
+            "msRef": {
+                "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+            }
+        },
+        {
+            "q": "True or False: Operational feasibility is mainly a post-go-live concern and does not need to influence solution selection.",
+            "answer": false,
+            "category": "operational-feasibility",
+            "tags": [
+                "supportability",
+                "operations",
+                "solution-selection"
+            ],
+            "explanation": "Operational feasibility should influence solution direction early because support, monitoring, release governance, and ownership all affect whether the solution is sustainable.",
+            "msRef": {
+                "label": "Operational Excellence design principles - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+            }
+        },
+        {
+            "q": "True or False: Financial feasibility should consider long-term support and maintenance costs, not just initial project spend.",
+            "answer": true,
+            "category": "financial-feasibility",
+            "tags": [
+                "total-cost",
+                "support",
+                "maintenance"
+            ],
+            "explanation": "A solution can look affordable initially but become poor value if support, maintenance, and lifecycle costs are high.",
+            "msRef": {
+                "label": "Project goals for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each concern to the most relevant feasibility category.",
+            "items": [
+                "Unknown API limits and unresolved integration ownership",
+                "Licensing and support costs may exceed the expected business value",
+                "No release process or support team is in place for the proposed solution",
+                "Source data quality is poor and migration timelines are fixed"
+            ],
+            "zones": [
+                "Technical feasibility",
+                "Financial feasibility",
+                "Operational feasibility",
+                "Technical feasibility"
+            ],
+            "correctMapping": {
+                "Unknown API limits and unresolved integration ownership": "Technical feasibility",
+                "Licensing and support costs may exceed the expected business value": "Financial feasibility",
+                "No release process or support team is in place for the proposed solution": "Operational feasibility",
+                "Source data quality is poor and migration timelines are fixed": "Technical feasibility"
+            },
+            "tags": [
+                "classification",
+                "feasibility",
+                "risk"
+            ],
+            "explanation": "Feasibility assessment often spans multiple categories. Integration and migration risks are usually technical, cost/value issues are financial, and support readiness is operational.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "instruction": "Match each architect action to the reason it matters.",
+            "items": [
+                "Run a proof of concept on an uncertain integration path",
+                "Compare packaged and custom options using total lifecycle cost",
+                "Assess support ownership and ALM readiness",
+                "Review quality-pillar tradeoffs using Well-Architected guidance"
+            ],
+            "zones": [
+                "Reduce technical uncertainty",
+                "Validate financial feasibility",
+                "Validate operational feasibility",
+                "Test whether the idea is viable beyond bare functionality"
+            ],
+            "correctMapping": {
+                "Run a proof of concept on an uncertain integration path": "Reduce technical uncertainty",
+                "Compare packaged and custom options using total lifecycle cost": "Validate financial feasibility",
+                "Assess support ownership and ALM readiness": "Validate operational feasibility",
+                "Review quality-pillar tradeoffs using Well-Architected guidance": "Test whether the idea is viable beyond bare functionality"
+            },
+            "tags": [
+                "architect-actions",
+                "feasibility",
+                "tradeoffs"
+            ],
+            "explanation": "Good feasibility assessment uses different methods for different risk types rather than treating feasibility as a single yes-or-no question.",
+            "msRef": {
+                "label": "Power Platform Well-Architected",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - The Idea Is Attractive, but Is It Actually Feasible?",
+            "scenario": "A company wants a new Power Platform solution for field service operations. The proposed design includes near-real-time updates from an on-premises dispatch system, mobile access for technicians in weak-connectivity areas, automated document generation, and a custom approval flow for a regulated service process. Stakeholders want phase one delivered quickly. Early analysis shows unclear ownership of the dispatch system, uncertain API behavior, a possible AppSource option for document generation, limited operational support maturity, and concern that custom development may push costs beyond the business case.",
+            "tags": [
+                "feasibility",
+                "technical",
+                "financial"
+            ],
+            "msRef": {
+                "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Approve the full proposed scope because the business wants speed",
+                        "Assess the proposal across technical, financial, and operational feasibility before committing to solution direction",
+                        "Ignore the operational concerns because they can be solved later",
+                        "Choose custom development because it offers maximum control"
+                    ],
+                    "answer": 1,
+                    "explanation": "The proposal contains multiple uncertainty points, so the architect should assess feasibility across all three dimensions before locking in direction.",
+                    "wrongExplanations": [
+                        "Speed alone is not enough when key feasibility questions remain open.",
+                        null,
+                        "Operational concerns can derail an otherwise technically workable solution.",
+                        "Maximum control does not automatically mean feasible or wise."
+                    ],
+                    "msRef": {
+                        "label": "Perform fit gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+                    }
+                },
+                {
+                    "q": "Which issue in the scenario most clearly signals technical feasibility risk?",
+                    "options": [
+                        "Stakeholders want phase one quickly",
+                        "Unclear ownership and uncertain API behavior in the on-premises dispatch integration",
+                        "The company wants automated document generation",
+                        "Technicians need mobile access"
+                    ],
+                    "answer": 1,
+                    "explanation": "Unclear ownership and uncertain API behavior are strong technical feasibility risks because they affect whether the required integration can realistically work as expected.",
+                    "wrongExplanations": [
+                        "This is more of a timeline pressure than a technical signal.",
+                        null,
+                        "Document generation is a requirement, not itself the clearest risk indicator.",
+                        "Mobile access matters, but the integration uncertainty is the sharper technical risk in this scenario."
+                    ],
+                    "msRef": {
+                        "label": "Overcome integration challenges in Dynamics 365 projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+                    }
+                },
+                {
+                    "q": "What is the strongest operational feasibility concern here?",
+                    "options": [
+                        "The regulated approval flow exists",
+                        "Operational support maturity is limited for the proposed solution",
+                        "The AppSource option might exist",
+                        "Stakeholders want mobile access"
+                    ],
+                    "answer": 1,
+                    "explanation": "Limited operational maturity means the organization may struggle to support, govern, monitor, and evolve the solution even if it can be built.",
+                    "wrongExplanations": [
+                        "A regulated approval flow is a requirement, not the clearest operational feasibility signal.",
+                        null,
+                        "An AppSource option is not itself an operational weakness.",
+                        "Mobile access is not the main operational issue described."
+                    ],
+                    "msRef": {
+                        "label": "Operational Excellence design principles - Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+                    }
+                },
+                {
+                    "q": "How should the architect treat the possible AppSource document-generation option?",
+                    "options": [
+                        "Ignore it because only custom development is strategic",
+                        "Evaluate it against business fit, cost, supportability, and lifecycle impact as part of feasibility assessment",
+                        "Adopt it immediately without review",
+                        "Use it only if all custom options fail"
+                    ],
+                    "answer": 1,
+                    "explanation": "An AppSource option can affect both financial and operational feasibility, so it should be evaluated deliberately rather than ignored or adopted blindly.",
+                    "wrongExplanations": [
+                        "That is an unjustified bias toward custom build.",
+                        null,
+                        "Immediate adoption without assessment is poor architect practice.",
+                        "It should be considered alongside other realistic options, not only as a backup."
+                    ],
+                    "msRef": {
+                        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+                        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Performing Fit/Gap Analyses",
+        "description": "Structured fit/gap methodology, gap categorisation, workaround identification, and build-vs-buy analysis.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the main purpose of fit/gap analysis in a PL-600 engagement?",
+            "options": [
+                "To list every possible customization idea",
+                "To compare known requirements against proposed or standard solution capabilities and identify how gaps should be addressed",
+                "To replace stakeholder workshops",
+                "To estimate test cases only"
+            ],
+            "answer": 1,
+            "category": "fit-gap-basics",
+            "tags": [
+                "fit-gap",
+                "requirements",
+                "solution-evaluation"
+            ],
+            "explanation": "Fit/gap analysis compares requirements to solution capabilities so the architect can identify where standard features fit and where gaps need a response such as process change, configuration, extension, or customization.",
+            "wrongExplanations": [
+                "Customization is only one possible outcome of fit/gap analysis, not its purpose.",
+                null,
+                "Workshops are still needed to discover and validate requirements.",
+                "Testing effort may be affected, but that is not the main purpose."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "When should fit/gap analysis be performed?",
+            "options": [
+                "Before any requirement discovery happens",
+                "After requirements are known well enough to compare against solution capabilities",
+                "Only after go-live",
+                "Only when custom development has already been approved"
+            ],
+            "answer": 1,
+            "category": "fit-gap-basics",
+            "tags": [
+                "timing",
+                "requirements",
+                "analysis"
+            ],
+            "explanation": "Fit/gap analysis depends on having known requirements. It comes after sufficient discovery and requirement refinement so there is something meaningful to compare.",
+            "wrongExplanations": [
+                "Without known requirements, there is no solid basis for fit/gap analysis.",
+                null,
+                "After go-live is far too late.",
+                "Fit/gap analysis should happen before deciding on customization."
+            ],
+            "msRef": {
+                "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+            }
+        },
+        {
+            "q": "Which statement best reflects a fit-to-standard mindset during fit/gap analysis?",
+            "options": [
+                "Rebuild the legacy process exactly first, then assess standard features",
+                "Evaluate whether business needs can be met acceptably by standard capabilities before recommending customization",
+                "Assume every gap requires custom code",
+                "Avoid AppSource options because they are not first-party"
+            ],
+            "answer": 1,
+            "category": "fit-to-standard",
+            "tags": [
+                "fit-to-standard",
+                "standard-capabilities",
+                "customization"
+            ],
+            "explanation": "Fit-to-standard means testing whether standard capabilities, configuration, or process adjustments can meet the need acceptably before heavier customization is recommended.",
+            "wrongExplanations": [
+                "This reverses the intended sequence and biases toward unnecessary customization.",
+                null,
+                "Many gaps can be closed through process change, configuration, or packaged options.",
+                "AppSource options can be valid gap-closure choices."
+            ],
+            "msRef": {
+                "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"We need a custom portal.\" What should the architect do first during fit/gap analysis?",
+            "options": [
+                "Approve the custom build direction",
+                "Clarify the requirement and compare it against standard Dynamics 365, Power Platform, and relevant AppSource options",
+                "Estimate custom effort immediately",
+                "Skip fit/gap because the stakeholder already chose the solution"
+            ],
+            "answer": 1,
+            "category": "fit-gap-method",
+            "tags": [
+                "solution-vs-requirement",
+                "app-evaluation",
+                "portal"
+            ],
+            "explanation": "The architect should first validate the real requirement, then compare that requirement to available capabilities and packaged options before accepting a custom path.",
+            "wrongExplanations": [
+                "That locks the project into a solution before validating fit.",
+                null,
+                "Effort estimation is premature before evaluating alternatives.",
+                "Stakeholder suggestions do not eliminate the need for fit/gap analysis."
+            ],
+            "msRef": {
+                "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        },
+        {
+            "q": "Which is the best example of a functional gap?",
+            "options": [
+                "The app should load in under three seconds",
+                "The standard solution cannot support the required approval routing behavior without additional changes",
+                "Data must remain in a specific geography",
+                "The system should be available during business hours"
+            ],
+            "answer": 1,
+            "category": "gap-categorisation",
+            "tags": [
+                "functional-gap",
+                "classification",
+                "approvals"
+            ],
+            "explanation": "A functional gap exists when the required business behavior is not adequately supported by the evaluated solution capability.",
+            "wrongExplanations": [
+                "This is a performance requirement, not a functional gap by itself.",
+                null,
+                "This is a compliance or residency constraint.",
+                "This is an availability requirement."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "What is the strongest reason to categorize gaps instead of treating them all the same?",
+            "options": [
+                "To make the gap register look more detailed",
+                "To distinguish whether gaps are better addressed through process change, configuration, extension, ISV, integration, or customization",
+                "To avoid discussing feasibility",
+                "To guarantee every gap gets funded"
+            ],
+            "answer": 1,
+            "category": "gap-categorisation",
+            "tags": [
+                "categorisation",
+                "response-options",
+                "analysis"
+            ],
+            "explanation": "Gap categorization helps the architect choose the right response path instead of defaulting every issue to customization.",
+            "wrongExplanations": [
+                "Visual detail is not the purpose.",
+                null,
+                "Feasibility discussion remains necessary.",
+                "Categorization does not guarantee funding."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Which response should usually be considered before recommending custom development for a validated gap?",
+            "options": [
+                "Ignore the gap",
+                "Assess whether process change or configuration can close the gap with acceptable business fit",
+                "Move it to post-go-live without analysis",
+                "Create a plugin by default"
+            ],
+            "answer": 1,
+            "category": "workarounds",
+            "tags": [
+                "process-change",
+                "configuration",
+                "gap-closure"
+            ],
+            "explanation": "Microsoft’s fit-to-standard guidance favors considering lower-complexity options such as process change and configuration before moving to heavier extension or customization.",
+            "wrongExplanations": [
+                "Known gaps should not be ignored.",
+                null,
+                "Postponement is not a substitute for analysis.",
+                "A plugin is only one possible response and should not be the default."
+            ],
+            "msRef": {
+                "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+            }
+        },
+        {
+            "q": "What is the best reason to evaluate Dynamics 365 first-party apps during fit/gap analysis?",
+            "options": [
+                "Because custom solutions are not allowed",
+                "Because first-party apps may already provide mature capabilities that reduce custom build effort",
+                "Because AppSource is always lower quality",
+                "Because workshops should focus only on Microsoft branding"
+            ],
+            "answer": 1,
+            "category": "build-vs-buy",
+            "tags": [
+                "first-party-apps",
+                "dynamics-365",
+                "standard-fit"
+            ],
+            "explanation": "First-party apps can already support common business scenarios, reducing risk, delivery time, and maintenance burden compared with custom rebuilding.",
+            "wrongExplanations": [
+                "Custom solutions may still be appropriate when justified.",
+                null,
+                "AppSource can also be a valid option and is not automatically lower quality.",
+                "Branding is irrelevant to fit/gap decisions."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "Why should AppSource or ISV solutions be evaluated during fit/gap analysis?",
+            "options": [
+                "Because every gap should be solved by an ISV",
+                "Because packaged extensions may close gaps faster and with less custom development if they fit support, security, and lifecycle needs",
+                "Because they remove the need for architecture review",
+                "Because they always cost less than standard features"
+            ],
+            "answer": 1,
+            "category": "build-vs-buy",
+            "tags": [
+                "appsource",
+                "isv",
+                "packaged-solutions"
+            ],
+            "explanation": "ISV or AppSource options can be strong gap responses when they fit functionally and meet lifecycle, governance, security, and support expectations.",
+            "wrongExplanations": [
+                "Not every gap belongs with an ISV.",
+                null,
+                "Architecture review is still necessary.",
+                "Cost depends on context and is not always lower."
+            ],
+            "msRef": {
+                "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "A requirement has no perfect standard fit. What is the best architect response?",
+            "options": [
+                "Treat it as an automatic custom build decision",
+                "Compare alternate solutions such as process change, configuration, extension, AppSource, integration, or customization using tradeoffs",
+                "Drop the requirement without discussion",
+                "Assume users will adapt regardless of business impact"
+            ],
+            "answer": 1,
+            "category": "alternate-solutions",
+            "tags": [
+                "tradeoffs",
+                "alternate-solutions",
+                "decision-making"
+            ],
+            "explanation": "A good fit/gap analysis compares realistic response options and their tradeoffs instead of jumping immediately to custom build.",
+            "wrongExplanations": [
+                "Automatic customization is poor architect judgment.",
+                null,
+                "Dropping a requirement requires explicit discussion and scope decisions.",
+                "User adaptation should not be assumed without evidence."
+            ],
+            "msRef": {
+                "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Fit/gap analysis compares requirements to the proposed or standard solution to identify differences that matter to delivery and design.",
+            "answer": true,
+            "category": "fit-gap-basics",
+            "tags": [
+                "fit-gap",
+                "requirements",
+                "solution-comparison"
+            ],
+            "explanation": "That is the core definition of fit/gap analysis in Microsoft Learn.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "True or False: A fit-to-standard approach means customization should be evaluated before configuration or process change.",
+            "answer": false,
+            "category": "fit-to-standard",
+            "tags": [
+                "fit-to-standard",
+                "configuration",
+                "process-change"
+            ],
+            "explanation": "Fit-to-standard means the opposite: standard capability, configuration, and process alignment should be evaluated before heavier customization.",
+            "msRef": {
+                "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+            }
+        },
+        {
+            "q": "True or False: A proof of concept can help refine fit/gap findings when feasibility or product fit remains uncertain.",
+            "answer": true,
+            "category": "fit-gap-method",
+            "tags": [
+                "proof-of-concept",
+                "feasibility",
+                "validation"
+            ],
+            "explanation": "Microsoft Learn includes refining requirements from proof-of-concept insights as part of fit/gap analysis work.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "True or False: Standardizing business processes can reduce the number of gaps that appear during fit/gap analysis.",
+            "answer": true,
+            "category": "workarounds",
+            "tags": [
+                "standardization",
+                "process-change",
+                "gap-reduction"
+            ],
+            "explanation": "Reducing unnecessary variation often improves standard fit and lowers the number of gaps requiring solution changes.",
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each gap response option to the scenario where it fits best.",
+            "items": [
+                "Process change",
+                "Configuration",
+                "AppSource / ISV extension",
+                "Customization"
+            ],
+            "zones": [
+                "The legacy process is inefficient and can be redesigned to align with standard capabilities",
+                "The required behavior already exists in the product but needs setup or rule changes",
+                "A validated market-ready package can fill the missing capability acceptably",
+                "A validated requirement is unique and cannot be met reasonably through standard or packaged options"
+            ],
+            "correctMapping": {
+                "Process change": "The legacy process is inefficient and can be redesigned to align with standard capabilities",
+                "Configuration": "The required behavior already exists in the product but needs setup or rule changes",
+                "AppSource / ISV extension": "A validated market-ready package can fill the missing capability acceptably",
+                "Customization": "A validated requirement is unique and cannot be met reasonably through standard or packaged options"
+            },
+            "tags": [
+                "gap-closure",
+                "fit-gap",
+                "build-vs-buy"
+            ],
+            "explanation": "Fit/gap analysis should consider multiple response paths and match each gap to the most appropriate closure approach.",
+            "msRef": {
+                "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+            }
+        },
+        {
+            "instruction": "Match each statement to the correct fit/gap concern.",
+            "items": [
+                "The requirement is not clear enough to compare against solution capabilities",
+                "The standard app covers most needs but one industry-specific function is missing",
+                "Three regions insist on preserving different legacy steps",
+                "The team is choosing between packaged extension and custom build"
+            ],
+            "zones": [
+                "Requirement refinement issue",
+                "Functional gap",
+                "Potential workaround through process standardization",
+                "Build-vs-buy decision"
+            ],
+            "correctMapping": {
+                "The requirement is not clear enough to compare against solution capabilities": "Requirement refinement issue",
+                "The standard app covers most needs but one industry-specific function is missing": "Functional gap",
+                "Three regions insist on preserving different legacy steps": "Potential workaround through process standardization",
+                "The team is choosing between packaged extension and custom build": "Build-vs-buy decision"
+            },
+            "tags": [
+                "categorisation",
+                "fit-gap",
+                "analysis"
+            ],
+            "explanation": "Not every fit/gap issue is the same. Some require clearer requirements, some are real functional gaps, some are process issues, and some are sourcing decisions.",
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Not Every Gap Should Become Custom Code",
+            "scenario": "A manufacturer is evaluating Dynamics 365 for service operations. Workshops show that standard case management and scheduling fit most requirements, but the customer also wants a unique regulatory approval step, a legacy-specific dispatch workaround, and a specialist document generation process. One regional lead argues that every legacy step must be preserved. Another stakeholder pushes for a full custom build because of the regulatory approval need. During review, the architect discovers that an AppSource product may address document generation, and that the dispatch workaround exists mainly because the legacy team never standardized processes between regions.",
+            "tags": [
+                "fit-gap",
+                "workarounds",
+                "build-vs-buy"
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Approve the full custom build because one regulatory step is unique",
+                        "Categorize the gaps and evaluate each one against process change, configuration, packaged extension, and customization options",
+                        "Ignore the regulatory requirement for phase one",
+                        "Preserve every legacy regional step by default"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should handle each gap deliberately instead of assuming one unique need justifies a full custom direction.",
+                    "wrongExplanations": [
+                        "That overreacts before options analysis is complete.",
+                        null,
+                        "Ignoring a requirement is not good fit/gap practice.",
+                        "That preserves complexity without testing whether it is necessary."
+                    ],
+                    "msRef": {
+                        "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+                    }
+                },
+                {
+                    "q": "Which issue in the scenario is the strongest candidate for a process-change workaround rather than immediate customization?",
+                    "options": [
+                        "The unique regulatory approval step",
+                        "The legacy-specific dispatch workaround caused by non-standard regional processes",
+                        "The standard case management fit",
+                        "The existence of an AppSource document generation option"
+                    ],
+                    "answer": 1,
+                    "explanation": "If the dispatch workaround exists mainly because of inconsistent regional processes, standardization may reduce or remove the gap without custom build.",
+                    "wrongExplanations": [
+                        "This may still require deeper fit analysis and is not the clearest process-standardization candidate.",
+                        null,
+                        "This is already a fit, not a gap.",
+                        "This points to a packaged option, not specifically a process workaround."
+                    ],
+                    "msRef": {
+                        "label": "Standardize business processes during a Dynamics 365 implementation",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+                    }
+                },
+                {
+                    "q": "How should the architect treat the AppSource document generation option?",
+                    "options": [
+                        "Dismiss it because only first-party features should be considered",
+                        "Evaluate it as a potential gap-closure option against support, security, lifecycle, and business fit criteria",
+                        "Adopt it immediately without review",
+                        "Use it only if custom development fails"
+                    ],
+                    "answer": 1,
+                    "explanation": "AppSource options should be evaluated seriously but not adopted blindly. The architect should test their fit, supportability, governance, and lifecycle impact.",
+                    "wrongExplanations": [
+                        "AppSource can be a valid option and should not be dismissed automatically.",
+                        null,
+                        "Immediate adoption without review is poor architect practice.",
+                        "It should be considered alongside other options, not only as a last resort."
+                    ],
+                    "msRef": {
+                        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+                        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+                    }
+                },
+                {
+                    "q": "What is the best final recommendation style for this scenario?",
+                    "options": [
+                        "Recommend one path based on explicit tradeoffs across business fit, maintainability, standardization opportunity, and extension options",
+                        "Choose the loudest stakeholder's preference",
+                        "Default to custom build because it offers the most control",
+                        "Avoid documenting why one option is better"
+                    ],
+                    "answer": 0,
+                    "explanation": "Fit/gap analysis should end with a reasoned recommendation that explains tradeoffs rather than a preference-based choice.",
+                    "wrongExplanations": [
+                        null,
+                        "That is not a sound architectural basis.",
+                        "Control alone does not justify custom build.",
+                        "The rationale matters because stakeholders need transparent decision-making."
+                    ],
+                    "msRef": {
+                        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+                    }
+                }
+            ]
+        }
+    ]
+}

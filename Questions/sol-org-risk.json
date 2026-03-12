@@ -1,0 +1,531 @@
+{
+    "_meta": {
+        "topic": "Assess Organisational Risk Factors",
+        "description": "PL-600 solution architect-level bank covering organisational risk factors, governance, stakeholder alignment, dependencies, integration and migration risks, adoption risk, project governance, and Well-Architected risk tradeoffs.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "A customer wants to go live in four months, but no executive sponsor regularly attends workshops and business owners frequently send delegates without decision authority. What is the most significant organisational risk factor?",
+            "options": [
+                "The environment strategy is not finalized",
+                "Weak business ownership and decision governance",
+                "The branding workstream is behind schedule",
+                "The number of test scripts is still low"
+            ],
+            "answer": 1,
+            "category": "governance-risk",
+            "tags": [
+                "governance",
+                "stakeholders",
+                "decision-making"
+            ],
+            "explanation": "Lack of engaged business ownership and decision authority is a major organisational risk because it slows decisions, weakens accountability, and causes scope and design churn.",
+            "wrongExplanations": [
+                "Environment strategy matters, but the scenario points first to business governance failure.",
+                null,
+                "Branding delay is minor compared with weak executive and business decision ownership.",
+                "Test script count is not the primary organisational risk in this early governance scenario."
+            ],
+            "msRef": {
+                "label": "Organize your Dynamics 365 project team",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-organization"
+            }
+        },
+        {
+            "q": "Which situation is the clearest example of an organisational risk factor rather than a pure technical risk?",
+            "options": [
+                "An API has uncertain rate limits",
+                "A legacy database contains duplicate records",
+                "Regional leaders disagree on the target sales process and refuse standardization",
+                "A plug-in may need performance tuning"
+            ],
+            "answer": 2,
+            "category": "org-risk",
+            "tags": [
+                "organizational-risk",
+                "process-alignment",
+                "regional-variation"
+            ],
+            "explanation": "Conflicting leadership positions on process standardization create organisational risk because they affect alignment, scope, adoption, and governance, not just technology.",
+            "wrongExplanations": [
+                "That is primarily a technical integration risk.",
+                "That is primarily a migration/data-quality risk.",
+                null,
+                "That is primarily a technical performance risk."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "What is the best architect response when a customer insists that each business unit must keep its own heavily customized process because 'that is how we have always operated'?",
+            "options": [
+                "Accept all process variants to reduce workshop friction",
+                "Analyze whether the differences are truly required and identify where standardization can reduce complexity",
+                "Defer the issue until UAT",
+                "Move all decisions to the development team"
+            ],
+            "answer": 1,
+            "category": "process-risk",
+            "tags": [
+                "standardization",
+                "complexity",
+                "business-process"
+            ],
+            "explanation": "The architect should challenge unnecessary process variation because preserving every legacy difference increases complexity, support cost, and adoption risk.",
+            "wrongExplanations": [
+                "This avoids conflict in the short term but increases long-term delivery and support risk.",
+                null,
+                "Deferring the issue usually makes it harder and more expensive to resolve.",
+                "This is a solution architect and business governance issue, not a developer-owned decision."
+            ],
+            "msRef": {
+                "label": "Perform fit gap analysis",
+                "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+            }
+        },
+        {
+            "q": "A project team plans multiple integrations, but no one owns several external systems and support contacts are unknown. Why is this an important organisational risk factor?",
+            "options": [
+                "Because support ownership and dependency clarity affect delivery sequencing and issue resolution",
+                "Because external systems always require custom code",
+                "Because integration risks can be ignored until build",
+                "Because user training is now unnecessary"
+            ],
+            "answer": 0,
+            "category": "dependency-risk",
+            "tags": [
+                "dependencies",
+                "ownership",
+                "integration"
+            ],
+            "explanation": "Unclear ownership across dependent systems is a major delivery risk because design decisions, testing coordination, defect triage, and operational support all depend on clear accountability.",
+            "wrongExplanations": [
+                null,
+                "External systems do not always require custom code.",
+                "Integration dependency risks should be identified early, not ignored.",
+                "Training remains relevant regardless of integration ownership issues."
+            ],
+            "msRef": {
+                "label": "Overcome integration challenges in Dynamics 365 projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+            }
+        },
+        {
+            "q": "Which finding most strongly suggests an adoption risk during organisational assessment?",
+            "options": [
+                "The team has not selected a dashboard theme",
+                "Users were not involved in discovery and frontline managers say the future process is unrealistic",
+                "The sandbox environment was provisioned late",
+                "The project uses Dataverse"
+            ],
+            "answer": 1,
+            "category": "adoption-risk",
+            "tags": [
+                "adoption",
+                "user-involvement",
+                "change-management"
+            ],
+            "explanation": "Weak user involvement and perceived process unreality are strong early warning signs for resistance, poor fit, and low adoption after go-live.",
+            "wrongExplanations": [
+                "Visual theming is minor compared with adoption readiness.",
+                null,
+                "Late sandbox provisioning is an environment issue, not the strongest organisational adoption signal here.",
+                "Using Dataverse is not an adoption risk by itself."
+            ],
+            "msRef": {
+                "label": "Define customer requirements",
+                "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+            }
+        },
+        {
+            "q": "What is the strongest reason to maintain an active risk register during a Dynamics 365 implementation?",
+            "options": [
+                "It replaces architecture reviews",
+                "It helps identify, prioritize, monitor, and mitigate risks before they derail the project",
+                "It is only useful for PMO reporting",
+                "It eliminates the need for stakeholder workshops"
+            ],
+            "answer": 1,
+            "category": "risk-management",
+            "tags": [
+                "risk-register",
+                "governance",
+                "mitigation"
+            ],
+            "explanation": "A risk register is a practical governance tool for making risks visible, actionable, and regularly managed throughout delivery.",
+            "wrongExplanations": [
+                "It supports but does not replace architecture reviews.",
+                null,
+                "It is more than PMO reporting; it is part of active project control.",
+                "Workshops are still needed to uncover and resolve issues."
+            ],
+            "msRef": {
+                "label": "Use classic project governance structures - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+            }
+        },
+        {
+            "q": "A customer expects the implementation partner to define all business decisions while the customer team remains mostly passive. What risk does this create?",
+            "options": [
+                "There is no risk if the partner is experienced",
+                "The solution may lack business ownership, reducing fit and long-term accountability",
+                "The solution will always be cheaper",
+                "The need for testing is reduced"
+            ],
+            "answer": 1,
+            "category": "ownership-risk",
+            "tags": [
+                "business-ownership",
+                "accountability",
+                "fit"
+            ],
+            "explanation": "Even with a strong partner, the customer must own business decisions. Without that ownership, the solution can drift away from real business needs and post-go-live accountability weakens.",
+            "wrongExplanations": [
+                "Partner experience does not remove the need for customer ownership.",
+                null,
+                "There is no basis to conclude the solution will be cheaper.",
+                "Testing remains essential."
+            ],
+            "msRef": {
+                "label": "Introduction to the Success by Design framework",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+            }
+        },
+        {
+            "q": "Which scenario best represents a risk that should influence scope decisions early?",
+            "options": [
+                "The customer wants a polished icon set",
+                "Data migration from three systems has unresolved quality issues and the go-live date is fixed",
+                "A report name has not been agreed",
+                "A user requested a custom ribbon button"
+            ],
+            "answer": 1,
+            "category": "scope-risk",
+            "tags": [
+                "migration",
+                "scope",
+                "timeline"
+            ],
+            "explanation": "When migration complexity is high and timelines are fixed, the architect should reassess what is feasible for phase one and whether scope must be reduced or phased.",
+            "wrongExplanations": [
+                "Icon design does not materially shape early scope decisions.",
+                null,
+                "A report name is minor and does not drive core scope feasibility.",
+                "A ribbon button request is too small to be the key scope risk."
+            ],
+            "msRef": {
+                "label": "Use the business process catalog to manage project scope and estimation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/techtalks/get-started-business-process-catalog-manage-project-scope-estimation"
+            }
+        },
+        {
+            "q": "Why should a solution architect care about Power Platform Well-Architected guidance when assessing organisational risks?",
+            "options": [
+                "Because organisational risk and architectural quality are unrelated",
+                "Because decisions that ignore reliability, security, performance, operations, or experience can create downstream business risk",
+                "Because Well-Architected applies only after production deployment",
+                "Because it only matters for infrastructure teams"
+            ],
+            "answer": 1,
+            "category": "well-architected-risk",
+            "tags": [
+                "well-architected",
+                "business-risk",
+                "tradeoffs"
+            ],
+            "explanation": "Poor early decisions around quality pillars often become organisational problems later through outages, security incidents, operational burden, or low user adoption.",
+            "wrongExplanations": [
+                "They are related; architecture choices can amplify or reduce business risk.",
+                null,
+                "Well-Architected is relevant during early design and evaluation, not just after go-live.",
+                "It is broader than infrastructure and applies to workload design."
+            ],
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        },
+        {
+            "q": "Which statement is the clearest sign that project governance is too weak?",
+            "options": [
+                "The steering group receives bad-news escalations only after deadlines are missed",
+                "The team uses model-driven apps",
+                "The solution uses Dataverse security roles",
+                "The project has a training plan"
+            ],
+            "answer": 0,
+            "category": "governance-risk",
+            "tags": [
+                "governance",
+                "escalation",
+                "project-control"
+            ],
+            "explanation": "Late escalation of serious issues shows weak governance and poor risk management because decision-makers are not engaged early enough to remove blockers or adjust scope.",
+            "wrongExplanations": [
+                null,
+                "Model-driven apps are unrelated to governance maturity.",
+                "Security roles do not indicate governance weakness.",
+                "A training plan suggests some planning discipline, not weak governance."
+            ],
+            "msRef": {
+                "label": "Use classic project governance structures - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+            }
+        },
+        {
+            "q": "What is the best architect response when stakeholders repeatedly introduce major new requirements after design sign-off because internal alignment never happened?",
+            "options": [
+                "Treat all additions as free changes",
+                "Identify weak stakeholder alignment as an organisational risk and enforce decision governance and scope control",
+                "Stop documenting requirements",
+                "Move all future workshops to the technical team only"
+            ],
+            "answer": 1,
+            "category": "alignment-risk",
+            "tags": [
+                "scope-control",
+                "stakeholder-alignment",
+                "change"
+            ],
+            "explanation": "Repeated late requirement changes usually signal poor internal alignment and weak governance. The response is stronger decision control and explicit scope management.",
+            "wrongExplanations": [
+                "That encourages uncontrolled scope growth.",
+                null,
+                "Documentation is not the problem; weak alignment is.",
+                "Excluding business stakeholders would make the risk worse."
+            ],
+            "msRef": {
+                "label": "Introduction to the Success by Design framework",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Lack of executive sponsorship is primarily a technical risk rather than an organisational risk.",
+            "answer": false,
+            "category": "org-risk",
+            "tags": [
+                "executive-sponsorship",
+                "governance"
+            ],
+            "explanation": "Lack of executive sponsorship is an organisational and governance risk because it affects prioritization, decision-making, escalation, and organizational commitment.",
+            "msRef": {
+                "label": "Organize your Dynamics 365 project team",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-organization"
+            }
+        },
+        {
+            "q": "True or False: A risk register is only useful if it is actively updated and managed.",
+            "answer": true,
+            "category": "risk-management",
+            "tags": [
+                "risk-register",
+                "governance"
+            ],
+            "explanation": "A stale risk register becomes noise. It only helps when it is used to track, prioritize, and mitigate real risks over time.",
+            "msRef": {
+                "label": "Use classic project governance structures - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+            }
+        },
+        {
+            "q": "True or False: Integration dependencies discovered late can create project delays and increased risk.",
+            "answer": true,
+            "category": "dependency-risk",
+            "tags": [
+                "integration",
+                "dependencies",
+                "planning"
+            ],
+            "explanation": "Microsoft guidance explicitly warns that unknown or poorly understood dependencies can cause delays and risks when found too late.",
+            "msRef": {
+                "label": "Overcome integration challenges in Dynamics 365 projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+            }
+        },
+        {
+            "q": "True or False: Organisational risk assessment can be separated completely from solution design quality considerations.",
+            "answer": false,
+            "category": "well-architected-risk",
+            "tags": [
+                "well-architected",
+                "risk",
+                "architecture"
+            ],
+            "explanation": "Architecture choices around reliability, security, operations, performance, and experience can directly create or reduce business and organisational risk.",
+            "msRef": {
+                "label": "Power Platform Well-Architected pillars",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/pillars"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each risk signal to the correct risk category.",
+            "items": [
+                "Executive sponsor is disengaged",
+                "External system owner is unknown",
+                "Frontline users were excluded from discovery",
+                "Three regions insist on keeping different approval processes"
+            ],
+            "zones": [
+                "Governance risk",
+                "Dependency risk",
+                "Adoption risk",
+                "Process alignment risk"
+            ],
+            "correctMapping": {
+                "Executive sponsor is disengaged": "Governance risk",
+                "External system owner is unknown": "Dependency risk",
+                "Frontline users were excluded from discovery": "Adoption risk",
+                "Three regions insist on keeping different approval processes": "Process alignment risk"
+            },
+            "tags": [
+                "risk-categories",
+                "organizational-risk",
+                "assessment"
+            ],
+            "explanation": "These are common organisational risk signals that affect decision-making, delivery coordination, future adoption, and solution complexity.",
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "instruction": "Match each action to the risk it best mitigates.",
+            "items": [
+                "Create and actively review a risk register",
+                "Identify dependency owners early",
+                "Standardize processes where justified",
+                "Involve business users in discovery and validation"
+            ],
+            "zones": [
+                "Ongoing project visibility and mitigation",
+                "Late integration and coordination surprises",
+                "Unnecessary complexity from legacy variation",
+                "Low adoption and unrealistic future-state design"
+            ],
+            "correctMapping": {
+                "Create and actively review a risk register": "Ongoing project visibility and mitigation",
+                "Identify dependency owners early": "Late integration and coordination surprises",
+                "Standardize processes where justified": "Unnecessary complexity from legacy variation",
+                "Involve business users in discovery and validation": "Low adoption and unrealistic future-state design"
+            },
+            "tags": [
+                "mitigation",
+                "organizational-risk",
+                "governance"
+            ],
+            "explanation": "Strong organisational risk assessment is not just about spotting problems. It is about linking each risk to a practical mitigation action.",
+            "msRef": {
+                "label": "Use classic project governance structures - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Weak Governance and Hidden Organisational Risk",
+            "scenario": "A national distributor is implementing Dynamics 365 to unify sales and service operations across four regions. The sponsor approved the budget but rarely attends governance meetings. Regional directors send deputies who cannot make binding decisions. The project team learns that each region wants its own approval process, sales stages, and reporting logic. Frontline users say they have not seen the proposed future-state process and believe headquarters is designing a system that will not match operational reality. Meanwhile, two external systems must integrate before go-live, but system owners are unclear and support contacts are inconsistent.",
+            "tags": [
+                "governance",
+                "adoption",
+                "dependencies"
+            ],
+            "msRef": {
+                "label": "Introduction to the Success by Design framework",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/success-by-design"
+            },
+            "questions": [
+                {
+                    "q": "What is the most serious organisational risk in this scenario?",
+                    "options": [
+                        "The project uses multiple regions",
+                        "Weak governance and lack of empowered decision-makers",
+                        "The solution may need reports",
+                        "The future-state process has not been branded"
+                    ],
+                    "answer": 1,
+                    "explanation": "The biggest risk is weak governance. Without empowered decision-makers, process alignment, scope control, and escalation all suffer.",
+                    "wrongExplanations": [
+                        "Multiple regions increase complexity, but the core problem here is governance failure.",
+                        null,
+                        "Reporting is not the primary organisational threat described.",
+                        "Branding is irrelevant compared with the decision and alignment failures."
+                    ],
+                    "msRef": {
+                        "label": "Organize your Dynamics 365 project team",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-organization"
+                    }
+                },
+                {
+                    "q": "Which risk is most clearly indicated by regional demands for separate approval processes and sales stages?",
+                    "options": [
+                        "Process alignment and complexity risk",
+                        "Network latency risk",
+                        "Environment provisioning risk",
+                        "Icon design risk"
+                    ],
+                    "answer": 0,
+                    "explanation": "Insistence on preserving regional variants creates process alignment risk and can drive unnecessary customization and long-term support burden.",
+                    "wrongExplanations": [
+                        null,
+                        "There is no indication that network latency is the main issue.",
+                        "Provisioning is not the highlighted problem.",
+                        "Icon design is irrelevant."
+                    ],
+                    "msRef": {
+                        "label": "Perform fit gap analysis",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/perform-fit-gap-analysis/"
+                    }
+                },
+                {
+                    "q": "What is the best immediate action for the architect regarding the unclear external system ownership?",
+                    "options": [
+                        "Assume the integration team will solve it later",
+                        "Identify and document dependency owners, support contacts, and escalation paths immediately",
+                        "Remove all integrations from scope without discussion",
+                        "Proceed with testing as if ownership is clear"
+                    ],
+                    "answer": 1,
+                    "explanation": "Unknown dependency ownership is a real delivery risk. It must be clarified early to avoid late surprises in design, testing, and operations.",
+                    "wrongExplanations": [
+                        "Deferring dependency ownership is exactly what creates late project risk.",
+                        null,
+                        "Removing integrations outright without analysis is too blunt and may be wrong.",
+                        "Testing assumptions without clear ownership is reckless."
+                    ],
+                    "msRef": {
+                        "label": "Overcome integration challenges in Dynamics 365 projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+                    }
+                },
+                {
+                    "q": "What is the strongest sign of adoption risk?",
+                    "options": [
+                        "Regional directors send deputies",
+                        "Frontline users say the future process does not reflect operational reality and they were not involved",
+                        "The budget is approved",
+                        "The solution spans sales and service"
+                    ],
+                    "answer": 1,
+                    "explanation": "Adoption risk is strongest when users are excluded from discovery and already believe the future process is unrealistic.",
+                    "wrongExplanations": [
+                        "This points more to governance weakness than direct adoption risk.",
+                        null,
+                        "Budget approval does not indicate adoption readiness.",
+                        "Cross-functional scope alone is not the main adoption signal."
+                    ],
+                    "msRef": {
+                        "label": "Define customer requirements",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/describe-solution-architect-role-power-platform-projects/2-define-customer-requirements"
+                    }
+                }
+            ]
+        }
+    ]
+}

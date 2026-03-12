@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Define Use Cases and Quality Standards for Existing Data",
+        "description": "Data profiling, data quality rules, cleansing requirements, and use case validation for existing data assets.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "Why should a solution architect define quality standards for existing data early in a PL-600 project?",
+            "options": [
+                "To make reports look more polished",
+                "To determine whether existing data is fit for the intended business use cases and what remediation effort is required",
+                "To avoid discussing migration",
+                "To ensure all historical data is copied unchanged"
+            ],
+            "answer": 1,
+            "category": "data-quality",
+            "tags": [
+                "quality-standards",
+                "use-cases",
+                "migration"
+            ],
+            "explanation": "Data quality standards should be tied to how the data will actually be used. The architect needs to know whether existing data is accurate, complete, consistent, and usable enough for the target business scenarios, and what cleansing or transformation effort will be needed.",
+            "wrongExplanations": [
+                "Visual polish is not the main reason to define data quality standards.",
+                null,
+                "Data quality work usually increases the need for migration planning rather than avoiding it.",
+                "Copying low-quality data unchanged often transfers legacy problems into the new solution."
+            ],
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        },
+        {
+            "q": "Which question best helps validate whether existing data is suitable for a proposed use case?",
+            "options": [
+                "Does the source system use a modern color palette?",
+                "Does the data contain the required values, quality level, and history needed to support the target process or decision?",
+                "How many users like the current export format?",
+                "Was the legacy database built by an internal team?"
+            ],
+            "answer": 1,
+            "category": "use-case-validation",
+            "tags": [
+                "data-fit",
+                "business-use-case",
+                "quality"
+            ],
+            "explanation": "The architect should test data against the specific business use case. The key issue is whether the data has the right fields, completeness, timeliness, and quality for the intended future-state scenario.",
+            "wrongExplanations": [
+                "Visual design does not determine whether data supports a business use case.",
+                null,
+                "Export preference does not validate data suitability.",
+                "Who built the database does not determine whether the data is fit for purpose."
+            ],
+            "msRef": {
+                "label": "Manage your data effectively with the right architecture",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management-architecture"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"We already have customer data, so migration should be easy.\" What should the architect do first?",
+            "options": [
+                "Accept the assumption and reduce migration planning",
+                "Profile the data and validate completeness, consistency, duplicates, and required transformations against the target use cases",
+                "Ignore the existing data until UAT",
+                "Assume Dataverse will fix the data automatically"
+            ],
+            "answer": 1,
+            "category": "data-profiling",
+            "tags": [
+                "profiling",
+                "migration",
+                "assumptions"
+            ],
+            "explanation": "Having data is not the same as having usable data. The architect should validate actual quality characteristics and transformation needs before accepting migration assumptions.",
+            "wrongExplanations": [
+                "This is a risky assumption because existing data often contains issues that materially affect effort and scope.",
+                null,
+                "Data quality issues should be assessed early, not deferred to UAT.",
+                "Dataverse does not automatically correct poor source data."
+            ],
+            "msRef": {
+                "label": "Using the data profiling tools - Power Query",
+                "url": "https://learn.microsoft.com/en-us/power-query/data-profiling-tools"
+            }
+        },
+        {
+            "q": "Which statement best describes data profiling in this context?",
+            "options": [
+                "A branding exercise for dashboards",
+                "An activity to understand the structure, completeness, distribution, and anomalies in existing data",
+                "A way to bypass requirements workshops",
+                "A replacement for business process analysis"
+            ],
+            "answer": 1,
+            "category": "data-profiling",
+            "tags": [
+                "profiling",
+                "quality",
+                "analysis"
+            ],
+            "explanation": "Data profiling helps the architect understand the shape and condition of the data, including completeness, distinct values, patterns, and anomalies that affect solution design and migration effort.",
+            "wrongExplanations": [
+                "Branding has nothing to do with data profiling.",
+                null,
+                "Data profiling complements, not replaces, discovery and requirements work.",
+                "Process analysis is still necessary because good data alone does not define the target process."
+            ],
+            "msRef": {
+                "label": "Using the data profiling tools - Power Query",
+                "url": "https://learn.microsoft.com/en-us/power-query/data-profiling-tools"
+            }
+        },
+        {
+            "q": "Why should data quality rules be linked to business use cases rather than defined as generic cleanup goals?",
+            "options": [
+                "Because cleanup should focus only on aesthetic formatting",
+                "Because the required level of quality depends on how the data will be used in the future solution",
+                "Because generic cleanup eliminates the need for profiling",
+                "Because all data must meet the same quality threshold"
+            ],
+            "answer": 1,
+            "category": "quality-rules",
+            "tags": [
+                "business-use-case",
+                "fit-for-purpose",
+                "quality-rules"
+            ],
+            "explanation": "Not every data element needs the same standard. Quality requirements should be driven by the business scenario, such as reporting, automation, matching, or operational decision-making.",
+            "wrongExplanations": [
+                "Formatting may matter, but it is not the main reason to define quality standards.",
+                null,
+                "Profiling is still required to understand current data condition.",
+                "Different use cases often require different quality thresholds and controls."
+            ],
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        },
+        {
+            "q": "Which is the best example of a useful data quality rule for existing customer records?",
+            "options": [
+                "Customer records should look cleaner",
+                "Each active customer record must have a unique identifier, a valid primary contact method, and no unresolved duplicate match above the agreed threshold",
+                "Users should like the imported data",
+                "Addresses should be modern"
+            ],
+            "answer": 1,
+            "category": "quality-rules",
+            "tags": [
+                "customer-data",
+                "duplicates",
+                "validation"
+            ],
+            "explanation": "A good quality rule is specific and testable. This example defines concrete conditions tied to usability and data trustworthiness.",
+            "wrongExplanations": [
+                "This is too vague to validate or operationalize.",
+                null,
+                "User sentiment is not a sufficient data quality rule.",
+                "Modern is subjective and not measurable."
+            ],
+            "msRef": {
+                "label": "Data Cleansing - Data Quality Services (DQS)",
+                "url": "https://learn.microsoft.com/en-us/sql/data-quality-services/data-cleansing?view=sql-server-ver16"
+            }
+        },
+        {
+            "q": "What is the strongest architect reason to identify cleansing requirements during solution assessment rather than during final cutover preparation?",
+            "options": [
+                "Because cleansing never affects scope",
+                "Because cleansing effort can materially affect timeline, ownership, migration design, and feasibility",
+                "Because cleansing is only a DBA concern",
+                "Because cutover teams prefer fewer meetings"
+            ],
+            "answer": 1,
+            "category": "cleansing",
+            "tags": [
+                "cleansing",
+                "feasibility",
+                "migration-planning"
+            ],
+            "explanation": "Cleansing work can be large, time-consuming, and dependent on business ownership. It affects scope, planning, migration sequencing, and whether phase-one goals are realistic.",
+            "wrongExplanations": [
+                "Cleansing often affects scope significantly.",
+                null,
+                "Cleansing is not only a DBA issue; business and data owners usually need to participate.",
+                "Meeting preference is irrelevant to why cleansing should be identified early."
+            ],
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        },
+        {
+            "q": "A team wants to use legacy product data for automated recommendations in the new system. Which concern should the architect validate first?",
+            "options": [
+                "Whether the recommendation screen looks modern",
+                "Whether the product data is complete, consistent, and trustworthy enough for the automation use case",
+                "Whether the product table has enough columns",
+                "Whether the old system used a different font"
+            ],
+            "answer": 1,
+            "category": "use-case-validation",
+            "tags": [
+                "automation",
+                "product-data",
+                "quality"
+            ],
+            "explanation": "When data will drive automation or decisions, the architect must validate that it is sufficiently complete and reliable for that specific use case.",
+            "wrongExplanations": [
+                "Screen appearance does not determine whether data can support automation.",
+                null,
+                "Column count alone does not show whether the data is good enough.",
+                "Font differences are irrelevant."
+            ],
+            "msRef": {
+                "label": "Manage your data effectively with the right architecture",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management-architecture"
+            }
+        },
+        {
+            "q": "Which finding most strongly indicates that existing data quality may block a future-state process?",
+            "options": [
+                "The source application has an old user interface",
+                "Critical fields required for routing and automation are missing or inconsistent across records",
+                "A report takes too long to open",
+                "The data owner prefers spreadsheets"
+            ],
+            "answer": 1,
+            "category": "data-risk",
+            "tags": [
+                "routing",
+                "automation",
+                "missing-data"
+            ],
+            "explanation": "If the future-state process depends on key fields that are missing or inconsistent, the data quality issue is directly blocking business capability and must be handled early.",
+            "wrongExplanations": [
+                "Old UI does not prove process-blocking data issues.",
+                null,
+                "Report speed is not the main issue described.",
+                "Tool preference does not by itself prove that required data is unusable."
+            ],
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        },
+        {
+            "q": "What is the best way to judge whether historical data should be cleansed before migration or left behind?",
+            "options": [
+                "Migrate everything because storage is cheap",
+                "Assess whether the historical data supports required business, reporting, audit, or operational use cases in the target solution",
+                "Move only the newest records regardless of business need",
+                "Let developers decide without stakeholder input"
+            ],
+            "answer": 1,
+            "category": "history-scope",
+            "tags": [
+                "historical-data",
+                "use-cases",
+                "scope"
+            ],
+            "explanation": "Historical data decisions should be based on actual business value and required use cases, not blanket rules. Some data may need cleansing and migration, some may need archiving, and some may not need to move at all.",
+            "wrongExplanations": [
+                "Cheap storage does not justify migrating low-value or poor-quality data unnecessarily.",
+                null,
+                "Recency alone is not a sound decision rule.",
+                "Stakeholders and data owners are needed because this is a business decision as much as a technical one."
+            ],
+            "msRef": {
+                "label": "Manage your data effectively with the right architecture",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management-architecture"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Data profiling can help expose completeness, distribution, and anomaly issues in existing data before migration or reuse.",
+            "answer": true,
+            "category": "data-profiling",
+            "tags": [
+                "profiling",
+                "quality",
+                "migration"
+            ],
+            "explanation": "Microsoft's profiling guidance shows how profiling helps reveal data quality, distribution, and column-level issues that matter for downstream use and migration.",
+            "msRef": {
+                "label": "Using the data profiling tools - Power Query",
+                "url": "https://learn.microsoft.com/en-us/power-query/data-profiling-tools"
+            }
+        },
+        {
+            "q": "True or False: A data quality rule should ideally be measurable and tied to whether the data can support a defined business use case.",
+            "answer": true,
+            "category": "quality-rules",
+            "tags": [
+                "fit-for-purpose",
+                "quality-standards",
+                "use-cases"
+            ],
+            "explanation": "Quality standards are most useful when they are explicit and connected to the business outcome the data must support.",
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        },
+        {
+            "q": "True or False: If source data exists, the architect can assume it is suitable for automation and analytics use cases without validation.",
+            "answer": false,
+            "category": "use-case-validation",
+            "tags": [
+                "assumptions",
+                "automation",
+                "analytics"
+            ],
+            "explanation": "Data existence does not prove data fitness. The architect should validate quality and suitability against the actual use case before relying on it.",
+            "msRef": {
+                "label": "Manage your data effectively with the right architecture",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management-architecture"
+            }
+        },
+        {
+            "q": "True or False: Cleansing requirements can affect scope and timeline, so they should be identified during solution assessment.",
+            "answer": true,
+            "category": "cleansing",
+            "tags": [
+                "timeline",
+                "scope",
+                "migration"
+            ],
+            "explanation": "Cleansing is often a significant workstream and can materially affect delivery planning and feasibility.",
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each data concern to the most relevant assessment activity.",
+            "items": [
+                "Many customer records are blank in key contact fields",
+                "The same product appears under multiple inconsistent names",
+                "The business wants to automate routing based on priority values",
+                "No one knows whether old warranty history is still needed"
+            ],
+            "zones": [
+                "Completeness profiling",
+                "Consistency and cleansing analysis",
+                "Use case validation against quality rules",
+                "Historical data scope assessment"
+            ],
+            "correctMapping": {
+                "Many customer records are blank in key contact fields": "Completeness profiling",
+                "The same product appears under multiple inconsistent names": "Consistency and cleansing analysis",
+                "The business wants to automate routing based on priority values": "Use case validation against quality rules",
+                "No one knows whether old warranty history is still needed": "Historical data scope assessment"
+            },
+            "tags": [
+                "profiling",
+                "cleansing",
+                "use-cases"
+            ],
+            "explanation": "These concerns map to different architect activities: understanding completeness, resolving inconsistency, checking whether data can support a future use case, and deciding whether historical data has business value.",
+            "msRef": {
+                "label": "Using the data profiling tools - Power Query",
+                "url": "https://learn.microsoft.com/en-us/power-query/data-profiling-tools"
+            }
+        },
+        {
+            "instruction": "Match each architect action to the reason it matters.",
+            "items": [
+                "Profile the source data",
+                "Define explicit quality rules",
+                "Identify cleansing ownership",
+                "Validate data against future-state use cases"
+            ],
+            "zones": [
+                "Reveals structure, completeness, and anomalies",
+                "Turns vague quality expectations into testable standards",
+                "Makes remediation planning realistic and accountable",
+                "Confirms whether data is fit for the intended business purpose"
+            ],
+            "correctMapping": {
+                "Profile the source data": "Reveals structure, completeness, and anomalies",
+                "Define explicit quality rules": "Turns vague quality expectations into testable standards",
+                "Identify cleansing ownership": "Makes remediation planning realistic and accountable",
+                "Validate data against future-state use cases": "Confirms whether data is fit for the intended business purpose"
+            },
+            "tags": [
+                "architect-actions",
+                "data-quality",
+                "planning"
+            ],
+            "explanation": "A strong architect approach connects each data-quality activity to a concrete decision need instead of treating data cleanup as a generic technical task.",
+            "msRef": {
+                "label": "Manage your data in Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Existing Data Looks Fine Until the Use Case Changes",
+            "scenario": "A company plans to move case management to Dynamics 365. Stakeholders say the existing customer and warranty data is already available in legacy systems, so they expect migration to be straightforward. During discovery, the business also wants automated case routing based on region and product line, proactive reporting on repeat issues, and agent dashboards showing complete contact details. Initial profiling reveals many blank contact fields, inconsistent product naming, duplicate customer records, and warranty history with missing region values. Business leaders still argue that the data is 'good enough' because users have been working with it for years.",
+            "tags": [
+                "data-quality",
+                "profiling",
+                "use-case-validation"
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            },
+            "questions": [
+                {
+                    "q": "What should the architect do first?",
+                    "options": [
+                        "Accept that the data is good enough because the business has used it historically",
+                        "Validate the existing data against the specific future-state use cases and define quality standards accordingly",
+                        "Defer all data analysis until cutover planning",
+                        "Assume the routing rules can be simplified to avoid data issues"
+                    ],
+                    "answer": 1,
+                    "explanation": "The right first move is to test the data against the intended future-state use cases. Data that worked in the past may not be sufficient for automation, analytics, or standardized routing.",
+                    "wrongExplanations": [
+                        "Historic usability does not prove future fitness.",
+                        null,
+                        "That is too late because data quality may shape scope and feasibility.",
+                        "Simplification may help, but the architect should first understand the actual gap between data quality and use-case needs."
+                    ],
+                    "msRef": {
+                        "label": "Manage your data effectively with the right architecture",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management-architecture"
+                    }
+                },
+                {
+                    "q": "Which data issue most directly threatens automated case routing?",
+                    "options": [
+                        "Users prefer spreadsheets",
+                        "Missing region values and inconsistent product naming",
+                        "The legacy system is old",
+                        "A dashboard opens slowly"
+                    ],
+                    "answer": 1,
+                    "explanation": "Automated routing depends on reliable routing attributes. Missing region values and inconsistent product names directly undermine that capability.",
+                    "wrongExplanations": [
+                        "Tool preference is not the direct blocker to routing logic.",
+                        null,
+                        "System age alone does not prove routing failure.",
+                        "Dashboard speed is not the key issue for routing."
+                    ],
+                    "msRef": {
+                        "label": "Manage your data in Dynamics 365 implementation projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/data-management"
+                    }
+                },
+                {
+                    "q": "Why is the statement 'users have been working with it for years' a weak defense of current data quality?",
+                    "options": [
+                        "Because past manual workarounds do not prove the data is fit for standardized automation and reporting",
+                        "Because old data should always be deleted",
+                        "Because Dynamics 365 does not support historical data",
+                        "Because profiling is unnecessary if users are experienced"
+                    ],
+                    "answer": 0,
+                    "explanation": "Data that users can work around manually may still be too incomplete or inconsistent for automated routing, analytics, or trustworthy dashboards.",
+                    "wrongExplanations": [
+                        null,
+                        "Historical data can still be valuable if it supports valid use cases.",
+                        "Dynamics 365 can support historical data; the issue is data quality and fit.",
+                        "User experience does not remove the need for profiling."
+                    ],
+                    "msRef": {
+                        "label": "Using the data profiling tools - Power Query",
+                        "url": "https://learn.microsoft.com/en-us/power-query/data-profiling-tools"
+                    }
+                },
+                {
+                    "q": "What is the best next planning action after confirming these quality issues?",
+                    "options": [
+                        "Ignore them because the migration budget is fixed",
+                        "Define cleansing requirements, ownership, and scope based on the future-state data use cases",
+                        "Move all bad records into a hidden table",
+                        "Abandon the project immediately"
+                    ],
+                    "answer": 1,
+                    "explanation": "Once the quality gap is known, the architect should turn it into a concrete workstream with explicit cleansing requirements, ownership, and scope decisions tied to business value.",
+                    "wrongExplanations": [
+                        "Budget pressure does not eliminate data reality.",
+                        null,
+                        "Hiding bad data is not the same as fixing or managing it.",
+                        "The right response is structured mitigation, not immediate abandonment."
+                    ],
+                    "msRef": {
+                        "label": "Data Cleansing - Data Quality Services (DQS)",
+                        "url": "https://learn.microsoft.com/en-us/sql/data-quality-services/data-cleansing?view=sql-server-ver16"
+                    }
+                }
+            ]
+        }
+    ]
+}

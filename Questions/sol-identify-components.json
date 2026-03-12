@@ -1,0 +1,451 @@
+{
+  "_meta": {
+    "topic": "Identify Microsoft Power Platform Solution Components",
+    "description": "Identifying and selecting the right Power Platform components — Power Apps (canvas, model-driven, custom pages), Power Automate (cloud, desktop/RPA), Power Pages, Power BI, Copilot Studio, AI Builder, Dataverse, connectors — for a given business requirement. Covers PL-600 exam objective: Initiate solution planning > Identify Microsoft Power Platform solution components.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "Which statement correctly distinguishes a canvas app from a model-driven app in Power Apps?",
+      "options": [
+        "Canvas apps are built on Dataverse; model-driven apps can use any data source",
+        "Canvas apps give makers full pixel-perfect control over layout and can connect to hundreds of data sources; model-driven apps generate their UI automatically from the Dataverse data model and are purpose-built for process-driven, data-dense scenarios",
+        "Canvas apps are only for mobile devices; model-driven apps are desktop-only",
+        "Canvas apps require premium licences; model-driven apps are included in all Microsoft 365 plans"
+      ],
+      "answer": 1,
+      "category": "power-apps",
+      "tags": ["canvas-app", "model-driven-app", "component-selection", "power-apps"],
+      "explanation": "Microsoft documents two distinct design philosophies: Canvas apps start with the user experience — makers design every screen pixel-by-pixel and can connect to over 900 data sources via connectors, making them ideal for targeted, task-specific scenarios. Model-driven apps start with the data model — the UI is automatically generated from Dataverse tables, forms, views, and relationships, making them ideal for complex, process-driven, data-dense applications (such as CRM, case management, field service) where consistency across 50–500 users matters more than custom visual design. Architects must match the app type to the scenario's dominant requirement.",
+      "wrongExplanations": [
+        "Canvas apps can connect to many data sources beyond Dataverse — including SharePoint, SQL, Salesforce, and REST APIs. Model-driven apps require Dataverse.",
+        "Both canvas and model-driven apps are responsive and run on desktop, tablet, and mobile — neither is restricted to a single device type.",
+        "Both app types require appropriate Power Apps licences — canvas apps connecting to non-Microsoft data sources or Dataverse require Power Apps per user or per app licences, as do model-driven apps."
+      ],
+      "msRef": {
+        "label": "Overview of building a model-driven app with Power Apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/model-driven-app-overview"
+      }
+    },
+    {
+      "q": "A customer wants to embed a highly customised, pixel-perfect data entry screen within an existing model-driven app — without rebuilding the whole app as a canvas app. Which Power Apps feature enables this?",
+      "options": [
+        "Embedded canvas app — a canvas app embedded as a control inside a model-driven form",
+        "Custom page — a canvas-like page type that can be added to a model-driven app, combining the flexibility of canvas with the navigation of model-driven",
+        "Power Pages site embedded via an iframe inside the model-driven app",
+        "PCF control — a custom Power Apps component framework control coded in TypeScript"
+      ],
+      "answer": 1,
+      "category": "power-apps",
+      "tags": ["custom-page", "model-driven-app", "canvas", "hybrid", "component-selection"],
+      "explanation": "Custom pages are a Power Apps feature that allows makers to add canvas-like pages — with full layout and formula control — into a model-driven app. This brings the flexibility of a canvas experience within the model-driven app's navigation shell without requiring a full rebuild. Microsoft introduced custom pages as the strategic direction for blending canvas flexibility into model-driven apps, gradually replacing embedded canvas app (which is still supported but considered the older pattern). Architects should recommend custom pages for new builds requiring this hybrid capability.",
+      "wrongExplanations": [
+        "Embedded canvas app achieves a similar outcome but is embedded as a control within a form — not as a standalone page in the model-driven app. It is the older pattern; custom pages are the strategic replacement.",
+        "Embedding a Power Pages site via iframe introduces an external dependency, separate data context, and authentication complexity — it is not the intended pattern for this scenario.",
+        "PCF controls are code-first components for extending individual form controls — they are not equivalent to adding a full custom page with multiple layouts, galleries, and navigation."
+      ],
+      "msRef": {
+        "label": "Model-driven app custom page overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/model-app-page-overview"
+      }
+    },
+    {
+      "q": "A business wants to automate a process that involves a legacy on-premises desktop application with no API and no connector available. Which Power Automate component is designed for this scenario?",
+      "options": [
+        "A cloud flow using the HTTP connector to call the desktop application",
+        "A desktop flow (Power Automate for Desktop) — it uses RPA to automate GUI interactions on desktop and web applications without requiring an API",
+        "A scheduled cloud flow with a custom connector",
+        "A Business Process Flow with an automated action step"
+      ],
+      "answer": 1,
+      "category": "power-automate",
+      "tags": ["desktop-flow", "RPA", "power-automate", "legacy-system", "component-selection"],
+      "explanation": "Microsoft explicitly documents that desktop flows (Power Automate for Desktop) are the correct component when a system lacks an API and no connector can be built. Desktop flows use RPA — teaching Power Automate to mimic mouse movements and keyboard entries as if a human user were operating the application. Microsoft's own guidance states: 'RPA is needed to interact with applications which are lacking a prebuilt connector and which don't have APIs.' Cloud flows with HTTP or custom connectors require an API endpoint — they cannot interact with a desktop GUI application.",
+      "wrongExplanations": [
+        "The HTTP connector calls REST/SOAP API endpoints — it cannot drive a desktop application's user interface.",
+        "Scheduled cloud flows with custom connectors still require an API — they cannot automate GUI interactions on a legacy desktop application.",
+        "Business Process Flows guide users through stages in a Dataverse-based model-driven app — they do not interact with external desktop applications."
+      ],
+      "msRef": {
+        "label": "Introduction to desktop flows — Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/desktop-flows/introduction"
+      }
+    },
+    {
+      "q": "When should a solution architect recommend using a cloud flow (digital process automation) rather than a desktop flow (RPA)?",
+      "options": [
+        "Always — cloud flows are more reliable and should be used in all automation scenarios",
+        "When the target application has an API or a prebuilt/custom connector available — API-based automation is more stable and resilient to application UI changes than RPA",
+        "When the customer has a Power Automate Premium licence — desktop flows require an additional add-on",
+        "When the process runs more than once per day — RPA is only suitable for batch overnight automation"
+      ],
+      "answer": 1,
+      "category": "power-automate",
+      "tags": ["cloud-flow", "desktop-flow", "RPA", "DPA", "decision-framework"],
+      "explanation": "Microsoft's guidance is clear: when an application has an API-based connector available, digital process automation (cloud flows) should be preferred over RPA. API-based integrations are more reliable — software vendors maintain API backwards compatibility even as application UIs change. RPA is susceptible to breaking when application screens, layouts, or controls change following an update. The architect's decision rule is: use cloud flows for API-capable systems, use desktop flows only for systems with no API and no connector. This minimises fragile automation that requires frequent maintenance.",
+      "wrongExplanations": [
+        "Cloud flows are preferred when an API is available — but desktop flows are appropriate and often the only option for legacy applications without APIs.",
+        "Attended desktop flows are included in Power Automate Premium — unattended RPA requires an additional Process licence per machine, but this is a licensing consideration, not the primary selection criterion.",
+        "RPA frequency has no bearing on the cloud vs desktop flow decision — the presence or absence of an API is the primary criterion."
+      ],
+      "msRef": {
+        "label": "Types of process automation to consider — Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/guidance/planning/various-types-process-automation"
+      }
+    },
+    {
+      "q": "Which Power Automate flow type is correct for automating a process that must be triggered by a schedule, run completely without human intervention overnight, and interact with systems via connectors?",
+      "options": [
+        "An instant cloud flow triggered manually by a user",
+        "A scheduled cloud flow — it runs automatically on a defined recurrence without human intervention and can call connectors and APIs",
+        "A desktop flow in unattended mode — it can run on a schedule without a logged-in user",
+        "A Business Process Flow with a scheduled trigger"
+      ],
+      "answer": 1,
+      "category": "power-automate",
+      "tags": ["cloud-flow", "scheduled-flow", "automation", "component-selection"],
+      "explanation": "Microsoft defines three cloud flow types: automated (triggered by an event), scheduled (triggered by a recurrence), and instant (triggered manually). A scheduled cloud flow runs automatically at a defined interval — daily, weekly, or at a custom recurrence — without any human trigger. It can call any connector, perform Dataverse operations, invoke child flows, and process data. An overnight batch process triggered by schedule and using connector-based APIs is exactly the scheduled cloud flow use case.",
+      "wrongExplanations": [
+        "Instant cloud flows require a human to trigger them — they are not suitable for unattended scheduled execution.",
+        "Desktop flows in unattended mode are for RPA scenarios involving GUI applications. For connector/API-based overnight automation, a scheduled cloud flow is the appropriate component — not RPA.",
+        "Business Process Flows are stage-based user guidance tools in model-driven apps — they do not support scheduled autonomous execution."
+      ],
+      "msRef": {
+        "label": "What is Power Automate? — flow types",
+        "url": "https://learn.microsoft.com/en-us/power-automate/flow-types"
+      }
+    },
+    {
+      "q": "A solution architect needs to design an AI component that can extract field values from supplier invoices uploaded as PDFs — without training a custom machine learning model from scratch. Which Power Platform component should they evaluate first?",
+      "options": [
+        "Azure Machine Learning with a custom BERT model",
+        "AI Builder — specifically its prebuilt invoice processing model, which extracts common invoice fields without requiring training data",
+        "Power Automate with a SharePoint connector to read PDF metadata",
+        "A JavaScript web resource using a third-party OCR library"
+      ],
+      "answer": 1,
+      "category": "ai-builder",
+      "tags": ["ai-builder", "document-processing", "invoice", "prebuilt-model", "component-selection"],
+      "explanation": "AI Builder includes prebuilt models for common business scenarios — including invoice processing — that can extract fields such as vendor name, invoice number, total amount, and line items from PDFs without any training data or machine learning expertise. These models are ready to use immediately in Power Automate flows and Power Apps. The architect should evaluate AI Builder's prebuilt models before recommending Azure ML or custom OCR development, as they provide a low-code path that requires no data science skill and is integrated natively with the Power Platform.",
+      "wrongExplanations": [
+        "Azure Machine Learning is appropriate when AI Builder's prebuilt or customisable models cannot meet the requirement — it should be evaluated after the platform-native option.",
+        "SharePoint connector reads metadata about PDF files — it does not extract field values from document content.",
+        "A custom JavaScript OCR library requires code maintenance, security management, and integration plumbing — this is custom development when a platform-native prebuilt model already exists."
+      ],
+      "msRef": {
+        "label": "Overview of AI Builder",
+        "url": "https://learn.microsoft.com/en-us/ai-builder/overview"
+      }
+    },
+    {
+      "q": "What is the difference between AI Builder's prebuilt models and its customisable models?",
+      "options": [
+        "Prebuilt models require AI Builder credits; customisable models are free",
+        "Prebuilt models are ready to use immediately for specific scenarios (invoice processing, sentiment analysis, language detection) without training data; customisable models are trained on the customer's own data for domain-specific requirements (custom object detection, custom document processing, prediction)",
+        "Prebuilt models only work in Power Automate; customisable models only work in Power Apps",
+        "Prebuilt models are available in preview only; customisable models are generally available"
+      ],
+      "answer": 1,
+      "category": "ai-builder",
+      "tags": ["ai-builder", "prebuilt-models", "custom-models", "training", "component-selection"],
+      "explanation": "AI Builder offers two categories: (1) Prebuilt models — trained by Microsoft for common scenarios and immediately usable without any customer training data. These include invoice processing, receipt processing, business card reader, sentiment analysis, language detection, text translation, and key phrase extraction. (2) Customisable (custom) models — trained on the customer's own labelled data for domain-specific scenarios where generic models are insufficient, such as detecting custom product defects (object detection), recognising proprietary document formats (document processing), or predicting business-specific outcomes (prediction). The architect selects prebuilt first; if the scenario is too domain-specific, they design a custom model training pipeline.",
+      "wrongExplanations": [
+        "Both prebuilt and custom models consume AI Builder credits — neither is free. Credit consumption rates vary by model type.",
+        "Both prebuilt and custom AI Builder models can be used in both Power Automate and Power Apps — there is no product-level restriction.",
+        "Many prebuilt models are generally available — the preview vs GA status is per model, not a categorical prebuilt vs custom distinction."
+      ],
+      "msRef": {
+        "label": "Overview of AI Builder",
+        "url": "https://learn.microsoft.com/en-us/ai-builder/overview"
+      }
+    },
+    {
+      "q": "Which AI Builder model type should an architect select when the business requirement is to automatically classify incoming support emails into categories such as 'billing', 'technical', and 'returns'?",
+      "options": [
+        "Object detection — it identifies items within images",
+        "Prediction — it predicts binary outcomes based on historical data",
+        "Category classification (text classification) — it assigns text content to predefined categories",
+        "Form processing — it extracts field values from structured documents"
+      ],
+      "answer": 2,
+      "category": "ai-builder",
+      "tags": ["ai-builder", "text-classification", "category-classification", "email-routing", "component-selection"],
+      "explanation": "AI Builder's category classification model (text classification) is specifically designed to classify text into predefined categories — exactly the email routing scenario described. The model is trained on labelled examples of support emails tagged with their correct category, and once published, it classifies new incoming emails in a Power Automate flow. The architect selects this model because it directly matches the business requirement: unstructured text → predefined category label. Object detection works on images, prediction models binary/numeric outcomes from structured tabular data, and form processing extracts fields from structured documents.",
+      "wrongExplanations": [
+        "Object detection identifies and locates objects within images — it is not applicable to text classification of email content.",
+        "Prediction models predict outcomes from structured historical data (e.g. will this customer churn?) — they require tabular input, not free-form text classification.",
+        "Form processing (document processing) extracts field values from structured forms and documents — it is not designed for categorising free-form email text."
+      ],
+      "msRef": {
+        "label": "AI models and business scenarios — AI Builder",
+        "url": "https://learn.microsoft.com/en-us/ai-builder/model-types"
+      }
+    },
+    {
+      "q": "A customer wants to surface real-time operational reports inside a D365 Customer Service model-driven app so agents can see case trend dashboards without leaving the app. Which component combination is most appropriate?",
+      "options": [
+        "Power Pages with Power BI visualisation enabled",
+        "Power BI report embedded as a Power BI Embedded system dashboard within the model-driven app",
+        "A canvas app with Power BI tiles embedded inside a model-driven form",
+        "Azure Data Studio reports linked from the case form via a web resource URL"
+      ],
+      "answer": 1,
+      "category": "power-bi",
+      "tags": ["power-bi", "embedded", "model-driven-app", "dashboards", "component-selection"],
+      "explanation": "Power BI supports native embedding in model-driven apps via Power BI embedded system dashboards. Makers create a system dashboard in Power Apps, select Power BI as the content source, choose a workspace and report, and the dashboard appears natively within the model-driven app's navigation — no iframes, no separate tabs. Agents see the report in context without leaving the app. Power BI visualization embedding must be enabled in Power Platform Admin Center for this to work. Environment variables can be used to configure workspace and report references per environment, supporting ALM.",
+      "wrongExplanations": [
+        "Power Pages is for external user portals — it is not the appropriate component for embedding analytics inside an internal agent-facing model-driven app.",
+        "A canvas app with Power BI tiles inside a model-driven form adds unnecessary complexity — the native Power BI embedded system dashboard is the correct, simpler platform pattern.",
+        "Azure Data Studio is a database development and query tool — it is not a supported component for embedding operational reports in model-driven apps."
+      ],
+      "msRef": {
+        "label": "Create or edit a Power BI embedded system dashboard",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/create-edit-powerbi-embedded-page"
+      }
+    },
+    {
+      "q": "What is the correct Power BI embedding scenario for a SaaS ISV that wants to embed reports inside their own multi-tenant application and serve external customers who do not have Power BI licences?",
+      "options": [
+        "Embed for your organisation (user owns data) — users sign in with their Power BI credentials",
+        "Embed for your customers (app owns data) — the app authenticates with Power BI using a service principal; customers do not need Power BI licences",
+        "Secure embed — paste the report URL into an iFrame in the application",
+        "Power BI Premium with per-user licences for each of the ISV's customers"
+      ],
+      "answer": 1,
+      "category": "power-bi",
+      "tags": ["power-bi", "embedded", "ISV", "app-owns-data", "external-users"],
+      "explanation": "Microsoft defines two Power BI embedded analytics solutions: (1) Embed for your customers (app owns data) — the ISV application authenticates against Power BI using a service principal or master account. Customers do not sign in to Power BI and do not need Power BI licences. This is the correct pattern for ISVs building multi-tenant SaaS applications where customers are external and should not need Microsoft licences. A Power BI Embedded (A SKU) or Fabric (F SKU) capacity is required for production. (2) Embed for your organisation (user owns data) — users authenticate with their own Power BI credentials and must have Power BI Pro or Premium licences. This is for internal enterprise applications.",
+      "wrongExplanations": [
+        "Embed for your organisation requires users to authenticate with Power BI credentials and have Pro/PPU licences — this is unsuitable for external customers in an ISV multi-tenant SaaS.",
+        "Secure embed is a no-code approach requiring viewers to have Power BI licences — it is not appropriate for serving external unlicensed customers.",
+        "Provisioning Power BI Premium per-user licences for every external customer is commercially impractical and not the documented ISV embedding model."
+      ],
+      "msRef": {
+        "label": "Power BI embedded analytics overview",
+        "url": "https://learn.microsoft.com/en-us/power-bi/developer/embedded/embedded-analytics-power-bi"
+      }
+    },
+    {
+      "q": "Microsoft Copilot Studio is identified as the correct component for a conversational AI requirement. Which of the following capabilities does it natively support?",
+      "options": [
+        "Only FAQ-style responses from a static knowledge base — it cannot perform actions or call external systems",
+        "Natural language understanding, topic-based conversation design, integration with Dataverse and external systems via connectors and plugins, escalation to human agents in D365 Customer Service, and publication to multiple channels including Teams, websites, and telephony",
+        "Only Teams chat integration — it cannot be deployed to external websites or telephony",
+        "Advanced ML model training — it allows data scientists to train custom NLP models"
+      ],
+      "answer": 1,
+      "category": "copilot-studio",
+      "tags": ["copilot-studio", "conversational-ai", "multi-channel", "escalation", "component-selection"],
+      "explanation": "Microsoft Copilot Studio is a graphical, low-code tool for building AI-powered conversational agents. It natively supports: (1) natural language understanding for topic matching; (2) topic-based conversation design with branching logic; (3) Dataverse integration and connector-based actions for retrieving and updating data; (4) plugins for calling external services; (5) escalation to D365 Customer Service human agents with full context transfer; and (6) multi-channel deployment including Teams, websites (via embed script), mobile apps, and telephony systems. It is not restricted to FAQ responses or Teams — and it is a no-code/low-code tool, not an ML training platform.",
+      "wrongExplanations": [
+        "Copilot Studio supports actions and connector-based integrations — it is not limited to static knowledge base responses.",
+        "Copilot Studio supports multi-channel deployment far beyond Teams — including external websites via an embed code, mobile apps, and telephony via Azure Communication Services or partner integrations.",
+        "Copilot Studio is a graphical low-code agent builder — data scientists use Azure AI Studio or Azure Machine Learning for training custom NLP models."
+      ],
+      "msRef": {
+        "label": "Microsoft Copilot Studio overview",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio"
+      }
+    },
+    {
+      "q": "Dataverse is the recommended data platform for Power Platform solutions. Which statement correctly describes a key architectural advantage of using Dataverse over a SharePoint list for a business application?",
+      "options": [
+        "Dataverse is cheaper than SharePoint for storing large volumes of files and attachments",
+        "Dataverse provides a relational data model with table relationships, column-level security, server-side business logic (plug-ins, workflows), role-based security, auditing, and the ability to run Dynamics 365 apps — capabilities not available in SharePoint lists",
+        "SharePoint lists require a premium licence; Dataverse is included in all Microsoft 365 plans",
+        "Dataverse and SharePoint lists are interchangeable — the choice depends only on the developer's preference"
+      ],
+      "answer": 1,
+      "category": "dataverse",
+      "tags": ["dataverse", "sharepoint", "data-platform", "component-selection", "architecture"],
+      "explanation": "Dataverse is a full relational data platform purpose-built for business applications. Its key advantages over SharePoint lists include: (1) true relational data model with one-to-many, many-to-many, and hierarchical relationships; (2) column-level and row-level security independent of table access; (3) server-side business logic via plug-ins, workflows, and Power Automate; (4) comprehensive auditing of every record change; (5) support for Dynamics 365 first-party apps; (6) multi-table transactions; (7) Dataverse search (Relevance Search) across all tables. SharePoint lists are designed for document management and simple list storage — they lack the relational, security, and business logic capabilities required for enterprise CRM or case management solutions.",
+      "wrongExplanations": [
+        "Dataverse charges for storage separately — it is not inherently cheaper than SharePoint for file/attachment scenarios. SharePoint is often preferred for document-centric workloads.",
+        "Dataverse requires a Power Apps or Dynamics 365 licence — it is not included in standard Microsoft 365 plans. SharePoint is included in Microsoft 365.",
+        "Dataverse and SharePoint lists are not interchangeable — they serve fundamentally different purposes and have different capabilities, security models, and licence requirements."
+      ],
+      "msRef": {
+        "label": "What is Microsoft Dataverse?",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-intro"
+      }
+    },
+    {
+      "q": "A Power Platform solution requires integration with a third-party HR system that has a REST API but no prebuilt connector on the Power Platform connector list. What is the correct component for bridging this gap without writing a full Azure Function middleware layer?",
+      "options": [
+        "Desktop flow — use RPA to navigate the HR system's web interface",
+        "Custom connector — define the HR system's API operations in a connector that can then be used in any cloud flow or Power App",
+        "HTTP action in Power Automate — call the REST API directly without a connector",
+        "Virtual table in Dataverse — map the HR system's data to a Dataverse table"
+      ],
+      "answer": 1,
+      "category": "connectors",
+      "tags": ["custom-connector", "connector", "REST-API", "integration", "component-selection"],
+      "explanation": "Custom connectors allow architects to wrap any REST or SOAP API into a reusable connector definition — without writing middleware code. Once defined using a Swagger/OpenAPI file or manually in the connector designer, the custom connector appears in Power Automate and Power Apps alongside first-party connectors, with the same trigger/action experience. This is the correct platform-native pattern for integrating third-party systems with REST APIs. Desktop flows (RPA) are for systems without APIs. HTTP actions work for one-off calls but create unmanaged, undiscoverable integrations. Virtual tables are for read/write data virtualisation, not workflow orchestration.",
+      "wrongExplanations": [
+        "Desktop flows are for applications without APIs — the HR system has a REST API, so RPA is the wrong tool.",
+        "HTTP actions in Power Automate can call REST APIs directly but produce unmanaged, hard-to-discover integrations that are not reusable across multiple flows or apps. Custom connectors are the governed, reusable pattern.",
+        "Virtual tables in Dataverse enable read/write access to external data through a Dataverse-like interface, but they are specifically for data surfacing within apps — not for orchestrating workflow actions via the HR API."
+      ],
+      "msRef": {
+        "label": "Custom connectors overview — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/connectors/custom-connectors/"
+      }
+    },
+    {
+      "q": "A solution includes a high-volume unattended RPA process that must run on multiple machines simultaneously to meet throughput requirements. Which Power Automate licensing and infrastructure component is designed for this scale-out scenario?",
+      "options": [
+        "One Power Automate Premium user licence — it supports unlimited concurrent desktop flow runs",
+        "A hosted machine group with Power Automate Process licences — it automatically scales Azure-hosted bots to match demand without customer infrastructure management",
+        "An on-premises VM cluster manually managed by the IT team with Power Automate Desktop installed",
+        "A single attended desktop flow — increasing the speed of each run is sufficient to meet throughput"
+      ],
+      "answer": 1,
+      "category": "power-automate",
+      "tags": ["RPA", "hosted-machine-group", "unattended", "scale", "process-licence"],
+      "explanation": "Hosted machine groups are Microsoft-managed Azure VM pools for unattended RPA at scale. Each Power Automate Process licence covers one bot (machine session). When multiple machines are needed for concurrent execution, multiple Process licences are allocated to the hosted machine group, which automatically provisions and scales Azure VMs to match the queue of waiting desktop flows — without the customer managing any physical or virtual infrastructure. This is the documented pattern for high-volume unattended RPA production deployments.",
+      "wrongExplanations": [
+        "Power Automate Premium (per user) supports attended RPA for a single user session — it does not enable concurrent unattended runs on multiple machines.",
+        "Manual VM clusters are a valid option but introduce significant infrastructure overhead — the hosted machine group approach eliminates provisioning, patching, and capacity management. Architects should evaluate managed hosting before recommending on-premises VM management.",
+        "Attended desktop flows run in the context of a logged-in user — they cannot run simultaneously without separate user sessions, and speed improvements do not address concurrent throughput requirements."
+      ],
+      "msRef": {
+        "label": "Introduction to Power Automate Hosted RPA",
+        "url": "https://learn.microsoft.com/en-us/power-automate/desktop-flows/hosted-rpa-overview"
+      }
+    },
+    {
+      "q": "Power Pages is the correct component for an external-facing customer portal. Which capability distinguishes Power Pages from a canvas app for this use case?",
+      "options": [
+        "Power Pages supports offline mode; canvas apps do not",
+        "Power Pages is designed for external authenticated and anonymous users, supports Dataverse security through table permissions and web roles, and does not require app users to have Power Apps licences — unlike canvas apps which require user licences",
+        "Power Pages can only display data; canvas apps can both display and update data",
+        "Power Pages is free for unlimited external users; canvas apps charge per session"
+      ],
+      "answer": 1,
+      "category": "power-pages",
+      "tags": ["power-pages", "external-users", "licensing", "table-permissions", "component-selection"],
+      "explanation": "Power Pages is architected specifically for external users: (1) It supports both authenticated and anonymous external access — users do not need Microsoft or Power Apps licences; (2) Data access is controlled through a dedicated table permissions and web roles model independent of Dataverse security roles; (3) It scales to large numbers of external users through authenticated user capacity and anonymous capacity licences. Canvas apps require every user to have a Power Apps licence — this makes them commercially unsuitable for external user portals where hundreds or thousands of non-Microsoft-licensed users need access.",
+      "wrongExplanations": [
+        "Canvas apps do support offline mode via the SaveData/LoadData pattern — this is not the distinguishing factor.",
+        "Both Power Pages and canvas apps can display and update Dataverse data — the distinction is licencing and the external user security model.",
+        "Power Pages is not free for unlimited external users — it requires authenticated user capacity (per-login) or website subscription licences for authenticated scenarios. The key distinction is that users do not need Power Apps licences, not that there is no licensing cost."
+      ],
+      "msRef": {
+        "label": "What is Power Pages? — Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-pages/introduction"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Solaris Logistics — Component Identification Workshop",
+      "scenario": {
+        "title": "Solaris Logistics — Component Identification Workshop",
+        "background": "Solaris Logistics is implementing a Power Platform solution to modernise their operations. During the component identification workshop, the following requirements have been raised:\n\nR1. 120 warehouse supervisors need a data-dense app to manage shipment records, track exceptions, and update delivery statuses — accessible on tablets and desktops with a consistent interface across all users.\n\nR2. Solaris uses a 20-year-old warehouse management system (WMS) with no API. Staff currently copy-paste stock movement data from the WMS into an Excel spreadsheet every morning.\n\nR3. Customer-facing shipment tracking must be available to Solaris's 5,000 business customers via a web portal. Customers should be able to log in, view their shipment status, and raise disputes. Customers do not have Microsoft licences.\n\nR4. Incoming freight invoices arrive as PDFs via email. Finance staff manually extract vendor name, invoice number, total amount, and line items into the ERP. Solaris wants to automate this extraction.\n\nR5. Solaris wants a conversational assistant on their customer portal where customers can ask questions about shipment status in natural language and get immediate answers from Dataverse data — before being escalated to a human agent if needed.",
+        "requirements": ["R1", "R2", "R3", "R4", "R5"]
+      },
+      "tags": ["component-selection", "model-driven", "RPA", "power-pages", "ai-builder", "copilot-studio"],
+      "msRef": {
+        "label": "Official Microsoft Power Platform documentation",
+        "url": "https://learn.microsoft.com/en-us/power-platform/"
+      },
+      "questions": [
+        {
+          "q": "For R1 — 120 supervisors, data-dense, tablet and desktop, consistent interface. Which Power Apps type should the architect recommend, and why?",
+          "options": [
+            "Canvas app — it provides full pixel-perfect control over the tablet layout",
+            "Model-driven app — it auto-generates a responsive, consistent UI from the Dataverse data model, is purpose-built for data-dense process-driven scenarios, and requires no screen-by-screen layout design for 120 users",
+            "Power Pages — it supports tablet browsers and requires no Power Apps licence",
+            "A custom React app hosted in Azure App Service for maximum design control"
+          ],
+          "explanation": "Model-driven apps are purpose-built for this scenario: data-dense, process-driven, multi-table applications used by many users on multiple devices. Their key advantage is that the UI is automatically generated from the Dataverse data model and is responsive across desktop and tablet without any screen-by-screen design work. With 120 supervisors, maintaining visual consistency across all user interactions and devices is critical — and model-driven apps provide this automatically. Building a canvas app for 120 supervisors across multiple entity types would require significant design effort per screen and is the wrong tool for data-dense process applications.",
+          "wrongExplanations": {
+            "0": "Pixel-perfect control is a canvas app strength — but for 120 supervisors on a data-dense multi-table application, designing every screen individually in canvas is excessive effort and produces inconsistent results. Model-driven is the right choice.",
+            "2": "Power Pages is designed for external users — it is not appropriate for internal supervisors managing shipment records. It also has a different security model and licensing structure.",
+            "3": "A custom React app introduces full-stack development, Azure hosting, and maintenance overhead — all of which are unnecessary when the model-driven app platform meets the requirement out-of-the-box."
+          },
+          "msRef": {
+            "label": "Overview of building a model-driven app with Power Apps",
+            "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/model-driven-app-overview"
+          }
+        },
+        {
+          "q": "For R2 — the 20-year-old WMS has no API. Staff copy-paste data from WMS to Excel daily. Which Power Platform component addresses this, and what is the architectural consideration?",
+          "options": [
+            "A custom connector — wrap the WMS in a REST API connector",
+            "A desktop flow (Power Automate for Desktop) using RPA — it can navigate the WMS UI and extract stock movement data without an API. The architect must note that RPA is susceptible to breaking when WMS UI changes",
+            "A scheduled cloud flow using the Excel connector — import the Excel file daily as a workaround",
+            "Azure Data Factory — connect directly to the WMS database"
+          ],
+          "explanation": "Desktop flows (RPA) are the correct component for a legacy system with no API. Power Automate for Desktop can record and replay mouse and keyboard interactions with the WMS, extract stock movement data, and write it to Dataverse or trigger downstream flows. The critical architectural caveat is that RPA is fragile: any change to the WMS interface — a screen layout update, a new dialogue, a resolution change — can break the automation. The architect must document this fragility, plan for regular RPA maintenance, and recommend the customer explore whether a database-level integration is feasible as a more stable long-term alternative.",
+          "wrongExplanations": {
+            "0": "A custom connector requires an API endpoint — the WMS has no API, making a custom connector impossible without first building a WMS API layer.",
+            "2": "Continuing to use the Excel file as an intermediate is a workaround, not an automation — it still requires a human to produce the Excel file daily before the flow can process it.",
+            "3": "Azure Data Factory can connect to databases — but this requires database-level access to the WMS, which may not be available or sanctioned. RPA is the documented Power Platform approach when no API and no database access is available."
+          },
+          "msRef": {
+            "label": "Introduction to desktop flows — Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/desktop-flows/introduction"
+          }
+        },
+        {
+          "q": "For R3 — 5,000 external business customers, web portal, shipment tracking and dispute raising, no Microsoft licences. Which component is correct, and why is a canvas app not appropriate?",
+          "options": [
+            "Canvas app shared via a public link — it can be accessed without a Microsoft licence",
+            "Power Pages — it is designed for external authenticated users at scale, uses table permissions and web roles for Dataverse security, and does not require users to have Power Apps licences",
+            "Model-driven app with guest access enabled in Entra ID",
+            "A Power BI embedded report on a public SharePoint site"
+          ],
+          "explanation": "Power Pages is the correct component for all three requirements: (1) external authenticated users — Power Pages supports Entra ID, Azure AD B2C, and custom identity providers for external login; (2) Dataverse read/write access — customers can view their shipment status and raise disputes via Dataverse-backed forms; (3) no Microsoft licences required — external users access Power Pages through authenticated user capacity licences purchased by Solaris, not individual Microsoft licences. Canvas apps require every user to have a Power Apps licence — at 5,000 business customers, this would be commercially unviable.",
+          "wrongExplanations": {
+            "0": "Canvas apps do not support public anonymous access at scale without every user having a Power Apps licence. There is no 'public link' option that bypasses the licensing requirement for authenticated external users accessing Dataverse.",
+            "2": "Model-driven apps are not designed for external user access — enabling Entra ID guest access provides limited external access under specific conditions, not a scalable self-service portal experience for 5,000 business customers.",
+            "3": "Power BI reports are read-only — they cannot support dispute-raising (write operations) and do not provide a full portal experience with authenticated user management."
+          },
+          "msRef": {
+            "label": "What is Power Pages? — Microsoft Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-pages/introduction"
+          }
+        },
+        {
+          "q": "For R4 — PDF invoices via email, automated extraction of vendor name, invoice number, total amount, and line items. Which Power Platform component combination should the architect recommend?",
+          "options": [
+            "A Power Automate cloud flow with a custom Python script in an Azure Function to parse the PDF",
+            "AI Builder invoice processing prebuilt model invoked from a Power Automate cloud flow triggered by a new email attachment in Outlook — extracting fields and writing results to Dataverse or the ERP",
+            "A desktop flow that opens each email, downloads the PDF, and copies data to the ERP manually",
+            "Power Pages with a file upload form where finance staff upload PDFs for manual review"
+          ],
+          "explanation": "AI Builder's prebuilt invoice processing model is purpose-built for this exact scenario — extracting common invoice fields (vendor name, invoice number, total, line items) from PDF documents without any training or machine learning expertise. Combined with a Power Automate cloud flow triggered by a new email attachment, the end-to-end automation is: (1) email arrives with PDF attachment; (2) flow triggers, passes attachment to AI Builder invoice model; (3) AI Builder returns extracted fields; (4) flow writes results to Dataverse or calls the ERP connector. This is a fully no-code/low-code solution using platform-native components — no Azure Functions, no custom code.",
+          "wrongExplanations": {
+            "0": "A custom Python script in Azure Functions can work but requires custom code, maintenance, and deployment overhead — AI Builder's prebuilt invoice processing model provides this capability without code.",
+            "2": "A desktop flow that manually navigates each email and copies data is RPA applied to a scenario that has a better solution — AI Builder's prebuilt model automates the extraction intelligently, not by mimicking manual steps.",
+            "3": "A file upload form with manual review is not automation — it simply digitises the manual submission process without reducing the human effort of data extraction."
+          },
+          "msRef": {
+            "label": "Overview of AI Builder",
+            "url": "https://learn.microsoft.com/en-us/ai-builder/overview"
+          }
+        },
+        {
+          "q": "For R5 — natural language shipment tracking assistant on the customer portal, Dataverse data, escalation to human agents. Which component is correct and how does it integrate with Power Pages?",
+          "options": [
+            "Power Automate cloud flow with a Teams Bot connector — publish it to the Power Pages site via an iFrame",
+            "Microsoft Copilot Studio — build an agent with Dataverse connector actions for shipment data lookup, publish it to the Power Pages website channel, and configure escalation to D365 Customer Service",
+            "AI Builder with a custom NLP prediction model trained on historical chat logs",
+            "A JavaScript web resource that calls the Dataverse Web API directly from the Power Pages site"
+          ],
+          "explanation": "Microsoft Copilot Studio is the correct component for this scenario: (1) it supports natural language understanding natively — no ML training required; (2) it can call Dataverse via connectors and plugins to retrieve real-time shipment data based on customer queries; (3) it supports multi-channel publishing including Power Pages — agents are published as an embedded chat widget on the portal via a single script tag; (4) it has native escalation to D365 Customer Service human agents with full conversation context transfer. The architect configures topics for common shipment queries, a Dataverse action to look up order status by customer reference, and an escalation topic for unresolved issues.",
+          "wrongExplanations": {
+            "0": "Teams Bot connectors are designed for Teams channels — they are not the native pattern for embedding a conversational assistant in a Power Pages external portal.",
+            "2": "AI Builder prediction models use structured tabular historical data — they are not designed for natural language conversational interfaces.",
+            "3": "JavaScript calling the Dataverse Web API can retrieve data but does not provide natural language understanding, conversation management, or human escalation — it requires building a custom chatbot from scratch."
+          },
+          "msRef": {
+            "label": "Microsoft Copilot Studio overview",
+            "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio"
+          }
+        }
+      ]
+    }
+  ]
+}

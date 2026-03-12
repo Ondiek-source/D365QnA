@@ -1,0 +1,425 @@
+{
+  "_meta": {
+    "topic": "Understanding Current State Business Processes",
+    "description": "Covers the PL-600 sub-objective: Guide the process of collecting the current state business processes. Topics: what business process mapping is and its documented benefits; the goal of as-is mapping (not to replicate legacy); when mapping should begin; who participates (business stakeholder + SMEs); tools and visual techniques; the three workshop types (scenario board/storyboard, storyline design review, detailed design); fit-to-standard analysis; process standardisation benefits and constraints; the anti-pattern of recreating legacy processes; process improvement using modern technology; digital transformation opportunities inside process review.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "Microsoft's guidance on business process mapping states that the level of detail in as-is processes depends on their importance and scope. Which statement best captures the documented principle about how much detail is required?",
+      "options": [
+        "Every step and system in the legacy process must be fully documented — missing any step risks building an incomplete solution",
+        "You don't need to define every step or system in your legacy processes. Instead, focus on the end-to-end scenarios and outcomes that matter to your business. The goal is not to replicate the legacy system in Dynamics 365, but to improve and innovate your processes",
+        "As-is documentation should exactly mirror the legacy system screen-by-screen so the team can validate which screens need to be replaced",
+        "As-is processes should be documented at the same level of detail regardless of their importance — consistency prevents scope disputes"
+      ],
+      "answer": 1,
+      "category": "as-is-mapping",
+      "tags": ["as-is", "process-mapping", "scope", "legacy", "detail-level"],
+      "explanation": "Microsoft's process optimisation guidance explicitly states: 'The level of detail in your as-is processes depends on their importance and scope. You don't need to define every step or system in your legacy processes. Instead, focus on the end-to-end scenarios and outcomes that matter to your business. Remember, your goal is not to replicate your legacy system in Dynamics 365, but to improve and innovate your processes.' This is a critical mindset shift — the as-is documentation is a baseline and improvement opportunity finder, not a migration blueprint. Over-documenting the legacy system wastes time and anchors the team to old ways of working, making it harder to adopt Dynamics 365 standard processes.",
+      "wrongExplanations": [
+        "Full documentation of every legacy step is explicitly not required — and doing so risks carrying legacy thinking into the new solution design.",
+        "Screen-by-screen documentation of legacy software is the antithesis of a process-focused approach — it produces a system migration, not a process improvement.",
+        "Consistent detail regardless of importance is inefficient — high-priority core processes merit deeper documentation; peripheral or low-frequency processes can be mapped at a higher level."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "Microsoft's guidance specifies when business process mapping should ideally begin in relation to the project lifecycle. What is the recommended timing?",
+      "options": [
+        "After the contract is signed and the project kick-off meeting has taken place",
+        "After the fit-gap analysis is complete — process mapping should follow, not precede, the gap assessment",
+        "Before a decision to purchase a new technology solution, or at the latest during the pre-sales phase, to establish a basic business process scope",
+        "During the build phase — once the environment is set up, processes can be mapped against the configured system"
+      ],
+      "answer": 2,
+      "category": "as-is-mapping",
+      "tags": ["timing", "pre-sales", "process-mapping", "scope", "lifecycle"],
+      "explanation": "Microsoft's guidance states: 'Mapping your processes should begin before a decision to purchase a new technology solution or at the latest during the pre-sales phase to establish a basic business process scope.' The rationale is that process mapping is foundational — it defines what the project is trying to achieve. Starting after contract signature means scope is defined by the vendor's interpretation rather than the organisation's process reality. Starting at pre-sales ensures that the business case, estimated scope, and statement of work are grounded in actual business processes. If an organisation is already live, the guidance recommends documenting processes as currently implemented and keeping them up to date.",
+      "wrongExplanations": [
+        "Post-kick-off is already later than the ideal timing — by then the statement of work and budget are likely fixed without process-based validation.",
+        "Starting process mapping after the fit-gap analysis reverses the logical sequence — fit-gap requires as-is processes as its input, not the other way around.",
+        "Mapping processes against a configured system is backward — configuration should be driven by processes, not the reverse."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "Microsoft's guidance specifies two key roles that must be present for effective process mapping. Which pairing is correct?",
+      "options": [
+        "Solution architect and project manager — they own the process design and schedule",
+        "IT system administrator and data analyst — they understand the technical structure of the legacy system",
+        "Business stakeholder (who owns and leads the process in operation and makes decisions about process structure and investment) and one or more subject matter experts (SMEs) who know how the process works in the real world and provide scenarios and variations",
+        "Change manager and training lead — they understand how users will experience the new process"
+      ],
+      "answer": 2,
+      "category": "as-is-mapping",
+      "tags": ["business-stakeholder", "SME", "process-mapping", "roles", "workshops"],
+      "explanation": "Microsoft's process mapping guidance defines two mandatory roles precisely: (1) 'A business stakeholder who owns and leads the process in the operation. They can make the decisions about the process structure and investment.' — this is the person with authority to say how the process should work and to commit resources. (2) 'One or more subject matter experts (SMEs) who know how the process works in the real world. They can provide the scenarios and variations for each process.' — these are typically experienced practitioners who know the edge cases and exceptions that the stakeholder may not. Microsoft further recommends that when using the business process catalog, a business stakeholder and an SME are assigned to each end-to-end, business process area, and business process at minimum.",
+      "wrongExplanations": [
+        "Solution architects and project managers facilitate and guide process workshops but are not the process owners — they cannot make decisions about how the business process should work.",
+        "IT administrators and data analysts understand system structure, not business operations — they are important for integration and data mapping but not primary process mapping participants.",
+        "Change managers and training leads are important later in the project for adoption and training design — they are not the primary mapping participants at the as-is collection stage."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "Microsoft explicitly documents a warning about the tools and approach used for process mapping. Which statement correctly reflects the documented guidance on tools?",
+      "options": [
+        "Only Microsoft Visio should be used — all other tools produce formats that cannot be imported into the business process catalog",
+        "Any tools that help draw and share processes quickly and easily can be used — including sticky notes, pens, and whiteboards to start, with drawings later transferred to more sophisticated applications. The key is to make process mapping interactive and visual, not a series of documents that require long approvals",
+        "Process mapping must be done directly in Azure DevOps — all other tools create disconnected artefacts that cannot be linked to project tasks",
+        "Tools are irrelevant — the quality of stakeholder participation matters more than the tool used"
+      ],
+      "answer": 1,
+      "category": "as-is-mapping",
+      "tags": ["tools", "Visio", "sticky-notes", "visual", "interactive", "process-mapping"],
+      "explanation": "Microsoft's process mapping guidance states: 'You can use any tools that help you draw and share your processes quickly and easily. For example, you can use sticky notes, pens, and whiteboards to start, and transfer the drawings and comments to more sophisticated applications later. The key is to make the process mapping interactive and visual, not a series of documents that require long approvals.' The guidance also notes that process flow diagrams in the business process guide are created using Microsoft Visio, and these are available for download at aka.ms/businessprocessflow as starting points — but Visio is not mandated. The critical principle is interactivity and visual collaboration, not a specific tool.",
+      "wrongExplanations": [
+        "Mandating Visio would contradict the guidance's explicit statement that 'any tools that help you draw and share your processes quickly and easily' can be used.",
+        "Azure DevOps is recommended as a project management tool for the business process catalog, not as the process drawing tool itself.",
+        "While stakeholder quality matters greatly, tool choice is also explicitly addressed — the guidance recommends visual and interactive approaches specifically to avoid the pitfall of producing lengthy documents requiring long approvals."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "Microsoft documents five specific benefits of mapping as-is processes. Which option lists all five correctly?",
+      "options": [
+        "Reduces project costs, identifies training needs, speeds up configuration, enables faster UAT, and produces audit trails",
+        "Defines scope and structure in a clear common language; communicates goals using processes stakeholders understand; identifies improvement, innovation, risks, and constraints; maps processes to Dynamics 365 design to measure impact; creates a workable project definition not reliant on individual written requirements",
+        "Documents legacy system screens, identifies data migration fields, estimates project timeline, defines security roles, and creates test cases",
+        "Produces the requirements register, identifies customisation requests, estimates licensing costs, documents API integrations, and defines SLAs"
+      ],
+      "answer": 1,
+      "category": "as-is-mapping",
+      "tags": ["process-mapping-benefits", "scope", "as-is", "requirements", "improvement"],
+      "explanation": "Microsoft's process optimisation documentation lists the five specific benefits of as-is mapping verbatim: (1) 'You can define the scope and structure of your project in a clear and common language.' (2) 'You can communicate your project goals and vision using processes that your stakeholders understand and recognise.' (3) 'You can identify and highlight areas for process improvement, innovation, risks, and constraints.' (4) 'You can map your processes to the equivalent design in Dynamics 365 and measure the impact of your changes.' (5) 'You can create a workable definition of the project that doesn't rely on individual written requirements.' These are the five exact benefits documented — the exam may test whether candidates know the full list.",
+      "wrongExplanations": [
+        "Cost reduction, training needs, and audit trails are downstream benefits of good process work but are not the five documented benefits of as-is mapping specifically.",
+        "Documenting legacy screens, migration fields, and estimating timelines are distinct workstreams — not the stated benefits of process mapping.",
+        "Requirements registers, customisation requests, and licensing cost estimates are outputs of later project phases — not the documented benefits of as-is process mapping."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "What is the fit-to-standard analysis, and what is the documented recommended first step before doing a fit-gap analysis?",
+      "options": [
+        "Fit-to-standard analysis is a cost comparison between customisation options — it should be done after the gap analysis to prioritise spend",
+        "Fit-to-standard analysis compares current processes against Dynamics 365 standard processes to identify how well the platform meets business needs and where standard processes can be adopted. Microsoft recommends starting with fit-to-standard analysis for every project before doing fit-gap analysis — working iteratively through the business process catalog from high-level processes to detailed subprocesses",
+        "Fit-to-standard is only applicable when implementing out-of-the-box D365 modules — customised implementations go directly to fit-gap analysis",
+        "Fit-to-standard analysis is a security model validation — it checks whether user access levels match Dynamics 365 standard roles"
+      ],
+      "answer": 1,
+      "category": "fit-to-standard",
+      "tags": ["fit-to-standard", "fit-gap", "process-catalog", "customisation", "analysis"],
+      "explanation": "Microsoft's fit-to-standard guidance defines it as: 'a method to compare your current processes with the standard processes available in Dynamics 365. It helps you identify how well the system's configuration and functionality meet your business needs. It also helps you adopt the best practices and recommendations of Dynamics 365 wherever possible, and adapt them only where necessary.' The three documented steps are: (1) download the business process catalog and identify applicable processes; (2) work iteratively through the catalog in workshops organised by level 2 business process areas, evaluating fit; (3) configure the system to match the standard catalog processes. The guidance explicitly states: 'We recommend that you start with fit-to-standard analysis for every project.' Fit-gap analysis follows — identifying what cannot be met by standard configuration.",
+      "wrongExplanations": [
+        "Fit-to-standard is not a cost analysis — it is a process alignment analysis. Cost implications follow from the findings, not the other way around.",
+        "Fit-to-standard applies to all implementations including those that will involve customisation — in fact, its purpose is to reduce unnecessary customisation by revealing what the standard product can already do.",
+        "Fit-to-standard relates to business processes and their alignment with the platform's standard capabilities, not to security role validation."
+      ],
+      "msRef": {
+        "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+      }
+    },
+    {
+      "q": "Microsoft documents eight specific problems that arise from recreating legacy processes in Dynamics 365 rather than adopting standard processes. Which of the following is one of the documented anti-patterns?",
+      "options": [
+        "Faster go-live due to reduced training requirements when users work in familiar processes",
+        "Costly and unnecessary customisations requiring more design, coding, testing, training, and documentation, plus lost opportunities for innovation as the team sticks to old ways of working and inefficient processes that don't align with standard Dynamics 365 practices validated across thousands of customers",
+        "Reduced Microsoft support costs because custom implementations require less Microsoft involvement",
+        "Better user adoption because users can work in processes they already know"
+      ],
+      "answer": 1,
+      "category": "fit-to-standard",
+      "tags": ["anti-pattern", "legacy-replication", "customisation", "fit-to-standard", "costs"],
+      "explanation": "Microsoft's fit-to-standard documentation lists eight specific problems caused by recreating legacy processes: (1) costly and unnecessary customisations; (2) lost opportunities for innovation; (3) inefficient and siloed processes that don't align with Dynamics 365 standard practices; (4) reduced usability and functionality of Dynamics 365 forced to fit processes designed for different software; (5) less access to documentation, training, sample code, and sample data; (6) less ability to apply market and industry knowledge from Dynamics 365; (7) less ability to use marketplace tools and apps; (8) fewer resources for value-adding customisations; (9) more barriers for citizen developers using Power Platform. The guidance warns: 'you might be tempted to recreate the same processes that you use in your legacy systems. But this approach can lead to problems.'",
+      "wrongExplanations": [
+        "Faster go-live through familiar processes is the opposite of documented reality — legacy replication creates costly customisations that slow delivery.",
+        "Custom implementations require more Microsoft support involvement, not less — they are harder to support and cannot benefit from standard documentation and training materials.",
+        "User adoption based on familiar legacy processes is superficially intuitive but leads to missed improvement opportunities and cements outdated ways of working — change management for improved standard processes has better long-term adoption outcomes."
+      ],
+      "msRef": {
+        "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis — Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+      }
+    },
+    {
+      "q": "Microsoft documents four specific benefits of process standardisation across business units or regions. Which is NOT one of the four documented benefits?",
+      "options": [
+        "Reduce costs by simplifying the processes that need to be implemented, trained, and maintained",
+        "Compare performance and results across different groups of users executing the same process",
+        "Move resources within the organisation more easily to meet changing demand",
+        "Eliminate the need for change management because standardised processes are already familiar to all users"
+      ],
+      "answer": 3,
+      "category": "process-standardisation",
+      "tags": ["standardisation", "benefits", "cost-reduction", "performance-comparison", "resources"],
+      "explanation": "Microsoft's process standardisation documentation lists four specific benefits: (1) 'Reduce costs by simplifying the processes that you need to implement, train, and maintain.' (2) 'Compare performance and results across different groups of users who execute the same process.' (3) 'Move resources within the organisation more easily to meet changing demand.' (4) 'Adopt best practices and share knowledge across the organisation. When one process improves, everyone benefits.' Eliminating change management is explicitly NOT a benefit — in fact, Microsoft states: 'Standardisation might require significant change management and communication.' Standardisation changes how people work and may 'increase the workload or change the culture of a local unit' — these impacts require active change management.",
+      "wrongExplanations": [
+        "Cost reduction through process simplification is documented benefit #1.",
+        "Performance comparison across groups is documented benefit #2.",
+        "Resource mobility is documented benefit #3."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "Microsoft documents five constraints and implications that an architect must consider before recommending process standardisation. Which statement is one of those documented constraints?",
+      "options": [
+        "Standardisation is always the right approach — the constraints only apply when there are regulatory differences between countries",
+        "Standardisation might not outweigh the costs or risks of changing the process — the architect may need to reassess the business case and expected outcomes when this is the case",
+        "Standardisation automatically reduces licensing costs because fewer process variants mean fewer required licences",
+        "Standardisation only applies to customer-facing processes — back-office processes should always remain locally managed"
+      ],
+      "answer": 1,
+      "category": "process-standardisation",
+      "tags": ["standardisation", "constraints", "business-case", "local-units", "implications"],
+      "explanation": "Microsoft's documentation lists five standardisation constraints: (1) 'Standardisation might benefit the organisation as a whole, but might increase the workload or change the culture of a local unit.' (2) 'Standardisation might require significant change management and communication.' (3) 'Standardisation might not fit well with the industry standards or the Dynamics 365 capabilities. You might need to customise or compromise some aspects of the process.' (4) 'Standardisation might not apply to the entire process. You might need to allow some variations or exceptions for local needs or preferences.' (5) 'Standardisation might not outweigh the costs or risks of changing the process. You might need to reassess the business case and the expected outcomes.' All five use the construction 'might not' — acknowledging that standardisation requires case-by-case evaluation, not blanket application.",
+      "wrongExplanations": [
+        "Standardisation is not always the right approach — all five documented constraints are framed as genuine considerations that can outweigh the benefits in specific circumstances.",
+        "Licensing cost is not directly determined by the number of process variants — and this is not one of the documented considerations.",
+        "Microsoft's guidance makes no distinction between customer-facing and back-office processes with regard to standardisation — the constraints apply to all processes."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    },
+    {
+      "q": "Microsoft describes three distinct types of implementation workshops in the business process guide. What are they, in the correct sequence?",
+      "options": [
+        "Requirements workshop, design workshop, and sign-off workshop",
+        "Scenario board/storyboard discovery workshop, storyline design review workshop, and detailed design workshop",
+        "As-is workshop, gap analysis workshop, and to-be workshop",
+        "Stakeholder alignment workshop, technical architecture workshop, and UAT preparation workshop"
+      ],
+      "answer": 1,
+      "category": "workshops",
+      "tags": ["workshops", "storyboard", "storyline-design-review", "detailed-design", "sequence"],
+      "explanation": "Microsoft's workshops documentation defines three specific workshop types: (1) Scenario board/storyboard discovery workshop — establishes a visual representation of key business processes in the new system, helps stakeholders agree on the primary process scenarios and paths that the implementation will address; (2) Storyline design review workshop — reviews, validates, and refines the end-to-end business process storylines from the storyboarding workshop; serves as a bridge between high-level process mapping and detailed design; ensures alignment of business objectives with solution architecture; (3) Detailed design workshop — takes information from the storyboarding process and vets out more details for functional requirements, with the objective of configuring a working solution that can be demonstrated. Each workshop type has different objectives, participants, inputs, and outputs.",
+      "wrongExplanations": [
+        "Requirements workshop and sign-off workshop are generic project management terms — not the specific workshop types defined in Microsoft's business process guide.",
+        "As-is/gap analysis/to-be is a common methodology framing but is not the three-workshop structure defined in Microsoft's documentation.",
+        "Stakeholder alignment and technical architecture workshops are useful concepts but are not the three documented implementation workshop types."
+      ],
+      "msRef": {
+        "label": "Workshops for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+      }
+    },
+    {
+      "q": "During a storyboard discovery workshop, the business team repeatedly refers back to the legacy CRM screens and asks the facilitator to model the new system to match them. What does Microsoft's guidance say the workshop facilitator should do?",
+      "options": [
+        "Accept the legacy screen layouts as the starting point — user familiarity reduces training time and adoption risk",
+        "Remind participants that the objective is to derive the closest and best solution within Dynamics 365, not to recreate the legacy processes. The storyboard draft should be based on standard processes from the business process catalog and Dynamics 365 standard capabilities, not modelled on the implementation in the current legacy system",
+        "Pause the workshop and restart with the IT team only — business users should not influence the technical design",
+        "Document the legacy screen requirements as customisation requests and proceed — the gap analysis will address them later"
+      ],
+      "answer": 1,
+      "category": "workshops",
+      "tags": ["storyboard", "legacy-replication", "anti-pattern", "facilitator", "workshop"],
+      "explanation": "Microsoft's storyline design review documentation explicitly states: 'Remind the participants that the objective is to derive the closest and best solution within Dynamics 365, and not to recreate the legacy processes in Dynamics 365. Typically, a moderator manages this principle to ensure the discussions are productive and focused.' The storyboarding documentation further states: 'Base the draft on the standard processes from the business process catalog and Dynamics 365 to meet the underlying business requirements. Don't model it based on the implementation in the current legacy system.' This is one of the most important facilitation responsibilities — holding the group to process improvement rather than legacy migration.",
+      "wrongExplanations": [
+        "Accepting legacy screens anchors the team to the old system and defeats the purpose of implementing Dynamics 365 — the guidance explicitly warns against this.",
+        "Excluding business users from process workshops removes the people who understand the real-world process requirements — SME and stakeholder participation is mandated.",
+        "Documenting legacy screen requirements as customisation requests normalises the anti-pattern — the facilitator's role is to redirect the conversation, not defer it."
+      ],
+      "msRef": {
+        "label": "Workshops for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+      }
+    },
+    {
+      "q": "What is the documented 80% principle for identifying which key scenarios to include in a storyboard?",
+      "options": [
+        "Document all scenarios but allocate 80% of workshop time to the highest-priority ones",
+        "Identify the small set of end-to-end scenarios that represent 80% of the business or represent the core business process — these become the primary storyboard scenarios. This also helps identify common steps and elements across scenarios and prioritise within this set",
+        "Ensure that 80% of the storyboard frames show the Dynamics 365 UI — only 20% can show the legacy system for comparison",
+        "80% of processes should be mapped by the business stakeholder; 20% can be mapped by the architect from documentation"
+      ],
+      "answer": 1,
+      "category": "workshops",
+      "tags": ["storyboard", "80-percent", "key-scenarios", "prioritisation", "scope"],
+      "explanation": "Microsoft's storyboard construction guidance states: 'From that collection of scenarios, identify the small set of end-to-end scenarios that represent 80% of the business or represent the core business process. This process also helps you identify the common steps and elements across the scenarios and prioritise within this small set.' This principle is documented under 'Identify key scenarios' — Step 1 of the storyboard construction process. The rationale is to focus workshop time and design effort on the most impactful scenarios before looking at 'more peripheral, complex, or very infrequent scenarios.' Starting with the 80% core ensures the critical path is mapped and agreed before edge cases consume workshop capacity.",
+      "wrongExplanations": [
+        "Time allocation is a facilitation technique but is not the 80% principle as documented — the principle is about which scenarios to include, not how to allocate workshop minutes.",
+        "Displaying Dynamics 365 UI vs legacy screens is not the 80% principle — storyboards are process flows, not UI comparisons.",
+        "The 80/20 split of mapping responsibility between stakeholders and architects is not documented — the principle is about scenario selection, not role allocation."
+      ],
+      "msRef": {
+        "label": "Workshops for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+      }
+    },
+    {
+      "q": "What are the documented outputs of a storyboarding workshop, and what does the architect do with them?",
+      "options": [
+        "A full technical specification ready for developers to begin coding",
+        "A detailed storyboard visually representing the user journey and interactions, a clear understanding of the proposed solution and its impact on users, and key user stories and business requirements — which then feed into the storyline design review and detailed design workshops",
+        "A completed requirements register that replaces the need for further design workshops",
+        "A signed-off project scope document that cannot be changed after the workshop"
+      ],
+      "answer": 1,
+      "category": "workshops",
+      "tags": ["storyboard", "outputs", "user-stories", "workshop-sequence", "requirements"],
+      "explanation": "Microsoft's storyboarding documentation defines three specific outputs: (1) 'A detailed storyboard that visually represents the user journey and interactions.' (2) 'A clear understanding of the proposed solution and its impact on users.' (3) 'Key user stories and business requirements.' These outputs are the inputs for the subsequent storyline design review workshop — which validates and refines them — and eventually the detailed design workshops. The guidance also states that at conclusion, all stakeholders should agree on the primary scenarios to be modelled in the next phase, and key risks, actions, problems, and decisions should be documented in Azure DevOps or the RAID log. The storyboard is a live artefact that evolves through the workshop sequence, not a locked document.",
+      "wrongExplanations": [
+        "A storyboarding workshop does not produce technical specifications — it produces agreed business process flows and user stories, which the design workshops then convert into configuration decisions.",
+        "The storyboard outputs feed into subsequent workshops — they do not replace the storyline review and detailed design stages.",
+        "A signed-off unchangeable scope document contradicts the guidance's explicit statement that processes 'are always subject to change' and must be adaptable."
+      ],
+      "msRef": {
+        "label": "Workshops for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+      }
+    },
+    {
+      "q": "When reviewing current state processes, Microsoft's guidance explicitly states that the architect should look for opportunities to use modern technologies. Which categories of modern technology are specifically named as process improvement enablers?",
+      "options": [
+        "Only Power Platform tools — Microsoft's guidance limits process improvement to first-party products",
+        "Cloud, artificial intelligence, machine learning, robotic process automation, virtual reality, the Internet of Things, big data, virtual conference rooms, and other technologies that create new possibilities and challenges for process outcomes and collaboration",
+        "Only AI and RPA — other technologies are applicable only in manufacturing or supply chain scenarios",
+        "Modern technologies should only be identified during the design phase — the as-is process review is not the right time for innovation discussions"
+      ],
+      "answer": 1,
+      "category": "process-improvement",
+      "tags": ["digital-transformation", "AI", "RPA", "IoT", "process-improvement", "cloud"],
+      "explanation": "Microsoft's process optimisation guidance states: 'When you review business processes as part of the project, think about how you can use these technologies to improve your process outcomes and collaboration. You might find multiple areas in your processes that can benefit from modern options.' The technologies specifically named are: 'the cloud, artificial intelligence, machine learning, robotic process automation, virtual reality, the Internet of Things, big data, virtual conference rooms, and many others.' The guidance emphasises: 'Technology is a key differentiator. Don't fall behind your competitors who might be using these options to gain an edge.' This confirms that the as-is process review is the right moment to identify innovation opportunities — not just document current state.",
+      "wrongExplanations": [
+        "The guidance explicitly names non-Microsoft technologies like IoT and virtual reality — it is not limited to Power Platform products.",
+        "AI and RPA are named but so are six other technology categories — limiting to only two understates the guidance.",
+        "The guidance explicitly says 'when you review business processes as part of the project, think about how you can use these technologies' — innovation identification is an explicit part of the current state review, not deferred to design."
+      ],
+      "msRef": {
+        "label": "Optimize your business processes with Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Broadfield Utilities — Current State Process Collection",
+      "scenario": {
+        "title": "Broadfield Utilities — Current State Process Collection",
+        "background": "Broadfield Utilities is implementing D365 Customer Service to replace a 12-year-old billing and service management platform. The project is in its second week. The architect is leading discovery sessions. The following situations have arisen:\n\nCS1. The business analyst team has spent two weeks producing a 350-page Word document mapping every screen and button of the legacy system. The architect is asked to validate this document as the as-is baseline.\n\nCS2. The Head of Customer Operations (process owner) says she is too busy to attend process workshops and has delegated to her deputy. No dedicated SME has been assigned for the fault management process — the only person who knows it well recently resigned.\n\nCS3. During the first workshop, the facilitator presents storyboard templates from the Dynamics 365 business process catalog. The operations team immediately starts comparing them to legacy screens and requests that the storyboard be redrawn to match the legacy system layout.\n\nCS4. Three business units (North, South, and Midlands) each manage fault reporting differently. The Head of Operations says all three should keep their own processes. The delivery manager says they should all be standardised to a single process immediately.\n\nCS5. The workshop reveals that fault engineers currently fill in paper forms on site. The business has not considered any technology for this step. The architect wants to flag a process improvement opportunity.",
+        "requirements": ["CS1", "CS2", "CS3", "CS4", "CS5"]
+      },
+      "tags": ["as-is-mapping", "workshops", "storyboard", "standardisation", "process-improvement"],
+      "questions": [
+        {
+          "q": "For CS1 — the team has produced a 350-page Word document mapping every legacy screen. Should the architect accept this as the as-is baseline?",
+          "options": [
+            "Yes — a comprehensive 350-page document proves thorough due diligence and should be the baseline",
+            "No. Microsoft's guidance states that as-is mapping should focus on end-to-end scenarios and outcomes that matter to the business — not replicate every step and system of the legacy platform. A screen-by-screen document anchors the team to the legacy system, produces a system migration rather than a process improvement, and violates the principle that the goal is to improve and innovate processes, not replicate them. The architect should redirect the team to produce process-level maps grouped by end-to-end scenario",
+            "Accept it as supplementary documentation but use it as the primary baseline — more detail is always better in process mapping",
+            "Accept it only for technical integration planning — use it to identify which screens need API connections"
+          ],
+          "explanation": "Microsoft's guidance explicitly states: 'The level of detail in your as-is processes depends on their importance and scope. You don't need to define every step or system in your legacy processes. Instead, focus on the end-to-end scenarios and outcomes that matter to your business. Remember, your goal is not to replicate your legacy system in Dynamics 365, but to improve and innovate your processes.' A 350-page screen-by-screen document does the opposite — it comprehensively documents the legacy system with the implicit goal of recreating it. The architect must redirect the team toward end-to-end scenario-based process maps using the Dynamics 365 business process catalog as a structure, not screen inventories.",
+          "wrongExplanations": {
+            "0": "Comprehensiveness of legacy documentation is not a virtue — it creates a gravitational pull toward recreating the old system and wastes time on irrelevant detail.",
+            "2": "Using a screen-level document as the primary baseline treats every legacy screen as a valid requirement — this directly leads to the customisation anti-patterns documented by Microsoft.",
+            "3": "Screen documentation is not a reliable basis for API integration planning either — integration design requires data flows and business events, not screen maps."
+          },
+          "msRef": {
+            "label": "Optimize your business processes with Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+          }
+        },
+        {
+          "q": "For CS2 — the process owner is unavailable and the fault management SME has resigned. What risk does this represent, and what should the architect do?",
+          "options": [
+            "This is a scheduling inconvenience — the deputy can cover all decisions and the SME role can be filled by IT staff who administered the legacy system",
+            "This represents a significant process mapping risk. Microsoft's guidance requires both a business stakeholder who can make decisions about process structure and investment, and SMEs who provide real-world scenarios and variations. The Head of Operations' deputy may lack authority to commit to process decisions; the absence of a fault management SME means the scenarios and edge cases for that process will be undocumented. The architect must escalate: request formal re-engagement of the process owner for key decision workshops, and work with the Head of Operations to identify a replacement fault management SME before those workshops begin",
+            "Proceed without changes — the architect can infer fault management process details from the legacy system documentation",
+            "Delay the entire project until the SME role is replaced — process mapping cannot proceed without full SME coverage"
+          ],
+          "explanation": "Microsoft's guidance mandates two specific roles for effective process mapping: (1) a business stakeholder 'who owns and leads the process in the operation and can make decisions about process structure and investment' — a deputy without delegated authority cannot fulfil this; (2) SMEs who 'know how the process works in the real world' and 'provide the scenarios and variations' — for fault management, this person has left the organisation. Without the SME, the fault management process will be mapped based on assumptions or legacy documentation, missing the real-world variations that the system must handle. The architect's responsibility is to formally flag both gaps, recommend mitigation, and ensure process decisions have the right authority behind them.",
+          "wrongExplanations": {
+            "0": "IT staff who administered the legacy system know how the system was configured, not how the business actually uses it — these are different things and the wrong input for process mapping.",
+            "2": "Inferring process details from legacy system documentation will produce a map of how the legacy system was built, not how the business process actually works — exactly the anti-pattern.",
+            "3": "A blanket project delay is disproportionate — the architect should escalate and find a replacement SME, and can proceed with other process areas while fault management is resolved."
+          },
+          "msRef": {
+            "label": "Optimize your business processes with Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+          }
+        },
+        {
+          "q": "For CS3 — participants want the storyboard redrawn to match the legacy system layout. What should the facilitator do?",
+          "options": [
+            "Accommodate the request — user familiarity with the legacy layout reduces training effort",
+            "Firmly but constructively redirect the group. The storyboard must be based on standard processes from the Dynamics 365 business process catalog and standard D365 capabilities, not on the legacy system layout. The facilitator's documented role is to remind participants that the objective is to find the closest and best solution within Dynamics 365, not to recreate legacy processes. Legacy-specific requirements should be noted as discussion items, not embedded as the storyboard baseline",
+            "Pause the workshop and escalate to the project manager — this is a scope management issue, not a facilitation issue",
+            "Split the storyboard into two columns — legacy process on the left, D365 process on the right — to satisfy both parties"
+          ],
+          "explanation": "Microsoft's workshops documentation is direct: 'Base the draft on the standard processes from the business process catalog and Dynamics 365 to meet the underlying business requirements. Don't model it based on the implementation in the current legacy system.' And in the storyline review guidance: 'Remind the participants that the objective is to derive the closest and best solution within Dynamics 365, and not to recreate the legacy processes in Dynamics 365. Typically, a moderator manages this principle to ensure the discussions are productive and focused.' This is an explicit facilitation responsibility documented for exactly this scenario — a common workshop dynamic where participants default to what they know.",
+          "wrongExplanations": {
+            "0": "Training effort is valid but secondary — basing the storyboard on the legacy layout produces a migration of the old system, not an improvement on it.",
+            "2": "This is precisely a facilitation issue — the documented facilitator role includes managing this dynamic. Escalating to the project manager abdicates the architect's responsibility.",
+            "3": "A two-column comparison anchors equal weight to the legacy layout — it legitimises legacy replication rather than redirecting toward D365 standard processes."
+          },
+          "msRef": {
+            "label": "Workshops for Dynamics 365 implementation projects",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+          }
+        },
+        {
+          "q": "For CS4 — North, South, and Midlands have different fault reporting processes. The Head of Operations wants to keep them separate; the delivery manager wants immediate standardisation. How should the architect approach this?",
+          "options": [
+            "Side with the delivery manager — standardisation always reduces implementation cost and complexity",
+            "The architect should evaluate both positions against Microsoft's documented standardisation framework, which acknowledges both benefits and constraints. Benefits include cost reduction, performance comparison, and resource mobility. Constraints include: standardisation might increase local unit workload or change culture; might require significant change management; might not outweigh the costs or risks of changing the process. The architect's role is to present these trade-offs to both stakeholders, propose a 'core template' approach where a common baseline process is defined with documented local variations where justified, and recommend that the business case for full standardisation be assessed before committing",
+            "Keep all three processes separate to avoid stakeholder conflict — process standardisation is optional",
+            "Defer the decision to the CFO — it is a financial decision, not an architecture decision"
+          ],
+          "explanation": "Microsoft's standardisation guidance provides both benefits and constraints. The 'core template' approach — 'creating a common process design that you can apply to different units or regions with minimal adjustments' — is the recommended pattern when standardisation has merit but local variation exists. The architect's role is to facilitate the trade-off evaluation, not to take sides. Microsoft explicitly documents: 'Standardisation might not outweigh the costs or risks of changing the process. You might need to reassess the business case and the expected outcomes.' The right answer combines the core template principle with an evidence-based business case assessment — not a blanket decision either way.",
+          "wrongExplanations": {
+            "0": "Cost reduction is one documented benefit but is not guaranteed to outweigh all constraints — the delivery manager's assertion that standardisation 'always' reduces cost ignores the documented constraints.",
+            "2": "Keeping three separate processes purely to avoid conflict abandons the architect's responsibility to optimise the solution — the constraints warrant consideration, not automatic deference.",
+            "3": "Process standardisation decisions have architecture, change management, and cost dimensions — delegating entirely to the CFO excludes the architecture and change implications."
+          },
+          "msRef": {
+            "label": "Optimize your business processes with Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+          }
+        },
+        {
+          "q": "For CS5 — fault engineers fill in paper forms on site. The business hasn't considered automating this. When is the right moment to flag this improvement opportunity, and what should the architect suggest?",
+          "options": [
+            "Defer this observation to the design phase — as-is collection is not the time for technology suggestions",
+            "Flag it now, during the process review workshop. Microsoft's guidance explicitly states that when reviewing business processes, the architect should identify opportunities to use modern technologies such as cloud, AI, machine learning, RPA, IoT, and mobile to improve process outcomes. Paper-based field data capture is a strong candidate for Power Apps mobile forms or Field Service mobile, enabling real-time data entry, validation, and integration with D365 — eliminating rekeying delays and data quality errors. The architect should document this as a process improvement opportunity in Azure DevOps or the RAID log for design phase evaluation",
+            "Do not flag it — the project scope was already defined and adding mobile forms would constitute scope creep",
+            "Flag it only if the business specifically requests automation — the architect should not suggest improvements the business hasn't asked for"
+          ],
+          "explanation": "Microsoft's process optimisation guidance states: 'When you review business processes as part of the project, think about how you can use these technologies to improve your process outcomes and collaboration. You might find multiple areas in your processes that can benefit from modern options. Technology is a key differentiator. Don't fall behind your competitors who might be using these options to gain an edge.' This applies during the process review itself — the as-is workshop is explicitly the right time to identify improvement opportunities, not defer them. Paper-based field data capture is a direct fit for mobile Power Apps or D365 Field Service Mobile — both well-documented process improvement options within the Power Platform ecosystem. The architect documents it as an opportunity, not a commitment, allowing the project team to evaluate scope implications.",
+          "wrongExplanations": {
+            "0": "Deferring improvement identification to design contradicts the guidance's explicit instruction to identify improvement opportunities during process review.",
+            "2": "Raising a potential improvement is not automatically scope creep — it is the architect's documented responsibility. Whether to include it in scope is a separate decision for the project team.",
+            "3": "Waiting for the business to specifically request improvements the architect can already see misses the proactive advisory value of the architect role — 'identify and highlight areas for process improvement, innovation, risks, and constraints' is a documented benefit of process mapping."
+          },
+          "msRef": {
+            "label": "Optimize your business processes with Dynamics 365",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+          }
+        }
+      ]
+    }
+  ]
+}

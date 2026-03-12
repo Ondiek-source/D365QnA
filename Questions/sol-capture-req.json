@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Capture Requirements",
+        "description": "Workshop facilitation, user story writing, requirement elicitation techniques, and documentation standards.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the main purpose of requirements capture in a PL-600 solution architect engagement?",
+            "options": [
+                "To collect as many feature ideas as possible without validation",
+                "To accurately understand customer needs, refine them, and express them in a form that can guide solution decisions",
+                "To replace fit/gap analysis entirely",
+                "To delay solution direction until development starts"
+            ],
+            "answer": 1,
+            "category": "requirements-capture",
+            "tags": [
+                "requirements",
+                "discovery",
+                "solution-architect"
+            ],
+            "explanation": "Requirements capture is about understanding and refining customer needs so the solution can be evaluated and designed against real business outcomes, not just raw requests.",
+            "wrongExplanations": [
+                "Collecting unvalidated ideas creates noise and scope risk.",
+                null,
+                "Fit/gap analysis still matters after requirements are captured.",
+                "Requirements capture should inform solution direction early, not delay it unnecessarily."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Which workshop behavior best supports effective requirement elicitation?",
+            "options": [
+                "Let the loudest stakeholder define the requirement",
+                "Use structured questions, validate assumptions, and separate business needs from solution ideas",
+                "Focus only on technical implementation choices",
+                "Avoid documenting disagreements to keep momentum"
+            ],
+            "answer": 1,
+            "category": "workshops",
+            "tags": [
+                "facilitation",
+                "elicitation",
+                "stakeholders"
+            ],
+            "explanation": "Good workshop facilitation uses structured questioning, validation, and clarification to uncover real requirements rather than simply recording opinions or implementation suggestions.",
+            "wrongExplanations": [
+                "This creates bias and weakens requirement quality.",
+                null,
+                "Technical implementation choices are premature during elicitation.",
+                "Disagreements should be surfaced and managed, not hidden."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"We need a custom approval app.\" What should the architect do first?",
+            "options": [
+                "Write a user story for the custom app immediately",
+                "Ask what business problem the approval process must solve and what outcome defines success",
+                "Estimate the number of approval screens",
+                "Assign a developer to prototype the app"
+            ],
+            "answer": 1,
+            "category": "elicitation",
+            "tags": [
+                "business-need",
+                "solution-vs-requirement",
+                "discovery"
+            ],
+            "explanation": "The architect should first uncover the underlying business need and success outcome before accepting a proposed solution idea.",
+            "wrongExplanations": [
+                "That assumes the proposed implementation is already correct.",
+                null,
+                "Screen estimation is premature.",
+                "A prototype before problem clarification can anchor the team on the wrong solution."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "Which user story is written best for solution design and validation?",
+            "options": [
+                "Build an approval page with a comments box",
+                "As a service manager, I want high-risk cases routed for approval so that escalations are controlled consistently",
+                "Managers need dashboards",
+                "Create three custom tables for approvals"
+            ],
+            "answer": 1,
+            "category": "user-stories",
+            "tags": [
+                "user-story",
+                "business-value",
+                "requirements"
+            ],
+            "explanation": "A strong user story identifies the actor, need, and business value, which helps drive solution and validation decisions.",
+            "wrongExplanations": [
+                "This is an implementation instruction, not a user-centered requirement.",
+                null,
+                "This is too vague and lacks business value context.",
+                "This is a design choice rather than a user story."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the strongest reason to document requirements against business processes?",
+            "options": [
+                "It makes the document longer and more detailed",
+                "It helps reveal process gaps, dependencies, and where requirements actually apply in the end-to-end flow",
+                "It removes the need for stakeholder workshops",
+                "It guarantees no customization will be needed"
+            ],
+            "answer": 1,
+            "category": "process-alignment",
+            "tags": [
+                "business-process",
+                "mapping",
+                "requirements"
+            ],
+            "explanation": "Linking requirements to processes gives them operational context and helps the team understand where they matter in the end-to-end scenario.",
+            "wrongExplanations": [
+                "Length is not the goal.",
+                null,
+                "Workshops are still needed to discover and refine the requirements.",
+                "Process mapping does not guarantee a no-customization outcome."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "Which question best helps refine a vague requirement during a workshop?",
+            "options": [
+                "Which color should the app use?",
+                "What exactly must the user be able to do, under what conditions, and how will you know it works well enough?",
+                "How many developers will be assigned?",
+                "Should we use plugins or flows?"
+            ],
+            "answer": 1,
+            "category": "refinement",
+            "tags": [
+                "refinement",
+                "workshops",
+                "requirement-quality"
+            ],
+            "explanation": "This question forces clarity around behavior, context, and validation, which are key to refining vague statements into usable requirements.",
+            "wrongExplanations": [
+                "Color choice does not refine core requirement meaning.",
+                null,
+                "Staffing does not define the requirement.",
+                "Implementation pattern choices are premature."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "What is the best reason to document assumptions alongside captured requirements?",
+            "options": [
+                "To make the backlog look fuller",
+                "To expose uncertain conditions that could affect requirement validity, scope, or feasibility",
+                "To avoid speaking with stakeholders again",
+                "To replace risk management"
+            ],
+            "answer": 1,
+            "category": "documentation",
+            "tags": [
+                "assumptions",
+                "risk",
+                "requirements"
+            ],
+            "explanation": "Assumptions identify things believed to be true that may later affect design, scope, and delivery if they prove false.",
+            "wrongExplanations": [
+                "Document size is irrelevant.",
+                null,
+                "Assumptions do not remove the need for more stakeholder input.",
+                "Assumptions support risk management but do not replace it."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "Which documentation standard is most useful when capturing architect-level requirements?",
+            "options": [
+                "Record requests exactly as spoken and avoid interpretation",
+                "Document requirements clearly, consistently, and with enough context to support design, validation, and scope decisions",
+                "Focus only on screenshots of the current system",
+                "Store requirements only in email threads"
+            ],
+            "answer": 1,
+            "category": "documentation",
+            "tags": [
+                "documentation-standards",
+                "clarity",
+                "traceability"
+            ],
+            "explanation": "Requirements documentation should be clear, structured, and useful for design, testing, and governance rather than being a raw transcript of stakeholder comments.",
+            "wrongExplanations": [
+                "Raw transcription often preserves ambiguity instead of resolving it.",
+                null,
+                "Screenshots can support analysis but do not replace structured requirements.",
+                "Email threads are poor as the primary requirements repository."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "Why should conflicting stakeholder requirements be surfaced during capture rather than hidden until design?",
+            "options": [
+                "Because conflict helps reduce documentation effort",
+                "Because unresolved conflict can create false requirement certainty and expensive rework later",
+                "Because developers prefer ambiguity",
+                "Because all conflicts disappear in UAT"
+            ],
+            "answer": 1,
+            "category": "stakeholder-alignment",
+            "tags": [
+                "conflict",
+                "alignment",
+                "requirements"
+            ],
+            "explanation": "If conflicting requirements are left unresolved, the team may design against assumptions that later prove wrong, causing churn and rework.",
+            "wrongExplanations": [
+                "Conflict does not reduce effort; it needs active management.",
+                null,
+                "Developers do not benefit from ambiguity.",
+                "UAT is too late to resolve major requirement conflicts."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "Which statement best reflects good architect judgment when capturing requirements for future-state business processes?",
+            "options": [
+                "Copy the current process exactly to avoid resistance",
+                "Guide stakeholders to define the desired future process while challenging unnecessary legacy behavior",
+                "Avoid process discussions and capture only system features",
+                "Leave future-state design entirely to developers"
+            ],
+            "answer": 1,
+            "category": "future-state",
+            "tags": [
+                "future-state",
+                "process-improvement",
+                "architect-judgment"
+            ],
+            "explanation": "The architect should facilitate future-state thinking and challenge legacy assumptions instead of preserving inefficient behavior by default.",
+            "wrongExplanations": [
+                "Exact replication often preserves inefficiency.",
+                null,
+                "Feature lists without process thinking are weak architect practice.",
+                "Future-state process design requires business and architect involvement."
+            ],
+            "msRef": {
+                "label": "Choose the right processes for your solution - Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/solution-architecture-design-pillars-processes"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Capturing requirements includes refining high-level requirements into clearer functional and non-functional statements.",
+            "answer": true,
+            "category": "requirements-capture",
+            "tags": [
+                "functional",
+                "non-functional",
+                "refinement"
+            ],
+            "explanation": "The PL-600 study guide explicitly includes refining high-level requirements and identifying both functional and non-functional requirements as part of capture requirements.",
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "True or False: Workshops should only be used to confirm technical designs after requirements are already fixed.",
+            "answer": false,
+            "category": "workshops",
+            "tags": [
+                "facilitation",
+                "design-workshops",
+                "requirements"
+            ],
+            "explanation": "Microsoft guidance describes workshops as collaborative sessions used to clarify and refine functional requirements and align stakeholders before detailed design is finalized.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "True or False: A good user story should communicate business value, not just implementation detail.",
+            "answer": true,
+            "category": "user-stories",
+            "tags": [
+                "user-story",
+                "business-value",
+                "requirements"
+            ],
+            "explanation": "User stories are most useful when they explain who needs something, what they need, and why it matters.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "True or False: Requirement documentation should be usable later for design, testing, and scope control.",
+            "answer": true,
+            "category": "documentation",
+            "tags": [
+                "traceability",
+                "testing",
+                "scope"
+            ],
+            "explanation": "Captured requirements are not just notes. They should support later design, validation, and governance decisions.",
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each requirement-capture activity to the main purpose.",
+            "items": [
+                "Facilitate a design workshop",
+                "Write a user story",
+                "Refine a vague stakeholder statement",
+                "Document assumptions"
+            ],
+            "zones": [
+                "Align stakeholders and clarify functional needs",
+                "Express user need and business value clearly",
+                "Turn ambiguity into a requirement that can guide design",
+                "Expose uncertain conditions that may affect solution decisions"
+            ],
+            "correctMapping": {
+                "Facilitate a design workshop": "Align stakeholders and clarify functional needs",
+                "Write a user story": "Express user need and business value clearly",
+                "Refine a vague stakeholder statement": "Turn ambiguity into a requirement that can guide design",
+                "Document assumptions": "Expose uncertain conditions that may affect solution decisions"
+            },
+            "tags": [
+                "requirements",
+                "facilitation",
+                "documentation"
+            ],
+            "explanation": "Good requirement capture is not one activity. It combines facilitated discussion, refinement, structured expression of needs, and explicit handling of uncertainty.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "instruction": "Match each example to the correct type.",
+            "items": [
+                "As a sales manager, I want duplicate leads flagged so that my team avoids duplicate follow-up",
+                "The solution must support case creation within agreed response-time targets",
+                "Users should be happier",
+                "Approvals can only be submitted when the mandatory fields are completed"
+            ],
+            "zones": [
+                "User story",
+                "Non-functional requirement",
+                "Vague statement needing refinement",
+                "Rule that supports acceptance or validation"
+            ],
+            "correctMapping": {
+                "As a sales manager, I want duplicate leads flagged so that my team avoids duplicate follow-up": "User story",
+                "The solution must support case creation within agreed response-time targets": "Non-functional requirement",
+                "Users should be happier": "Vague statement needing refinement",
+                "Approvals can only be submitted when the mandatory fields are completed": "Rule that supports acceptance or validation"
+            },
+            "tags": [
+                "classification",
+                "user-stories",
+                "requirements-types"
+            ],
+            "explanation": "Architect-level requirement capture includes distinguishing strong requirement forms from vague statements that still need refinement.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Capturing Requirements Without Locking in the Wrong Solution",
+            "scenario": "A customer wants to modernize its service request process. In workshops, one operations manager says the team needs a custom service console immediately. Frontline agents say the real problem is that requests arrive through too many channels, triage rules are inconsistent, and required information is often missing. Regional leads disagree on whether the same request flow can be used everywhere. The project team has notes from several meetings, but the statements are inconsistent, some are vague, and many are written as proposed solutions instead of requirements.",
+            "tags": [
+                "requirements-capture",
+                "workshops",
+                "user-stories"
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Accept the custom console idea and estimate it",
+                        "Facilitate structured refinement to separate business needs, process issues, and proposed solution ideas",
+                        "Ignore the frontline input and rely on managers",
+                        "Start UI wireframes for the console"
+                    ],
+                    "answer": 1,
+                    "explanation": "The first step is to structure and refine what has been heard so the team is solving the real problem, not just the loudest suggested solution.",
+                    "wrongExplanations": [
+                        "That would lock the project onto an unvalidated approach.",
+                        null,
+                        "Frontline input is critical for understanding process reality.",
+                        "Wireframing is premature before the requirements are clarified."
+                    ],
+                    "msRef": {
+                        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+                    }
+                },
+                {
+                    "q": "Which captured statement is the best candidate for refinement rather than direct acceptance?",
+                    "options": [
+                        "Requests arrive through too many channels",
+                        "We need a custom service console immediately",
+                        "Required information is often missing",
+                        "Regional leads disagree on standardization"
+                    ],
+                    "answer": 1,
+                    "explanation": "This is a proposed solution statement, not a validated requirement. It needs to be unpacked into the actual business need and success outcome.",
+                    "wrongExplanations": [
+                        "This is a real problem statement that can inform requirements.",
+                        null,
+                        "This is a useful process/data pain point, not merely a premature design choice.",
+                        "This is an alignment issue that must be managed, not just a solution suggestion."
+                    ],
+                    "msRef": {
+                        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+                    }
+                },
+                {
+                    "q": "What is the best way to document the requirement that agents need enough information to triage accurately?",
+                    "options": [
+                        "Build more fields",
+                        "As an agent, I want required request details captured consistently so that I can triage requests correctly on first review",
+                        "Users need a better screen",
+                        "Add a plugin"
+                    ],
+                    "answer": 1,
+                    "explanation": "This user story expresses actor, need, and business value clearly, making it more useful for design and validation.",
+                    "wrongExplanations": [
+                        "This is an implementation guess, not a requirement expression.",
+                        null,
+                        "This is too vague and not clearly tied to process outcome.",
+                        "This is a technical solution idea."
+                    ],
+                    "msRef": {
+                        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+                    }
+                },
+                {
+                    "q": "Why is it important to document the disagreement between regional leads rather than smooth over it in the notes?",
+                    "options": [
+                        "Because unresolved differences can affect scope, process design, and standardization decisions",
+                        "Because conflict always improves innovation",
+                        "Because developers prefer different regional rules",
+                        "Because it avoids future workshops"
+                    ],
+                    "answer": 0,
+                    "explanation": "Regional disagreement is not noise. It is a real requirement and governance issue that can materially affect scope and future-state process design.",
+                    "wrongExplanations": [
+                        null,
+                        "Conflict is not useful by itself unless managed productively.",
+                        "Developer preference is not the main reason to capture the issue.",
+                        "It does not remove the need for future workshops."
+                    ],
+                    "msRef": {
+                        "label": "Workshops for Dynamics 365 implementation projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+                    }
+                }
+            ]
+        }
+    ]
+}

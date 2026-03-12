@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Identify Data Sources Needed for a Solution",
+        "description": "Data source discovery, connector availability, data residency requirements, and volume/velocity assessment.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "Why should a solution architect identify data sources early when evaluating a proposed Power Platform or Dynamics 365 solution?",
+            "options": [
+                "To decide which users should get dark mode",
+                "To understand what data is needed, where it lives, who owns it, how it moves, and what constraints shape the solution",
+                "To avoid documenting integrations",
+                "To guarantee that all data will move into Dataverse"
+            ],
+            "answer": 1,
+            "category": "data-discovery",
+            "tags": [
+                "data-sources",
+                "discovery",
+                "ownership"
+            ],
+            "explanation": "Early data source discovery helps the architect understand source systems, ownership, quality, movement, and constraints such as integration, residency, and performance expectations.",
+            "wrongExplanations": [
+                "UI preference is unrelated to the main reason for data source discovery.",
+                null,
+                "Data source discovery usually increases the need to document integrations, not avoid them.",
+                "Not all data belongs in Dataverse; some data may remain in other systems or be accessed through integration."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "Which discovery question best helps identify whether a data source is critical to the proposed solution?",
+            "options": [
+                "What color is the current application's header?",
+                "What business process depends on this data, who owns it, and what happens if it is delayed or unavailable?",
+                "How many users like the current report layout?",
+                "What font is used in the source system?"
+            ],
+            "answer": 1,
+            "category": "data-discovery",
+            "tags": [
+                "business-dependency",
+                "ownership",
+                "criticality"
+            ],
+            "explanation": "The strongest discovery question ties the data source to business process dependency, ownership, and operational impact, which reveals whether it is truly critical.",
+            "wrongExplanations": [
+                "Visual design does not establish business criticality.",
+                null,
+                "Report layout preferences do not reveal operational dependency.",
+                "Font choice is irrelevant."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"We need data from the ERP in the new solution.\" What should the architect clarify next?",
+            "options": [
+                "Only the ERP vendor name",
+                "Which entities are needed, who owns them, how current they must be, and whether they need to be copied or accessed through integration",
+                "Whether the ERP has a blue theme",
+                "Only how many users log in daily"
+            ],
+            "answer": 1,
+            "category": "integration-analysis",
+            "tags": [
+                "erp",
+                "data-needs",
+                "integration"
+            ],
+            "explanation": "The architect needs to understand data entities, ownership, freshness, and access pattern. Those factors drive integration strategy, synchronization design, and solution scope.",
+            "wrongExplanations": [
+                "Vendor name alone does not define the data requirement.",
+                null,
+                "Theme is irrelevant to data architecture.",
+                "Daily login count does not define the data access pattern."
+            ],
+            "msRef": {
+                "label": "Integrate your Dynamics 365 apps with other solutions",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+            }
+        },
+        {
+            "q": "What is the strongest reason to assess connector availability during data source discovery?",
+            "options": [
+                "To choose the most visually attractive connector",
+                "To determine whether the needed systems can be connected through supported patterns or whether alternative approaches are required",
+                "To avoid governance review",
+                "To ensure every integration becomes real time"
+            ],
+            "answer": 1,
+            "category": "connectors",
+            "tags": [
+                "connector-availability",
+                "integration-patterns",
+                "feasibility"
+            ],
+            "explanation": "Connector availability affects feasibility, effort, governance, and pattern choice. If no suitable supported connector exists, the architect may need a different integration approach.",
+            "wrongExplanations": [
+                "Visual appearance has nothing to do with architectural suitability.",
+                null,
+                "Connector use still needs governance review.",
+                "Not every integration should be real time."
+            ],
+            "msRef": {
+                "label": "Connectors overview",
+                "url": "https://learn.microsoft.com/en-us/connectors/overview"
+            }
+        },
+        {
+            "q": "Why is connector availability alone not enough when assessing data sources?",
+            "options": [
+                "Because the connector icon may change later",
+                "Because security, governance, data residency, limits, licensing, and operational fit also matter",
+                "Because connectors never work in production",
+                "Because custom connectors are always forbidden"
+            ],
+            "answer": 1,
+            "category": "connectors",
+            "tags": [
+                "governance",
+                "licensing",
+                "constraints"
+            ],
+            "explanation": "A connector existing is only part of the picture. The architect also needs to assess governance constraints, data movement rules, licensing, security posture, and operational suitability.",
+            "wrongExplanations": [
+                "Icon changes are irrelevant to architectural evaluation.",
+                null,
+                "Connectors can work in production when used appropriately.",
+                "Custom connectors are not always forbidden, but they do require governance and design review."
+            ],
+            "msRef": {
+                "label": "Data policies - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+            }
+        },
+        {
+            "q": "A customer has a requirement that customer data must remain in a specific geography. What should the architect assess first?",
+            "options": [
+                "Whether users prefer faster dashboards",
+                "Whether the environment region, data residency model, and connected services align with that geography requirement",
+                "Whether the case form has too many tabs",
+                "Whether the CRM sitemap is modern"
+            ],
+            "answer": 1,
+            "category": "data-residency",
+            "tags": [
+                "data-residency",
+                "region",
+                "compliance"
+            ],
+            "explanation": "A geography requirement means the architect must validate region choice, data residency behavior, and whether all relevant services align with that requirement.",
+            "wrongExplanations": [
+                "Dashboard preference does not address residency compliance.",
+                null,
+                "Form tab count is irrelevant.",
+                "UI structure does not resolve geography constraints."
+            ],
+            "msRef": {
+                "label": "Where your Microsoft Dynamics 365 and Power Platform customer data is stored",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/get-started/availability"
+            }
+        },
+        {
+            "q": "Which statement best reflects good architect judgment about data residency in Power Platform?",
+            "options": [
+                "Residency matters only after go-live",
+                "Residency should be evaluated early because region choice and connected services can affect compliance and design",
+                "Residency is only a concern for infrastructure teams",
+                "Residency can be ignored if a connector exists"
+            ],
+            "answer": 1,
+            "category": "data-residency",
+            "tags": [
+                "compliance",
+                "region-selection",
+                "early-design"
+            ],
+            "explanation": "Data residency affects design choices from the beginning. Region selection and service use can create compliance implications that must be understood early.",
+            "wrongExplanations": [
+                "That is too late; residency can influence core design and approval decisions.",
+                null,
+                "It is broader than infrastructure and affects application architecture too.",
+                "Connector availability does not override residency obligations."
+            ],
+            "msRef": {
+                "label": "Choose the region when setting up an environment",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/regions-overview"
+            }
+        },
+        {
+            "q": "Why should the architect assess data volume and velocity during data source discovery?",
+            "options": [
+                "To choose a better font for reports",
+                "To understand whether the proposed data handling pattern is realistic for throughput, synchronization, and performance expectations",
+                "To eliminate the need for data governance",
+                "To guarantee that all data must be stored in the same place"
+            ],
+            "answer": 1,
+            "category": "volume-velocity",
+            "tags": [
+                "throughput",
+                "performance",
+                "data-patterns"
+            ],
+            "explanation": "Data volume and velocity can materially affect migration strategy, synchronization design, batching, performance, and architecture feasibility.",
+            "wrongExplanations": [
+                "Formatting is irrelevant to volume and velocity assessment.",
+                null,
+                "Governance still matters regardless of throughput needs.",
+                "Different data may belong in different systems or movement patterns."
+            ],
+            "msRef": {
+                "label": "Overview for implementation workshops to provide guidance",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/fasttrack/implementation-workshops"
+            }
+        },
+        {
+            "q": "A requirement calls for high-volume near-real-time updates from an on-premises source into Dynamics 365. Which concern should the architect raise first?",
+            "options": [
+                "Whether the welcome screen is branded",
+                "Whether latency, batching strategy, connectivity pattern, and realistic throughput have been assessed",
+                "Whether users prefer dark mode",
+                "Whether the source server uses a recent browser"
+            ],
+            "answer": 1,
+            "category": "integration-performance",
+            "tags": [
+                "latency",
+                "batching",
+                "on-premises"
+            ],
+            "explanation": "High-volume near-real-time integration from on-premises sources raises latency and throughput concerns that should be assessed early, along with realistic batching and connectivity patterns.",
+            "wrongExplanations": [
+                "Branding is irrelevant.",
+                null,
+                "User theme preference does not affect integration feasibility.",
+                "Browser age is not the key architectural issue in this scenario."
+            ],
+            "msRef": {
+                "label": "Overcome integration challenges in Dynamics 365 projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-challenges"
+            }
+        },
+        {
+            "q": "Which statement best shows that the architect is evaluating data sources at the right level?",
+            "options": [
+                "We listed every source system by name",
+                "We identified what data is needed, who owns it, how often it changes, what constraints apply, and how it supports business processes",
+                "We counted the number of tables in each source",
+                "We copied the source system screenshots into the design pack"
+            ],
+            "answer": 1,
+            "category": "data-discovery",
+            "tags": [
+                "source-inventory",
+                "business-context",
+                "architecture"
+            ],
+            "explanation": "Good data source evaluation ties technical source information to ownership, usage, change frequency, constraints, and business relevance.",
+            "wrongExplanations": [
+                "Names alone are not enough.",
+                null,
+                "Object counts do not provide enough business or architectural meaning.",
+                "Screenshots do not substitute for architectural analysis."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: A supported connector automatically means the data source is acceptable from a governance and compliance perspective.",
+            "answer": false,
+            "category": "connectors",
+            "tags": [
+                "governance",
+                "compliance",
+                "connectors"
+            ],
+            "explanation": "A connector may exist, but governance, DLP policies, licensing, residency, and security requirements still need to be evaluated.",
+            "msRef": {
+                "label": "Data policies - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+            }
+        },
+        {
+            "q": "True or False: Data residency requirements can affect environment region selection and service design choices.",
+            "answer": true,
+            "category": "data-residency",
+            "tags": [
+                "region",
+                "residency",
+                "design-constraints"
+            ],
+            "explanation": "Region and geography choices influence where customer data is stored and can affect whether the solution aligns with residency requirements.",
+            "msRef": {
+                "label": "Where your Microsoft Dynamics 365 and Power Platform customer data is stored",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/get-started/availability"
+            }
+        },
+        {
+            "q": "True or False: Data volume and throughput considerations are only relevant during production tuning, not during solution assessment.",
+            "answer": false,
+            "category": "volume-velocity",
+            "tags": [
+                "throughput",
+                "design",
+                "assessment"
+            ],
+            "explanation": "Volume and throughput should be assessed early because they influence migration approach, integration pattern, performance expectations, and feasibility.",
+            "msRef": {
+                "label": "Overview for implementation workshops to provide guidance",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/fasttrack/implementation-workshops"
+            }
+        },
+        {
+            "q": "True or False: A data source that is not stored in Dataverse can still be essential to the final solution.",
+            "answer": true,
+            "category": "data-discovery",
+            "tags": [
+                "external-data",
+                "integration",
+                "architecture"
+            ],
+            "explanation": "Many solutions rely on external systems as systems of record or integrated data sources. Not all relevant data needs to be copied into Dataverse.",
+            "msRef": {
+                "label": "Integrate your Dynamics 365 apps with other solutions",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each architect concern to the most relevant data source assessment area.",
+            "items": [
+                "Is there a supported way to connect to the required service?",
+                "Must customer data remain in a particular geography?",
+                "Will millions of updates arrive daily from the source?",
+                "Who is the authoritative owner of customer credit status?"
+            ],
+            "zones": [
+                "Connector availability",
+                "Data residency requirement",
+                "Volume and velocity assessment",
+                "Data ownership and source-of-truth"
+            ],
+            "correctMapping": {
+                "Is there a supported way to connect to the required service?": "Connector availability",
+                "Must customer data remain in a particular geography?": "Data residency requirement",
+                "Will millions of updates arrive daily from the source?": "Volume and velocity assessment",
+                "Who is the authoritative owner of customer credit status?": "Data ownership and source-of-truth"
+            },
+            "tags": [
+                "data-sources",
+                "assessment",
+                "architecture"
+            ],
+            "explanation": "Data source discovery should separate concerns around connectivity, geography, throughput, and ownership because each affects solution direction differently.",
+            "msRef": {
+                "label": "Connectors overview",
+                "url": "https://learn.microsoft.com/en-us/connectors/overview"
+            }
+        },
+        {
+            "instruction": "Match each discovery action to the reason it matters.",
+            "items": [
+                "Identify data owners",
+                "Review connector and policy constraints",
+                "Assess region and residency expectations",
+                "Estimate data volume and change frequency"
+            ],
+            "zones": [
+                "Clarifies who governs quality, access, and accountability",
+                "Shows whether the source can be used through approved patterns",
+                "Helps determine whether geography and compliance needs can be met",
+                "Helps validate whether the proposed synchronization pattern is feasible"
+            ],
+            "correctMapping": {
+                "Identify data owners": "Clarifies who governs quality, access, and accountability",
+                "Review connector and policy constraints": "Shows whether the source can be used through approved patterns",
+                "Assess region and residency expectations": "Helps determine whether geography and compliance needs can be met",
+                "Estimate data volume and change frequency": "Helps validate whether the proposed synchronization pattern is feasible"
+            },
+            "tags": [
+                "discovery",
+                "governance",
+                "feasibility"
+            ],
+            "explanation": "The architect needs to connect each discovery step to a concrete architectural purpose instead of treating data source inventory as a checklist exercise.",
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Choosing Data Sources Without Getting Burned Later",
+            "scenario": "A company wants a new service solution in Dynamics 365. During discovery, stakeholders say the solution needs customer data from the ERP, warranty history from a legacy database, shipment status from a logistics platform, and field inspection photos from a separate document service. The business expects shipment status updates to appear quickly, and field teams in one region say customer data must remain in a specific geography. The delivery team finds a prebuilt connector for the logistics platform, but the organization's data policies are strict. The source systems also vary heavily in record volume and update frequency.",
+            "tags": [
+                "data-sources",
+                "connectors",
+                "data-residency"
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            },
+            "questions": [
+                {
+                    "q": "What should the architect do first?",
+                    "options": [
+                        "Assume all source data should be copied into Dataverse",
+                        "Identify the required data sets, owners, freshness needs, and constraints for each source before choosing patterns",
+                        "Ignore the legacy database because it is not modern",
+                        "Start building flows from the logistics connector immediately"
+                    ],
+                    "answer": 1,
+                    "explanation": "The first step is to understand what data is needed, who owns it, how current it must be, and what constraints apply. Pattern choices should follow that analysis.",
+                    "wrongExplanations": [
+                        "Copying everything into Dataverse by default is poor architect judgment.",
+                        null,
+                        "Legacy systems may still contain critical business data.",
+                        "Immediate implementation is premature before constraints are understood."
+                    ],
+                    "msRef": {
+                        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+                    }
+                },
+                {
+                    "q": "Why is the existence of a prebuilt connector for the logistics platform not enough on its own?",
+                    "options": [
+                        "Because connector icons may change",
+                        "Because governance policies, data movement rules, and operational fit still need evaluation",
+                        "Because prebuilt connectors cannot be used in enterprise projects",
+                        "Because shipment data never needs frequent updates"
+                    ],
+                    "answer": 1,
+                    "explanation": "A connector being available does not mean the pattern is automatically acceptable. Governance, policy, and operational requirements still matter.",
+                    "wrongExplanations": [
+                        "Icon changes are irrelevant.",
+                        null,
+                        "Prebuilt connectors can be used in enterprise projects when appropriate.",
+                        "Some shipment scenarios absolutely do need timely updates."
+                    ],
+                    "msRef": {
+                        "label": "Data policies - Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+                    }
+                },
+                {
+                    "q": "What is the main architectural implication of the requirement that customer data remain in a specific geography?",
+                    "options": [
+                        "Only the dashboard layout is affected",
+                        "Environment region, service choices, and data movement design may need to align to residency expectations",
+                        "The solution must avoid all connectors",
+                        "The app cannot use Dynamics 365"
+                    ],
+                    "answer": 1,
+                    "explanation": "Geography requirements influence region selection, service design, and how data moves across systems and environments.",
+                    "wrongExplanations": [
+                        "Layout is unrelated.",
+                        null,
+                        "Residency requirements do not automatically forbid all connectors.",
+                        "Dynamics 365 can still be used; the design just needs to align with the requirement."
+                    ],
+                    "msRef": {
+                        "label": "Choose the region when setting up an environment",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/admin/regions-overview"
+                    }
+                },
+                {
+                    "q": "Why should the architect assess record volume and update frequency for these sources before recommending a design?",
+                    "options": [
+                        "Because it affects whether throughput, batching, latency, and synchronization expectations are realistic",
+                        "Because it decides the app's icon color",
+                        "Because it removes the need for requirements refinement",
+                        "Because it proves the ERP should be replaced"
+                    ],
+                    "answer": 0,
+                    "explanation": "Data volume and frequency directly influence whether a proposed pattern can meet performance and operational expectations realistically.",
+                    "wrongExplanations": [
+                        null,
+                        "Icon color is irrelevant.",
+                        "Requirements refinement is still needed.",
+                        "Volume alone does not prove the ERP should be replaced."
+                    ],
+                    "msRef": {
+                        "label": "Overview for implementation workshops to provide guidance",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/fasttrack/implementation-workshops"
+                    }
+                }
+            ]
+        }
+    ]
+}

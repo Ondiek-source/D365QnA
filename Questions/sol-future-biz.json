@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Guide Future State Business Process Design",
+        "description": "To-be process design, improvement facilitation, change management, and future-state documentation.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the main purpose of guiding future-state business process design in a PL-600 engagement?",
+            "options": [
+                "To copy the current process exactly into the new system",
+                "To define improved ways of working that align business outcomes, platform capabilities, and organizational constraints",
+                "To avoid stakeholder workshops",
+                "To focus only on technical components"
+            ],
+            "answer": 1,
+            "category": "future-state-design",
+            "tags": [
+                "to-be-process",
+                "process-improvement",
+                "business-outcomes"
+            ],
+            "explanation": "Future-state design is about shaping a better target process, not just reproducing the current one. It should align business goals, process improvement, and realistic platform capabilities.",
+            "wrongExplanations": [
+                "Copying the current process exactly often preserves inefficiency and unnecessary complexity.",
+                null,
+                "Stakeholder workshops are a core part of future-state design.",
+                "Technical components matter, but future-state design starts with business process improvement."
+            ],
+            "msRef": {
+                "label": "Optimize your business processes with Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+            }
+        },
+        {
+            "q": "Which statement best reflects good architect judgment when designing a future-state business process?",
+            "options": [
+                "Preserve every current manual step to reduce resistance",
+                "Challenge legacy steps and identify where process standardization or simplification will improve outcomes",
+                "Let each business unit invent its own target process independently",
+                "Delay all process design until development starts"
+            ],
+            "answer": 1,
+            "category": "process-improvement",
+            "tags": [
+                "standardization",
+                "simplification",
+                "architect-judgment"
+            ],
+            "explanation": "A solution architect should challenge unnecessary legacy behavior and guide the organization toward a simpler, more effective future process where justified.",
+            "wrongExplanations": [
+                "Preserving every manual step usually carries forward inefficiency.",
+                null,
+                "Independent process design across business units often increases fragmentation.",
+                "Process design should happen before development, not after."
+            ],
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"Users already know the current process, so the new solution should work exactly the same way.\" What should the architect do first?",
+            "options": [
+                "Accept the statement to protect adoption",
+                "Explore which current steps are genuinely necessary and which are legacy workarounds that should be redesigned",
+                "Ask developers to estimate a like-for-like rebuild",
+                "Freeze the process map immediately"
+            ],
+            "answer": 1,
+            "category": "change-facilitation",
+            "tags": [
+                "legacy-process",
+                "workarounds",
+                "future-state"
+            ],
+            "explanation": "The architect should separate true business needs from outdated habits and workarounds before deciding what the future process should look like.",
+            "wrongExplanations": [
+                "Immediate acceptance can lock the project into unnecessary complexity.",
+                null,
+                "Estimating a rebuild is premature before validating process value.",
+                "Freezing the process too early prevents improvement."
+            ],
+            "msRef": {
+                "label": "Optimize your business processes with Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+            }
+        },
+        {
+            "q": "What is the strongest reason to map a future-state process end to end instead of only documenting system features?",
+            "options": [
+                "It makes documentation look more formal",
+                "It reveals handoffs, dependencies, decision points, and where the process can fail or improve",
+                "It avoids discussing organizational change",
+                "It guarantees no customization will be required"
+            ],
+            "answer": 1,
+            "category": "process-mapping",
+            "tags": [
+                "end-to-end",
+                "handoffs",
+                "dependencies"
+            ],
+            "explanation": "End-to-end process mapping shows how work actually flows, including transitions, bottlenecks, and dependencies that feature lists alone often miss.",
+            "wrongExplanations": [
+                "Formal appearance is not the main value.",
+                null,
+                "Future-state process mapping usually increases discussion of change, not avoids it.",
+                "It does not guarantee standard fit or remove all customization."
+            ],
+            "msRef": {
+                "label": "Implement a solution based on business processes",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution"
+            }
+        },
+        {
+            "q": "Which workshop behavior best supports future-state process design?",
+            "options": [
+                "Capture requests exactly as stated and avoid challenge",
+                "Facilitate discussion around desired outcomes, pain points, constraints, and improved process options",
+                "Focus only on tables and columns",
+                "Ignore disagreement to keep momentum"
+            ],
+            "answer": 1,
+            "category": "facilitation",
+            "tags": [
+                "workshops",
+                "future-state",
+                "facilitation"
+            ],
+            "explanation": "Effective future-state design workshops explore goals, pain points, options, and tradeoffs so the process can be improved intentionally.",
+            "wrongExplanations": [
+                "Raw capture without challenge often preserves weak assumptions.",
+                null,
+                "Data structure matters later, but not as the only focus of process design.",
+                "Ignored disagreement usually resurfaces later as delivery risk."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "What is the best architect response when regional teams insist that their approval processes must remain completely different in the future state?",
+            "options": [
+                "Accept all differences immediately to reduce conflict",
+                "Assess which variations are truly required and where a common target process can be standardized",
+                "Tell each region to build its own app",
+                "Delay the issue until UAT"
+            ],
+            "answer": 1,
+            "category": "standardization",
+            "tags": [
+                "regional-variation",
+                "target-process",
+                "governance"
+            ],
+            "explanation": "The architect should distinguish justified business variation from inherited inconsistency and standardize where it improves maintainability and control.",
+            "wrongExplanations": [
+                "Immediate acceptance often creates unnecessary complexity.",
+                null,
+                "Multiple independent apps are a premature and usually poor response.",
+                "UAT is too late to resolve target-process design issues."
+            ],
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        },
+        {
+            "q": "Why should change management be considered during future-state process design rather than only at go-live?",
+            "options": [
+                "Because future-state design often changes roles, behaviors, ownership, and expectations that people must adopt",
+                "Because change management is only a training issue",
+                "Because it replaces requirements gathering",
+                "Because it removes the need for process documentation"
+            ],
+            "answer": 0,
+            "category": "change-management",
+            "tags": [
+                "adoption",
+                "organizational-change",
+                "roles"
+            ],
+            "explanation": "Future-state process design often changes how people work, who owns steps, and what decisions are made. Those changes need active adoption planning early.",
+            "wrongExplanations": [
+                null,
+                "Change management is broader than training and includes adoption, communication, and readiness.",
+                "Requirements gathering still matters.",
+                "Documentation remains important."
+            ],
+            "msRef": {
+                "label": "Develop a vision for adopting Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/vision"
+            }
+        },
+        {
+            "q": "What is the strongest reason to document assumptions and constraints in future-state process design?",
+            "options": [
+                "To increase document length",
+                "To make explicit what the target process depends on and what limitations shape it",
+                "To avoid talking about risks",
+                "To eliminate stakeholder signoff"
+            ],
+            "answer": 1,
+            "category": "documentation",
+            "tags": [
+                "assumptions",
+                "constraints",
+                "future-state"
+            ],
+            "explanation": "Assumptions and constraints influence whether the future-state process is realistic, feasible, and aligned with organizational conditions.",
+            "wrongExplanations": [
+                "Length is irrelevant.",
+                null,
+                "Documenting assumptions and constraints helps risk discussion rather than avoiding it.",
+                "Stakeholder signoff is still needed."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "What is the best reason to use current-state pain points when designing the future state?",
+            "options": [
+                "To justify replacing every system involved",
+                "To target meaningful improvements and avoid rebuilding known inefficiencies",
+                "To avoid stakeholder interviews",
+                "To remove the need for fit/gap analysis"
+            ],
+            "answer": 1,
+            "category": "process-improvement",
+            "tags": [
+                "pain-points",
+                "future-state",
+                "improvement"
+            ],
+            "explanation": "Current-state pain points provide evidence about what must improve, which helps the architect avoid carrying old inefficiencies into the new process.",
+            "wrongExplanations": [
+                "Pain points do not automatically justify replacing every system.",
+                null,
+                "Stakeholder interviews are still important to validate pain points.",
+                "Fit/gap analysis still matters after future-state design begins."
+            ],
+            "msRef": {
+                "label": "Optimize your business processes with Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+            }
+        },
+        {
+            "q": "Which statement best reflects good future-state documentation practice?",
+            "options": [
+                "Document only the desired screens and buttons",
+                "Document the target process flow, actors, rules, handoffs, decisions, assumptions, and outcomes",
+                "Keep the future state informal to stay agile",
+                "Store all process decisions only in email threads"
+            ],
+            "answer": 1,
+            "category": "future-state-documentation",
+            "tags": [
+                "documentation",
+                "to-be-process",
+                "traceability"
+            ],
+            "explanation": "Strong future-state documentation captures how the target process should work end to end, including roles, rules, transitions, and expected outcomes.",
+            "wrongExplanations": [
+                "Screens and buttons are too narrow.",
+                null,
+                "Informality can preserve ambiguity rather than agility.",
+                "Email threads are poor as the primary process-design record."
+            ],
+            "msRef": {
+                "label": "Create a functional and technical design document",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/patterns/create-functional-technical-design-document"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Future-state business process design should focus on improving outcomes, not simply reproducing the current process.",
+            "answer": true,
+            "category": "future-state-design",
+            "tags": [
+                "to-be-process",
+                "outcomes",
+                "improvement"
+            ],
+            "explanation": "Microsoft’s process-focused guidance emphasizes using business processes to drive better outcomes rather than copying the current state unchanged.",
+            "msRef": {
+                "label": "Implement a solution based on business processes",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution"
+            }
+        },
+        {
+            "q": "True or False: Standardizing business processes can reduce complexity and support more consistent implementation decisions.",
+            "answer": true,
+            "category": "standardization",
+            "tags": [
+                "standardization",
+                "consistency",
+                "complexity"
+            ],
+            "explanation": "Microsoft guidance highlights standardization as a way to reduce unnecessary variation and implementation complexity.",
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        },
+        {
+            "q": "True or False: Change management should be considered only after the future-state process is fully built.",
+            "answer": false,
+            "category": "change-management",
+            "tags": [
+                "adoption",
+                "organizational-change",
+                "planning"
+            ],
+            "explanation": "Change management should start during future-state design because changes to roles, responsibilities, and working practices affect adoption readiness.",
+            "msRef": {
+                "label": "Develop a vision for adopting Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/vision"
+            }
+        },
+        {
+            "q": "True or False: Future-state process design can expose new requirements and dependencies that were not obvious during initial discovery.",
+            "answer": true,
+            "category": "process-mapping",
+            "tags": [
+                "dependencies",
+                "requirements",
+                "future-state"
+            ],
+            "explanation": "As the future process is mapped in more detail, new requirements, handoffs, constraints, and dependencies often become visible.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each activity to the main purpose.",
+            "items": [
+                "Map the target process end to end",
+                "Challenge a legacy manual handoff",
+                "Document assumptions and constraints",
+                "Plan adoption impacts for changed roles"
+            ],
+            "zones": [
+                "Reveal target flow, transitions, and decision points",
+                "Remove unnecessary inefficiency from the future state",
+                "Make feasibility and limitations explicit",
+                "Support change management readiness"
+            ],
+            "correctMapping": {
+                "Map the target process end to end": "Reveal target flow, transitions, and decision points",
+                "Challenge a legacy manual handoff": "Remove unnecessary inefficiency from the future state",
+                "Document assumptions and constraints": "Make feasibility and limitations explicit",
+                "Plan adoption impacts for changed roles": "Support change management readiness"
+            },
+            "tags": [
+                "future-state",
+                "facilitation",
+                "change-management"
+            ],
+            "explanation": "These activities support a realistic and adoptable future-state process by improving design clarity, feasibility, and readiness for change.",
+            "msRef": {
+                "label": "Implement a solution based on business processes",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution"
+            }
+        },
+        {
+            "instruction": "Match each statement to the correct future-state design concern.",
+            "items": [
+                "Different regions insist on different approval paths",
+                "Users say the new process removes a familiar manual check",
+                "The target process depends on a system owner who has not committed",
+                "The organization wants one consistent global operating model"
+            ],
+            "zones": [
+                "Standardization decision",
+                "Change management impact",
+                "Dependency / feasibility concern",
+                "Enterprise process alignment"
+            ],
+            "correctMapping": {
+                "Different regions insist on different approval paths": "Standardization decision",
+                "Users say the new process removes a familiar manual check": "Change management impact",
+                "The target process depends on a system owner who has not committed": "Dependency / feasibility concern",
+                "The organization wants one consistent global operating model": "Enterprise process alignment"
+            },
+            "tags": [
+                "future-state",
+                "standardization",
+                "dependencies"
+            ],
+            "explanation": "Future-state design must balance process consistency, adoption impact, dependencies, and alignment with the target operating model.",
+            "msRef": {
+                "label": "Standardize business processes during a Dynamics 365 implementation",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Designing the To-Be Process Without Rebuilding the Past",
+            "scenario": "A distributor is implementing Dynamics 365 for service and sales operations. Current-state workshops show that case intake, escalation, and regional approvals vary widely, with many manual handoffs and spreadsheet-based tracking. Leadership wants a single future-state process that improves visibility and speed, but regional managers argue that their current variations are necessary. Frontline users are worried that the new process will remove checks they rely on, and one critical handoff in the proposed future state depends on another department that has not formally committed to supporting the new timeline.",
+            "tags": [
+                "future-state",
+                "change-management",
+                "standardization"
+            ],
+            "msRef": {
+                "label": "Optimize your business processes with Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-opportunity-optimization"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Accept each region's current process as mandatory",
+                        "Facilitate a future-state design discussion focused on desired outcomes, justified variation, and process simplification",
+                        "Skip future-state design and move directly to backlog creation",
+                        "Ask developers to pick one process"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should guide stakeholders toward a target process based on outcomes and justified needs, not simply preserve or discard variation without analysis.",
+                    "wrongExplanations": [
+                        "That preserves complexity by default.",
+                        null,
+                        "Backlog creation without a target process would be premature.",
+                        "Developers should not decide the business process model alone."
+                    ],
+                    "msRef": {
+                        "label": "Workshops for Dynamics 365 implementation projects",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+                    }
+                },
+                {
+                    "q": "Which issue most clearly points to a change management concern in this scenario?",
+                    "options": [
+                        "Regional approvals vary",
+                        "Frontline users are worried that familiar checks will disappear",
+                        "Leadership wants more visibility",
+                        "The process includes case intake"
+                    ],
+                    "answer": 1,
+                    "explanation": "User concern about losing familiar checks signals adoption risk and the need to manage the behavioral and trust impact of the future-state process.",
+                    "wrongExplanations": [
+                        "This is more directly a standardization issue.",
+                        null,
+                        "Visibility is a desired outcome, not the clearest change-management signal.",
+                        "Case intake itself is not the issue."
+                    ],
+                    "msRef": {
+                        "label": "Develop a vision for adopting Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/vision"
+                    }
+                },
+                {
+                    "q": "How should the architect handle the regional approval differences?",
+                    "options": [
+                        "Preserve every difference without challenge",
+                        "Assess which variations are justified and where a single target approval model can be standardized",
+                        "Ignore the differences until go-live",
+                        "Create separate applications for each region immediately"
+                    ],
+                    "answer": 1,
+                    "explanation": "The architect should balance local realities against the value of a common target process and only keep variation that is genuinely required.",
+                    "wrongExplanations": [
+                        "That keeps unnecessary complexity.",
+                        null,
+                        "Ignoring the issue creates later rework.",
+                        "Separate applications are a premature and usually poor answer."
+                    ],
+                    "msRef": {
+                        "label": "Standardize business processes during a Dynamics 365 implementation",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+                    }
+                },
+                {
+                    "q": "What is the strongest concern about the uncommitted department in the proposed future-state handoff?",
+                    "options": [
+                        "It is only a training problem",
+                        "It is a dependency that could undermine the feasibility of the target process",
+                        "It means Dynamics 365 cannot be used",
+                        "It affects only branding"
+                    ],
+                    "answer": 1,
+                    "explanation": "A target process that depends on an uncommitted upstream or downstream participant carries a real feasibility and delivery risk.",
+                    "wrongExplanations": [
+                        "This is more than training.",
+                        null,
+                        "The issue does not automatically rule out Dynamics 365.",
+                        "Branding is irrelevant."
+                    ],
+                    "msRef": {
+                        "label": "Implement a solution based on business processes",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution"
+                    }
+                }
+            ]
+        }
+    ]
+}

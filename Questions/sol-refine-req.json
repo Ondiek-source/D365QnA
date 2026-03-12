@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Refine High-Level Requirements",
+        "description": "Iterative refinement, backlog grooming, prioritisation frameworks, and requirement traceability.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "Why should a solution architect refine high-level requirements before detailed design begins?",
+            "options": [
+                "To make the backlog longer",
+                "To turn broad statements into clear, testable, and decision-ready requirements that can guide scope and solution choices",
+                "To avoid involving business stakeholders later",
+                "To eliminate the need for fit/gap analysis"
+            ],
+            "answer": 1,
+            "category": "refinement",
+            "tags": [
+                "requirements",
+                "refinement",
+                "scope"
+            ],
+            "explanation": "High-level requirements are often too broad for design decisions. Refinement makes them specific enough to support prioritization, validation, feasibility analysis, and solution direction.",
+            "wrongExplanations": [
+                "Backlog size is not the goal.",
+                null,
+                "Business stakeholders still need to validate and clarify refined requirements.",
+                "Fit/gap analysis is still required after refinement."
+            ],
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "Which action best reflects iterative refinement of requirements?",
+            "options": [
+                "Capture the first version of a requirement and freeze it immediately",
+                "Revisit requirements as new process detail, risks, constraints, and stakeholder feedback emerge",
+                "Move all unclear items directly into development",
+                "Replace business requirements with technical tasks"
+            ],
+            "answer": 1,
+            "category": "iterative-refinement",
+            "tags": [
+                "iteration",
+                "feedback",
+                "requirements-quality"
+            ],
+            "explanation": "Requirement refinement is iterative because understanding improves as workshops, analysis, and validation uncover more detail and resolve ambiguity.",
+            "wrongExplanations": [
+                "Freezing early usually preserves ambiguity and creates rework.",
+                null,
+                "Unclear items should be refined, not rushed into development.",
+                "Technical tasks are not a substitute for business requirement clarity."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "A requirement states, \"The system should improve case handling.\" What is the best refinement step?",
+            "options": [
+                "Convert it straight into a plugin task",
+                "Break it down into the specific user actions, business rules, measures, and constraints that define improved case handling",
+                "Leave it broad so the team stays flexible",
+                "Remove it because it is not technical enough"
+            ],
+            "answer": 1,
+            "category": "refinement",
+            "tags": [
+                "decomposition",
+                "measurable",
+                "business-process"
+            ],
+            "explanation": "A broad requirement like this must be decomposed into specific capabilities, rules, success measures, and conditions before it can guide solution design.",
+            "wrongExplanations": [
+                "That jumps to implementation before understanding the requirement.",
+                null,
+                "Leaving it broad preserves ambiguity.",
+                "It is valid as a high-level outcome, but it needs refinement rather than removal."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "What is the main purpose of backlog grooming during requirement refinement?",
+            "options": [
+                "To make all backlog items the same size",
+                "To clarify, split, prioritize, and remove ambiguity from backlog items so they are ready for planning and design",
+                "To bypass stakeholder review",
+                "To replace architecture decisions with user votes"
+            ],
+            "answer": 1,
+            "category": "backlog-grooming",
+            "tags": [
+                "backlog",
+                "prioritization",
+                "clarity"
+            ],
+            "explanation": "Backlog grooming helps ensure items are understandable, actionable, properly scoped, and ready for downstream planning and delivery decisions.",
+            "wrongExplanations": [
+                "Uniform size is not the main goal.",
+                null,
+                "Stakeholder input remains important.",
+                "Architecture decisions still require structured judgment."
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "Which question best helps refine a requirement into something design-ready?",
+            "options": [
+                "Which icon should be used?",
+                "Who needs this, what exactly must happen, under what conditions, and how will success be validated?",
+                "Which developer will own it?",
+                "Can we skip the workshop?"
+            ],
+            "answer": 1,
+            "category": "elicitation",
+            "tags": [
+                "design-ready",
+                "refinement",
+                "validation"
+            ],
+            "explanation": "A design-ready requirement needs clear actor, behavior, conditions, and validation logic. This question drives the requirement toward that level of clarity.",
+            "wrongExplanations": [
+                "Icon choice is too low-level and not requirement-defining.",
+                null,
+                "Ownership assignment does not clarify requirement meaning.",
+                "Skipping the workshop reduces, not improves, clarity."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Which statement best reflects good prioritization during requirement refinement?",
+            "options": [
+                "Prioritize the requests from the loudest stakeholder",
+                "Prioritize based on business value, risk reduction, feasibility, dependencies, and alignment to outcomes",
+                "Prioritize only by ease of development",
+                "Treat every requirement as equally urgent"
+            ],
+            "answer": 1,
+            "category": "prioritization",
+            "tags": [
+                "business-value",
+                "dependencies",
+                "risk"
+            ],
+            "explanation": "Architect-level prioritization should balance value, feasibility, dependencies, and risk rather than just stakeholder volume or build convenience.",
+            "wrongExplanations": [
+                "Stakeholder influence alone is not a sound prioritization method.",
+                null,
+                "Ease of development is too narrow.",
+                "Treating everything as urgent destroys focus."
+            ],
+            "msRef": {
+                "label": "Plan a Dynamics 365 implementation strategy",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy"
+            }
+        },
+        {
+            "q": "Why is requirement traceability important during refinement?",
+            "options": [
+                "It helps connect requirements to business objectives, design choices, validation, and scope decisions",
+                "It makes documents harder to read",
+                "It removes the need for backlog grooming",
+                "It is only useful after go-live"
+            ],
+            "answer": 0,
+            "category": "traceability",
+            "tags": [
+                "traceability",
+                "business-objectives",
+                "validation"
+            ],
+            "explanation": "Traceability helps the team understand why a requirement exists, where it came from, how it will be validated, and what downstream decisions it influences.",
+            "wrongExplanations": [
+                null,
+                "Good traceability improves clarity when done well.",
+                "Backlog grooming is still needed.",
+                "Traceability is useful throughout the lifecycle, not only after go-live."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "A backlog item says, \"Integrate with finance.\" What is the best refinement approach?",
+            "options": [
+                "Estimate a real-time API immediately",
+                "Clarify which business events, data entities, timing, ownership, and failure expectations define the integration need",
+                "Convert it into a single technical story called Finance integration",
+                "Assume the standard connector will be enough"
+            ],
+            "answer": 1,
+            "category": "integration-refinement",
+            "tags": [
+                "integration",
+                "decomposition",
+                "clarification"
+            ],
+            "explanation": "The statement is too vague. The architect should refine it into concrete business and technical expectations before deciding on the solution pattern.",
+            "wrongExplanations": [
+                "That assumes the pattern before the requirement is understood.",
+                null,
+                "A single vague technical story preserves ambiguity.",
+                "Connector availability does not define the requirement."
+            ],
+            "msRef": {
+                "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+            }
+        },
+        {
+            "q": "What is the strongest reason to split a large backlog item into smaller refined requirements?",
+            "options": [
+                "To create more work items for reporting",
+                "To isolate business value, dependencies, and validation conditions more clearly",
+                "To avoid talking about scope",
+                "To force all items into one sprint"
+            ],
+            "answer": 1,
+            "category": "backlog-grooming",
+            "tags": [
+                "decomposition",
+                "dependencies",
+                "validation"
+            ],
+            "explanation": "Splitting large items makes them easier to analyze, prioritize, validate, and sequence, especially when different parts carry different value or dependencies.",
+            "wrongExplanations": [
+                "Reporting quantity is not the goal.",
+                null,
+                "Decomposition improves scope clarity rather than avoiding it.",
+                "Not all refined items belong in the same sprint."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Which statement best shows a requirement has been refined well enough for architect review?",
+            "options": [
+                "It names a preferred technology",
+                "It clearly describes the business need, scope boundaries, constraints, dependencies, and validation expectations",
+                "It contains many screenshots",
+                "It has been copied exactly from workshop notes"
+            ],
+            "answer": 1,
+            "category": "design-readiness",
+            "tags": [
+                "quality",
+                "scope",
+                "constraints"
+            ],
+            "explanation": "An architect-ready requirement is clear about purpose, boundaries, constraints, and how success or acceptance will be judged.",
+            "wrongExplanations": [
+                "Preferred technology may be premature and does not prove refinement quality.",
+                null,
+                "Screenshots can support analysis but do not make a requirement design-ready.",
+                "Raw notes often preserve ambiguity rather than resolve it."
+            ],
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Refining high-level requirements includes identifying functional and non-functional details that were not clear initially.",
+            "answer": true,
+            "category": "refinement",
+            "tags": [
+                "functional",
+                "non-functional",
+                "requirements"
+            ],
+            "explanation": "The PL-600 study guide places refinement alongside identifying functional and non-functional requirements, which is exactly what happens as broad needs are made more specific.",
+            "msRef": {
+                "label": "Study guide for Exam PL-600: Microsoft Power Platform Solution Architect",
+                "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+            }
+        },
+        {
+            "q": "True or False: Requirement refinement should be treated as a one-time activity completed before any further stakeholder interaction.",
+            "answer": false,
+            "category": "iterative-refinement",
+            "tags": [
+                "iteration",
+                "stakeholders",
+                "feedback"
+            ],
+            "explanation": "Refinement is iterative. New information from stakeholders, workshops, risks, and design analysis often changes how requirements must be expressed and prioritized.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        },
+        {
+            "q": "True or False: Requirement traceability helps reduce the risk of delivering features that are no longer tied to business objectives.",
+            "answer": true,
+            "category": "traceability",
+            "tags": [
+                "business-objectives",
+                "scope-control",
+                "validation"
+            ],
+            "explanation": "Traceability helps the team verify that requirements still connect to the business need they were meant to address.",
+            "msRef": {
+                "label": "Define your requirements for your Dynamics 365 solution",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+            }
+        },
+        {
+            "q": "True or False: Backlog grooming can help expose hidden dependencies and oversized requirements before delivery planning.",
+            "answer": true,
+            "category": "backlog-grooming",
+            "tags": [
+                "dependencies",
+                "planning",
+                "decomposition"
+            ],
+            "explanation": "Grooming is useful for clarifying dependencies, splitting oversized items, and improving planning readiness before development begins.",
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each refinement activity to the main purpose.",
+            "items": [
+                "Split a broad requirement into smaller items",
+                "Add acceptance and validation detail",
+                "Link a requirement to a business objective",
+                "Reorder backlog items after dependency review"
+            ],
+            "zones": [
+                "Improve clarity and sequencing",
+                "Make the requirement testable",
+                "Improve traceability",
+                "Improve prioritization readiness"
+            ],
+            "correctMapping": {
+                "Split a broad requirement into smaller items": "Improve clarity and sequencing",
+                "Add acceptance and validation detail": "Make the requirement testable",
+                "Link a requirement to a business objective": "Improve traceability",
+                "Reorder backlog items after dependency review": "Improve prioritization readiness"
+            },
+            "tags": [
+                "refinement",
+                "traceability",
+                "prioritization"
+            ],
+            "explanation": "Refinement is not just rewriting text. It improves requirement clarity, traceability, validation, and planning readiness.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "instruction": "Match each example to the most accurate interpretation.",
+            "items": [
+                "Improve lead management",
+                "As a sales manager, I want duplicate leads flagged so that follow-up is not wasted",
+                "Integrate with finance",
+                "Average quote approval time must drop from 2 days to 4 hours"
+            ],
+            "zones": [
+                "High-level requirement needing refinement",
+                "Refined user-centered requirement",
+                "Vague integration requirement needing decomposition",
+                "Measurable outcome that supports prioritization"
+            ],
+            "correctMapping": {
+                "Improve lead management": "High-level requirement needing refinement",
+                "As a sales manager, I want duplicate leads flagged so that follow-up is not wasted": "Refined user-centered requirement",
+                "Integrate with finance": "Vague integration requirement needing decomposition",
+                "Average quote approval time must drop from 2 days to 4 hours": "Measurable outcome that supports prioritization"
+            },
+            "tags": [
+                "classification",
+                "user-story",
+                "outcomes"
+            ],
+            "explanation": "Good refinement distinguishes between broad goals, properly expressed user needs, vague technical statements, and measurable outcomes.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Turning Broad Demands into a Usable Backlog",
+            "scenario": "A customer is replacing a manual approvals process with Dynamics 365 and Power Platform. Early discovery produced broad requirements such as 'improve approvals,' 'integrate with finance,' and 'give managers visibility.' During workshops, stakeholders added requests for mobile approvals, escalation rules, audit history, and regional variations in approval thresholds. The current backlog mixes business outcomes, user needs, technical ideas, and vague placeholders. Project leadership wants to prioritize phase one quickly, but several items are too broad and some are not clearly traceable to agreed business objectives.",
+            "tags": [
+                "refinement",
+                "backlog-grooming",
+                "traceability"
+            ],
+            "msRef": {
+                "label": "Workshops for Dynamics 365 implementation projects",
+                "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/about-workshops"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Freeze the backlog immediately so scope does not move",
+                        "Refine the broad items into clearer requirements with business value, constraints, dependencies, and validation detail",
+                        "Send the vague backlog directly to developers",
+                        "Prioritize only the items requested by executives"
+                    ],
+                    "answer": 1,
+                    "explanation": "Before prioritization is meaningful, the broad and mixed items need refinement into something clear enough to analyze and compare.",
+                    "wrongExplanations": [
+                        "Freezing ambiguity early makes planning worse.",
+                        null,
+                        "Developers should not inherit unresolved requirement ambiguity.",
+                        "Executive attention alone is not a sound prioritization model."
+                    ],
+                    "msRef": {
+                        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+                    }
+                },
+                {
+                    "q": "Which backlog item most obviously needs decomposition before architect review?",
+                    "options": [
+                        "Average approval time must drop from 2 days to 4 hours",
+                        "As a manager, I want to approve requests from mobile so that urgent work does not stall",
+                        "Integrate with finance",
+                        "Audit history must be available for completed approvals"
+                    ],
+                    "answer": 2,
+                    "explanation": "This item is too vague because it does not explain what data moves, when it moves, who owns it, or what business event triggers the integration.",
+                    "wrongExplanations": [
+                        "This is already a measurable outcome.",
+                        "This is already a reasonably refined user-centered requirement.",
+                        null,
+                        "This is more specific and usable than the vague integration placeholder."
+                    ],
+                    "msRef": {
+                        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+                    }
+                },
+                {
+                    "q": "Why is traceability especially important in this scenario?",
+                    "options": [
+                        "Because it helps show which refined items still connect to agreed business goals",
+                        "Because it removes the need for prioritization",
+                        "Because it guarantees that all regional variations stay in phase one",
+                        "Because it replaces acceptance criteria"
+                    ],
+                    "answer": 0,
+                    "explanation": "When the backlog contains mixed item types, traceability helps ensure the team is still working against real business objectives rather than drifting into ungrounded requests.",
+                    "wrongExplanations": [
+                        null,
+                        "Prioritization is still necessary.",
+                        "Traceability does not force all variation into scope.",
+                        "Acceptance criteria remain distinct and necessary."
+                    ],
+                    "msRef": {
+                        "label": "Define your requirements for your Dynamics 365 solution",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-define-requirements"
+                    }
+                },
+                {
+                    "q": "What is the best basis for phase-one prioritization after refinement?",
+                    "options": [
+                        "The total number of comments each item received",
+                        "Business value, dependency order, feasibility, and risk reduction",
+                        "The personal preference of the project manager",
+                        "The length of each requirement description"
+                    ],
+                    "answer": 1,
+                    "explanation": "After refinement, phase-one prioritization should be based on structured factors that support value delivery and realistic sequencing.",
+                    "wrongExplanations": [
+                        "Comment count is not a reliable prioritization method.",
+                        null,
+                        "A PM preference alone is too subjective.",
+                        "Length of text does not indicate importance."
+                    ],
+                    "msRef": {
+                        "label": "Plan a Dynamics 365 implementation strategy",
+                        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy"
+                    }
+                }
+            ]
+        }
+    ]
+}

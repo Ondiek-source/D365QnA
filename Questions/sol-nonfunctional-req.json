@@ -1,0 +1,506 @@
+{
+    "_meta": {
+        "topic": "Identify Non-Functional Requirements",
+        "description": "Performance, scalability, security, availability, and compliance requirements for Power Platform solutions.",
+        "status": "complete"
+    },
+    "mcq": [
+        {
+            "q": "What is the main purpose of identifying non-functional requirements in a PL-600 engagement?",
+            "options": [
+                "To define the exact screen layout",
+                "To specify the quality attributes and constraints the solution must satisfy beyond core business functions",
+                "To replace functional requirements",
+                "To decide the color scheme of the app"
+            ],
+            "answer": 1,
+            "category": "non-functional-basics",
+            "tags": [
+                "non-functional",
+                "quality-attributes",
+                "constraints"
+            ],
+            "explanation": "Non-functional requirements define how well the solution must operate, such as security, reliability, performance, scalability, and compliance, rather than what business functions it performs.",
+            "wrongExplanations": [
+                "Screen layout is typically a UX or design concern, not the main purpose of non-functional requirements.",
+                null,
+                "Non-functional requirements complement functional requirements; they do not replace them.",
+                "Visual theme choices are not the core purpose of non-functional requirement identification."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "Which statement is the best example of a non-functional requirement?",
+            "options": [
+                "Agents must be able to reassign a case",
+                "The solution must support 99.9% availability during business hours",
+                "Managers must approve discount requests",
+                "Users must be able to create service requests"
+            ],
+            "answer": 1,
+            "category": "classification",
+            "tags": [
+                "availability",
+                "non-functional",
+                "reliability"
+            ],
+            "explanation": "Availability is a quality attribute that defines how reliably the solution must be accessible, making it a non-functional requirement.",
+            "wrongExplanations": [
+                "This describes a business function the solution must support.",
+                null,
+                "This is also a functional capability.",
+                "This is another functional capability."
+            ],
+            "msRef": {
+                "label": "Power Platform Well-Architected pillars",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/pillars"
+            }
+        },
+        {
+            "q": "A stakeholder says, \"The system must be fast.\" What is the best architect response?",
+            "options": [
+                "Accept it because everyone understands what fast means",
+                "Refine it into measurable targets for specific user actions and workloads",
+                "Ignore it until production",
+                "Convert it into a dashboard requirement"
+            ],
+            "answer": 1,
+            "category": "performance",
+            "tags": [
+                "performance",
+                "measurable",
+                "targets"
+            ],
+            "explanation": "A usable non-functional requirement should be measurable. Performance needs should be expressed as clear targets for key user actions or workload behaviors.",
+            "wrongExplanations": [
+                "This is too vague to validate objectively.",
+                null,
+                "Performance expectations should be defined early because they affect design choices.",
+                "A dashboard requirement does not address performance."
+            ],
+            "msRef": {
+                "label": "Define performance targets recommendation for Power Platform workload",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/performance-efficiency/performance-targets"
+            }
+        },
+        {
+            "q": "Which question best helps uncover security-related non-functional requirements?",
+            "options": [
+                "How many tabs should be on the form?",
+                "Who should be able to access which data and actions, under what conditions, and with what restrictions?",
+                "What font should the app use?",
+                "How many developers are on the team?"
+            ],
+            "answer": 1,
+            "category": "security",
+            "tags": [
+                "security",
+                "access-control",
+                "data-protection"
+            ],
+            "explanation": "Security non-functional requirements are often uncovered by clarifying access, data sensitivity, action restrictions, and protection expectations.",
+            "wrongExplanations": [
+                "Form tab count does not uncover security requirements.",
+                null,
+                "Font choice is irrelevant.",
+                "Team size does not define security requirements."
+            ],
+            "msRef": {
+                "label": "Security and governance considerations in Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/governance-considerations"
+            }
+        },
+        {
+            "q": "What is the strongest reason to identify scalability requirements during solution assessment?",
+            "options": [
+                "To choose a better icon set",
+                "To understand how growth in users, transactions, or data volume could affect the viability of the design",
+                "To avoid discussing data quality",
+                "To guarantee every process must be automated"
+            ],
+            "answer": 1,
+            "category": "scalability",
+            "tags": [
+                "scalability",
+                "growth",
+                "capacity"
+            ],
+            "explanation": "Scalability requirements help determine whether the proposed design can continue to meet expectations as workload size increases.",
+            "wrongExplanations": [
+                "Icons have nothing to do with scalability.",
+                null,
+                "Data quality is still relevant but is a separate concern.",
+                "Scalability does not imply universal automation."
+            ],
+            "msRef": {
+                "label": "Power Platform Well-Architected workloads",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/workloads"
+            }
+        },
+        {
+            "q": "Why should availability requirements be captured before finalizing solution direction?",
+            "options": [
+                "Because they can influence architecture, dependency design, support expectations, and risk tradeoffs",
+                "Because availability is only a licensing issue",
+                "Because availability can always be improved later without design impact",
+                "Because it removes the need for testing"
+            ],
+            "answer": 0,
+            "category": "availability",
+            "tags": [
+                "availability",
+                "reliability",
+                "architecture"
+            ],
+            "explanation": "Availability expectations shape architectural decisions, dependency tolerance, operational design, and support models, so they should be known early.",
+            "wrongExplanations": [
+                null,
+                "Availability is broader than licensing and directly affects architecture.",
+                "Late improvement is not always easy and may require redesign.",
+                "Testing remains necessary."
+            ],
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        },
+        {
+            "q": "A field inspection team works in low-connectivity areas. How should the architect classify this statement first?",
+            "options": [
+                "As a cosmetic preference",
+                "As a non-functional operating-environment requirement with major design implications",
+                "As a report requirement",
+                "As a training issue only"
+            ],
+            "answer": 1,
+            "category": "operating-environment",
+            "tags": [
+                "offline",
+                "connectivity",
+                "non-functional"
+            ],
+            "explanation": "Intermittent connectivity is an operating-environment requirement that can materially affect product choice, synchronization design, and feasibility.",
+            "wrongExplanations": [
+                "This is not cosmetic at all.",
+                null,
+                "Reporting is not the main issue here.",
+                "Training may matter later, but the core issue is solution capability in the operating environment."
+            ],
+            "msRef": {
+                "label": "Power Platform Well-Architected workloads",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/workloads"
+            }
+        },
+        {
+            "q": "Which statement is the best example of a compliance-related non-functional requirement?",
+            "options": [
+                "Users must be able to create opportunities",
+                "Customer data must remain in an approved geography and follow organizational policy restrictions",
+                "Managers need a dashboard for pipeline visibility",
+                "Agents must close cases with a resolution code"
+            ],
+            "answer": 1,
+            "category": "compliance",
+            "tags": [
+                "compliance",
+                "data-residency",
+                "governance"
+            ],
+            "explanation": "Compliance requirements often involve geography, policy, retention, access, or regulatory constraints that shape how the solution must operate.",
+            "wrongExplanations": [
+                "This is a functional capability.",
+                null,
+                "This is also functional.",
+                "This is another functional rule."
+            ],
+            "msRef": {
+                "label": "Power Platform governance overview and strategy",
+                "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/admin-best-practices"
+            }
+        },
+        {
+            "q": "What is the strongest reason to align non-functional requirements with Power Platform Well-Architected guidance?",
+            "options": [
+                "Because it helps balance reliability, security, performance, operations, and experience tradeoffs deliberately",
+                "Because it replaces solution architecture review",
+                "Because it only matters after go-live",
+                "Because it focuses only on infrastructure"
+            ],
+            "answer": 0,
+            "category": "well-architected",
+            "tags": [
+                "well-architected",
+                "tradeoffs",
+                "quality-pillars"
+            ],
+            "explanation": "Well-Architected guidance gives a structured way to reason about non-functional tradeoffs across the core quality pillars of a workload.",
+            "wrongExplanations": [
+                null,
+                "It supports architecture review rather than replacing it.",
+                "It is relevant during design and assessment, not just after go-live.",
+                "It applies to workload design broadly, not only infrastructure."
+            ],
+            "msRef": {
+                "label": "Power Platform Well-Architected pillars",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/pillars"
+            }
+        },
+        {
+            "q": "Which architect question best helps reveal hidden non-functional requirements?",
+            "options": [
+                "Which screen should appear first?",
+                "What response time, security, availability, compliance, and operating-context expectations must the solution meet?",
+                "How many custom pages do you want?",
+                "What should the app icon look like?"
+            ],
+            "answer": 1,
+            "category": "elicitation",
+            "tags": [
+                "non-functional",
+                "hidden-requirements",
+                "quality-attributes"
+            ],
+            "explanation": "This question directly probes the quality expectations and constraints that often stay hidden unless asked explicitly.",
+            "wrongExplanations": [
+                "This focuses on UI sequence rather than non-functional needs.",
+                null,
+                "Custom page count is an implementation detail.",
+                "Icon design is irrelevant."
+            ],
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        }
+    ],
+    "tf": [
+        {
+            "q": "True or False: Non-functional requirements can materially influence solution design even when the functional process is already understood.",
+            "answer": true,
+            "category": "non-functional-basics",
+            "tags": [
+                "design-impact",
+                "non-functional",
+                "architecture"
+            ],
+            "explanation": "Security, performance, reliability, compliance, and other non-functional requirements can significantly change architecture and product decisions.",
+            "msRef": {
+                "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+            }
+        },
+        {
+            "q": "True or False: A supported connector automatically means a non-functional security or compliance requirement is satisfied.",
+            "answer": false,
+            "category": "security",
+            "tags": [
+                "compliance",
+                "connectors",
+                "governance"
+            ],
+            "explanation": "Connector availability does not automatically satisfy security, compliance, governance, or operational requirements. Those still need explicit evaluation.",
+            "msRef": {
+                "label": "Data policies - Power Platform",
+                "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+            }
+        },
+        {
+            "q": "True or False: Availability requirements should be considered only after the system has been deployed.",
+            "answer": false,
+            "category": "availability",
+            "tags": [
+                "reliability",
+                "early-design",
+                "operations"
+            ],
+            "explanation": "Availability expectations should be understood during design because they affect architecture, dependencies, and support planning.",
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        },
+        {
+            "q": "True or False: Performance targets are stronger when they are tied to specific user actions or workload scenarios.",
+            "answer": true,
+            "category": "performance",
+            "tags": [
+                "performance-targets",
+                "measurement",
+                "validation"
+            ],
+            "explanation": "Specific targets tied to concrete actions are more useful because they can be validated objectively and tied to real user experience.",
+            "msRef": {
+                "label": "Define performance targets recommendation for Power Platform workload",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/performance-efficiency/performance-targets"
+            }
+        }
+    ],
+    "dragdrop": [
+        {
+            "instruction": "Match each statement to the correct non-functional category.",
+            "items": [
+                "The solution must support 99.9% uptime during business hours",
+                "Only authorized investigators can view sensitive attachments",
+                "Case creation should complete within an agreed response-time target",
+                "Customer data must remain in approved regions under policy control"
+            ],
+            "zones": [
+                "Availability",
+                "Security",
+                "Performance",
+                "Compliance"
+            ],
+            "correctMapping": {
+                "The solution must support 99.9% uptime during business hours": "Availability",
+                "Only authorized investigators can view sensitive attachments": "Security",
+                "Case creation should complete within an agreed response-time target": "Performance",
+                "Customer data must remain in approved regions under policy control": "Compliance"
+            },
+            "tags": [
+                "classification",
+                "non-functional",
+                "quality-attributes"
+            ],
+            "explanation": "These statements map directly to common non-functional requirement categories that shape solution design.",
+            "msRef": {
+                "label": "Power Platform Well-Architected pillars",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/pillars"
+            }
+        },
+        {
+            "instruction": "Match each architect action to the reason it matters.",
+            "items": [
+                "Set measurable response-time targets",
+                "Clarify access and protection rules",
+                "Assess regional and policy constraints",
+                "Examine workload growth expectations"
+            ],
+            "zones": [
+                "Makes performance requirements testable",
+                "Defines security requirements clearly",
+                "Validates compliance and residency needs",
+                "Validates scalability expectations"
+            ],
+            "correctMapping": {
+                "Set measurable response-time targets": "Makes performance requirements testable",
+                "Clarify access and protection rules": "Defines security requirements clearly",
+                "Assess regional and policy constraints": "Validates compliance and residency needs",
+                "Examine workload growth expectations": "Validates scalability expectations"
+            },
+            "tags": [
+                "architect-actions",
+                "non-functional",
+                "assessment"
+            ],
+            "explanation": "Strong non-functional analysis connects each requirement area to a concrete architect action instead of leaving quality expectations vague.",
+            "msRef": {
+                "label": "How to use the Power Platform Well-Architected Framework",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+            }
+        }
+    ],
+    "casestudy": [
+        {
+            "title": "Case Study - Functional Fit Is Fine but the Quality Bar Is Still Unclear",
+            "scenario": "A company is implementing a Power Platform and Dynamics 365 solution for case management and field inspections. Functional workshops show that the proposed process is a good fit, but several important quality expectations remain vague. Investigators handle sensitive evidence, field inspectors often work in low-connectivity areas, leadership expects strong uptime during business hours, and the compliance team says customer information must stay within approved policy and geography boundaries. One stakeholder keeps saying the system must be 'fast and secure' without defining what that means.",
+            "tags": [
+                "non-functional",
+                "security",
+                "availability"
+            ],
+            "msRef": {
+                "label": "Power Platform Well-Architected workloads",
+                "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/workloads"
+            },
+            "questions": [
+                {
+                    "q": "What should the solution architect do first?",
+                    "options": [
+                        "Ignore the quality statements until after build starts",
+                        "Refine the vague quality expectations into measurable and actionable non-functional requirements",
+                        "Assume the platform will handle all non-functional needs automatically",
+                        "Focus only on additional forms and dashboards"
+                    ],
+                    "answer": 1,
+                    "explanation": "The quality expectations are too vague to guide design. The architect should refine them into concrete requirements for security, availability, performance, connectivity, and compliance.",
+                    "wrongExplanations": [
+                        "That delays important design decisions and increases risk.",
+                        null,
+                        "The platform helps, but architectural decisions still matter.",
+                        "Additional UI work does not solve the undefined quality requirements."
+                    ],
+                    "msRef": {
+                        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+                        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+                    }
+                },
+                {
+                    "q": "Which statement in the scenario most clearly represents a security-related non-functional requirement?",
+                    "options": [
+                        "Inspectors work in low-connectivity areas",
+                        "Investigators handle sensitive evidence",
+                        "Leadership expects uptime",
+                        "Stakeholders want the system to be fast"
+                    ],
+                    "answer": 1,
+                    "explanation": "Sensitive evidence implies access control, protection, and governance expectations, which are classic security-related non-functional concerns.",
+                    "wrongExplanations": [
+                        "This is more about operating environment and connectivity.",
+                        null,
+                        "This is primarily an availability concern.",
+                        "This is primarily a performance concern."
+                    ],
+                    "msRef": {
+                        "label": "Security and governance considerations in Power Platform",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/admin/governance-considerations"
+                    }
+                },
+                {
+                    "q": "How should the architect handle the stakeholder statement that the system must be 'fast'?",
+                    "options": [
+                        "Treat it as good enough because everyone understands speed",
+                        "Translate it into measurable performance targets for key actions such as case creation or search",
+                        "Convert it into a requirement for more dashboards",
+                        "Leave it for UAT to interpret"
+                    ],
+                    "answer": 1,
+                    "explanation": "A vague word like 'fast' needs to become measurable targets tied to specific actions so it can shape design and later be validated.",
+                    "wrongExplanations": [
+                        "This leaves too much room for conflicting interpretations.",
+                        null,
+                        "Dashboards do not solve the definition problem.",
+                        "UAT is too late to discover what performance was actually expected."
+                    ],
+                    "msRef": {
+                        "label": "Define performance targets recommendation for Power Platform workload",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/performance-efficiency/performance-targets"
+                    }
+                },
+                {
+                    "q": "Which concern most directly connects to compliance requirements in this scenario?",
+                    "options": [
+                        "Uptime during business hours",
+                        "Customer information must stay within approved policy and geography boundaries",
+                        "Investigators need mobile access",
+                        "Managers need better reports"
+                    ],
+                    "answer": 1,
+                    "explanation": "Policy and geography boundaries are compliance-related constraints that affect how data is handled and where it can reside.",
+                    "wrongExplanations": [
+                        "This is an availability concern, not primarily compliance.",
+                        null,
+                        "Mobile access is a functional or operating-context need, not primarily compliance.",
+                        "Reporting is not the key compliance issue here."
+                    ],
+                    "msRef": {
+                        "label": "Power Platform governance overview and strategy",
+                        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/admin-best-practices"
+                    }
+                }
+            ]
+        }
+    ]
+}

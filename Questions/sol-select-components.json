@@ -1,0 +1,429 @@
+{
+  "_meta": {
+    "topic": "Identify and Select Components",
+    "description": "Selecting components from existing apps, Dynamics 365 first-party apps, AppSource, Azure services, third-party ISVs, and custom development. Covers the build/buy/extend decision framework, multi-app environment strategy, single-app vs multi-app deployment, Power Automate vs Azure Logic Apps vs Azure Functions, Azure Service Bus for high-volume integrations, and ISV evaluation criteria. Covers PL-600 exam objective: Initiate solution planning > Identify and select components from existing apps, D365 apps, AppSource apps, Azure, third-party components, and ISVs.",
+    "status": "complete"
+  },
+  "mcq": [
+    {
+      "q": "A customer already has Dynamics 365 Sales deployed for their 80 salespeople. They now want to add case management for their support team. What should the architect evaluate first before recommending a separate D365 Customer Service environment?",
+      "options": [
+        "Whether Dynamics 365 Customer Service is on the Microsoft product roadmap for merger with Sales",
+        "Whether D365 Customer Service can be installed into the existing Sales environment, reusing the Contact, Account, and Product tables, security model, and existing user licences — avoiding data duplication and cross-environment integration",
+        "Whether the support team users are in the same Azure Active Directory tenant as the sales team",
+        "Whether the existing Sales environment has sufficient storage before adding Customer Service"
+      ],
+      "answer": 1,
+      "category": "existing-apps",
+      "tags": ["dynamics-365", "multi-app", "environment-strategy", "Sales", "Customer-Service", "coexistence"],
+      "explanation": "Microsoft's implementation guidance explicitly documents the multi-app deployment model: D365 Sales and D365 Customer Service can coexist in the same Dataverse environment, sharing the Contact, Account, Lead, and Product tables, the security model, and the environment's user licences. This avoids the core problem of a separate environment: the need to synchronise shared entities like Contacts across environments via integration. Microsoft states the multi-app approach 'enables stronger collaboration between business teams by decreasing data silos, reduces the number of environments to manage, and allows reuse of integrations.' The architect must evaluate coexistence before recommending isolation.",
+      "wrongExplanations": [
+        "Roadmap speculation is never a valid basis for current architectural decisions — the architect designs for what the platform supports today.",
+        "Both apps use Entra ID for identity — same-tenant is a prerequisite for any Power Platform deployment, not a factor specific to this coexistence decision.",
+        "Storage is a manageable operational concern — it informs capacity planning but does not determine whether coexistence is architecturally appropriate."
+      ],
+      "msRef": {
+        "label": "Get guidance for your Dynamics 365 environment strategy",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/environment-strategy-guidance-product"
+      }
+    },
+    {
+      "q": "A customer is deploying Dynamics 365 Sales and Customer Service in the same environment. A salesperson needs to see the customer's open cases alongside their opportunities. What is the correct architectural approach?",
+      "options": [
+        "Build a custom integration to copy case data into the Sales environment",
+        "Add the Case entity to the Sales Hub app's site map and configure the appropriate security role privileges for the sales team — data is already shared in the same Dataverse environment",
+        "Build a Power BI report that joins sales and case data from two separate environments",
+        "Ask salespeople to switch between the Sales Hub and Customer Service Hub apps to view both"
+      ],
+      "answer": 1,
+      "category": "existing-apps",
+      "tags": ["multi-app", "security-roles", "Sales-Hub", "coexistence", "site-map"],
+      "explanation": "When Sales and Customer Service are deployed in the same environment, their data shares the same Dataverse instance — no integration or data copy is needed. The architect simply adds the Case table to the Sales Hub app module's site map and grants the sales security role read access to Case records. Microsoft's guidance on the Sales Hub vs custom app decision explicitly cites this pattern: 'you want to combine specific components and processes from two or more first-party apps, such as Sales Hub and Customer Service Hub.' The solution is app module configuration, not integration.",
+      "wrongExplanations": [
+        "A custom integration to copy case data is unnecessary and counterproductive — the whole point of the multi-app deployment is that data is already shared in one Dataverse environment.",
+        "A cross-environment Power BI report adds complexity and potential data latency — it is not the right approach when the data is already in the same environment.",
+        "Switching between apps is a poor user experience — the correct pattern is to surface the relevant entities within the salesperson's existing app through app module configuration."
+      ],
+      "msRef": {
+        "label": "Sales Hub app versus a custom app",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/sales/saleshub-customapp"
+      }
+    },
+    {
+      "q": "When is a single-app environment deployment (one Dynamics 365 app per environment) preferable to a multi-app deployment?",
+      "options": [
+        "Always — Microsoft recommends single-app deployments for all D365 implementations",
+        "When the business functions have little to no data sharing or collaboration requirements, such as an isolated internal HR ticketing system, and separation of security models, customisations, and release cycles is more valuable than shared data",
+        "When the customer has fewer than 100 users — multi-app deployments are only justified at scale",
+        "When the customer has a Microsoft 365 E5 licence — it includes separate environments for each D365 app"
+      ],
+      "answer": 1,
+      "category": "existing-apps",
+      "tags": ["single-app", "multi-app", "environment-strategy", "isolation", "data-silos"],
+      "explanation": "Microsoft's environment strategy guidance documents both models with their tradeoffs. Single-app deployments are preferable when: business functions are genuinely independent with no data sharing requirements; when security models, customisations, and release cadences would conflict in a shared environment; or when regulatory data isolation is required. The guidance specifically cites 'an internal HR ticketing system for employees has little to do with the sales process' as the example use case for isolation. Multi-app deployments are preferred when data sharing, collaboration, and security reuse outweigh the isolation benefits.",
+      "wrongExplanations": [
+        "Microsoft does not recommend single-app deployments categorically — both models are valid, and the guidance explicitly describes when each is appropriate.",
+        "User count does not determine the deployment model — the decision is based on data sharing requirements and business function overlap, not scale.",
+        "Licence type does not determine environment topology — the decision is driven by architectural requirements, not which Microsoft 365 licence is held."
+      ],
+      "msRef": {
+        "label": "Get guidance for your Dynamics 365 environment strategy",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/environment-strategy-guidance-product"
+      }
+    },
+    {
+      "q": "A customer has a Dataverse environment but did not enable 'Dynamics 365 apps' during environment creation. They now want to install D365 Customer Service. What is required?",
+      "options": [
+        "Run a PowerShell script to enable Dynamics 365 apps on the existing environment",
+        "A new environment must be created with 'Enable Dynamics 365 apps' set to Yes during database provisioning — D365 apps cannot be installed on a Dataverse-only environment after the fact",
+        "Submit a support ticket to Microsoft to retrofit D365 apps onto the existing environment",
+        "Purchase a Dynamics 365 Customer Service Enterprise licence and the system will automatically enable D365 apps on the existing environment"
+      ],
+      "answer": 1,
+      "category": "existing-apps",
+      "tags": ["environment", "dynamics-365-apps", "provisioning", "dataverse-only", "admin"],
+      "explanation": "Microsoft explicitly states: 'Installing Dynamics 365 apps such as Dynamics 365 Sales and Dynamics 365 Customer Service is only supported on environments that have been created with a database with the option to Enable Dynamics 365 apps set to Yes.' If an environment was created as Dataverse-only, there is no supported path to retrofit D365 apps onto it — a new environment with the correct flag must be created. This is a critical architecture decision made at environment provisioning time that cannot be reversed. Architects must ensure the correct environment type is provisioned before any D365 app deployments.",
+      "wrongExplanations": [
+        "No PowerShell script can convert a Dataverse-only environment to a D365-enabled environment — the flag is set permanently at database provisioning time.",
+        "Microsoft Support cannot retroactively enable D365 apps on a Dataverse-only environment — this is a platform constraint, not a support case.",
+        "Purchasing a licence does not change the environment's Dataverse-only status — the database flag must be set at creation time."
+      ],
+      "msRef": {
+        "label": "Manage Dynamics 365 apps that run on Microsoft Dataverse",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-apps"
+      }
+    },
+    {
+      "q": "A solution architect is evaluating whether to customise the out-of-the-box Sales Hub app or build a custom model-driven app from scratch. Which scenario justifies building a custom app?",
+      "options": [
+        "The customer wants to rename some fields and add a few custom tables — this justifies a full custom build",
+        "The organisation has highly unique selling processes that cannot be accommodated within the Sales Hub's structure, or requires a lean app containing only a specific subset of Sales components without the full Sales Hub feature set",
+        "Building a custom app is always preferable — it avoids Microsoft's automatic Sales Hub updates from overwriting customisations",
+        "The customer has more than 500 users — Sales Hub is only suitable for smaller deployments"
+      ],
+      "answer": 1,
+      "category": "dynamics365-apps",
+      "tags": ["Sales-Hub", "custom-app", "first-party", "customisation", "build-vs-extend"],
+      "explanation": "Microsoft's Sales Hub vs custom app guidance identifies two main justifications for a custom app: (1) the organisation's selling processes are sufficiently unique that Sales Hub cannot be configured to match them; or (2) the organisation needs a lean app with only a specific subset of sales components — without the full Sales Hub feature set. Microsoft explicitly states that Sales Hub customisations are protected from automatic updates: 'Updates to the Sales Hub site map or objects such as forms, entities, and views don't overwrite any customizations.' This removes the common misconception that Sales Hub customisations are unsafe. Renaming fields or adding tables is standard Sales Hub customisation, not justification for a custom build.",
+      "wrongExplanations": [
+        "Renaming fields and adding custom tables are exactly the kinds of customisations that Sales Hub supports — this is not sufficient justification for a custom app.",
+        "Microsoft protects Sales Hub customisations from automatic overwrites — the weekly update mechanism isolates customisations from UI-disruptive changes.",
+        "User count does not determine whether to use Sales Hub or a custom app — the decision is based on process fit and feature subset requirements."
+      ],
+      "msRef": {
+        "label": "Sales Hub app versus a custom app",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/sales/saleshub-customapp"
+      }
+    },
+    {
+      "q": "A customer needs multi-session support for their contact centre agents — allowing each agent to handle multiple cases simultaneously in a single browser tab. Which D365 Customer Service component provides this capability?",
+      "options": [
+        "Customer Service Hub — it supports multiple tabs within a single form",
+        "Copilot Service workspace (formerly Customer Service workspace) — it supports up to 9 simultaneous sessions and up to 10 tabs per session in a single app",
+        "A custom model-driven app with multiple views pinned to the site map",
+        "Unified Service Desk — it is the only multi-session option for D365 Customer Service"
+      ],
+      "answer": 1,
+      "category": "dynamics365-apps",
+      "tags": ["Customer-Service", "Copilot-Service-workspace", "multi-session", "contact-centre", "component-selection"],
+      "explanation": "Copilot Service workspace (formerly Customer Service workspace) is Microsoft's purpose-built multi-session application for contact centre agents. It supports up to 9 simultaneous sessions — each representing a separate customer interaction — and up to 10 tabs within each session. Agents can work on multiple cases, conversations, or customer records concurrently without losing context. Microsoft documents: 'The multisession capabilities are supported in the Copilot Service workspace and Omnichannel for Customer Service apps only. You won't be able to navigate across multiple sessions in a custom app or a copy of the Copilot Service workspace app.' The architect must select this specific app for multi-session contact centre deployments.",
+      "wrongExplanations": [
+        "Customer Service Hub is a standard single-session model-driven app — it does not support simultaneous multi-session work for agents.",
+        "A custom model-driven app explicitly cannot replicate multi-session functionality — Microsoft documents this limitation: multi-session is not available in custom app copies.",
+        "Unified Service Desk is a legacy multi-session desktop client — Microsoft's current strategic direction is Copilot Service workspace, not Unified Service Desk."
+      ],
+      "msRef": {
+        "label": "Overview of the Copilot Service workspace application",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/csw-overview"
+      }
+    },
+    {
+      "q": "When evaluating an AppSource ISV solution for a D365 implementation, which factor is the most architecturally significant risk that an AppSource listing alone does NOT validate?",
+      "options": [
+        "Whether the solution is built on Power Platform",
+        "Whether the ISV actively maintains the solution through major Dynamics 365 release waves, has documented upgrade procedures, and will not introduce breaking changes that block the customer's environment update",
+        "Whether the solution has a pricing page on the ISV's website",
+        "Whether the ISV's solution uses standard Dataverse tables"
+      ],
+      "answer": 1,
+      "category": "appsource-isv",
+      "tags": ["AppSource", "ISV", "upgrade-risk", "release-wave", "evaluation"],
+      "explanation": "An AppSource listing confirms that a solution has passed Microsoft's technical certification at a point in time — it does not guarantee that the ISV actively maintains the solution through D365's twice-yearly release waves (Wave 1 in April, Wave 2 in October). An unmaintained ISV solution can introduce breaking changes that prevent the customer's environment from updating, leaving the entire environment on an outdated version or requiring expensive ISV remediation. The architect must verify: the ISV's release cadence relative to Microsoft's release calendar, documented upgrade procedures, the ISV's support SLA, and their financial health. This is the most significant long-term architectural risk that AppSource certification does not cover.",
+      "wrongExplanations": [
+        "AppSource certification does validate that the solution runs on Power Platform — this is a baseline certification requirement.",
+        "Pricing is a commercial concern, not the primary architectural risk introduced by ISV solutions.",
+        "Standard table usage is a best practice and can be partially assessed during technical review — it does not represent the most significant long-term risk, which is release wave compatibility and active maintenance."
+      ],
+      "msRef": {
+        "label": "Microsoft AppSource overview",
+        "url": "https://learn.microsoft.com/en-us/marketplace/appsource-overview"
+      }
+    },
+    {
+      "q": "An architect is choosing between Power Automate and Azure Logic Apps for an integration workflow. Which scenario justifies Azure Logic Apps over Power Automate?",
+      "options": [
+        "The workflow needs to send an email notification — only Logic Apps supports email connectors",
+        "The workflow involves complex B2B enterprise integration patterns, requires fine-grained infrastructure control as an Azure resource, needs enterprise-level ALM via Azure DevOps, or requires capabilities beyond Power Automate's connector set",
+        "The workflow must run more than once per minute — Power Automate's minimum interval is 60 seconds",
+        "The customer does not have Power Automate licences — Logic Apps is free for all Azure subscribers"
+      ],
+      "answer": 1,
+      "category": "azure-components",
+      "tags": ["Logic-Apps", "Power-Automate", "integration", "B2B", "decision-framework"],
+      "explanation": "Microsoft explicitly documents that Power Automate empowers business users and citizen developers for simpler integrations, while Azure Logic Apps 'supports integrations ranging from little-to-no-code scenarios to more advanced, codeful, and complex workflows — including B2B processes or scenarios requiring enterprise-level interactions with Azure DevOps.' Logic Apps is deployed as an Azure resource, offering greater infrastructure control, Azure Monitor integration, and deployment through ARM templates or Bicep. The architect chooses Logic Apps when: the integration complexity exceeds Power Automate's design intent, the team is comfortable with Azure resource management, B2B EDI scenarios are involved, or the workflow must be managed alongside other Azure infrastructure.",
+      "wrongExplanations": [
+        "Both Power Automate and Logic Apps have extensive email connector support — this is not a differentiator.",
+        "The 60-second minimum recurrence applies to both Power Automate and Logic Apps cloud workflows — it is not a reason to prefer Logic Apps.",
+        "Logic Apps is not free — it is billed by execution consumption (Standard or Consumption tier). Power Automate is included in many D365 and Microsoft 365 licences."
+      ],
+      "msRef": {
+        "label": "Integration and automation platform options in Azure",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-compare-logic-apps-ms-flow-webjobs"
+      }
+    },
+    {
+      "q": "An architect is designing an integration where a high-volume external website writes case updates to Dataverse. Expected volume is 50,000 writes per day with sharp traffic spikes during business hours. Why might they recommend Azure Service Bus as an intermediary rather than direct Dataverse API calls?",
+      "options": [
+        "Azure Service Bus supports SOAP which the website requires — Dataverse only supports REST",
+        "Azure Service Bus decouples the website from Dataverse, queues messages during spikes to prevent Dataverse service protection limit violations, provides guaranteed delivery with dead-letter queues, and scales independently of Dataverse's request constraints",
+        "Direct Dataverse API calls are not supported from external websites — Service Bus is the only supported integration pattern",
+        "Service Bus reduces the number of Power Platform request licences consumed by treating the batch as a single entitlement unit"
+      ],
+      "answer": 1,
+      "category": "azure-components",
+      "tags": ["Azure-Service-Bus", "integration", "decoupling", "throttling", "high-volume"],
+      "explanation": "Microsoft's integration requirements guidance explicitly recommends Azure Service Bus as a queue to decouple writes when Dataverse approaches its projected request load. The Service Bus pattern: (1) decouples the website's write throughput from Dataverse's service protection limits — spikes are absorbed by the queue rather than causing 429 errors; (2) provides guaranteed at-least-once delivery with dead-letter queues for failed messages; (3) enables the downstream Dataverse writer (a Power Automate flow or Azure Function) to process messages at a controlled, throttle-safe rate. Microsoft documents: 'decouple the create and update requests from the website using a queuing service such as Azure Service Bus.' This is the documented high-volume decoupling pattern.",
+      "wrongExplanations": [
+        "Dataverse's Web API is REST — it does not require SOAP. Both Service Bus and direct Dataverse calls use modern protocols.",
+        "Direct Dataverse API calls from external websites are fully supported — Service Bus is a recommended architectural pattern for high-volume scenarios, not a technical requirement.",
+        "Service Bus queuing does not change Power Platform request entitlement accounting — each Dataverse CRUD operation processed from the queue still accrues against entitlements."
+      ],
+      "msRef": {
+        "label": "Determine integration requirements — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/requirements"
+      }
+    },
+    {
+      "q": "When should an architect recommend Azure Functions over Power Automate for processing logic in a Power Platform solution?",
+      "options": [
+        "Always — Azure Functions provides better performance than Power Automate for all scenarios",
+        "When the logic involves complex calculations, algorithms, or processing that exceeds Power Automate's expression capabilities — Azure Functions encapsulates the complexity as independently scalable custom code, callable from Power Automate via HTTP action or custom connector",
+        "When the customer does not have Power Automate Premium licences — Azure Functions is a free alternative",
+        "Azure Functions should never be combined with Power Automate — they are competing platforms"
+      ],
+      "answer": 1,
+      "category": "azure-components",
+      "tags": ["Azure-Functions", "Power-Automate", "hybrid", "complex-logic", "decision-framework"],
+      "explanation": "Microsoft's integration guidance recommends Azure Functions specifically for complex calculations and custom logic that exceeds Power Automate's built-in expression engine. A documented example: an online banking service uses Power Automate for data collection with built-in connectors, and an Azure Function for complex loan risk calculations — a hybrid approach that 'balances performance, scalability, and cost.' Azure Functions can be called from Power Automate via HTTP action or exposed as a custom connector action, allowing citizen-developer flows to leverage professional-developer compute. Azure Functions and Power Automate are designed to complement each other, not compete.",
+      "wrongExplanations": [
+        "Azure Functions is not universally better — for standard connector-based orchestration, Power Automate's no-code approach is faster to build and easier to maintain.",
+        "Azure Functions is billed by execution — it is not free. Power Automate is included in many licences and is the preferred starting point before adding Azure services.",
+        "Microsoft explicitly documents that Power Automate flows can call Azure Functions — they are complementary and commonly combined in hybrid integration architectures."
+      ],
+      "msRef": {
+        "label": "Explore integration patterns — Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/patterns"
+      }
+    },
+    {
+      "q": "Which statement correctly describes when to use webhooks versus Azure Service Bus for Dataverse event-driven integration?",
+      "options": [
+        "Webhooks are for asynchronous integrations; Azure Service Bus is for synchronous near-real-time integrations",
+        "Webhooks are suitable for near-real-time integration with lower event volumes and support both synchronous and asynchronous steps; Azure Service Bus is preferable when handling many events or high-scale processing and provides a full queueing mechanism — but only supports asynchronous steps",
+        "Azure Service Bus and webhooks are interchangeable — select based on cost",
+        "Webhooks require an on-premises data gateway; Azure Service Bus works only with cloud endpoints"
+      ],
+      "answer": 1,
+      "category": "azure-components",
+      "tags": ["webhooks", "Azure-Service-Bus", "event-driven", "integration", "scalability"],
+      "explanation": "Microsoft's integration guidance states: 'Webhooks are HTTP requests useful for near-real-time integration scenarios. You can choose between synchronous and asynchronous steps.' And: 'If you need to handle many events or high-scale processing, you might want to use Azure Service Bus instead of webhooks. Azure Service Bus provides a full queueing mechanism for data exchange, but it only supports asynchronous steps.' The key distinctions are: (1) synchronous support — webhooks yes, Service Bus no; (2) scale — Service Bus is designed for high-volume event processing; (3) durability — Service Bus persists messages in a queue with dead-letter support, webhooks are fire-and-forget without built-in retry queueing.",
+      "wrongExplanations": [
+        "Webhooks support both synchronous and asynchronous — they are not exclusively asynchronous. Service Bus is asynchronous only.",
+        "Selecting based on cost alone ignores the critical functional differences — particularly synchronous support and scale characteristics.",
+        "Webhooks call external HTTP endpoints directly — they do not require an on-premises data gateway. Service Bus works with any endpoint that can connect to Azure."
+      ],
+      "msRef": {
+        "label": "Integrate Dynamics 365 apps with other systems",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-guidance-product"
+      }
+    },
+    {
+      "q": "An architect is evaluating a third-party middleware platform to connect D365 with an existing on-premises ERP. Which characteristic should they assess to ensure the middleware supports long-term solution health?",
+      "options": [
+        "Only the middleware's cost per message — lower cost always indicates a better architectural fit",
+        "Scalability and performance at projected volumes, security and authentication compatibility, high availability and disaster recovery support, monitoring and alerting capabilities, ALM compatibility with Azure DevOps, and extensibility for future requirements",
+        "Whether the middleware vendor is a Microsoft Gold Partner — this is the only quality indicator needed",
+        "Whether the middleware supports REST only — SOAP-based middleware should always be rejected"
+      ],
+      "answer": 1,
+      "category": "third-party",
+      "tags": ["middleware", "third-party", "evaluation", "integration-platform", "HA-DR"],
+      "explanation": "Microsoft's integration platform selection guidance defines these evaluation characteristics for middleware: (1) Scalability and performance — can it handle current and future transaction volumes? (2) Security — does it support the authentication mechanisms required by both systems? (3) HA and DR — does it have failover and recovery plans? (4) Monitoring and alerting — does it surface integration issues proactively? (5) Diagnostics and audit logs — does it support cross-system activity logging? (6) Extensibility — can it accommodate future integration requirements? (7) ALM — can all components use Azure DevOps or equivalent tools? Evaluating on cost alone, partner status alone, or protocol preferences produces incomplete architectural assessments.",
+      "wrongExplanations": [
+        "Cost per message is one factor among many — a cheap middleware that lacks HA, monitoring, and ALM support produces a fragile, difficult-to-operate integration.",
+        "Microsoft Gold Partner status indicates implementation capability — it does not guarantee the middleware product's HA, monitoring, or ALM characteristics.",
+        "Many enterprise systems use SOAP — rejecting SOAP-based middleware categorically would eliminate many well-established enterprise integration platforms without architectural justification."
+      ],
+      "msRef": {
+        "label": "Select the ideal platform for your Dynamics 365 apps integration",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-choose-platform"
+      }
+    },
+    {
+      "q": "Microsoft's integration guidance explicitly warns against which integration anti-pattern when designing Dynamics 365 integrations?",
+      "options": [
+        "Using Power Automate for any integration — cloud flows are not suitable for production integrations",
+        "Creating tightly coupled, point-to-point, custom synchronous service integrations — they do not scale well as business requirements evolve",
+        "Using Azure Service Bus — it adds unnecessary complexity for D365 integrations",
+        "Using prebuilt connectors — custom connectors provide better control and should always be preferred"
+      ],
+      "answer": 1,
+      "category": "third-party",
+      "tags": ["anti-pattern", "point-to-point", "synchronous", "integration", "scalability"],
+      "explanation": "Microsoft's integration guidance explicitly states: 'Avoid creating tightly coupled point-to-point, custom synchronous service integrations, because they might not scale well.' Point-to-point integrations create a web of direct dependencies between systems — when one system changes, every integration connected to it must be updated. They also create synchronous blocking chains that degrade performance under load and create single points of failure. The recommended approach is to use event-driven, asynchronous, loosely coupled patterns using Power Automate, Azure Service Bus, or middleware — decoupling the producing and consuming systems.",
+      "wrongExplanations": [
+        "Microsoft recommends Power Automate as the preferred first choice for integration orchestration — it is not excluded from production use.",
+        "Azure Service Bus is explicitly recommended for high-volume integration scenarios — it is not identified as unnecessarily complex.",
+        "Prebuilt connectors are the preferred starting point — custom connectors are built only when no prebuilt connector exists. The guidance favours prebuilt over custom."
+      ],
+      "msRef": {
+        "label": "Select the ideal platform for your Dynamics 365 apps integration",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions-choose-platform"
+      }
+    },
+    {
+      "q": "What is the correct order of evaluation when an architect is identifying components for a new Power Platform solution requirement?",
+      "options": [
+        "Custom development → AppSource → Azure → Power Platform native",
+        "Power Platform native capabilities → Dynamics 365 first-party apps → AppSource/ISV → Azure services → custom development",
+        "Azure services → Power Platform native → ISV → custom development",
+        "AppSource → Dynamics 365 first-party → Power Platform native → Azure → custom development"
+      ],
+      "answer": 1,
+      "category": "decision-framework",
+      "tags": ["component-selection", "build-vs-buy", "evaluation-order", "architecture", "PL-600"],
+      "explanation": "The PL-600 evaluation hierarchy for component selection flows from lowest to highest build effort and risk: (1) Power Platform native capabilities — can out-of-the-box platform features meet the requirement without customisation? (2) Dynamics 365 first-party apps — does a Microsoft-maintained app address the functional area? (3) AppSource/ISV solutions — has the market produced a certified, maintained solution? (4) Azure services — can an Azure platform service fill the gap with less custom code than a full build? (5) Custom development — only when all other options are exhausted. This hierarchy minimises maintenance overhead, upgrade risk, and total cost of ownership. Architects who start with custom development accumulate unnecessary technical debt.",
+      "wrongExplanations": [
+        "Starting with custom development inverts the hierarchy — it is always the last resort, not the first evaluation.",
+        "Starting with Azure skips Power Platform native and D365 first-party options that may already solve the requirement without Azure infrastructure.",
+        "AppSource before Power Platform native and D365 first-party skips the two lowest-effort options that should be evaluated first."
+      ],
+      "msRef": {
+        "label": "Study guide for PL-600: Microsoft Power Platform Solution Architect",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-600"
+      }
+    }
+  ],
+  "scenario": [
+    {
+      "title": "Apex Insurance Group — Component Selection Workshop",
+      "scenario": {
+        "title": "Apex Insurance Group — Component Selection Workshop",
+        "background": "Apex Insurance Group is modernising their operations platform. The following component selection decisions have been raised for architectural review:\n\nC1. Apex has D365 Field Service for their loss assessor team. They now want a case management system for their claims handlers. A developer proposes a separate D365 Customer Service environment.\n\nC2. The claims processing workflow involves complex actuarial calculations (risk scoring algorithms with 15 variables) that must run when a claim is submitted. The team wants to use Power Automate expressions for this.\n\nC3. Apex's broker portal receives 80,000 claim updates per day from 3,000 broker firms, with volume peaking sharply at 9am and 4pm. The current design calls for direct Dataverse Web API calls from the portal.\n\nC4. An ISV on AppSource offers a pre-built claims document management solution that integrates with D365. The project manager suggests selecting it immediately based on the AppSource listing alone.\n\nC5. Apex's legacy mainframe policy system has no API and no connector. Claims handlers need to query policy details from within D365 Customer Service without leaving the app.",
+        "requirements": ["C1", "C2", "C3", "C4", "C5"]
+      },
+      "tags": ["component-selection", "multi-app", "azure-functions", "service-bus", "ISV", "RPA"],
+      "msRef": {
+        "label": "Get guidance for your Dynamics 365 environment strategy",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/environment-strategy-guidance-product"
+      },
+      "questions": [
+        {
+          "q": "For C1 — Apex already has D365 Field Service. A developer proposes a separate D365 Customer Service environment for claims handling. What should the architect recommend, and why?",
+          "options": [
+            "Approve the separate environment — D365 Field Service and Customer Service should never share an environment",
+            "Evaluate whether D365 Customer Service can be installed into the existing Field Service environment first — sharing the Contact, Account, and Policy tables, the existing security model, and the existing user licences eliminates cross-environment data synchronisation",
+            "Replace Field Service with Customer Service — Apex only needs one D365 app",
+            "Create a completely separate tenant for the claims system to ensure regulatory data isolation"
+        ],
+          "explanation": "D365 Field Service and Customer Service are designed to coexist in the same Dataverse environment. Installing Customer Service into the existing environment would allow: shared Contact and Account records (loss assessors and claims handlers work with the same customers and policies), reuse of the existing security model and business unit structure, and elimination of the cross-environment integration that would otherwise be needed to synchronise shared entities. Microsoft's multi-app guidance states coexistence 'enables stronger collaboration between business teams by decreasing data silos.' The architect must evaluate this before approving a separate environment.",
+          "wrongExplanations": {
+            "0": "D365 Field Service and Customer Service are designed to coexist — a separate environment is not a documented requirement.",
+            "2": "Field Service manages assessor scheduling, work orders, and asset inspection — Customer Service manages claim cases. Both are needed and serve distinct functions.",
+            "3": "A separate tenant provides the strongest data isolation but eliminates all shared identity, data, and licence benefits — there is no stated regulatory requirement for this level of isolation."
+          },
+          "msRef": {
+            "label": "Get guidance for your Dynamics 365 environment strategy",
+            "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/environment-strategy-guidance-product"
+          }
+        },
+        {
+          "q": "For C2 — the actuarial risk scoring involves 15 variables and complex algorithms. The team wants to implement this in Power Automate expressions. What is the architect's recommendation?",
+          "options": [
+            "Approve Power Automate expressions — they can handle any calculation with enough nested functions",
+            "Implement the calculations as a Power Automate expression chain — but document it heavily for maintainability",
+            "Encapsulate the actuarial calculations in an Azure Function and call it from Power Automate via HTTP action or custom connector — complex algorithms in Power Automate expressions become unmaintainable and are better isolated in independently testable, scalable custom code",
+            "Move the calculations to a D365 plug-in — it is the only supported way to run complex logic in a Power Platform solution"
+        ],
+          "explanation": "Microsoft's integration guidance documents a hybrid approach for this exact scenario: 'Power Automate to handle data collection with built-in connectors, and complex calculations encapsulated in custom code running as an Azure Function, which can be independently scaled.' A 15-variable actuarial risk scoring algorithm in Power Automate expressions would be: unmaintainable (expressions nested 5–6 levels deep are difficult to read and debug), untestable in isolation (Power Automate has no unit testing framework), and difficult to version. An Azure Function encapsulates the algorithm as independently testable, versioned, scalable code — called from Power Automate via HTTP action, keeping the orchestration layer low-code while moving compute-intensive logic to the right tool.",
+          "wrongExplanations": {
+            "0": "Technically possible does not mean architecturally appropriate — deeply nested Power Automate expressions for 15-variable algorithms produce maintainability nightmares.",
+            "1": "Heavy documentation does not solve the testability, versioning, or maintainability problems of complex expressions in Power Automate — the root issue is using the wrong tool.",
+            "3": "D365 plug-ins execute synchronously in the Dataverse pipeline — they are not the right component for complex calculations triggered during claim submission via a Power Automate flow. Azure Functions are the better isolation pattern."
+          },
+          "msRef": {
+            "label": "Explore integration patterns — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/patterns"
+          }
+        },
+        {
+          "q": "For C3 — 80,000 claim updates per day from the broker portal with sharp 9am and 4pm peaks. The current design uses direct Dataverse Web API calls. What architectural risk must the architect address?",
+          "options": [
+            "No risk — 80,000 requests per day is well within Dataverse's service protection limits",
+            "During peak hours, the sharp burst of concurrent direct Dataverse API calls risks hitting service protection limits (429 errors), causing portal write failures. The architect should introduce Azure Service Bus to queue portal writes, allowing Dataverse to consume messages at a controlled rate and absorbing traffic spikes without losing data",
+            "The risk is purely a licensing issue — purchase additional PPR entitlement packs",
+            "Replace direct API calls with a desktop flow to batch updates overnight"
+        ],
+          "explanation": "Microsoft's integration requirements guidance explicitly addresses this scenario: 'decouple the create and update requests from the website using a queuing service such as Azure Service Bus.' 80,000 requests distributed across a day is manageable, but sharp peaks at 9am and 4pm mean a large fraction arrives in a short window — creating concentrated bursts that can trigger Dataverse's service protection 429 errors even if daily entitlements are not exceeded. Azure Service Bus queues broker updates during spikes, guarantees delivery via dead-letter queues, and allows a controlled downstream Dataverse writer to process messages at a safe, throttle-compliant rate. This is the documented decoupling pattern for high-volume write scenarios.",
+          "wrongExplanations": {
+            "0": "The daily total matters less than the peak burst rate — service protection limits operate on 5-minute windows, and sharp spikes can violate these limits even with manageable daily volumes.",
+            "2": "PPR entitlement packs address daily quota limits, not burst-rate service protection violations — buying more entitlement does not prevent 429 errors from spike traffic.",
+            "3": "A desktop flow for batch overnight updates would introduce a 14+ hour delay in claim status visibility for broker users — this is operationally unacceptable for a live portal."
+          },
+          "msRef": {
+            "label": "Determine integration requirements — Power Platform",
+            "url": "https://learn.microsoft.com/en-us/power-platform/architecture/key-concepts/integration-patterns/requirements"
+          }
+        },
+        {
+          "q": "For C4 — the project manager wants to select the ISV document management solution based on the AppSource listing alone. What must the architect investigate first?",
+          "options": [
+            "Accept the AppSource listing as sufficient validation — Microsoft's certification process ensures all AppSource solutions are production-ready for any D365 implementation",
+            "Investigate the ISV's release wave update history, support SLA, upgrade procedures for major D365 releases, DLP policy impact, data handling and residency compliance for insurance data, and total cost of ownership beyond the licence fee",
+            "Check only whether the ISV has Microsoft Gold Partner status",
+            "Run a performance test of the solution in a sandbox environment — technical performance is the only meaningful differentiator"
+        ],
+          "explanation": "An AppSource listing confirms technical certification at a point in time — it does not validate long-term maintenance fitness. For an insurance company, the architect must specifically assess: (1) release wave compatibility — does the ISV certify their solution against every D365 release wave before Microsoft deploys it? An unvalidated solution can block environment updates; (2) FCA/insurance data compliance — does the ISV's data handling meet UK financial services regulatory requirements? (3) support SLA — what is the ISV's incident response commitment? (4) upgrade procedures — how are breaking changes communicated and remediated? (5) TCO — licence cost plus upgrade and support costs over 5 years. Accepting an AppSource listing without these checks exposes the customer to upgrade blockers and compliance risk.",
+          "wrongExplanations": {
+            "0": "AppSource certification is a baseline technical check — it explicitly does not guarantee ongoing maintenance, release wave compatibility, or compliance.",
+            "2": "Partner status indicates implementation capability — it does not validate the product's release wave maintenance, compliance posture, or support SLA.",
+            "3": "Performance testing is valuable but cannot reveal the ISV's maintenance commitment, compliance posture, or upgrade risk — these are the most significant long-term architectural risks."
+          },
+          "msRef": {
+            "label": "Microsoft AppSource overview",
+            "url": "https://learn.microsoft.com/en-us/marketplace/appsource-overview"
+          }
+        },
+        {
+          "q": "For C5 — the legacy mainframe policy system has no API. Claims handlers need to query policy details from within D365 Customer Service. Which component combination should the architect recommend?",
+          "options": [
+            "A custom connector calling the mainframe via REST — all systems can be wrapped in REST endpoints",
+            "A Power Automate desktop flow in unattended mode running on a dedicated machine, triggered from D365 via a cloud flow, which navigates the mainframe terminal to retrieve policy details and returns them to the agent's session",
+            "Ask claims handlers to open the mainframe in a separate window and copy-paste data manually",
+            "Build an Azure API Management layer that exposes the mainframe as a REST API, then call it via a custom connector"
+        ],
+          "explanation": "The mainframe has no API — a custom connector and Azure API Management both require an API endpoint that does not exist. The correct component for no-API legacy system access is a Power Automate desktop flow using RPA. The pattern is: agent triggers an action in D365 → cloud flow receives the trigger and invokes the desktop flow → desktop flow navigates the mainframe terminal using RPA, retrieves policy details → cloud flow returns the data to the D365 session. This provides a seamless in-app experience for agents while using RPA as the integration bridge to the non-API system. The architect must document the RPA fragility risk and plan for maintenance when the mainframe interface changes.",
+          "wrongExplanations": {
+            "0": "A custom connector requires an API endpoint — the mainframe has none. Without first building a mainframe API layer, a custom connector cannot be created.",
+            "2": "Manual copy-paste is the current state the solution is meant to replace — recommending it as the architectural answer is not acceptable.",
+            "3": "Azure API Management manages existing APIs — it cannot create an API from a mainframe system that exposes none. An intermediary layer (e.g. a mainframe integration adapter from the vendor) would be needed first, which is a separate evaluation."
+          },
+          "msRef": {
+            "label": "Introduction to desktop flows — Power Automate",
+            "url": "https://learn.microsoft.com/en-us/power-automate/desktop-flows/introduction"
+          }
+        }
+      ]
+    }
+  ]
+}
