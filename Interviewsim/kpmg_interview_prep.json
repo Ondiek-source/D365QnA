@@ -22,6 +22,1853 @@
   },
   "mcq": [
     {
+      "q": "A PreOperation plugin on Case Create assigns the owner based on region and service type. Why is PreOperation the correct stage for this logic?",
+      "options": [
+        "Because the record already exists and can be updated asynchronously",
+        "Because the owner can be set before the transaction commits, avoiding a second update",
+        "Because PreOperation is only stage where tracing works",
+        "Because PostOperation cannot access the Target entity"
+      ],
+      "answer": 1,
+      "category": "plugin-development",
+      "tags": [
+        "plugin-stage",
+        "preoperation",
+        "routing"
+      ],
+      "explanation": "PreOperation lets you mutate the incoming record inside the transaction so the Case is saved with the correct owner immediately.",
+      "wrongExplanations": [
+        "That describes a post-save pattern and adds an unnecessary extra update.",
+        null,
+        "Tracing works in other stages too.",
+        "PostOperation can access context, but the main issue is timing and transaction behavior."
+      ],
+      "msRef": {
+        "label": "Event framework",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/event-framework"
+      }
+    },
+    {
+      "q": "You need to stop case creation when no valid entitlement exists. What is the correct plugin behavior?",
+      "options": [
+        "Allow save, then create a task for manual review",
+        "Throw InvalidPluginExecutionException in a synchronous stage",
+        "Write a trace log only",
+        "Retry the transaction three times automatically"
+      ],
+      "answer": 1,
+      "category": "plugin-development",
+      "tags": [
+        "exception-handling",
+        "entitlements",
+        "transaction"
+      ],
+      "explanation": "Throwing InvalidPluginExecutionException in a synchronous stage blocks the operation and rolls back the transaction with a user-visible message.",
+      "wrongExplanations": [
+        "That does not enforce the business rule at save time.",
+        null,
+        "Tracing alone does not stop the transaction.",
+        "Automatic retries do not solve a business-rule validation failure."
+      ],
+      "msRef": {
+        "label": "Handle exceptions in plug-ins",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/handle-exceptions"
+      }
+    },
+    {
+      "q": "In a plugin, which object should you use to query Dataverse for a custom routing matrix table?",
+      "options": [
+        "ITracingService",
+        "IPluginExecutionContext",
+        "IOrganizationService from IOrganizationServiceFactory",
+        "HttpClient"
+      ],
+      "answer": 2,
+      "category": "plugin-development",
+      "tags": [
+        "iorganizationservice",
+        "dataverse",
+        "plugins"
+      ],
+      "explanation": "IOrganizationService is the correct Dataverse service for Create, Update, Retrieve, and RetrieveMultiple inside plugins.",
+      "wrongExplanations": [
+        "Tracing is for diagnostics, not data access.",
+        "The execution context contains metadata, not the query interface.",
+        null,
+        "Direct HTTP is not the normal plugin pattern for Dataverse CRUD."
+      ],
+      "msRef": {
+        "label": "Organization service overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/org-service/overview"
+      }
+    },
+    {
+      "q": "What is the main reason to avoid calling an external private-network system directly from a form JavaScript web resource?",
+      "options": [
+        "JavaScript cannot call external APIs",
+        "The D365 client cannot directly reach private network endpoints, so a secure intermediary is needed",
+        "fetch() is deprecated",
+        "Xrm.WebApi can only call private endpoints"
+      ],
+      "answer": 1,
+      "category": "azure-integration",
+      "tags": [
+        "private-network",
+        "azure-functions",
+        "integration-pattern"
+      ],
+      "explanation": "A browser-based client cannot directly reach a private-network endpoint, so a secure bridge such as an Azure Function behind approved connectivity is the right pattern.",
+      "wrongExplanations": [
+        "JavaScript can call external APIs, but network accessibility and security are the issue.",
+        null,
+        "fetch() is not deprecated.",
+        "Xrm.WebApi is for Dataverse, not private-network reachability."
+      ],
+      "msRef": {
+        "label": "Azure Functions overview",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview"
+      }
+    },
+    {
+      "q": "In a JavaScript web resource, what is the supported client API for Dataverse reads and writes?",
+      "options": [
+        "jQuery.ajax only",
+        "Xrm.WebApi",
+        "Console API",
+        "Plugin Trace Log API"
+      ],
+      "answer": 1,
+      "category": "client-development",
+      "tags": [
+        "xrm-webapi",
+        "javascript",
+        "dataverse"
+      ],
+      "explanation": "Xrm.WebApi is the supported client API for Dataverse operations from model-driven app scripts.",
+      "wrongExplanations": [
+        "jQuery.ajax can make HTTP requests, but Xrm.WebApi is the supported Dataverse client API.",
+        null,
+        "Console API is unrelated.",
+        "There is no client API for plugin trace logs in this context."
+      ],
+      "msRef": {
+        "label": "Xrm.WebApi reference",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference/xrm-webapi"
+      }
+    },
+    {
+      "q": "When would you prefer FetchXML over OData/Web API query syntax?",
+      "options": [
+        "When you need complex aggregation or certain join/query patterns",
+        "Only when using canvas apps",
+        "Only when querying custom tables",
+        "Never, because OData fully replaces it"
+      ],
+      "answer": 0,
+      "category": "dataverse",
+      "tags": [
+        "fetchxml",
+        "odata",
+        "queries"
+      ],
+      "explanation": "FetchXML is still useful for some aggregate and join-heavy query scenarios and remains fully supported.",
+      "wrongExplanations": [
+        null,
+        "It is not limited to canvas apps.",
+        "It is not limited to custom tables.",
+        "FetchXML is not deprecated."
+      ],
+      "msRef": {
+        "label": "Use FetchXML to query data",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-fetchxml-construct-query"
+      }
+    },
+    {
+      "q": "A custom connector needs bearer-token authentication to a REST API. What is the correct design principle?",
+      "options": [
+        "Hardcode the token in the OpenAPI definition",
+        "Define connector security properly and pass the token in the Authorization header",
+        "Store the token in a form field",
+        "Put the token in the query string"
+      ],
+      "answer": 1,
+      "category": "integration",
+      "tags": [
+        "custom-connectors",
+        "bearer-token",
+        "security"
+      ],
+      "explanation": "Bearer-token auth should be handled through the connector security definition and sent in the Authorization header, not hardcoded or exposed in URLs.",
+      "wrongExplanations": [
+        "Hardcoding secrets is poor security practice.",
+        null,
+        "A form field is not a secure secret store.",
+        "Query strings are the wrong place for bearer tokens."
+      ],
+      "msRef": {
+        "label": "Define authentication for a custom connector",
+        "url": "https://learn.microsoft.com/en-us/connectors/custom-connectors/define-authentication"
+      }
+    },
+    {
+      "q": "Which Power Platform mechanism is the right place to store environment-specific endpoint URLs or similar deployment-time configuration?",
+      "options": [
+        "A JavaScript constant in every web resource",
+        "Environment variables in solutions",
+        "A Word document in SharePoint",
+        "Agent personal settings"
+      ],
+      "answer": 1,
+      "category": "alm-devops",
+      "tags": [
+        "environment-variables",
+        "configuration",
+        "solutions"
+      ],
+      "explanation": "Environment variables are designed for environment-specific configuration values that differ across Dev, UAT, and Production.",
+      "wrongExplanations": [
+        "Hardcoded constants are brittle and poor ALM practice.",
+        null,
+        "Documentation is not runtime configuration.",
+        "Personal settings are unrelated."
+      ],
+      "msRef": {
+        "label": "Environment variables in solutions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables"
+      }
+    },
+    {
+      "q": "What is the recommended ALM pattern for moving a D365 solution from Dev to Production?",
+      "options": [
+        "Unmanaged everywhere",
+        "Unmanaged in Dev, then managed packages promoted through controlled pipelines",
+        "Managed in Dev only, unmanaged in Prod",
+        "Direct edits in Prod followed by back-porting"
+      ],
+      "answer": 1,
+      "category": "alm-devops",
+      "tags": [
+        "managed-solutions",
+        "pipelines",
+        "governance"
+      ],
+      "explanation": "The normal pattern is to develop in unmanaged form, then build and deploy managed solutions through controlled pipelines into downstream environments.",
+      "wrongExplanations": [
+        "Unmanaged everywhere weakens control and auditability.",
+        null,
+        "That reverses the normal governance model.",
+        "Direct production edits are poor ALM practice."
+      ],
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "q": "What is the strongest technical reason to use source control and build pipelines for Dataverse solutions?",
+      "options": [
+        "To make deployments look more professional",
+        "To provide versioning, repeatability, reviewability, and controlled promotion between environments",
+        "To avoid all manual testing",
+        "To eliminate the need for solution publishers"
+      ],
+      "answer": 1,
+      "category": "alm-devops",
+      "tags": [
+        "source-control",
+        "ci-cd",
+        "repeatability"
+      ],
+      "explanation": "Source control and pipelines provide traceability, review, repeatable packaging, and controlled deployment behavior.",
+      "wrongExplanations": [
+        "That is cosmetic, not the technical value.",
+        null,
+        "Testing is still required.",
+        "Publishers still matter."
+      ],
+      "msRef": {
+        "label": "Use Power Platform Build Tools for Azure DevOps",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools"
+      }
+    },
+    {
+      "q": "What is the most important difference between a managed and unmanaged solution in Production?",
+      "options": [
+        "Managed solutions are faster",
+        "Managed solutions help prevent direct uncontrolled customization in Production",
+        "Unmanaged solutions support more entities",
+        "Managed solutions remove the need for security roles"
+      ],
+      "answer": 1,
+      "category": "alm-devops",
+      "tags": [
+        "managed-solutions",
+        "production-governance",
+        "control"
+      ],
+      "explanation": "Managed solutions in Production help enforce change control by preventing uncontrolled direct modification of deployed assets.",
+      "wrongExplanations": [
+        "Speed is not the primary difference.",
+        null,
+        "Entity support is not the point here.",
+        "Security roles are unrelated."
+      ],
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "q": "When investigating an intermittent Power Automate HTTP integration failure, what should you inspect first?",
+      "options": [
+        "The plugin trace log",
+        "The flow run history and failed action inputs/outputs",
+        "The ribbon commands",
+        "The dashboard theme"
+      ],
+      "answer": 1,
+      "category": "power-automate",
+      "tags": [
+        "flow-debugging",
+        "http",
+        "run-history"
+      ],
+      "explanation": "Run history shows the failing action, payload, response code, and returned error, which is the fastest path to root-cause analysis.",
+      "wrongExplanations": [
+        "Plugin trace logs are for plugins, not the first place for a cloud flow HTTP issue.",
+        null,
+        "Ribbon commands are irrelevant.",
+        "Theme is irrelevant."
+      ],
+      "msRef": {
+        "label": "Fix flow failures",
+        "url": "https://learn.microsoft.com/en-us/power-automate/fix-flow-failures"
+      }
+    },
+    {
+      "q": "For a large migration from messy Excel and paper-derived datasets into Dataverse, when is KingswaySoft or similar ETL tooling preferable to a basic import?",
+      "options": [
+        "Only when importing fewer than 1,000 rows",
+        "When transformation, deduplication, joins, and multi-source shaping are required before load",
+        "Only when Dataverse Bulk Import is unavailable",
+        "Never, because native import always handles cleansing better"
+      ],
+      "answer": 1,
+      "category": "data-migration",
+      "tags": [
+        "etl",
+        "kingswaysoft",
+        "transformation"
+      ],
+      "explanation": "ETL tooling is preferable when the migration requires shaping, matching, deduplication, lookups, and complex transforms before data lands in Dataverse.",
+      "wrongExplanations": [
+        "Row count alone does not determine tool choice.",
+        null,
+        "Tool choice is driven by transformation complexity, not availability alone.",
+        "Native import is not automatically better for complex cleansing scenarios."
+      ],
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "q": "What is the strongest sign that a migration has not been validated properly?",
+      "options": [
+        "Row counts match",
+        "Critical lookups, duplicates, or business-rule outcomes were not verified after import",
+        "The import job completed quickly",
+        "The environment was refreshed before testing"
+      ],
+      "answer": 1,
+      "category": "data-migration",
+      "tags": [
+        "validation",
+        "referential-integrity",
+        "data-quality"
+      ],
+      "explanation": "Migration validation is not just row count; it must include referential integrity, duplicates, and business-rule correctness.",
+      "wrongExplanations": [
+        "Matching counts are necessary but not sufficient.",
+        null,
+        "Speed does not prove quality.",
+        "Refresh timing alone is not the key validation gap."
+      ],
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "q": "What is the most appropriate security design principle for a CE solution with agents, managers, and senior leadership needing different record visibility levels?",
+      "options": [
+        "Give everyone organization-level read access",
+        "Use security roles, privilege depths, and where appropriate hierarchy-aware access patterns",
+        "Use only business rules to hide records",
+        "Put all sensitive data in notes"
+      ],
+      "answer": 1,
+      "category": "security-model",
+      "tags": [
+        "security-roles",
+        "privilege-depth",
+        "hierarchy"
+      ],
+      "explanation": "Role-based security with correct privilege depth is the right platform-level way to implement layered access.",
+      "wrongExplanations": [
+        "Organization-wide access is usually excessive.",
+        null,
+        "Business rules do not enforce record security.",
+        "Notes are not a security design strategy."
+      ],
+      "msRef": {
+        "label": "Security roles and privileges",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "q": "In Power Pages, what combination controls what an authenticated portal user can do against Dataverse tables?",
+      "options": [
+        "D365 security roles only",
+        "Web roles plus table permissions",
+        "Business process flows",
+        "Power BI workspaces"
+      ],
+      "answer": 1,
+      "category": "power-pages",
+      "tags": [
+        "web-roles",
+        "table-permissions",
+        "portal-security"
+      ],
+      "explanation": "Power Pages uses web roles and table permissions to govern access to Dataverse data for portal users.",
+      "wrongExplanations": [
+        "Standard internal D365 roles are not the main portal authorization mechanism.",
+        null,
+        "BPFs do not control portal permissions.",
+        "Power BI workspaces are unrelated."
+      ],
+      "msRef": {
+        "label": "Table permissions in Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/table-permissions"
+      }
+    },
+    {
+      "q": "What is the strongest licensing/compliance risk if internal staff use Power Pages against internal Dataverse data under an inappropriate external-user licensing assumption?",
+      "options": [
+        "Only performance degradation",
+        "A Microsoft licensing compliance issue",
+        "Automatic data deletion",
+        "Loss of plugin registration"
+      ],
+      "answer": 1,
+      "category": "power-pages",
+      "tags": [
+        "licensing",
+        "compliance",
+        "power-pages"
+      ],
+      "explanation": "Using the wrong licensing model for internal users is a commercial and compliance risk that can surface in audit or contract review.",
+      "wrongExplanations": [
+        "Performance is not the core issue.",
+        null,
+        "That is not the normal licensing consequence described here.",
+        "Plugin registration is unrelated."
+      ],
+      "msRef": {
+        "label": "Licensing overview for Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/admin/licensing-overview"
+      }
+    },
+    {
+      "q": "What is the main purpose of an entitlement in Customer Service?",
+      "options": [
+        "To assign security roles",
+        "To define the support a customer is allowed to consume and link service expectations",
+        "To configure queue routing only",
+        "To control Power Pages authentication"
+      ],
+      "answer": 1,
+      "category": "customer-service",
+      "tags": [
+        "entitlements",
+        "support-model",
+        "case-management"
+      ],
+      "explanation": "Entitlements define the support allowance or coverage a customer has and work alongside service management processes.",
+      "wrongExplanations": [
+        "Security roles are separate.",
+        null,
+        "Routing is not the main purpose of entitlements.",
+        "Portal auth is unrelated."
+      ],
+      "msRef": {
+        "label": "Set up entitlements and entitlement templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-entitlements-templates"
+      }
+    },
+    {
+      "q": "What is the relationship between an SLA KPI and SLA actions in Customer Service?",
+      "options": [
+        "They are unrelated",
+        "The KPI defines the measured target, while actions define what happens at warning or failure thresholds",
+        "Actions replace the KPI entirely",
+        "KPIs are only for voice channels"
+      ],
+      "answer": 1,
+      "category": "customer-service",
+      "tags": [
+        "sla",
+        "kpi",
+        "actions"
+      ],
+      "explanation": "The SLA KPI defines what is being timed, and the actions define system responses when thresholds are reached.",
+      "wrongExplanations": [
+        "They are related parts of SLA behavior.",
+        null,
+        "Actions do not replace measurement.",
+        "SLAs are not limited to voice."
+      ],
+      "msRef": {
+        "label": "Define service level agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/define-service-level-agreements"
+      }
+    },
+    {
+      "q": "What is the main technical difference between basic routing and unified routing in Customer Service?",
+      "options": [
+        "Unified routing only works for email",
+        "Unified routing supports more advanced assignment logic such as skills and capacity-aware distribution",
+        "Basic routing is not supported anymore",
+        "Basic routing requires Azure Functions"
+      ],
+      "answer": 1,
+      "category": "customer-service",
+      "tags": [
+        "unified-routing",
+        "assignment",
+        "customer-service"
+      ],
+      "explanation": "Unified routing extends routing capability with richer assignment logic beyond simpler queue-based patterns.",
+      "wrongExplanations": [
+        "Unified routing supports multiple channels.",
+        null,
+        "Basic routing is still supported in appropriate cases.",
+        "Azure Functions are not inherently required."
+      ],
+      "msRef": {
+        "label": "Assignment methods in unified routing",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      }
+    },
+    {
+      "q": "When does it make architectural sense to go beyond native routing and implement custom routing logic?",
+      "options": [
+        "Whenever users ask for more screens",
+        "When validated routing requirements exceed supported native behavior in a material way",
+        "Before reviewing product capability",
+        "Only after Production deployment"
+      ],
+      "answer": 1,
+      "category": "customer-service",
+      "tags": [
+        "custom-routing",
+        "architecture",
+        "requirements"
+      ],
+      "explanation": "Custom routing should be justified by a real requirement gap beyond what native routing can support acceptably.",
+      "wrongExplanations": [
+        "Screen requests do not justify custom routing.",
+        null,
+        "That skips product evaluation.",
+        "That is too late."
+      ],
+      "msRef": {
+        "label": "Unified routing overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview-unified-routing"
+      }
+    },
+    {
+      "q": "What is the right use of a record creation and update rule in Customer Service?",
+      "options": [
+        "To replace all plugin logic",
+        "To create or update records automatically from supported incoming activities without code when the scenario fits",
+        "To assign Dataverse security roles",
+        "To publish managed solutions"
+      ],
+      "answer": 1,
+      "category": "customer-service",
+      "tags": [
+        "record-creation-rules",
+        "automation",
+        "customer-service"
+      ],
+      "explanation": "Record creation/update rules are useful for supported activity-driven automation without code where the scenario fits the feature.",
+      "wrongExplanations": [
+        "They do not replace all plugin scenarios.",
+        null,
+        "Security role assignment is unrelated.",
+        "Publishing solutions is unrelated."
+      ],
+      "msRef": {
+        "label": "Set up rules to automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-rules-to-automatically-create-or-update-records"
+      }
+    },
+    {
+      "q": "In Field Service, what is the operational role of a work order?",
+      "options": [
+        "It is only an invoice",
+        "It is the main record representing the field service job and related execution details",
+        "It is only a report output",
+        "It is only a SharePoint folder"
+      ],
+      "answer": 1,
+      "category": "field-service",
+      "tags": [
+        "work-order",
+        "field-service",
+        "operations"
+      ],
+      "explanation": "The work order is the core field service execution record for the job being delivered.",
+      "wrongExplanations": [
+        "Invoicing is separate.",
+        null,
+        "Reports may summarize work orders but are not the same thing.",
+        "SharePoint can complement document storage but is not the work order."
+      ],
+      "msRef": {
+        "label": "Create a work order",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/field-service/create-work-order"
+      }
+    },
+    {
+      "q": "What is the strongest reason to use a Business Process Flow for an incident lifecycle such as Report -> Investigate -> Implement Recommendations?",
+      "options": [
+        "It makes forms prettier",
+        "It enforces guided stage progression and process governance",
+        "It replaces all notifications",
+        "It automatically creates a mobile app"
+      ],
+      "answer": 1,
+      "category": "field-service",
+      "tags": [
+        "bpf",
+        "incident-management",
+        "governance"
+      ],
+      "explanation": "A BPF helps guide users through stages and provides governance over the intended lifecycle.",
+      "wrongExplanations": [
+        "Visual appearance is not the main purpose.",
+        null,
+        "Notifications may complement the process but are not replaced by BPFs.",
+        "BPFs do not automatically create apps."
+      ],
+      "msRef": {
+        "label": "Business process flows overview",
+        "url": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
+      }
+    },
+    {
+      "q": "What is the best architectural reason to use SharePoint integration with CE for document-heavy operational processes?",
+      "options": [
+        "To avoid Dataverse entirely",
+        "To leverage document management, collaboration, and version control where appropriate",
+        "To replace security roles",
+        "To eliminate environment strategy"
+      ],
+      "answer": 1,
+      "category": "integration",
+      "tags": [
+        "sharepoint",
+        "documents",
+        "version-control"
+      ],
+      "explanation": "SharePoint integration is useful where document collaboration and versioning are significant operational needs.",
+      "wrongExplanations": [
+        "Dataverse still remains important for transactional data.",
+        null,
+        "Security roles still matter.",
+        "Environment strategy is unrelated."
+      ],
+      "msRef": {
+        "label": "Integrate your Dynamics 365 apps with other solutions",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+      }
+    },
+    {
+      "q": "What is the main reason DLP policies matter in a tenant holding sensitive citizen or regulated business data?",
+      "options": [
+        "They improve form layout",
+        "They control risky connector combinations and data movement patterns",
+        "They replace security roles",
+        "They automatically encrypt every external system"
+      ],
+      "answer": 1,
+      "category": "governance",
+      "tags": [
+        "dlp",
+        "connector-governance",
+        "data-protection"
+      ],
+      "explanation": "DLP policies are governance controls that reduce the risk of sensitive data moving through the wrong connector paths.",
+      "wrongExplanations": [
+        "DLP is not a UX feature.",
+        null,
+        "Security roles and DLP solve different problems.",
+        "They do not automatically encrypt all external systems."
+      ],
+      "msRef": {
+        "label": "Data loss prevention policies",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+      }
+    },
+    {
+      "q": "If a client asks to make a direct production change because it is 'small', what is the correct technical-lead stance?",
+      "options": [
+        "Allow it if it is urgent",
+        "Explain why direct production change bypasses source control, testing, and rollback discipline, then route it through the pipeline",
+        "Always refuse without explanation",
+        "Allow it if an admin is present"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "production-governance",
+        "alm",
+        "client-management"
+      ],
+      "explanation": "The right stance is risk-based and professional: explain the governance risk and redirect through the controlled release path.",
+      "wrongExplanations": [
+        "Urgency is not a justification for bypassing control by default.",
+        null,
+        "Refusal without explanation is usually poor client handling.",
+        "Admin presence does not make the pattern safe."
+      ],
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "q": "What is the strongest technical leadership responsibility in a sprint for a CE technical lead?",
+      "options": [
+        "Write every line of code personally",
+        "Own technical direction, unblock the team, review work quality, and protect architectural consistency",
+        "Avoid client contact",
+        "Focus only on wiki pages"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "technical-lead",
+        "agile",
+        "quality"
+      ],
+      "explanation": "A technical lead should govern technical direction and enable the team rather than becoming a coding bottleneck.",
+      "wrongExplanations": [
+        "Doing everything personally does not scale.",
+        null,
+        "Client context often matters.",
+        "Documentation matters, but it is not the only responsibility."
+      ],
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "q": "How should you raise the quality bar with offshore developers on a CE project?",
+      "options": [
+        "Increase meeting count indefinitely",
+        "Use clear Definition of Done, small reviewable work items, pull requests, standards, and shared technical documentation",
+        "Give them only low-value tasks",
+        "Avoid letting them touch custom code"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "offshore-teams",
+        "quality-control",
+        "definition-of-done"
+      ],
+      "explanation": "Clear standards, review gates, and explicit definitions of quality scale better than constant oversight.",
+      "wrongExplanations": [
+        "More meetings do not automatically improve quality.",
+        null,
+        "That underuses the team and creates bottlenecks.",
+        "That is not a sustainable scaling model."
+      ],
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "q": "What is the best way to handle a junior developer repeatedly solving requirements with custom code when standard product features exist?",
+      "options": [
+        "Accept it to keep velocity high",
+        "Coach them to start with product capability, fit-to-standard evaluation, and only customize where justified",
+        "Remove them from the project immediately",
+        "Let QA find the problem later"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "mentoring",
+        "fit-to-standard",
+        "architecture"
+      ],
+      "explanation": "This is a coaching opportunity around architectural judgment, not just code output.",
+      "wrongExplanations": [
+        "That increases lifecycle burden.",
+        null,
+        "That is disproportionate as a first response.",
+        "QA should not be the first architecture control."
+      ],
+      "msRef": {
+        "label": "Perform fit gap analysis",
+        "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+      }
+    },
+    {
+      "q": "In a presales proof of concept, what is the strongest technical mistake to avoid?",
+      "options": [
+        "Using sample data",
+        "Demonstrating something that cannot realistically be delivered or supported in the target architecture",
+        "Limiting the demo scope",
+        "Using official Microsoft capabilities"
+      ],
+      "answer": 1,
+      "category": "presales",
+      "tags": [
+        "poc",
+        "presales",
+        "credibility"
+      ],
+      "explanation": "A PoC should build confidence, not promise an unrealistic target-state that later collapses under technical reality.",
+      "wrongExplanations": [
+        "Sample data is normal in presales.",
+        null,
+        "Tight scope is often a strength in PoC work.",
+        "Using Microsoft capability is not the mistake."
+      ],
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "q": "What is the strongest first objective of an initial requirements workshop with a new enterprise client?",
+      "options": [
+        "Present every D365 screen available",
+        "Understand current pain points, process reality, and success measures before solutioning",
+        "Lock the technical design immediately",
+        "Sign off the final functional design"
+      ],
+      "answer": 1,
+      "category": "delivery",
+      "tags": [
+        "requirements",
+        "discovery",
+        "workshops"
+      ],
+      "explanation": "The first workshop should be about understanding the business reality and what success looks like.",
+      "wrongExplanations": [
+        "That is too product-led and premature.",
+        null,
+        "Design should not be locked before discovery.",
+        "That is far too early."
+      ],
+      "msRef": {
+        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+      }
+    },
+    {
+      "q": "What is the most important content in a cutover plan for a CE project?",
+      "options": [
+        "Only user training dates",
+        "Sequence of migration, freeze windows, go/no-go criteria, rollback path, smoke testing, and hypercare ownership",
+        "Only final PowerPoint slides",
+        "Only licensing allocations"
+      ],
+      "answer": 1,
+      "category": "delivery",
+      "tags": [
+        "cutover",
+        "go-live",
+        "hypercare"
+      ],
+      "explanation": "A cutover plan should define the controlled transition sequence, success checkpoints, rollback logic, and early-live support structure.",
+      "wrongExplanations": [
+        "Training matters, but cutover is broader.",
+        null,
+        "Slides are not the core plan artifact.",
+        "Licensing is only one element."
+      ],
+      "msRef": {
+        "label": "Go-live readiness",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/fasttrack/go-live-readiness"
+      }
+    },
+    {
+      "q": "What is the clearest sign a solution is weak in early live support readiness?",
+      "options": [
+        "There is a nice dashboard",
+        "No clear support ownership, issue triage path, or monitoring approach exists for go-live",
+        "The logo was approved late",
+        "There are few JavaScript files"
+      ],
+      "answer": 1,
+      "category": "delivery",
+      "tags": [
+        "hypercare",
+        "support-model",
+        "operations"
+      ],
+      "explanation": "Go-live readiness depends heavily on whether issues can be detected, triaged, owned, and resolved quickly during early live support.",
+      "wrongExplanations": [
+        "Dashboards do not prove support readiness.",
+        null,
+        "Logo timing is irrelevant.",
+        "File count is irrelevant."
+      ],
+      "msRef": {
+        "label": "Operational Excellence design principles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+      }
+    },
+    {
+      "q": "Which Dataverse extensibility option is most appropriate when you want a formal reusable Web API surface for a custom business operation?",
+      "options": [
+        "Business rule",
+        "Custom API",
+        "Chart component",
+        "View selector"
+      ],
+      "answer": 1,
+      "category": "dataverse",
+      "tags": [
+        "custom-api",
+        "web-api",
+        "extensibility"
+      ],
+      "explanation": "Custom API is the right Dataverse extensibility choice when you want a first-class API contract for a custom operation.",
+      "wrongExplanations": [
+        "Business rules are not API contracts.",
+        null,
+        "Charts are unrelated.",
+        "View selector is unrelated."
+      ],
+      "msRef": {
+        "label": "Custom API overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/custom-api"
+      }
+    },
+    {
+      "q": "What is the strongest reason to keep plugin code small, focused, and well-scoped?",
+      "options": [
+        "To reduce the number of files in Visual Studio",
+        "To improve maintainability, testability, and predictability in the Dataverse pipeline",
+        "Because large plugins are blocked by the platform",
+        "Because only one plugin can run per entity"
+      ],
+      "answer": 1,
+      "category": "plugin-development",
+      "tags": [
+        "maintainability",
+        "plugins",
+        "design-quality"
+      ],
+      "explanation": "Focused plugin responsibilities are easier to test, reason about, debug, and support.",
+      "wrongExplanations": [
+        "File count is not the main reason.",
+        null,
+        "The platform does not impose a simple 'large plugin' block in that sense.",
+        "Multiple plugins can run."
+      ],
+      "msRef": {
+        "label": "Write a plug-in",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/write-plug-in"
+      }
+    },
+    {
+      "q": "What is the first thing you should verify when a plugin seems to run but produces no visible result?",
+      "options": [
+        "Whether plugin steps are registered on the correct message, table, stage, and filtering attributes",
+        "Whether the solution icon is correct",
+        "Whether the sitemap was published twice",
+        "Whether a dashboard was pinned"
+      ],
+      "answer": 0,
+      "category": "plugin-development",
+      "tags": [
+        "registration",
+        "troubleshooting",
+        "plugins"
+      ],
+      "explanation": "Misregistration is a common reason for 'working code' not producing the intended behavior.",
+      "wrongExplanations": [
+        null,
+        "Icon choice is irrelevant.",
+        "Publishing twice is not the key diagnostic question.",
+        "Dashboards are unrelated."
+      ],
+      "msRef": {
+        "label": "Event framework",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/event-framework"
+      }
+    },
+    {
+      "q": "What is the best reason to use plugin trace logging in a production issue rather than immediately changing code?",
+      "options": [
+        "It provides lightweight runtime diagnostics without first changing deployed logic",
+        "It is required before any code can run",
+        "It replaces error handling",
+        "It automatically fixes transaction failures"
+      ],
+      "answer": 0,
+      "category": "plugin-development",
+      "tags": [
+        "tracing",
+        "production-support",
+        "diagnostics"
+      ],
+      "explanation": "Trace logging gives operational insight quickly and with less disruption than changing code immediately.",
+      "wrongExplanations": [
+        null,
+        "It is not a prerequisite for code execution.",
+        "It does not replace real error handling.",
+        "It diagnoses; it does not auto-fix."
+      ],
+      "msRef": {
+        "label": "Logging and tracing",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/logging-tracing"
+      }
+    },
+    {
+      "q": "Why is data residency discussion sometimes a solution-architecture issue rather than just a legal one?",
+      "options": [
+        "Because it can change environment region choice, integration design, and service selection",
+        "Because legal teams choose all forms and views",
+        "Because it only affects SharePoint",
+        "Because it removes the need for DLP"
+      ],
+      "answer": 0,
+      "category": "architecture",
+      "tags": [
+        "data-residency",
+        "governance",
+        "architecture"
+      ],
+      "explanation": "Residency requirements can materially affect architectural choices around environment geography and data movement.",
+      "wrongExplanations": [
+        null,
+        "Legal teams do not choose forms and views as an architecture rule.",
+        "It is broader than SharePoint.",
+        "DLP may still be needed."
+      ],
+      "msRef": {
+        "label": "Regions overview",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/regions-overview"
+      }
+    },
+    {
+      "q": "Which design principle best fits a mission-critical public-sector or utility workload on Power Platform?",
+      "options": [
+        "Develop in production for speed",
+        "Treat it as a governed workload with controlled ALM, testing, monitoring, and operational ownership",
+        "Skip automated deployment because the stakes are high",
+        "Reduce documentation to stay agile"
+      ],
+      "answer": 1,
+      "category": "architecture",
+      "tags": [
+        "mission-critical",
+        "governance",
+        "operations"
+      ],
+      "explanation": "Mission-critical workloads need stronger engineering rigor across lifecycle, operations, and governance.",
+      "wrongExplanations": [
+        "That is specifically what mission-critical guidance argues against.",
+        null,
+        "High stakes usually increase the need for controlled deployment.",
+        "Documentation still matters."
+      ],
+      "msRef": {
+        "label": "Plan mission-critical workloads",
+        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/plan-mission-critical"
+      }
+    },
+    {
+      "q": "What is the strongest technical signal that a CE solution design is too tightly coupled to one client-specific workaround?",
+      "options": [
+        "The requirement was discussed twice",
+        "The design creates bespoke components to preserve non-standard behavior that could instead be standardized or configured",
+        "The client has an Azure subscription",
+        "The team uses DevOps boards"
+      ],
+      "answer": 1,
+      "category": "architecture",
+      "tags": [
+        "customization",
+        "standardization",
+        "technical-debt"
+      ],
+      "explanation": "When bespoke components preserve avoidable non-standard behavior, the design often accumulates unnecessary technical debt.",
+      "wrongExplanations": [
+        "Discussion frequency is not the signal.",
+        null,
+        "Azure subscription presence is unrelated.",
+        "Boards are unrelated."
+      ],
+      "msRef": {
+        "label": "Standardize business processes during a Dynamics 365 implementation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+      }
+    },
+    {
+      "q": "When should a technical lead escalate rather than solve a design issue inside the squad?",
+      "options": [
+        "Whenever a junior asks a question",
+        "When the decision materially affects scope, budget, architectural direction, or governance commitments",
+        "Whenever a plugin fails once",
+        "Whenever a stakeholder asks for a demo"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "escalation",
+        "governance",
+        "decision-rights"
+      ],
+      "explanation": "Some issues exceed team-level autonomy and need formal governance because of their project or architectural impact.",
+      "wrongExplanations": [
+        "Junior questions are normal team-level matters.",
+        null,
+        "Single failures do not automatically require escalation.",
+        "Demo requests are not escalation triggers by themselves."
+      ],
+      "msRef": {
+        "label": "Use classic project governance structures",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+      }
+    },
+    {
+      "q": "What is the best reason to keep a project wiki or equivalent architecture documentation current during delivery?",
+      "options": [
+        "To impress the client visually",
+        "To preserve decision rationale, onboarding context, standards, and repeatability across onshore/offshore delivery",
+        "To avoid standups",
+        "To replace backlog items"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "documentation",
+        "knowledge-transfer",
+        "delivery-governance"
+      ],
+      "explanation": "A maintained wiki reduces tribal knowledge risk and supports team consistency and onboarding.",
+      "wrongExplanations": [
+        "Visual impression is not the main value.",
+        null,
+        "Standups still serve a different purpose.",
+        "Backlog items remain necessary."
+      ],
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "q": "Which statement best demonstrates mature presales technical rigor?",
+      "options": [
+        "Promise every requested feature is easy",
+        "Constrain the PoC to believable architecture and call out assumptions, risks, and next validation steps",
+        "Avoid mentioning risks so the client stays positive",
+        "Demo only generic out-of-the-box screens"
+      ],
+      "answer": 1,
+      "category": "presales",
+      "tags": [
+        "poc",
+        "rigor",
+        "solutioning"
+      ],
+      "explanation": "Strong presales work builds confidence through realistic demonstrations and transparent treatment of uncertainty.",
+      "wrongExplanations": [
+        "That damages trust later.",
+        null,
+        "Hiding risk is poor consulting practice.",
+        "Purely generic demos often fail to address the client’s real problem."
+      ],
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "q": "What is the strongest reason to use Power Platform DLP and tenant governance discussion early in a public-sector project rather than after build?",
+      "options": [
+        "Because it only affects admin screens",
+        "Because connector, residency, and data-movement constraints can invalidate later design choices if ignored",
+        "Because it is easier to write emails early",
+        "Because DLP replaces licensing"
+      ],
+      "answer": 1,
+      "category": "governance",
+      "tags": [
+        "dlp",
+        "tenant-governance",
+        "early-design"
+      ],
+      "explanation": "Governance constraints can shape the solution fundamentally, so discovering them late can cause rework or non-compliance.",
+      "wrongExplanations": [
+        "It is much broader than admin UI.",
+        null,
+        "Email effort is irrelevant.",
+        "DLP does not replace licensing."
+      ],
+      "msRef": {
+        "label": "Data loss prevention policies",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+      }
+    },
+    {
+      "q": "What is the most important technical difference between a browser-side fetch() call and a server-side Azure Function call to an external system?",
+      "options": [
+        "They are identical in network and credential behavior",
+        "Server-side calls can better handle protected connectivity, secret storage, and controlled integration boundaries",
+        "fetch() is always more secure",
+        "Azure Functions cannot call REST APIs"
+      ],
+      "answer": 1,
+      "category": "azure-integration",
+      "tags": [
+        "fetch",
+        "azure-functions",
+        "integration-security"
+      ],
+      "explanation": "Server-side integration can protect secrets, support controlled networking, and centralize integration behavior more safely than client-side patterns.",
+      "wrongExplanations": [
+        "They have materially different execution and security characteristics.",
+        null,
+        "Client-side calls are not always more secure.",
+        "Azure Functions can absolutely call REST APIs."
+      ],
+      "msRef": {
+        "label": "Azure Functions overview",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview"
+      }
+    },
+    {
+      "q": "What is the clearest anti-pattern in Dataverse data-model design for an enterprise CE project?",
+      "options": [
+        "Starting with standard tables and extending deliberately",
+        "Creating many custom tables just because the client describes concepts in legacy terms",
+        "Using solution publishers consistently",
+        "Using environment variables for endpoint config"
+      ],
+      "answer": 1,
+      "category": "dataverse",
+      "tags": [
+        "data-model",
+        "custom-tables",
+        "anti-pattern"
+      ],
+      "explanation": "Legacy naming or client vocabulary alone is not sufficient justification for proliferating custom tables if standard modeling can work.",
+      "wrongExplanations": [
+        "That is generally a sound design principle.",
+        null,
+        "That is not the anti-pattern here.",
+        "That is also sound ALM practice."
+      ],
+      "msRef": {
+        "label": "Table overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/entity-overview"
+      }
+    },
+    {
+      "q": "Why should a CE consultant be able to speak credibly about Azure and cloud technologies in a technically led interview even when the main platform is D365 CE?",
+      "options": [
+        "Because CE never integrates with Azure",
+        "Because real enterprise CE solutions often rely on Azure services for integration, security boundaries, automation, or supporting architecture",
+        "Because Azure replaces Dataverse",
+        "Because KPMG only sells Azure"
+      ],
+      "answer": 1,
+      "category": "architecture",
+      "tags": [
+        "azure",
+        "enterprise-architecture",
+        "integration"
+      ],
+      "explanation": "Enterprise CE solutions often depend on Azure-based integration or supporting patterns, so platform understanding matters in real delivery.",
+      "wrongExplanations": [
+        "That is false.",
+        null,
+        "Azure does not replace Dataverse in that sense.",
+        "The role is broader than that."
+      ],
+      "msRef": {
+        "label": "Architect solutions for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+      }
+    },
+    {
+      "q": "What is the strongest indicator that a proposed CE solution needs a formal technical design artifact instead of only backlog items?",
+      "options": [
+        "The project has more than one developer",
+        "The solution includes significant custom logic, integrations, security decisions, or operational complexity that require shared design clarity",
+        "The client wants a demo",
+        "The team uses Scrum"
+      ],
+      "answer": 1,
+      "category": "delivery",
+      "tags": [
+        "design-document",
+        "architecture",
+        "complexity"
+      ],
+      "explanation": "Complex custom logic, integrations, and security decisions usually need a stronger shared design artifact than backlog text alone.",
+      "wrongExplanations": [
+        "Developer count alone is not the threshold.",
+        null,
+        "Demo need is not the core signal.",
+        "Scrum does not remove design needs."
+      ],
+      "msRef": {
+        "label": "Create a functional and technical design document",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/patterns/create-functional-technical-design-document"
+      }
+    },
+    {
+      "q": "What is the best way to adapt a technical explanation for a C-suite audience in a KPMG-style client setting?",
+      "options": [
+        "Lead with plugin stages and API internals",
+        "Lead with business risk, value, compliance, timeline, and operating-model impact, then hold technical detail in reserve",
+        "Avoid any mention of tradeoffs",
+        "Read directly from architecture notes"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "executive-communication",
+        "c-suite",
+        "client-facing"
+      ],
+      "explanation": "Executives usually care first about business outcomes and risk, not low-level implementation detail.",
+      "wrongExplanations": [
+        "That is too low-level for most executives.",
+        null,
+        "Tradeoffs are often exactly what they need.",
+        "That usually lands poorly."
+      ],
+      "msRef": {
+        "label": "Project goals for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+      }
+    },
+    {
+      "q": "If a client requests an AI chatbot PoC, what is the strongest technical consulting behavior?",
+      "options": [
+        "Promise full production rollout in the presales phase",
+        "Bound the PoC clearly, test feasibility and risks, and document phased recommendations",
+        "Reject the request because AI is risky",
+        "Build the bot directly in Production"
+      ],
+      "answer": 1,
+      "category": "presales",
+      "tags": [
+        "copilot",
+        "poc",
+        "phased-approach"
+      ],
+      "explanation": "A well-run PoC should test feasibility in a bounded way and end with a grounded recommendation, not an unqualified promise.",
+      "wrongExplanations": [
+        "That overcommits too early.",
+        null,
+        "Blanket rejection is too crude.",
+        "Production-first is poor governance."
+      ],
+      "msRef": {
+        "label": "Get started with Copilot Service admin center",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/cs-admin-center"
+      }
+    },
+    {
+      "q": "What is the clearest reason to use pull requests in a CE DevOps workflow?",
+      "options": [
+        "To make commits slower",
+        "To enforce review and maintain design and code quality before merge",
+        "To replace testing",
+        "To avoid documentation"
+      ],
+      "answer": 1,
+      "category": "alm-devops",
+      "tags": [
+        "pull-requests",
+        "quality",
+        "review"
+      ],
+      "explanation": "Pull requests are a quality gate that supports review, standard enforcement, and safer change integration.",
+      "wrongExplanations": [
+        "Slowness is not the purpose.",
+        null,
+        "Testing is still required.",
+        "Documentation remains useful."
+      ],
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "q": "What is the strongest reason to model agent assignment logic in data rather than hardcoding all routing conditions in plugin code?",
+      "options": [
+        "Because code cannot read configuration tables",
+        "Because rule data can be adjusted more safely and transparently than recompiling logic for every routing change",
+        "Because hardcoded logic is always faster",
+        "Because plugins cannot branch"
+      ],
+      "answer": 1,
+      "category": "plugin-development",
+      "tags": [
+        "routing",
+        "configuration-data",
+        "maintainability"
+      ],
+      "explanation": "Storing routing rules in data makes change management and governance easier than hardcoding everything into compiled logic.",
+      "wrongExplanations": [
+        "Plugins can read configuration tables.",
+        null,
+        "Speed is not the main architecture advantage here.",
+        "Plugins can obviously branch."
+      ],
+      "msRef": {
+        "label": "Write a plug-in",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/write-plug-in"
+      }
+    },
+    {
+      "q": "Why is it risky to treat a routing requirement as 'just a queue setup' too early in design?",
+      "options": [
+        "Because routing can hide complex business rules, capacity logic, and escalation dependencies",
+        "Because queues are deprecated",
+        "Because queue names are difficult to change",
+        "Because routing never affects SLAs"
+      ],
+      "answer": 0,
+      "category": "customer-service",
+      "tags": [
+        "routing",
+        "queues",
+        "design-risk"
+      ],
+      "explanation": "Routing often involves business logic beyond simple queue assignment, including skills, escalation, priorities, and operational constraints.",
+      "wrongExplanations": [
+        null,
+        "Queues are not deprecated.",
+        "Naming is not the main risk.",
+        "Routing can absolutely affect SLA behavior."
+      ],
+      "msRef": {
+        "label": "Unified routing overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview-unified-routing"
+      }
+    },
+    {
+      "q": "What is the strongest reason to use phased rollout in a technically complex CE program?",
+      "options": [
+        "To avoid all testing",
+        "To reduce delivery risk by controlling complexity, validating assumptions, and limiting blast radius",
+        "To hide missing requirements",
+        "To prevent any need for support planning"
+      ],
+      "answer": 1,
+      "category": "delivery",
+      "tags": [
+        "phasing",
+        "risk-reduction",
+        "implementation-strategy"
+      ],
+      "explanation": "Phased rollout can reduce risk by narrowing the initial scope and validating assumptions before wider expansion.",
+      "wrongExplanations": [
+        "Testing is still essential.",
+        null,
+        "It should not be used to hide weak discovery.",
+        "Support planning is still needed."
+      ],
+      "msRef": {
+        "label": "Implementation strategy",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy"
+      }
+    },
+    {
+      "q": "What is the strongest reason a consultant should understand both waterfall and agile delivery styles for D365 projects?",
+      "options": [
+        "Because Microsoft requires both on every project",
+        "Because client governance, procurement, and release controls may force hybrid delivery realities",
+        "Because agile is obsolete",
+        "Because waterfall eliminates risk"
+      ],
+      "answer": 1,
+      "category": "delivery",
+      "tags": [
+        "agile",
+        "waterfall",
+        "delivery-models"
+      ],
+      "explanation": "Enterprise projects often operate with hybrid realities, so the consultant must work effectively under different governance and planning models.",
+      "wrongExplanations": [
+        "There is no such universal requirement.",
+        null,
+        "Agile is not obsolete.",
+        "Waterfall does not eliminate risk."
+      ],
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "q": "What is the strongest reason to keep technical debt visible in delivery conversations instead of silently accepting it?",
+      "options": [
+        "Because technical debt has no project impact",
+        "Because hidden debt can become future cost, support burden, upgrade risk, and delivery drag",
+        "Because clients prefer pessimism",
+        "Because it replaces estimation"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "technical-debt",
+        "risk",
+        "architecture"
+      ],
+      "explanation": "Technical debt has real lifecycle implications and should be discussed explicitly as part of responsible delivery leadership.",
+      "wrongExplanations": [
+        "That is false.",
+        null,
+        "The point is transparency, not pessimism.",
+        "It does not replace estimation."
+      ],
+      "msRef": {
+        "label": "Plan mission-critical workloads",
+        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/plan-mission-critical"
+      }
+    },
+    {
+      "q": "What is the most appropriate technical response if a client asks for direct SQL access to Dataverse data for unsupported shortcuts?",
+      "options": [
+        "Provide it if they are senior",
+        "Explain supported access patterns and steer them toward supported integration/reporting methods",
+        "Pretend it is technically impossible without explanation",
+        "Give them a production database backup instead"
+      ],
+      "answer": 1,
+      "category": "architecture",
+      "tags": [
+        "supported-patterns",
+        "dataverse",
+        "consulting"
+      ],
+      "explanation": "The right response is to steer the client toward supported patterns rather than enabling risky unsupported shortcuts.",
+      "wrongExplanations": [
+        "Seniority does not make unsupported patterns safe.",
+        null,
+        "You should explain the rationale, not just refuse vaguely.",
+        "That is not an appropriate substitute."
+      ],
+      "msRef": {
+        "label": "Query data using Web API",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/query-data-web-api"
+      }
+    },
+    {
+      "q": "What is the strongest reason to keep business risk and technical risk linked during delivery governance?",
+      "options": [
+        "Because they are always identical",
+        "Because technical design failures often become business failures in timeline, compliance, service, or cost",
+        "Because risk registers are optional",
+        "Because business teams should not hear technical concerns"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "risk",
+        "governance",
+        "business-impact"
+      ],
+      "explanation": "Good consulting links technical concerns to business impact so stakeholders can make informed decisions.",
+      "wrongExplanations": [
+        "They are related, but not identical.",
+        null,
+        "Risk registers are important governance tools.",
+        "Business teams often need translated technical risk information."
+      ],
+      "msRef": {
+        "label": "Project goals for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+      }
+    },
+    {
+      "q": "What is the clearest sign that a technical consultant is working at lead-consultant rather than configurator level?",
+      "options": [
+        "They can create forms quickly",
+        "They connect requirements, architecture, risk, delivery method, and stakeholder communication into one coherent solution approach",
+        "They know many shortcut keys",
+        "They avoid documentation to move fast"
+      ],
+      "answer": 1,
+      "category": "technical-leadership",
+      "tags": [
+        "lead-consultant",
+        "architecture",
+        "delivery"
+      ],
+      "explanation": "Lead-level consulting is about integrated judgment across business, architecture, risk, and delivery, not just implementation mechanics.",
+      "wrongExplanations": [
+        "That is a narrow implementation skill.",
+        null,
+        "That is irrelevant.",
+        "That is usually a weakness, not a strength."
+      ],
+      "msRef": {
+        "label": "Become a solution architect",
+        "url": "https://learn.microsoft.com/en-us/training/paths/become-solution-architect/"
+      }
+    }
+  ],
+  "tf": [
+    {
+      "q": "True or False: A synchronous InvalidPluginExecutionException can roll back the Dataverse transaction and show the user a message.",
+      "answer": true,
+      "category": "plugin-development",
+      "tags": [
+        "exceptions",
+        "rollback",
+        "plugins"
+      ],
+      "explanation": "That is exactly why it is used for business-rule enforcement in synchronous plugin execution.",
+      "msRef": {
+        "label": "Handle exceptions in plug-ins",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/handle-exceptions"
+      }
+    },
+    {
+      "q": "True or False: Xrm.WebApi is the supported client API for Dataverse operations in model-driven app scripts.",
+      "answer": true,
+      "category": "client-development",
+      "tags": [
+        "xrm-webapi",
+        "javascript",
+        "dataverse"
+      ],
+      "explanation": "Xrm.WebApi is the supported model-driven app client API for Dataverse operations.",
+      "msRef": {
+        "label": "Xrm.WebApi reference",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference/xrm-webapi"
+      }
+    },
+    {
+      "q": "True or False: A managed solution in Production is generally preferable to unmanaged because it supports stronger governance.",
+      "answer": true,
+      "category": "alm-devops",
+      "tags": [
+        "managed-solutions",
+        "production",
+        "governance"
+      ],
+      "explanation": "Managed deployments help enforce change control and reduce uncontrolled direct editing in Production.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "q": "True or False: DLP policies can prevent risky connector combinations from sharing data in the same flow.",
+      "answer": true,
+      "category": "governance",
+      "tags": [
+        "dlp",
+        "connectors",
+        "data-movement"
+      ],
+      "explanation": "That is one of the core reasons DLP policies exist in Power Platform governance.",
+      "msRef": {
+        "label": "Data loss prevention policies",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+      }
+    },
+    {
+      "q": "True or False: Matching row counts alone is enough to declare a migration successful.",
+      "answer": false,
+      "category": "data-migration",
+      "tags": [
+        "validation",
+        "referential-integrity",
+        "quality"
+      ],
+      "explanation": "Migration validation also needs data correctness, relationships, duplicates, and business-rule checks.",
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "q": "True or False: Unified routing adds richer assignment capabilities than a simple queue-based routing approach.",
+      "answer": true,
+      "category": "customer-service",
+      "tags": [
+        "unified-routing",
+        "assignment",
+        "customer-service"
+      ],
+      "explanation": "Unified routing adds more advanced assignment capabilities than basic queue-only patterns.",
+      "msRef": {
+        "label": "Assignment methods in unified routing",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      }
+    },
+    {
+      "q": "True or False: Power Pages portal users are primarily authorized against Dataverse by standard internal D365 security roles alone.",
+      "answer": false,
+      "category": "power-pages",
+      "tags": [
+        "power-pages",
+        "web-roles",
+        "table-permissions"
+      ],
+      "explanation": "Power Pages primarily uses web roles and table permissions for Dataverse access.",
+      "msRef": {
+        "label": "Table permissions in Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/table-permissions"
+      }
+    },
+    {
+      "q": "True or False: Environment variables are useful for storing deployment-time configuration that changes by environment.",
+      "answer": true,
+      "category": "alm-devops",
+      "tags": [
+        "environment-variables",
+        "configuration",
+        "deployment"
+      ],
+      "explanation": "That is one of their main intended purposes in solution ALM.",
+      "msRef": {
+        "label": "Environment variables in solutions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables"
+      }
+    },
+    {
+      "q": "True or False: A PoC should ideally test real uncertainty, not just act as a flashy sales demo.",
+      "answer": true,
+      "category": "presales",
+      "tags": [
+        "poc",
+        "validation",
+        "presales"
+      ],
+      "explanation": "A strong PoC is evidence-driven and reduces uncertainty around fit or feasibility.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "q": "True or False: Mission-critical Power Platform workloads require stronger engineering discipline than ad hoc productivity workloads.",
+      "answer": true,
+      "category": "architecture",
+      "tags": [
+        "mission-critical",
+        "operational-excellence",
+        "engineering-rigor"
+      ],
+      "explanation": "Mission-critical workload guidance emphasizes stronger rigor across lifecycle and operations.",
+      "msRef": {
+        "label": "Plan mission-critical workloads",
+        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/plan-mission-critical"
+      }
+    },
+    {
+      "q": "True or False: Direct production customization is acceptable if the requested change is small enough.",
+      "answer": false,
+      "category": "technical-leadership",
+      "tags": [
+        "production-governance",
+        "alm",
+        "change-control"
+      ],
+      "explanation": "Size does not remove the governance risk of bypassing source control, testing, and release discipline.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "q": "True or False: FetchXML is still a supported Dataverse query language.",
+      "answer": true,
+      "category": "dataverse",
+      "tags": [
+        "fetchxml",
+        "queries",
+        "supported"
+      ],
+      "explanation": "FetchXML remains supported and useful for certain query scenarios.",
+      "msRef": {
+        "label": "Use FetchXML to query data",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-fetchxml-construct-query"
+      }
+    },
+    {
+      "q": "True or False: Operational support readiness should influence solution direction before go-live, not just after it.",
+      "answer": true,
+      "category": "delivery",
+      "tags": [
+        "operations",
+        "support-model",
+        "go-live"
+      ],
+      "explanation": "A solution that cannot be supported well is operationally risky even if it is technically buildable.",
+      "msRef": {
+        "label": "Operational Excellence design principles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+      }
+    },
+    {
+      "q": "True or False: Role-based access concerns should be solved with platform security rather than only UI hiding techniques.",
+      "answer": true,
+      "category": "security-model",
+      "tags": [
+        "security",
+        "roles",
+        "record-access"
+      ],
+      "explanation": "Real access control belongs in platform security, not just the user interface.",
+      "msRef": {
+        "label": "Security roles and privileges",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "q": "True or False: A good technical lead should be able to explain technical tradeoffs in business language to non-technical stakeholders.",
+      "answer": true,
+      "category": "technical-leadership",
+      "tags": [
+        "stakeholder-management",
+        "communication",
+        "tradeoffs"
+      ],
+      "explanation": "That is a core part of senior consulting and technical leadership.",
+      "msRef": {
+        "label": "Project goals for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+      }
+    },
+    {
       "q": "You are building a custom agent routing plugin for a D365 Customer Service contact centre. At which plugin stage should you write the owner assignment back to the Case record before it is saved to the database?",
       "options": [
         "PreValidation — before the transaction opens",
@@ -31,7 +1878,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["plugin-stages", "pre-operation", "case-routing"],
+      "tags": [
+        "plugin-stages",
+        "pre-operation",
+        "case-routing"
+      ],
       "explanation": "<strong>PreOperation</strong> runs inside the database transaction before the record is committed. Writing the owner assignment here means the record saves with the correct agent already assigned — avoiding a second update round trip. This is exactly the pattern used in the NTSA routing plugin.",
       "wrongExplanations": [
         "PreValidation runs before the transaction — writing data here is not supported as the record doesn't yet exist in the transaction.",
@@ -54,7 +1905,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["custom-routing", "pre-operation", "case-create"],
+      "tags": [
+        "custom-routing",
+        "pre-operation",
+        "case-create"
+      ],
       "explanation": "A <strong>PreOperation C# plugin on Case Create</strong> is the correct approach. It reads the incoming Case fields (service type, region, department), queries custom assignment tables via IOrganizationService, and writes the owner back before the record is committed — ensuring the SLA timer starts on the correct agent immediately.",
       "wrongExplanations": [
         "Power Automate flows fire after save — the case would briefly have no owner and the SLA timer would start incorrectly.",
@@ -77,7 +1932,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["plugin-context", "input-parameters", "target-entity"],
+      "tags": [
+        "plugin-context",
+        "input-parameters",
+        "target-entity"
+      ],
       "explanation": "<strong>context.InputParameters[\"Target\"]</strong> cast to Entity gives you the incoming record's field values in a PreOperation plugin. This is the standard pattern for reading fields from the record being created or updated before it hits the database.",
       "wrongExplanations": [
         "OutputParameters are for returning values from the operation, not reading incoming record data.",
@@ -100,7 +1959,11 @@
       ],
       "answer": 2,
       "category": "plugin-development",
-      "tags": ["iorganizationservice", "plugin-services", "dataverse-query"],
+      "tags": [
+        "iorganizationservice",
+        "plugin-services",
+        "dataverse-query"
+      ],
       "explanation": "<strong>IOrganizationService</strong> retrieved via IOrganizationServiceFactory is the correct service for querying and updating Dataverse records inside a plugin. It provides methods like RetrieveMultiple, Create, Update, and Delete against the Dataverse database.",
       "wrongExplanations": [
         "ITracingService is for writing diagnostic log messages — not for querying data.",
@@ -123,7 +1986,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["tracing-service", "plugin-debugging", "error-handling"],
+      "tags": [
+        "tracing-service",
+        "plugin-debugging",
+        "error-handling"
+      ],
       "explanation": "<strong>ITracingService.Trace()</strong> is the correct diagnostic tool inside plugins. Trace messages are written to the Plugin Trace Log in D365 when tracing is enabled — invaluable for debugging production issues without code changes.",
       "wrongExplanations": [
         "Writing to a custom logging entity works but creates a Dataverse record on every error — ITracingService is more appropriate for diagnostics.",
@@ -146,7 +2013,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["error-handling", "InvalidPluginExecutionException", "transaction-rollback"],
+      "tags": [
+        "error-handling",
+        "InvalidPluginExecutionException",
+        "transaction-rollback"
+      ],
       "explanation": "<strong>InvalidPluginExecutionException</strong> should be thrown when you want to <strong>block the operation and display a message to the user</strong>. It rolls back the entire database transaction in synchronous plugins. Use it for business rule violations — for example blocking a Case creation if no valid entitlement exists.",
       "wrongExplanations": [
         "Wrapping every exception in InvalidPluginExecutionException would block operations unnecessarily — use it only for intentional business rule enforcement.",
@@ -169,7 +2040,12 @@
       ],
       "answer": 1,
       "category": "azure-integration",
-      "tags": ["azure-function", "vpn-proxy", "private-network", "integration-pattern"],
+      "tags": [
+        "azure-function",
+        "vpn-proxy",
+        "private-network",
+        "integration-pattern"
+      ],
       "explanation": "The core reason is <strong>network boundary</strong>. iTims sits on NTSA's private network — completely inaccessible from D365 cloud. The Azure Function, connected to the private network via VPN, acts as a bridge: D365 calls the Azure Function (accessible via HTTPS), which then calls iTims on the private network and returns the result.",
       "wrongExplanations": [
         "Performance is not the primary reason — the VPN connectivity gap is.",
@@ -192,7 +2068,12 @@
       ],
       "answer": 1,
       "category": "azure-integration",
-      "tags": ["xrm-webapi", "javascript-web-resource", "fetch-api", "case-form"],
+      "tags": [
+        "xrm-webapi",
+        "javascript-web-resource",
+        "fetch-api",
+        "case-form"
+      ],
       "explanation": "<strong>Xrm.WebApi</strong> is the supported D365 JavaScript API for querying Dataverse records from web resources. <strong>fetch()</strong> is the modern JavaScript API for calling external endpoints like the Azure Function proxy. Together they enable inline data retrieval on the Case form without page navigation.",
       "wrongExplanations": [
         "XMLHttpRequest is the older approach — Xrm.WebApi and fetch() are the modern recommended pattern.",
@@ -215,7 +2096,11 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["dlp-policy", "connector-classification", "data-governance"],
+      "tags": [
+        "dlp-policy",
+        "connector-classification",
+        "data-governance"
+      ],
       "explanation": "DLP policies classify connectors into <strong>Business</strong> (enterprise-approved), <strong>Non-Business</strong> (personal/consumer), and <strong>Blocked</strong> groups. Connectors in different groups cannot share data in the same flow — ensuring sensitive citizen data in Dataverse (Business) cannot be mixed with non-sanctioned external connectors (Non-Business).",
       "wrongExplanations": [
         "Approved/Unapproved is not the DLP terminology used by Microsoft.",
@@ -238,7 +2123,12 @@
       ],
       "answer": 1,
       "category": "security-model",
-      "tags": ["security-roles", "privilege-depth", "hierarchical-security", "access-control"],
+      "tags": [
+        "security-roles",
+        "privilege-depth",
+        "hierarchical-security",
+        "access-control"
+      ],
       "explanation": "<strong>Security roles with privilege depth settings</strong> control what records a user can access: User level (own records), Business Unit level (own BU records), Parent level (own BU and child BUs), and Organisation level (all records). Combined with <strong>Hierarchical Security</strong>, managers automatically inherit access to subordinates' records — enabling the layered visibility model at NTSA.",
       "wrongExplanations": [
         "Business Rules control field logic and form behaviour — not record-level access control.",
@@ -261,7 +2151,11 @@
       ],
       "answer": 1,
       "category": "dataverse",
-      "tags": ["common-data-model", "data-model-design", "best-practices"],
+      "tags": [
+        "common-data-model",
+        "data-model-design",
+        "best-practices"
+      ],
       "explanation": "Starting with the <strong>Common Data Model</strong> means your solution stays on Microsoft's supported upgrade path, inherits pre-built integrations (Power BI, Customer Insights, etc.), and reduces custom maintenance overhead. Every deviation into custom tables adds long-term cost — so extensions should be deliberate and justified.",
       "wrongExplanations": [
         "The CDM is not mandatory — but it is strongly recommended for maintainability.",
@@ -284,7 +2178,11 @@
       ],
       "answer": 1,
       "category": "dataverse",
-      "tags": ["data-model-design", "custom-tables", "design-principle"],
+      "tags": [
+        "data-model-design",
+        "custom-tables",
+        "design-principle"
+      ],
       "explanation": "The governing principle is: <strong>start standard, extend deliberately, create custom only when necessary</strong>. Custom tables require ongoing maintenance, can complicate upgrades, and may break integrations. At NTSA, the routing matrix complexity was a genuine requirement that standard tables could not support — justifying the custom table design.",
       "wrongExplanations": [
         "Custom tables are not always more flexible — standard tables benefit from Microsoft's continued investment and integration.",
@@ -307,7 +2205,11 @@
       ],
       "answer": 1,
       "category": "alm-devops",
-      "tags": ["solution-alm", "managed-unmanaged", "environment-strategy"],
+      "tags": [
+        "solution-alm",
+        "managed-unmanaged",
+        "environment-strategy"
+      ],
       "explanation": "<strong>Unmanaged solutions in Dev/UAT</strong> allow developers to make changes freely. <strong>Managed solutions in Production</strong> prevent direct customisation, enforce change management through the pipeline, and enable clean rollback. This is the Microsoft-recommended ALM pattern.",
       "wrongExplanations": [
         "Unmanaged in all environments allows direct production customisation — a governance and auditing risk.",
@@ -330,7 +2232,11 @@
       ],
       "answer": 1,
       "category": "alm-devops",
-      "tags": ["azure-devops", "cicd-pipeline", "solution-deployment"],
+      "tags": [
+        "azure-devops",
+        "cicd-pipeline",
+        "solution-deployment"
+      ],
       "explanation": "The correct ALM pipeline: export unmanaged from Dev → <strong>commit to source control</strong> (Azure DevOps Repos) → build pipeline converts to managed → deploy to UAT for testing → upon approval, deploy managed solution to Production. This provides versioning, audit trail, and rollback capability.",
       "wrongExplanations": [
         "Importing unmanaged solutions to Production bypasses governance and allows direct customisation.",
@@ -353,7 +2259,12 @@
       ],
       "answer": 1,
       "category": "data-migration",
-      "tags": ["kingswaySoft", "data-migration", "bulk-import", "etl"],
+      "tags": [
+        "kingswaySoft",
+        "data-migration",
+        "bulk-import",
+        "etl"
+      ],
       "explanation": "<strong>KingswaySoft SSIS</strong> excels when source data requires complex ETL — transformation logic, lookup joins, deduplication, multi-source merging. <strong>Dataverse Bulk Import</strong> (Import Wizard or the Power Platform import tool) is appropriate for straightforward CSV imports with minimal transformation. At BSK, the Excel data had legacy inconsistencies requiring transformation — hence KingswaySoft.",
       "wrongExplanations": [
         "KingswaySoft is not always faster — for clean data, Bulk Import is sufficient and simpler.",
@@ -376,7 +2287,12 @@
       ],
       "answer": 1,
       "category": "azure-integration",
-      "tags": ["custom-connector", "bearer-token", "authentication", "rest-api"],
+      "tags": [
+        "custom-connector",
+        "bearer-token",
+        "authentication",
+        "rest-api"
+      ],
       "explanation": "Custom connectors support <strong>API Key and OAuth 2.0 authentication</strong>. For Bearer Token, configure the security definition to pass the token in the <strong>Authorization header</strong> as 'Bearer {token}'. In Power Platform, environment variables or Azure Key Vault are used to store the token securely rather than hardcoding.",
       "wrongExplanations": [
         "Hardcoding tokens in URLs is a security violation — tokens belong in headers.",
@@ -399,7 +2315,12 @@
       ],
       "answer": 0,
       "category": "d365-customer-service",
-      "tags": ["entitlements", "sla", "customer-service", "case-management"],
+      "tags": [
+        "entitlements",
+        "sla",
+        "customer-service",
+        "case-management"
+      ],
       "explanation": "<strong>Entitlements</strong> define what support a customer is entitled to — number of cases, hours, or unlimited support. When a Case is created, D365 matches it to an active entitlement and applies the <strong>associated SLA</strong>. At NTSA, entitlements and SLAs were aligned to the Citizen Service Delivery Charter to enforce response time compliance.",
       "wrongExplanations": [
         null,
@@ -422,7 +2343,12 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["sla", "sla-kpi", "sla-actions", "customer-service"],
+      "tags": [
+        "sla",
+        "sla-kpi",
+        "sla-actions",
+        "customer-service"
+      ],
       "explanation": "<strong>SLA KPIs</strong> define measurable time targets — e.g., First Response Time must be within 4 hours. <strong>SLA Actions</strong> define automated responses when warning or failure thresholds are reached — e.g., send an escalation email to the manager when a case is approaching its deadline. Together they enforce and monitor compliance.",
       "wrongExplanations": [
         "They are distinct concepts with different functions.",
@@ -445,7 +2371,12 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["routing", "unified-routing", "queues", "contact-centre"],
+      "tags": [
+        "routing",
+        "unified-routing",
+        "queues",
+        "contact-centre"
+      ],
       "explanation": "<strong>Basic Routing</strong> uses queues and routing rules to assign cases — straightforward but limited to queue-based logic. <strong>Unified Routing</strong> adds skills-based routing, capacity profiles, sentiment-based routing, and intelligent work distribution across voice, email, and digital channels. At NTSA, the routing matrix complexity required a custom plugin beyond even what Unified Routing could natively support.",
       "wrongExplanations": [
         "Unified Routing handles all channels — voice, email, chat, social.",
@@ -468,7 +2399,11 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["omnichannel", "workstream", "channel-configuration"],
+      "tags": [
+        "omnichannel",
+        "workstream",
+        "channel-configuration"
+      ],
       "explanation": "A <strong>Workstream</strong> in Omnichannel defines how work from a specific channel is handled — including routing rules, capacity settings, session templates, and notification configurations. Each channel type (email, voice, live chat) has its own workstream defining the end-to-end experience.",
       "wrongExplanations": [
         "Workstreams are configuration objects — not reporting tools.",
@@ -491,7 +2426,11 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["business-process-flow", "process-governance", "field-service"],
+      "tags": [
+        "business-process-flow",
+        "process-governance",
+        "field-service"
+      ],
       "explanation": "A <strong>BPF</strong> provides guided process governance — enforcing that users move through defined stages, complete required fields at each step, and cannot skip critical phases. At CEC, this ensured every incident followed the complete Reporting → Investigation → Recommendations lifecycle with full audit trail.",
       "wrongExplanations": [
         "Performance is not the reason for choosing BPFs.",
@@ -514,7 +2453,12 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["power-pages", "web-roles", "table-permissions", "portal-security"],
+      "tags": [
+        "power-pages",
+        "web-roles",
+        "table-permissions",
+        "portal-security"
+      ],
       "explanation": "<strong>Web Roles</strong> in Power Pages define user access categories (e.g. Authenticated User, Anonymous). <strong>Table Permissions</strong> are assigned to Web Roles and define exactly which Dataverse tables portal users can access and what CRUD operations they can perform — providing granular, record-scoped security for portal users.",
       "wrongExplanations": [
         "D365 security roles apply to internal users — portal users are controlled by Web Roles and Table Permissions.",
@@ -537,7 +2481,12 @@
       ],
       "answer": 0,
       "category": "dataverse",
-      "tags": ["odata", "web-api", "javascript", "query"],
+      "tags": [
+        "odata",
+        "web-api",
+        "javascript",
+        "query"
+      ],
       "explanation": "The D365 Web API uses OData syntax at <strong>/api/data/v9.2/</strong>. The incident entity logical name is 'incidents' (plural). <strong>$filter</strong> applies conditions: ownerid for the assigned user and statecode eq 0 for Active status. The Xrm.WebApi option is also valid but uses the JavaScript client API wrapper.",
       "wrongExplanations": [
         null,
@@ -560,7 +2509,12 @@
       ],
       "answer": 1,
       "category": "dataverse",
-      "tags": ["fetchxml", "odata", "query", "aggregates"],
+      "tags": [
+        "fetchxml",
+        "odata",
+        "query",
+        "aggregates"
+      ],
       "explanation": "<strong>FetchXML</strong> excels for complex aggregations (SUM, COUNT by group), multi-entity link-entity joins, and is natively generated by Advanced Find. <strong>OData</strong> is preferred in JavaScript web resources and Power Automate for its JSON response format and REST conventions. Both are fully supported — choice depends on scenario.",
       "wrongExplanations": [
         "OData is equally powerful for most scenarios — FetchXML has specific strengths.",
@@ -583,7 +2537,12 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["power-automate", "error-handling", "flow-debugging", "sms-integration"],
+      "tags": [
+        "power-automate",
+        "error-handling",
+        "flow-debugging",
+        "sms-integration"
+      ],
       "explanation": "The <strong>flow run history</strong> in Power Automate provides the complete execution log — each action shows inputs, outputs, HTTP status codes, and error messages. Expanding the failed action reveals exactly what was sent to the SMS gateway and what error was returned — essential for diagnosing intermittent failures.",
       "wrongExplanations": [
         "D365 audit logs track record changes — not Power Automate HTTP call failures.",
@@ -606,7 +2565,12 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["cut-over", "go-live", "hypercare", "project-delivery"],
+      "tags": [
+        "cut-over",
+        "go-live",
+        "hypercare",
+        "project-delivery"
+      ],
       "explanation": "A <strong>cut-over plan</strong> defines the precise sequence of activities for transitioning from the old system to the new one: data migration execution order, legacy system freeze, smoke testing on production, go/no-go decision criteria, rollback plan if critical issues arise, and hypercare support structure for the early live period.",
       "wrongExplanations": [
         "User training is part of the broader project plan — not specific to cut-over.",
@@ -629,7 +2593,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["power-pages-licensing", "compliance", "microsoft-licensing"],
+      "tags": [
+        "power-pages-licensing",
+        "compliance",
+        "microsoft-licensing"
+      ],
       "explanation": "<strong>Power Pages capacity bundles</strong> are intended for external/anonymous users and authenticated external scenarios. <strong>Internal users</strong> (employees) accessing Dataverse tables via Power Pages require <strong>per-user Authenticated User licences</strong>. Using capacity bundles for internal users is a licensing compliance risk — exactly the scenario you identified and pushed back on at NTSA.",
       "wrongExplanations": [
         "Capacity bundles are not appropriate for internal users accessing internal Dataverse.",
@@ -652,7 +2620,11 @@
       ],
       "answer": 1,
       "category": "presales",
-      "tags": ["presales", "proof-of-concept", "demo-strategy"],
+      "tags": [
+        "presales",
+        "proof-of-concept",
+        "demo-strategy"
+      ],
       "explanation": "Planning for <strong>two to three demo rounds</strong> is best practice. Round 1 shows core capability and surfaces feedback. Round 2 incorporates that feedback and demonstrates targeted solutions to the client's specific pain points. Round 3 (if needed) shows a near-final polished solution. This iterative approach builds trust and increases win rate.",
       "wrongExplanations": [
         "A single round leaves no room for client refinement — the first demo rarely perfectly matches expectations.",
@@ -675,7 +2647,12 @@
       ],
       "answer": 1,
       "category": "mentoring",
-      "tags": ["offshore-teams", "project-management", "azure-devops", "quality"],
+      "tags": [
+        "offshore-teams",
+        "project-management",
+        "azure-devops",
+        "quality"
+      ],
       "explanation": "Effective offshore collaboration requires: <strong>clear Definition of Done</strong> so quality expectations are explicit; <strong>Azure DevOps boards</strong> with well-defined tasks so no ambiguity exists; <strong>pull request code reviews</strong> for quality gates; and a <strong>project wiki</strong> capturing architectural decisions and standards. These create a self-service quality framework that doesn't require constant synchronous oversight.",
       "wrongExplanations": [
         "Daily calls across time zones create fatigue and are not scalable.",
@@ -698,7 +2675,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["requirements-workshop", "discovery", "stakeholder-management"],
+      "tags": [
+        "requirements-workshop",
+        "discovery",
+        "stakeholder-management"
+      ],
       "explanation": "The first requirements session should focus on <strong>understanding before solutioning</strong>. Open-ended questions surface pain points and unstated needs. A data dictionary captures industry-specific terminology to prevent misinterpretation downstream. Jumping to features or POC too early misses the discovery value.",
       "wrongExplanations": [
         "Feature presentations come after understanding the client's needs — not before.",
@@ -721,7 +2702,11 @@
       ],
       "answer": 2,
       "category": "stakeholder-delivery",
-      "tags": ["governance", "change-management", "production-risk"],
+      "tags": [
+        "governance",
+        "change-management",
+        "production-risk"
+      ],
       "explanation": "Direct production customisation bypasses testing, creates ungoverned configurations (invisible in source control), and risks breaking live operations. The correct approach is to <strong>explain the risk clearly</strong> and <strong>redirect through the formal pipeline</strong>. Framing it around protecting the client's investment and operational stability — not bureaucracy — tends to get buy-in.",
       "wrongExplanations": [
         "Allowing exceptions erodes governance and sets a precedent for bypassing controls.",
@@ -744,7 +2729,11 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["field-service", "work-order", "cec-zambia"],
+      "tags": [
+        "field-service",
+        "work-order",
+        "cec-zambia"
+      ],
       "explanation": "In D365 <strong>Field Service</strong>, the <strong>Work Order</strong> is the central operational record — it captures the service type, customer location, assigned field technician, required parts, scheduled window, and completion status. At CEC, field personnel raised incidents from substations that fed into the central platform — analogous to work order creation.",
       "wrongExplanations": [
         "Invoicing is handled separately in D365 — Work Orders are operational records.",
@@ -767,7 +2756,11 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["environment-variables", "configuration", "solution-alm"],
+      "tags": [
+        "environment-variables",
+        "configuration",
+        "solution-alm"
+      ],
       "explanation": "<strong>Environment variables</strong> store configuration values that differ per environment without requiring code changes — perfect for endpoint URLs, API keys, and bearer tokens that change between Dev, UAT, and Production. At NTSA, the iTims bearer token was stored as an environment variable so the solution could be promoted cleanly across environments.",
       "wrongExplanations": [
         "Environment variables are configuration — not user preferences.",
@@ -790,7 +2783,12 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["agile", "sprint-review", "sdlc", "stakeholder-management"],
+      "tags": [
+        "agile",
+        "sprint-review",
+        "sdlc",
+        "stakeholder-management"
+      ],
       "explanation": "A <strong>Sprint Review</strong> is the client-facing demonstration of completed work at the end of a sprint. Stakeholders provide feedback, acceptance decisions are made, and the product backlog is updated based on learnings. This is distinct from a Retrospective (team process improvement) and Sprint Planning (next sprint preparation).",
       "wrongExplanations": [
         "Retrospectives focus on process improvement — Sprint Reviews focus on product delivery.",
@@ -813,7 +2811,11 @@
       ],
       "answer": 1,
       "category": "mentoring",
-      "tags": ["mentoring", "junior-development", "presentation-skills"],
+      "tags": [
+        "mentoring",
+        "junior-development",
+        "presentation-skills"
+      ],
       "explanation": "<strong>Graduated exposure</strong> is the most effective development approach — each step builds confidence through real experience in a progressively higher-stakes context. Structured feedback after each session ensures learning compounds. Simply observing or practising in isolation does not build the contextual skills needed for client-facing delivery.",
       "wrongExplanations": [
         "Observation without participation delays real skill development.",
@@ -836,7 +2838,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["risk-management", "vendor-dependencies", "project-delivery"],
+      "tags": [
+        "risk-management",
+        "vendor-dependencies",
+        "project-delivery"
+      ],
       "explanation": "The <strong>AVAYA and QMS integration dependencies</strong> were not documented as formal risks early enough — becoming mid-delivery blockers. Best practice is to log all third-party dependencies in the risk register from day one, define mitigation owners, and ensure all vendors are represented in early planning sessions. Undocumented dependencies are the most common source of implementation delays.",
       "wrongExplanations": [
         "Licensing costs are commercial risks — not the primary delivery risk identified.",
@@ -859,7 +2865,12 @@
       ],
       "answer": 1,
       "category": "azure-integration",
-      "tags": ["custom-api", "dataverse-action", "web-api", "integration"],
+      "tags": [
+        "custom-api",
+        "dataverse-action",
+        "web-api",
+        "integration"
+      ],
       "explanation": "<strong>Custom APIs</strong> provide a versioned, publisher-namespaced Web API endpoint with explicit request/response contracts — suitable for external callers (like the NTSA Azure Function calling back into D365). They are more formally defined than Dataverse actions and support custom request/response parameter types. At NTSA, the Custom API (ntsa_GetApplicationStatus) served as the internal D365 entry point for the iTims integration.",
       "wrongExplanations": [
         "They have different use cases — Custom APIs provide formal API contracts; Dataverse actions are more suited to internal process automation.",
@@ -882,7 +2893,12 @@
       ],
       "answer": 1,
       "category": "mentoring",
-      "tags": ["technical-lead", "agile", "team-management", "sprint-delivery"],
+      "tags": [
+        "technical-lead",
+        "agile",
+        "team-management",
+        "sprint-delivery"
+      ],
       "explanation": "A <strong>Technical Lead</strong> owns the technical quality of the sprint — decomposing backlog items into clear tasks, unblocking developers when they're stuck, conducting code/configuration reviews, maintaining architectural consistency, and ensuring delivery commitments are met. They code when needed but their primary value is technical governance and team enablement.",
       "wrongExplanations": [
         "Doing all the work yourself creates a bottleneck and stunts team growth.",
@@ -905,7 +2921,11 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["accelerators", "industry-templates", "customer-service"],
+      "tags": [
+        "accelerators",
+        "industry-templates",
+        "customer-service"
+      ],
       "explanation": "Power Platform <strong>Accelerators</strong> are Microsoft-provided solution packages containing pre-built data models, forms, flows, and dashboards for specific industries or workloads. The Customer Service Accelerator provides a foundation for contact centre implementations — reducing build time while staying on the standard CDM. Using accelerators before customising is a KPMG best practice.",
       "wrongExplanations": [
         "Accelerators are free solution packages — not paid performance add-ons.",
@@ -928,7 +2948,11 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["omnichannel", "session-template", "agent-workspace"],
+      "tags": [
+        "omnichannel",
+        "session-template",
+        "agent-workspace"
+      ],
       "explanation": "A <strong>Session Template</strong> defines the <strong>agent workspace experience</strong> for a specific channel — which tabs open automatically (e.g. Customer Summary, Case form, Knowledge Search) when an agent accepts a work item. This reduces agent effort by pre-loading the right context, directly impacting handling time.",
       "wrongExplanations": [
         "Session Templates are technical configuration — not training documents.",
@@ -951,7 +2975,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["frd", "business-analysis", "requirements-documentation"],
+      "tags": [
+        "frd",
+        "business-analysis",
+        "requirements-documentation"
+      ],
       "explanation": "An <strong>FRD</strong> captures agreed functional requirements: business process flows, user stories/use cases, data field requirements, integration points, business rules, and acceptance criteria. It forms the contractual baseline between business stakeholders and the delivery team — preventing scope creep and providing a reference for UAT.",
       "wrongExplanations": [
         "Technical specifications are separate from the FRD — the FRD is business-facing.",
@@ -974,7 +3002,11 @@
       ],
       "answer": 1,
       "category": "data-migration",
-      "tags": ["data-migration", "integrity-validation", "quality-assurance"],
+      "tags": [
+        "data-migration",
+        "integrity-validation",
+        "quality-assurance"
+      ],
       "explanation": "<strong>Full integrity validation</strong> covers: <strong>record count</strong> (source vs. target matches), <strong>field accuracy</strong> (spot-check critical values), <strong>referential integrity</strong> (all lookup relationships resolve correctly — no orphaned records), <strong>duplicate check</strong>, and <strong>business rule compliance</strong> (required fields populated, valid option set values). A row count alone is insufficient validation.",
       "wrongExplanations": [
         "Row count is necessary but not sufficient for integrity validation.",
@@ -997,7 +3029,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["c-suite-presentation", "executive-communication", "stakeholder-management"],
+      "tags": [
+        "c-suite-presentation",
+        "executive-communication",
+        "stakeholder-management"
+      ],
       "explanation": "C-suite audiences care about <strong>business outcomes</strong> — cost reduction, risk mitigation, compliance, competitive advantage. Lead with these, use high-level process diagrams, and quantify impact where possible. Technical details belong in appendices or separate technical workshops. At NTSA you were engaging government legal, ICT, and procurement leadership — adapting communication style was essential.",
       "wrongExplanations": [
         "Technical architecture diagrams are appropriate for technical audiences — not C-suite.",
@@ -1020,7 +3056,11 @@
       ],
       "answer": 1,
       "category": "alm-devops",
-      "tags": ["solution-publisher", "customisation-prefix", "solution-alm"],
+      "tags": [
+        "solution-publisher",
+        "customisation-prefix",
+        "solution-alm"
+      ],
       "explanation": "A <strong>solution publisher</strong> defines the prefix (e.g. 'ntsa_', 'bsk_') applied to all custom tables, fields, and components. This <strong>namespacing</strong> prevents collisions with Microsoft standard components and other customisations. It is a critical governance decision — changing it later is extremely complex. KPMG typically defines a client-specific publisher prefix for each engagement.",
       "wrongExplanations": [
         "Solution publishers are a technical configuration concept — not related to licensing sales.",
@@ -1043,7 +3083,11 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["sharepoint", "document-management", "d365-integration"],
+      "tags": [
+        "sharepoint",
+        "document-management",
+        "d365-integration"
+      ],
       "explanation": "D365's out-of-the-box SharePoint integration creates a <strong>document library folder per D365 record</strong> — documents stored in SharePoint are accessible directly from the D365 record's Documents tab. This provides SharePoint's document management capabilities (version control, co-authoring, approval workflows) without leaving the D365 interface. Used at CEC for HSE procedure documents.",
       "wrongExplanations": [
         "Co-authoring is a SharePoint capability — D365 integration exposes the SharePoint folder within D365, not the other way around.",
@@ -1066,7 +3110,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["microsoft-gold-partner", "partner-competency", "kpmg-mbs"],
+      "tags": [
+        "microsoft-gold-partner",
+        "partner-competency",
+        "kpmg-mbs"
+      ],
       "explanation": "<strong>Microsoft Gold Partner</strong> status requires demonstrated technical competence (certified professionals), proven customer success references, and meeting Microsoft's partnership performance standards. For clients it signals validated expertise and access to Microsoft's deepest technical support and early-access programmes.",
       "wrongExplanations": [
         "Partner licences are available but not unlimited — Gold status is about competency, not licensing.",
@@ -1089,7 +3137,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["plugin-performance", "synchronous-plugin", "transaction-timeout"],
+      "tags": [
+        "plugin-performance",
+        "synchronous-plugin",
+        "transaction-timeout"
+      ],
       "explanation": "Synchronous plugins execute within the Dataverse <strong>database transaction</strong>. D365 enforces a 2-minute transaction timeout. Each additional synchronous plugin adds execution time — complex queries or external calls across multiple plugins can approach or exceed this limit, causing transaction failures and blocking the user operation.",
       "wrongExplanations": [
         "Synchronous plugins run sequentially in the transaction — not in parallel.",
@@ -1112,7 +3164,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["user-training", "change-management", "go-live"],
+      "tags": [
+        "user-training",
+        "change-management",
+        "go-live"
+      ],
       "explanation": "Effective end-user training is <strong>role-based</strong> — agents get different training from managers. It uses the actual system with realistic data exercises, not slides. Quick reference guides provide post-training support. A clear helpdesk/support pathway addresses the inevitable questions after go-live. Generic, architecture-focused training does not build the operational confidence users need.",
       "wrongExplanations": [
         "Self-training from manuals is ineffective for most users — they need guided, contextual practice.",
@@ -1135,7 +3191,11 @@
       ],
       "answer": 1,
       "category": "dataverse",
-      "tags": ["connection-roles", "relationships", "dataverse-model"],
+      "tags": [
+        "connection-roles",
+        "relationships",
+        "dataverse-model"
+      ],
       "explanation": "<strong>Relationships</strong> (1:N, N:N) are structural data model links — defined at design time, enforced by the platform, with cascade behaviours. <strong>Connection Roles</strong> allow users to create flexible semantic associations between any two records at runtime — e.g., marking a Contact as a 'Stakeholder' on an Account. They are complementary tools for different purposes.",
       "wrongExplanations": [
         "They serve different purposes — one is structural, one is semantic.",
@@ -1158,7 +3218,12 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["copilot-studio", "ai-builder", "chatbot", "self-service"],
+      "tags": [
+        "copilot-studio",
+        "ai-builder",
+        "chatbot",
+        "self-service"
+      ],
       "explanation": "The Copilot Studio POC at NTSA targeted a <strong>public-facing self-service chatbot</strong> on the NTSA website — enabling citizens to get answers to common queries (licence status, application status) without creating a Case in the contact centre. The goal was <strong>deflection</strong> — reducing inbound volume and freeing agents for complex queries.",
       "wrongExplanations": [
         "The chatbot supplements agents — it does not replace them.",
@@ -1181,7 +3246,11 @@
       ],
       "answer": 1,
       "category": "d365-customer-service",
-      "tags": ["unified-interface", "omnichannel", "ux"],
+      "tags": [
+        "unified-interface",
+        "omnichannel",
+        "ux"
+      ],
       "explanation": "The <strong>Unified Interface</strong> is the modern D365 application framework — responsive, web-based, and replacing the legacy client. It is foundational for contact centres because <strong>Omnichannel for Customer Service</strong> is built on top of it, providing multi-session handling, embedded chat/voice, and the agent workspace required for high-volume operations like NTSA.",
       "wrongExplanations": [
         "Unified Interface is a D365 application framework — not an Azure service.",
@@ -1204,7 +3273,12 @@
       ],
       "answer": 1,
       "category": "alm-devops",
-      "tags": ["default-solution", "solution-publisher", "technical-debt", "alm-remediation"],
+      "tags": [
+        "default-solution",
+        "solution-publisher",
+        "technical-debt",
+        "alm-remediation"
+      ],
       "explanation": "Working in the <strong>default solution</strong> is a major ALM anti-pattern: no publisher prefix (collision risk), no clean export/import capability, no layered solution management, and no proper promotion pipeline. The remediation is to define a publisher, create structured solutions, and migrate customisations — a non-trivial but necessary remediation before go-live.",
       "wrongExplanations": [
         "The default solution creates significant technical debt and governance risk.",
@@ -1227,7 +3301,12 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["definition-of-done", "agile", "quality-gates", "sprint"],
+      "tags": [
+        "definition-of-done",
+        "agile",
+        "quality-gates",
+        "sprint"
+      ],
       "explanation": "A <strong>Definition of Done</strong> is a shared agreement on what 'complete' means for a user story — typically: feature configured/developed, unit tested, code reviewed, technical documentation updated, and demoed to the product owner. It prevents 'done' meaning different things to different team members and ensures consistent quality across sprints.",
       "wrongExplanations": [
         "Task lists are sprint backlogs — not the Definition of Done.",
@@ -1250,7 +3329,12 @@
       ],
       "answer": 1,
       "category": "security-model",
-      "tags": ["least-privilege", "security-roles", "compliance", "dataverse-security"],
+      "tags": [
+        "least-privilege",
+        "security-roles",
+        "compliance",
+        "dataverse-security"
+      ],
       "explanation": "The <strong>principle of least privilege</strong> means each user has only the minimum access needed for their role. In D365 this means tailored security roles — field technicians can create incidents but not delete them; HSE managers can approve but not modify financial cost records; admins have full access. This reduces risk surface for accidental changes and potential data breaches.",
       "wrongExplanations": [
         "Broad access increases risk without increasing productivity.",
@@ -1273,7 +3357,11 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["javascript-web-resource", "form-events", "auto-populate"],
+      "tags": [
+        "javascript-web-resource",
+        "form-events",
+        "auto-populate"
+      ],
       "explanation": "Registering on <strong>OnChange of the Service Type field</strong> fires the JavaScript function immediately when the user selects a service type — enabling real-time auto-population of related fields. OnLoad fires once when the form opens (before user input). OnSave fires too late for field auto-population during data entry.",
       "wrongExplanations": [
         "OnLoad fires before the user has selected a service type — too early for field-based auto-population.",
@@ -1296,7 +3384,12 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["data-sovereignty", "compliance", "data-residency", "government"],
+      "tags": [
+        "data-sovereignty",
+        "compliance",
+        "data-residency",
+        "government"
+      ],
       "explanation": "<strong>Data sovereignty</strong> means data is subject to the laws of the country where it resides. For NTSA — a Kenyan government entity — citizen data must comply with Kenya's Data Protection Act, which has implications for where the D365 environment is hosted. Negotiating the hosting framework with Microsoft and NTSA's legal team was a critical pre-implementation step.",
       "wrongExplanations": [
         "Data sovereignty is about legal jurisdiction — not schema ownership.",
@@ -1319,7 +3412,11 @@
       ],
       "answer": 1,
       "category": "presales",
-      "tags": ["presales", "demo-environment", "client-presentation"],
+      "tags": [
+        "presales",
+        "demo-environment",
+        "client-presentation"
+      ],
       "explanation": "An effective demo uses <strong>relevant sample data and scenarios</strong> that mirror the client's context — showing how D365 solves their specific pain points rather than generic product features. A blank environment requires too much imagination; a live client environment creates confidentiality risks. The narrative connecting each feature to business value is as important as the technical demonstration.",
       "wrongExplanations": [
         "Blank environments require clients to imagine the value — demos should show it.",
@@ -1342,7 +3439,11 @@
       ],
       "answer": 1,
       "category": "plugin-development",
-      "tags": ["synchronous-plugin", "asynchronous-plugin", "plugin-mode"],
+      "tags": [
+        "synchronous-plugin",
+        "asynchronous-plugin",
+        "plugin-mode"
+      ],
       "explanation": "<strong>Synchronous plugins</strong> run within the transaction — blocking the user until complete. Use them for validation (PreValidation), data modification (PreOperation), or post-save operations that must succeed before the user is unblocked (PostOperation sync). <strong>Asynchronous plugins</strong> run in a background queue after the transaction — use them for non-critical operations (email notifications, external API calls) that should not block the user experience.",
       "wrongExplanations": [
         "Synchronous plugins block the user — overusing them degrades performance.",
@@ -1365,7 +3466,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["public-sector", "security-clearance", "government-compliance"],
+      "tags": [
+        "public-sector",
+        "security-clearance",
+        "government-compliance"
+      ],
       "explanation": "Government security clearances demonstrate that a consultant can be trusted with <strong>sensitive national data</strong> — a prerequisite for many public sector engagements. Obtaining clearances also means navigating government legal, ICT, and procurement teams — a significantly more complex stakeholder environment than commercial clients. This experience is a genuine differentiator in competitive D365 consulting.",
       "wrongExplanations": [
         "Security clearances are not standard for commercial D365 projects — they are specific to sensitive government engagements.",
@@ -1388,7 +3493,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["certification", "pl-600", "solution-architect"],
+      "tags": [
+        "certification",
+        "pl-600",
+        "solution-architect"
+      ],
       "explanation": "<strong>PL-600 Power Platform Solution Architect Expert</strong> is the highest-level Power Platform certification — validating expertise in solution architecture, governance, security, ALM, and integration across the full Power Platform and D365 stack. It requires hands-on experience and is the certification that most directly maps to the KPMG Senior Consultant/Architect role requirements.",
       "wrongExplanations": [
         "PL-900 is a fundamentals certification — not appropriate for senior consultant validation.",
@@ -1411,7 +3520,12 @@
       ],
       "answer": 1,
       "category": "alm-devops",
-      "tags": ["solution-checker", "code-quality", "best-practices", "alm"],
+      "tags": [
+        "solution-checker",
+        "code-quality",
+        "best-practices",
+        "alm"
+      ],
       "explanation": "<strong>Solution Checker</strong> performs static analysis of your solution — identifying issues like deprecated API usage, synchronous plugin calls to external services, missing error handling, and security violations. Running it <strong>regularly during development</strong> (not just at go-live) prevents technical debt accumulation and ensures compliance with Microsoft's best practice standards — important in KPMG's structured delivery methodology.",
       "wrongExplanations": [
         "Running only at go-live means issues are discovered too late — remediation at that stage is costly.",
@@ -1434,7 +3548,12 @@
       ],
       "answer": 1,
       "category": "power-platform",
-      "tags": ["canvas-app", "model-driven-app", "power-apps", "design-decision"],
+      "tags": [
+        "canvas-app",
+        "model-driven-app",
+        "power-apps",
+        "design-decision"
+      ],
       "explanation": "<strong>Canvas Apps</strong> excel when you need full UI control, custom layouts, or integration with many non-Dataverse data sources. <strong>Model-Driven Apps</strong> excel when the solution is data-centric, process-driven (BPFs, business rules), and deeply integrated with Dataverse — as in field service or customer service scenarios. At CEC, a D365 mobile app (Model-Driven) was appropriate because it needed to integrate with the core HSE data model.",
       "wrongExplanations": [
         "Model-Driven Apps work excellently on mobile — D365 mobile uses Unified Interface.",
@@ -1457,7 +3576,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["requirements-workshop", "documentation", "sign-off"],
+      "tags": [
+        "requirements-workshop",
+        "documentation",
+        "sign-off"
+      ],
       "explanation": "The primary output of a requirements workshop is <strong>agreed, documented, signed-off requirements</strong> with clear acceptance criteria. This forms the contractual baseline preventing scope creep, provides the reference for UAT, and ensures all stakeholders share the same understanding of what will be delivered. Action items and demos support the process — they are not the output.",
       "wrongExplanations": [
         "PowerPoint summaries are communication tools — not the contractual deliverable.",
@@ -1480,7 +3603,11 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["uat", "bug-vs-change-request", "scope-management"],
+      "tags": [
+        "uat",
+        "bug-vs-change-request",
+        "scope-management"
+      ],
       "explanation": "A <strong>bug</strong> means the system does not match the agreed requirements — it must be fixed. A <strong>change request</strong> means the system works as agreed but the client wants something different or new — it goes through formal scope change management (impact assessment, timeline, cost). Confusing these two is one of the most common sources of scope creep and project disputes.",
       "wrongExplanations": [
         "Treating all UAT feedback as bugs leads to uncontrolled scope creep.",
@@ -1503,7 +3630,12 @@
       ],
       "answer": 1,
       "category": "security-model",
-      "tags": ["data-protection", "auditing", "compliance", "kenya-dpa"],
+      "tags": [
+        "data-protection",
+        "auditing",
+        "compliance",
+        "kenya-dpa"
+      ],
       "explanation": "<strong>Dataverse Auditing</strong> records every data change — who created, modified, or deleted records, and when. This audit trail is a core requirement of data protection legislation like Kenya's DPA, enabling accountability, breach investigation, and regulatory reporting. At NTSA, enabling auditing on citizen data entities was a compliance requirement.",
       "wrongExplanations": [
         "Power BI reports analyse data — they don't create the compliance audit trail.",
@@ -1526,7 +3658,12 @@
       ],
       "answer": 1,
       "category": "stakeholder-delivery",
-      "tags": ["multi-country", "gdpr", "data-residency", "global-architecture"],
+      "tags": [
+        "multi-country",
+        "gdpr",
+        "data-residency",
+        "global-architecture"
+      ],
       "explanation": "Multi-country D365 deployments require careful architecture across: <strong>data residency</strong> (GDPR requires EU citizen data to stay in the EU), <strong>Business Unit structure</strong> for data segregation by country, <strong>currency and language</strong> configuration per region, and a <strong>governance model</strong> for cross-country data access. This is directly relevant to KPMG MBS's EMEA client base.",
       "wrongExplanations": [
         "A single environment without proper BU/security design can violate data residency regulations.",
@@ -1542,6 +3679,316 @@
   ],
   "dragdrop": [
     {
+      "instruction": "Put these ALM steps in the correct order for promoting a CE solution from Dev to Production.",
+      "items": [
+        "Commit solution unpacked assets to source control",
+        "Build and package the managed solution",
+        "Deploy to UAT and execute validation",
+        "Promote the managed solution to Production"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Commit solution unpacked assets to source control": "Step 1",
+        "Build and package the managed solution": "Step 2",
+        "Deploy to UAT and execute validation": "Step 3",
+        "Promote the managed solution to Production": "Step 4"
+      },
+      "tags": [
+        "alm",
+        "ci-cd",
+        "devops"
+      ],
+      "explanation": "A controlled ALM flow moves from versioned source to packaged artifact to test validation to managed production deployment.",
+      "msRef": {
+        "label": "Use Power Platform Build Tools for Azure DevOps",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools"
+      }
+    },
+    {
+      "instruction": "Put these troubleshooting steps in order when a Power Automate HTTP action fails intermittently.",
+      "items": [
+        "Open the failed run in flow history",
+        "Inspect the failed action inputs, outputs, and status code",
+        "Confirm whether the problem is token, payload, endpoint, or downstream behavior",
+        "Apply the targeted fix and re-test"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Open the failed run in flow history": "Step 1",
+        "Inspect the failed action inputs, outputs, and status code": "Step 2",
+        "Confirm whether the problem is token, payload, endpoint, or downstream behavior": "Step 3",
+        "Apply the targeted fix and re-test": "Step 4"
+      },
+      "tags": [
+        "power-automate",
+        "troubleshooting",
+        "http"
+      ],
+      "explanation": "Good debugging starts with evidence from run history, then narrows root cause, then fixes deliberately.",
+      "msRef": {
+        "label": "Fix flow failures",
+        "url": "https://learn.microsoft.com/en-us/power-automate/fix-flow-failures"
+      }
+    },
+    {
+      "instruction": "Put these steps in order when designing a secure Azure Function proxy for a private-network back-end.",
+      "items": [
+        "Confirm the private system cannot be reached directly from the client",
+        "Define the Azure Function as the controlled integration boundary",
+        "Establish approved secure connectivity and secret handling",
+        "Call the function from the client and let it broker the back-end request"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the private system cannot be reached directly from the client": "Step 1",
+        "Define the Azure Function as the controlled integration boundary": "Step 2",
+        "Establish approved secure connectivity and secret handling": "Step 3",
+        "Call the function from the client and let it broker the back-end request": "Step 4"
+      },
+      "tags": [
+        "azure-functions",
+        "integration",
+        "private-network"
+      ],
+      "explanation": "The point is to create a governed, reachable, and secure bridge instead of exposing a private dependency directly.",
+      "msRef": {
+        "label": "Azure Functions overview",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview"
+      }
+    },
+    {
+      "instruction": "Put these migration-validation steps in the correct order after loading records into Dataverse.",
+      "items": [
+        "Verify record counts against the source",
+        "Check critical field accuracy on sampled records",
+        "Validate lookups and referential integrity",
+        "Confirm business-rule compliance and duplicate outcomes"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Verify record counts against the source": "Step 1",
+        "Check critical field accuracy on sampled records": "Step 2",
+        "Validate lookups and referential integrity": "Step 3",
+        "Confirm business-rule compliance and duplicate outcomes": "Step 4"
+      },
+      "tags": [
+        "data-migration",
+        "validation",
+        "quality"
+      ],
+      "explanation": "Validation should move from volume checks into deeper correctness and business fitness checks.",
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "instruction": "Put these steps in order when responding to a client request for direct Production changes.",
+      "items": [
+        "Clarify the requested change and urgency",
+        "Explain the governance, testing, and rollback risks of bypassing the pipeline",
+        "Route the change through the approved release path",
+        "Communicate expected delivery path and next checkpoint"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the requested change and urgency": "Step 1",
+        "Explain the governance, testing, and rollback risks of bypassing the pipeline": "Step 2",
+        "Route the change through the approved release path": "Step 3",
+        "Communicate expected delivery path and next checkpoint": "Step 4"
+      },
+      "tags": [
+        "governance",
+        "production",
+        "stakeholder-management"
+      ],
+      "explanation": "A strong lead handles this by clarifying, educating, redirecting, and then setting expectations.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "instruction": "Put these steps in order when deciding whether to build custom routing instead of using native routing features.",
+      "items": [
+        "Clarify the real routing requirement and edge cases",
+        "Evaluate native routing capability and supported assignment methods",
+        "Identify the material gap that remains",
+        "Decide whether custom logic is justified and document the rationale"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the real routing requirement and edge cases": "Step 1",
+        "Evaluate native routing capability and supported assignment methods": "Step 2",
+        "Identify the material gap that remains": "Step 3",
+        "Decide whether custom logic is justified and document the rationale": "Step 4"
+      },
+      "tags": [
+        "routing",
+        "fit-gap",
+        "architecture"
+      ],
+      "explanation": "You should not jump to custom routing until the requirement and the native capability gap are both clear.",
+      "msRef": {
+        "label": "Assignment methods in unified routing",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      }
+    },
+    {
+      "instruction": "Put these steps in order for designing secure Power Pages access to Dataverse.",
+      "items": [
+        "Identify which portal users need access to which records",
+        "Define the appropriate web roles",
+        "Create table permissions aligned to those access needs",
+        "Test portal behavior against the intended record-access model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify which portal users need access to which records": "Step 1",
+        "Define the appropriate web roles": "Step 2",
+        "Create table permissions aligned to those access needs": "Step 3",
+        "Test portal behavior against the intended record-access model": "Step 4"
+      },
+      "tags": [
+        "power-pages",
+        "security",
+        "portal"
+      ],
+      "explanation": "Security should begin with the access model, then the roles and permissions, then verification.",
+      "msRef": {
+        "label": "Table permissions in Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/table-permissions"
+      }
+    },
+    {
+      "instruction": "Put these steps in order when preparing a technically rigorous presales PoC.",
+      "items": [
+        "Clarify the client problem and success criteria",
+        "Select a believable constrained scenario to demonstrate",
+        "Build only enough to validate fit and key risks",
+        "Close with assumptions, limitations, and recommended next steps"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the client problem and success criteria": "Step 1",
+        "Select a believable constrained scenario to demonstrate": "Step 2",
+        "Build only enough to validate fit and key risks": "Step 3",
+        "Close with assumptions, limitations, and recommended next steps": "Step 4"
+      },
+      "tags": [
+        "presales",
+        "poc",
+        "technical-rigor"
+      ],
+      "explanation": "A strong PoC starts with the problem, stays bounded, and ends with grounded recommendations.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "instruction": "Put these steps in order when setting DLP guardrails for a regulated CE tenant.",
+      "items": [
+        "Classify the sensitive data and allowed movement patterns",
+        "Group connectors by approved business usage and restrictions",
+        "Apply and test DLP policies in the relevant environments",
+        "Review impact on planned integrations and adjust design if needed"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Classify the sensitive data and allowed movement patterns": "Step 1",
+        "Group connectors by approved business usage and restrictions": "Step 2",
+        "Apply and test DLP policies in the relevant environments": "Step 3",
+        "Review impact on planned integrations and adjust design if needed": "Step 4"
+      },
+      "tags": [
+        "dlp",
+        "governance",
+        "compliance"
+      ],
+      "explanation": "DLP should follow from data-classification intent, then connector policy design, then testing, then architectural adjustment.",
+      "msRef": {
+        "label": "Data loss prevention policies",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+      }
+    },
+    {
+      "instruction": "Put these early-live support steps in order around go-live.",
+      "items": [
+        "Define hypercare ownership and triage routes",
+        "Execute cutover and smoke testing",
+        "Monitor incidents and stabilize the solution during hypercare",
+        "Transition to the steady-state support model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Define hypercare ownership and triage routes": "Step 1",
+        "Execute cutover and smoke testing": "Step 2",
+        "Monitor incidents and stabilize the solution during hypercare": "Step 3",
+        "Transition to the steady-state support model": "Step 4"
+      },
+      "tags": [
+        "cutover",
+        "hypercare",
+        "support"
+      ],
+      "explanation": "Hypercare is not an afterthought; it should be designed before cutover and then executed deliberately.",
+      "msRef": {
+        "label": "Go-live readiness",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/fasttrack/go-live-readiness"
+      }
+    },
+    {
       "instruction": "Arrange the correct sequence of steps to build and deploy a custom C# routing plugin for D365 Customer Service — from requirement to production.",
       "items": [
         "Define the routing matrix requirements with the client",
@@ -1553,7 +4000,16 @@
         "Conduct regression testing and obtain sign-off",
         "Deploy managed solution to Production"
       ],
-      "zones": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8"],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5",
+        "Step 6",
+        "Step 7",
+        "Step 8"
+      ],
       "correctMapping": {
         "Define the routing matrix requirements with the client": "Step 1",
         "Create the plugin project in Visual Studio targeting the correct Dataverse SDK version": "Step 2",
@@ -1564,7 +4020,11 @@
         "Conduct regression testing and obtain sign-off": "Step 7",
         "Deploy managed solution to Production": "Step 8"
       },
-      "tags": ["plugin-development", "sdlc", "deployment-sequence"],
+      "tags": [
+        "plugin-development",
+        "sdlc",
+        "deployment-sequence"
+      ],
       "explanation": "Plugin delivery follows the full SDLC: requirements → development → plugin registration → Dev testing → UAT promotion → regression testing → Production deployment. Skipping any step risks production issues.",
       "msRef": {
         "label": "Plugin development lifecycle",
@@ -1597,7 +4057,11 @@
         "SLA Action": "An automated response triggered when a warning or failure threshold is reached",
         "Business Process Flow": "A guided stage-by-stage process enforcing lifecycle completion"
       },
-      "tags": ["customer-service", "component-mapping", "terminology"],
+      "tags": [
+        "customer-service",
+        "component-mapping",
+        "terminology"
+      ],
       "explanation": "These six components form the core Customer Service configuration model. Understanding each and how they interact is essential for architecting a D365 contact centre at NTSA scale.",
       "msRef": {
         "label": "Customer Service configuration components",
@@ -1614,7 +4078,14 @@
         "Test that existing flows are not broken by the policy",
         "Communicate restrictions to all Power Platform users and document exceptions process"
       ],
-      "zones": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6"],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5",
+        "Step 6"
+      ],
       "correctMapping": {
         "Audit existing connectors in use across all environments": "Step 1",
         "Classify connectors into Business, Non-Business, and Blocked groups": "Step 2",
@@ -1623,7 +4094,11 @@
         "Test that existing flows are not broken by the policy": "Step 5",
         "Communicate restrictions to all Power Platform users and document exceptions process": "Step 6"
       },
-      "tags": ["dlp-policy", "data-governance", "power-platform-admin"],
+      "tags": [
+        "dlp-policy",
+        "data-governance",
+        "power-platform-admin"
+      ],
       "explanation": "DLP policy implementation sequence: audit first (to understand impact), classify, scope, apply, test, communicate. Applying without testing first risks breaking existing legitimate flows.",
       "msRef": {
         "label": "DLP policy setup",
@@ -1652,7 +4127,12 @@
         "Sync case data to an external reporting system after save": "Asynchronous Plugin (background queue)",
         "Validate that a required field has a value before save": "Synchronous Plugin (blocks transaction)"
       },
-      "tags": ["plugin-mode", "synchronous", "asynchronous", "design-decision"],
+      "tags": [
+        "plugin-mode",
+        "synchronous",
+        "asynchronous",
+        "design-decision"
+      ],
       "explanation": "Synchronous plugins are needed when the operation must block the transaction — validation, pre-save data modification. Asynchronous plugins are appropriate for non-blocking post-save operations that should not delay the user experience.",
       "msRef": {
         "label": "Plugin execution modes",
@@ -1670,7 +4150,15 @@
         "Obtain business sign-off on migrated data quality",
         "Archive or decommission the legacy Excel files"
       ],
-      "zones": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7"],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Step 5",
+        "Step 6",
+        "Step 7"
+      ],
       "correctMapping": {
         "Map source Excel columns to Dataverse field schema": "Step 1",
         "Clean and deduplicate source data": "Step 2",
@@ -1680,7 +4168,11 @@
         "Obtain business sign-off on migrated data quality": "Step 6",
         "Archive or decommission the legacy Excel files": "Step 7"
       },
-      "tags": ["data-migration", "sequence", "referential-integrity"],
+      "tags": [
+        "data-migration",
+        "sequence",
+        "referential-integrity"
+      ],
       "explanation": "Migration sequence matters: parent records must exist before child records (to resolve lookups). Clean data before migration — not after. Validate before sign-off. Decommission only after confirmed success.",
       "msRef": {
         "label": "Data migration for Dynamics 365",
@@ -1713,7 +4205,11 @@
         "KingswaySoft SSIS Adapter": "Migrate large volumes of data with complex transformation from SQL or structured sources",
         "Power Automate ETL Flow": "Simple data transformation and load operations within Power Platform"
       },
-      "tags": ["integration-patterns", "connector-selection", "design-decision"],
+      "tags": [
+        "integration-patterns",
+        "connector-selection",
+        "design-decision"
+      ],
       "explanation": "Integration pattern selection follows a hierarchy: native connector first, custom connector second, Custom API for external-facing endpoints, Azure Function for network boundary crossing, KingswaySoft for complex ETL, Power Automate for simple platform-native transforms.",
       "msRef": {
         "label": "Integration patterns for Power Platform",
@@ -1725,7 +4221,13 @@
     {
       "title": "KPMG Scenario: National Revenue Authority — D365 Customer Service Contact Centre",
       "scenario": "A KPMG client — a National Revenue Authority (NRA) — processes 3,000+ daily taxpayer queries across phone, email, and a web form. Current state: queries handled via email only with no SLA tracking, agents are assigned manually by supervisors, and there is no self-service capability. The NRA has strict data sovereignty requirements under national data protection law — all data must remain in-country.\n\nYour task as the D365 CE Consultant is to architect and lead delivery of a D365 Customer Service contact centre solution.\n\nRequirements:\n1. Automated case routing based on query type and agent skill\n2. SLA enforcement aligned to a published citizen service charter\n3. Real-time visibility dashboards for supervisors\n4. Integration with the NRA's legacy taxpayer database (on-premise, REST API, Bearer Token)\n5. Data sovereignty compliance — hosting must be within the country's Microsoft data centre\n6. Self-service portal for status checking by taxpayers",
-      "tags": ["customer-service", "contact-centre", "integration", "data-sovereignty", "power-pages"],
+      "tags": [
+        "customer-service",
+        "contact-centre",
+        "integration",
+        "data-sovereignty",
+        "power-pages"
+      ],
       "msRef": {
         "label": "D365 Customer Service architecture",
         "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview"
