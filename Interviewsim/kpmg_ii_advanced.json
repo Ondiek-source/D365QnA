@@ -1,0 +1,2957 @@
+{
+  "_meta": {
+    "topic": "KPMG II Advanced",
+    "description": "Advanced KPMG-style sequence scenarios for Dynamics 365 CE technical consulting, focusing on architecture, ALM, integration, migration, customer service, Power Pages, Field Service, and technical leadership.",
+    "status": "complete"
+  },
+  "mcq": [],
+  "tf": [],
+  "dragdrop": [
+    {
+      "instruction": "You need to enforce region-based case assignment before a Case is saved. Put the plugin design steps in the correct order.",
+      "items": [
+        "Confirm the assignment must happen before save and within the transaction",
+        "Register a synchronous PreOperation step on Case Create",
+        "Read the routing inputs and query the routing matrix",
+        "Set the owner on the Target record before commit"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the assignment must happen before save and within the transaction": "Step 1",
+        "Register a synchronous PreOperation step on Case Create": "Step 2",
+        "Read the routing inputs and query the routing matrix": "Step 3",
+        "Set the owner on the Target record before commit": "Step 4"
+      },
+      "tags": [
+        "plugin",
+        "routing",
+        "preoperation"
+      ],
+      "explanation": "When ownership must be correct at save time, the right pattern is to validate the timing requirement first, use PreOperation, resolve the routing rule, then set the Target record before the transaction commits.",
+      "msRef": {
+        "label": "Event framework",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/event-framework"
+      }
+    },
+    {
+      "instruction": "A plugin must block Case creation when no valid entitlement exists. Put the correct implementation flow in order.",
+      "items": [
+        "Read the incoming case context and relevant customer references",
+        "Query the entitlement conditions needed for validation",
+        "Determine whether the business rule fails",
+        "Throw InvalidPluginExecutionException to stop the transaction"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Read the incoming case context and relevant customer references": "Step 1",
+        "Query the entitlement conditions needed for validation": "Step 2",
+        "Determine whether the business rule fails": "Step 3",
+        "Throw InvalidPluginExecutionException to stop the transaction": "Step 4"
+      },
+      "tags": [
+        "plugin",
+        "entitlements",
+        "validation"
+      ],
+      "explanation": "For a synchronous save-time validation, the sequence is to inspect context, retrieve the required entitlement evidence, evaluate the rule, then throw an exception if the operation must be blocked.",
+      "msRef": {
+        "label": "Handle exceptions in plug-ins",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/handle-exceptions"
+      }
+    },
+    {
+      "instruction": "A plugin appears deployed but no business behavior happens. Put the first-line troubleshooting sequence in order.",
+      "items": [
+        "Verify the step is registered on the correct message and table",
+        "Verify the execution stage and mode match the intended behavior",
+        "Check filtering attributes and input assumptions",
+        "Review tracing or logs after confirming registration is correct"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Verify the step is registered on the correct message and table": "Step 1",
+        "Verify the execution stage and mode match the intended behavior": "Step 2",
+        "Check filtering attributes and input assumptions": "Step 3",
+        "Review tracing or logs after confirming registration is correct": "Step 4"
+      },
+      "tags": [
+        "plugin",
+        "troubleshooting",
+        "registration"
+      ],
+      "explanation": "The cleanest plugin triage starts with registration correctness, then stage/mode, then filtering/input assumptions, and only then deeper runtime diagnostics.",
+      "msRef": {
+        "label": "Event framework",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/event-framework"
+      }
+    },
+    {
+      "instruction": "You want routing rules to be maintainable without changing code every time. Put the better design sequence in order.",
+      "items": [
+        "Identify the routing factors that should be business-maintained",
+        "Create a routing configuration table or matrix in Dataverse",
+        "Read the configuration from the plugin at runtime",
+        "Keep compiled code focused on evaluation and assignment rather than hardcoded rule values"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the routing factors that should be business-maintained": "Step 1",
+        "Create a routing configuration table or matrix in Dataverse": "Step 2",
+        "Read the configuration from the plugin at runtime": "Step 3",
+        "Keep compiled code focused on evaluation and assignment rather than hardcoded rule values": "Step 4"
+      },
+      "tags": [
+        "plugin",
+        "configuration",
+        "maintainability"
+      ],
+      "explanation": "The maintainable pattern is to separate business-changeable rules into data and keep code focused on execution logic.",
+      "msRef": {
+        "label": "Write a plug-in",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/write-plug-in"
+      }
+    },
+    {
+      "instruction": "You need a custom Dataverse operation exposed cleanly for reuse. Put the design steps in order.",
+      "items": [
+        "Define the business operation that is not just simple CRUD",
+        "Design the request and response contract clearly",
+        "Implement it as a Custom API",
+        "Call it consistently from the approved consumers"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Define the business operation that is not just simple CRUD": "Step 1",
+        "Design the request and response contract clearly": "Step 2",
+        "Implement it as a Custom API": "Step 3",
+        "Call it consistently from the approved consumers": "Step 4"
+      },
+      "tags": [
+        "dataverse",
+        "custom-api",
+        "extensibility"
+      ],
+      "explanation": "A Custom API is appropriate when you have a reusable business operation that deserves a formal contract rather than ad hoc client logic.",
+      "msRef": {
+        "label": "Custom API overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/custom-api"
+      }
+    },
+    {
+      "instruction": "A client-side script needs related Dataverse data to drive dynamic form behavior. Put the clean approach in order.",
+      "items": [
+        "Identify the exact data needed for the behavior",
+        "Build the supported Dataverse query using Xrm.WebApi",
+        "Handle the returned data and apply the form logic",
+        "Add error handling for missing or failed data retrieval"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the exact data needed for the behavior": "Step 1",
+        "Build the supported Dataverse query using Xrm.WebApi": "Step 2",
+        "Handle the returned data and apply the form logic": "Step 3",
+        "Add error handling for missing or failed data retrieval": "Step 4"
+      },
+      "tags": [
+        "javascript",
+        "xrm-webapi",
+        "forms"
+      ],
+      "explanation": "The right client pattern is to define the data need first, retrieve it with supported APIs, apply the logic, and fail gracefully.",
+      "msRef": {
+        "label": "Xrm.WebApi reference",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference/xrm-webapi"
+      }
+    },
+    {
+      "instruction": "A browser form must access a private-network API. Put the correct architectural response in order.",
+      "items": [
+        "Confirm the browser cannot directly and safely reach the private endpoint",
+        "Define an Azure Function as the controlled integration boundary",
+        "Establish approved secure connectivity and secret handling",
+        "Call the Azure Function from the client instead of the private endpoint"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the browser cannot directly and safely reach the private endpoint": "Step 1",
+        "Define an Azure Function as the controlled integration boundary": "Step 2",
+        "Establish approved secure connectivity and secret handling": "Step 3",
+        "Call the Azure Function from the client instead of the private endpoint": "Step 4"
+      },
+      "tags": [
+        "azure-functions",
+        "integration",
+        "private-network"
+      ],
+      "explanation": "The correct pattern is to avoid direct browser-to-private-network dependency and introduce a governed server-side integration boundary.",
+      "msRef": {
+        "label": "Azure Functions overview",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview"
+      }
+    },
+    {
+      "instruction": "You need to call an external REST API from a Power Automate custom connector using bearer-token authentication. Put the setup sequence in order.",
+      "items": [
+        "Confirm the target API authentication pattern and token expectation",
+        "Define the connector security scheme appropriately",
+        "Configure the Authorization header pattern correctly",
+        "Test the connector with controlled secrets and expected responses"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the target API authentication pattern and token expectation": "Step 1",
+        "Define the connector security scheme appropriately": "Step 2",
+        "Configure the Authorization header pattern correctly": "Step 3",
+        "Test the connector with controlled secrets and expected responses": "Step 4"
+      },
+      "tags": [
+        "custom-connector",
+        "bearer-token",
+        "integration"
+      ],
+      "explanation": "The safe order is to understand auth requirements first, model them correctly in the connector, apply the header pattern, then validate behavior.",
+      "msRef": {
+        "label": "Define authentication for a custom connector",
+        "url": "https://learn.microsoft.com/en-us/connectors/custom-connectors/define-authentication"
+      }
+    },
+    {
+      "instruction": "An intermittent HTTP integration in a cloud flow is failing. Put the debugging sequence in order.",
+      "items": [
+        "Open the failed run in Power Automate history",
+        "Inspect the failed action inputs, outputs, and status code",
+        "Determine whether the issue is token, payload, endpoint, or downstream behavior",
+        "Apply the targeted fix and run a controlled retest"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Open the failed run in Power Automate history": "Step 1",
+        "Inspect the failed action inputs, outputs, and status code": "Step 2",
+        "Determine whether the issue is token, payload, endpoint, or downstream behavior": "Step 3",
+        "Apply the targeted fix and run a controlled retest": "Step 4"
+      },
+      "tags": [
+        "power-automate",
+        "http",
+        "troubleshooting"
+      ],
+      "explanation": "Run history is the fastest evidence source; use it before guessing at fixes.",
+      "msRef": {
+        "label": "Fix flow failures",
+        "url": "https://learn.microsoft.com/en-us/power-automate/fix-flow-failures"
+      }
+    },
+    {
+      "instruction": "You need to choose between FetchXML and OData/Web API for a query. Put the decision sequence in order.",
+      "items": [
+        "Clarify the query need, including joins or aggregation",
+        "Check whether standard OData/Web API syntax covers the scenario cleanly",
+        "Use FetchXML if the scenario needs its stronger query pattern support",
+        "Implement the chosen query and validate performance and correctness"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the query need, including joins or aggregation": "Step 1",
+        "Check whether standard OData/Web API syntax covers the scenario cleanly": "Step 2",
+        "Use FetchXML if the scenario needs its stronger query pattern support": "Step 3",
+        "Implement the chosen query and validate performance and correctness": "Step 4"
+      },
+      "tags": [
+        "fetchxml",
+        "odata",
+        "query-design"
+      ],
+      "explanation": "Choose the query approach based on the actual shape of the requirement, not habit.",
+      "msRef": {
+        "label": "Use FetchXML to query data",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/use-fetchxml-construct-query"
+      }
+    },
+    {
+      "instruction": "A script-based Dataverse query is timing out on a heavy form. Put the remediation sequence in order.",
+      "items": [
+        "Confirm which query or UI action is actually slow",
+        "Reduce returned data to only required fields and records",
+        "Review whether the retrieval should happen later or conditionally",
+        "Retest the user scenario with the optimized pattern"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm which query or UI action is actually slow": "Step 1",
+        "Reduce returned data to only required fields and records": "Step 2",
+        "Review whether the retrieval should happen later or conditionally": "Step 3",
+        "Retest the user scenario with the optimized pattern": "Step 4"
+      },
+      "tags": [
+        "performance",
+        "javascript",
+        "dataverse"
+      ],
+      "explanation": "You first identify the real bottleneck, then reduce data volume, then challenge timing, then revalidate the experience.",
+      "msRef": {
+        "label": "Optimize performance in model-driven apps",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/design-performant-forms"
+      }
+    },
+    {
+      "instruction": "A flow is creating duplicate records because multiple triggers fire around the same business event. Put the response sequence in order.",
+      "items": [
+        "Confirm the duplicate-creation pattern from run history and data",
+        "Identify the overlapping triggers or automation paths",
+        "Introduce idempotency, trigger conditions, or a single source-of-truth trigger",
+        "Retest under the same event conditions"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the duplicate-creation pattern from run history and data": "Step 1",
+        "Identify the overlapping triggers or automation paths": "Step 2",
+        "Introduce idempotency, trigger conditions, or a single source-of-truth trigger": "Step 3",
+        "Retest under the same event conditions": "Step 4"
+      },
+      "tags": [
+        "power-automate",
+        "duplicate-prevention",
+        "automation"
+      ],
+      "explanation": "The clean fix is evidence first, then root-cause isolation, then control logic, then confirmation.",
+      "msRef": {
+        "label": "Fix flow failures",
+        "url": "https://learn.microsoft.com/en-us/power-automate/fix-flow-failures"
+      }
+    },
+    {
+      "instruction": "You need environment-specific API endpoints for Dev, UAT, and Prod. Put the ALM sequence in order.",
+      "items": [
+        "Identify which values vary by environment",
+        "Create environment variables for those values",
+        "Reference the environment variables from the solution components",
+        "Set the correct values during deployment to each environment"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify which values vary by environment": "Step 1",
+        "Create environment variables for those values": "Step 2",
+        "Reference the environment variables from the solution components": "Step 3",
+        "Set the correct values during deployment to each environment": "Step 4"
+      },
+      "tags": [
+        "alm",
+        "environment-variables",
+        "configuration"
+      ],
+      "explanation": "Environment-specific configuration should be externalized cleanly and promoted with the solution lifecycle, not hardcoded.",
+      "msRef": {
+        "label": "Environment variables in solutions",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables"
+      }
+    },
+    {
+      "instruction": "You are setting up a proper DevOps flow for a Power Platform project. Put the high-level CI/CD sequence in order.",
+      "items": [
+        "Keep solution assets under source control",
+        "Build and package deployable managed artifacts",
+        "Deploy to a test environment and validate",
+        "Promote the approved artifact to Production"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Keep solution assets under source control": "Step 1",
+        "Build and package deployable managed artifacts": "Step 2",
+        "Deploy to a test environment and validate": "Step 3",
+        "Promote the approved artifact to Production": "Step 4"
+      },
+      "tags": [
+        "devops",
+        "ci-cd",
+        "managed-solutions"
+      ],
+      "explanation": "Strong ALM starts with source control, produces controlled artifacts, validates before release, then promotes to Production.",
+      "msRef": {
+        "label": "Use Power Platform Build Tools for Azure DevOps",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools"
+      }
+    },
+    {
+      "instruction": "A client asks for a direct Production change because it is 'small'. Put the technical lead response in order.",
+      "items": [
+        "Clarify the business need and urgency",
+        "Explain the governance and rollback risk of bypassing the release path",
+        "Route the change into the approved pipeline path",
+        "Set expectations on validation and release timing"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the business need and urgency": "Step 1",
+        "Explain the governance and rollback risk of bypassing the release path": "Step 2",
+        "Route the change into the approved pipeline path": "Step 3",
+        "Set expectations on validation and release timing": "Step 4"
+      },
+      "tags": [
+        "production-governance",
+        "alm",
+        "technical-leadership"
+      ],
+      "explanation": "A strong lead does not just refuse; they clarify, explain risk, redirect, and manage expectations professionally.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "instruction": "A team is using unmanaged solutions in Production. Put the remediation path in order.",
+      "items": [
+        "Confirm the current unmanaged deployment pattern and risks",
+        "Define the target managed-solution promotion model",
+        "Align source control and build packaging around managed release artifacts",
+        "Move future Production updates through the controlled managed deployment process"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the current unmanaged deployment pattern and risks": "Step 1",
+        "Define the target managed-solution promotion model": "Step 2",
+        "Align source control and build packaging around managed release artifacts": "Step 3",
+        "Move future Production updates through the controlled managed deployment process": "Step 4"
+      },
+      "tags": [
+        "managed-solutions",
+        "alm",
+        "production"
+      ],
+      "explanation": "You first diagnose the governance weakness, then define the target state, then line up the tooling and future release discipline.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "instruction": "A release failed in UAT because of missing dependencies. Put the response sequence in order.",
+      "items": [
+        "Review the import failure details and dependency messages",
+        "Identify whether the dependency issue is packaging, sequence, or missing component related",
+        "Correct the dependency chain or solution composition",
+        "Rebuild and redeploy for controlled validation"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Review the import failure details and dependency messages": "Step 1",
+        "Identify whether the dependency issue is packaging, sequence, or missing component related": "Step 2",
+        "Correct the dependency chain or solution composition": "Step 3",
+        "Rebuild and redeploy for controlled validation": "Step 4"
+      },
+      "tags": [
+        "deployment",
+        "dependencies",
+        "devops"
+      ],
+      "explanation": "Import issues should be treated systematically: inspect the evidence, classify the dependency problem, fix it, then rerun in a controlled way.",
+      "msRef": {
+        "label": "Use Power Platform Build Tools for Azure DevOps",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools"
+      }
+    },
+    {
+      "instruction": "You need to set up pull-request discipline for an offshore team working on CE customizations. Put the implementation sequence in order.",
+      "items": [
+        "Define the coding and solution standards the team will be held to",
+        "Require changes to flow through branches and pull requests",
+        "Review against quality, design, and regression criteria",
+        "Merge only after standards and checks are satisfied"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Define the coding and solution standards the team will be held to": "Step 1",
+        "Require changes to flow through branches and pull requests": "Step 2",
+        "Review against quality, design, and regression criteria": "Step 3",
+        "Merge only after standards and checks are satisfied": "Step 4"
+      },
+      "tags": [
+        "offshore",
+        "pull-requests",
+        "quality-control"
+      ],
+      "explanation": "Good offshore quality control starts with standards, then gated submission, then disciplined review, then controlled merge.",
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "instruction": "A project wiki is out of date and onboarding is painful. Put the technical lead correction sequence in order.",
+      "items": [
+        "Identify the missing or stale architecture and delivery content",
+        "Define the minimal documentation set that must stay current",
+        "Make ownership explicit for updating those areas",
+        "Review documentation currency as part of normal delivery governance"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the missing or stale architecture and delivery content": "Step 1",
+        "Define the minimal documentation set that must stay current": "Step 2",
+        "Make ownership explicit for updating those areas": "Step 3",
+        "Review documentation currency as part of normal delivery governance": "Step 4"
+      },
+      "tags": [
+        "documentation",
+        "technical-leadership",
+        "delivery-governance"
+      ],
+      "explanation": "The fix is not 'write more docs' blindly; it is to identify the essential set, assign ownership, and govern it routinely.",
+      "msRef": {
+        "label": "Create a functional and technical design document",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/patterns/create-functional-technical-design-document"
+      }
+    },
+    {
+      "instruction": "You must migrate messy Excel and paper-derived records into Dataverse. Put the migration planning sequence in order.",
+      "items": [
+        "Profile the source data and identify quality issues",
+        "Define mapping and transformation rules into the target model",
+        "Select the right migration tooling for the complexity",
+        "Run controlled migration rehearsals before final cutover"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Profile the source data and identify quality issues": "Step 1",
+        "Define mapping and transformation rules into the target model": "Step 2",
+        "Select the right migration tooling for the complexity": "Step 3",
+        "Run controlled migration rehearsals before final cutover": "Step 4"
+      },
+      "tags": [
+        "migration",
+        "data-quality",
+        "rehearsal"
+      ],
+      "explanation": "The right sequence is to understand the source first, define the transform, choose the tool accordingly, then rehearse.",
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "instruction": "A team is choosing between Dataverse Bulk Import and an ETL tool like KingswaySoft. Put the decision sequence in order.",
+      "items": [
+        "Assess whether the source needs joins, deduplication, or transformation",
+        "Use simple native import when the data is already clean and flat enough",
+        "Use stronger ETL when shaping across multiple sources is required",
+        "Validate the outcome with data-quality and integrity checks"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Assess whether the source needs joins, deduplication, or transformation": "Step 1",
+        "Use simple native import when the data is already clean and flat enough": "Step 2",
+        "Use stronger ETL when shaping across multiple sources is required": "Step 3",
+        "Validate the outcome with data-quality and integrity checks": "Step 4"
+      },
+      "tags": [
+        "migration",
+        "etl",
+        "kingswaysoft"
+      ],
+      "explanation": "Tool choice should follow transformation complexity, not guesswork or row-count myths.",
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "instruction": "After loading migration data, put the validation sequence in the correct order.",
+      "items": [
+        "Verify source-versus-target record counts",
+        "Spot-check critical field accuracy on sample records",
+        "Validate lookups and referential integrity",
+        "Confirm duplicates and business-rule outcomes are acceptable"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Verify source-versus-target record counts": "Step 1",
+        "Spot-check critical field accuracy on sample records": "Step 2",
+        "Validate lookups and referential integrity": "Step 3",
+        "Confirm duplicates and business-rule outcomes are acceptable": "Step 4"
+      },
+      "tags": [
+        "migration",
+        "validation",
+        "data-integrity"
+      ],
+      "explanation": "Row count is only the starting point; integrity and business fitness checks matter more.",
+      "msRef": {
+        "label": "Data integration in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/data-integration"
+      }
+    },
+    {
+      "instruction": "You are designing a cutover plan for a CE project. Put the high-level sequence in order.",
+      "items": [
+        "Define freeze windows and final migration timing",
+        "Define go or no-go criteria and rollback logic",
+        "Execute cutover and smoke testing in sequence",
+        "Enter hypercare with named ownership and triage paths"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Define freeze windows and final migration timing": "Step 1",
+        "Define go or no-go criteria and rollback logic": "Step 2",
+        "Execute cutover and smoke testing in sequence": "Step 3",
+        "Enter hypercare with named ownership and triage paths": "Step 4"
+      },
+      "tags": [
+        "cutover",
+        "go-live",
+        "hypercare"
+      ],
+      "explanation": "Cutover should be engineered, not improvised: freeze, decide, execute, stabilize.",
+      "msRef": {
+        "label": "Go-live readiness",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/fasttrack/go-live-readiness"
+      }
+    },
+    {
+      "instruction": "A migration rehearsal exposed missing lookups and duplicates. Put the response sequence in order.",
+      "items": [
+        "Classify which issues are source quality versus mapping logic issues",
+        "Fix source cleansing or mapping rules accordingly",
+        "Repeat the rehearsal with the corrected approach",
+        "Update cutover risk and go-live readiness based on the new evidence"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Classify which issues are source quality versus mapping logic issues": "Step 1",
+        "Fix source cleansing or mapping rules accordingly": "Step 2",
+        "Repeat the rehearsal with the corrected approach": "Step 3",
+        "Update cutover risk and go-live readiness based on the new evidence": "Step 4"
+      },
+      "tags": [
+        "migration",
+        "rehearsal",
+        "risk-management"
+      ],
+      "explanation": "The mature pattern is classification, correction, re-test, then governance update.",
+      "msRef": {
+        "label": "Go-live readiness",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/fasttrack/go-live-readiness"
+      }
+    },
+    {
+      "instruction": "You are preparing early live support for a CE deployment. Put the readiness sequence in order.",
+      "items": [
+        "Define support ownership and escalation routes",
+        "Set up monitoring and incident visibility",
+        "Run go-live with smoke testing and triage discipline",
+        "Transition stabilized support into the steady-state model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Define support ownership and escalation routes": "Step 1",
+        "Set up monitoring and incident visibility": "Step 2",
+        "Run go-live with smoke testing and triage discipline": "Step 3",
+        "Transition stabilized support into the steady-state model": "Step 4"
+      },
+      "tags": [
+        "hypercare",
+        "support",
+        "operations"
+      ],
+      "explanation": "Support readiness begins before go-live and ends only when the system is stable enough to hand over cleanly.",
+      "msRef": {
+        "label": "Operational Excellence design principles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+      }
+    },
+    {
+      "instruction": "A CE production issue appears during hypercare. Put the triage sequence in order.",
+      "items": [
+        "Confirm the symptom, impact, and affected business process",
+        "Classify severity and assign the correct owner",
+        "Stabilize or workaround the issue where necessary",
+        "Drive root cause and permanent fix through controlled change"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the symptom, impact, and affected business process": "Step 1",
+        "Classify severity and assign the correct owner": "Step 2",
+        "Stabilize or workaround the issue where necessary": "Step 3",
+        "Drive root cause and permanent fix through controlled change": "Step 4"
+      },
+      "tags": [
+        "hypercare",
+        "incident-management",
+        "delivery"
+      ],
+      "explanation": "During hypercare, speed matters, but discipline still matters more than chaos.",
+      "msRef": {
+        "label": "Operational Excellence design principles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+      }
+    },
+    {
+      "instruction": "You need to design role-based access for agents, managers, and executives in CE. Put the design sequence in order.",
+      "items": [
+        "Clarify who needs access to which records and actions",
+        "Model privilege depth and role separation appropriately",
+        "Implement the security roles and related access structure",
+        "Validate the model against real user scenarios"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify who needs access to which records and actions": "Step 1",
+        "Model privilege depth and role separation appropriately": "Step 2",
+        "Implement the security roles and related access structure": "Step 3",
+        "Validate the model against real user scenarios": "Step 4"
+      },
+      "tags": [
+        "security",
+        "roles",
+        "access-model"
+      ],
+      "explanation": "Security should start from access intent, then privilege model, then implementation, then real-world validation.",
+      "msRef": {
+        "label": "Security roles and privileges",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/security-roles-privileges"
+      }
+    },
+    {
+      "instruction": "Sensitive regulated data will be used in flows. Put the DLP design sequence in order.",
+      "items": [
+        "Classify the sensitive data and permitted movement patterns",
+        "Group connectors into approved policy boundaries",
+        "Apply DLP policy to the relevant environments",
+        "Retest the intended integration patterns under that governance model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Classify the sensitive data and permitted movement patterns": "Step 1",
+        "Group connectors into approved policy boundaries": "Step 2",
+        "Apply DLP policy to the relevant environments": "Step 3",
+        "Retest the intended integration patterns under that governance model": "Step 4"
+      },
+      "tags": [
+        "dlp",
+        "governance",
+        "regulated-data"
+      ],
+      "explanation": "DLP should be driven by data classification and business-approved movement patterns, then enforced and validated.",
+      "msRef": {
+        "label": "Data loss prevention policies",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+      }
+    },
+    {
+      "instruction": "A client raises data residency concerns for a public-sector deployment. Put the architecture response in order.",
+      "items": [
+        "Clarify the actual residency and policy requirement",
+        "Confirm the platform region and service implications",
+        "Review integration and data-movement impacts of that geography choice",
+        "Document the compliant architecture position and constraints"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the actual residency and policy requirement": "Step 1",
+        "Confirm the platform region and service implications": "Step 2",
+        "Review integration and data-movement impacts of that geography choice": "Step 3",
+        "Document the compliant architecture position and constraints": "Step 4"
+      },
+      "tags": [
+        "data-residency",
+        "compliance",
+        "architecture"
+      ],
+      "explanation": "Residency should be handled as a real architecture constraint, not a late legal footnote.",
+      "msRef": {
+        "label": "Regions overview",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/regions-overview"
+      }
+    },
+    {
+      "instruction": "You are designing secure Power Pages access to Dataverse data. Put the sequence in order.",
+      "items": [
+        "Identify which external or portal users need which record access",
+        "Define the required web roles",
+        "Configure table permissions to match those access needs",
+        "Validate portal access behavior against expected scenarios"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify which external or portal users need which record access": "Step 1",
+        "Define the required web roles": "Step 2",
+        "Configure table permissions to match those access needs": "Step 3",
+        "Validate portal access behavior against expected scenarios": "Step 4"
+      },
+      "tags": [
+        "power-pages",
+        "security",
+        "table-permissions"
+      ],
+      "explanation": "Portal access design begins with the access model, then authorization structure, then permissions, then validation.",
+      "msRef": {
+        "label": "Table permissions in Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/table-permissions"
+      }
+    },
+    {
+      "instruction": "A client proposes using Power Pages capacity bundles for a large internal-user scenario. Put the consultant response in order.",
+      "items": [
+        "Clarify who the users really are and what data they will access",
+        "Check the licensing model against internal versus external usage",
+        "Identify the compliance risk in the proposed assumption",
+        "Recommend the compliant licensing path and document the rationale"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify who the users really are and what data they will access": "Step 1",
+        "Check the licensing model against internal versus external usage": "Step 2",
+        "Identify the compliance risk in the proposed assumption": "Step 3",
+        "Recommend the compliant licensing path and document the rationale": "Step 4"
+      },
+      "tags": [
+        "power-pages",
+        "licensing",
+        "compliance"
+      ],
+      "explanation": "The right sequence is to understand the user type first, validate the licensing model, then raise and document the compliance risk and correct path.",
+      "msRef": {
+        "label": "Licensing overview for Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/admin/licensing-overview"
+      }
+    },
+    {
+      "instruction": "You need a self-service portal backed by Dataverse with secure onboarding. Put the design sequence in order.",
+      "items": [
+        "Clarify the exact onboarding journey and required user identity",
+        "Define the portal data access model and submission rules",
+        "Configure Power Pages security and data submission behavior",
+        "Validate the onboarding journey end to end with test identities"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the exact onboarding journey and required user identity": "Step 1",
+        "Define the portal data access model and submission rules": "Step 2",
+        "Configure Power Pages security and data submission behavior": "Step 3",
+        "Validate the onboarding journey end to end with test identities": "Step 4"
+      },
+      "tags": [
+        "power-pages",
+        "onboarding",
+        "portal-design"
+      ],
+      "explanation": "Portal design should begin from the user journey and trust model, then be implemented and validated against that design.",
+      "msRef": {
+        "label": "Power Pages security overview",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/security-overview"
+      }
+    },
+    {
+      "instruction": "A portal is exposing more records than expected. Put the debugging sequence in order.",
+      "items": [
+        "Confirm the exact records and user types affected",
+        "Review web roles assigned to the portal user",
+        "Inspect table permissions and scope configuration",
+        "Retest after correcting the authorization model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the exact records and user types affected": "Step 1",
+        "Review web roles assigned to the portal user": "Step 2",
+        "Inspect table permissions and scope configuration": "Step 3",
+        "Retest after correcting the authorization model": "Step 4"
+      },
+      "tags": [
+        "power-pages",
+        "security",
+        "troubleshooting"
+      ],
+      "explanation": "You start with the symptom and affected actor, then check role assignment, then effective permissions, then validate the fix.",
+      "msRef": {
+        "label": "Table permissions in Power Pages",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/table-permissions"
+      }
+    },
+    {
+      "instruction": "You need to enable customer self-service status checking on a portal. Put the solution-design sequence in order.",
+      "items": [
+        "Identify exactly which case or request data the customer should see",
+        "Design the access model so users see only their own or allowed records",
+        "Implement the portal retrieval and presentation pattern",
+        "Validate both successful access and unauthorized access attempts"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify exactly which case or request data the customer should see": "Step 1",
+        "Design the access model so users see only their own or allowed records": "Step 2",
+        "Implement the portal retrieval and presentation pattern": "Step 3",
+        "Validate both successful access and unauthorized access attempts": "Step 4"
+      },
+      "tags": [
+        "power-pages",
+        "self-service",
+        "security"
+      ],
+      "explanation": "Self-service design should be deliberate about both permitted visibility and negative-path security validation.",
+      "msRef": {
+        "label": "Power Pages security overview",
+        "url": "https://learn.microsoft.com/en-us/power-pages/security/security-overview"
+      }
+    },
+    {
+      "instruction": "You are designing case intake through Omnichannel and native Customer Service features. Put the sequence in order.",
+      "items": [
+        "Clarify channels, work types, and routing requirements",
+        "Map the intake flow into the relevant native channel and case processes",
+        "Configure or evaluate native routing and workspace behavior",
+        "Validate the end-to-end intake experience with real handling scenarios"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify channels, work types, and routing requirements": "Step 1",
+        "Map the intake flow into the relevant native channel and case processes": "Step 2",
+        "Configure or evaluate native routing and workspace behavior": "Step 3",
+        "Validate the end-to-end intake experience with real handling scenarios": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "omnichannel",
+        "case-intake"
+      ],
+      "explanation": "You must understand the channel and work model first, then apply native platform patterns, then validate the actual handling journey.",
+      "msRef": {
+        "label": "Omnichannel for Customer Service overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/implement/omnichannel-overview"
+      }
+    },
+    {
+      "instruction": "You need skill-based case or conversation assignment. Put the architecture decision sequence in order.",
+      "items": [
+        "Clarify assignment factors such as skill, capacity, or work type",
+        "Evaluate native unified routing capabilities against the real requirement",
+        "Identify any material gap that remains after native evaluation",
+        "Decide whether native routing is sufficient or justified customization is needed"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify assignment factors such as skill, capacity, or work type": "Step 1",
+        "Evaluate native unified routing capabilities against the real requirement": "Step 2",
+        "Identify any material gap that remains after native evaluation": "Step 3",
+        "Decide whether native routing is sufficient or justified customization is needed": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "unified-routing",
+        "fit-gap"
+      ],
+      "explanation": "Do not jump to custom routing before clarifying the requirement and testing the native routing fit.",
+      "msRef": {
+        "label": "Assignment methods in unified routing",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/assignment-methods"
+      }
+    },
+    {
+      "instruction": "A Customer Service team needs SLA enforcement aligned to a public service charter. Put the design sequence in order.",
+      "items": [
+        "Identify the service commitments that must be measured",
+        "Define the SLA KPIs and timing targets",
+        "Configure warning and failure behaviors appropriately",
+        "Validate the SLA behavior against real case scenarios"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the service commitments that must be measured": "Step 1",
+        "Define the SLA KPIs and timing targets": "Step 2",
+        "Configure warning and failure behaviors appropriately": "Step 3",
+        "Validate the SLA behavior against real case scenarios": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "sla",
+        "service-charter"
+      ],
+      "explanation": "Start from the business commitment, then model the KPI, then behavior, then validate it against real operations.",
+      "msRef": {
+        "label": "Define service level agreements",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/define-service-level-agreements"
+      }
+    },
+    {
+      "instruction": "You must enforce support consumption rules using entitlements. Put the sequence in order.",
+      "items": [
+        "Clarify what support coverage or allowance the customer is entitled to",
+        "Model the entitlement structure and applicability",
+        "Link case handling behavior to the entitlement logic where required",
+        "Test supported and unsupported consumption scenarios"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify what support coverage or allowance the customer is entitled to": "Step 1",
+        "Model the entitlement structure and applicability": "Step 2",
+        "Link case handling behavior to the entitlement logic where required": "Step 3",
+        "Test supported and unsupported consumption scenarios": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "entitlements",
+        "case-management"
+      ],
+      "explanation": "Entitlements only work well when the support model is clear, modeled correctly, then tested across edge cases.",
+      "msRef": {
+        "label": "Set up entitlements and entitlement templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/set-up-entitlements-templates"
+      }
+    },
+    {
+      "instruction": "An agent workspace must open the right tabs automatically per channel. Put the configuration sequence in order.",
+      "items": [
+        "Identify the agent context needed at the moment of work acceptance",
+        "Design the session experience per channel or work type",
+        "Configure session templates and related workspace behavior",
+        "Validate that the right context opens for the intended scenario"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the agent context needed at the moment of work acceptance": "Step 1",
+        "Design the session experience per channel or work type": "Step 2",
+        "Configure session templates and related workspace behavior": "Step 3",
+        "Validate that the right context opens for the intended scenario": "Step 4"
+      },
+      "tags": [
+        "omnichannel",
+        "session-templates",
+        "agent-workspace"
+      ],
+      "explanation": "Session design should begin from the handling context needed by the agent, then be implemented and verified.",
+      "msRef": {
+        "label": "Session templates",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/session-templates"
+      }
+    },
+    {
+      "instruction": "A team wants to use a Record Creation Rule for inbound activity handling. Put the decision sequence in order.",
+      "items": [
+        "Confirm the inbound activity scenario matches what the feature supports",
+        "Define the create-or-update behavior and matching logic",
+        "Configure the rule accordingly",
+        "Validate the activity-to-record behavior under expected inputs"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the inbound activity scenario matches what the feature supports": "Step 1",
+        "Define the create-or-update behavior and matching logic": "Step 2",
+        "Configure the rule accordingly": "Step 3",
+        "Validate the activity-to-record behavior under expected inputs": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "record-creation-rules",
+        "automation"
+      ],
+      "explanation": "Use the feature when the scenario fits, then define the exact behavior, configure it, and prove it behaves correctly.",
+      "msRef": {
+        "label": "Set up rules to automatically create or update records",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/administer/set-up-rules-to-automatically-create-or-update-records"
+      }
+    },
+    {
+      "instruction": "A routing requirement seems too complex for simple queues. Put the proper analysis sequence in order.",
+      "items": [
+        "Clarify priorities, skills, capacity, and escalation behavior",
+        "Evaluate native queueing and unified routing options",
+        "Determine the exact unsupported behavior that remains",
+        "Choose justified extension or custom logic only for the residual gap"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify priorities, skills, capacity, and escalation behavior": "Step 1",
+        "Evaluate native queueing and unified routing options": "Step 2",
+        "Determine the exact unsupported behavior that remains": "Step 3",
+        "Choose justified extension or custom logic only for the residual gap": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "routing",
+        "solution-design"
+      ],
+      "explanation": "The right pattern is clarify, evaluate native fit, isolate the actual gap, then extend only where necessary.",
+      "msRef": {
+        "label": "Unified routing overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview-unified-routing"
+      }
+    },
+    {
+      "instruction": "You are designing a Field Service work-order process. Put the high-level sequence in order.",
+      "items": [
+        "Define the service event or operational need that triggers the work",
+        "Model the work order and related execution data needed",
+        "Configure the process and supporting behaviors around the work order",
+        "Validate the end-to-end operational flow from creation to completion"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Define the service event or operational need that triggers the work": "Step 1",
+        "Model the work order and related execution data needed": "Step 2",
+        "Configure the process and supporting behaviors around the work order": "Step 3",
+        "Validate the end-to-end operational flow from creation to completion": "Step 4"
+      },
+      "tags": [
+        "field-service",
+        "work-order",
+        "operations"
+      ],
+      "explanation": "The work order should be designed from the real operational trigger and execution need, not just from the UI.",
+      "msRef": {
+        "label": "Create a work order",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/field-service/create-work-order"
+      }
+    },
+    {
+      "instruction": "You need to implement an incident lifecycle with a Business Process Flow. Put the design sequence in order.",
+      "items": [
+        "Clarify the real stages of the incident lifecycle",
+        "Identify stage-specific data and decision gates",
+        "Design and configure the Business Process Flow accordingly",
+        "Validate progression, branching, and governance behavior in use"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the real stages of the incident lifecycle": "Step 1",
+        "Identify stage-specific data and decision gates": "Step 2",
+        "Design and configure the Business Process Flow accordingly": "Step 3",
+        "Validate progression, branching, and governance behavior in use": "Step 4"
+      },
+      "tags": [
+        "bpf",
+        "incident-management",
+        "field-service"
+      ],
+      "explanation": "A BPF should reflect the real lifecycle first, then the control points, then the configured process, then live validation.",
+      "msRef": {
+        "label": "Business process flows overview",
+        "url": "https://learn.microsoft.com/en-us/power-automate/business-process-flows-overview"
+      }
+    },
+    {
+      "instruction": "A field team must raise incidents from remote operational sites. Put the architecture sequence in order.",
+      "items": [
+        "Clarify the field mobility and connectivity reality",
+        "Select the supported mobile and sync pattern that matches that reality",
+        "Configure the field capture experience and data handling",
+        "Validate the field-to-central sync behavior in the intended conditions"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the field mobility and connectivity reality": "Step 1",
+        "Select the supported mobile and sync pattern that matches that reality": "Step 2",
+        "Configure the field capture experience and data handling": "Step 3",
+        "Validate the field-to-central sync behavior in the intended conditions": "Step 4"
+      },
+      "tags": [
+        "field-service",
+        "mobile",
+        "connectivity"
+      ],
+      "explanation": "Mobile architecture should follow actual field conditions, then product capability, then configuration, then realistic testing.",
+      "msRef": {
+        "label": "Field Service mobile app overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/field-service/mobile/overview"
+      }
+    },
+    {
+      "instruction": "You are designing risk scoring for an HSE or regulated operations solution. Put the sequence in order.",
+      "items": [
+        "Clarify the business risk model and severity definitions",
+        "Map the required classifications into the data model and process",
+        "Configure the scoring and related workflow behavior",
+        "Validate that the operational teams interpret and use the scores correctly"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the business risk model and severity definitions": "Step 1",
+        "Map the required classifications into the data model and process": "Step 2",
+        "Configure the scoring and related workflow behavior": "Step 3",
+        "Validate that the operational teams interpret and use the scores correctly": "Step 4"
+      },
+      "tags": [
+        "hse",
+        "risk-management",
+        "process-design"
+      ],
+      "explanation": "Risk scoring is not just a field setup task; it starts from the business model and ends with operational usability.",
+      "msRef": {
+        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+      }
+    },
+    {
+      "instruction": "You need to integrate document-heavy operational work with SharePoint. Put the design sequence in order.",
+      "items": [
+        "Clarify what belongs as transactional data versus managed documents",
+        "Define the SharePoint integration pattern around the CE records",
+        "Configure document management behavior appropriately",
+        "Validate collaboration, versioning, and access behavior against business needs"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify what belongs as transactional data versus managed documents": "Step 1",
+        "Define the SharePoint integration pattern around the CE records": "Step 2",
+        "Configure document management behavior appropriately": "Step 3",
+        "Validate collaboration, versioning, and access behavior against business needs": "Step 4"
+      },
+      "tags": [
+        "sharepoint",
+        "document-management",
+        "integration"
+      ],
+      "explanation": "The core decision is what belongs in Dataverse versus SharePoint, then the integration should be shaped around that answer.",
+      "msRef": {
+        "label": "Integrate your Dynamics 365 apps with other solutions",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+      }
+    },
+    {
+      "instruction": "A client asks for a Copilot or chatbot PoC. Put the strongest consulting sequence in order.",
+      "items": [
+        "Clarify the business problem and success criteria for the bot",
+        "Choose a bounded realistic scenario to validate",
+        "Build only enough to test feasibility and value",
+        "Close with limitations, risks, and phased recommendations"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the business problem and success criteria for the bot": "Step 1",
+        "Choose a bounded realistic scenario to validate": "Step 2",
+        "Build only enough to test feasibility and value": "Step 3",
+        "Close with limitations, risks, and phased recommendations": "Step 4"
+      },
+      "tags": [
+        "copilot",
+        "poc",
+        "presales"
+      ],
+      "explanation": "A good AI PoC is a validation exercise, not a promise of full production readiness.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "instruction": "You are leading the first enterprise discovery workshop. Put the sequence in order.",
+      "items": [
+        "Understand the current process reality and pain points",
+        "Identify success measures and business outcomes",
+        "Clarify constraints, dependencies, and risk areas",
+        "Only then start converging on solution direction"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Understand the current process reality and pain points": "Step 1",
+        "Identify success measures and business outcomes": "Step 2",
+        "Clarify constraints, dependencies, and risk areas": "Step 3",
+        "Only then start converging on solution direction": "Step 4"
+      },
+      "tags": [
+        "workshops",
+        "discovery",
+        "requirements"
+      ],
+      "explanation": "A good first workshop is about understanding before solutioning.",
+      "msRef": {
+        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+      }
+    },
+    {
+      "instruction": "A client keeps asking for specific screens rather than describing the problem. Put the consultant response in order.",
+      "items": [
+        "Acknowledge the request without accepting the implied solution",
+        "Ask what business outcome or user task is driving the request",
+        "Translate the answer into requirement language",
+        "Evaluate whether standard capability already meets the underlying need"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Acknowledge the request without accepting the implied solution": "Step 1",
+        "Ask what business outcome or user task is driving the request": "Step 2",
+        "Translate the answer into requirement language": "Step 3",
+        "Evaluate whether standard capability already meets the underlying need": "Step 4"
+      },
+      "tags": [
+        "consulting",
+        "requirements",
+        "fit-to-standard"
+      ],
+      "explanation": "The lead consultant should not fight the client, but should reframe the conversation from screens to business needs.",
+      "msRef": {
+        "label": "Discover customer needs as a Solution Architect for Dynamics 365 and Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/training/modules/discover-customer-needs/"
+      }
+    },
+    {
+      "instruction": "You need to present a technical solution to a CFO and CEO. Put the presentation sequence in order.",
+      "items": [
+        "Lead with business value, risk, timeline, and operating impact",
+        "Use high-level process or architecture summaries only as needed",
+        "Address assumptions and decision tradeoffs clearly",
+        "Hold detailed technical mechanics for deeper follow-up if requested"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Lead with business value, risk, timeline, and operating impact": "Step 1",
+        "Use high-level process or architecture summaries only as needed": "Step 2",
+        "Address assumptions and decision tradeoffs clearly": "Step 3",
+        "Hold detailed technical mechanics for deeper follow-up if requested": "Step 4"
+      },
+      "tags": [
+        "c-suite",
+        "presentation",
+        "stakeholder-management"
+      ],
+      "explanation": "Executives care first about business impact and risk, not plugin stages or low-level implementation mechanics.",
+      "msRef": {
+        "label": "Project goals for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+      }
+    },
+    {
+      "instruction": "A junior developer is overusing custom code where product capability exists. Put the technical lead response in order.",
+      "items": [
+        "Review the actual requirement and current implementation choice",
+        "Show the equivalent standard or lower-complexity product capability",
+        "Explain the lifecycle cost of unnecessary customization",
+        "Reset the implementation approach and standards going forward"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Review the actual requirement and current implementation choice": "Step 1",
+        "Show the equivalent standard or lower-complexity product capability": "Step 2",
+        "Explain the lifecycle cost of unnecessary customization": "Step 3",
+        "Reset the implementation approach and standards going forward": "Step 4"
+      },
+      "tags": [
+        "mentoring",
+        "fit-to-standard",
+        "technical-leadership"
+      ],
+      "explanation": "The strongest lead response is coaching around requirement fit and lifecycle consequences, not just saying no.",
+      "msRef": {
+        "label": "Perform fit gap analysis",
+        "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+      }
+    },
+    {
+      "instruction": "An offshore team is producing inconsistent quality. Put the corrective leadership sequence in order.",
+      "items": [
+        "Identify the actual failure pattern in delivery quality",
+        "Set clear standards, Definition of Done, and review expectations",
+        "Break work into smaller reviewable units with gated pull requests",
+        "Coach through early cycles and inspect whether quality stabilizes"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the actual failure pattern in delivery quality": "Step 1",
+        "Set clear standards, Definition of Done, and review expectations": "Step 2",
+        "Break work into smaller reviewable units with gated pull requests": "Step 3",
+        "Coach through early cycles and inspect whether quality stabilizes": "Step 4"
+      },
+      "tags": [
+        "offshore",
+        "quality",
+        "technical-leadership"
+      ],
+      "explanation": "You diagnose first, then define expectations, then improve workflow control, then coach and inspect results.",
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "instruction": "A design decision now affects budget, scope, and future support. Put the escalation sequence in order.",
+      "items": [
+        "Confirm the technical decision and why it matters",
+        "Translate the impact into business terms such as cost, schedule, and supportability",
+        "Take the issue through the correct governance path",
+        "Document the decision and rationale after direction is given"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the technical decision and why it matters": "Step 1",
+        "Translate the impact into business terms such as cost, schedule, and supportability": "Step 2",
+        "Take the issue through the correct governance path": "Step 3",
+        "Document the decision and rationale after direction is given": "Step 4"
+      },
+      "tags": [
+        "governance",
+        "escalation",
+        "technical-leadership"
+      ],
+      "explanation": "A senior consultant does not just escalate noise; they escalate clear decisions with business consequences and documented rationale.",
+      "msRef": {
+        "label": "Use classic project governance structures",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+      }
+    },
+    {
+      "instruction": "A client wants an unsupported shortcut directly against the platform. Put the consulting response in order.",
+      "items": [
+        "Clarify the real business problem behind the shortcut request",
+        "Explain why the requested pattern is unsupported or risky",
+        "Offer supported alternative patterns that solve the actual need",
+        "Document the recommendation and architectural rationale"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the real business problem behind the shortcut request": "Step 1",
+        "Explain why the requested pattern is unsupported or risky": "Step 2",
+        "Offer supported alternative patterns that solve the actual need": "Step 3",
+        "Document the recommendation and architectural rationale": "Step 4"
+      },
+      "tags": [
+        "consulting",
+        "supported-patterns",
+        "architecture"
+      ],
+      "explanation": "Good consulting is not blunt refusal; it is problem clarification, education, supported alternatives, and defensible documentation.",
+      "msRef": {
+        "label": "Query data using Web API",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/query-data-web-api"
+      }
+    },
+    {
+      "instruction": "You must choose between build and buy for a specialist document-generation gap. Put the decision sequence in order.",
+      "items": [
+        "Clarify the exact functional and non-functional need",
+        "Evaluate standard capability and packaged options first",
+        "Compare packaged versus custom paths on fit, cost, support, and lifecycle",
+        "Recommend the best tradeoff and document why"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the exact functional and non-functional need": "Step 1",
+        "Evaluate standard capability and packaged options first": "Step 2",
+        "Compare packaged versus custom paths on fit, cost, support, and lifecycle": "Step 3",
+        "Recommend the best tradeoff and document why": "Step 4"
+      },
+      "tags": [
+        "build-vs-buy",
+        "appsource",
+        "tradeoffs"
+      ],
+      "explanation": "Build-versus-buy should be a structured tradeoff decision, not a preference contest.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "instruction": "A solution uses many custom tables because the client described everything in legacy terms. Put the technical lead correction sequence in order.",
+      "items": [
+        "Review whether the legacy terms really imply unique data-model needs",
+        "Map the requirement back to standard table capability where possible",
+        "Keep custom tables only where a validated model gap remains",
+        "Refactor the design to reduce unnecessary model sprawl"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Review whether the legacy terms really imply unique data-model needs": "Step 1",
+        "Map the requirement back to standard table capability where possible": "Step 2",
+        "Keep custom tables only where a validated model gap remains": "Step 3",
+        "Refactor the design to reduce unnecessary model sprawl": "Step 4"
+      },
+      "tags": [
+        "dataverse",
+        "data-model",
+        "fit-to-standard"
+      ],
+      "explanation": "Legacy vocabulary is not enough to justify custom data models; validate first, then reduce sprawl.",
+      "msRef": {
+        "label": "Table overview",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/entity-overview"
+      }
+    },
+    {
+      "instruction": "A mission-critical workload is being treated like a casual departmental app. Put the architect response in order.",
+      "items": [
+        "Clarify the business criticality and operational impact of failure",
+        "Identify the engineering gaps in ALM, monitoring, resilience, and support",
+        "Reset the delivery approach to a governed workload model",
+        "Validate that the revised operating model matches the workload criticality"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the business criticality and operational impact of failure": "Step 1",
+        "Identify the engineering gaps in ALM, monitoring, resilience, and support": "Step 2",
+        "Reset the delivery approach to a governed workload model": "Step 3",
+        "Validate that the revised operating model matches the workload criticality": "Step 4"
+      },
+      "tags": [
+        "mission-critical",
+        "governance",
+        "operations"
+      ],
+      "explanation": "Critical workloads need a deliberately stronger engineering model; the first step is proving the criticality clearly.",
+      "msRef": {
+        "label": "Plan mission-critical workloads",
+        "url": "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/plan-mission-critical"
+      }
+    },
+    {
+      "instruction": "A KPMG-style pre-sales engagement is starting. Put the disciplined sequence in order.",
+      "items": [
+        "Clarify the client problem and required business outcome",
+        "Bound the discovery assumptions and technical uncertainty",
+        "Shape a believable target solution or PoC scope",
+        "Present the recommendation with risks, dependencies, and next steps"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the client problem and required business outcome": "Step 1",
+        "Bound the discovery assumptions and technical uncertainty": "Step 2",
+        "Shape a believable target solution or PoC scope": "Step 3",
+        "Present the recommendation with risks, dependencies, and next steps": "Step 4"
+      },
+      "tags": [
+        "presales",
+        "solutioning",
+        "consulting"
+      ],
+      "explanation": "The strongest presales behavior is disciplined and risk-aware, not just enthusiastic product demonstration.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "instruction": "A contact centre requires real-time supervisor visibility. Put the reporting design sequence in order.",
+      "items": [
+        "Clarify the operational decisions supervisors need to make",
+        "Identify the data points and refresh expectations that support those decisions",
+        "Design the dashboard or reporting pattern around those operational needs",
+        "Validate that the reporting supports live supervision rather than static reporting only"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the operational decisions supervisors need to make": "Step 1",
+        "Identify the data points and refresh expectations that support those decisions": "Step 2",
+        "Design the dashboard or reporting pattern around those operational needs": "Step 3",
+        "Validate that the reporting supports live supervision rather than static reporting only": "Step 4"
+      },
+      "tags": [
+        "reporting",
+        "customer-service",
+        "supervision"
+      ],
+      "explanation": "Operational dashboards should be designed from the decision need, not from a random chart wishlist.",
+      "msRef": {
+        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+      }
+    },
+    {
+      "instruction": "An external REST API integration must be reused by multiple CE processes. Put the design sequence in order.",
+      "items": [
+        "Identify the shared business operation all consumers need",
+        "Decide the right reusable integration boundary",
+        "Implement the shared integration service or endpoint cleanly",
+        "Consume it consistently from the approved dependent processes"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the shared business operation all consumers need": "Step 1",
+        "Decide the right reusable integration boundary": "Step 2",
+        "Implement the shared integration service or endpoint cleanly": "Step 3",
+        "Consume it consistently from the approved dependent processes": "Step 4"
+      },
+      "tags": [
+        "integration",
+        "reuse",
+        "architecture"
+      ],
+      "explanation": "Shared integrations should be designed as reusable boundaries rather than duplicated ad hoc calls in many places.",
+      "msRef": {
+        "label": "Azure Functions overview",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview"
+      }
+    },
+    {
+      "instruction": "A form JavaScript solution is getting too heavy and brittle. Put the remediation sequence in order.",
+      "items": [
+        "Identify which behavior truly belongs on the client",
+        "Remove or defer unnecessary client-side retrieval and logic",
+        "Move suitable logic to platform-native or server-side patterns",
+        "Retest the form experience and maintainability impact"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify which behavior truly belongs on the client": "Step 1",
+        "Remove or defer unnecessary client-side retrieval and logic": "Step 2",
+        "Move suitable logic to platform-native or server-side patterns": "Step 3",
+        "Retest the form experience and maintainability impact": "Step 4"
+      },
+      "tags": [
+        "javascript",
+        "maintainability",
+        "architecture"
+      ],
+      "explanation": "Client scripts should be lean; when they become overloaded, the right answer is to re-separate responsibilities.",
+      "msRef": {
+        "label": "Design performant forms",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/design-performant-forms"
+      }
+    },
+    {
+      "instruction": "A plugin is throwing intermittently in Production and users are blocked. Put the support sequence in order.",
+      "items": [
+        "Confirm the exact blocked user operation and impact",
+        "Review plugin trace logging and supporting evidence",
+        "Identify whether the issue is data-driven, registration-related, or logic-related",
+        "Apply the controlled fix through the governed release path"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the exact blocked user operation and impact": "Step 1",
+        "Review plugin trace logging and supporting evidence": "Step 2",
+        "Identify whether the issue is data-driven, registration-related, or logic-related": "Step 3",
+        "Apply the controlled fix through the governed release path": "Step 4"
+      },
+      "tags": [
+        "plugin",
+        "production-support",
+        "troubleshooting"
+      ],
+      "explanation": "Production triage should begin with business impact, then evidence, then classification, then controlled change.",
+      "msRef": {
+        "label": "Logging and tracing",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/logging-tracing"
+      }
+    },
+    {
+      "instruction": "A client insists on exact legacy replication. Put the architect response in order.",
+      "items": [
+        "Clarify the underlying business need behind the legacy behavior",
+        "Identify which parts are true requirements versus historical workaround",
+        "Evaluate standard product fit and process redesign options",
+        "Carry forward only the justified exceptions into the solution design"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the underlying business need behind the legacy behavior": "Step 1",
+        "Identify which parts are true requirements versus historical workaround": "Step 2",
+        "Evaluate standard product fit and process redesign options": "Step 3",
+        "Carry forward only the justified exceptions into the solution design": "Step 4"
+      },
+      "tags": [
+        "fit-to-standard",
+        "legacy-process",
+        "architecture"
+      ],
+      "explanation": "A strong consultant does not blindly rebuild the past; they extract the real requirement and carry forward only what is justified.",
+      "msRef": {
+        "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+      }
+    },
+    {
+      "instruction": "An environment strategy is missing and teams are changing assets ad hoc. Put the correction sequence in order.",
+      "items": [
+        "Clarify the environment roles needed across Dev, Test, UAT, and Prod",
+        "Define the movement path and governance between those environments",
+        "Align deployment tooling and release control to that model",
+        "Enforce the strategy through team practice and approvals"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the environment roles needed across Dev, Test, UAT, and Prod": "Step 1",
+        "Define the movement path and governance between those environments": "Step 2",
+        "Align deployment tooling and release control to that model": "Step 3",
+        "Enforce the strategy through team practice and approvals": "Step 4"
+      },
+      "tags": [
+        "environment-strategy",
+        "alm",
+        "governance"
+      ],
+      "explanation": "Environment strategy needs clear purpose first, then movement logic, then tooling, then team enforcement.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "instruction": "A flow is using too many connectors for a regulated tenant. Put the governance review sequence in order.",
+      "items": [
+        "Inventory the actual connectors and data paths in use",
+        "Check them against the intended business need and DLP model",
+        "Remove or redesign unnecessary risky connector paths",
+        "Retest the approved flow design under policy"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Inventory the actual connectors and data paths in use": "Step 1",
+        "Check them against the intended business need and DLP model": "Step 2",
+        "Remove or redesign unnecessary risky connector paths": "Step 3",
+        "Retest the approved flow design under policy": "Step 4"
+      },
+      "tags": [
+        "dlp",
+        "power-automate",
+        "governance"
+      ],
+      "explanation": "Governance review should begin with the real data paths, then policy fit, then redesign, then validation.",
+      "msRef": {
+        "label": "Data loss prevention policies",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention"
+      }
+    },
+    {
+      "instruction": "A client asks for direct SQL access to Dataverse for reporting shortcuts. Put the consulting response in order.",
+      "items": [
+        "Clarify what reporting problem they are really trying to solve",
+        "Explain why unsupported direct access is risky",
+        "Steer them to supported query, integration, or reporting patterns",
+        "Document the supported architectural recommendation"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify what reporting problem they are really trying to solve": "Step 1",
+        "Explain why unsupported direct access is risky": "Step 2",
+        "Steer them to supported query, integration, or reporting patterns": "Step 3",
+        "Document the supported architectural recommendation": "Step 4"
+      },
+      "tags": [
+        "dataverse",
+        "reporting",
+        "supported-patterns"
+      ],
+      "explanation": "The mature response is to reframe the need, explain the risk, propose supported alternatives, and leave a defensible record.",
+      "msRef": {
+        "label": "Query data using Web API",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/query-data-web-api"
+      }
+    },
+    {
+      "instruction": "You need to decide whether a bug should be fixed by configuration, flow, plugin, or process change. Put the decision sequence in order.",
+      "items": [
+        "Confirm the actual requirement and failure mode",
+        "Evaluate whether standard configuration already covers the need",
+        "Only then compare automation or code options for the remaining gap",
+        "Choose the lowest-complexity path that meets the requirement safely"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the actual requirement and failure mode": "Step 1",
+        "Evaluate whether standard configuration already covers the need": "Step 2",
+        "Only then compare automation or code options for the remaining gap": "Step 3",
+        "Choose the lowest-complexity path that meets the requirement safely": "Step 4"
+      },
+      "tags": [
+        "architecture",
+        "fit-to-standard",
+        "decision-making"
+      ],
+      "explanation": "Good technical judgment starts from requirement clarity and standard fit before escalating to heavier technical responses.",
+      "msRef": {
+        "label": "Perform fit gap analysis",
+        "url": "https://learn.microsoft.com/en-us/training/modules/fit-gap-analysis/"
+      }
+    },
+    {
+      "instruction": "A project is drifting because technical risk is being discussed only in engineering terms. Put the correction sequence in order.",
+      "items": [
+        "Confirm the technical risk precisely",
+        "Translate it into business impact such as timeline, cost, service, or compliance",
+        "Take the translated risk into the right stakeholder forum",
+        "Track the decision and mitigation actions explicitly"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the technical risk precisely": "Step 1",
+        "Translate it into business impact such as timeline, cost, service, or compliance": "Step 2",
+        "Take the translated risk into the right stakeholder forum": "Step 3",
+        "Track the decision and mitigation actions explicitly": "Step 4"
+      },
+      "tags": [
+        "risk",
+        "governance",
+        "stakeholder-management"
+      ],
+      "explanation": "Senior consulting means making technical risks decision-usable for the business, not leaving them as engineering jargon.",
+      "msRef": {
+        "label": "Project goals for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+      }
+    },
+    {
+      "instruction": "A project must deliver quickly but maintain enterprise discipline. Put the balanced technical lead response in order.",
+      "items": [
+        "Identify which controls are truly non-negotiable",
+        "Reduce scope or phase the delivery rather than bypassing core controls",
+        "Keep ALM, security, and supportability discipline intact",
+        "Communicate the tradeoff openly to stakeholders"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify which controls are truly non-negotiable": "Step 1",
+        "Reduce scope or phase the delivery rather than bypassing core controls": "Step 2",
+        "Keep ALM, security, and supportability discipline intact": "Step 3",
+        "Communicate the tradeoff openly to stakeholders": "Step 4"
+      },
+      "tags": [
+        "delivery",
+        "governance",
+        "technical-leadership"
+      ],
+      "explanation": "Strong leads trade scope before they trade away governance and operational safety.",
+      "msRef": {
+        "label": "Implementation strategy",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy"
+      }
+    },
+    {
+      "instruction": "A large enterprise client wants a lead consultant to shape both waterfall and agile delivery expectations. Put the alignment sequence in order.",
+      "items": [
+        "Clarify the client’s governance, approval, and documentation expectations",
+        "Map how those constraints affect sprinting, release cadence, and sign-off",
+        "Define the practical hybrid delivery model for the engagement",
+        "Communicate how the team will operate within that model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the client’s governance, approval, and documentation expectations": "Step 1",
+        "Map how those constraints affect sprinting, release cadence, and sign-off": "Step 2",
+        "Define the practical hybrid delivery model for the engagement": "Step 3",
+        "Communicate how the team will operate within that model": "Step 4"
+      },
+      "tags": [
+        "agile",
+        "waterfall",
+        "delivery-model"
+      ],
+      "explanation": "Enterprise consulting often needs a hybrid model; define it deliberately instead of pretending the client environment is purely agile.",
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "instruction": "A presales demo is drifting into unrealistic promises. Put the recovery sequence in order.",
+      "items": [
+        "Identify what in the demo is no longer aligned to believable delivery reality",
+        "Re-scope the demo to a defensible scenario",
+        "State assumptions and limitations transparently",
+        "Close with a realistic next validation step instead of an overcommitment"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify what in the demo is no longer aligned to believable delivery reality": "Step 1",
+        "Re-scope the demo to a defensible scenario": "Step 2",
+        "State assumptions and limitations transparently": "Step 3",
+        "Close with a realistic next validation step instead of an overcommitment": "Step 4"
+      },
+      "tags": [
+        "presales",
+        "poc",
+        "credibility"
+      ],
+      "explanation": "Presales rigor means correcting overreach before it becomes a promise the delivery team cannot defend.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "instruction": "A client is asking for strong executive reporting but the data model is inconsistent. Put the response sequence in order.",
+      "items": [
+        "Clarify what decisions the executive reporting must support",
+        "Assess whether the current data can support those decisions reliably",
+        "Define the data remediation or shaping needed before reporting is trusted",
+        "Only then finalize the reporting design path"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify what decisions the executive reporting must support": "Step 1",
+        "Assess whether the current data can support those decisions reliably": "Step 2",
+        "Define the data remediation or shaping needed before reporting is trusted": "Step 3",
+        "Only then finalize the reporting design path": "Step 4"
+      },
+      "tags": [
+        "reporting",
+        "data-quality",
+        "stakeholder-management"
+      ],
+      "explanation": "Reporting should be driven by decision support and trusted data, not by a dashboard-first mentality.",
+      "msRef": {
+        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+      }
+    },
+    {
+      "instruction": "A technical lead must review a design proposed by a junior consultant. Put the review sequence in order.",
+      "items": [
+        "Check that the design solves the actual requirement first",
+        "Check whether standard capability or lower-complexity options were considered",
+        "Review lifecycle implications such as ALM, support, and security",
+        "Approve, refine, or reject with clear rationale"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Check that the design solves the actual requirement first": "Step 1",
+        "Check whether standard capability or lower-complexity options were considered": "Step 2",
+        "Review lifecycle implications such as ALM, support, and security": "Step 3",
+        "Approve, refine, or reject with clear rationale": "Step 4"
+      },
+      "tags": [
+        "technical-leadership",
+        "design-review",
+        "mentoring"
+      ],
+      "explanation": "A proper design review starts with requirement fit, then simplicity, then lifecycle consequences, then a clear decision.",
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected Framework",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    },
+    {
+      "instruction": "You suspect a requirement is actually masking a governance problem rather than a product gap. Put the diagnostic sequence in order.",
+      "items": [
+        "Clarify the exact requirement and who is asking for it",
+        "Check whether the ask exists because standards or ownership are weak",
+        "Separate governance weakness from true product shortfall",
+        "Recommend the right mix of governance correction and solution design"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the exact requirement and who is asking for it": "Step 1",
+        "Check whether the ask exists because standards or ownership are weak": "Step 2",
+        "Separate governance weakness from true product shortfall": "Step 3",
+        "Recommend the right mix of governance correction and solution design": "Step 4"
+      },
+      "tags": [
+        "governance",
+        "architecture",
+        "consulting"
+      ],
+      "explanation": "Good consultants diagnose whether the real issue is governance, process, or product before designing the fix.",
+      "msRef": {
+        "label": "Project goals for Dynamics 365 implementation projects",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-project-goals"
+      }
+    },
+    {
+      "instruction": "A lead consultant is preparing a handover to BAU support after hypercare. Put the sequence in order.",
+      "items": [
+        "Confirm the solution is stable enough to leave hypercare",
+        "Transfer support knowledge, runbooks, and ownership clearly",
+        "Align open items and known limitations with the BAU team",
+        "Complete the transition and confirm support acceptance"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the solution is stable enough to leave hypercare": "Step 1",
+        "Transfer support knowledge, runbooks, and ownership clearly": "Step 2",
+        "Align open items and known limitations with the BAU team": "Step 3",
+        "Complete the transition and confirm support acceptance": "Step 4"
+      },
+      "tags": [
+        "hypercare",
+        "handover",
+        "operations"
+      ],
+      "explanation": "BAU transition should happen only after stabilization, with explicit knowledge and ownership transfer.",
+      "msRef": {
+        "label": "Operational Excellence design principles",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/operational-excellence/principles"
+      }
+    },
+    {
+      "instruction": "You need to decide whether to embed business rules in forms, flows, or plugins. Put the analysis sequence in order.",
+      "items": [
+        "Clarify whether the rule is UI-only, process-wide, or transaction-critical",
+        "Match the rule scope to the appropriate platform layer",
+        "Evaluate maintainability and enforcement implications",
+        "Implement the rule in the chosen layer and validate behavior"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify whether the rule is UI-only, process-wide, or transaction-critical": "Step 1",
+        "Match the rule scope to the appropriate platform layer": "Step 2",
+        "Evaluate maintainability and enforcement implications": "Step 3",
+        "Implement the rule in the chosen layer and validate behavior": "Step 4"
+      },
+      "tags": [
+        "architecture",
+        "business-rules",
+        "platform-design"
+      ],
+      "explanation": "The right platform layer depends on the rule’s scope and enforcement requirement, not just developer preference.",
+      "msRef": {
+        "label": "Work with requirements for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/work-with-requirements/"
+      }
+    },
+    {
+      "instruction": "An enterprise client wants a single source of truth across CE, ERP, and portal channels. Put the architecture sequence in order.",
+      "items": [
+        "Clarify which system is authoritative for each business domain",
+        "Define how data must flow or be referenced across systems",
+        "Choose synchronization or access patterns based on those ownership rules",
+        "Validate that the chosen design avoids uncontrolled duplication"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify which system is authoritative for each business domain": "Step 1",
+        "Define how data must flow or be referenced across systems": "Step 2",
+        "Choose synchronization or access patterns based on those ownership rules": "Step 3",
+        "Validate that the chosen design avoids uncontrolled duplication": "Step 4"
+      },
+      "tags": [
+        "architecture",
+        "source-of-truth",
+        "integration"
+      ],
+      "explanation": "Single source of truth starts from ownership clarity, not from a random sync tool selection.",
+      "msRef": {
+        "label": "Integrate your Dynamics 365 apps with other solutions",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/integrate-other-solutions"
+      }
+    },
+    {
+      "instruction": "You discover a requirement that could be solved by standard capability if the client changes one approval policy. Put the consulting sequence in order.",
+      "items": [
+        "Confirm the underlying business outcome the approval policy is meant to protect",
+        "Show how the standard capability would meet that outcome under the revised policy",
+        "Explain the cost and lifecycle difference versus custom build",
+        "Support the client in deciding whether policy change is acceptable"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the underlying business outcome the approval policy is meant to protect": "Step 1",
+        "Show how the standard capability would meet that outcome under the revised policy": "Step 2",
+        "Explain the cost and lifecycle difference versus custom build": "Step 3",
+        "Support the client in deciding whether policy change is acceptable": "Step 4"
+      },
+      "tags": [
+        "fit-to-standard",
+        "consulting",
+        "tradeoffs"
+      ],
+      "explanation": "The strongest approach is outcome-first, then standard fit, then tradeoffs, then client decision support.",
+      "msRef": {
+        "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+      }
+    },
+    {
+      "instruction": "A client is pushing for a one-step big-bang rollout under heavy technical uncertainty. Put the architect response in order.",
+      "items": [
+        "Identify the main uncertainty, dependency, and blast-radius risks",
+        "Evaluate whether phased delivery would reduce those risks materially",
+        "Present the tradeoff between speed perception and controlled delivery",
+        "Recommend the rollout model that best protects delivery success"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the main uncertainty, dependency, and blast-radius risks": "Step 1",
+        "Evaluate whether phased delivery would reduce those risks materially": "Step 2",
+        "Present the tradeoff between speed perception and controlled delivery": "Step 3",
+        "Recommend the rollout model that best protects delivery success": "Step 4"
+      },
+      "tags": [
+        "phased-rollout",
+        "risk",
+        "delivery-strategy"
+      ],
+      "explanation": "Phasing is justified when it reduces meaningful risk, not just because it sounds safer abstractly.",
+      "msRef": {
+        "label": "Implementation strategy",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/implementation-strategy"
+      }
+    },
+    {
+      "instruction": "A project needs stronger technical governance without slowing delivery to a halt. Put the balanced setup sequence in order.",
+      "items": [
+        "Identify the minimum controls that protect quality and Production safely",
+        "Embed those controls into the normal delivery workflow",
+        "Automate the repeatable parts through tooling where possible",
+        "Review whether the controls are improving outcomes without excess drag"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the minimum controls that protect quality and Production safely": "Step 1",
+        "Embed those controls into the normal delivery workflow": "Step 2",
+        "Automate the repeatable parts through tooling where possible": "Step 3",
+        "Review whether the controls are improving outcomes without excess drag": "Step 4"
+      },
+      "tags": [
+        "governance",
+        "delivery",
+        "technical-leadership"
+      ],
+      "explanation": "Good governance should be effective and sustainable, not bureaucratic for its own sake.",
+      "msRef": {
+        "label": "Overview of ALM in Microsoft Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/overview-alm"
+      }
+    },
+    {
+      "instruction": "You need to decide if a scenario belongs in plugin code or in a cloud flow. Put the evaluation sequence in order.",
+      "items": [
+        "Clarify whether the behavior must be transactional and immediate",
+        "Check whether the event belongs naturally inside the Dataverse transaction",
+        "Evaluate whether asynchronous orchestration is acceptable instead",
+        "Choose the option that matches timing, reliability, and maintainability needs"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify whether the behavior must be transactional and immediate": "Step 1",
+        "Check whether the event belongs naturally inside the Dataverse transaction": "Step 2",
+        "Evaluate whether asynchronous orchestration is acceptable instead": "Step 3",
+        "Choose the option that matches timing, reliability, and maintainability needs": "Step 4"
+      },
+      "tags": [
+        "plugin",
+        "power-automate",
+        "architecture"
+      ],
+      "explanation": "The transaction boundary and timing requirement are the critical first questions in plugin-versus-flow decisions.",
+      "msRef": {
+        "label": "Event framework",
+        "url": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/event-framework"
+      }
+    },
+    {
+      "instruction": "A technical consultant is asked to mentor juniors while still delivering project work. Put the effective sequence in order.",
+      "items": [
+        "Identify the few repeat mistakes or knowledge gaps hurting delivery",
+        "Create clear examples, standards, and review guidance around those areas",
+        "Coach within live work rather than as abstract lectures only",
+        "Track whether the same issues reduce over subsequent sprints"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the few repeat mistakes or knowledge gaps hurting delivery": "Step 1",
+        "Create clear examples, standards, and review guidance around those areas": "Step 2",
+        "Coach within live work rather than as abstract lectures only": "Step 3",
+        "Track whether the same issues reduce over subsequent sprints": "Step 4"
+      },
+      "tags": [
+        "mentoring",
+        "leadership",
+        "delivery"
+      ],
+      "explanation": "Effective mentoring targets the real delivery pain points, embeds coaching into live work, and measures whether it is actually helping.",
+      "msRef": {
+        "label": "Best practices for agile project management",
+        "url": "https://learn.microsoft.com/en-us/azure/devops/boards/best-practices-agile-project-management"
+      }
+    },
+    {
+      "instruction": "A technical design is becoming over-engineered for a straightforward requirement. Put the simplification sequence in order.",
+      "items": [
+        "Restate the actual business requirement in plain terms",
+        "Strip away technical components that do not directly support that requirement",
+        "Re-evaluate standard capabilities and simpler patterns",
+        "Keep only the complexity that is justified by a real gap or constraint"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Restate the actual business requirement in plain terms": "Step 1",
+        "Strip away technical components that do not directly support that requirement": "Step 2",
+        "Re-evaluate standard capabilities and simpler patterns": "Step 3",
+        "Keep only the complexity that is justified by a real gap or constraint": "Step 4"
+      },
+      "tags": [
+        "architecture",
+        "simplicity",
+        "technical-judgment"
+      ],
+      "explanation": "The best antidote to over-engineering is to re-anchor the design in the actual requirement and then justify each layer of complexity.",
+      "msRef": {
+        "label": "How to use the Power Platform Well-Architected Framework",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/what-is-power-well-architected"
+      }
+    },
+    {
+      "instruction": "A client wants a contact-centre solution but has only email today and no SLA discipline. Put the solutioning sequence in order.",
+      "items": [
+        "Clarify current intake volume, pain points, and expected service commitments",
+        "Map those needs to case, routing, SLA, and workspace capabilities",
+        "Identify where integration, portal, or custom routing needs remain",
+        "Shape the target operating model and phased implementation path"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify current intake volume, pain points, and expected service commitments": "Step 1",
+        "Map those needs to case, routing, SLA, and workspace capabilities": "Step 2",
+        "Identify where integration, portal, or custom routing needs remain": "Step 3",
+        "Shape the target operating model and phased implementation path": "Step 4"
+      },
+      "tags": [
+        "customer-service",
+        "solutioning",
+        "contact-centre"
+      ],
+      "explanation": "Contact-centre architecture should begin from service reality, then capability mapping, then gaps, then target operating model.",
+      "msRef": {
+        "label": "Customer Service overview",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/overview"
+      }
+    },
+    {
+      "instruction": "You need to defend a recommendation against a client’s preference for the wrong option. Put the sequence in order.",
+      "items": [
+        "Clarify the client’s real concern behind the preference",
+        "Show the evaluated options against agreed criteria",
+        "Explain the recommendation through fit, risk, cost, and supportability tradeoffs",
+        "Document the decision outcome and any explicit accepted risks"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the client’s real concern behind the preference": "Step 1",
+        "Show the evaluated options against agreed criteria": "Step 2",
+        "Explain the recommendation through fit, risk, cost, and supportability tradeoffs": "Step 3",
+        "Document the decision outcome and any explicit accepted risks": "Step 4"
+      },
+      "tags": [
+        "consulting",
+        "stakeholder-management",
+        "tradeoffs"
+      ],
+      "explanation": "Good consulting is not 'because I say so'; it is understanding the concern, showing evaluation, explaining tradeoffs, and documenting outcomes.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    },
+    {
+      "instruction": "A CE program has strong build momentum but weak rollback planning. Put the correction sequence in order.",
+      "items": [
+        "Identify which deployment and data steps would be hardest to reverse",
+        "Define rollback conditions and decision thresholds",
+        "Document the rollback execution path alongside cutover",
+        "Validate that the team understands and can execute the rollback plan"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify which deployment and data steps would be hardest to reverse": "Step 1",
+        "Define rollback conditions and decision thresholds": "Step 2",
+        "Document the rollback execution path alongside cutover": "Step 3",
+        "Validate that the team understands and can execute the rollback plan": "Step 4"
+      },
+      "tags": [
+        "cutover",
+        "rollback",
+        "governance"
+      ],
+      "explanation": "Rollback is part of serious cutover engineering and should be explicit, not assumed.",
+      "msRef": {
+        "label": "Go-live readiness",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/fasttrack/go-live-readiness"
+      }
+    },
+    {
+      "instruction": "A client’s requirement could be solved by either Power Automate or Azure-based integration. Put the evaluation sequence in order.",
+      "items": [
+        "Clarify volume, latency, security, and operational support expectations",
+        "Check whether the scenario stays comfortably within Power Platform-native strengths",
+        "Assess whether Azure-based integration is justified by non-functional or enterprise constraints",
+        "Choose the pattern with the best operational and architectural fit"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify volume, latency, security, and operational support expectations": "Step 1",
+        "Check whether the scenario stays comfortably within Power Platform-native strengths": "Step 2",
+        "Assess whether Azure-based integration is justified by non-functional or enterprise constraints": "Step 3",
+        "Choose the pattern with the best operational and architectural fit": "Step 4"
+      },
+      "tags": [
+        "integration",
+        "power-automate",
+        "azure"
+      ],
+      "explanation": "The correct answer is not 'Azure is more enterprise' by default; it is a requirement-led decision on volume, latency, security, and operations.",
+      "msRef": {
+        "label": "Integration patterns for Power Platform",
+        "url": "https://learn.microsoft.com/en-us/power-platform/architecture/integration-patterns"
+      }
+    },
+    {
+      "instruction": "A client wants to preserve three different regional approval flows. Put the technical consultant’s response in order.",
+      "items": [
+        "Clarify why the regional differences exist",
+        "Separate justified regulatory or business variation from inherited inconsistency",
+        "Propose a standard target model with only necessary exceptions",
+        "Validate the operational and governance implications of that target model"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify why the regional differences exist": "Step 1",
+        "Separate justified regulatory or business variation from inherited inconsistency": "Step 2",
+        "Propose a standard target model with only necessary exceptions": "Step 3",
+        "Validate the operational and governance implications of that target model": "Step 4"
+      },
+      "tags": [
+        "process-standardization",
+        "consulting",
+        "future-state"
+      ],
+      "explanation": "The right lead behavior is to test whether the differences are real needs or just history, then simplify responsibly.",
+      "msRef": {
+        "label": "Standardize business processes during a Dynamics 365 implementation",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/business-processes/standardize-business-processes"
+      }
+    },
+    {
+      "instruction": "A team is using a plugin for something that should be configuration. Put the correction sequence in order.",
+      "items": [
+        "Confirm the exact business behavior the plugin is enforcing",
+        "Check whether standard configuration already covers that behavior",
+        "Assess whether keeping code adds unnecessary maintenance burden",
+        "Refactor toward configuration if the requirement is still met"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the exact business behavior the plugin is enforcing": "Step 1",
+        "Check whether standard configuration already covers that behavior": "Step 2",
+        "Assess whether keeping code adds unnecessary maintenance burden": "Step 3",
+        "Refactor toward configuration if the requirement is still met": "Step 4"
+      },
+      "tags": [
+        "fit-to-standard",
+        "plugin",
+        "configuration"
+      ],
+      "explanation": "The right question is not 'can we code it?' but 'should we still code it if the platform already handles it?'",
+      "msRef": {
+        "label": "Optimize your implementation with a fit-to-standard and fit-gap analysis",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/process-focused-solution-fit-to-standard-fit-gap-analysis"
+      }
+    },
+    {
+      "instruction": "A stakeholder wants to skip UAT because the team already tested in Dev. Put the consultant response in order.",
+      "items": [
+        "Acknowledge the schedule pressure but do not accept the premise",
+        "Explain the different purpose of UAT versus developer testing",
+        "Tie the risk back to business process acceptance and sign-off",
+        "Recommend the minimum safe validation path before release"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Acknowledge the schedule pressure but do not accept the premise": "Step 1",
+        "Explain the different purpose of UAT versus developer testing": "Step 2",
+        "Tie the risk back to business process acceptance and sign-off": "Step 3",
+        "Recommend the minimum safe validation path before release": "Step 4"
+      },
+      "tags": [
+        "uat",
+        "stakeholder-management",
+        "delivery"
+      ],
+      "explanation": "A mature consultant handles the pressure respectfully but re-anchors the discussion in business acceptance risk.",
+      "msRef": {
+        "label": "Go-live readiness",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/fasttrack/go-live-readiness"
+      }
+    },
+    {
+      "instruction": "A client says the team should just 'make it scalable' without further detail. Put the architect response in order.",
+      "items": [
+        "Ask what growth in users, data, or transactions is realistically expected",
+        "Identify which parts of the design would be stressed by that growth",
+        "Define the concrete scalability requirements that matter",
+        "Choose architecture and patterns that address those validated scale drivers"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Ask what growth in users, data, or transactions is realistically expected": "Step 1",
+        "Identify which parts of the design would be stressed by that growth": "Step 2",
+        "Define the concrete scalability requirements that matter": "Step 3",
+        "Choose architecture and patterns that address those validated scale drivers": "Step 4"
+      },
+      "tags": [
+        "scalability",
+        "non-functional",
+        "architecture"
+      ],
+      "explanation": "Scalability must be turned from a vague desire into a specific workload concern before it can guide architecture.",
+      "msRef": {
+        "label": "Power Platform Well-Architected workloads",
+        "url": "https://learn.microsoft.com/en-us/power-platform/well-architected/workloads"
+      }
+    },
+    {
+      "instruction": "You need to introduce stronger code quality without paralyzing delivery. Put the implementation sequence in order.",
+      "items": [
+        "Identify the few checks that catch the most damaging errors",
+        "Put those checks into pull request and build flow discipline",
+        "Make failures visible early to the team",
+        "Refine the quality gates as the delivery pattern matures"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Identify the few checks that catch the most damaging errors": "Step 1",
+        "Put those checks into pull request and build flow discipline": "Step 2",
+        "Make failures visible early to the team": "Step 3",
+        "Refine the quality gates as the delivery pattern matures": "Step 4"
+      },
+      "tags": [
+        "quality",
+        "devops",
+        "technical-leadership"
+      ],
+      "explanation": "The best quality improvement starts with the highest-value controls and then matures incrementally.",
+      "msRef": {
+        "label": "Use Power Platform Build Tools for Azure DevOps",
+        "url": "https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools"
+      }
+    },
+    {
+      "instruction": "A major design choice now affects compliance, support, and budget. Put the manager-level response in order.",
+      "items": [
+        "Confirm the decision point and affected architecture areas",
+        "Summarize the implications in business language",
+        "Take the decision to the correct governance body",
+        "Record the outcome and any accepted risk transparently"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Confirm the decision point and affected architecture areas": "Step 1",
+        "Summarize the implications in business language": "Step 2",
+        "Take the decision to the correct governance body": "Step 3",
+        "Record the outcome and any accepted risk transparently": "Step 4"
+      },
+      "tags": [
+        "governance",
+        "managerial-judgment",
+        "technical-leadership"
+      ],
+      "explanation": "This is the sort of stepwise, decision-rights-oriented thinking senior interviewers want to hear.",
+      "msRef": {
+        "label": "Use classic project governance structures",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/project-governance-classic-structures"
+      }
+    },
+    {
+      "instruction": "A client asks for an accelerator or industry template. Put the consultant evaluation sequence in order.",
+      "items": [
+        "Clarify what business capability the accelerator is expected to speed up",
+        "Evaluate whether the accelerator aligns to the needed domain and operating model",
+        "Assess what can be reused versus what still needs tailoring",
+        "Recommend an approach that preserves standard value without blind dependence"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify what business capability the accelerator is expected to speed up": "Step 1",
+        "Evaluate whether the accelerator aligns to the needed domain and operating model": "Step 2",
+        "Assess what can be reused versus what still needs tailoring": "Step 3",
+        "Recommend an approach that preserves standard value without blind dependence": "Step 4"
+      },
+      "tags": [
+        "accelerators",
+        "industry-templates",
+        "solutioning"
+      ],
+      "explanation": "Accelerators are useful when they fit the real need; they should be evaluated pragmatically, not worshipped or ignored.",
+      "msRef": {
+        "label": "Power Platform accelerators",
+        "url": "https://learn.microsoft.com/en-us/industry/"
+      }
+    },
+    {
+      "instruction": "A client wants many custom components because they sound more powerful. Put the consultant pushback sequence in order.",
+      "items": [
+        "Clarify the actual business outcome being sought",
+        "Compare standard, packaged, and custom approaches against that outcome",
+        "Explain lifecycle and support implications of unnecessary custom build",
+        "Recommend the least complex option that still meets the need"
+      ],
+      "zones": [
+        "Step 1",
+        "Step 2",
+        "Step 3",
+        "Step 4"
+      ],
+      "correctMapping": {
+        "Clarify the actual business outcome being sought": "Step 1",
+        "Compare standard, packaged, and custom approaches against that outcome": "Step 2",
+        "Explain lifecycle and support implications of unnecessary custom build": "Step 3",
+        "Recommend the least complex option that still meets the need": "Step 4"
+      },
+      "tags": [
+        "consulting",
+        "customization",
+        "tradeoffs"
+      ],
+      "explanation": "The best response is grounded in business outcome, option comparison, lifecycle cost, and a recommendation tied to simplicity.",
+      "msRef": {
+        "label": "Propose a solution as a Solution Architect for Microsoft Power Platform and Dynamics 365",
+        "url": "https://learn.microsoft.com/en-us/training/modules/propose-solution/"
+      }
+    }
+  ],
+  "casestudy": []
+}
