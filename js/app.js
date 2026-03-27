@@ -442,7 +442,7 @@ const App = (function () {
         const tooltip = group.desc || '';
         return `
             <div class="gtile gtile--${group.id}" onclick="window.openGroup('${group.id}')"
-                 style="--gtile-accent:${accent}">
+                style="--gtile-accent:${accent}">
                 <div class="gtile__icon">${svg}</div>
                 <div class="gtile__label">${group.title}</div>
                 <div class="gtile__count">${count} topics</div>
