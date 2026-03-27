@@ -1,527 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build your Dynamics 365 Edge</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="./css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Build your Dynamics 365 Edge</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-  <div class="app">
+<div class="app">
 
-    <!-- ══════ LOADING ══════ -->
-    <div class="loading-overlay" id="loadingOverlay" style="display:none">
-      <div class="loading-spinner"></div>
-      <div class="loading-text" id="loadingText">Loading questions…</div>
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay" style="display:none">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loadingText">Loading questions…</div>
+</div>
+
+<!-- ========== HOME SCREEN ========== -->
+<div class="screen active" id="homeScreen">
+  <nav class="top-nav">
+    <div class="nav-logo">D365<span>·</span>Mastery</div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="window.showGuided()">Guided Learning</button>
+      <button class="nav-btn" onclick="window.showInterviewSim()">Interview Prep Sim</button>
+      <button class="nav-btn" onclick="window.showHistory()">History</button>
     </div>
+  </nav>
+  <div class="hero-eyebrow"><div class="hero-dot"></div>Dynamics 365 Career Prep</div>
+  <h1 class="hero-title">Build your<br><em>Dynamics 365</em> edge.</h1>
+  <p class="hero-sub">Exam-format sessions: 60 questions, 65-minute timer, 700/1000 to pass. MCQ, drag-and-drop, and case study questions drawn from a deep question pool.</p>
+  <div class="exam-info-bar">
+    <div class="eib-cell"><span class="eib-n">60</span><div class="eib-l">Questions/Session</div></div>
+    <div class="eib-cell"><span class="eib-n">65</span><div class="eib-l">Minutes</div></div>
+    <div class="eib-cell"><span class="eib-n">700</span><div class="eib-l">Passing Score</div></div>
+    <div class="eib-cell"><span class="eib-n">1000</span><div class="eib-l">Total Points</div></div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-cell"><span class="stat-n" id="gs-sessions">0</span><div class="stat-l">Sessions</div></div>
+    <div class="stat-cell"><span class="stat-n" id="gs-questions">0</span><div class="stat-l">Questions</div></div>
+    <div class="stat-cell"><span class="stat-n" id="gs-accuracy">—</span><div class="stat-l">Avg Score</div></div>
+    <div class="stat-cell"><span class="stat-n" id="gs-best">—</span><div class="stat-l">Best Score</div></div>
+  </div>
+  <div class="section-label">Available Topics</div>
+  <div id="unlockBanner"></div>
+  <div class="topics-grid" id="topicsGrid"></div>
+</div>
 
-    <!-- ══════ HOME ══════ -->
-    <div class="screen active" id="homeScreen">
-      <nav class="top-nav">
-        <div class="nav-logo">D365<span>·</span>Mastery</div>
-        <div class="nav-actions">
-          <button class="nav-btn" onclick="showGuided()">Guided Learning</button>
-          <button class="nav-btn" onclick="showInterviewSim()">Interview Prep Sim</button>
-          <button class="nav-btn" onclick="showHistory()">History</button>
-        </div>
-      </nav>
-      <div class="hero-eyebrow">
-        <div class="hero-dot"></div>Dynamics 365 Career Prep
-      </div>
-      <h1 class="hero-title">Build your<br><em>Dynamics 365</em> edge.</h1>
-      <p class="hero-sub">Exam-format sessions: 60 questions, 65-minute timer, 700/1000 to pass. MCQ, drag-and-drop, and
-        case study questions drawn from a deep question pool.</p>
-      <div class="exam-info-bar">
-        <div class="eib-cell"><span class="eib-n">60</span>
-          <div class="eib-l">Questions/Session</div>
-        </div>
-        <div class="eib-cell"><span class="eib-n">65</span>
-          <div class="eib-l">Minutes</div>
-        </div>
-        <div class="eib-cell"><span class="eib-n">700</span>
-          <div class="eib-l">Passing Score</div>
-        </div>
-        <div class="eib-cell"><span class="eib-n">1000</span>
-          <div class="eib-l">Total Points</div>
-        </div>
-      </div>
-      <div class="stats-bar">
-        <div class="stat-cell"><span class="stat-n" id="gs-sessions">0</span>
-          <div class="stat-l">Sessions</div>
-        </div>
-        <div class="stat-cell"><span class="stat-n" id="gs-questions">0</span>
-          <div class="stat-l">Questions</div>
-        </div>
-        <div class="stat-cell"><span class="stat-n" id="gs-accuracy">—</span>
-          <div class="stat-l">Avg Score</div>
-        </div>
-        <div class="stat-cell"><span class="stat-n" id="gs-best">—</span>
-          <div class="stat-l">Best Score</div>
-        </div>
-      </div>
-      <div class="section-label">Available Topics</div>
-      <div id="unlockBanner"></div>
-      <div class="topics-grid" id="topicsGrid"></div>
+<!-- ========== SUB-TOPIC PICKER ========== -->
+<div class="screen" id="subtopicScreen">
+  <nav class="top-nav">
+    <div class="nav-logo">D365<span>·</span>Mastery</div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="window.showHome()">← Home</button>
     </div>
+  </nav>
+  <div id="subtopicBreadcrumb" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px"></div>
+  <div id="subtopicGroupTitle" style="font-family:'Syne',sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin-bottom:6px"></div>
+  <div id="subtopicGroupDesc" style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:560px;margin-bottom:28px"></div>
+  <div class="section-label" style="margin-bottom:16px">Choose a topic</div>
+  <div class="topics-grid" id="subtopicGrid"></div>
+</div>
 
-    <!-- ══════ SUB-TOPIC PICKER ══════ -->
-    <div class="screen" id="subtopicScreen">
-      <nav class="top-nav">
-        <div class="nav-logo">D365<span>·</span>Mastery</div>
-        <div class="nav-actions">
-          <button class="nav-btn" onclick="showHome()">← Home</button>
-        </div>
-      </nav>
-      <div id="subtopicBreadcrumb"
-        style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px"></div>
-      <div id="subtopicGroupTitle"
-        style="font-family:'Syne',sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin-bottom:6px">
-      </div>
-      <div id="subtopicGroupDesc"
-        style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:560px;margin-bottom:28px"></div>
-      <div class="section-label" style="margin-bottom:16px">Choose a topic</div>
-      <div class="topics-grid" id="subtopicGrid"></div>
+<!-- ========== RESUME MODAL ========== -->
+<div class="resume-modal-bg" id="resumeModal" style="display:none">
+  <div class="resume-modal">
+    <div class="rm-eyebrow">⚡ Unfinished Session</div>
+    <div class="rm-title">You have a session in progress</div>
+    <div class="rm-body" id="resumeBody"></div>
+    <div class="rm-actions">
+      <button class="rm-resume" onclick="window.resumeSession()">Resume →</button>
+      <button class="rm-discard" onclick="window.startFreshSession()">Discard & Start Fresh</button>
+      <button class="rm-discard" onclick="window.dismissResumeModal()">Never mind</button>
     </div>
+  </div>
+</div>
 
-    <!-- ══════ RESUME PROMPT ══════ -->
-    <div class="resume-modal-bg" id="resumeModal" style="display:none">
-      <div class="resume-modal">
-        <div class="rm-eyebrow">⚡ Unfinished Session</div>
-        <div class="rm-title">You have a session in progress</div>
-        <div class="rm-body" id="resumeBody">You were on question — of — with — remaining on the clock.</div>
-        <div class="rm-actions">
-          <button class="rm-resume" onclick="resumeSession()">Resume →</button>
-          <button class="rm-discard" onclick="startFreshSession()">Discard & Start Fresh</button>
-          <button class="rm-discard" onclick="dismissResumeModal()">Never mind</button>
-        </div>
+<!-- ========== REPLAY SCREEN ========== -->
+<div class="screen" id="replayScreen">
+  <div style="max-width:960px;margin:0 auto;padding:0">
+    <div class="quiz-topbar">
+      <button class="quiz-back" onclick="window.showHistory()">← Back to History</button>
+      <div class="quiz-center">
+        <span class="q-counter" id="rpCounter">1 / 60</span>
+        <div class="q-type-badge qtb-mcq" id="rpTypeBadge">MCQ</div>
+      </div>
+      <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--muted2)">
+        📖 Review Mode
       </div>
     </div>
-
-    <!-- ══════ SESSION REPLAY ══════ -->
-    <div class="screen" id="replayScreen">
-      <div style="max-width:960px;margin:0 auto;padding:0">
-        <div class="quiz-topbar">
-          <button class="quiz-back" onclick="showHistory()">← Back to History</button>
-          <div class="quiz-center">
-            <span class="q-counter" id="rpCounter">1 / 60</span>
-            <div class="q-type-badge qtb-mcq" id="rpTypeBadge">MCQ</div>
-          </div>
-          <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--muted2)">
-            📖 Review Mode
-          </div>
-        </div>
-        <div style="padding:28px 24px">
-          <div class="replay-banner">📖 Read-only review — answers shown, no changes possible</div>
-          <div class="replay-q-nav" id="rpNav"></div>
-          <div id="rpQuestionBlock"></div>
-          <div class="feedback-panel show" id="rpFeedback" style="margin-top:16px">
-            <div class="fb-label" id="rpFbLabel"></div>
-            <div class="fb-body" id="rpFbBody"></div>
-            <div class="fb-pts" id="rpFbPts"></div>
-            <a class="ms-ref-btn" id="rpMsRef" href="#" target="_blank" rel="noopener" style="display:none">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-              <span id="rpMsRefLabel">Microsoft Docs</span>
-            </a>
-          </div>
-          <div class="replay-nav-btns">
-            <button class="rp-btn rp-btn-prev" id="rpPrev" onclick="rpNavigate(-1)">← Prev</button>
-            <button class="rp-btn rp-btn-next" id="rpNext" onclick="rpNavigate(1)">Next →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ LICENCE MODAL ══════ -->
-    <div class="licence-modal-bg" id="licenceModal" style="display:none" onclick="handleModalBgClick(event)">
-      <div class="licence-modal">
-        <button class="lm-close" onclick="closeLicenceModal()">✕</button>
-        <div class="lm-eyebrow">🔐 Full Access</div>
-        <div class="lm-title">Unlock All Topics</div>
-        <div class="lm-desc">Enter your licence key to unlock all current and future topics permanently on this device.
-          One-off payment — no subscription.</div>
-        <div class="lm-input-wrap">
-          <input class="lm-input" id="licenceInput" type="text" placeholder="PPMA-XXXX-XXXX-XXXX" maxlength="19"
-            oninput="formatKeyInput(this)" onkeydown="if(event.key==='Enter')submitKey()">
-        </div>
-        <div class="lm-error" id="licenceError"></div>
-        <button class="lm-submit" onclick="submitKey()">Activate Key →</button>
-        <div class="lm-divider">don't have a key yet?</div>
-        <a class="lm-gumroad" id="gumroadLink" href="https://ondiek-source.gumroad.com/l/pp-mastery" target="_blank"
-          rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            <polyline points="15 3 21 3 21 9" />
-            <line x1="10" y1="14" x2="21" y2="3" />
-          </svg>
-          Get Full Access — $2
+    <div style="padding:28px 24px">
+      <div class="replay-banner">📖 Read-only review — answers shown, no changes possible</div>
+      <div class="replay-q-nav" id="rpNav"></div>
+      <div id="rpQuestionBlock"></div>
+      <div class="feedback-panel show" id="rpFeedback" style="margin-top:16px">
+        <div class="fb-label" id="rpFbLabel"></div>
+        <div class="fb-body" id="rpFbBody"></div>
+        <div class="fb-pts" id="rpFbPts"></div>
+        <a class="ms-ref-btn" id="rpMsRef" href="#" target="_blank" rel="noopener" style="display:none">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span id="rpMsRefLabel">Microsoft Docs</span>
         </a>
-        <div class="lm-note">Key is saved to this browser. Works on any device you enter it on.<br>Questions answered
-          stay private — stored locally, never uploaded.</div>
+      </div>
+      <div class="replay-nav-btns">
+        <button class="rp-btn rp-btn-prev" id="rpPrev" onclick="window.rpNavigate(-1)">← Prev</button>
+        <button class="rp-btn rp-btn-next" id="rpNext" onclick="window.rpNavigate(1)">Next →</button>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- ══════ QUIZ ══════ -->
-    <div class="screen" id="quizScreen">
-      <div class="quiz-layout" id="quizLayout">
-        <div class="quiz-topbar">
-          <button class="quiz-back" onclick="confirmExit()">← Exit</button>
-          <div class="quiz-center">
-            <span class="q-counter" id="qCounter">1 / 60</span>
-            <div class="q-type-badge qtb-mcq" id="qTypeBadge">MCQ</div>
-            <div class="live-score">Score: <span id="liveScore">0</span>/1000</div>
-          </div>
-          <div class="timer-wrap">
-            <div class="timer-bar-track">
-              <div class="timer-bar-fill" id="timerBarFill" style="width:100%;background:var(--timer-ok)"></div>
-            </div>
-            <div class="timer-display ok" id="timerDisplay">65:00</div>
-          </div>
-        </div>
-        <div class="quiz-main" id="quizMain">
-          <div class="progress-track">
-            <div class="progress-fill" id="progressFill" style="width:0%"></div>
-          </div>
-          <div class="q-nav" id="qNav"></div>
-          <div id="questionBlock"></div>
-          <div class="feedback-panel" id="feedbackPanel">
-            <div class="fb-label" id="fbLabel"></div>
-            <div class="fb-body" id="fbBody"></div>
-            <div class="fb-pts" id="fbPts"></div>
-            <a class="ms-ref-btn" id="msRefBtn" href="#" target="_blank" rel="noopener" style="display:none">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-              <span id="msRefLabel">Microsoft Docs</span>
-            </a>
-          </div>
-          <div class="q-actions">
-            <button class="btn-next" id="btnNext" onclick="nextQuestion()">Next →</button>
-            <button class="btn-skip" id="btnSkip" onclick="skipQuestion()">Skip</button>
-            <button class="flag-btn" id="flagBtn" onclick="toggleFlag()" title="Flag for review">⚑</button>
-            <button class="report-btn" id="reportBtn" onclick="openReportModal()"
-              title="Report an issue with this question">⚐ Report</button>
-          </div>
-        </div>
-        <div class="scenario-panel" id="scenarioPanel" style="display:none">
-          <div class="scenario-header">
-            <div class="scenario-header-title">📋 Scenario</div>
-            <button class="scenario-toggle" onclick="toggleScenarioPanel()">✕</button>
-          </div>
-          <div class="scenario-body" id="scenarioBody"></div>
-        </div>
+<!-- ========== LICENCE MODAL ========== -->
+<div class="licence-modal-bg" id="licenceModal" style="display:none" onclick="window.handleModalBgClick(event)">
+  <div class="licence-modal">
+    <button class="lm-close" onclick="window.closeLicenceModal()">✕</button>
+    <div class="lm-eyebrow">🔐 Full Access</div>
+    <div class="lm-title">Unlock All Topics</div>
+    <div class="lm-desc">Enter your licence key to unlock all current and future topics permanently on this device. One-off payment — no subscription.</div>
+    <div class="lm-input-wrap">
+      <input class="lm-input" id="licenceInput" type="text" placeholder="PPMA-XXXX-XXXX-XXXX" maxlength="19" oninput="window.formatKeyInput(this)" onkeydown="if(event.key==='Enter')window.submitKey()">
+    </div>
+    <div class="lm-error" id="licenceError"></div>
+    <button class="lm-submit" onclick="window.submitKey()">Activate Key →</button>
+    <div class="lm-divider">don't have a key yet?</div>
+    <a class="lm-gumroad" id="gumroadLink" href="https://ondiek-source.gumroad.com/l/pp-mastery" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Get Full Access — $2
+    </a>
+    <div class="lm-note">Key is saved to this browser. Works on any device you enter it on.<br>Questions answered stay private — stored locally, never uploaded.</div>
+  </div>
+</div>
+
+<!-- ========== QUIZ SCREEN ========== -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-layout" id="quizLayout">
+    <div class="quiz-topbar">
+      <button class="quiz-back" onclick="window.QuizEngine && window.QuizEngine.confirmExit()">← Exit</button>
+      <div class="quiz-center">
+        <span class="q-counter" id="qCounter">1 / 60</span>
+        <div class="q-type-badge qtb-mcq" id="qTypeBadge">MCQ</div>
+        <div class="live-score">Score: <span id="liveScore">0</span>/1000</div>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer-bar-track"><div class="timer-bar-fill" id="timerBarFill" style="width:100%;background:var(--timer-ok)"></div></div>
+        <div class="timer-display ok" id="timerDisplay">65:00</div>
       </div>
     </div>
-
-    <!-- ══════ RESULTS ══════ -->
-    <div class="screen" id="resultsScreen">
-      <div style="max-width:860px;margin:0 auto;padding:32px 24px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px">
-          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)" id="resTopic">
-          </div>
-          <button class="nav-btn" onclick="showHome()">Home</button>
-        </div>
-        <div class="results-hero">
-          <div class="score-circle" id="scoreCircle">
-            <div class="sc-num" id="scNum">0</div>
-            <div class="sc-denom">/1000</div>
-            <div class="sc-grade" id="scGrade"></div>
-          </div>
-          <div class="results-meta">
-            <div class="pass-badge" id="passBadge"></div>
-            <h2 id="resHeading"></h2>
-            <p id="resMsg"></p>
-            <div style="font-size:11px;color:var(--muted);margin-top:10px" id="resTimeTaken"></div>
-          </div>
-        </div>
-        <div class="breakdown-grid">
-          <div class="bd-cell"><span class="bd-n" id="bdMcq" style="color:var(--accent)">0</span>
-            <div class="bd-l">MCQ Score</div>
-          </div>
-          <div class="bd-cell"><span class="bd-n" id="bdDd" style="color:var(--warn)">0</span>
-            <div class="bd-l">Drag & Drop</div>
-          </div>
-          <div class="bd-cell"><span class="bd-n" id="bdCs" style="color:var(--accent2)">0</span>
-            <div class="bd-l">Case Study</div>
-          </div>
-        </div>
-        <div class="ci-card">
-          <div class="ci-title">Mastery Confidence Interval — 95% Wilson Score CI</div>
-          <div class="ci-bar-outer">
-            <div class="ci-bar-track"></div>
-            <div class="ci-bar-range" id="ciRange" style="left:0%;width:100%"></div>
-            <div class="ci-bar-point" id="ciPoint" style="left:50%"></div>
-          </div>
-          <div class="ci-tick-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
-          </div>
-          <div class="ci-stats">
-            <div class="ci-stat"><span class="ci-stat-n" id="ciLow" style="color:var(--wrong)">—</span>
-              <div class="ci-stat-l">Lower Bound</div>
-            </div>
-            <div class="ci-stat"><span class="ci-stat-n" id="ciMid" style="color:var(--accent)">—</span>
-              <div class="ci-stat-l">Point Estimate</div>
-            </div>
-            <div class="ci-stat"><span class="ci-stat-n" id="ciHigh" style="color:var(--correct)">—</span>
-              <div class="ci-stat-l">Upper Bound</div>
-            </div>
-          </div>
-          <div class="ci-interpret" id="ciInterpret"></div>
-        </div>
-        <div class="section-label" style="margin-bottom:14px">Performance Summary</div>
-        <div class="perf-grid" id="perfGrid"></div>
-        <button class="review-toggle" onclick="toggleReview(this)">▶ Show Question Review</button>
-        <div class="review-list" id="reviewList"></div>
-        <div class="results-actions">
-          <button class="btn-primary" onclick="playAgain()">New Session →</button>
-          <button class="btn-ghost" onclick="showHome()">← All Topics</button>
-        </div>
+    <div class="quiz-main" id="quizMain">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="q-nav" id="qNav"></div>
+      <div id="questionBlock"></div>
+      <div class="feedback-panel" id="feedbackPanel">
+        <div class="fb-label" id="fbLabel"></div>
+        <div class="fb-body" id="fbBody"></div>
+        <div class="fb-pts" id="fbPts"></div>
+        <a class="ms-ref-btn" id="msRefBtn" href="#" target="_blank" rel="noopener" style="display:none">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span id="msRefLabel">Microsoft Docs</span>
+        </a>
+      </div>
+      <div class="q-actions">
+        <button class="btn-next" id="btnNext" onclick="window.QuizEngine && window.QuizEngine.advanceQuestion()">Next →</button>
+        <button class="btn-skip" id="btnSkip" onclick="window.QuizEngine && window.QuizEngine.skipQuestion()">Skip</button>
+        <button class="flag-btn" id="flagBtn" onclick="window.QuizEngine && window.QuizEngine.toggleFlag()" title="Flag for review">⚑</button>
+        <button class="report-btn" id="reportBtn" onclick="window.openReportModal()" title="Report an issue with this question">⚐ Report</button>
       </div>
     </div>
+    <div class="scenario-panel" id="scenarioPanel" style="display:none">
+      <div class="scenario-header">
+        <div class="scenario-header-title">📋 Scenario</div>
+        <button class="scenario-toggle" onclick="window.QuizEngine && window.QuizEngine.toggleScenarioPanel()">✕</button>
+      </div>
+      <div class="scenario-body" id="scenarioBody"></div>
+    </div>
+  </div>
+</div>
 
-    <!-- ══════ HISTORY ══════ -->
-    <div class="screen" id="historyScreen">
-      <div style="max-width:860px;margin:0 auto;padding:32px 24px">
-        <nav class="top-nav">
-          <div class="nav-logo">D365<span>·</span>Mastery</div>
-          <div class="nav-actions">
-            <button class="nav-btn active-nav">History</button>
-            <button class="nav-btn" onclick="showHome()">Topics</button>
-          </div>
-        </nav>
-        <div class="section-label" style="margin-bottom:20px">Session History</div>
-        <div id="historyContent"></div>
+<!-- ========== RESULTS SCREEN ========== -->
+<div class="screen" id="resultsScreen">
+  <div style="max-width:860px;margin:0 auto;padding:32px 24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)" id="resTopic"></div>
+      <button class="nav-btn" onclick="window.showHome()">Home</button>
+    </div>
+    <div class="results-hero">
+      <div class="score-circle" id="scoreCircle">
+        <div class="sc-num" id="scNum">0</div>
+        <div class="sc-denom">/1000</div>
+        <div class="sc-grade" id="scGrade"></div>
+      </div>
+      <div class="results-meta">
+        <div class="pass-badge" id="passBadge"></div>
+        <h2 id="resHeading"></h2>
+        <p id="resMsg"></p>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px" id="resTimeTaken"></div>
       </div>
     </div>
+    <div class="breakdown-grid">
+      <div class="bd-cell"><span class="bd-n" id="bdMcq" style="color:var(--accent)">0</span><div class="bd-l">MCQ Score</div></div>
+      <div class="bd-cell"><span class="bd-n" id="bdDd" style="color:var(--warn)">0</span><div class="bd-l">Drag & Drop</div></div>
+      <div class="bd-cell"><span class="bd-n" id="bdCs" style="color:var(--accent2)">0</span><div class="bd-l">Case Study</div></div>
+    </div>
+    <div class="ci-card">
+      <div class="ci-title">Mastery Confidence Interval — 95% Wilson Score CI</div>
+      <div class="ci-bar-outer">
+        <div class="ci-bar-track"></div>
+        <div class="ci-bar-range" id="ciRange" style="left:0%;width:100%"></div>
+        <div class="ci-bar-point" id="ciPoint" style="left:50%"></div>
+      </div>
+      <div class="ci-tick-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+      <div class="ci-stats">
+        <div class="ci-stat"><span class="ci-stat-n" id="ciLow" style="color:var(--wrong)">—</span><div class="ci-stat-l">Lower Bound</div></div>
+        <div class="ci-stat"><span class="ci-stat-n" id="ciMid" style="color:var(--accent)">—</span><div class="ci-stat-l">Point Estimate</div></div>
+        <div class="ci-stat"><span class="ci-stat-n" id="ciHigh" style="color:var(--correct)">—</span><div class="ci-stat-l">Upper Bound</div></div>
+      </div>
+      <div class="ci-interpret" id="ciInterpret"></div>
+    </div>
+    <div class="section-label" style="margin-bottom:14px">Performance Summary</div>
+    <div class="perf-grid" id="perfGrid"></div>
+    <button class="review-toggle" onclick="window.toggleReview(this)">▶ Show Question Review</button>
+    <div class="review-list" id="reviewList"></div>
+    <div class="results-actions">
+      <button class="btn-primary" onclick="window.QuizEngine && window.QuizEngine.playAgain()">New Session →</button>
+      <button class="btn-ghost" onclick="window.showHome()">← All Topics</button>
+    </div>
+  </div>
+</div>
 
-    <!-- ══════ GUIDED LEARNING ══════ -->
-    <div class="screen" id="guidedScreen">
-      <div style="max-width:960px;margin:0 auto">
-        <nav class="top-nav">
-          <div class="nav-logo">D365<span>·</span>Mastery</div>
-          <div class="nav-actions">
-            <button class="nav-btn active-nav">Guided Learning</button>
-            <button class="nav-btn" onclick="showHistory()">History</button>
-            <button class="nav-btn" onclick="showHome()">Topics</button>
-          </div>
-        </nav>
-        <div id="glTopicPicker">
-          <div class="hero-eyebrow" style="margin-bottom:16px">
-            <div class="hero-dot"></div>Learn Mode
-          </div>
-          <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px">
-            Guided Learning</h2>
-          <p style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:560px;margin-bottom:32px">Read
-            concepts, study key facts, and test yourself with inline questions — no timer, no pressure. Like W3Schools
-            but for Dynamics 365.</p>
-          <div class="section-label" style="margin-bottom:16px">Choose a topic to study</div>
-          <div class="topics-grid" id="glTopicsGrid"></div>
+<!-- ========== HISTORY SCREEN ========== -->
+<div class="screen" id="historyScreen">
+  <div style="max-width:860px;margin:0 auto;padding:32px 24px">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn active-nav">History</button>
+        <button class="nav-btn" onclick="window.showHome()">Topics</button>
+      </div>
+    </nav>
+    <div class="section-label" style="margin-bottom:20px">Session History</div>
+    <div id="historyContent"></div>
+  </div>
+</div>
+
+<!-- ========== GUIDED LEARNING SCREEN ========== -->
+<div class="screen" id="guidedScreen">
+  <div style="max-width:960px;margin:0 auto">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn active-nav">Guided Learning</button>
+        <button class="nav-btn" onclick="window.showHistory()">History</button>
+        <button class="nav-btn" onclick="window.showHome()">Topics</button>
+      </div>
+    </nav>
+    <div id="glTopicPicker">
+      <div class="hero-eyebrow" style="margin-bottom:16px"><div class="hero-dot"></div>Learn Mode</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px">Guided Learning</h2>
+      <p style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:560px;margin-bottom:32px">Read concepts, study key facts, and test yourself with inline questions — no timer, no pressure. Like W3Schools but for Dynamics 365.</p>
+      <div class="section-label" style="margin-bottom:16px">Choose a topic to study</div>
+      <div class="topics-grid" id="glTopicsGrid"></div>
+    </div>
+    <div id="glReader" style="display:none">
+      <div class="gl-reader-layout">
+        <div class="gl-sidebar" id="glSidebar">
+          <div class="gl-sidebar-topic" id="glSidebarTopic"></div>
+          <div class="gl-sidebar-nav" id="glSidebarNav"></div>
+          <button class="gl-back-btn" onclick="window.glBackToTopics()">← All Topics</button>
         </div>
-        <div id="glReader" style="display:none">
-          <div class="gl-reader-layout">
-            <div class="gl-sidebar" id="glSidebar">
-              <div class="gl-sidebar-topic" id="glSidebarTopic"></div>
-              <div class="gl-sidebar-nav" id="glSidebarNav"></div>
-              <button class="gl-back-btn" onclick="glBackToTopics()">← All Topics</button>
-            </div>
-            <div class="gl-content" id="glContent"></div>
-          </div>
-        </div>
+        <div class="gl-content" id="glContent"></div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- ══════ INTERVIEW PREP SIM ══════ -->
-    <div class="screen" id="interviewSimScreen">
-      <div style="max-width:960px;margin:0 auto">
-        <nav class="top-nav">
-          <div class="nav-logo">D365<span>·</span>Mastery</div>
-          <div class="nav-actions">
-            <button class="nav-btn active-nav">Interview Prep Sim</button>
-            <button class="nav-btn" onclick="showGuided()">Guided Learning</button>
-            <button class="nav-btn" onclick="showHome()">Topics</button>
-          </div>
-        </nav>
-        <div class="hero-eyebrow" style="margin-bottom:16px">
-          <div class="hero-dot"></div>Interview Practice
-        </div>
-        <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px">
-          Interview Prep Simulator</h2>
-        <p style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:620px;margin-bottom:32px">Run technical
-          interview drills using structured packs. Work through MCQs, open technical questions, case studies, and
-          deep-dive prompts with model answers, probes, and scoring guidance.</p>
-        <div class="section-label" style="margin-bottom:16px">Available Interview Packs</div>
-        <div class="topics-grid" id="interviewSimGrid"></div>
+<!-- ========== INTERVIEW PREP SIM SCREEN ========== -->
+<div class="screen" id="interviewSimScreen">
+  <div style="max-width:960px;margin:0 auto">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn active-nav">Interview Prep Sim</button>
+        <button class="nav-btn" onclick="window.showGuided()">Guided Learning</button>
+        <button class="nav-btn" onclick="window.showHome()">Topics</button>
       </div>
-    </div>
+    </nav>
+    <div class="hero-eyebrow" style="margin-bottom:16px"><div class="hero-dot"></div>Interview Practice</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px">Interview Prep Simulator</h2>
+    <p style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:620px;margin-bottom:32px">Run technical interview drills using structured packs. Work through MCQs, open technical questions, case studies, and deep-dive prompts with model answers, probes, and scoring guidance.</p>
+    <div class="section-label" style="margin-bottom:16px">Available Interview Packs</div>
+    <div class="topics-grid" id="interviewSimGrid"></div>
+  </div>
+</div>
 
-    <!-- ══════ INTERVIEW PACK SCREEN ══════ -->
-    <div class="screen" id="interviewPackScreen">
-      <div style="max-width:1080px;margin:0 auto">
-        <nav class="top-nav">
-          <div class="nav-logo">D365<span>·</span>Mastery</div>
-          <div class="nav-actions">
-            <button class="nav-btn" onclick="showInterviewSim()">← Interview Packs</button>
-            <button class="nav-btn" onclick="showHome()">Topics</button>
+<!-- ========== INTERVIEW PACK SCREEN ========== -->
+<div class="screen" id="interviewPackScreen">
+  <div style="max-width:1080px;margin:0 auto">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="window.showInterviewSim()">← Interview Packs</button>
+        <button class="nav-btn" onclick="window.showHome()">Topics</button>
+      </div>
+    </nav>
+    <div class="hero-eyebrow" style="margin-bottom:16px"><div class="hero-dot"></div>Interview Practice</div>
+    <h2 id="isPackTitle" style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px"></h2>
+    <p id="isPackMeta" style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:720px;margin-bottom:18px"></p>
+    <div id="isPackNotes" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
+    <div id="isScoringBox" class="ci-card" style="margin-bottom:18px;padding:18px 20px"></div>
+    <div id="isSectionTabs" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"></div>
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="flex:1;min-width:0">
+        <div class="q-block" id="isQuestionBlock"></div>
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-skip" id="isPrevBtn" onclick="window.isNavigate(-1)">← Previous</button>
+            <button class="btn-next" id="isNextBtn" onclick="window.isNavigate(1)">Next →</button>
           </div>
-        </nav>
-        <div class="hero-eyebrow" style="margin-bottom:16px">
-          <div class="hero-dot"></div>Interview Practice
-        </div>
-        <h2 id="isPackTitle"
-          style="font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:8px"></h2>
-        <p id="isPackMeta"
-          style="color:var(--muted2);font-size:12px;line-height:1.8;max-width:720px;margin-bottom:18px"></p>
-        <div id="isPackNotes" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
-        <div id="isScoringBox" class="ci-card" style="margin-bottom:18px;padding:18px 20px"></div>
-        <div id="isSectionTabs" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"></div>
-        <div style="display:flex;gap:20px;align-items:flex-start">
-          <div style="flex:1;min-width:0">
-            <div class="q-block" id="isQuestionBlock"></div>
-            <div
-              style="display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap">
-              <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button class="btn-skip" id="isPrevBtn" onclick="isNavigate(-1)">← Previous</button>
-                <button class="btn-next" id="isNextBtn" onclick="isNavigate(1)">Next →</button>
-              </div>
-              <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button class="btn-primary" id="isRevealBtn" onclick="toggleInterviewReveal()">Reveal Guidance</button>
-              </div>
-            </div>
-          </div>
-          <div style="width:min(320px,100%);position:sticky;top:16px">
-            <div class="ci-card" style="padding:18px 20px">
-              <div class="ci-title" style="margin-bottom:12px">Pack Overview</div>
-              <div id="isSectionInfo" style="font-size:12px;color:var(--muted2);line-height:1.8"></div>
-            </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-primary" id="isRevealBtn" onclick="window.toggleInterviewReveal()">Reveal Guidance</button>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- ══════ VOICE INTERVIEW NAME MODAL ══════ -->
-    <div class="vi-name-bg" id="viNameModal" style="display:none">
-      <div class="vi-name-modal">
-        <div class="vi-name-eyebrow">🎙 Interview Prep Simulator</div>
-        <div class="vi-name-title" id="viNamePackTitle">Technical Interview</div>
-        <div class="vi-name-sub">Enter your name so the interviewer can address you naturally. The session will be
-          recorded and scored using the pack's rubric.</div>
-        <input class="vi-name-input" id="viNameInput" type="text" placeholder="Your first name…" maxlength="40"
-          oninput="viNameInputChanged()" onkeydown="if(event.key==='Enter')viStartInterview()">
-        <button class="vi-name-btn" id="viNameBtn" onclick="viStartInterview()" disabled>Begin Interview →</button>
-      </div>
-    </div>
-
-    <!-- ══════ VOICE INTERVIEW SCREEN ══════ -->
-    <div class="screen" id="voiceInterviewScreen">
-      <div class="vi-layout">
-        <div class="vi-stage">
-          <div class="vi-mood" id="viMood">🎙️</div>
-          <div class="vi-status" id="viStatusLabel">Ready</div>
-          <div class="vi-waveform" id="viWaveform"></div>
-          <div class="vi-question-display">
-            <div class="vi-q-label" id="viQLabel">Question 0 of 0</div>
-            <div class="vi-q-text" id="viQText">Preparing your interview…</div>
-          </div>
-          <div class="vi-controls">
-            <button class="vi-end-btn" onclick="viConfirmEnd()">End Interview</button>
-            <button class="vi-mic-btn" id="viMicBtn" onclick="viToggleMic()" disabled title="Hold to answer">🎤</button>
-            <button class="vi-end-btn" onclick="viSkipQuestion()" id="viSkipBtn"
-              style="opacity:0;pointer-events:none">Skip →</button>
-          </div>
-        </div>
-        <div class="vi-panel">
-          <div class="vi-panel-header">
-            <div class="vi-panel-title">Live Transcript</div>
-            <div class="vi-panel-meta" id="viPanelMeta">Waiting to begin…</div>
-          </div>
-          <div class="vi-progress-wrap">
-            <div class="vi-progress-track">
-              <div class="vi-progress-fill" id="viProgressFill" style="width:0%"></div>
-            </div>
-            <div class="vi-progress-label"><span id="viProgressLabel">0 of 0 questions</span><span
-                id="viTimerLabel">0:00</span></div>
-          </div>
-          <div class="vi-transcript" id="viTranscript"></div>
-          <div class="vi-panel-footer">
-            <button class="vi-dl-btn" onclick="viDownloadTranscript()">⬇ Download Transcript</button>
-          </div>
+      <div style="width:min(320px,100%);position:sticky;top:16px">
+        <div class="ci-card" style="padding:18px 20px">
+          <div class="ci-title" style="margin-bottom:12px">Pack Overview</div>
+          <div id="isSectionInfo" style="font-size:12px;color:var(--muted2);line-height:1.8"></div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- ══════ VOICE INTERVIEW RESULTS ══════ -->
-    <div class="screen" id="viResultsScreen">
-      <div class="vi-results-wrap">
-        <nav class="top-nav">
-          <div class="nav-logo">D365<span>·</span>Mastery</div>
-          <div class="nav-actions">
-            <button class="nav-btn" onclick="showInterviewSim()">← Interview Packs</button>
-            <button class="nav-btn" onclick="showHome()">Home</button>
-          </div>
-        </nav>
-        <div class="hero-eyebrow" style="margin-bottom:20px">
-          <div class="hero-dot"></div>Interview Complete
-        </div>
-        <div class="vi-score-hero">
-          <div class="vi-score-ring">
-            <div class="vi-score-num" id="viResScore">—</div>
-            <div class="vi-score-denom" id="viResDenom">/5 avg</div>
-            <div class="vi-score-band" id="viResBand"></div>
-          </div>
-          <div>
-            <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px"
-              id="viResHeading"></div>
-            <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:16px" id="viResMsg"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn-primary" onclick="viDownloadTranscript()">⬇ Download Transcript</button>
-              <button class="btn-ghost" onclick="showInterviewSim()">← Back to Packs</button>
-            </div>
-          </div>
-        </div>
-        <div class="section-label" style="margin-bottom:16px">Question Breakdown</div>
-        <div id="viResBreakdown"></div>
+<!-- ========== VOICE INTERVIEW NAME MODAL ========== -->
+<div class="vi-name-bg" id="viNameModal" style="display:none">
+  <div class="vi-name-modal">
+    <div class="vi-name-eyebrow">🎙 Interview Prep Simulator</div>
+    <div class="vi-name-title" id="viNamePackTitle">Technical Interview</div>
+    <div class="vi-name-sub">Enter your name so the interviewer can address you naturally. The session will be recorded and scored using the pack's rubric.</div>
+    <input class="vi-name-input" id="viNameInput" type="text" placeholder="Your first name…" maxlength="40" oninput="window.viNameInputChanged && window.viNameInputChanged()" onkeydown="if(event.key==='Enter')window.viStartInterview && window.viStartInterview()">
+    <button class="vi-name-btn" id="viNameBtn" onclick="window.viStartInterview && window.viStartInterview()" disabled>Begin Interview →</button>
+  </div>
+</div>
+
+<!-- ========== VOICE INTERVIEW SCREEN ========== -->
+<div class="screen" id="voiceInterviewScreen">
+  <div class="vi-layout">
+    <div class="vi-stage">
+      <div class="vi-mood" id="viMood">🎙️</div>
+      <div class="vi-status" id="viStatusLabel">Ready</div>
+      <div class="vi-waveform" id="viWaveform"></div>
+      <div class="vi-question-display">
+        <div class="vi-q-label" id="viQLabel">Question 0 of 0</div>
+        <div class="vi-q-text" id="viQText">Preparing your interview…</div>
+      </div>
+      <div class="vi-controls">
+        <button class="vi-end-btn" onclick="window.viConfirmEnd && window.viConfirmEnd()">End Interview</button>
+        <button class="vi-mic-btn" id="viMicBtn" onclick="window.viToggleMic && window.viToggleMic()" disabled title="Hold to answer">🎤</button>
+        <button class="vi-end-btn" onclick="window.viSkipQuestion && window.viSkipQuestion()" id="viSkipBtn" style="opacity:0;pointer-events:none">Skip →</button>
       </div>
     </div>
-
-    <!-- ══════ REPORT MODAL ══════ -->
-    <div class="rpt-modal-bg" id="reportModal" style="display:none" onclick="handleReportBgClick(event)">
-      <div class="rpt-modal">
-        <button class="rpt-close" onclick="closeReportModal()">✕</button>
-        <div class="rpt-eyebrow">⚐ Question Feedback</div>
-        <div class="rpt-title">Report an Issue</div>
-        <div class="rpt-subtitle">Help improve the question bank. All reports are reviewed by the admin before any
-          changes are made.</div>
-        <label class="rpt-label">Nature of issue <span style="color:var(--wrong)">*</span></label>
-        <select class="rpt-select" id="rptType" onchange="validateReport()">
-          <option value="">— Select issue type —</option>
-          <option value="wrong-answer">Wrong answer — correct answer is marked incorrectly</option>
-          <option value="outdated-info">Outdated information — platform has changed</option>
-          <option value="misleading-question">Misleading question — ambiguous or poorly worded</option>
-          <option value="wrong-explanation">Wrong explanation — explanation is inaccurate</option>
-          <option value="broken-formatting">Broken formatting — display or layout issue</option>
-          <option value="remove-question">Remove question — out of scope or duplicate</option>
-          <option value="other">Other</option>
-        </select>
-        <label class="rpt-label">Details <span style="color:var(--wrong)">*</span></label>
-        <textarea class="rpt-textarea" id="rptComment" maxlength="200"
-          placeholder="Describe the issue clearly (max 200 characters)..." oninput="updateCharCount()"></textarea>
-        <span class="rpt-charcount" id="rptCharCount">0 / 200</span>
-        <button class="rpt-submit" id="rptSubmit" onclick="submitReport()" disabled>Submit Report →</button>
-        <div class="rpt-status" id="rptStatus"></div>
+    <div class="vi-panel">
+      <div class="vi-panel-header">
+        <div class="vi-panel-title">Live Transcript</div>
+        <div class="vi-panel-meta" id="viPanelMeta">Waiting to begin…</div>
+      </div>
+      <div class="vi-progress-wrap">
+        <div class="vi-progress-track"><div class="vi-progress-fill" id="viProgressFill" style="width:0%"></div></div>
+        <div class="vi-progress-label"><span id="viProgressLabel">0 of 0 questions</span><span id="viTimerLabel">0:00</span></div>
+      </div>
+      <div class="vi-transcript" id="viTranscript"></div>
+      <div class="vi-panel-footer">
+        <button class="vi-dl-btn" onclick="window.viDownloadTranscript && window.viDownloadTranscript()">⬇ Download Transcript</button>
       </div>
     </div>
+  </div>
+</div>
 
-  </div><!-- /app -->
-  <script src="./js/app.js"></script>
+<!-- ========== VOICE INTERVIEW RESULTS SCREEN ========== -->
+<div class="screen" id="viResultsScreen">
+  <div class="vi-results-wrap">
+    <nav class="top-nav">
+      <div class="nav-logo">D365<span>·</span>Mastery</div>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="window.showInterviewSim()">← Interview Packs</button>
+        <button class="nav-btn" onclick="window.showHome()">Home</button>
+      </div>
+    </nav>
+    <div class="hero-eyebrow" style="margin-bottom:20px"><div class="hero-dot"></div>Interview Complete</div>
+    <div class="vi-score-hero">
+      <div class="vi-score-ring">
+        <div class="vi-score-num" id="viResScore">—</div>
+        <div class="vi-score-denom" id="viResDenom">/5 avg</div>
+        <div class="vi-score-band" id="viResBand"></div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px" id="viResHeading"></div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:16px" id="viResMsg"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-primary" onclick="window.viDownloadTranscript && window.viDownloadTranscript()">⬇ Download Transcript</button>
+          <button class="btn-ghost" onclick="window.showInterviewSim()">← Back to Packs</button>
+        </div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-bottom:16px">Question Breakdown</div>
+    <div id="viResBreakdown"></div>
+  </div>
+</div>
+
+<!-- ========== REPORT MODAL ========== -->
+<div class="rpt-modal-bg" id="reportModal" style="display:none" onclick="window.handleReportBgClick(event)">
+  <div class="rpt-modal">
+    <button class="rpt-close" onclick="window.closeReportModal()">✕</button>
+    <div class="rpt-eyebrow">⚐ Question Feedback</div>
+    <div class="rpt-title">Report an Issue</div>
+    <div class="rpt-subtitle">Help improve the question bank. All reports are reviewed by the admin before any changes are made.</div>
+    <label class="rpt-label">Nature of issue <span style="color:var(--wrong)">*</span></label>
+    <select class="rpt-select" id="rptType" onchange="window.validateReport && window.validateReport()">
+      <option value="">— Select issue type —</option>
+      <option value="wrong-answer">Wrong answer — correct answer is marked incorrectly</option>
+      <option value="outdated-info">Outdated information — platform has changed</option>
+      <option value="misleading-question">Misleading question — ambiguous or poorly worded</option>
+      <option value="wrong-explanation">Wrong explanation — explanation is inaccurate</option>
+      <option value="broken-formatting">Broken formatting — display or layout issue</option>
+      <option value="remove-question">Remove question — out of scope or duplicate</option>
+      <option value="other">Other</option>
+    </select>
+    <label class="rpt-label">Details <span style="color:var(--wrong)">*</span></label>
+    <textarea class="rpt-textarea" id="rptComment" maxlength="200" placeholder="Describe the issue clearly (max 200 characters)..." oninput="window.updateCharCount && window.updateCharCount()"></textarea>
+    <span class="rpt-charcount" id="rptCharCount">0 / 200</span>
+    <button class="rpt-submit" id="rptSubmit" onclick="window.submitReport && window.submitReport()" disabled>Submit Report →</button>
+    <div class="rpt-status" id="rptStatus"></div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- ========== MODULE SCRIPTS (LOAD IN ORDER) ========== -->
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/interview.js"></script>
+<script src="js/app.js"></script>
+
 </body>
-
 </html>
