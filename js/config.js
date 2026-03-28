@@ -7,22 +7,49 @@
 
 const CONFIG = {
 
-  /* ── SESSION SETTINGS ──────────────────────────────────────── */
-  SESSION_QUESTIONS: 60,
-  SESSION_MINUTES: 65,
-  PASSING_SCORE: 700,
-  MAX_SCORE: 1000,
+  /* ── SESSION SETTINGS ─────────────────────────────────────────
+     SESSION_TOTAL is the ONE number to change.
+     Acceptable values: 20 | 30 | 40 | 50 | 60
+     Min: 20 (no case studies)  |  Max: 60 (full exam simulation)
+
+     Verified totals — no overshoot:
+       20 → MCQ:14  DD:6  CS:0   raw max: 360pts
+       30 → MCQ:18  DD:9  CS:3   raw max: 532pts
+       40 → MCQ:24  DD:12 CS:4   raw max: 710pts
+       50 → MCQ:30  DD:15 CS:5   raw max: 888pts
+       60 → MCQ:36  DD:18 CS:6   raw max: 1065pts
+     All results scale to /1000. Future: user-overridable from profile.
+  ──────────────────────────────────────────────────────────── */
+  SESSION_TOTAL  : 20,   // ← 20 | 30 | 40 | 50 | 60
+  SESSION_MINUTES: 25,   // ← 25 | 35 | 50 | 60 | 75
+  PASSING_SCORE  : 700,
+  MAX_SCORE      : 1000,
 
   /* ── QUESTION TYPE POINTS ───────────────────────────────────── */
   POINTS: {
-    mcq: 15,
-    tf: 12,
-    dragdrop: 25,
+    mcq      : 15,
+    tf       : 12,
+    dragdrop : 25,
     casestudy: 12.5
   },
 
-  /* ── DEFAULT SESSION MIX ────────────────────────────────────── */
-  COUNTS: { mcq: 40, tf: 0, dragdrop: 12, casestudy: 8 },
+  /* ── DERIVED — do not edit directly ─────────────────────────
+     COUNTS and SCORE_MAX derive from SESSION_TOTAL automatically.
+     Case studies excluded below 30 to avoid scenario overflow.
+  ──────────────────────────────────────────────────────────── */
+  get COUNTS() {
+    const t  = this.SESSION_TOTAL;
+    const dd = Math.floor(t * 0.30);
+    const cs = t >= 30 ? Math.floor(t * 0.10) : 0;
+    return { mcq: t - dd - cs, tf: 0, dragdrop: dd, casestudy: cs };
+  },
+
+  get SCORE_MAX() {
+    const c = this.COUNTS, p = this.POINTS;
+    return (c.mcq * p.mcq) + (c.dragdrop * p.dragdrop) + (c.casestudy * p.casestudy);
+  },
+
+  get SESSION_QUESTIONS() { return this.SESSION_TOTAL; },
 
   TYPE_WEIGHTS: { mcq: 0.60, tf: 0.00, dragdrop: 0.30, casestudy: 0.10 },
 

@@ -14,6 +14,7 @@ const App = (function () {
     let _initialized = false;
     let _timer = null;
     let _quizEngine = null;
+    let _navStack = [];
 
     /**
      * Global event handler for quiz completion
@@ -125,7 +126,7 @@ const App = (function () {
         // Performance summary
         const perfGrid = document.getElementById('perfGrid');
         if (perfGrid) {
-            perfGrid.innerHTML = '<div class="perf-item"><div class="perf-icon">📊</div><div><div class="perf-area">Building your profile</div><div class="perf-why">Complete more sessions to generate personalised weak-area analysis.</div></div></div>';
+            perfGrid.innerHTML = '<div class="perf-item"><div><div class="perf-area">Building your profile</div><div class="perf-why">Complete more sessions to generate personalised weak-area analysis.</div></div></div>';
         }
 
         // Review list
@@ -362,109 +363,6 @@ const App = (function () {
     }
 
     // ── SVG icons for group tiles ────────────────────────────────
-    const _GROUP_SVGS = {
-        'cs-app': `<svg width="100" height="100" viewBox="0 0 110 110" fill="none">
-            <path d="M25 58 A30 30 0 0 1 85 58" stroke="#1D9E75" stroke-width="1.8" stroke-linecap="round"/>
-            <rect x="17" y="56" width="15" height="22" rx="5" stroke="#1D9E75" stroke-width="1.6"/>
-            <rect x="21" y="60" width="7" height="14" rx="2" stroke="#0F6E56" stroke-width="1"/>
-            <rect x="78" y="56" width="15" height="22" rx="5" stroke="#1D9E75" stroke-width="1.6"/>
-            <rect x="82" y="60" width="7" height="14" rx="2" stroke="#0F6E56" stroke-width="1"/>
-            <path d="M93 68 Q103 76 99 88" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/>
-            <rect x="94" y="86" width="10" height="6" rx="3" stroke="#1D9E75" stroke-width="1.4"/>
-            <path d="M107 84 Q111 88 107 92" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
-            <path d="M111 81 Q117 88 111 95" stroke="#0F6E56" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
-            <circle cx="55" cy="30" r="2" fill="#1D9E75" opacity="0.7"/>
-            <circle cx="55" cy="36" r="1.2" fill="#1D9E75" opacity="0.35"/>
-            <line x1="20" y1="95" x2="90" y2="95" stroke="#1D9E75" stroke-width="0.5" opacity="0.18"/>
-        </svg>`,
-        'solution-architect': `<svg width="100" height="100" viewBox="0 0 110 110" fill="none">
-            <g opacity="0.10" stroke="#378ADD" stroke-width="0.8">
-                <line x1="10" y1="20" x2="100" y2="20"/><line x1="10" y1="38" x2="100" y2="38"/>
-                <line x1="10" y1="56" x2="100" y2="56"/><line x1="10" y1="74" x2="100" y2="74"/>
-                <line x1="10" y1="92" x2="100" y2="92"/><line x1="20" y1="10" x2="20" y2="100"/>
-                <line x1="38" y1="10" x2="38" y2="100"/><line x1="56" y1="10" x2="56" y2="100"/>
-                <line x1="74" y1="10" x2="74" y2="100"/><line x1="92" y1="10" x2="92" y2="100"/>
-            </g>
-            <polygon points="55,14 96,55 55,96 14,55" stroke="#378ADD" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon points="55,30 80,55 55,80 30,55" stroke="#378ADD" stroke-width="1.2" stroke-linejoin="round" opacity="0.65"/>
-            <polygon points="55,42 68,55 55,68 42,55" stroke="#378ADD" stroke-width="1" stroke-linejoin="round" opacity="0.4"/>
-            <line x1="55" y1="14" x2="55" y2="30" stroke="#378ADD" stroke-width="0.8" opacity="0.6"/>
-            <line x1="96" y1="55" x2="80" y2="55" stroke="#378ADD" stroke-width="0.8" opacity="0.6"/>
-            <line x1="55" y1="96" x2="55" y2="80" stroke="#378ADD" stroke-width="0.8" opacity="0.6"/>
-            <line x1="14" y1="55" x2="30" y2="55" stroke="#378ADD" stroke-width="0.8" opacity="0.6"/>
-            <circle cx="55" cy="55" r="3" stroke="#378ADD" stroke-width="1.2"/>
-        </svg>`,
-        'pp-developer': `<svg width="100" height="100" viewBox="0 0 110 110" fill="none">
-            <line x1="8" y1="55" x2="102" y2="55" stroke="#7F77DD" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="55" y1="8" x2="55" y2="102" stroke="#7F77DD" stroke-width="1.4" stroke-linecap="round"/>
-            <polyline points="28,55 28,30 40,30" stroke="#7F77DD" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="82,55 82,30 70,30" stroke="#7F77DD" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="28,55 28,80 40,80" stroke="#7F77DD" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="82,55 82,80 70,80" stroke="#7F77DD" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="55,28 35,28" stroke="#7F77DD" stroke-width="1.1" stroke-linecap="round"/>
-            <polyline points="55,82 35,82" stroke="#7F77DD" stroke-width="1.1" stroke-linecap="round"/>
-            <circle cx="40" cy="30" r="3.5" stroke="#7F77DD" stroke-width="1.4"/>
-            <circle cx="70" cy="30" r="3.5" stroke="#7F77DD" stroke-width="1.4"/>
-            <circle cx="40" cy="80" r="3.5" stroke="#7F77DD" stroke-width="1.4"/>
-            <circle cx="70" cy="80" r="3.5" stroke="#7F77DD" stroke-width="1.4"/>
-            <circle cx="35" cy="28" r="2.5" stroke="#534AB7" stroke-width="1.2"/>
-            <circle cx="35" cy="82" r="2.5" stroke="#534AB7" stroke-width="1.2"/>
-            <rect x="40" y="40" width="30" height="30" rx="3" stroke="#7F77DD" stroke-width="1.8"/>
-            <line x1="48" y1="40" x2="48" y2="34" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="55" y1="40" x2="55" y2="34" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="62" y1="40" x2="62" y2="34" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="48" y1="70" x2="48" y2="76" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="55" y1="70" x2="55" y2="76" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="62" y1="70" x2="62" y2="76" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="40" y1="51" x2="34" y2="51" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="40" y1="59" x2="34" y2="59" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="70" y1="51" x2="76" y2="51" stroke="#7F77DD" stroke-width="1.2"/>
-            <line x1="70" y1="59" x2="76" y2="59" stroke="#7F77DD" stroke-width="1.2"/>
-            <circle cx="55" cy="55" r="4" stroke="#7F77DD" stroke-width="1" opacity="0.5"/>
-            <circle cx="55" cy="55" r="1.5" fill="#7F77DD" opacity="0.6"/>
-        </svg>`
-    };
-
-    // ── Accent colour per group id ───────────────────────────────
-    const _GROUP_ACCENTS = {
-        'cs-app':             '#1D9E75',
-        'solution-architect': '#378ADD',
-        'pp-developer':       '#7F77DD'
-    };
-
-    /**
-     * Build a group tile (SVG icon + label + tooltip).
-     */
-    function _groupTileHtml(group) {
-        const svg     = _GROUP_SVGS[group.id] || '';
-        const accent  = _GROUP_ACCENTS[group.id] || 'var(--accent)';
-        const count   = (group.subtopics || []).length + (group.subgroups || []).length;
-        const tooltip = group.desc || '';
-        return `
-            <div class="gtile gtile--${group.id}" onclick="window.openGroup('${group.id}')"
-                style="--gtile-accent:${accent}">
-                <div class="gtile__icon">${svg}</div>
-                <div class="gtile__label">${group.title}</div>
-                <div class="gtile__count">${count} topics</div>
-                <div class="gtile__tooltip"><strong>${group.title}</strong>${tooltip}</div>
-            </div>`;
-    }
-
-    /**
-     * Build a plain topic tile (used for ungrouped topics and inside subtopic screens).
-     */
-    function _topicTileHtml(topic, locked, best) {
-        const bestHtml = best !== undefined
-            ? `<div class="stile__best">Best: ${best}/1000</div>` : '';
-        const action   = locked ? "window.openLicenceModal()" : `window.selectTopic('${topic.id}')`;
-        return `
-            <div class="stile${locked ? ' stile--locked' : ''}" onclick="${action}">
-                <div class="stile__title">${topic.title}${locked ? ' <span class="stile__lock">LOCKED</span>' : ''}</div>
-                <div class="stile__desc">${topic.desc || ''}</div>
-                ${bestHtml}
-            </div>`;
-    }
-
     /**
      * Render the home screen topics grid and stats bar.
      */
@@ -521,14 +419,14 @@ const App = (function () {
 
         // Group tiles (SVG icons)
         (window.CONFIG.GROUPS || []).forEach(group => {
-            html += _groupTileHtml(group);
+            html += window.Tiles.groupTile(group);
         });
 
         // Standalone topic tiles (plain text style)
         (window.CONFIG.TOPICS || []).forEach(topic => {
             if (groupedIds.has(topic.id)) return;
             const locked = topic.locked && !unlocked;
-            html += _topicTileHtml(topic, locked, bestByTopic[topic.id]);
+            html += window.Tiles.topicTile(topic, locked, bestByTopic[topic.id]);
         });
 
         grid.innerHTML = html;
@@ -541,15 +439,23 @@ const App = (function () {
         const container = document.getElementById('interviewSimGrid');
         if (container) {
             const packs = window.CONFIG.INTERVIEW_PACKS || [];
-            container.innerHTML = packs.map(pack => `
-                <div class="stile" onclick="window.loadInterviewPack('${pack.id}')">
-                    <div class="stile__title">${pack.title}</div>
-                    <div class="stile__desc">${pack.desc || ''}</div>
-                    <div class="stile__cta">Start session →</div>
-                </div>`).join('');
+            container.innerHTML = packs.map(pack => window.Tiles.interviewTile(pack)).join('');
         }
         UI.showScreen('interviewSimScreen');
     }
+
+    /**
+     * Update the subtopic screen nav buttons based on _navStack.
+     */
+    function _updateSubtopicNav() {
+        const nav = document.getElementById('subtopicNav');
+        if (!nav) return;
+        nav.innerHTML = _navStack.map((item, i) => {
+            const isLast = i === _navStack.length - 1;
+            return `<button class="nav-btn${isLast ? '' : ''}" onclick="_navStack[${i}].fn()">← ${item.label}</button>`;
+        }).join('');
+    }
+
 
     /**
      * Open a topic group — shows sub-topic picker screen.
@@ -560,6 +466,10 @@ const App = (function () {
 
         const unlocked = localStorage.getItem('ppma_unlocked') === 'true';
 
+        _navStack = [{ label: 'Home', fn: () => window.showHome() }];
+        _updateSubtopicNav();
+
+
         document.getElementById('subtopicBreadcrumb').textContent = 'Home → ' + group.title;
         document.getElementById('subtopicGroupTitle').textContent = group.title;
         document.getElementById('subtopicGroupDesc').textContent  = group.desc || '';
@@ -569,23 +479,15 @@ const App = (function () {
 
         let html = '';
 
-        // Subgroup tiles (text-only, same stile class)
         (group.subgroups || []).forEach(sgId => {
             const sg = (window.CONFIG.SUBGROUPS || []).find(s => s.id === sgId);
             if (!sg) return;
-            html += `
-                <div class="stile stile--subgroup" onclick="window.openSubGroup('${sg.id}', '${groupId}')">
-                    <div class="stile__title">${sg.title}</div>
-                    <div class="stile__desc">${sg.desc || ''}</div>
-                    <div class="stile__cta">${(sg.subtopics || []).length} topics →</div>
-                </div>`;
+            html += window.Tiles.subgroupTile(sg, groupId);
         });
-
-        // Direct topic tiles
         (group.subtopics || []).forEach(topicId => {
             const topic = (window.CONFIG.TOPICS || []).find(t => t.id === topicId);
             if (!topic) return;
-            html += _topicTileHtml(topic, topic.locked && !unlocked, undefined);
+            html += window.Tiles.topicTile(topic, topic.locked && !unlocked, undefined);
         });
 
         grid.innerHTML = html;
@@ -602,6 +504,12 @@ const App = (function () {
 
         const unlocked = localStorage.getItem('ppma_unlocked') === 'true';
 
+        _navStack = [
+            { label: 'Home',          fn: () => window.showHome() },
+            { label: parent?.title || 'Back', fn: () => _openGroup(parentGroupId) }
+        ];
+        _updateSubtopicNav();
+
         document.getElementById('subtopicBreadcrumb').textContent = 'Home → ' + (parent?.title || '') + ' → ' + sg.title;
         document.getElementById('subtopicGroupTitle').textContent  = sg.title;
         document.getElementById('subtopicGroupDesc').textContent   = sg.desc || '';
@@ -612,7 +520,7 @@ const App = (function () {
         grid.innerHTML = (sg.subtopics || []).map(topicId => {
             const topic = (window.CONFIG.TOPICS || []).find(t => t.id === topicId);
             if (!topic) return '';
-            return _topicTileHtml(topic, topic.locked && !unlocked, undefined);
+            return window.Tiles.topicTile(topic, topic.locked && !unlocked, undefined);
         }).join('');
 
         UI.showScreen('subtopicScreen');
@@ -646,7 +554,16 @@ const App = (function () {
         if (window.Interview && window.Interview.init) window.Interview.init();
 
         // ── Wire up global functions BEFORE rendering ──────────
-        window.showHome = () => _renderHome().then(() => UI.showScreen('homeScreen'));
+        window.showHome = () => { _navStack = []; _renderHome().then(() => UI.showScreen('homeScreen')); };
+        window.navTo = (i) => { if (_navStack[i]) _navStack[i].fn(); };
+        window.goBack = () => {
+            if (_navStack.length > 0) {
+                const prev = _navStack[_navStack.length - 1];
+                prev.fn();
+            } else {
+                window.showHome();
+            }
+        };
         window.showGuided = () => UI.showScreen('guidedScreen');
         window.showHistory = () => _showHistory();
         window.showInterviewSim = () => _showInterviewSim();
@@ -680,6 +597,35 @@ const App = (function () {
         };
 
         window.onQuizComplete = _onQuizComplete;
+
+        // Review list toggle on results screen
+        window.toggleReview = (btn) => {
+            const list = document.getElementById('reviewList');
+            if (!list) return;
+            const open = list.classList.toggle('open');
+            btn.textContent = open ? '▼ Hide Question Review' : '▶ Show Question Review';
+        };
+
+        // Report modal helpers
+        window.openReportModal  = () => UI.openModal('reportModal');
+        window.closeReportModal = () => UI.closeModal();
+        window.handleReportBgClick = (e) => UI.handleModalBgClick(e, 'reportModal');
+        window.validateReport = () => {
+            const type = document.getElementById('rptType')?.value;
+            const comment = document.getElementById('rptComment')?.value?.trim();
+            const btn = document.getElementById('rptSubmit');
+            if (btn) btn.disabled = !(type && comment && comment.length >= 5);
+        };
+        window.updateCharCount = () => {
+            const ta = document.getElementById('rptComment');
+            const cc = document.getElementById('rptCharCount');
+            if (ta && cc) cc.textContent = `${ta.value.length} / 200`;
+        };
+        window.submitReport = () => {
+            const status = document.getElementById('rptStatus');
+            if (status) status.textContent = 'Report submitted — thank you.';
+            setTimeout(() => UI.closeModal(), 1500);
+        };
 
         _initialized = true;
 

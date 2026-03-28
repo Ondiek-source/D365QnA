@@ -7,9 +7,9 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── IndexedDB ───────────────────────────────────────────────── */
-const DB_NAME    = 'PPMasteryV3';
-const DB_VER     = 2;
-const STORE      = 'sessions';
+const DB_NAME = 'PPMasteryV3';
+const DB_VER = 2;
+const STORE = 'sessions';
 const DRAFT_STORE = 'draft';
 
 let _db = null;
@@ -26,7 +26,7 @@ function openDB() {
         d.createObjectStore(DRAFT_STORE, { keyPath: 'id' });
     };
     r.onsuccess = e => { _db = e.target.result; res(_db); };
-    r.onerror   = e => rej(e);
+    r.onerror = e => rej(e);
   });
 }
 
@@ -44,9 +44,9 @@ async function dbGetAll() {
   const d = await openDB();
   return new Promise((res, rej) => {
     const tx = d.transaction(STORE, 'readonly');
-    const r  = tx.objectStore(STORE).getAll();
+    const r = tx.objectStore(STORE).getAll();
     r.onsuccess = e => res(e.target.result || []);
-    r.onerror   = e => rej(e);
+    r.onerror = e => rej(e);
   });
 }
 
@@ -54,9 +54,9 @@ async function dbGetById(id) {
   const d = await openDB();
   return new Promise((res, rej) => {
     const tx = d.transaction(STORE, 'readonly');
-    const r  = tx.objectStore(STORE).get(id);
+    const r = tx.objectStore(STORE).get(id);
     r.onsuccess = e => res(e.target.result || null);
-    r.onerror   = e => rej(e);
+    r.onerror = e => rej(e);
   });
 }
 
@@ -71,7 +71,7 @@ async function dbClearAll() {
 
 async function dbDeleteTopic(topicId) {
   const all = await dbGetAll();
-  const d   = await openDB();
+  const d = await openDB();
   return new Promise((res, rej) => {
     const tx = d.transaction(STORE, 'readwrite');
     const st = tx.objectStore(STORE);
@@ -81,7 +81,7 @@ async function dbDeleteTopic(topicId) {
     targets.forEach(s => {
       const r = st.delete(s.id);
       r.onsuccess = () => { if (--n === 0) res(); };
-      r.onerror   = e => rej(e);
+      r.onerror = e => rej(e);
     });
     tx.onerror = e => rej(e);
   });
@@ -105,9 +105,9 @@ async function dbGetDraft(topicId) {
   const d = await openDB();
   return new Promise((res, rej) => {
     const tx = d.transaction(DRAFT_STORE, 'readonly');
-    const r  = tx.objectStore(DRAFT_STORE).get(draftKey(topicId));
+    const r = tx.objectStore(DRAFT_STORE).get(draftKey(topicId));
     r.onsuccess = e => res(e.target.result || null);
-    r.onerror   = e => rej(e);
+    r.onerror = e => rej(e);
   });
 }
 
@@ -115,9 +115,9 @@ async function dbGetAllDrafts() {
   const d = await openDB();
   return new Promise((res, rej) => {
     const tx = d.transaction(DRAFT_STORE, 'readonly');
-    const r  = tx.objectStore(DRAFT_STORE).getAll();
+    const r = tx.objectStore(DRAFT_STORE).getAll();
     r.onsuccess = e => res(e.target.result || []);
-    r.onerror   = e => rej(e);
+    r.onerror = e => rej(e);
   });
 }
 
@@ -148,20 +148,20 @@ function shuffle(a) {
 /** Wilson score confidence interval for a binomial proportion. */
 function wilsonCI(c, t, z = 1.96) {
   if (!t) return { low: 0, mid: 0, high: 0 };
-  const p  = c / t;
-  const d  = 1 + z * z / t;
+  const p = c / t;
+  const d = 1 + z * z / t;
   const ct = p + z * z / (2 * t);
-  const s  = z * Math.sqrt(p * (1 - p) / t + z * z / (4 * t * t));
+  const s = z * Math.sqrt(p * (1 - p) / t + z * z / (4 * t * t));
   return {
-    low  : Math.max(0, (ct - s) / d),
-    mid  : p,
-    high : Math.min(1, (ct + s) / d)
+    low: Math.max(0, (ct - s) / d),
+    mid: p,
+    high: Math.min(1, (ct + s) / d)
   };
 }
 
 /** Format seconds as M:SS */
 function fmtTime(s) {
-  const m  = Math.floor(s / 60);
+  const m = Math.floor(s / 60);
   const sc = s % 60;
   return `${m}:${sc.toString().padStart(2, '0')}`;
 }
@@ -213,10 +213,10 @@ function pickBalanced(pool, count, balance) {
   if (!count || !items.length) return [];
   if (!balance) return items.slice(0, count);
 
-  const domains   = Object.keys(balance);
-  const chosen    = [];
-  const used      = new Set();
-  const byDomain  = Object.fromEntries(
+  const domains = Object.keys(balance);
+  const chosen = [];
+  const used = new Set();
+  const byDomain = Object.fromEntries(
     domains.map(d => [d, items.filter(x => inferDomain(x) === d)])
   );
   let remaining = count;
@@ -260,7 +260,7 @@ function pickBalancedCaseStudies(pool, targetSubquestions, balance) {
     return picked;
   }
 
-  const domains  = Object.keys(balance);
+  const domains = Object.keys(balance);
   const byDomain = Object.fromEntries(
     domains.map(d => [d, scenarios.filter(x => inferDomain(x) === d)])
   );
@@ -299,9 +299,9 @@ const _cache = {};
 function showSetupError(file, type = 'questions') {
   document.getElementById('setupModal')?.remove();
   const isFileProtocol = location.protocol === 'file:';
-  const isInterview    = type === 'interview';
-  const label          = isInterview ? '⚠ Cannot Load Interview Pack' : '⚠ Cannot Load Questions';
-  const structureHint  = isInterview
+  const isInterview = type === 'interview';
+  const label = isInterview ? '⚠ Cannot Load Interview Pack' : '⚠ Cannot Load Questions';
+  const structureHint = isInterview
     ? `your-repo/<br>  index.html<br>  Interviewsim/<br>    CE_Technical_Consultant_Interview.json  ✓ must be here`
     : `your-repo/<br>  index.html<br>  Questions/<br>    delegation.json  ✓ must be here`;
 
@@ -313,8 +313,8 @@ function showSetupError(file, type = 'questions') {
       <div style="font-family:Syne,sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--wrong);margin-bottom:16px">${label}</div>
       <div style="font-family:Syne,sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:12px">
         ${isFileProtocol
-          ? 'Running as a local file — a web server is required'
-          : `File not found: <code style="color:var(--accent);font-size:.9em">${file}</code>`}
+      ? 'Running as a local file — a web server is required'
+      : `File not found: <code style="color:var(--accent);font-size:.9em">${file}</code>`}
       </div>
       <div style="font-size:12px;color:var(--muted2);line-height:1.8;margin-bottom:20px">
         ${isFileProtocol ? `
@@ -392,7 +392,7 @@ async function fetchInterviewPack(packCfg) {
    queue so the exam still feels varied but never mid-scenario.
 ────────────────────────────────────────────────────────────────── */
 function buildSession(bank, topicId) {
-  const counts  = getSessionCounts(topicId);
+  const counts = getSessionCounts(topicId);
   const weights = getTypeWeights(topicId);
   const balance = getTopicProfile(topicId).balance || null;
 
@@ -400,8 +400,8 @@ function buildSession(bank, topicId) {
 
   const tfRaw = pickBalanced(bank.tf || [], counts.tf || 0, balance).map(q => ({
     ...q,
-    options : ['True', 'False'],
-    answer  : q.answer === true ? 0 : 1
+    options: ['True', 'False'],
+    answer: q.answer === true ? 0 : 1
   }));
 
   const dd = pickBalanced(bank.dragdrop || [], counts.dragdrop || 0, balance);
@@ -415,20 +415,43 @@ function buildSession(bank, topicId) {
   const csFlat = csScenarios.flatMap(scenario =>
     (scenario.questions || []).map(q => ({
       ...q,
-      _type          : 'casestudy',
-      _scenarioTitle : scenario.scenarioTitle || scenario.title || '',
-      _scenarioBody  : scenario.scenarioBody  || scenario.body  || '',
+      _type: 'casestudy',
+      _scenarioTitle: scenario.scenarioTitle || scenario.title || '',
+      _scenarioBody: scenario.scenarioBody || scenario.body || '',
     }))
   );
 
   // Merge MCQ + TF + DD, shuffle, then splice case study block in at random position
-  const base     = shuffle([...mcq, ...tfRaw, ...dd]);
+  const base = shuffle([...mcq, ...tfRaw, ...dd]);
   const insertAt = Math.floor(Math.random() * (base.length + 1));
-  const queue    = [...base.slice(0, insertAt), ...csFlat, ...base.slice(insertAt)];
+  const queue = [...base.slice(0, insertAt), ...csFlat, ...base.slice(insertAt)];
 
-  return queue.map((q, i) => ({
-    ...q,
-    _idx  : i,
-    _type : q._type || (q.pairs ? 'dragdrop' : q.options?.length ? 'mcq' : 'mcq'),
-  }));
+  const built = queue.map((q, i) => {
+    const resolvedType = q._type || (
+      (q.pairs || (q.items && q.zones)) ? 'dragdrop' :
+        q._scenarioTitle !== undefined ? 'casestudy' :
+          (q.options?.length === 2 && q.answer !== undefined &&
+            typeof q.answer === 'number' && !q.category) ? 'tf' :
+            'mcq'
+    );
+    const pts = q.pts ?? (
+      resolvedType === 'dragdrop'  ? (window.CONFIG?.POINTS?.dragdrop  ?? 25) :
+      resolvedType === 'casestudy' ? (window.CONFIG?.POINTS?.casestudy ?? 12.5) :
+      resolvedType === 'tf'        ? (window.CONFIG?.POINTS?.tf        ?? 12) :
+                                     (window.CONFIG?.POINTS?.mcq       ?? 15)
+    );
+    return { ...q, _idx: i, _type: resolvedType, pts };
+  });
+
+  // Attach scoreMeta so results screen can scale to /1000 correctly
+  // regardless of session length or question mix.
+  const mcqMax = built.filter(q => q._type === 'mcq' || q._type === 'tf')
+                      .reduce((s, q) => s + (q.pts || 0), 0);
+  const ddMax  = built.filter(q => q._type === 'dragdrop')
+                      .reduce((s, q) => s + (q.pts || 0), 0);
+  const csMax  = built.filter(q => q._type === 'casestudy')
+                      .reduce((s, q) => s + (q.pts || 0), 0);
+  built._meta = { mcqMax, ddMax, csMax };
+
+  return built;
 }
