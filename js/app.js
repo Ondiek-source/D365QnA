@@ -368,24 +368,24 @@ const App = (function () {
      */
     async function _renderHome() {
         // ── Stats bar ────────────────────────────────────────────
-        const sessions    = await window.dbGetAll();
+        const sessions = await window.dbGetAll();
         const quizSessions = sessions.filter(s => s.type !== 'voice_interview');
 
-        const elSessions  = document.getElementById('gs-sessions');
+        const elSessions = document.getElementById('gs-sessions');
         const elQuestions = document.getElementById('gs-questions');
-        const elAccuracy  = document.getElementById('gs-accuracy');
-        const elBest      = document.getElementById('gs-best');
+        const elAccuracy = document.getElementById('gs-accuracy');
+        const elBest = document.getElementById('gs-best');
 
-        if (elSessions)  elSessions.textContent  = quizSessions.length;
-        if (elQuestions) elQuestions.textContent  = quizSessions.reduce((a, s) => a + (s.questionCount || 0), 0);
-        if (elAccuracy)  elAccuracy.textContent   = quizSessions.length
+        if (elSessions) elSessions.textContent = quizSessions.length;
+        if (elQuestions) elQuestions.textContent = quizSessions.reduce((a, s) => a + (s.questionCount || 0), 0);
+        if (elAccuracy) elAccuracy.textContent = quizSessions.length
             ? Math.round(quizSessions.reduce((a, s) => a + s.totalScore, 0) / quizSessions.length) : '—';
-        if (elBest)      elBest.textContent       = quizSessions.length
+        if (elBest) elBest.textContent = quizSessions.length
             ? Math.max(...quizSessions.map(s => s.totalScore)) : '—';
 
         // ── Unlock banner ────────────────────────────────────────
         const unlocked = localStorage.getItem('ppma_unlocked') === 'true';
-        const banner   = document.getElementById('unlockBanner');
+        const banner = document.getElementById('unlockBanner');
         if (banner) {
             banner.innerHTML = unlocked ? '' : `
                 <div class="unlock-banner">
@@ -452,7 +452,7 @@ const App = (function () {
         if (!nav) return;
         nav.innerHTML = _navStack.map((item, i) => {
             const isLast = i === _navStack.length - 1;
-            return `<button class="nav-btn${isLast ? '' : ''}" onclick="_navStack[${i}].fn()">← ${item.label}</button>`;
+            return `<button class="nav-btn" onclick="window.navTo(${i})">← ${item.label}</button>`;
         }).join('');
     }
 
@@ -472,7 +472,7 @@ const App = (function () {
 
         document.getElementById('subtopicBreadcrumb').textContent = 'Home → ' + group.title;
         document.getElementById('subtopicGroupTitle').textContent = group.title;
-        document.getElementById('subtopicGroupDesc').textContent  = group.desc || '';
+        document.getElementById('subtopicGroupDesc').textContent = group.desc || '';
 
         const grid = document.getElementById('subtopicGrid');
         if (!grid) return;
@@ -498,21 +498,21 @@ const App = (function () {
      * Open a subgroup within a group.
      */
     function _openSubGroup(subGroupId, parentGroupId) {
-        const sg     = (window.CONFIG.SUBGROUPS || []).find(s => s.id === subGroupId);
-        const parent = (window.CONFIG.GROUPS    || []).find(g => g.id === parentGroupId);
+        const sg = (window.CONFIG.SUBGROUPS || []).find(s => s.id === subGroupId);
+        const parent = (window.CONFIG.GROUPS || []).find(g => g.id === parentGroupId);
         if (!sg) return;
 
         const unlocked = localStorage.getItem('ppma_unlocked') === 'true';
 
         _navStack = [
-            { label: 'Home',          fn: () => window.showHome() },
+            { label: 'Home', fn: () => window.showHome() },
             { label: parent?.title || 'Back', fn: () => _openGroup(parentGroupId) }
         ];
         _updateSubtopicNav();
 
         document.getElementById('subtopicBreadcrumb').textContent = 'Home → ' + (parent?.title || '') + ' → ' + sg.title;
-        document.getElementById('subtopicGroupTitle').textContent  = sg.title;
-        document.getElementById('subtopicGroupDesc').textContent   = sg.desc || '';
+        document.getElementById('subtopicGroupTitle').textContent = sg.title;
+        document.getElementById('subtopicGroupDesc').textContent = sg.desc || '';
 
         const grid = document.getElementById('subtopicGrid');
         if (!grid) return;
@@ -607,7 +607,7 @@ const App = (function () {
         };
 
         // Report modal helpers
-        window.openReportModal  = () => UI.openModal('reportModal');
+        window.openReportModal = () => UI.openModal('reportModal');
         window.closeReportModal = () => UI.closeModal();
         window.handleReportBgClick = (e) => UI.handleModalBgClick(e, 'reportModal');
         window.validateReport = () => {
